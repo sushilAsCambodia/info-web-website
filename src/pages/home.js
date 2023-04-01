@@ -1,14 +1,14 @@
 import Layout from '@/layouts'
-const Profile = () => {
+const Home = () => {
     return <>
-        Pofile
+        Home
     </>
 };
-Profile.getLayout = function getLayout(page) {
+Home.getLayout = function getLayout(page) {
     return (
         <Layout>
             {page}
         </Layout>
     )
 }
-export default Profile;
+export default Home;
