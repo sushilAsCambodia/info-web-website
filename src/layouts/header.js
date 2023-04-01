@@ -34,10 +34,10 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" >
+    <AppBar position="static" style={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)'}} >
       <Container maxWidth={false}>
         <Toolbar disableGutters>
-          <AdbIcon sx={{   mr: 1 }} />
+       
           <Typography
             variant="h6"
             noWrap
@@ -46,6 +46,7 @@ const Header = () => {
             sx={{
               flexGrow: 1,
               mr: 2,
+              lineHeight:"0px",
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
@@ -53,7 +54,7 @@ const Header = () => {
               textDecoration: 'none',
               width:'100px'
             }}>
-            LOGO
+            <img src="./assets/Logo/logowhite.png" />
           </Typography> 
           <Box sx={{ alignItems:'center' }}>
             <LangSwitcher/>
