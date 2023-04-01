@@ -1,7 +1,9 @@
 import Layout from '@/layouts'
+import { useTranslation } from 'react-i18next';
 const Home = () => {
+    const { t, i18n } = useTranslation();
     return <>
-        Home
+        {t('home')}
     </>
 };
 Home.getLayout = function getLayout(page) {
@@ -11,4 +13,5 @@ Home.getLayout = function getLayout(page) {
         </Layout>
     )
 }
+
 export default Home;

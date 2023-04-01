@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
+import LangSwitcher from '@/components/LangSwitcher';
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -56,7 +56,7 @@ const Header = () => {
             LOGO
           </Typography> 
           <Box sx={{ alignItems:'center' }}>
-            English
+            <LangSwitcher/>
           </Box> 
         </Toolbar>
       </Container>
