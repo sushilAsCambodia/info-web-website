@@ -34,10 +34,10 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" >
+    <AppBar position="static" sx={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)'}}>
       <Container maxWidth={false}>
         <Toolbar disableGutters>
-          <AdbIcon sx={{   mr: 1 }} />
+          <AdbIcon sx={{ mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -51,7 +51,8 @@ const Header = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              width:'100px'
+              width:'100px',
+             
             }}>
             LOGO
           </Typography> 

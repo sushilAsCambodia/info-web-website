@@ -69,7 +69,7 @@ export default function LangSwitcher() {
   const changeLanguage = (l) => {
     window.localStorage.setItem('lang',l);
     i18n.changeLanguage(l);
-    handleClose()
+    handleClose();
   }
   return (
     <div>
