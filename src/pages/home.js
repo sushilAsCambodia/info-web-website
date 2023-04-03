@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 const Home = () => {
     const { t, i18n } = useTranslation();
     return <>
-        <Link as="/journal-detial" href="/journalDetial">{t('home')}</Link>
+        <Link  href="/journalDetial">{t('home')}</Link>
     </>
 };
 Home.getLayout = function getLayout(page) {

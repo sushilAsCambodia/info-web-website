@@ -3,10 +3,10 @@ import Navigate from '@/components/navigate';
 import Footer from './footer';
 import Container from '@mui/material/Container';
 const NavigateLayout =(props) => {
-    const {children, title = ''} = props;
+    const {children, title = '', lead = '', tail = ''} = props;
     return(
         <>
-            <Navigate title={title}/>
+            <Navigate title={title} lead={lead} tail={tail}/>
                 <Container maxWidth="false" sx={{ bgcolor: '#bbdefb', height: 'calc(100vh - 56px)' }}>
                     <main>
                         {children}
