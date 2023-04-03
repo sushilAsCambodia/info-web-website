@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import { Grid } from '@mui/material';
 import FullSilder from './FullSilder';
 import MultiTabs from './MultiTabs';
+import JournalCard from '../homeJournal/JournalCard';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -81,7 +82,7 @@ export default function NewsJournalTabs() {
         <MultiTabs />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+        <JournalCard />
         </TabPanel>
        
       </SwipeableViews>

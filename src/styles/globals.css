@@ -118,6 +118,7 @@ a {
   background: linear-gradient(90deg, #FF0000 0%, #FF6E31 100%);
   border-radius: 30px;
   color: #fff;
+
 }
 .tabclass .css-19kntty-MuiPaper-root-MuiAppBar-root{
   background-color: transparent;
@@ -128,6 +129,7 @@ a {
   background: linear-gradient(90deg, #D0D0D0 0%, #EBEBEB 100%);
 border-radius: 30px;
 margin: 0px 10px;
+min-height:40px
 }
 .tabclass .css-1jlhdwc-MuiTabs-indicator{
   height: 0;
@@ -135,7 +137,7 @@ margin: 0px 10px;
 }
 
 .tabclass .css-19kzrtu{
-  padding: 20px 0px;
+  padding: 10px 0px 20px 0px;
 }
 
 .tabclass .css-1384nzf-MuiMobileStepper-dots{
