@@ -1,6 +1,7 @@
 import JournalCardDetails from '@/components/homeJournal/JournalCardDetails';
 import NewsJournalTabs from '@/components/homeNews/NewsJournalTabs';
 import Layout from '@/layouts'
+import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 const Home = () => {
     const { t, i18n } = useTranslation();

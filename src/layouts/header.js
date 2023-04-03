@@ -52,7 +52,8 @@ const Header = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              width:'100px'
+              width:'100px',
+             
             }}>
             <img src="./assets/Logo/logowhite.png" />
           </Typography> 
