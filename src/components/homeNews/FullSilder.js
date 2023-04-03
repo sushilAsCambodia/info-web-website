@@ -64,7 +64,7 @@ export default function FullSilder() {
 
   return (
     <>
-      <Box sx={{ position: "relative" }}>
+      <Box item sx={{ position: "relative" }}>
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={activeStep}
@@ -74,7 +74,8 @@ export default function FullSilder() {
           {images.map((step, index) => (
             <div key={step.label}>
               {Math.abs(activeStep - index) <= 2 ? (
-                <Box
+                <Box 
+                item
                   component="img"
                   sx={{
                     height: 255,
@@ -128,7 +129,7 @@ export default function FullSilder() {
           color="#fff"
           justifyContent="space-between"
         >
-          <Typography position="relative" textAlign="center">
+          <Grid position="relative" textAlign="center">
             <img src={card1} alt="一般" width="80px" height="80px" />
             <Typography
               position="absolute"
@@ -148,8 +149,8 @@ export default function FullSilder() {
             >
               General
             </Typography>
-          </Typography>
-          <Typography position="relative" textAlign="center">
+          </Grid>
+          <Grid position="relative" textAlign="center">
             <img src={card2} alt="一般" width="80px" height="80px" />
             <Typography
               position="absolute"
@@ -169,8 +170,8 @@ export default function FullSilder() {
             >
               Casino
             </Typography>
-          </Typography>
-          <Typography position="relative" textAlign="center">
+          </Grid>
+          <Grid position="relative" textAlign="center">
             <img src={card3} alt="一般" width="80px" height="80px" />
             <Typography
               position="absolute"
@@ -190,8 +191,8 @@ export default function FullSilder() {
             >
               Fishing
             </Typography>
-          </Typography>
-          <Typography position="relative" textAlign="center">
+          </Grid>
+          <Grid position="relative" textAlign="center">
             <img src={card4} alt="一般" width="80px" height="80px" />
             <Typography
               position="absolute"
@@ -211,7 +212,7 @@ export default function FullSilder() {
             >
               Live Casino
             </Typography>
-          </Typography>
+          </Grid>
         </Grid>
       </Grid>
     </>

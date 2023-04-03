@@ -3,18 +3,19 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { IconButton } from '@mui/material';
 import { useRouter } from 'next/router';
-
+import JournalCardDetails from '@/components/homeJournal/JournalCardDetails';
+import { Icon } from '@iconify/react';
 const JournalDetail = () => {
     const { t, i18n } = useTranslation();
     return <>
-        <Link href="">{t('home')}</Link>
+        <JournalCardDetails />
     </>
 };
 JournalDetail.getLayout = function getLayout(page) {
     const router = useRouter();
     return (
+        <>
         <Layout 
-            title="Journal" 
             lead={<IconButton
             onClick={() => router.back()}
             size="large"
@@ -28,7 +29,9 @@ JournalDetail.getLayout = function getLayout(page) {
             </IconButton>}
             >
             {page}
+          
         </Layout>
+        </>
     )
 }
 

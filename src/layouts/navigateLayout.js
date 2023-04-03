@@ -7,7 +7,7 @@ const NavigateLayout =(props) => {
     return(
         <>
             <Navigate title={title} lead={lead} tail={tail}/>
-                <Container maxWidth="false" sx={{ bgcolor: '#bbdefb', height: 'calc(100vh - 56px)' }}>
+                <Container maxWidth="false" sx={{  height: 'calc(100vh - 56px)' }}>
                     <main>
                         {children}
                     </main>
