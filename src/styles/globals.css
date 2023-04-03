@@ -105,3 +105,95 @@ a {
     color-scheme: dark;
   }
 }
+
+
+.css-1texxco-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected{
+  color: #FF0000;
+}
+
+
+/* tabs css */
+
+.tabclass .css-1vw5i9y-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  background: linear-gradient(90deg, #FF0000 0%, #FF6E31 100%);
+  border-radius: 30px;
+  color: #fff;
+}
+.tabclass .css-19kntty-MuiPaper-root-MuiAppBar-root{
+  background-color: transparent;
+  color: #000;
+  box-shadow:none
+}
+.tabclass .css-1vw5i9y-MuiButtonBase-root-MuiTab-root{
+  background: linear-gradient(90deg, #D0D0D0 0%, #EBEBEB 100%);
+border-radius: 30px;
+margin: 0px 10px;
+}
+.tabclass .css-1jlhdwc-MuiTabs-indicator{
+  height: 0;
+  background-color: transparent;
+}
+
+.tabclass .css-19kzrtu{
+  padding: 20px 0px;
+}
+
+.tabclass .css-1384nzf-MuiMobileStepper-dots{
+  display: none;
+}
+.tabclass .css-rh92k-MuiPaper-root-MuiMobileStepper-root{
+padding: 0px;
+}
+.tabclass .css-oxfx9-MuiPaper-root-MuiMobileStepper-root{
+  position: absolute;
+    top: 0;
+    bottom: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+.tabclass .css-w7a2h6-MuiButtonBase-root-MuiButton-root{
+  padding: 5px;
+  margin: 10px;
+  background: rgba(255, 255, 255, 0.36);
+  border: 0.5px solid #FFFFFF;
+  border-radius: 50%;
+  min-width: 0px;
+  color: #fff;
+}
+
+.multitabs .css-ulxgan-MuiTabs-root .MuiTabs-scrollButtons{
+  display: grid;
+}
+
+.multitabs .css-1nh2715-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  color: #FF0000;
+}
+.multitabs .css-dqvilf-MuiTabs-indicator{
+  background-color: #FF0000;
+}
+.multitabs .css-1nh2715-MuiButtonBase-root-MuiTab-root{
+  font-size: 10px;
+  line-height: initial;
+  max-width: 68px;
+  min-width: 68px;
+  padding: 0px 10px;
+  }
+  .multitabs .css-ulxgan-MuiTabs-root{
+    min-height:initial
+  }
+  .multitabs .css-1nh2715-MuiButtonBase-root-MuiTab-root{
+    min-height: 30px;
+  }
+  .multitabs .css-145v6pe-MuiButtonBase-root-MuiTabScrollButton-root{
+    width: auto;
+  }
+  .multitabs .css-hpgf8j{
+    padding: 0px;
+  }
+
+
+
+  /* .css-1nhsnip {
+    padding: 10px 10px;
+} */

@@ -2,6 +2,7 @@ import Layout from '@/layouts/navigateLayout'
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { IconButton } from '@mui/material';
+import { useRouter } from 'next/router';
 
 const JournalDetail = () => {
     const { t, i18n } = useTranslation();
@@ -10,6 +11,7 @@ const JournalDetail = () => {
     </>
 };
 JournalDetail.getLayout = function getLayout(page) {
+    const router = useRouter();
     return (
         <Layout 
             title="Journal" 

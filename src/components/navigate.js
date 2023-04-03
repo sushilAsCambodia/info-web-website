@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { IconButton, Grid } from '@mui/material';
-import { useRouter } from 'next/router';
 
 function ElevationScroll(props) {
     const { children, window } = props;
@@ -35,7 +34,6 @@ ElevationScroll.propTypes = {
 
 export default function Navigate(props) {
     const { title, lead='', tail='' } = props;
-    const router = useRouter();
     return (
         <React.Fragment>
             <CssBaseline />

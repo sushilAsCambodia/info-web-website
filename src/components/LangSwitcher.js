@@ -74,18 +74,20 @@ export default function LangSwitcher() {
   return (
     <div>
       <Button
-        sx={{backgroundColor:"white"}}
+        sx={{backgroundColor:"transparent", border:"0.5px solid #FFFFFF", color:"#fff", padding:"0px", textTransform:"capitalize !important"}}
         id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        variant="contained"
+    
+        padding="0px !important"
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}>
         {lang}
       </Button>
       <StyledMenu
+      
         id="demo-customized-menu"
         MenuListProps={{
           'aria-labelledby': 'demo-customized-button',

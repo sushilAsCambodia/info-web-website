@@ -6,7 +6,7 @@ const Layout =({children}) => {
     return(
         <>
             <Header/>
-                <Container maxWidth="false" sx={{ bgcolor: '#bbdefb', height: 'calc(100vh - 112px)' }}>
+                <Container maxWidth="false" sx={{ bgcolor: '#fff', height: 'calc(100vh - 112px)', padding:"0px !important" }}>
                     <main>
                         {children}
                     </main>
