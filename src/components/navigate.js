@@ -38,7 +38,7 @@ export default function Navigate(props) {
         <React.Fragment>
             <CssBaseline />
             <ElevationScroll {...props}>
-                <AppBar sx={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)'}}>
+                <AppBar position="static" sx={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)'}}>
                     <Toolbar>
                         <Grid container spacing={2} alignItems="center" justifyContent="space-between">
                             <Grid item xs={4}>

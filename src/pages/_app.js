@@ -4,12 +4,14 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Provider } from 'react-redux';
 import {store} from '../store/store';
 import  '@/common/i18n';
+import Layout from '@/layouts';
 const App = ({ Component, pageProps }) => {
-  const getLayout = Component.getLayout || ((page) => page)
   return <>
     <Provider store={store}>
       <ThemeProvider theme={ThemConfiguration()}>
-          {getLayout(<Component {...pageProps} />)}
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
       </ThemeProvider>
     </Provider>
   </>

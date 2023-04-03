@@ -1,20 +1,18 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'https://fakestoreapi.com',
+    baseURL: 'http://localhost:3000/api',
     headers: {
         'content-type':'application/json'
     },
 });
 
 export default {
-    get: () => {
+    get: (url, params = {}) => {
         return instance({
-            'method':'GET',
-            'url':'/products',
-            'params': {
-                'search':'parameter',
-            },
+            'method': 'GET',
+            'url': url,
+            'params': params,
             transformResponse: [function (data) {
                 // Do whatever you want to transform the data
                 console.log('Transforming data...')
