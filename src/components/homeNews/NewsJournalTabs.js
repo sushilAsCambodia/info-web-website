@@ -12,7 +12,6 @@ import FullSilder from './FullSilder';
 import MultiTabs from './MultiTabs';
 import JournalCard from '../homeJournal/JournalCard';
 import { useRouter }  from "next/router";
-import TestCompo from './TestCompo';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

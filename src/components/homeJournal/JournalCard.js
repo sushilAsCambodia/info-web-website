@@ -14,7 +14,7 @@ export default function JournalCard() {
     const card10 = "/assets/NewsJourney/Journalcard10.png";
 
     const cardDetail = () => {
-          Router.push("/journalDetial");
+          Router.push("/JournalCardDetails");
       };
 
   return (

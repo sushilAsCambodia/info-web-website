@@ -13,7 +13,7 @@ export default function JournalCardDetails() {
 
   return (
 
-    <Grid container item textAlign="left" sx={{marginTop:'70px'}}>
+    <Grid container item textAlign="left" p={1}>
       <Grid item xs={12}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Grid item >
