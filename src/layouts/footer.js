@@ -10,8 +10,25 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 const Footer = () => {
     const {t} = useTranslation();
-    const [value, setValue] = React.useState(0);
+    let selectedTab = 0;
     const router = useRouter();
+    switch (router.pathname.toLowerCase()) {
+        case  '/home':
+            selectedTab = 0;
+            break;
+        case  '/lottery':
+            selectedTab = 1;
+            break;
+        case  '/match':
+            selectedTab = 2;
+            break;
+        case  '/profile':
+            selectedTab = 3;
+            break;
+        default:
+            break;
+    }
+    const [value, setValue] = React.useState(selectedTab);
     return <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0,}}>
             <BottomNavigation
                 showLabels

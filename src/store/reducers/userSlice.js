@@ -27,6 +27,28 @@ export const login = createAsyncThunk(
       }
     },
 );
+export const register = createAsyncThunk(
+  "user/register",
+  async ({ body = {}, callback }, { getState, dispatch }) => {
+    try {
+      const response = await api.post('/register',body);
+      if(typeof callback == 'function') {
+        callback(response.data);
+      }
+      if(typeof window !='undefined') {
+        if(response.data[tokenKey]) {
+          window.localStorage.setItem('token',response.data[tokenKey] || '');
+        }
+      }
+      return response.data;
+    } catch (error) {
+      if(typeof callback == 'function') {
+        callback(error?.response?.data);
+      }
+      return error?.response?.data;
+    }
+  },
+);
 const userSlice = createSlice({
   name: 'user',
   initialState,
