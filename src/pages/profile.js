@@ -41,11 +41,6 @@ const Profile = () => {
     const goToLogout = () => {
         Router.push("/Logout");
     };
-
-
-
-
-
     return (
         <>
             <Grid

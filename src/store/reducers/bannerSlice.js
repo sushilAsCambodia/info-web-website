@@ -6,8 +6,8 @@ const initialState = {
 }
 export const getBannerSync = createAsyncThunk(
     "banner/getBannerSync",
-    async (callback, { getState, dispatch }) => {
-      const banners = await api.get('/banner');
+    async ({ params = {}, callback }, { getState, dispatch }) => {
+      const banners = await api.get('/banner',params);
       if(typeof callback == 'function') {
         callback(banners.data);
       }

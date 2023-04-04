@@ -4,8 +4,9 @@ import Footer from './footer';
 import Container from '@mui/material/Container';
 import { useRouter } from 'next/router';
 import Navigate from '@/components/navigate';
-import { Grid, IconButton } from '@mui/material';
+import { Grid, IconButton } from '@mui/material'; 
 const Layout =({children}) => {
+    
     const pages = [
         '/lottery',
         '/games',
@@ -38,7 +39,6 @@ const Layout =({children}) => {
         if(router.pathname!='/') {
             if(pages.includes(router.pathname)) {
                 return <Navigate 
-               
                 lead={<IconButton
                 onClick={() => router.back()}
                 size="large"
@@ -109,6 +109,7 @@ const Layout =({children}) => {
         } 
         return '';
     };
+    
     return(
         <>
             {switchHeader()}
