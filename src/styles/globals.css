@@ -118,6 +118,7 @@ a {
   background: linear-gradient(90deg, #FF0000 0%, #FF6E31 100%);
   border-radius: 30px;
   color: #fff;
+
 }
 .tabclass .css-19kntty-MuiPaper-root-MuiAppBar-root{
   background-color: transparent;
@@ -128,6 +129,7 @@ a {
   background: linear-gradient(90deg, #D0D0D0 0%, #EBEBEB 100%);
 border-radius: 30px;
 margin: 0px 10px;
+min-height:40px
 }
 .tabclass .css-1jlhdwc-MuiTabs-indicator{
   height: 0;
@@ -135,7 +137,7 @@ margin: 0px 10px;
 }
 
 .tabclass .css-19kzrtu{
-  padding: 20px 0px;
+  padding: 10px 0px 20px 0px;
 }
 
 .tabclass .css-1384nzf-MuiMobileStepper-dots{
@@ -197,3 +199,39 @@ padding: 0px;
   /* .css-1nhsnip {
     padding: 10px 10px;
 } */
+
+
+/* Dialog css  */
+
+#registerdialog .css-d3wcwz-MuiTypography-root{
+text-align: center;
+}
+#registerdialog .css-hlj6pa-MuiDialogActions-root{
+justify-content: center;
+}
+#registerdialog .css-1vb6ifl-MuiButtonBase-root-MuiButton-root{
+  padding: 0px;
+  font-size: 14px;
+}
+#registerdialog .borderright::after{
+  height: 22px;
+  content: "";
+  border-right: 2px solid #DDDDDD;
+  margin: 0 auto;
+  position: absolute;
+  right: -6px;
+}
+#registerdialog .css-ahj2mt-MuiTypography-root{
+font-size: 14px;
+}
+#logindialog .css-hlj6pa-MuiDialogActions-root{
+display: block;
+text-align: center;
+}
+#logindialog .css-1vb6ifl-MuiButtonBase-root-MuiButton-root{
+padding: 0px;
+}
+#logindialog .css-d3wcwz-MuiTypography-root{
+  text-align: center;
+}
+

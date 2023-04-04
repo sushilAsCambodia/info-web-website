@@ -10,11 +10,14 @@ import Box from '@mui/material/Box';
 import { Grid } from '@mui/material';
 import FullSilder from './FullSilder';
 import MultiTabs from './MultiTabs';
+import JournalCard from '../homeJournal/JournalCard';
+import { useRouter }  from "next/router";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <Grid
       role="tabpanel"
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
@@ -22,11 +25,11 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
+        <Grid>
+          {children}
+        </Grid>
       )}
-    </div>
+    </Grid>
   );
 }
 
@@ -47,7 +50,7 @@ function a11yProps(index) {
 export default function NewsJournalTabs() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-
+  const router = useRouter();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -57,8 +60,8 @@ export default function NewsJournalTabs() {
   };
   return (
     <Grid item className='tabclass'>
-     <Box sx={{ padding:'10px 10px' }} >
-      <AppBar position="static">
+     <Grid sx={{ padding:'10px 10px' }} >
+      
         <Tabs
           value={value}
           onChange={handleChange}
@@ -67,25 +70,20 @@ export default function NewsJournalTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="News" {...a11yProps(0)} />
-          <Tab label="journal" {...a11yProps(1)} />
+          <Tab label="News" {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
+          <Tab label="journal" {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
+      
+      
+        <TabPanel  value={value} index={0} >
         <FullSilder />
         <MultiTabs />
         </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+        <TabPanel value={value} index={1} >
+        <JournalCard />
         </TabPanel>
-       
-      </SwipeableViews>
-    </Box>
+
+    </Grid>
     </Grid>
   )
 }
