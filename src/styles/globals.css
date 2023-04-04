@@ -199,3 +199,39 @@ padding: 0px;
   /* .css-1nhsnip {
     padding: 10px 10px;
 } */
+
+
+/* Dialog css  */
+
+#registerdialog .css-d3wcwz-MuiTypography-root{
+text-align: center;
+}
+#registerdialog .css-hlj6pa-MuiDialogActions-root{
+justify-content: center;
+}
+#registerdialog .css-1vb6ifl-MuiButtonBase-root-MuiButton-root{
+  padding: 0px;
+  font-size: 14px;
+}
+#registerdialog .borderright::after{
+  height: 22px;
+  content: "";
+  border-right: 2px solid #DDDDDD;
+  margin: 0 auto;
+  position: absolute;
+  right: -6px;
+}
+#registerdialog .css-ahj2mt-MuiTypography-root{
+font-size: 14px;
+}
+#logindialog .css-hlj6pa-MuiDialogActions-root{
+display: block;
+text-align: center;
+}
+#logindialog .css-1vb6ifl-MuiButtonBase-root-MuiButton-root{
+padding: 0px;
+}
+#logindialog .css-d3wcwz-MuiTypography-root{
+  text-align: center;
+}
+
