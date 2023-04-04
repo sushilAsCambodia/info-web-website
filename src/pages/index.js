@@ -2,14 +2,8 @@ import { Grid, List, ListItem, Card, Typography, Container } from "@mui/material
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 
-
-
 export default function Home() {
-
-
   const matches = useMediaQuery("(max-width:768px)");
-
-
   return !matches ? (
     <Container sx={{
       backgroundImage: 'url("./assets/Home/landingpagebg.jpg")',
