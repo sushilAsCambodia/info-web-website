@@ -9,9 +9,21 @@ const Layout =({children}) => {
     const pages = [
         '/lottery',
         '/games',
-        '/announcement',
-        '/profile',
         '/JournalCardDetails',
+        
+    ];
+    const innerpages = [
+        '/Login',
+        '/Register',
+        '/ForgotPassword',
+        '/Profile',
+        '/ProfileDetail',
+        '/Feedback',
+        '/CustomerService',
+        '/Announcement',
+        '/Logout',
+        
+       
         
     ];
     const router = useRouter();
@@ -46,7 +58,7 @@ const Layout =({children}) => {
                 </svg>
                     </Grid>
                 }/>
-            }else if(router.pathname == '/Login' || router.pathname == '/Register' || router.pathname == '/ForgotPassword') {
+            }else if(innerpages.includes(router.pathname)) {
                 return <Navigate
                 title={router.pathname.replace('/','')}
 

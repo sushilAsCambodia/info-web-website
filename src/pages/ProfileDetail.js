@@ -1,0 +1,54 @@
+import React, { useEffect, useState } from "react";
+import { Icon } from "@iconify/react";
+import {
+    Button,
+    Typography,
+    FormControl,
+    Grid,
+    IconButton,
+    InputAdornment,
+    Link,
+    ListItem,
+    ListItemText,
+    ListItemIcon,
+    List,
+    Dialog,
+    OutlinedInput,
+    Divider,
+} from "@mui/material";
+import Router from "next/router";
+
+const ProfileDetail = () => {
+
+    const goToLogin = () => {
+        Router.push("/Login");
+    };
+
+
+    return (
+        <>
+           <>
+            <Grid
+                container
+                alignItems="flex-start"
+                justifyContent="center"
+                padding="0px 16px"
+            >
+              
+                <Grid
+                    item
+                    xs={12}
+                    container
+                    alignContent="flex-start"
+                    alignItems="center"
+                    overflow="auto"
+                >
+                profile details
+                </Grid>
+            </Grid>
+        </>
+        </>
+    )
+
+};
+export default ProfileDetail;

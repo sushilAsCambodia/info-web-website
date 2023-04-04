@@ -23,7 +23,7 @@ const Footer = () => {
                 <BottomNavigationAction onClick={() => router.push('/home')} label={t('home')} icon={<HomeIcon />} />
                 <BottomNavigationAction onClick={() => router.push('/lottery')} label={t('lottery')} icon={<ScatterPlotIcon />} />
                 <BottomNavigationAction onClick={() => router.push('/match')} label={t('match')} icon={<SportsBaseballIcon />} />
-                <BottomNavigationAction onClick={() => router.push('/profile')} label={t('profile')} icon={<AccountCircleIcon />} />
+                <BottomNavigationAction onClick={() => router.push('/Profile')} label={t('profile')} icon={<AccountCircleIcon />} />
             </BottomNavigation>
         </Paper>
 };
