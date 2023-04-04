@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: 'http://localhost:3001/api',
     headers: {
         'content-type':'application/json'
     },
@@ -13,24 +13,21 @@ export default {
             'method': 'GET',
             'url': url,
             'params': params,
-            transformResponse: [function (data) {
-                // Do whatever you want to transform the data
-                console.log('Transforming data...')
+            transformResponse: [function (data) { 
                 const json = JSON.parse(data) 
                 data = json
                 return data;
             }],
         });
     },
-    post: () => {
+    post: (url, body = {}) => {
         return instance({
             'method': 'POST',
-            'url':'/api',
-            'data': {
-                'item1':'data1',
-                'item2':'item2'
-            },
-            'headers': { 'content-type':'application/json'}, // override instance defaults
+            'url':url,
+            'data':body,
+            'headers': { 
+                'content-type':'application/json'
+            }, // override instance defaults
         });
     }
 }
