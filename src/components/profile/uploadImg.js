@@ -69,7 +69,7 @@ const ImgUpload =({
         // onClick={toggleDrawer(anchor, false)}
         // onKeyDown={toggleDrawer(anchor, false)}
       >
-        <Typography></Typography>
+        <Typography className="drawerline"></Typography>
         <List sx={{padding:"70px 16px"}}>
         <ListItem  disablePadding sx={{paddingBottom:"10px"}}>
          <Grid item xs={12} sm={12} >
