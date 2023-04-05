@@ -17,36 +17,42 @@ import {
     Divider,
 } from "@mui/material";
 import Router from "next/router";
+import UploadImg from "@/components/profile/uploadImg";
 
 const ProfileDetail = () => {
-
-    const goToLogin = () => {
-        Router.push("/Login");
-    };
 
 
     return (
         <>
-           <>
+
             <Grid
                 container
                 alignItems="flex-start"
                 justifyContent="center"
                 padding="0px 16px"
             >
-              
                 <Grid
                     item
                     xs={12}
                     container
-                    alignContent="flex-start"
+                    alignContent="center"
                     alignItems="center"
                     overflow="auto"
+                    className="uploadimg_main"
+                    flexDirection="column"
                 >
-                profile details
+
+<Grid item >
+
+</Grid>
+
+
+
+
+
+                  <UploadImg />
                 </Grid>
             </Grid>
-        </>
         </>
     )
 
