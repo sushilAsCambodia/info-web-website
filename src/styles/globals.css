@@ -246,18 +246,18 @@ padding: 0px;
   margin-top: 40px;
 
 }
-@keyframes open {
+/* @keyframes open {
   0%  {background-position: 166% -25%, 220% -69%;}
   100%{background-position: 120% -5%, 200% -40%;}
-}
-.uploadimg_main form{
+} */
+/* .uploadimg_main form{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 350px;
   margin: 0 auto;
-}
+} */
 
 .uploadimg_main .field{
  width: 100%;
@@ -293,7 +293,7 @@ padding: 0px;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%);
+  color: #FF6F31;
   width: 150px;
   height: 150px;
   border-radius: 50%;

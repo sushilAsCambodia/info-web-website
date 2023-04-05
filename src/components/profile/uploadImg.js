@@ -1,29 +1,11 @@
 import React from "react";
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import { Icon } from "@iconify/react";
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
     Button,
     Typography,
     FormControl,
     Grid,
-    IconButton,
     InputAdornment,
-    Link,
-    ListItem,
-    ListItemText,
-    ListItemIcon,
-    List,
-    Dialog,
-    InputLabel ,
     OutlinedInput,
-    Divider,
-    TextField
 } from "@mui/material";
 
 const ImgUpload =({
@@ -43,13 +25,8 @@ const ImgUpload =({
     state = {
       file: '',
       imagePreviewUrl: 'https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true',
-      active: 'edit'
+     
     }
-  
-    
-
-   
-  
 
     photoUpload = e =>{
       e.preventDefault();
@@ -67,19 +44,25 @@ const ImgUpload =({
     render() {
       const {imagePreviewUrl} = this.state;
       return (
-        <Grid item  xs={12}>
+        <Grid item  xs={12} textAlign="center">
             <form>
-                
               <ImgUpload onChange={this.photoUpload} src={imagePreviewUrl}/>
+             
+              <Grid item xs={12} sm={12} >
+                <Typography fontWeight="bold" pb={1} textAlign="left">
+                  Username
+                </Typography>
               <FormControl
                 variant="outlined"
                 fullWidth
                 sx={{
                   borderRadius: "15px",
                   marginBottom: "5px",
+                
                 }}
               >
                 <OutlinedInput
+                sx={{paddingRight:"10px"}}
                   name="Username"
                   placeholder="Username"
                   inputProps={{ maxLength: 16 }}
@@ -101,11 +84,32 @@ const ImgUpload =({
                 >
                  Edit
                 </Button>
-                   
                     </InputAdornment>
                   }
                 />
               </FormControl>
+              </Grid>
+
+              <Grid item fullWidth>
+              <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                marginTop:"20px",
+                    color: "#000",
+                    boxShadow:"none",
+                    border:"0.5px solid #DDDDDD",
+                    borderRadius:"10px",
+                    background:
+                    "linear-gradient(90.04deg, #E9E9E9 0.04%, #E9E9E9 99.97%);",
+                
+                    textTransform: 'capitalize'
+                  }}
+                 
+                >
+                Change Password
+                </Button>
+              </Grid>
             </form>
               </Grid>
       )
