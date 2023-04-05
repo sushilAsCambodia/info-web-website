@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 var user = {
-    username:'vitou',
+    username:'vitouchhay',
     password:'11111111'
 };
 const matches = (obj, source) =>
@@ -10,18 +10,21 @@ const matches = (obj, source) =>
 export default function handler(req, res) {
     const { method } = req
     if (method !== 'POST') {
-        res.status(405).send({ message: 'Only POST requests allowed' });
+        res.status(405).send({ status:405, message: 'Only POST requests allowed' });
     }
-    if(!matches(req.body,user)) {
+    if(matches(req.body,user)) {
         res.status(200).json({ 
-            name:'chhay vitou',
-            first_name:'vitou',
-            last_name:'chhay',
-            profile:null,
+            status:200,
+            profile: {
+                name:'chhay vitou',
+                first_name:'vitou',
+                last_name:'chhay',
+                profile:null,
+            },
             access_token:'xxxxxx11111xxxxxx'
         })
     }else {
-        res.status(404).json({ status: 'failed',message:'User doest not exist!' })
+        res.status(404).json({ status: 404, message:'User doest not exist!' })
     }
 }
   
