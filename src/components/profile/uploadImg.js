@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import {
     Button,
     Typography,
@@ -7,6 +7,7 @@ import {
     InputAdornment,
     OutlinedInput,
 } from "@mui/material";
+
 
 const ImgUpload =({
     onChange,
@@ -21,32 +22,29 @@ const ImgUpload =({
    
 
   
-  export default  class UploadImg extends React.Component {
-    state = {
-      file: '',
-      imagePreviewUrl: 'https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true',
-     
-    }
+  const UploadImg =()=> {
+   
 
-    photoUpload = e =>{
+    const[file,setFile]=useState('')
+    const[imagePreviewUrl,setImagePreviewUrl]=useState('https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true')
+
+    const photoUpload = (e) =>{
       e.preventDefault();
       const reader = new FileReader();
       const file = e.target.files[0];
       reader.onloadend = () => {
-        this.setState({
-          file: file,
-          imagePreviewUrl: reader.result
-        });
+        setFile(file)
+        setImagePreviewUrl(reader.result)       
       }
       reader.readAsDataURL(file);
     }
 
-    render() {
-      const {imagePreviewUrl} = this.state;
+  
+      
       return (
         <Grid item  xs={12} textAlign="center">
             <form>
-              <ImgUpload onChange={this.photoUpload} src={imagePreviewUrl}/>
+              <ImgUpload onChange={photoUpload} src={imagePreviewUrl}/>
              
               <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
@@ -113,6 +111,7 @@ const ImgUpload =({
             </form>
               </Grid>
       )
-    }
+    
   }
+  export default UploadImg;
   
