@@ -58,6 +58,9 @@ const Profile = () => {
     const goToLogout = () => {
         Router.push("/Logout");
     };
+
+
+    console.log('isLogin',isLogin)
     return (
         <>
             <Grid
@@ -96,7 +99,7 @@ const Profile = () => {
                                                 alignItems="center"
                                                 justifyContent="space-between">
                                                 <Grid item>
-                                                    <Typography fontWeight="600" fontSize="12px">{profile.user_name || 'N/A'}</Typography>
+                                                    <Typography fontWeight="600" fontSize="12px">{profile.user_name || 'Profile Name'}</Typography>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
