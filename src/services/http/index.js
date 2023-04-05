@@ -1,7 +1,7 @@
 import axios from 'axios'
-
+import utils from '@/common/utils';
 const instance = axios.create({
-    baseURL: 'http://localhost:3001/api',
+    baseURL: utils.baseUrl || '',
     headers: {
         'content-type':'application/json'
     },
@@ -20,14 +20,18 @@ export default {
             }],
         });
     },
-    post: (url, body = {}) => {
+    post: (url, body = {}, auth = false) => {
+        const header = { 
+            'content-type':'application/json'
+        }; // override instance defaults
+        if(auth) {
+            header['Authorization'] = 'Bearer '+ (localStorage.getItem(utils.tokenKey)||'');
+        }
         return instance({
             'method': 'POST',
             'url':url,
             'data':body,
-            'headers': { 
-                'content-type':'application/json'
-            }, // override instance defaults
+            'headers': header
         });
     }
 }

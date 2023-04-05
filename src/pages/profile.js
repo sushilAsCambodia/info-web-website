@@ -17,9 +17,26 @@ import {
     Divider,
 } from "@mui/material";
 import Router from "next/router";
+import {logout} from '@/store/reducers/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+const Profile = () => { 
+    const {isLogin, profile } = useSelector((state) => state.user); 
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        dispatch(logout(
+            { 
+                callback: (res) => {
+                    console.log(res)
+                    const {status_code} = res;
 
-const Profile = () => {
-
+                    if([200,201,202,203].includes(status_code)) {
+                        // Router.push('/home');
+                    }
+                },
+                auth: true
+            },
+        ));
+    }
     const goToLogin = () => {
         Router.push("/Login");
     };
@@ -66,42 +83,60 @@ const Profile = () => {
                                     sx={{ padding: "18px 0px", borderRadius: "5px" }}
                                     boxShadow="none"
                                     display="flex"
-                                    alignItems="center"
-                                >
-                                    <Grid item xs={2} display="flex" alignItems="center">
-                                        <img src="./assets/Profile/user-icon.png" />
-                                    </Grid>
-                                    <Grid item xs={10}>
-                                        <Grid
-                                            item
-                                            xs={12}
-                                            display="flex"
-                                            alignItems="center"
-                                            justifyContent="space-between"
-                                        >
-                                            <Grid item>
-                                                <Typography fontWeight="600" fontSize="12px">Log in to enjoy more exciting features</Typography>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={goToLogin}
-                                                    sx={{
-                                                        fontSize: "12px",
-                                                        marginTop: "6px",
-                                                        color: "white",
-                                                        background:
-                                                            "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
-                                                        textTransform: 'capitalize',
-                                                        borderRadius: '22px',
-                                                        padding: "4px 10px"
-                                                    }}
-                                                >
-                                                    Login/Register
-                                                </Button>
+                                    alignItems="center">
+                                    { isLogin ? <>
+                                        <Grid item xs={2} display="flex" alignItems="center">
+                                            <img src="./assets/Profile/user-icon.png" />
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <Grid
+                                                item
+                                                xs={12}
+                                                display="flex"
+                                                alignItems="center"
+                                                justifyContent="space-between">
+                                                <Grid item>
+                                                    <Typography fontWeight="600" fontSize="12px">{profile.user_name || 'N/A'}</Typography>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </>: <>
+                                        <Grid item xs={2} display="flex" alignItems="center">
+                                            <img src="./assets/Profile/user-icon.png" />
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <Grid
+                                                item
+                                                xs={12}
+                                                display="flex"
+                                                alignItems="center"
+                                                justifyContent="space-between"
+                                            >
+                                                <Grid item>
+                                                    <Typography fontWeight="600" fontSize="12px">Log in to enjoy more exciting features</Typography>
+                                                    <Button
+                                                        variant="contained"
+                                                        onClick={goToLogin}
+                                                        sx={{
+                                                            fontSize: "12px",
+                                                            marginTop: "6px",
+                                                            color: "white",
+                                                            background:
+                                                                "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
+                                                            textTransform: 'capitalize',
+                                                            borderRadius: '22px',
+                                                            padding: "4px 10px"
+                                                        }}
+                                                    >
+                                                        Login/Register
+                                                    </Button>
+
+                                                </Grid>
 
                                             </Grid>
-
                                         </Grid>
-                                    </Grid>
+                                    </>}
+                                    
                                 </Grid>
 
                             </ListItem>
@@ -252,8 +287,7 @@ const Profile = () => {
                                 </Grid>
 
                             </ListItem>
-                            <Divider />
-                            <ListItem sx={{ padding: "0px 0px" }} onClick={goToLogout}>
+                            {isLogin && <><Divider /><ListItem sx={{ padding: "0px 0px" }} onClick={handleLogout}>
                                 <Grid
                                     item
                                     xs={12}
@@ -265,7 +299,7 @@ const Profile = () => {
                                     <Grid item xs={2} display="flex" alignItems="center">
                                         <Icon icon="mdi:logout-variant" fontSize="40px" color="#FF6E31" />
                                     </Grid>
-                                    <Grid item xs={10}>
+                                     <Grid item xs={10}>
                                         <Grid
                                             item
                                             xs={12}
@@ -282,8 +316,7 @@ const Profile = () => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-
-                            </ListItem>
+                            </ListItem></>}
                         </List>
                         <Divider />
                     </Grid>

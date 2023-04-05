@@ -23,6 +23,7 @@ import LoadingDialog from "@/components/Loading";
 import {login} from '@/store/reducers/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { middleware } from '@/middleware';
+import { useTranslation } from "react-i18next";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -61,6 +62,8 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function Login() {
+  const {t} = useTranslation();
+  const [responseMessage, setResponseMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
@@ -72,16 +75,17 @@ export default function Login() {
   const handleLogin = () => {
     dispatch(login(
         { 
-            body: { username:username, password:password },
+            body: { user_name:username, password:password },
             callback: (res) => {
               setLoading(false);
-              const {status} = res;
-              if(status == 200 || status == 201) {
-                Router.push('/home');
-              }else {
-                setOpen(true)
+              const { status, status_code, message = '' } = res;
+              setResponseMessage(t(message));
+              setOpen(true)
+              if([200,201,202,203].includes(status_code)) {
+                setTimeout(() => {
+                  Router.push('/home');
+                }, 1000);
               }
-              console.log(status,res,'callback')
             }
         }
     ));
@@ -327,15 +331,10 @@ export default function Login() {
 
         <DialogContent dividers>
           <Typography gutterBottom>
-            Please enter the correct username or Password
+            {responseMessage}
           </Typography>
 
-        </DialogContent>
-        <DialogActions fontSize="14px !important" display="flex"  justifyContent="center !important">
-          <Button fontSize="14px" autoFocus onClick={handleClose}>
-            ok
-          </Button>
-        </DialogActions>
+        </DialogContent> 
       </BootstrapDialog>
     </>
   )

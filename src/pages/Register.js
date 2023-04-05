@@ -23,7 +23,8 @@ import { middleware } from '@/middleware';
 import LoadingDialog from "@/components/Loading";
 import FormHelperText from '@mui/material/FormHelperText';
 import { useDispatch, useSelector } from 'react-redux';
-import {register} from '@/store/reducers/userSlice';
+import {register,login} from '@/store/reducers/userSlice';
+import { useTranslation } from "react-i18next";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -64,6 +65,9 @@ BootstrapDialogTitle.propTypes = {
 
 
 export default function Register() {
+  const {t} = useTranslation();
+  const [registerSuccess,setRegisterSuccess] = useState(false);
+  const [responseMessage,setResponseMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
@@ -78,16 +82,26 @@ export default function Register() {
   const handleSignup = () => {
     dispatch(register(
         { 
-            body: { username:username, password:password },
+            body: { user_name:username, password:password },
             callback: (res) => {
               setLoading(false);
-              const {status} = res;
-              if(status == 200 || status == 201) {
-                Router.push('/home');
-              }else {
-                setOpen(true)
+              const {status_code, message = ''} = res;
+              setResponseMessage(t(message));
+              setOpen(true)
+              if([200,201,202,203].includes(status_code)) {
+                setRegisterSuccess(true);
+                dispatch(login(
+                  { 
+                      body: { user_name: username, password:password},
+                      callback: (res) => {
+                        const {status_code} = res; 
+                        if([200,201,202,203].includes(status_code)) {
+                          Router.push('/home');
+                        }
+                      }
+                  }
+                ));
               }
-              console.log(status,res,'callback')
             }
         }
     ));
@@ -307,33 +321,26 @@ export default function Register() {
         </Grid>
       </Grid>
       <LoadingDialog loading={loading} setLoading={setLoading}></LoadingDialog>
-
       {/* Register Dialog */}
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
-        id="registerdialog"
-      >
-
+        id="registerdialog">
         <DialogContent dividers>
-          <Typography gutterBottom>
-            This account already exists, <br /> Please Log In
+          <Typography>
+            {responseMessage}
           </Typography>
-
         </DialogContent>
-        <DialogActions fontSize="14px !important" display="flex" justifyContent="space-around !important">
+        {!registerSuccess && <DialogActions fontSize="14px !important">
           <Button fontSize="14px" autoFocus onClick={handleClose} position="relative !important" className="borderright">
             Cancel
           </Button>
-
           <Button fontSize="14px" autoFocus onClick={handleClose}>
             <Link underline="none" style={{ fontSize: '12px' }} ><Typography style={{ cursor: "pointer", color: "#F26522" }}>Login</Typography></Link>
-
           </Button>
-        </DialogActions>
+        </DialogActions>}
       </BootstrapDialog>
-
     </>
   )
 }
