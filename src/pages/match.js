@@ -1,6 +1,7 @@
+import { Typography } from '@mui/material';
 const Match = () => {
     return <>
-        Match
+        <Typography sx={{textAlign:'center'}}>TODO</Typography>
     </>
 }; 
 export default Match;

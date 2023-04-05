@@ -2,5 +2,10 @@
     "home":"ទំព័រដើម",
     "lottery":"ឆ្នោត",
     "match":"ការប្រកួត",
-    "profile":"ប្រវត្តិរូប"
+    "profile":"ប្រវត្តិរូប",
+    "user_name_required":"ឈ្មោះត្រូវបានទាមទារ",
+    "user_name_unique":"ឈ្មោះមានរួចហើយ",
+    "incorrect_username_or_password":"ឈ្មោះអ្នកប្រើ ឬ ពាក្យសម្ងាត់មិនត្រឹមត្រូវ",
+    "login_successfully":"ជោគជ័យ"
+
 }

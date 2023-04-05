@@ -2,5 +2,9 @@
     "home":"家",
     "lottery":"彩票",
     "match":"匹配",
-    "profile":"轮廓"
+    "profile":"轮廓",
+    "user_name_required":"用户名是必需的",
+    "user_name_unique":"用户名已存在",
+    "incorrect_username_or_password":"用户名或密码错误",
+    "login_successfully":"登录成功"
 }

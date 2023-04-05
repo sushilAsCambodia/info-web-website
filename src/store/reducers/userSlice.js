@@ -1,38 +1,100 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import api from '@/services/http';
-const tokenKey = 'access_token';
-const initialState = { 
+import utils from '@/common/utils';
+var initialState = { 
     status: 'idle',
-    profile:{}
+    profile: typeof window != 'undefined' && window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
+    isLogin: typeof window != 'undefined' && window.localStorage.getItem(utils.tokenKey) ? true : false
 }
 export const login = createAsyncThunk(
-    "user/login",
+    "customers/login",
     async ({ body = {}, callback }, { getState, dispatch }) => {
       try {
-        const login = await api.post('/login',body);
-        if(typeof callback == 'function') {
-          callback(login.data);
-        }
-        if(typeof window !='undefined') {
-          if(login.data[tokenKey]) {
-            window.localStorage.setItem('token',login.data[tokenKey] || '');
+        const response = await api.post('/customers/login',body);
+        const { data, status } = response;
+        data['status_code'] = status;
+        if(typeof window !='undefined') { 
+          if(data.data[utils.tokenKey]) {
+            window.localStorage.setItem(utils.tokenKey,data.data[utils.tokenKey] || '');
           }
         }
-        return login.data;
-      } catch (error) {
         if(typeof callback == 'function') {
-          callback(error?.response?.data);
+          callback(data);
         }
-        return error?.response?.data;
+        return data;
+      } catch (error) {
+        const {status, data} = error.response;
+        data['status_code']  = status;
+        if(typeof callback == 'function') {
+          callback(data);
+        }
+        return data;
       }
     },
 );
+export const register = createAsyncThunk(
+  "customers/register",
+  async ({ body = {}, callback }, { getState, dispatch }) => {
+    try {
+      const response = await api.post('/customers/register',body);
+      const { data, status } = response;
+      data['status_code'] = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      if(typeof window !='undefined') {
+        if(data.data[utils.tokenKey]) {
+          window.localStorage.setItem(utils.tokenKey,data.data[utils.tokenKey] || '');
+        }
+      }
+      return data;
+    } catch (error) {
+      const {status, data} = error.response;
+      data['status_code']  = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      return data;
+    }
+  },
+);
+export const logout = createAsyncThunk(
+  "customers/logout",
+  async ({ body = {}, callback, auth = false }, { getState, dispatch }) => {
+    try {
+      const response = await api.post('/customers/logout',body, auth);
+      const { data, status } = response;
+      data['status_code'] = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      if(typeof window !='undefined') {
+        dispatch(userSlice.actions.setUser({}));
+        dispatch(userSlice.actions.setLogin(false));
+        window.localStorage.removeItem(utils.tokenKey);
+        window.localStorage.removeItem('profile');
+      }
+      return data;
+    } catch (error) {
+      console.log(error)
+      const {status, data} = error.response;
+      data['status_code']  = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      return data;
+    }
+  },
+);
 const userSlice = createSlice({
-  name: 'user',
+  name: 'customers',
   initialState,
   reducers: {
     setUser(state,action) {
       state.profile  = action.payload;
+    },  
+    setLogin(state,action) {
+      state.isLogin  = action.payload;
     },  
   },
   extraReducers: (builder) => {
@@ -42,7 +104,10 @@ const userSlice = createSlice({
     builder.addCase(
         login.fulfilled,
       (state, action) => {
-        state.profile = action.payload;
+        const {data} = action.payload;
+        state.profile = data && data.customer ? data.customer : {};
+        window.localStorage.setItem('profile',JSON.stringify(state.profile));
+        state.isLogin = true;
         state.status = "completed";
       },
     );

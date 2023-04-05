@@ -23,7 +23,7 @@ import {
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import PropTypes from "prop-types";
-
+import Router from "next/router";
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -50,6 +50,8 @@ function TabPanel(props) {
     value: PropTypes.number.isRequired,
   };
 
+
+
 export default function MultiTabs({ _setPage }) {
     const [value, setValue] = useState(0);
 
@@ -57,6 +59,9 @@ export default function MultiTabs({ _setPage }) {
       setValue(newValue);
     };
   
+    const goToNewsCardDetails = () => {
+      Router.push("/NewsCardDetails");
+  };
 
   return (
     <Grid
@@ -97,7 +102,7 @@ export default function MultiTabs({ _setPage }) {
             <TabPanel value={value} index={0}>
             <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                   <List padding="0px">
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}
@@ -132,7 +137,7 @@ export default function MultiTabs({ _setPage }) {
                     </Grid>
                   </Grid>
                     </ListItem>
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}
@@ -167,7 +172,7 @@ export default function MultiTabs({ _setPage }) {
                     </Grid>
                   </Grid>
                     </ListItem>
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}
@@ -211,7 +216,7 @@ export default function MultiTabs({ _setPage }) {
             <TabPanel value={value} index={1}>
             <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                   <List padding="0px">
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}
@@ -246,7 +251,7 @@ export default function MultiTabs({ _setPage }) {
                     </Grid>
                   </Grid>
                     </ListItem>
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}
@@ -287,7 +292,7 @@ export default function MultiTabs({ _setPage }) {
             <TabPanel value={value} index={2}>
             <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                   <List padding="0px">
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}
@@ -329,7 +334,7 @@ export default function MultiTabs({ _setPage }) {
             <TabPanel value={value} index={3}>
             <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                   <List padding="0px">
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}
@@ -364,7 +369,7 @@ export default function MultiTabs({ _setPage }) {
                     </Grid>
                   </Grid>
                     </ListItem>
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}
@@ -406,8 +411,7 @@ export default function MultiTabs({ _setPage }) {
             <TabPanel value={value} index={4}>
             <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                   <List padding="0px">
-                 
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}
@@ -449,8 +453,7 @@ export default function MultiTabs({ _setPage }) {
             <TabPanel value={value} index={5}>
             <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                   <List padding="0px">
-                  
-                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }}>
+                    <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom:'1px solid #D9D9D9;' }} onClick={goToNewsCardDetails}>
                   <Grid
                     item
                     xs={12}

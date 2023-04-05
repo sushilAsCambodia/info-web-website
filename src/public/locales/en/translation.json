@@ -2,5 +2,10 @@
     "home":"Home",
     "lottery":"Lottery",
     "match":"Match",
-    "profile":"Profile"
+    "profile":"Profile",
+    "user_name_required":"User name is required",
+    "user_name_unique":"User name already exist",
+    "incorrect_username_or_password":"Incorrect username or password",
+    "login_successfully":"Login successfully"
+
 }
