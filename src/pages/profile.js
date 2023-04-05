@@ -149,7 +149,7 @@ const Profile = () => {
                                                 <Typography fontWeight="500" fontSize="16px">Profile</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
-                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="30px" />
+                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -181,7 +181,7 @@ const Profile = () => {
                                                 <Typography fontWeight="500" fontSize="16px">Announcement</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
-                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="30px" />
+                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -213,7 +213,7 @@ const Profile = () => {
                                                 <Typography fontWeight="500" fontSize="16px">Feedback</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
-                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="30px" />
+                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -245,7 +245,7 @@ const Profile = () => {
                                                 <Typography fontWeight="500" fontSize="16px">Customer Service</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
-                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="30px" />
+                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -277,7 +277,7 @@ const Profile = () => {
                                                 <Typography fontWeight="500" fontSize="16px">Logout</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
-                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="30px" />
+                                                <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
                                             </Grid>
                                         </Grid>
                                     </Grid>

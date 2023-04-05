@@ -1,3 +1,4 @@
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -234,4 +235,81 @@ padding: 0px;
 #logindialog .css-d3wcwz-MuiTypography-root{
   text-align: center;
 }
+
+
+
+/* profile details  */
+
+
+
+.uploadimg_main .card{
+  margin-top: 40px;
+
+}
+@keyframes open {
+  0%  {background-position: 166% -25%, 220% -69%;}
+  100%{background-position: 120% -5%, 200% -40%;}
+}
+.uploadimg_main form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.uploadimg_main .field{
+ width: 100%;
+  }
+  .uploadimg_main input[type="file"] {
+  display: none;
+}
+
+.uploadimg_main .custom-file-upload {
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  padding: 6px;
+  cursor: pointer;
+  background: linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%);
+  margin-bottom: 25px;
+}
+
+.uploadimg_main .img-wrap{
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.uploadimg_main .img-upload:before{
+  content: "\f095";
+  font-size: 90px;
+  font-family: FontAwesome;
+  position: absolute;
+  padding-top: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #fff;
+}
+.uploadimg_main .img-upload:hover:before{
+ opacity: 1;
+}
+.uploadimg_main img {
+  width: auto;
+  height: 100%;
+}
+
+
+
+
 
