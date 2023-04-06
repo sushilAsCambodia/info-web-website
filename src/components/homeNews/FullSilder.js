@@ -64,7 +64,7 @@ export default function FullSilder() {
 
   return (
     <>
-      <Box item sx={{ position: "relative" }}>
+      <Grid item sx={{ position: "relative" }} className="mainautoplayswipeable">
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={activeStep}
@@ -120,7 +120,7 @@ export default function FullSilder() {
             </Button>
           }
         />
-      </Box>
+      </Grid>
       <Grid item xs={12}>
         <Grid
           item
