@@ -120,7 +120,7 @@ const Layout =(props) => {
                 <meta property="og:title" content={title} key="title" />
             </Head>
             {switchHeader()}
-                <Container maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding:"0px !important" }}>
+                <Container maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding:"0px !important", overflowY:'auto' }}>
                     <main>
                         {children}
                     </main>
