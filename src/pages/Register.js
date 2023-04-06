@@ -25,7 +25,6 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { useDispatch, useSelector } from 'react-redux';
 import {register,login} from '@/store/reducers/userSlice';
 import { useTranslation } from "react-i18next";
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -75,6 +74,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  console.log("registerSuccess", registerSuccess)
   const goToLogin = () => {
     Router.push("/login");
   }; 
