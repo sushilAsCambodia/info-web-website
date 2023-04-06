@@ -32,7 +32,7 @@ export default function FullSilder(props) {
   const card4 = "/assets/NewsJourney/newscard4.png";
   return (
     <>
-      <Box item sx={{ position: "relative" }}>
+      <Grid item sx={{ position: "relative" }} className="mainautoplayswipeable">
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={activeStep}
@@ -88,7 +88,7 @@ export default function FullSilder(props) {
             </Button>
           }
         />
-      </Box>
+      </Grid>
       <Grid item xs={12}>
         <Grid
           item
