@@ -21,7 +21,7 @@ import Router from "next/router";
 const Logout = () => {
 
     const goToLogin = () => {
-        Router.push("/login");
+        Router.push("/login222");
     };
 
 
