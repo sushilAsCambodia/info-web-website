@@ -8,8 +8,9 @@ import {
   IconButton,
   InputAdornment,
   Link,
-  Dialog,
   OutlinedInput,
+  Dialog,
+  Divider,
 } from "@mui/material";
 import Router from "next/router";
 import PropTypes from 'prop-types';
@@ -18,12 +19,13 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
-import FormHelperText from '@mui/material/FormHelperText';
-import LoadingDialog from "@/components/Loading";
-import {login} from '@/store/reducers/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import { middleware } from '@/middleware';
+import LoadingDialog from "@/components/Loading";
+import FormHelperText from '@mui/material/FormHelperText';
+import { useDispatch, useSelector } from 'react-redux';
+import {register,login} from '@/store/reducers/userSlice';
 import { useTranslation } from "react-i18next";
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -61,9 +63,11 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function Login() {
+
+export default function Register() {
   const {t} = useTranslation();
-  const [responseMessage, setResponseMessage] = useState('');
+  const [registerSuccess,setRegisterSuccess] = useState(false);
+  const [responseMessage,setResponseMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
@@ -71,34 +75,37 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const goToLogin = () => {
+    Router.push("/login");
+  }; 
   const dispatch = useDispatch();
-  const handleLogin = () => {
-    dispatch(login(
+  const handleSignup = () => {
+    dispatch(register(
         { 
             body: { user_name:username, password:password },
             callback: (res) => {
               setLoading(false);
-              const { status, status_code, message = '' } = res;
+              const {status_code, message = ''} = res;
               setResponseMessage(t(message));
               setOpen(true)
               if([200,201,202,203].includes(status_code)) {
-                setTimeout(() => {
-                  Router.push('/home');
-                }, 1000);
+                setRegisterSuccess(true);
+                dispatch(login(
+                  { 
+                      body: { user_name: username, password:password},
+                      callback: (res) => {
+                        const {status_code} = res; 
+                        if([200,201,202,203].includes(status_code)) {
+                          Router.push('/home');
+                        }
+                      }
+                  }
+                ));
               }
             }
         }
     ));
   }
-  const goToRegister = () => {
-    Router.push("/register");
-  };
-  const goToForgotPassword = () => {
-    Router.push("/forgotPassword");
-  };
-  // Login Dialog 
-  const [open, setOpen] = React.useState(false);
-
   const onSubmit = () => {
     if (username == '' && password == '') {
       setErrorUserName(true);
@@ -113,11 +120,8 @@ export default function Login() {
     }
     if (!errorPassword && !errorUserName) {
       setLoading(true)
-      handleLogin();
+      handleSignup();
     }
-  };
-  const handleClose = () => {
-    setOpen(false);
   };
   const onChangeUserName = (e) => {
     if (e.target.value != '' && e.target.value.length < 6) {
@@ -137,9 +141,19 @@ export default function Login() {
   }
   useEffect(() => {
     middleware(Router, (res) => {
-        console.log(res);
+      console.log(res);
     });
-  },[]);
+  }, []);
+  // Register Dialog 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <Grid
@@ -158,7 +172,7 @@ export default function Login() {
           <Grid item container xs={12} sm={12} padding={2}>
             <Grid container alignItems="flex-end" alignContent="center" mb={8}>
               <Typography variant="h5" sx={{ position: "relative" }}>
-                Login
+                Register
               </Typography>
             </Grid>
             <form
@@ -177,8 +191,6 @@ export default function Login() {
                   Username
                 </Typography>
 
-                
-
                 <FormControl
                   variant="outlined"
                   fullWidth
@@ -192,7 +204,6 @@ export default function Login() {
                     placeholder="Username"
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-username"
-                    type="text"
                     value={username}
                     onChange={(e) => onChangeUserName(e)}
                     error={errorUserName}
@@ -263,28 +274,15 @@ export default function Login() {
                     }}
                     onClick={onSubmit}
                   >
-                    Login
+                    Sign up for now
                   </Button>
                 </Grid>
               </Grid>
 
-              <Grid
-                item
-                sm={12}
-                container
-                sx={{
-                  cursor: "pointer",
-                  color: "#8C8C8C",
-                  fontSize: { xs: "13px", sm: "inerited" },
-                  justifyContent: { xs: "center", sm: "center" },
-                }}
-                underline="none"
-              >
-                <Link underline="none" style={{ cursor: "pointer", color: "#F26522" }} onClick={goToForgotPassword}> forgot password?</Link>
-              </Grid>
+
               <Grid item container spacing={2} mt={1}>
                 <Grid item xs={12}  >
-                  <Typography >Log In Via</Typography>
+                  <Typography textAlign="center">Log In Via</Typography>
                 </Grid>
               </Grid>
               <Grid
@@ -315,7 +313,7 @@ export default function Login() {
                 }}
                 underline="none"
               >
-                <Link underline="none" style={{ cursor: "pointer", fontSize: '12px', color: "#000", padding: "10px", display: 'flex' }} onClick={goToRegister} >Don’t have an account？ <Typography style={{ fontSize: '12px', cursor: "pointer", color: "#F26522" }}>Register</Typography></Link>
+                <Link underline="none" style={{ cursor: "pointer", fontSize: '12px', color: "#000", padding: "10px", display: 'flex' }} onClick={goToLogin} >Already have an account？<Typography style={{ fontSize: '12px', cursor: "pointer", color: "#F26522" }}>Login</Typography></Link>
 
               </Grid>
             </form>
@@ -323,20 +321,25 @@ export default function Login() {
         </Grid>
       </Grid>
       <LoadingDialog loading={loading} setLoading={setLoading}></LoadingDialog>
-      {/* Login Dialog */}
+      {/* Register Dialog */}
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
-        id="logindialog"
-      >
-
+        id="registerdialog">
         <DialogContent dividers>
-          <Typography gutterBottom>
+          <Typography>
             {responseMessage}
           </Typography>
-
-        </DialogContent> 
+        </DialogContent>
+        {!registerSuccess && <DialogActions fontSize="14px !important">
+          <Button fontSize="14px" autoFocus onClick={handleClose} position="relative !important" className="borderright">
+            Cancel
+          </Button>
+          <Button fontSize="14px" autoFocus onClick={handleClose}>
+            <Link underline="none" style={{ fontSize: '12px' }} ><Typography style={{ cursor: "pointer", color: "#F26522" }}>Login</Typography></Link>
+          </Button>
+        </DialogActions>}
       </BootstrapDialog>
     </>
   )
