@@ -2,13 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import api from '@/services/http'
 const initialState = { 
     status: 'idle',
-    banners:[]
+    sports:[]
 }
-export const getBannerSync = createAsyncThunk(
-    "banner/getBannerSync",
+export const getSportByCategory = createAsyncThunk(
+    "sport/getSportByCategory",
     async ({ params = {}, callback }, { getState, dispatch }) => {
       try {
-        const response = await api.get('/banner',params);
+        const response = await api.get('/sport',params);
         const {data,status} = response;
         data['status_code'] = status;
         if(typeof callback == 'function') {
@@ -25,28 +25,28 @@ export const getBannerSync = createAsyncThunk(
       }
     },
 );
-const bannerSlice = createSlice({
-  name: 'banner',
+const sportSlice = createSlice({
+  name: 'category',
   initialState,
   reducers: {
-    setBanner(state,action) {
-      state.banners  = action.payload;
+    setSport(state,action) {
+      state.sports  = action.payload;
     },  
   },
   extraReducers: (builder) => {
-    builder.addCase(getBannerSync.pending, (state) => {
+    builder.addCase(getSportByCategory.pending, (state) => {
       state.status = "loading";
     });
     builder.addCase(
-        getBannerSync.fulfilled,
+        getSportByCategory.fulfilled,
       (state, action) => {
         const {data} =  action.payload;
-        state.banners = data;
+        state.sports = data;
         state.status = "completed";
       },
     );
   },
 })
 
-export const { setBanner } = bannerSlice.actions
-export default bannerSlice.reducer
+export const { setSport } = sportSlice.actions
+export default sportSlice.reducer
