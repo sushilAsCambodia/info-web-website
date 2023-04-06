@@ -19,7 +19,7 @@ const Home = () => {
         ));
         dispatch(getCategorySync(
             {
-                params: { fake:true },
+                params: {},
                 callback:(res) => {
                     console.log(res,'callback')
                 }
