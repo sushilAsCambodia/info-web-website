@@ -38,6 +38,10 @@ const ThemConfiguration = () => {
           },
         },
         palette: {
+          text:{
+            light: '#8C8C8C',
+            main: '#8C8C8C',
+          },
           primary: {
             // light: will be calculated from palette.primary.main,
             main: '#8C8C8C',

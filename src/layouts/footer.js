@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import LotterIcon from '@/components/svg/lottery';
 import ProfileIcon from '@/components/svg/user';
+import MatchIcon from '@/components/svg/match';
 const Footer = () => {
     const {t} = useTranslation();
     let selectedTab = 0;
@@ -41,7 +42,7 @@ const Footer = () => {
                 }}>
                 <BottomNavigationAction onClick={() => router.push('/home')} label={t('home')} icon={<HomeIcon color={value == 0?'#FF0000':''} />} />
                 <BottomNavigationAction onClick={() => router.push('/lottery')} label={t('lottery')} icon={<LotterIcon  color={value == 1?'#FF0000':''} />} />
-                <BottomNavigationAction onClick={() => router.push('/match')} label={t('match')} icon={<SportsBaseballIcon color={value == 2?'#FF0000':''}/>} />
+                <BottomNavigationAction onClick={() => router.push('/match')} label={t('match')} icon={<MatchIcon color={value == 2?'#FF0000':''}/>} />
                 <BottomNavigationAction onClick={() => router.push('/profile')} label={t('profile')} icon={<ProfileIcon color={value == 3?'#FF0000':''} />} />
             </BottomNavigation>
         </Paper>

@@ -1,8 +1,14 @@
 import * as React from 'react';
+import { useTheme } from '@mui/material/styles';
+
 const  HomeIcon = ({
   size = 20, // or any default size of your choice
-  color = "black" // or any color of your choice
+  color = "" // or any color of your choice
 }) =>{
+  const theme = useTheme();
+  if(color == '') {
+    color = theme.palette.text.primary;
+  }
   return ( 
     <svg
       xmlns="http://www.w3.org/2000/svg"

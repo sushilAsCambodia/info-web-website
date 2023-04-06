@@ -101,7 +101,15 @@ const Layout =(props) => {
         case '/home':
             title = t('home_info_web')
             break;
-    
+        case '/lottery':
+            title = t('lottery_info_web')
+            break;
+        case '/match':
+            title = t('match_info_web')
+            break;
+        case '/profile':
+            title = t('profile_info_web')
+            break;
         default:
             break;
     }
