@@ -39,10 +39,10 @@ const Footer = () => {
                 onChange={(event, newValue) => {
                     setValue(newValue);
                 }}>
-                <BottomNavigationAction onClick={() => router.push('/home')} label={t('home')} icon={<HomeIcon color={value == 0?'red':''} />} />
-                <BottomNavigationAction onClick={() => router.push('/lottery')} label={t('lottery')} icon={<LotterIcon  color={value == 1?'red':''} />} />
-                <BottomNavigationAction onClick={() => router.push('/match')} label={t('match')} icon={<SportsBaseballIcon color={value == 2?'red':''}/>} />
-                <BottomNavigationAction onClick={() => router.push('/profile')} label={t('profile')} icon={<ProfileIcon color={value == 3?'red':''} />} />
+                <BottomNavigationAction onClick={() => router.push('/home')} label={t('home')} icon={<HomeIcon color={value == 0?'#FF0000':''} />} />
+                <BottomNavigationAction onClick={() => router.push('/lottery')} label={t('lottery')} icon={<LotterIcon  color={value == 1?'#FF0000':''} />} />
+                <BottomNavigationAction onClick={() => router.push('/match')} label={t('match')} icon={<SportsBaseballIcon color={value == 2?'#FF0000':''}/>} />
+                <BottomNavigationAction onClick={() => router.push('/profile')} label={t('profile')} icon={<ProfileIcon color={value == 3?'#FF0000':''} />} />
             </BottomNavigation>
         </Paper>
 };

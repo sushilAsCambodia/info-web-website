@@ -40,7 +40,7 @@ const ThemConfiguration = () => {
         palette: {
           primary: {
             // light: will be calculated from palette.primary.main,
-            main: '#283593',
+            main: '#8C8C8C',
             alertBorderColor:'#64b5f6',
             alertBackgroundColor:'#9dd3ff36',
             // dark: will be calculated from palette.primary.main,
