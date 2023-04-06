@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './header';
 import Footer from './footer';
 import Container from '@mui/material/Container';
@@ -6,7 +6,13 @@ import { useRouter } from 'next/router';
 import Navigate from '@/components/navigate';
 import { Grid, IconButton } from '@mui/material';
 import Head from 'next/head'
+import { useTranslation } from 'react-i18next';
 const Layout =(props) => {
+    const [mounted,setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    },[]);
+    const {t} = useTranslation();
     const {children} = props;
     let title = '';
     const pages = [
@@ -92,8 +98,15 @@ const Layout =(props) => {
         } 
         return;
     };
+    switch (router.pathname.toLocaleLowerCase()) {
+        case '/home':
+            title = t('home_info_web')
+            break;
     
-    return(
+        default:
+            break;
+    }
+    return mounted && (
         <>
             <Head>
                 <title>{title}</title>
