@@ -12,7 +12,7 @@ export function middleware(router, callback) {
         }else {
             if(!window.localStorage.getItem('token')) {
                 if(routerName == '/profile') {
-                    router.push('/Login');
+                    router.push('/login');
                 }else {
                     router.push('/home');
                 }

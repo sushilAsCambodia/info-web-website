@@ -60,7 +60,7 @@ export default function MultiTabs({ _setPage }) {
     };
   
     const goToNewsCardDetails = () => {
-      Router.push("/NewsCardDetails");
+      Router.push("/newsCardDetails");
   };
 
   return (

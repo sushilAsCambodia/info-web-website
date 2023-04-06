@@ -9,7 +9,7 @@ const App = ({ Component, pageProps }) => {
   return <>
     <Provider store={store}>
       <ThemeProvider theme={ThemConfiguration()}>
-          <Layout>
+          <Layout {...pageProps}>
             <Component {...pageProps} />
           </Layout>
       </ThemeProvider>

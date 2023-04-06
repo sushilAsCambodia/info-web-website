@@ -21,12 +21,7 @@ import Router from "next/router";
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { width } from "@mui/system";
   
-const CustomerService = () => {
-
-    const goToLogin = () => {
-        Router.push("/Login");
-    };
-
+const CustomerService = () => { 
 
     return (
         <>

@@ -19,6 +19,7 @@ import {
 import Router from "next/router";
 import {logout} from '@/store/reducers/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+
 const Profile = () => { 
     const {isLogin, profile } = useSelector((state) => state.user); 
     const dispatch = useDispatch();
@@ -38,27 +39,22 @@ const Profile = () => {
         ));
     }
     const goToLogin = () => {
-        Router.push("/Login");
+        Router.push("/login");
     };
     const goToProfileDetail = () => {
-        Router.push("/ProfileDetail");
+        Router.push("/profileDetail");
     };
     const goToAnnouncement = () => {
-        Router.push("/Announcement");
+        Router.push("/announcement");
     };
 
     const goToFeedback = () => {
-        Router.push("/Feedback");
+        Router.push("/feedback");
     };
 
     const goToCustomerService = () => {
-        Router.push("/CustomerService");
-    };
-
-    const goToLogout = () => {
-        Router.push("/Logout");
-    };
-
+        Router.push("/customerService");
+    }; 
 
     console.log('isLogin',isLogin)
     return (
@@ -367,5 +363,5 @@ const Profile = () => {
         </>
     )
 
-};
+}; 
 export default Profile;

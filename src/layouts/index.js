@@ -4,26 +4,27 @@ import Footer from './footer';
 import Container from '@mui/material/Container';
 import { useRouter } from 'next/router';
 import Navigate from '@/components/navigate';
-import { Grid, IconButton } from '@mui/material'; 
-const Layout =({children}) => {
-    
+import { Grid, IconButton } from '@mui/material';
+import Head from 'next/head'
+const Layout =(props) => {
+    const {children} = props;
     const pages = [
         '/lottery',
         '/games',
-        '/JournalCardDetails',
+        '/journalCardDetails',
         
     ];
     const innerpages = [
-        '/Login',
-        '/Register',
-        '/ForgotPassword',
-        '/Profile',
-        '/ProfileDetail',
-        '/Feedback',
-        '/CustomerService',
-        '/Announcement',
-        '/NewsCardDetails',
-        '/Logout',
+        '/login',
+        '/register',
+        '/forgotPassword',
+        '/profile',
+        '/profileDetail',
+        '/feedback',
+        '/customerService',
+        '/announcement',
+        '/newsCardDetails',
+        '/logout',
         
        
         
@@ -32,10 +33,9 @@ const Layout =({children}) => {
     let height = '';
     if(router.pathname != '/') {
         height = 'calc(100vh - 112px)';
-    }if (router.pathname == '/Login' || router.pathname == '/Register' || router.pathname == '/ForgotPassword') {
+    }if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
         height = 'calc(100vh - 56px)';
     }
-    console.log("router", router)
     const switchHeader = () => {
         if(router.pathname!='/') {
             if(pages.includes(router.pathname)) {
@@ -87,7 +87,7 @@ const Layout =({children}) => {
     };
     const switchFooter = () => {
         if(router.pathname!='/') {
-            if (router.pathname == '/Login' || router.pathname == '/Register' || router.pathname == '/ForgotPassword') {
+            if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
                 
                 return  ;
             }else{
@@ -99,6 +99,10 @@ const Layout =({children}) => {
     
     return(
         <>
+            <Head>
+                <title>{'Home'}</title>
+                <meta property="og:title" content={'Home'} key="title" />
+            </Head>
             {switchHeader()}
                 <Container maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding:"0px !important" }}>
                     <main>
