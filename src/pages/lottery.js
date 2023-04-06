@@ -6,6 +6,7 @@ const Lottery = () => {
     const banners = useSelector((state) => state.banner);
     console.log(banners,'state');
     const dispatch = useDispatch();
+    
     useEffect(() => {
         dispatch(getBannerSync(
             {
