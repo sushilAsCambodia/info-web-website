@@ -115,6 +115,11 @@ a {
 
 /* tabs css */
 
+.css-1kocmnn-MuiButtonBase-root-MuiButton-root{
+
+}
+
+
 .tabclass .css-1vw5i9y-MuiButtonBase-root-MuiTab-root.Mui-selected{
   background: linear-gradient(90deg, #FF0000 0%, #FF6E31 100%);
   border-radius: 30px;
@@ -165,6 +170,10 @@ padding: 0px;
   color: #fff;
 }
 
+.multitabs .css-i36jm5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  color: #000 !important;
+}
+
 .multitabs .css-ulxgan-MuiTabs-root .MuiTabs-scrollButtons{
   display: grid;
 }
@@ -197,9 +206,21 @@ padding: 0px;
 
 
 
-  /* .css-1nhsnip {
-    padding: 10px 10px;
-} */
+  /* main auto play swipeable css */
+
+  .mainautoplayswipeable .css-1kocmnn-MuiButtonBase-root-MuiButton-root{
+padding: 0px 0px;
+margin: 0px 5px;
+min-width:0px;
+border: 1px solid #fff;
+border-radius: 40px;
+color: #fff;
+  }
+
+  .mainautoplayswipeable .css-1kocmnn-MuiButtonBase-root-MuiButton-root.Mui-disabled{
+    color: #fff;
+  }
+
 
 
 /* Dialog css  */
@@ -240,24 +261,10 @@ padding: 0px;
 
 /* profile details  */
 
-
-
 .uploadimg_main .card{
   margin-top: 40px;
 
 }
-/* @keyframes open {
-  0%  {background-position: 166% -25%, 220% -69%;}
-  100%{background-position: 120% -5%, 200% -40%;}
-} */
-/* .uploadimg_main form{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 350px;
-  margin: 0 auto;
-} */
 
 .uploadimg_main .field{
  width: 100%;
@@ -314,6 +321,8 @@ padding: 0px;
   border-top-right-radius: 15px;
 }
 
+/* drawerline model css  */
+
 .drawerline.css-ahj2mt-MuiTypography-root {
   margin: 0;
   font-family: "Roboto","Helvetica","Arial",sans-serif;
@@ -332,4 +341,48 @@ padding: 0px;
   border-radius: 20px;
 }
 
+/* carouselcard jaurnal detail  */
 
+.carouselcard .image-gallery-left-nav, .image-gallery-right-nav{
+  padding: 0px 5px;
+}
+.carouselcard .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg{
+  width: 20px !important;
+  height: 20px !important ;
+  border: 1px solid #f7f6f6;
+  border-radius: 40px;
+}
+
+.calendraDrawer .css-i36jm5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+color: #FF0000;
+font-weight: 600;
+}
+.calendraDrawer .css-4oithy-MuiTabs-indicator{
+border-bottom: 1px solid #FF0000;
+}
+
+.yearheadline{
+
+  display:flex;
+}
+
+ .yearheadline:after {
+  color:white;
+  content:'';
+  flex:1;
+  border-bottom:groove 2px;
+  margin: auto 0.25rem;
+  box-shadow: 0 -2px ;
+}
+.yearheadline:before {
+    color: white;
+    content: '';
+    border-bottom: groove 2px;
+    margin: auto 0.25rem;
+    box-shadow: 0 -2px;
+    width: 44px;
+}
+
+.calendraDrawer .css-19kzrtu{
+padding: 10px 0px;
+}

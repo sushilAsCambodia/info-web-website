@@ -1,56 +1,66 @@
 import React from 'react'
 import { Grid, Typography } from '@mui/material'
+import ImageGallery from 'react-image-gallery';
+import "react-image-gallery/styles/css/image-gallery.css";
+const images = [
+  {
+    original: '/assets/NewsJourney/bigcarddetail.png',
+    thumbnail: '/assets/NewsJourney/Journalcard5.png',
+  },
+  {
+    original: '/assets/NewsJourney/bigcarddetail.png',
+    thumbnail: '/assets/NewsJourney/Journalcard5.png',
+  },
+  {
+    original: '/assets/NewsJourney/bigcarddetail.png',
+    thumbnail: '/assets/NewsJourney/Journalcard5.png',
+  },
+  {
+    original: '/assets/NewsJourney/bigcarddetail.png',
+    thumbnail: '/assets/NewsJourney/Journalcard5.png',
+  },
+];
+
+
 export default function JournalCardDetails() {
-  const bigcard = "/assets/NewsJourney/bigcarddetail.png";
-  const card1 = "/assets/NewsJourney/Journalcard1.png";
-  const card2 = "/assets/NewsJourney/Journalcard2.png";
-  const card3 = "/assets/NewsJourney/Journalcard3.png";
-  const card4 = "/assets/NewsJourney/Journalcard4.png";
-  const card5 = "/assets/NewsJourney/Journalcard5.png";
-
-
 
 
   return (
-
-    <Grid container item textAlign="left" p={1}>
+    <Grid container item textAlign="left" p={1} >
       <Grid item xs={12}>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Grid item >
-            <Grid item>
-              <img src={bigcard} alt="一般" width="100%" height="auto" />
-            </Grid>
+        <Grid item xs={12}>
+          <Grid item className='carouselcard'>
+          <ImageGallery
+      items={images}
+      showPlayButton={false}
+      showFullscreenButton={false}
+      showNav={true}
+      showBullets={false}
+      showThumbnails={true}
+      showIndex={false}
+      autoPlay={true}
+      slideDuration={1000}
+      slideInterval={5000}
+      slideOnThumbnailHover={true}
+      disableThumbnailScroll={false}
+      disableArrowKeys={false}
+      disableSwipe={false}
+      useBrowserFullscreen={true}
+      useTranslate3D={false}
+      lazyLoad={true}
+      thumbnailPosition="bottom"
+      className="image-gallery-bottom-left"
+      infinite={true}
+      thumbnailHeight={"50"}
+      thumbnailWidth={"50"}
+      slideWidth="400"
+      slideHeight="400"
+      originalHeight ="200px"
+    />
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Grid item display="grid" sx={{ gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px" }} >
-            <Grid item>
-              <img src={card1} alt="一般" width="100%" height="auto" />
-          
-            </Grid>
-            <Grid item>
-              <img src={card2} alt="一般" width="100%" height="auto" />
-       
-            </Grid>
-            <Grid item>
-              <img src={card3} alt="一般" width="100%" height="auto" />
-             
-            </Grid>
-            <Grid item>
-              <img src={card4} alt="一般" width="100%" height="auto" />
-            
-            </Grid>
-            <Grid item>
-              <img src={card5} alt="一般" width="100%" height="auto" />
-           
-            </Grid>
-            
-
-          </Grid>
-        </Grid>
-
+        
       </Grid>
-
     </Grid>
 
   )
