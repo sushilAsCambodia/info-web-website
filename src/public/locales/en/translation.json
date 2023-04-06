@@ -6,6 +6,7 @@
     "user_name_required":"User name is required",
     "user_name_unique":"User name already exist",
     "incorrect_username_or_password":"Incorrect username or password",
-    "login_successfully":"Login successfully"
+    "login_successfully":"Login successfully",
+    "home_info_web":"Home | InfoWeb"
 
 }

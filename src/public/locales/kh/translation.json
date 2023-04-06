@@ -6,6 +6,7 @@
     "user_name_required":"ឈ្មោះត្រូវបានទាមទារ",
     "user_name_unique":"ឈ្មោះមានរួចហើយ",
     "incorrect_username_or_password":"ឈ្មោះអ្នកប្រើ ឬ ពាក្យសម្ងាត់មិនត្រឹមត្រូវ",
-    "login_successfully":"ជោគជ័យ"
+    "login_successfully":"ជោគជ័យ",
+    "home_info_web":"ទំព័រដើម | InfoWeb"
 
 }
