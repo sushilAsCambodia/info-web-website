@@ -20,12 +20,7 @@ import {
 import Router from "next/router";
 import TextareaAutosize from '@mui/base/TextareaAutosize';
   
-const Feedback = () => {
-
-    const goToLogin = () => {
-        Router.push("/Login");
-    };
-
+const Feedback = () => { 
 
     return (
         <>

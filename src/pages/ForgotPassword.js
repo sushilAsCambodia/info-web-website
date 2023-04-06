@@ -18,7 +18,7 @@ export default function ForgotPassword() {
 
 
   const goToLogin = () => {
-    Router.push("/Login");
+    Router.push("/login");
   };
  
   return (

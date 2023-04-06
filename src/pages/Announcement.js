@@ -18,13 +18,7 @@ import {
 } from "@mui/material";
 import Router from "next/router";
 
-const Announcement = () => {
-
-    const goToLogin = () => {
-        Router.push("/Login");
-    };
-
-
+const Announcement = () => { 
     return (
         <>
             <Grid

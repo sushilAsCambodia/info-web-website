@@ -76,7 +76,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const goToLogin = () => {
-    Router.push("/Login");
+    Router.push("/login");
   }; 
   const dispatch = useDispatch();
   const handleSignup = () => {

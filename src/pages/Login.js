@@ -91,10 +91,10 @@ export default function Login() {
     ));
   }
   const goToRegister = () => {
-    Router.push("/Register");
+    Router.push("/register");
   };
   const goToForgotPassword = () => {
-    Router.push("/ForgotPassword");
+    Router.push("/forgotPassword");
   };
   // Login Dialog 
   const [open, setOpen] = React.useState(false);

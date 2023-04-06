@@ -20,6 +20,10 @@ import Router from "next/router";
 import {logout} from '@/store/reducers/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 const Profile = () => { 
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true)
+    }, [])
     const {isLogin, profile } = useSelector((state) => state.user); 
     const dispatch = useDispatch();
     const handleLogout = () => {
@@ -38,30 +42,24 @@ const Profile = () => {
         ));
     }
     const goToLogin = () => {
-        Router.push("/Login");
+        Router.push("/login");
     };
     const goToProfileDetail = () => {
-        Router.push("/ProfileDetail");
+        Router.push("/profileDetail");
     };
     const goToAnnouncement = () => {
-        Router.push("/Announcement");
+        Router.push("/announcement");
     };
 
     const goToFeedback = () => {
-        Router.push("/Feedback");
+        Router.push("/feedback");
     };
 
     const goToCustomerService = () => {
-        Router.push("/CustomerService");
-    };
+        Router.push("/customerService");
+    }; 
 
-    const goToLogout = () => {
-        Router.push("/Logout");
-    };
-
-
-    console.log('isLogin',isLogin)
-    return (
+    return mounted && (
         <>
             <Grid
                 container
@@ -139,7 +137,6 @@ const Profile = () => {
                                             </Grid>
                                         </Grid>
                                     </>}
-                                    
                                 </Grid>
 
                             </ListItem>
@@ -290,8 +287,9 @@ const Profile = () => {
                                 </Grid>
 
                             </ListItem>
-                            {isLogin && <><Divider /><ListItem sx={{ padding: "0px 0px" }} onClick={handleLogout}>
-                                <Grid
+                            <ListItem sx={{ padding: "0px 0px" }} onClick={handleLogout}>
+                                {isLogin ? <Grid
+                                    container
                                     item
                                     xs={12}
                                     sx={{ padding: "12px 0px", borderRadius: "5px" }}
@@ -318,8 +316,9 @@ const Profile = () => {
                                             </Grid>
                                         </Grid>
                                     </Grid>
-                                </Grid>
-                            </ListItem></>}
+                                </Grid>: ''}
+                                
+                            </ListItem>
                         </List>
                         <Divider />
                     </Grid>
@@ -367,5 +366,5 @@ const Profile = () => {
         </>
     )
 
-};
+}; 
 export default Profile;

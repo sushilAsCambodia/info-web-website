@@ -4,38 +4,36 @@ import Footer from './footer';
 import Container from '@mui/material/Container';
 import { useRouter } from 'next/router';
 import Navigate from '@/components/navigate';
-import { Grid, IconButton } from '@mui/material'; 
-const Layout =({children}) => {
-    
+import { Grid, IconButton } from '@mui/material';
+import Head from 'next/head'
+const Layout =(props) => {
+    const {children} = props;
+    let title = '';
     const pages = [
         '/lottery',
         '/games',
-        '/JournalCardDetails',
-        
+        '/journalCardDetails',
     ];
     const innerpages = [
-        '/Login',
-        '/Register',
-        '/ForgotPassword',
-        '/Profile',
-        '/ProfileDetail',
-        '/Feedback',
-        '/CustomerService',
-        '/Announcement',
-        '/NewsCardDetails',
-        '/Logout',
-        
-       
-        
+        '/login',
+        '/register',
+        '/forgotPassword',
+        '/profile',
+        '/profileDetail',
+        '/feedback',
+        '/customerService',
+        '/announcement',
+        '/newsCardDetails',
+        '/logout',
     ];
     const router = useRouter();
     let height = '';
     if(router.pathname != '/') {
         height = 'calc(100vh - 112px)';
-    }if (router.pathname == '/Login' || router.pathname == '/Register' || router.pathname == '/ForgotPassword') {
+    }if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
         height = 'calc(100vh - 56px)';
     }
-    console.log("router", router)
+    console.log(router,'router')
     const switchHeader = () => {
         if(router.pathname!='/') {
             if(pages.includes(router.pathname)) {
@@ -59,46 +57,48 @@ const Layout =({children}) => {
                 </svg>
                     </Grid>
                 }/>
-            }else if(innerpages.includes(router.pathname)) {
+            } else if(innerpages.includes(router.pathname)) {
                 return <Navigate
-                title={router.pathname.replace('/','')}
-
-                lead={<IconButton
-                onClick={() => router.back()}
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }} >
-                <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.13716 0.700943L0.837158 7.00001L7.13716 13.2991L8.45528 11.9509L4.44185 7.93751H23.25V6.06251H4.44091L8.45528 2.04907L7.13716 0.700943Z" fill="white" />
-                </svg>
-                </IconButton>}
+                    title={router.pathname.replace('/','')}
+                    lead={<IconButton
+                    onClick={() => router.back()}
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }} >
+                    <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.13716 0.700943L0.837158 7.00001L7.13716 13.2991L8.45528 11.9509L4.44185 7.93751H23.25V6.06251H4.44091L8.45528 2.04907L7.13716 0.700943Z" fill="white" />
+                    </svg>
+                    </IconButton>}
                 />
             }
-            
-           
-            
             else {
                 return <Header/>
             }
         }
-        return '';
+        return;
     };
     const switchFooter = () => {
         if(router.pathname!='/') {
-            if (router.pathname == '/Login' || router.pathname == '/Register' || router.pathname == '/ForgotPassword') {
-                
-                return  ;
+            if (router.pathname == '/login' || 
+                router.pathname == '/register' || 
+                router.pathname == '/forgotPassword') 
+            {
+                return;
             }else{
                 return <Footer/>
             }
         } 
-        return '';
+        return;
     };
     
     return(
         <>
+            <Head>
+                <title>{title}</title>
+                <meta property="og:title" content={title} key="title" />
+            </Head>
             {switchHeader()}
                 <Container maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding:"0px !important" }}>
                     <main>
