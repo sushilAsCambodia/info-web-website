@@ -39,7 +39,6 @@ const Layout =(props) => {
     }if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
         height = 'calc(100vh - 56px)';
     }
-    console.log(router,'router')
     const switchHeader = () => {
         if(router.pathname!='/') {
             if(pages.includes(router.pathname)) {
