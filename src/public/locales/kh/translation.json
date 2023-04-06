@@ -7,6 +7,8 @@
     "user_name_unique":"ឈ្មោះមានរួចហើយ",
     "incorrect_username_or_password":"ឈ្មោះអ្នកប្រើ ឬ ពាក្យសម្ងាត់មិនត្រឹមត្រូវ",
     "login_successfully":"ជោគជ័យ",
-    "home_info_web":"ទំព័រដើម | InfoWeb"
-
+    "home_info_web":"ទំព័រដើម | InfoWeb",
+    "lottery_info_web":"ឆ្នោត | InfoWeb",
+    "profile_info_web":"ប្រវត្តិរូប | InfoWeb",
+    "match_info_web":"ការប្រកួត | InfoWeb"
 }

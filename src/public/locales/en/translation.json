@@ -7,6 +7,9 @@
     "user_name_unique":"User name already exist",
     "incorrect_username_or_password":"Incorrect username or password",
     "login_successfully":"Login successfully",
-    "home_info_web":"Home | InfoWeb"
+    "home_info_web":"Home | InfoWeb",
+    "lottery_info_web":"Lottery | InfoWeb",
+    "profile_info_web":"Profile | InfoWeb",
+    "match_info_web":"Match | InfoWeb"
 
 }

@@ -12,10 +12,8 @@ import FullSilder from './FullSilder';
 import MultiTabs from './MultiTabs';
 import JournalCard from '../homeJournal/JournalCard';
 import { useRouter }  from "next/router";
-
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
+  const { children, value, index, ...other } = props; 
   return (
     <Grid
       role="tabpanel"
@@ -47,7 +45,8 @@ function a11yProps(index) {
 }
 
 
-export default function NewsJournalTabs() {
+export default function NewsJournalTabs(props) {
+  const {banners = [], categories = []} = props; 
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const router = useRouter();
@@ -57,11 +56,10 @@ export default function NewsJournalTabs() {
 
   const handleChangeIndex = (index) => {
     setValue(index);
-  };
+  }; 
   return (
     <Grid item className='tabclass'>
-     <Grid sx={{ padding:'10px 10px' }} >
-      
+      <Grid sx={{ padding:'10px 10px' }} >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -73,17 +71,14 @@ export default function NewsJournalTabs() {
           <Tab label="News" {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
           <Tab label="journal" {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
-      
-      
         <TabPanel  value={value} index={0} >
-        <FullSilder />
-        <MultiTabs />
+          <FullSilder banners={banners}/>
+          <MultiTabs categories={categories}/>
         </TabPanel>
         <TabPanel value={value} index={1} >
-        <JournalCard />
+          <JournalCard />
         </TabPanel>
-
-    </Grid>
+      </Grid>
     </Grid>
   )
 }

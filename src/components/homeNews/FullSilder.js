@@ -12,56 +12,24 @@ import { autoPlay } from "react-swipeable-views-utils";
 import { Grid } from "@mui/material";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-const images = [
-  {
-    label: "San Francisco – Oakland Bay Bridge, United States",
-    imgPath:
-      "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
-  },
-  {
-    label: "Bird",
-    imgPath:
-      "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
-  },
-  {
-    label: "Bali, Indonesia",
-    imgPath:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
-  },
-  {
-    label: "Goč, Serbia",
-    imgPath:
-      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
-  },
-];
-export default function FullSilder() {
+export default function FullSilder(props) {
+  const {banners = []} = props;
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = images.length;
-
+  const maxSteps = banners.length;
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
   const handleStepChange = (step) => {
     setActiveStep(step);
-  };
-
-  const bannerrightimg1 =
-    "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e";
-  const bannerrightimg2 =
-    "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c";
-
+  }; 
   const card1 = "/assets/NewsJourney/newscard1.png";
   const card2 = "/assets/NewsJourney/newscard2.png";
   const card3 = "/assets/NewsJourney/newscard3.png";
   const card4 = "/assets/NewsJourney/newscard4.png";
-
   return (
     <>
       <Box item sx={{ position: "relative" }}>
@@ -71,7 +39,7 @@ export default function FullSilder() {
           onChangeIndex={handleStepChange}
           enableMouseEvents
         >
-          {images.map((step, index) => (
+          {banners.map((step, index) => (
             <div key={step.label}>
               {Math.abs(activeStep - index) <= 2 ? (
                 <Box 
@@ -83,7 +51,7 @@ export default function FullSilder() {
                     overflow: "hidden",
                     width: "100%",
                   }}
-                  src={step.imgPath}
+                  src={step.image}
                   alt={step.label}
                 />
               ) : null}
@@ -212,7 +180,7 @@ export default function FullSilder() {
             >
               Live Casino
             </Typography>
-          </Grid>
+          </Grid> 
         </Grid>
       </Grid>
     </>
