@@ -252,9 +252,10 @@ export default function Login() {
                   <Button
                     fullWidth
                     variant="contained"
+                    disabled={loading?true:false}
                     sx={{
                       color: "white",
-                      background:
+                      background: loading  ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);" :
                         "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
                       textTransform: 'capitalize'
                     }}
