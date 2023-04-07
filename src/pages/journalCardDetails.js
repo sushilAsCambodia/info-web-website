@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Typography } from '@mui/material'
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
-const images = [
+const imagess = [
   {
     original: '/assets/NewsJourney/bigcarddetail.png',
     thumbnail: '/assets/NewsJourney/Journalcard5.png',
@@ -31,7 +31,7 @@ export default function JournalCardDetails() {
         <Grid item xs={12}>
           <Grid item className='carouselcard'>
           <ImageGallery
-      items={images}
+      items={imagess}
       showPlayButton={false}
       showFullscreenButton={false}
       showNav={true}
