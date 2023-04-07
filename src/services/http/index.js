@@ -9,12 +9,13 @@ const instance = axios.create({
 
 export default {
     get: (url, params = {}) => {
+        let fakeUrl = undefined;
         if(Object.keys(params).length > 0 && params?.fake === true) {
-            instance.defaults.baseURL  = 'http://localhost:3000/api';
+            fakeUrl  = 'http://localhost:3000/api';
         }
         return instance({
             'method': 'GET',
-            'url': url,
+            'url': (fakeUrl ? fakeUrl : '') + url,
             'params': params,
             transformResponse: [function (data) { 
                 const json = JSON.parse(data)

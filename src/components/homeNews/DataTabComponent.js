@@ -8,7 +8,7 @@ import {
   import { useDispatch, useSelector } from 'react-redux';
 import {getSportByCategory} from '@/store/reducers/sport'
 import DataLoading from '../DataLoading';
-
+import Router from "next/router";
 const DataTabComponent = ({id}) => {
     const {sports} = useSelector((state) => state.sport); 
     const dispatch = useDispatch();
@@ -28,15 +28,15 @@ const DataTabComponent = ({id}) => {
         {
             loading ? <DataLoading/> :
             (
-                <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+                <Grid item xs={12} sm={12} md={12} xl={12}>
                     {sports.map((sport) => {
                         return (
-                            <List padding="0px">
-                                <ListItem sx={{ padding: "10px 0px 10px 0px", borderBottom: '1px solid #D9D9D9;' }} >
+                            <List sx={{padding:0}} onClick={() => Router.push("/newsCardDetails")}>
+                                <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }} >
                                     <Grid
                                         item
                                         xs={12}
-                                        sx={{ padding: "8px 0px", borderRadius: "5px" }}
+                                        sx={{borderRadius: "5px",padding:0 }}
                                         boxShadow="none"
                                         display="flex"
                                         alignItems="center"

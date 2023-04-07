@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import api from '@/services/http'
+import i18n from '@/common/i18n';
 const initialState = { 
     status: 'idle',
     categories:[]
@@ -8,8 +9,9 @@ export const getCategorySync = createAsyncThunk(
     "category/getCategorySync",
     async ({ params = {}, callback }, { getState, dispatch }) => {
       try {
-        const response = await api.get('/category',params);
-        const {data,status} = response;
+        console.log(i18n);
+        const response = await api.get('/news/categories/all?lang_id=1',params);
+        const {data, status} = response;
         data['status_code'] = status;
         if(typeof callback == 'function') {
           callback(data);
@@ -41,7 +43,7 @@ const categorySlice = createSlice({
         getCategorySync.fulfilled,
       (state, action) => {
         const {data} =  action.payload;
-        state.categories = data;
+        state.categories = data.category;
         state.status = "completed";
       },
     );

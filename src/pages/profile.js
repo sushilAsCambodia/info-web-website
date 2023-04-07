@@ -17,7 +17,7 @@ import {
     Divider,
 } from "@mui/material";
 import Router from "next/router";
-import {logout} from '@/store/reducers/userSlice';
+import {logout, setLogout} from '@/store/reducers/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 const Profile = () => { 
     const [mounted, setMounted] = useState(false);
@@ -30,12 +30,18 @@ const Profile = () => {
         dispatch(logout(
             { 
                 callback: (res) => {
-                    console.log(res)
-                    const {status_code} = res;
-
-                    if([200,201,202,203].includes(status_code)) {
-                        // Router.push('/home');
-                    }
+                    dispatch(setLogout());
+                    Router.push('/home');
+                    // const {status_code} = res;
+                    // if([200,201,202,203].includes(status_code)) {
+                    //     setLogout();
+                    //     Router.push('/home');
+                    // }else if(status_code === 419) {
+                    //     setLogout();
+                    // }else {
+                    //     setLogout();
+                    //     Router.push('/home');
+                    // }
                 },
                 auth: true
             },

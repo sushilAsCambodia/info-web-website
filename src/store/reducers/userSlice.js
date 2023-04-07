@@ -10,7 +10,7 @@ export const login = createAsyncThunk(
     "customers/login",
     async ({ body = {}, callback }, { getState, dispatch }) => {
       try {
-        const response = await api.post('/customers/login',body);
+        const response = await api.post('/auth/customers/login',body);
         const { data, status } = response;
         data['status_code'] = status;
         if(typeof window !='undefined') { 
@@ -36,7 +36,7 @@ export const register = createAsyncThunk(
   "customers/register",
   async ({ body = {}, callback }, { getState, dispatch }) => {
     try {
-      const response = await api.post('/customers/register',body);
+      const response = await api.post('/auth/customers/register',body);
       const { data, status } = response;
       data['status_code'] = status;
       if(typeof callback == 'function') {
@@ -62,21 +62,17 @@ export const logout = createAsyncThunk(
   "customers/logout",
   async ({ body = {}, callback, auth = false }, { getState, dispatch }) => {
     try {
-      const response = await api.post('/customers/logout',body, auth);
+      const response = await api.post('/auth/customers/logout',body, auth);
       const { data, status } = response;
       data['status_code'] = status;
       if(typeof callback == 'function') {
         callback(data);
       }
       if(typeof window !='undefined') {
-        dispatch(userSlice.actions.setUser({}));
-        dispatch(userSlice.actions.setLogin(false));
-        window.localStorage.removeItem(utils.tokenKey);
-        window.localStorage.removeItem('profile');
+        dispatch(userSlice.actions.setLogout);
       }
       return data;
     } catch (error) {
-      console.log(error)
       const {status, data} = error.response;
       data['status_code']  = status;
       if(typeof callback == 'function') {
@@ -96,6 +92,13 @@ const userSlice = createSlice({
     setLogin(state,action) {
       state.isLogin  = action.payload;
     },  
+    setLogout(state,action) {
+      console.log('innn')
+      state.isLogin  = false;
+      state.profile  = {};
+      window.localStorage.removeItem(utils.tokenKey);
+      window.localStorage.removeItem('profile');
+    }, 
   },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
@@ -114,5 +117,5 @@ const userSlice = createSlice({
   },
 })
 
-export const { setUser } = userSlice.actions
+export const { setUser, setLogout } = userSlice.actions
 export default userSlice.reducer

@@ -6,7 +6,6 @@ import {
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import PropTypes from "prop-types";
-import Router from "next/router";
 import DataTabComponent from "./DataTabComponent";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -40,12 +39,8 @@ export default function MultiTabs(props) {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-  const goToNewsCardDetails = () => {
-    Router.push("/newsCardDetails");
-  };
-
-  return (
+  }; 
+  return (categories && categories.length > 0) && (
     <Grid
       item
       xs={12}
@@ -69,12 +64,11 @@ export default function MultiTabs(props) {
                   '&.Mui-disabled': { opacity: 0.3 },
                 },
               }}>
-              {categories.map((category, index) => <Tab key={index} label={category.label} />)}
+              { categories.map((category, index) => <Tab key={index} label={category.label} />)}
             </Tabs>
           </Grid>
           <Grid xs={12} item>
-            {
-              categories.map((category,index) => {
+            { categories.map((category,index) => {
                 return (
                   <TabPanel key={index} value={value} index={index} >
                     <DataTabComponent id={category?.id}/>
