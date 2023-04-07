@@ -122,7 +122,7 @@ const Profile = () => {
                                                 justifyContent="space-between"
                                             >
                                                 <Grid item>
-                                                    <Typography fontWeight="600" fontSize="12px">Log in to enjoy more exciting features</Typography>
+                                                    <Typography fontWeight="600" fontSize="12px">{t('login_to_enjoy')}</Typography>
                                                     <Button
                                                         variant="contained"
                                                         onClick={goToLogin}
@@ -137,7 +137,7 @@ const Profile = () => {
                                                             padding: "4px 10px"
                                                         }}
                                                     >
-                                                        Login/Register
+                                                        {t('login')}/{t('register')}
                                                     </Button>
 
                                                 </Grid>

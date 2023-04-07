@@ -163,6 +163,7 @@ const Layout = (props) => {
         }
         return;
     };
+
     switch (router.pathname.toLocaleLowerCase()) {
         case '/home':
             title = t('home_info_web')
@@ -176,11 +177,15 @@ const Layout = (props) => {
         case '/profile':
             title = t('profile_info_web')
             break;
+        case '/profiledetail':
+            title = t('profile_detail_info_web')
+            break;
+        case '/announcement':
+            title = t('announcement_info_web')
+            break;
         default:
             break;
     }
-
-
 
     const [state, setState] = useState({ bottom: false });
 
