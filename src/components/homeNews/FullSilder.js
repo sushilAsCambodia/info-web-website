@@ -40,7 +40,7 @@ export default function FullSilder(props) {
           enableMouseEvents
         >
           {banners.map((step, index) => (
-            <div key={step.label}>
+            <div key={index}>
               {Math.abs(activeStep - index) <= 2 ? (
                 <Box 
                 item

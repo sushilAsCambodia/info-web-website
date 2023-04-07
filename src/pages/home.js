@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getBannerSync} from '@/store/reducers/bannerSlice'
 import {getCategorySync} from '@/store/reducers/categorySlice'
 import { useEffect } from 'react';  
+import utils from '@/common/utils';
 const Home = () => {
     const {banners} = useSelector((state) => state.banner);
     const {categories} = useSelector((state) => state.category); 
     const dispatch = useDispatch();
+    const {i18n} = useTranslation();
     useEffect(() => {
+        console.log(utils.convertLangCodeToID(i18n.language))
         dispatch(getBannerSync(
             {
                 params: { fake:true },
@@ -19,13 +22,13 @@ const Home = () => {
         ));
         dispatch(getCategorySync(
             {
-                params: {},
+                params: {lang_id: utils.convertLangCodeToID(i18n.language)},
                 callback:(res) => {
                     console.log(res,'callback')
                 }
             }
         ));
-    },[]); 
+    },[i18n.language]); 
     return <>
         <NewsJournalTabs banners={banners} categories={categories}/>
     </>

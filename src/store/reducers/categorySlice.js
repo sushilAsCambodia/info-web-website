@@ -1,16 +1,15 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import api from '@/services/http'
-import i18n from '@/common/i18n';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import api from '@/services/http';
 const initialState = { 
-    status: 'idle',
-    categories:[]
+  status: 'idle',
+  categories:[]
 }
+
 export const getCategorySync = createAsyncThunk(
     "category/getCategorySync",
     async ({ params = {}, callback }, { getState, dispatch }) => {
       try {
-        console.log(i18n);
-        const response = await api.get('/news/categories/all?lang_id=1',params);
+        const response = await api.get('/news/categories/all',params);
         const {data, status} = response;
         data['status_code'] = status;
         if(typeof callback == 'function') {
@@ -27,6 +26,7 @@ export const getCategorySync = createAsyncThunk(
       }
     },
 );
+
 const categorySlice = createSlice({
   name: 'category',
   initialState,
@@ -50,5 +50,5 @@ const categorySlice = createSlice({
   },
 })
 
-export const { setCategory } = categorySlice.actions
-export default categorySlice.reducer
+export const { setCategory } = categorySlice.actions;
+export default categorySlice.reducer;
