@@ -48,8 +48,7 @@ export default function MultiTabs(props) {
       alignContent="flex-start"
       alignItems="center"
       overflow="auto"
-      className="multitabs"
-    >
+      className="multitabs">
       <Grid item xs={12} paddingTop="10px">
         <Grid container >
           <Grid item xs={12} justifyContent="center" >
