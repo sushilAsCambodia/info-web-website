@@ -93,7 +93,6 @@ const userSlice = createSlice({
       state.isLogin  = action.payload;
     },  
     setLogout(state,action) {
-      console.log('innn')
       state.isLogin  = false;
       state.profile  = {};
       window.localStorage.removeItem(utils.tokenKey);

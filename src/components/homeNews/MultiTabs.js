@@ -64,13 +64,13 @@ export default function MultiTabs(props) {
                   '&.Mui-disabled': { opacity: 0.3 },
                 },
               }}>
-              { categories.map((category, index) => <Tab key={index} label={category.label} />)}
+              { categories.map((category, index) => <Tab key={index} label={category.translation ? category.translation?.name : (category.label||'N/A')} />)}
             </Tabs>
           </Grid>
           <Grid xs={12} item>
             { categories.map((category,index) => {
                 return (
-                  <TabPanel key={index} value={value} index={index} >
+                  <TabPanel key={index} value={value} index={index}>
                     <DataTabComponent id={category?.id}/>
                   </TabPanel>
                 );
