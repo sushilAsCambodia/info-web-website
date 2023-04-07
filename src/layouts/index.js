@@ -107,11 +107,11 @@ const Layout = (props) => {
     const switchHeader = () => {
         if (router.pathname != '/') {
             if (pages.includes(router.pathname)) {
+                
                 return <Navigate
                     lead={<IconButton
                         onClick={() => router.back()}
-                        size="large"
-
+                        size="large" 
                         edge="start"
                         color="inherit"
                         aria-label="menu"
@@ -128,8 +128,10 @@ const Layout = (props) => {
                         </Grid>
                     } />
             } else if (innerpages.includes(router.pathname)) {
+                let title = router.pathname.replace('/', '').toLowerCase();
+                
                 return <Navigate
-                    title={router.pathname.replace('/', '')}
+                    title={t(title)}
                     lead={<IconButton
                         onClick={() => router.back()}
                         size="large"

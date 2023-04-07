@@ -12,6 +12,7 @@ import FullSilder from './FullSilder';
 import MultiTabs from './MultiTabs';
 import JournalCard from '../homeJournal/JournalCard';
 import { useRouter }  from "next/router";
+import { useTranslation } from 'react-i18next';
 function TabPanel(props) {
   const { children, value, index, ...other } = props; 
   return (
@@ -46,6 +47,7 @@ function a11yProps(index) {
 
 
 export default function NewsJournalTabs(props) {
+  const {t} = useTranslation();
   const {banners = [], categories = []} = props; 
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -68,8 +70,8 @@ export default function NewsJournalTabs(props) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="News" {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
-          <Tab label="journal" {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
+          <Tab label={t('news')} {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
+          <Tab label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
         <TabPanel  value={value} index={0} >
           <FullSilder banners={banners}/>

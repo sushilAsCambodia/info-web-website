@@ -10,5 +10,22 @@
     "home_info_web":"ទំព័រដើម | InfoWeb",
     "lottery_info_web":"ឆ្នោត | InfoWeb",
     "profile_info_web":"ប្រវត្តិរូប | InfoWeb",
-    "match_info_web":"ការប្រកួត | InfoWeb"
+    "match_info_web":"ការប្រកួត | InfoWeb",
+    "news":"ព័រមាន",
+    "journal":"ទិនានុប្បវត្តិ",
+    "announcement":"សេចក្តីប្រកាស",
+    "feedback":"មតិកែលម្អ",
+    "customerservice":"សេវាកម្ម​អតិថិជន",
+    "logout":"ចាកចេញ",
+    "download_app":"ទាញយកកម្មវិធី",
+    "important_links":"តំណភ្ជាប់សំខាន់ៗ",
+    "nick_name":"ឈ្មោះហៅក្រៅ",
+    "profiledetail":"ពត៌មានលំអិត",
+    "edit":"កែសម្រួល",
+    "change_password":"ផ្លាស់ប្តូរពាក្យសម្ងាត់",
+    "user_name":"ឈ្មោះ​អ្នកប្រើប្រាស់",
+    "password":"ពាក្យសម្ងាត់",
+    "confirm_password":"បញ្ជាក់ពាក្យសម្ងាត់",
+    "save":"រក្សាទុក",
+    "submit":"បញ្ជូន"
 }

@@ -18,6 +18,7 @@ import Drawer from '@mui/material/Drawer';
 import ListItemButton from '@mui/material/ListItemButton';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { useTranslation } from "react-i18next";
 
 const ImgUpload =({
     onChange,
@@ -33,8 +34,7 @@ const ImgUpload =({
 
   
   const UploadImg =()=> {
-   
-
+    const {t} = useTranslation();
     const[file,setFile]=useState('')
     const[imagePreviewUrl,setImagePreviewUrl]=useState('https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true')
 
@@ -74,7 +74,7 @@ const ImgUpload =({
         <ListItem  disablePadding sx={{paddingBottom:"10px"}}>
          <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                Nick Name
+                {t('nick_name')}
                 </Typography>
               <FormControl
                 variant="outlined"
@@ -87,7 +87,7 @@ const ImgUpload =({
                 <OutlinedInput
                 sx={{paddingRight:"10px"}}
                   name="Username"
-                  placeholder="Username"
+                  placeholder={t('user_name')}
                   inputProps={{ maxLength: 16 }}
                   id="outlined-adornment-password"
                   type="text"
@@ -104,7 +104,7 @@ const ImgUpload =({
                   }}
                   onClick={toggleDrawer('bottom', true)}
                 >
-                Save
+                {t('save')}
                 </Button>
                     </InputAdornment>
                   }
@@ -115,7 +115,7 @@ const ImgUpload =({
          <ListItem  disablePadding sx={{paddingBottom:"10px"}}>
          <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                Password
+                {t('password')}
                 </Typography>
               <FormControl
                 variant="outlined"
@@ -128,7 +128,7 @@ const ImgUpload =({
                 <OutlinedInput
                 sx={{paddingRight:"10px"}}
                   name="Username"
-                  placeholder="Username"
+                  placeholder={t('user_name')}
                   inputProps={{ maxLength: 16 }}
                   id="outlined-adornment-password"
                   type="password"
@@ -140,7 +140,7 @@ const ImgUpload =({
          <ListItem  disablePadding sx={{paddingBottom:"10px"}}>
          <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                Confirm Password
+                {t('confirm_password')}
                 </Typography>
               <FormControl
                 variant="outlined"
@@ -153,7 +153,7 @@ const ImgUpload =({
                 <OutlinedInput
                 sx={{paddingRight:"10px"}}
                   name="Username"
-                  placeholder="Username"
+                  placeholder={t('user_name')}
                   inputProps={{ maxLength: 16 }}
                   id="outlined-adornment-password"
                   type="password"
@@ -176,7 +176,7 @@ const ImgUpload =({
                   }}
                   onClick={toggleDrawer('bottom', true)}
                 >
-           Submit
+           {t('submit')}
                 </Button>
           </Grid>
          </ListItem>
@@ -192,7 +192,7 @@ const ImgUpload =({
               <ImgUpload onChange={photoUpload} src={imagePreviewUrl}/>
               <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                Nick Name
+                {t('nick_name')}
                 </Typography>
               <FormControl
                 variant="outlined"
@@ -205,7 +205,7 @@ const ImgUpload =({
                 <OutlinedInput
                 sx={{paddingRight:"10px"}}
                   name="Username"
-                  placeholder="Username"
+                  placeholder={t('user_name')}
                   inputProps={{ maxLength: 16 }}
                   id="outlined-adornment-password"
                   type="text"
@@ -222,7 +222,7 @@ const ImgUpload =({
                   }}
                   onClick={toggleDrawer('bottom', true)}
                 >
-                 Edit
+                 {t('edit')}
                 </Button>
                     </InputAdornment>
                   }
@@ -245,7 +245,7 @@ const ImgUpload =({
                   }}
                   onClick={toggleDrawer('bottom', true)}
                 >
-                Change Password
+                {t('change_password')}
                 </Button>
               </Grid>
             </form>

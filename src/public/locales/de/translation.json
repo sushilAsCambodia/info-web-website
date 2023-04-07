@@ -10,5 +10,22 @@
     "home_info_web":"主页 | InfoWeb",
     "lottery_info_web":"彩票 | InfoWeb",
     "profile_info_web":"轮廓 | InfoWeb",
-    "match_info_web":"匹配 | InfoWeb"
+    "match_info_web":"匹配 | InfoWeb",
+    "news":"消息",
+    "journal":"杂志",
+    "announcement":"公告",
+    "feedback":"反馈",
+    "customerservice":"客户服务",
+    "logout":"登出",
+    "download_app":"下载应用程序",
+    "important_links":"重要链接",
+    "nick_name":"昵称",
+    "profiledetail":"资料详情",
+    "edit":"编辑",
+    "change_password":"更改密码",
+    "user_name":"用户名",
+    "password":"确认密码",
+    "confirm_password":"Confirm password",
+    "save":"节省",
+    "submit":"提交"
 }

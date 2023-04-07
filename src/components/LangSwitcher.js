@@ -53,7 +53,6 @@ export default function LangSwitcher() {
     if(typeof window !='undefined') {
       const lang = window.localStorage.getItem('lang') || 'en';
       setLang(lang);
-      changeLanguage(lang)
     }else {
       setLang(i18n.language);
     }

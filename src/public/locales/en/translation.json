@@ -10,6 +10,22 @@
     "home_info_web":"Home | InfoWeb",
     "lottery_info_web":"Lottery | InfoWeb",
     "profile_info_web":"Profile | InfoWeb",
-    "match_info_web":"Match | InfoWeb"
-
+    "match_info_web":"Match | InfoWeb",
+    "news":"News",
+    "journal":"Journal",
+    "announcement":"Announcement",
+    "feedback":"Feedback",
+    "customerservice":"Customer Service", 
+    "logout":"Logout",
+    "download_app":"Download App",
+    "important_links":"Import links",
+    "nick_name":"Nickname",
+    "profiledetail":"Profile detail",
+    "edit":"Edit",
+    "change_password":"Change password",
+    "user_name":"User name",
+    "password":"Password",
+    "confirm_password":"Confirm password",
+    "save":"Save",
+    "submit":"Submit"
 }
