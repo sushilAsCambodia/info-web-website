@@ -71,6 +71,23 @@ export default function LangSwitcher() {
     i18n.changeLanguage(l);
     handleClose();
   }
+  const labelLanguage = (l) => {
+    let language = '';
+    switch (l) {
+      case 'en':
+        language = 'Eng';
+        break;
+      case 'de':
+        language = 'Ch';
+        break;
+      case 'kh':
+        language = 'Kh';
+        break;
+      default:
+        break;
+    }
+    return language;
+  }
   return (
     <div>
       <Button
@@ -84,7 +101,7 @@ export default function LangSwitcher() {
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}>
-        {lang}
+        {labelLanguage(lang)}
       </Button>
       <StyledMenu
       
@@ -99,7 +116,7 @@ export default function LangSwitcher() {
         {['en','kh','de'].map(
             (l) => {
                 if(l!==lang) {
-                  return (<MenuItem key={l} onClick={() => changeLanguage(l)} disableRipple> {l} </MenuItem>);
+                  return (<MenuItem key={l} onClick={() => changeLanguage(l)} disableRipple> { labelLanguage(l)  } </MenuItem>);
                 }
             },
         )} 

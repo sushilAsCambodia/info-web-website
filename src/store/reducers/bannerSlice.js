@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import api from '@/services/http'
 const initialState = { 
-    status: 'idle',
-    banners:[]
+  status: 'idle',
+  banners:[]
 }
 export const getBannerSync = createAsyncThunk(
     "banner/getBannerSync",
