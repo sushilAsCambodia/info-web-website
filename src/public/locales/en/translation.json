@@ -27,5 +27,7 @@
     "password":"Password",
     "confirm_password":"Confirm password",
     "save":"Save",
-    "submit":"Submit"
+    "submit":"Submit",
+    "newscarddetails":"News card detail"
+
 }

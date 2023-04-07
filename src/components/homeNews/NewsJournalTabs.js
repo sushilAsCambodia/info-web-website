@@ -13,6 +13,7 @@ import MultiTabs from './MultiTabs';
 import JournalCard from '../homeJournal/JournalCard';
 import { useRouter }  from "next/router";
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 function TabPanel(props) {
   const { children, value, index, ...other } = props; 
   return (
@@ -50,12 +51,19 @@ export default function NewsJournalTabs(props) {
   const {t} = useTranslation();
   const {banners = [], categories = []} = props; 
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
   const router = useRouter();
+  const [value, setValue] = React.useState(0);
+  useEffect(()=>{
+    const hash = router.asPath.split('#')[1];
+    if(hash == 'journal') {
+      setValue(1);
+    }else {
+      setValue(0);
+    }
+   }, [ router.asPath ]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const handleChangeIndex = (index) => {
     setValue(index);
   }; 
