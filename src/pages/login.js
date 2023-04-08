@@ -71,6 +71,17 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    middleware(Router,(res) => {
+      console.log(res)
+        if(res) { 
+          Router.push('/home');
+        }else {
+          setMounted(true);
+        }
+    })
+  }, [])
   const dispatch = useDispatch();
   const handleLogin = () => {
     dispatch(login(
@@ -134,13 +145,8 @@ export default function Login() {
       setErrorPassword(false);
     }
     setPassword(e.target.value)
-  }
-  useEffect(() => {
-    middleware(Router, (res) => {
-        console.log(res);
-    });
-  },[]);
-  return (
+  } 
+  return mounted && (
     <>
       <Grid
         container

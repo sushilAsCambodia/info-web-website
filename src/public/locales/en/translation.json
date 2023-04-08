@@ -41,6 +41,7 @@
     "login":"Login",
     "register":"Register",
     "forgot_password":"Forgot password?",
+    "forgotpassword": "Forgot password",
     "no_account":"Don’t have an account?",
     "login_via":"Login as Via",
     "validate_user_name":"The format of the user name is 6-16 letters or numbers",

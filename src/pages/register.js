@@ -78,6 +78,18 @@ export default function Register() {
     Router.push("/login");
   }; 
   const dispatch = useDispatch();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    middleware(Router,(res) => {
+        if(res) { 
+          Router.push('/home');
+        }else {
+          setMounted(true);
+        }
+    })
+  }, []);
+
   const handleSignup = () => {
     dispatch(register(
         { 
@@ -137,12 +149,7 @@ export default function Register() {
       setErrorPassword(false);
     }
     setPassword(e.target.value)
-  }
-  useEffect(() => {
-    middleware(Router, (res) => {
-      console.log(res);
-    });
-  }, []);
+  } 
   // Register Dialog 
   const [open, setOpen] = React.useState(false);
 
@@ -153,7 +160,7 @@ export default function Register() {
     setOpen(false);
   };
 
-  return (
+  return mounted && (
     <>
       <Grid
         container

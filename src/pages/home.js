@@ -10,8 +10,7 @@ const Home = () => {
     const {categories} = useSelector((state) => state.category); 
     const dispatch = useDispatch();
     const {i18n} = useTranslation();
-    useEffect(() => {
-        console.log(utils.convertLangCodeToID(i18n.language))
+    useEffect(() => { 
         dispatch(getBannerSync(
             {
                 params: { fake:true },
@@ -30,7 +29,7 @@ const Home = () => {
         ));
     },[i18n.language]); 
     return <>
-        <NewsJournalTabs banners={banners} categories={categories}/>
+        <NewsJournalTabs banners={banners} categories={categories} lang_id={utils.convertLangCodeToID(i18n.language)}/>
     </>
 };
 export default Home;

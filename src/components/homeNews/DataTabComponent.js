@@ -6,7 +6,7 @@ import {
     List, 
   } from "@mui/material";
   import { useDispatch, useSelector } from 'react-redux';
-import {getSportByCategory} from '@/store/reducers/sport'
+import {getSportByCategory} from '@/store/reducers/sportSlice'
 import DataLoading from '../DataLoading';
 import Router from "next/router";
 const DataTabComponent = ({id}) => {

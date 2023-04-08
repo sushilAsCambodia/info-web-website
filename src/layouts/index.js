@@ -29,7 +29,6 @@ import MailIcon from '@mui/icons-material/Mail';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -66,19 +65,17 @@ function a11yProps(index) {
 
 
 const Layout = (props) => {
+    const router = useRouter();
     const [mounted, setMounted] = useState(false);
     const [value, setValue] = React.useState(0);
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-
     useEffect(() => {
         setMounted(true);
     }, []);
     const { t } = useTranslation();
-    const { children } = props;
+    let { children } = props;  
     let title = '';
     const pages = [
         '/lottery',
@@ -97,7 +94,6 @@ const Layout = (props) => {
         '/newsCardDetails',
         '/logout',
     ];
-    const router = useRouter();
     let height = '';
     if (router.pathname != '/') {
         height = 'calc(100vh - 112px)';
@@ -321,8 +317,8 @@ const Layout = (props) => {
             </Head>
             {switchHeader()}
             <Container maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding: "0px !important", overflowY: 'auto' }}>
-                <main>
-                    {children}
+                <main style={{height:'100%'}}>
+                {children}
                 </main>
             </Container>
             {switchFooter()}
