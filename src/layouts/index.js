@@ -107,11 +107,11 @@ const Layout = (props) => {
     const switchHeader = () => {
         if (router.pathname != '/') {
             if (pages.includes(router.pathname)) {
+                
                 return <Navigate
                     lead={<IconButton
                         onClick={() => router.back()}
-                        size="large"
-
+                        size="large" 
                         edge="start"
                         color="inherit"
                         aria-label="menu"
@@ -128,8 +128,10 @@ const Layout = (props) => {
                         </Grid>
                     } />
             } else if (innerpages.includes(router.pathname)) {
+                let title = router.pathname.replace('/', '').toLowerCase();
+                
                 return <Navigate
-                    title={router.pathname.replace('/', '')}
+                    title={t(title)}
                     lead={<IconButton
                         onClick={() => router.back()}
                         size="large"
@@ -161,6 +163,7 @@ const Layout = (props) => {
         }
         return;
     };
+
     switch (router.pathname.toLocaleLowerCase()) {
         case '/home':
             title = t('home_info_web')
@@ -174,11 +177,15 @@ const Layout = (props) => {
         case '/profile':
             title = t('profile_info_web')
             break;
+        case '/profiledetail':
+            title = t('profile_detail_info_web')
+            break;
+        case '/announcement':
+            title = t('announcement_info_web')
+            break;
         default:
             break;
     }
-
-
 
     const [state, setState] = useState({ bottom: false });
 

@@ -44,7 +44,7 @@ export default function Navigate(props) {
                             <Grid item xs={4}>
                                 {lead}
                             </Grid>
-                            <Grid item xs={4} textAlign="center">
+                            <Grid item xs={4} textAlign="center" sx={{whiteSpace:'nowrap'}}>
                                 <Typography variant="h6" component="div" >
                                     {title}
                                 </Typography>

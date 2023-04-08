@@ -26,10 +26,10 @@ export default {
     },
     post: (url, body = {}, auth = false) => {
         const header = { 
-            'content-type':'application/json'
+            'content-type':'application/json; charset=utf-8'
         }; // override instance defaults
         if(auth) {
-            header['Authorization'] = 'Bearer '+ (localStorage.getItem(utils.tokenKey)||'');
+            header['Authorization'] = 'Bearer '+ (localStorage.getItem(utils.tokenKey) || '');
         }
         return instance({
             'method': 'POST',

@@ -24,7 +24,7 @@ const DataTabComponent = ({id}) => {
         ));
     },[]);
     const [loading,setLoading] = React.useState(true);
-    return <Grid sx={{height:loading ? '250px' : 'auto', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
+    return <Grid sx={{height:'250px', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
         {
             loading ? <DataLoading/> :
             (

@@ -107,10 +107,12 @@ const userSlice = createSlice({
         login.fulfilled,
       (state, action) => {
         const {data} = action.payload;
-        state.profile = data && data.customer ? data.customer : {};
-        window.localStorage.setItem('profile',JSON.stringify(state.profile));
-        state.isLogin = true;
-        state.status = "completed";
+        if(data && data.customer) {
+          state.profile = data && data.customer ? data.customer : {};
+          window.localStorage.setItem('profile',JSON.stringify(state.profile));
+          state.isLogin = true;
+          state.status = "completed";
+        }
       },
     );
   },
