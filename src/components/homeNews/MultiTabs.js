@@ -48,8 +48,7 @@ export default function MultiTabs(props) {
       alignContent="flex-start"
       alignItems="center"
       overflow="auto"
-      className="multitabs"
-    >
+      className="multitabs">
       <Grid item xs={12} paddingTop="10px">
         <Grid container >
           <Grid item xs={12} justifyContent="center" >
@@ -64,7 +63,7 @@ export default function MultiTabs(props) {
                   '&.Mui-disabled': { opacity: 0.3 },
                 },
               }}>
-              { categories.map((category, index) => <Tab key={index} label={category.translation ? category.translation?.name : (category.label||'N/A')} />)}
+              { categories.map((category, index) => <Tab key={index} label={category.translation ? category.translation?.category_name : (category.label||'N/A')} />)}
             </Tabs>
           </Grid>
           <Grid xs={12} item>

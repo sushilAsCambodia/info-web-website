@@ -30,7 +30,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(2),
   },
   '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
+    padding: theme.spacing(0),
   },
 }));
 
@@ -74,7 +74,6 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  console.log("registerSuccess", registerSuccess)
   const goToLogin = () => {
     Router.push("/login");
   }; 
@@ -327,18 +326,20 @@ export default function Register() {
         aria-labelledby="customized-dialog-title"
         open={open}
         id="registerdialog">
-        <DialogContent dividers>
+        <DialogContent dividers sx={{maxWidth: '220px', textAlign:'center'}}>
           <Typography>
             {responseMessage}
           </Typography>
         </DialogContent>
-        {!registerSuccess && <DialogActions fontSize="14px !important">
-          <Button fontSize="14px" autoFocus onClick={handleClose} position="relative !important" className="borderright">
-            Cancel
-          </Button>
-          <Button fontSize="14px" autoFocus onClick={handleClose}>
-            <Link underline="none" style={{ fontSize: '12px' }} ><Typography style={{ cursor: "pointer", color: "#F26522" }}>Login</Typography></Link>
-          </Button>
+        {!registerSuccess && <DialogActions >
+          <Grid container textAlign="center">
+            <Grid item md={6}  width="50%" sx={{borderRight:'1px solid #eee'}}  padding="5px" onClick={handleClose}>
+              {t('cancel')}
+            </Grid>
+            <Grid item md={6} width="50%" padding="5px" onClick={() =>  Router.push('/login')} sx={{color:'#0898D6'}}>
+             {t('login')}
+            </Grid> 
+          </Grid> 
         </DialogActions>}
       </BootstrapDialog>
     </>

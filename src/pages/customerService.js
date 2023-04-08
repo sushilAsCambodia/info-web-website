@@ -20,9 +20,9 @@ import {
 import Router from "next/router";
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { width } from "@mui/system";
-  
+import { useTranslation } from "react-i18next";
 const CustomerService = () => { 
-
+    const {t} = useTranslation();
     return (
         <>
             <Grid
@@ -48,7 +48,7 @@ const CustomerService = () => {
                         </Grid>
                         <Grid item xs={12} >
                             <Typography paddingBottom="20px" textAlign="center">
-                            Contact Customer Service Via
+                                {t('contact_customer_service_via')}
                             </Typography>
                            <List sx={{ display:"flex", justifyContent:"center"  }}>
                             <ListItem sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}><Icon icon="logos:whatsapp-icon" fontSize="35px" /></ListItem>

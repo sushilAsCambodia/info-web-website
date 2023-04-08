@@ -19,7 +19,9 @@ import {
 import Router from "next/router";
 import {logout, setLogout} from '@/store/reducers/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
 const Profile = () => { 
+    const {t} = useTranslation();
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
         setMounted(true)
@@ -120,7 +122,7 @@ const Profile = () => {
                                                 justifyContent="space-between"
                                             >
                                                 <Grid item>
-                                                    <Typography fontWeight="600" fontSize="12px">Log in to enjoy more exciting features</Typography>
+                                                    <Typography fontWeight="600" fontSize="12px">{t('login_to_enjoy')}</Typography>
                                                     <Button
                                                         variant="contained"
                                                         onClick={goToLogin}
@@ -135,7 +137,7 @@ const Profile = () => {
                                                             padding: "4px 10px"
                                                         }}
                                                     >
-                                                        Login/Register
+                                                        {t('login')}/{t('register')}
                                                     </Button>
 
                                                 </Grid>
@@ -161,7 +163,7 @@ const Profile = () => {
                     <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                         <Grid item xs={12} paddingTop="15px">
                             <Typography>
-                                Important Links
+                               {t('important_links')}
                             </Typography>
                         </Grid>
 
@@ -187,7 +189,7 @@ const Profile = () => {
                                             justifyContent="space-between"
                                         >
                                             <Grid item>
-                                                <Typography fontWeight="500" fontSize="16px">Profile</Typography>
+                                                <Typography fontWeight="500" fontSize="16px">{t('profile')}</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
                                                 <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
@@ -219,7 +221,7 @@ const Profile = () => {
                                             justifyContent="space-between"
                                         >
                                             <Grid item>
-                                                <Typography fontWeight="500" fontSize="16px">Announcement</Typography>
+                                                <Typography fontWeight="500" fontSize="16px">{t('announcement')}</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
                                                 <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
@@ -251,7 +253,7 @@ const Profile = () => {
                                             justifyContent="space-between"
                                         >
                                             <Grid item>
-                                                <Typography fontWeight="500" fontSize="16px">Feedback</Typography>
+                                                <Typography fontWeight="500" fontSize="16px">{t('feedback')}</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
                                                 <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
@@ -283,7 +285,7 @@ const Profile = () => {
                                             justifyContent="space-between"
                                         >
                                             <Grid item>
-                                                <Typography fontWeight="500" fontSize="16px">Customer Service</Typography>
+                                                <Typography fontWeight="500" fontSize="16px">{t('customerservice')}</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
                                                 <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
@@ -315,7 +317,7 @@ const Profile = () => {
                                             justifyContent="space-between"
                                         >
                                             <Grid item>
-                                                <Typography fontWeight="500" fontSize="16px">Logout</Typography>
+                                                <Typography fontWeight="500" fontSize="16px">{t('logout')}</Typography>
                                             </Grid>
                                             <Grid item display="flex" alignItems="center" color="#8C8C8C;">
                                                 <Icon icon="material-symbols:keyboard-arrow-right" fontSize="25px" />
@@ -331,7 +333,7 @@ const Profile = () => {
                     <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                         <Grid item xs={12} paddingTop="20px" paddingBottom="20px" >
                             <Typography fontWeight="600">
-                                DOWNLOAD APP
+                            {t('download_app')}
                             </Typography>
                         </Grid>
                         <List sx={{ padding: "0px" }}>

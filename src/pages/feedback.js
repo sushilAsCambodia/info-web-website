@@ -19,9 +19,10 @@ import {
 } from "@mui/material";
 import Router from "next/router";
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import { useTranslation } from "react-i18next";
   
 const Feedback = () => { 
-
+    const {t} = useTranslation();
     return (
         <>
             <Grid
@@ -42,12 +43,12 @@ const Feedback = () => {
                     <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                         <Grid item xs={12} paddingTop="15px">
                             <Typography fontSize="18px">
-                            Send your feedback here
+                              {t('send_your_feedback_here')}
                             </Typography>
                         </Grid>
                         <Grid item xs={12} paddingTop="30px">
                             <Typography paddingBottom="20px">
-                            Feedback content*
+                            {t('feedback_content')}
                             </Typography>
                             <TextField
                             fullWidth
@@ -61,7 +62,7 @@ const Feedback = () => {
 
                         <Grid item xs={12} paddingTop="30px">
                             <Typography paddingBottom="20px">
-                            Contact 
+                            {t('contact')} 
                             </Typography>
                        
 
@@ -75,7 +76,7 @@ const Feedback = () => {
               >
                 <OutlinedInput
                   name="Username"
-                  placeholder="Username"
+                  placeholder={t('user_name')} 
                   inputProps={{ maxLength: 16 }}
                   id="outlined-adornment-password"
                   type="text"
@@ -104,7 +105,7 @@ const Feedback = () => {
                   }}
                  
                 >
-                 Submit
+                 {t('submit')}
                 </Button>
                         </Grid>
                      

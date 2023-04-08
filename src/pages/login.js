@@ -29,7 +29,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(2),
   },
   '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
+    padding: theme.spacing(0),
   },
 }));
 
@@ -79,7 +79,7 @@ export default function Login() {
             callback: (res) => {
               setLoading(false);
               const { status, status_code, message = '' } = res;
-              setResponseMessage(t(message));
+              setResponseMessage(t(message.toLowerCase()));
               setOpen(true)
               if([200,201,202,203].includes(status_code)) {
                 setTimeout(() => {
@@ -158,7 +158,7 @@ export default function Login() {
           <Grid item container xs={12} sm={12} padding={2}>
             <Grid container alignItems="flex-end" alignContent="center" mb={8}>
               <Typography variant="h5" sx={{ position: "relative" }}>
-                Login
+                {t('login')}
               </Typography>
             </Grid>
             <form
@@ -174,11 +174,8 @@ export default function Login() {
             >
               <Grid item xs={12} sm={12} mb={3}>
                 <Typography fontWeight="bold" pb={1}>
-                  Username
+                  {t('user_name')}
                 </Typography>
-
-                
-
                 <FormControl
                   variant="outlined"
                   fullWidth
@@ -189,7 +186,7 @@ export default function Login() {
                 >
                   <OutlinedInput
                     name="Username"
-                    placeholder="Username"
+                    placeholder={t('user_name')}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-username"
                     type="text"
@@ -207,12 +204,12 @@ export default function Login() {
                       </InputAdornment>
                     }
                   />
-                  {errorUserName && <FormHelperText error>The username format is a combination of 6-16 letters and numbers</FormHelperText>}
+                  {errorUserName && <FormHelperText error>{t('validate_user_name')}</FormHelperText>}
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={12} mb={4}>
                 <Typography fontWeight="bold" pb={1}>
-                  Password
+                    {t('password')}
                 </Typography>
                 <FormControl
                   variant="outlined"
@@ -224,7 +221,7 @@ export default function Login() {
                 >
                   <OutlinedInput
                     name="password"
-                    placeholder="Password"
+                    placeholder={t('password')}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-password"
                     type={showPassword ? "text" : "password"}
@@ -247,7 +244,7 @@ export default function Login() {
                       </InputAdornment>
                     }
                   />
-                  {errorPassword && <FormHelperText error>The format of the account number is 6-16 letters or numbers</FormHelperText>}
+                  {errorPassword && <FormHelperText error>{t('validate_password')}</FormHelperText>}
                 </FormControl>
               </Grid>
               <Grid item container spacing={2} mb={1}>
@@ -255,15 +252,16 @@ export default function Login() {
                   <Button
                     fullWidth
                     variant="contained"
+                    disabled={loading?true:false}
                     sx={{
                       color: "white",
-                      background:
+                      background: loading  ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);" :
                         "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
                       textTransform: 'capitalize'
                     }}
                     onClick={onSubmit}
                   >
-                    Login
+                    {t('login')}
                   </Button>
                 </Grid>
               </Grid>
@@ -280,11 +278,11 @@ export default function Login() {
                 }}
                 underline="none"
               >
-                <Link underline="none" style={{ cursor: "pointer", color: "#F26522" }} onClick={goToForgotPassword}> forgot password?</Link>
+                <Link underline="none" style={{ cursor: "pointer", color: "#F26522" }} onClick={goToForgotPassword}> {t('forgot_password')}</Link>
               </Grid>
               <Grid item container spacing={2} mt={1}>
                 <Grid item xs={12}  >
-                  <Typography >Log In Via</Typography>
+                  <Typography >{t('login_via')}</Typography>
                 </Grid>
               </Grid>
               <Grid
@@ -315,7 +313,7 @@ export default function Login() {
                 }}
                 underline="none"
               >
-                <Link underline="none" style={{ cursor: "pointer", fontSize: '12px', color: "#000", padding: "10px", display: 'flex' }} onClick={goToRegister} >Don’t have an account？ <Typography style={{ fontSize: '12px', cursor: "pointer", color: "#F26522" }}>Register</Typography></Link>
+                <Link underline="none" style={{ cursor: "pointer", fontSize: '12px', color: "#000", padding: "10px", display: 'flex' }} onClick={goToRegister} >{t('no_account')} <Typography style={{ fontSize: '12px', cursor: "pointer", color: "#F26522" }}>{t('register')}</Typography></Link>
 
               </Grid>
             </form>
@@ -331,12 +329,16 @@ export default function Login() {
         id="logindialog"
       >
 
-        <DialogContent dividers>
+        <DialogContent dividers sx={{maxWidth:"290px"}}>
           <Typography gutterBottom>
             {responseMessage}
           </Typography>
-
         </DialogContent> 
+        <DialogActions>
+            <Button autoFocus onClick={handleClose}>
+                {t('ok')}
+            </Button>
+        </DialogActions>
       </BootstrapDialog>
     </>
   )
