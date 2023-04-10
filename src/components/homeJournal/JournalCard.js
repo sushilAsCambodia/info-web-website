@@ -8,7 +8,7 @@ export default function JournalCard(props) {
     Router.push({pathname:'/journalCardDetails',query:{journal_id,lang_id}});
   }; 
   return (
-    <Grid container item textAlign="left">
+    <Grid container item textAlign="left" sx={{marginTop:'5px'}}>
       <Grid item xs={12}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           {journals && journals.length > 0 ? (<Grid item display="grid" sx={{ gridTemplateColumns: "auto auto auto", gridGap: "10px" }}>

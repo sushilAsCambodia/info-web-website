@@ -29,7 +29,7 @@ export default function FullSilder(props) {
   }; 
   return (
     <> 
-      <Grid item sx={{ position: "relative" }} className="mainautoplayswipeable">
+      <Grid item sx={{ position: "relative", marginTop:'5px' }} className="mainautoplayswipeable">
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={activeStep}
