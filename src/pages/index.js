@@ -1,12 +1,11 @@
 import { Grid, List, ListItem, Card, Typography, Container } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
-
+import NewsColumns from "@/components/homeNews/NewsColumns";
 export default function Home() {
   const matches = useMediaQuery("(max-width:768px)");
   return !matches ? (
     <Container sx={{
-      backgroundImage: 'url("./assets/Home/landingpagebg.jpg")',
       position: "relative",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
@@ -14,15 +13,10 @@ export default function Home() {
       backgroundPosition: "center"
 
     }}>
-      <Grid
-        container
-        xs={12}
-        justifyContent="center"
-      >
-        <Grid item xs={12} sm={12} md={12} xl={12}>
-
+    
+        <Grid item >
+        <NewsColumns />
         </Grid>
-      </Grid>
     </Container>
   ) : (
     <Container sx={{
