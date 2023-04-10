@@ -10,6 +10,8 @@ import {getSportByCategory} from '@/store/reducers/sportSlice'
 import DataLoading from '../DataLoading';
 import Router from "next/router";
 import Empty from '../Empty';
+import moment from 'moment/moment';
+import utils from '@/common/utils';
 const DataTabComponent = ({id,lang_id}) => {
     const {sports} = useSelector((state) => state.sport); 
     const dispatch = useDispatch();
@@ -57,9 +59,9 @@ const DataTabComponent = ({id,lang_id}) => {
                                                 xs={12}
                                             >
                                                 <Grid item>
-                                                    <Typography fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: sport.description }}></Typography>
+                                                    <Typography fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.description,100)}}></Typography>
                                                     <Typography textAlign="left" fontSize="11px !important">
-                                                        {sport.created_at}
+                                                        {moment(sport.created_at).format(utils.formatDate)}
                                                     </Typography>
                                                 </Grid>
     
