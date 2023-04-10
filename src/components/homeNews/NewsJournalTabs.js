@@ -14,6 +14,8 @@ import JournalCard from '../homeJournal/JournalCard';
 import { useRouter }  from "next/router";
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import {getJournalSync,setJournal} from '@/store/reducers/jounalSlice'
+import { useDispatch, useSelector } from 'react-redux';
 function TabPanel(props) {
   const { children, value, index, ...other } = props; 
   return (
@@ -49,11 +51,13 @@ function a11yProps(index) {
 
 export default function NewsJournalTabs(props) {
   const {t} = useTranslation();
-  const {banners = [], categories = []} = props; 
+  const {banners = [], categories = [], cards = [], lang_id} = props; 
+  const {journals = []} = useSelector((state) => state.journal) 
+  const dispatch = useDispatch();
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
-  useEffect(()=>{
+  useEffect(() => {
     const hash = router.asPath.split('#')[1];
     if(hash == 'journal') {
       setValue(1);
@@ -63,13 +67,23 @@ export default function NewsJournalTabs(props) {
    }, [ router.asPath ]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-  const handleChangeIndex = (index) => {
-    setValue(index);
   }; 
+  useEffect(() => {
+    if(value === 1) {
+      dispatch(setJournal([]));
+      dispatch(getJournalSync(
+        {
+            params: {lang_id: lang_id, fake:true},
+            callback:(res) => {
+                console.log(res,'callback')
+            }
+        }
+      ));
+    }
+  },[lang_id,value])
   return (
-    <Grid item className='tabclass'>
-      <Grid sx={{ padding:'10px 10px' }} >
+    <Grid item className='tabclass' sx={{height:'100%'}}>
+      <Grid sx={{ padding:'10px 10px',height:'100%' }} >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -82,11 +96,11 @@ export default function NewsJournalTabs(props) {
           <Tab label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
         <TabPanel  value={value} index={0} >
-          <FullSilder banners={banners}/>
+          <FullSilder banners={banners} cards={cards}/>
           <MultiTabs categories={categories}/>
         </TabPanel>
         <TabPanel value={value} index={1} >
-          <JournalCard />
+          <JournalCard journals={journals} lang_id={lang_id}/>
         </TabPanel>
       </Grid>
     </Grid>

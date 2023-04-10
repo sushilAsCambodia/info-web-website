@@ -22,7 +22,6 @@ import FormHelperText from '@mui/material/FormHelperText';
 import LoadingDialog from "@/components/Loading";
 import {login} from '@/store/reducers/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { middleware } from '@/middleware';
 import { useTranslation } from "react-i18next";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -71,6 +70,10 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, [])
   const dispatch = useDispatch();
   const handleLogin = () => {
     dispatch(login(
@@ -134,13 +137,8 @@ export default function Login() {
       setErrorPassword(false);
     }
     setPassword(e.target.value)
-  }
-  useEffect(() => {
-    middleware(Router, (res) => {
-        console.log(res);
-    });
-  },[]);
-  return (
+  } 
+  return mounted && (
     <>
       <Grid
         container

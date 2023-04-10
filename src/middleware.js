@@ -1,26 +1,12 @@
-
-export function middleware(router, callback) {
-    if(typeof window != 'undefined') {
-        const routerName = router.pathname.toLowerCase();
-        if(typeof callback == 'function') {
-            callback(false);
-        }
-        if(routerName == '/login' || routerName =='/register') {
-            if(window.localStorage.getItem('token')) {
-                router.push('/home');
-            }
-        }else {
-            if(!window.localStorage.getItem('token')) {
-                if(routerName == '/profile') {
-                    router.push('/login');
-                }else {
-                    router.push('/home');
-                }
-            }else {
-                if(typeof callback == 'function') {
-                    callback(true);
-                }
-            }
-        }
-    }
+import { NextResponse } from 'next/server';
+var routePreventToken = ['/profile','/profileDetail','/announcement','/feedback','/customerService'];
+export function middleware(req) {
+    const { pathname } =  req.nextUrl;
+    const absoluteUrl = new URL("/", req.url).toString();
+    if(routePreventToken.includes(pathname) && !req.cookies.has('token')) {
+        return NextResponse.redirect(absoluteUrl+'login')
+    }else if((pathname === '/login' || pathname === '/register' || pathname === '/forgotPassword') && req.cookies.has('token')) {
+        return NextResponse.redirect(absoluteUrl+'home')
+    } 
+    return NextResponse.next(); 
 }
