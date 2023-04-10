@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import api from '@/services/http';
 import utils from '@/common/utils';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 var initialState = { 
     status: 'idle',
     profile: typeof window != 'undefined' && window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
