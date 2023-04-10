@@ -27,7 +27,7 @@ const ImgUpload =({
   })=>
     <label htmlFor="photo-upload" className="custom-file-upload fas">
       <div className="img-wrap img-upload" >
-        <img for="photo-upload" src={src}/>
+        <img htmlFor="photo-upload" src={src}/>
       </div>
       <input id="photo-upload" type="file" onChange={onChange}/> 
     </label>
@@ -36,10 +36,10 @@ const ImgUpload =({
   
   const UploadImg =()=> {
     const {profile} = useSelector((state) => state.user); 
+    const [userName,setUsername] = useState((profile && profile.user_name? profile.user_name : ''));
     const {t} = useTranslation();
     const[file,setFile]=useState('')
     const[imagePreviewUrl,setImagePreviewUrl]=useState('https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true')
-
     const photoUpload = (e) =>{
       e.preventDefault();
       const reader = new FileReader();
@@ -62,8 +62,10 @@ const ImgUpload =({
       }
       setState({ ...state, [anchor]: open });
     };
-  
-  
+    
+    useEffect(() => {
+      setUsername((profile && profile.user_name? profile.user_name : ''));
+    },[profile])
     const list = (anchor) => (
       <Box
         sx={{ width: anchor === 'bottom' ? 'auto' : 250 }}
@@ -91,7 +93,7 @@ const ImgUpload =({
                   name="Username"
                   placeholder={t('user_name')}
                   inputProps={{ maxLength: 16 }}
-                  id="outlined-adornment-password"
+                  id="outlined-adornment-username"
                   type="text"
                   endAdornment={
                     <InputAdornment position="end">
@@ -129,7 +131,7 @@ const ImgUpload =({
               >
                 <OutlinedInput
                 sx={{paddingRight:"10px"}}
-                  name="Username"
+                  name="password"
                   placeholder={t('user_name')}
                   inputProps={{ maxLength: 16 }}
                   id="outlined-adornment-password"
@@ -154,10 +156,10 @@ const ImgUpload =({
               >
                 <OutlinedInput
                 sx={{paddingRight:"10px"}}
-                  name="Username"
-                  placeholder={t('user_name')}
+                  name="confirm_password"
+                  placeholder={t('confirm_password')}
                   inputProps={{ maxLength: 16 }}
-                  id="outlined-adornment-password"
+                  id="outlined-adornment-confirmpassword"
                   type="password"
                  
                 />
@@ -206,12 +208,13 @@ const ImgUpload =({
               >
                 <OutlinedInput
                 sx={{paddingRight:"10px"}}
-                  name="Username"
+                  name="nickname"
                   placeholder={t('user_name')}
                   inputProps={{ maxLength: 16 }}
-                  id="outlined-adornment-password"
+                  id="outlined-adornment-nickname"
                   type="text"
-                  value={ profile && profile.user_name? profile.user_name : '' }
+                  value={ userName }
+                  onChange={(e) => setUsername(e.target.value)}
                   endAdornment={
                     <InputAdornment position="end">
                         <Button
@@ -233,7 +236,7 @@ const ImgUpload =({
                 />
               </FormControl>
               </Grid>
-              <Grid item fullWidth>
+              <Grid item>
               <Button
                   fullWidth
                   variant="contained"

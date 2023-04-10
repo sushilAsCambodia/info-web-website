@@ -3,5 +3,5 @@ const Match = () => {
     return <>
         <Typography sx={{textAlign:'center'}}>TODO</Typography>
     </>
-};  
+};   
 export default Match;

@@ -19,7 +19,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
-import { middleware } from '@/middleware';
 import LoadingDialog from "@/components/Loading";
 import FormHelperText from '@mui/material/FormHelperText';
 import { useDispatch, useSelector } from 'react-redux';
@@ -78,6 +77,12 @@ export default function Register() {
     Router.push("/login");
   }; 
   const dispatch = useDispatch();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const handleSignup = () => {
     dispatch(register(
         { 
@@ -137,12 +142,7 @@ export default function Register() {
       setErrorPassword(false);
     }
     setPassword(e.target.value)
-  }
-  useEffect(() => {
-    middleware(Router, (res) => {
-      console.log(res);
-    });
-  }, []);
+  } 
   // Register Dialog 
   const [open, setOpen] = React.useState(false);
 
@@ -153,7 +153,7 @@ export default function Register() {
     setOpen(false);
   };
 
-  return (
+  return mounted && (
     <>
       <Grid
         container
