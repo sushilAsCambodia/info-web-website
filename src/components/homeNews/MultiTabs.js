@@ -62,6 +62,9 @@ export default function MultiTabs(props) {
                 [`& .${tabsClasses.scrollButtons}`]: {
                   '&.Mui-disabled': { opacity: 0.3 },
                 },
+                '& .MuiTabs-indicator':{
+                  background: 'linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)'
+                }
               }}>
               { categories.map((category, index) => <Tab key={index} label={category.translation ? category.translation?.category_name : (category.category_name||'N/A')} />)}
             </Tabs>

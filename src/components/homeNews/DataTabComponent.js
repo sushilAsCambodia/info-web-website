@@ -9,6 +9,7 @@ import {
 import {getSportByCategory} from '@/store/reducers/sportSlice'
 import DataLoading from '../DataLoading';
 import Router from "next/router";
+import Empty from '../Empty';
 const DataTabComponent = ({id}) => {
     const {sports} = useSelector((state) => state.sport); 
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const DataTabComponent = ({id}) => {
             loading ? <DataLoading/> :
             (
                 <Grid item xs={12} sm={12} md={12} xl={12}>
-                    {sports.map((sport,index) => {
+                    {sports && sports.length ?sports.map((sport,index) => {
                         return (
                             <List key={index} sx={{padding:0}} onClick={() => Router.push("/newsCardDetails")}>
                                 <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }} >
@@ -69,7 +70,7 @@ const DataTabComponent = ({id}) => {
                                 </ListItem> 
                             </List>
                         );
-                    })}
+                    }) : <Empty/>}
                 </Grid>
             )
         }

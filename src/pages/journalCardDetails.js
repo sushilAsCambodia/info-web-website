@@ -24,7 +24,6 @@ export default function JournalCardDetails() {
             const {status_code,data = {}} = res;
             if([200,201,202,203].includes(status_code)) {
               if(data && Object.keys(data).length) {
-                console.log(data,'data')
                 const images =  [];
                 for (let i = 0; i < data.images.length; i++) {
                   images.push({
