@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import api from '@/services/http';
 import utils from '@/common/utils';
+import Cookies from 'js-cookie'
 var initialState = { 
     status: 'idle',
     profile: typeof window != 'undefined' && window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
-    isLogin: typeof window != 'undefined' && window.localStorage.getItem(utils.tokenKey) ? true : false
+    isLogin: typeof window != 'undefined' && Cookies.get(utils.tokenKey) ? true : false
 }
 export const login = createAsyncThunk(
     "customers/login",
@@ -15,7 +16,7 @@ export const login = createAsyncThunk(
         data['status_code'] = status;
         if(typeof window !='undefined') { 
           if(data.data[utils.tokenKey]) {
-            window.localStorage.setItem(utils.tokenKey,data.data[utils.tokenKey] || '');
+            Cookies.set(utils.tokenKey,data.data[utils.tokenKey] || '');
           }
         }
         if(typeof callback == 'function') {
@@ -44,7 +45,7 @@ export const register = createAsyncThunk(
       }
       if(typeof window !='undefined') {
         if(data.data[utils.tokenKey]) {
-          window.localStorage.setItem(utils.tokenKey,data.data[utils.tokenKey] || '');
+          Cookies.set(utils.tokenKey,data.data[utils.tokenKey] || '');
         }
       }
       return data;
@@ -95,8 +96,9 @@ const userSlice = createSlice({
     setLogout(state,action) {
       state.isLogin  = false;
       state.profile  = {};
-      window.localStorage.removeItem(utils.tokenKey);
       window.localStorage.removeItem('profile');
+      Cookies.remove(utils.tokenKey);
+
     }, 
   },
   extraReducers: (builder) => {

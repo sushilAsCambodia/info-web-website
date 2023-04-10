@@ -19,7 +19,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
-import { middleware } from '@/middleware';
 import LoadingDialog from "@/components/Loading";
 import FormHelperText from '@mui/material/FormHelperText';
 import { useDispatch, useSelector } from 'react-redux';
@@ -81,13 +80,7 @@ export default function Register() {
   const [mounted, setMounted] = useState(false);
   
   useEffect(() => {
-    middleware(Router,(res) => {
-        if(res) { 
-          Router.push('/home');
-        }else {
-          setMounted(true);
-        }
-    })
+    setMounted(true);
   }, []);
 
   const handleSignup = () => {

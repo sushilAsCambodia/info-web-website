@@ -20,19 +20,11 @@ import Router from "next/router";
 import {logout, setLogout} from '@/store/reducers/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { middleware } from "@/middleware";
 const Profile = () => { 
     const {t} = useTranslation();
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
-        middleware(Router,(res) => {
-            console.log(res)
-            if(res) { 
-                setMounted(true)
-            }else {
-                goToLogin();
-            }
-        })
+        setMounted(true)
     }, [])
     const {isLogin, profile } = useSelector((state) => state.user); 
     const dispatch = useDispatch();
