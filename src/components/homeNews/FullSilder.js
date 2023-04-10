@@ -98,7 +98,7 @@ export default function FullSilder(props) {
           }}>
           {
             cards.map((card,index) => {
-              return <Tab onClick={()=> setTabValue(0)} sx={{ padding: '5px'}} label={<Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
+              return <Tab key={index} onClick={()=> setTabValue(0)} sx={{ padding: '5px'}} label={<Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
                   <Grid sx={{background:`url(${card.image})`}} alt="机率" width="80px" height="80px" className="card-custom">
                     <span></span>
                   </Grid>
