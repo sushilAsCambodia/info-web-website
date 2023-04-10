@@ -171,7 +171,7 @@ export default function Register() {
           <Grid item container xs={12} sm={12} padding={2}>
             <Grid container alignItems="flex-end" alignContent="center" mb={8}>
               <Typography variant="h5" sx={{ position: "relative" }}>
-                Register
+                {t('register')}
               </Typography>
             </Grid>
             <form
@@ -187,7 +187,7 @@ export default function Register() {
             >
               <Grid item xs={12} sm={12} mb={3}>
                 <Typography fontWeight="bold" pb={1}>
-                  Username
+                  {t('user_name')}
                 </Typography>
 
                 <FormControl
@@ -200,7 +200,7 @@ export default function Register() {
                 >
                   <OutlinedInput
                     name="Username"
-                    placeholder="Username"
+                    placeholder={t('user_name')}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-username"
                     value={username}
@@ -217,12 +217,12 @@ export default function Register() {
                       </InputAdornment>
                     }
                   />
-                  {errorUserName && <FormHelperText error>The username format is a combination of 6-16 letters and numbers</FormHelperText>}
+                  {errorUserName && <FormHelperText error>{t('validate_user_name')}</FormHelperText>}
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={12} mb={4}>
                 <Typography fontWeight="bold" pb={1}>
-                  Password
+                {t('password')}
                 </Typography>
                 <FormControl
                   variant="outlined"
@@ -234,7 +234,7 @@ export default function Register() {
                 >
                   <OutlinedInput
                     name="password"
-                    placeholder="Password"
+                    placeholder={t('password')}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-password"
                     type={showPassword ? "text" : "password"}
@@ -257,7 +257,7 @@ export default function Register() {
                       </InputAdornment>
                     }
                   />
-                  {errorPassword && <FormHelperText error>The format of the account number is 6-16 letters or numbers</FormHelperText>}
+                  {errorPassword && <FormHelperText error>{t('validate_password')}</FormHelperText>}
                 </FormControl>
               </Grid>
               <Grid item container spacing={2} mb={1}>
@@ -273,15 +273,15 @@ export default function Register() {
                     }}
                     onClick={onSubmit}
                   >
-                    Sign up for now
+                    {t('signup_for_now')}
                   </Button>
                 </Grid>
               </Grid>
 
 
               <Grid item container spacing={2} mt={1}>
-                <Grid item xs={12}  >
-                  <Typography textAlign="center">Log In Via</Typography>
+                <Grid item xs={12} textAlign="center" textTransform="capitalize">
+                  <Typography>{t('signup_via')}</Typography>
                 </Grid>
               </Grid>
               <Grid
@@ -312,7 +312,7 @@ export default function Register() {
                 }}
                 underline="none"
               >
-                <Link underline="none" style={{ cursor: "pointer", fontSize: '12px', color: "#000", padding: "10px", display: 'flex' }} onClick={goToLogin} >Already have an account？<Typography style={{ fontSize: '12px', cursor: "pointer", color: "#F26522" }}>Login</Typography></Link>
+                <Link underline="none" style={{ cursor: "pointer", fontSize: '12px', color: "#000", padding: "10px", display: 'flex' }} onClick={goToLogin} >{t('already_have_an_account')}<Typography style={{ fontSize: '12px', cursor: "pointer", color: "#F26522" }}>{t('login')}</Typography></Link>
 
               </Grid>
             </form>
