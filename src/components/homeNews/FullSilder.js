@@ -26,11 +26,7 @@ export default function FullSilder(props) {
   };
   const handleStepChange = (step) => {
     setActiveStep(step);
-  };
-  const card1 = "/assets/NewsJourney/newscard1.png";
-  const card2 = "/assets/NewsJourney/newscard2.png";
-  const card3 = "/assets/NewsJourney/newscard3.png";
-  const card4 = "/assets/NewsJourney/newscard4.png";
+  }; 
   return (
     <> 
       <Grid item sx={{ position: "relative" }} className="mainautoplayswipeable">
