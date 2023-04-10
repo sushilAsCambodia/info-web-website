@@ -35,7 +35,7 @@ TabPanel.propTypes = {
 
 
 export default function MultiTabs(props) {
-  const { categories } = props;
+  const { categories,lang_id } = props;
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -73,7 +73,7 @@ export default function MultiTabs(props) {
             { categories.map((category,index) => {
                 return (
                   <TabPanel key={index} value={value} index={index}>
-                    <DataTabComponent id={category?.id}/>
+                    <DataTabComponent id={category?.id} lang_id={lang_id}/>
                   </TabPanel>
                 );
               })

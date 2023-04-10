@@ -41,7 +41,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    {children}
                 </Box>
             )}
         </div>
@@ -179,6 +179,15 @@ const Layout = (props) => {
         case '/announcement':
             title = t('announcement_info_web')
             break;
+        case '/login':
+            title = t('login_info_web')
+            break;
+        case '/register':
+            title = t('regiter_info_web')
+            break;
+        case '/forgotpassword':
+            title = t('forgot_password_info_web')
+            break;
         default:
             break;
     }
@@ -197,113 +206,228 @@ const Layout = (props) => {
         <Box
             sx={{ width: anchor === 'bottom' ? 'auto' : 250 }}
             role="presentation"
-            className="calendraDrawer"
-        >
+            className="calendraDrawer">
             <Typography className="drawerline"></Typography>
             <br />
             <Typography textAlign="center" fontSize="12px">Choose the number of periods</Typography>
             <Typography textAlign="left" fontSize="12px" className='yearheadline'>Year</Typography>
-            <List sx={{ padding: "0px 16px"  }}>
+            <List>
                 <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
-                    <Grid item xs={12} sm={12} >
-                        <Typography fontWeight="bold" pb={1} textAlign="left">
-                            <Box sx={{ width: '100%' }}>
-                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                        <Tab label="2023" {...a11yProps(0)} />
-                                        <Tab label="2022" {...a11yProps(1)} />
-                                        <Tab label="2021" {...a11yProps(2)} />
-                                        <Tab label="2020" {...a11yProps(3)} />
-
-                                    </Tabs>
-                                </Box>
-                                <TabPanel value={value} index={0} padding="0px !important" textAlign="center !important">
-                                    <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                        <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 02</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 03</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 04</Typography>
-                                        </ListItem>
-                                        <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 05</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 06</Typography>
-                                        </ListItem>
-                                        <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 07</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 08</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 09</Typography>
-                                        </ListItem>
-                                        <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 10</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 11</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 12</Typography>
-                                        </ListItem>
-                                        <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 13</Typography>
-                                        </ListItem>
-                                    </List>
-                                </TabPanel>
-                                <TabPanel value={value} index={1}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                        <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                    
-                                    </List>
-                                </TabPanel>
-                                <TabPanel value={value} index={2}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                        <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                  
-                                    </List>
-                                </TabPanel>
-                                <TabPanel value={value} index={3}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
-                                        <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                        <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                            <Typography fontSize="10px">Issue 01</Typography>
-                                        </ListItem>
-                                    
-                                    </List>
-                                </TabPanel>
+                    <Grid item xs={12} sm={12} width='100%'>
+                        <Box sx={{ width: '100%' }}>
+                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <Tabs 
+                                    variant="scrollable"
+                                    scrollButtons 
+                                    value={value} 
+                                    onChange={handleChange} 
+                                    aria-label="basic tabs example" >
+                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2020" {...a11yProps(0)} />
+                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2021" {...a11yProps(1)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2022" {...a11yProps(2)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2023" {...a11yProps(3)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2024" {...a11yProps(4)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2025" {...a11yProps(5)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2026" {...a11yProps(6)} /> 
+                                </Tabs>
                             </Box>
-                        </Typography>
+                            <TabPanel value={value} index={0} padding="0px !important" >
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 02</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 03</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 04</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 05</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 06</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 07</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 08</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 09</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 10</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 11</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 12</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 13</Typography>
+                                    </ListItem>
+                                </List>
+                            </TabPanel>
+                            <TabPanel value={value} index={1}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                
+                                </List>
+                            </TabPanel> 
+                            <TabPanel value={value} index={2} padding="0px !important" >
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 02</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 03</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 04</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 05</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 06</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 07</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 08</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 09</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 10</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 11</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 12</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 13</Typography>
+                                    </ListItem>
+                                </List>
+                            </TabPanel>
+                            <TabPanel value={value} index={3}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                </List>
+                            </TabPanel> 
+                            <TabPanel value={value} index={4} padding="0px !important" >
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 02</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 03</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 04</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 05</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 06</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 07</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 08</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 09</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 10</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 11</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 12</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 13</Typography>
+                                    </ListItem>
+                                </List>
+                            </TabPanel>
+                            <TabPanel value={value} index={5}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                
+                                </List>
+                            </TabPanel> 
+                            <TabPanel value={value} index={6}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                
+                                </List>
+                            </TabPanel> 
+                        </Box>
                     </Grid>
                 </ListItem>
             </List>

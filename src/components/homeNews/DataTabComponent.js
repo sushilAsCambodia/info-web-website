@@ -10,13 +10,13 @@ import {getSportByCategory} from '@/store/reducers/sportSlice'
 import DataLoading from '../DataLoading';
 import Router from "next/router";
 import Empty from '../Empty';
-const DataTabComponent = ({id}) => {
+const DataTabComponent = ({id,lang_id}) => {
     const {sports} = useSelector((state) => state.sport); 
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(getSportByCategory(
             {
-                params: { fake:true,id: id },
+                params: { lang_id:lang_id,category_id: id,take:10 },
                 callback:(res) => {
                     console.log(res,'callback')
                     setLoading(false);
@@ -32,7 +32,7 @@ const DataTabComponent = ({id}) => {
                 <Grid item xs={12} sm={12} md={12} xl={12}>
                     {sports && sports.length ?sports.map((sport,index) => {
                         return (
-                            <List key={index} sx={{padding:0}} onClick={() => Router.push("/newsCardDetails")}>
+                            <List key={index} sx={{padding:0}} onClick={() => Router.push({pathname:'/newsCardDetails'})}>
                                 <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }} >
                                     <Grid
                                         item
@@ -40,27 +40,26 @@ const DataTabComponent = ({id}) => {
                                         sx={{borderRadius: "5px",padding:0 }}
                                         boxShadow="none"
                                         display="flex"
-                                        alignItems="center"
+                                        alignItems="start"
                                     >
                                         <Grid item xs={3} display="flex" alignItems="center">
                                             <img
-                                                src="./assets/NewsJourney/tabcard1.png"
+                                                src={sport.image ? sport.image?.path :'./assets/no-image.png'}
+                                                onError={(e) => e.target.src = './assets/no-image.png'}
                                                 width="80px"
                                                 height="55px"
+                                                style={{objectFit:"contain"}}
                                             />
                                         </Grid>
                                         <Grid item xs={9}>
                                             <Grid
                                                 item
                                                 xs={12}
-                                                display="flex"
-                                                alignItems="center"
-                                                justifyContent="space-between"
                                             >
                                                 <Grid item>
-                                                    <Typography fontWeight="600" fontSize="10px">The Premier League isn’t Apple’s first push into soccer. The company added all MLS games its...</Typography>
+                                                    <Typography fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: sport.description }}></Typography>
                                                     <Typography textAlign="left" fontSize="11px !important">
-                                                        15/04/2023
+                                                        {sport.created_at}
                                                     </Typography>
                                                 </Grid>
     
