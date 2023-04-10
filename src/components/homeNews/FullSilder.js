@@ -9,13 +9,14 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-import { Grid } from "@mui/material";
+import { Grid, Tabs, Tab } from "@mui/material";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function FullSilder(props) {
-  const {banners = []} = props;
+  const { banners = [] } = props;
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [tabValue, setTabValue] = React.useState(0);
   const maxSteps = banners.length;
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -25,13 +26,13 @@ export default function FullSilder(props) {
   };
   const handleStepChange = (step) => {
     setActiveStep(step);
-  }; 
+  };
   const card1 = "/assets/NewsJourney/newscard1.png";
   const card2 = "/assets/NewsJourney/newscard2.png";
   const card3 = "/assets/NewsJourney/newscard3.png";
   const card4 = "/assets/NewsJourney/newscard4.png";
   return (
-    <>
+    <> 
       <Grid item sx={{ position: "relative" }} className="mainautoplayswipeable">
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
@@ -42,8 +43,8 @@ export default function FullSilder(props) {
           {banners.map((step, index) => (
             <div key={index}>
               {Math.abs(activeStep - index) <= 2 ? (
-                <Box 
-                item
+                <Box
+                  item
                   component="img"
                   sx={{
                     height: 255,
@@ -90,14 +91,16 @@ export default function FullSilder(props) {
         />
       </Grid>
       <Grid item xs={12}>
-        <Grid
-          item
-          display="flex"
-          sx={{ marginTop: "10px" }}
-          color="#fff"
-          justifyContent="space-between"
-        >
-          <Grid position="relative" textAlign="center">
+        <Tabs
+          value={tabValue}
+          onChange={(e) => setTabValue(e.target.value)}
+          variant="scrollable"
+          aria-label="scrollable auto tabs example"
+          className="MuiTabs-custom-tab"
+          TabIndicatorProps={{
+            style: {display:'none' }
+          }}>
+          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
             <img src={card1} alt="一般" width="80px" height="80px" />
             <Typography
               position="absolute"
@@ -117,9 +120,10 @@ export default function FullSilder(props) {
             >
               General
             </Typography>
-          </Grid>
-          <Grid position="relative" textAlign="center">
-            <img src={card2} alt="一般" width="80px" height="80px" />
+          </Grid>}>
+          </Tab>
+          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
+            <img src={card2} alt="机率" width="80px" height="80px" />
             <Typography
               position="absolute"
               fontSize="10px"
@@ -138,9 +142,10 @@ export default function FullSilder(props) {
             >
               Casino
             </Typography>
-          </Grid>
-          <Grid position="relative" textAlign="center">
-            <img src={card3} alt="一般" width="80px" height="80px" />
+          </Grid>}>
+          </Tab>
+          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
+            <img src={card3} alt="机率" width="80px" height="80px" />
             <Typography
               position="absolute"
               fontSize="10px"
@@ -159,9 +164,10 @@ export default function FullSilder(props) {
             >
               Fishing
             </Typography>
-          </Grid>
-          <Grid position="relative" textAlign="center">
-            <img src={card4} alt="一般" width="80px" height="80px" />
+          </Grid>}>
+          </Tab>
+          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
+            <img src={card4} alt="机率" width="80px" height="80px" />
             <Typography
               position="absolute"
               fontSize="10px"
@@ -180,8 +186,31 @@ export default function FullSilder(props) {
             >
               Live Casino
             </Typography>
-          </Grid> 
-        </Grid>
+          </Grid>}>
+          </Tab>
+          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
+            <img src={card3} alt="机率" width="80px" height="80px" />
+            <Typography
+              position="absolute"
+              fontSize="10px"
+              bottom="25%"
+              left="0"
+              right="0"
+            >
+              视讯
+            </Typography>
+            <Typography
+              position="absolute"
+              fontSize="10px"
+              bottom="10%"
+              left="0"
+              right="0"
+            >
+              Live Casino
+            </Typography>
+          </Grid>}>
+          </Tab>
+        </Tabs>
       </Grid>
     </>
   );

@@ -67,11 +67,7 @@ export default function NewsJournalTabs(props) {
    }, [ router.asPath ]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-  const handleChangeIndex = (index) => {
-    setValue(index);
   }; 
-  
   useEffect(() => {
     if(value === 1) {
       dispatch(setJournal([]));
