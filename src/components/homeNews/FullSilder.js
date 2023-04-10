@@ -13,7 +13,7 @@ import { Grid, Tabs, Tab } from "@mui/material";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function FullSilder(props) {
-  const { banners = [] } = props;
+  const { banners = [],cards = [] } = props;
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const [tabValue, setTabValue] = React.useState(0);
@@ -90,7 +90,7 @@ export default function FullSilder(props) {
           }
         />
       </Grid>
-      <Grid item xs={12}>
+      {cards && cards.length > 0 && <Grid item xs={12} sx={{marginTop:'5px',marginBottom:'5px'}}>
         <Tabs
           value={tabValue}
           onChange={(e) => setTabValue(e.target.value)}
@@ -100,118 +100,52 @@ export default function FullSilder(props) {
           TabIndicatorProps={{
             style: {display:'none' }
           }}>
-          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
-            <img src={card1} alt="一般" width="80px" height="80px" />
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="25%"
-              left="0"
-              right="0"
-            >
-              一般
-            </Typography>
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="10%"
-              left="0"
-              right="0"
-            >
-              General
-            </Typography>
-          </Grid>}>
-          </Tab>
-          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
-            <img src={card2} alt="机率" width="80px" height="80px" />
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="25%"
-              left="0"
-              right="0"
-            >
-              机率
-            </Typography>
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="10%"
-              left="0"
-              right="0"
-            >
-              Casino
-            </Typography>
-          </Grid>}>
-          </Tab>
-          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
-            <img src={card3} alt="机率" width="80px" height="80px" />
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="25%"
-              left="0"
-              right="0"
-            >
-              捕鱼
-            </Typography>
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="10%"
-              left="0"
-              right="0"
-            >
-              Fishing
-            </Typography>
-          </Grid>}>
-          </Tab>
-          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
-            <img src={card4} alt="机率" width="80px" height="80px" />
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="25%"
-              left="0"
-              right="0"
-            >
-              视讯
-            </Typography>
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="10%"
-              left="0"
-              right="0"
-            >
-              Live Casino
-            </Typography>
-          </Grid>}>
-          </Tab>
-          <Tab sx={{ padding: '5px'}} icon={<Grid position="relative" textAlign="center">
-            <img src={card3} alt="机率" width="80px" height="80px" />
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="25%"
-              left="0"
-              right="0"
-            >
-              视讯
-            </Typography>
-            <Typography
-              position="absolute"
-              fontSize="10px"
-              bottom="10%"
-              left="0"
-              right="0"
-            >
-              Live Casino
-            </Typography>
-          </Grid>}>
-          </Tab>
-        </Tabs>
-      </Grid>
+          {
+            cards.map((card,index) => {
+              return <Tab onClick={()=> setTabValue(0)} sx={{ padding: '5px'}} label={<Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
+                  <Grid sx={{background:`url(${card.image})`}} alt="机率" width="80px" height="80px" className="card-custom">
+                    <span></span>
+                  </Grid>
+                  <Typography
+                    position="absolute"
+                    fontSize="10px"
+                    bottom="25%"
+                    left="0"
+                    right="0"
+                    sx={{color:'white'}}
+                  >
+                    {card.translate||'N/A'}
+                  </Typography>
+                  <Typography
+                    position="absolute"
+                    fontSize="10px"
+                    bottom="10%"
+                    left="0"
+                    right="0"
+                    sx={{color:'white'}}
+                  >
+                    {card.label||'N/A'}
+                  </Typography>
+                </Grid>}>
+              </Tab> 
+            })
+          }
+          
+        </Tabs> 
+        <style>
+          {
+            `
+              .card-custom > span{
+                position: absolute;
+                height: 100%;
+                left: 0;
+                right: 0;
+                background:linear-gradient(360deg, #FF0000 0%, rgba(255, 110, 49, 0.37) 100%)
+              }
+            `
+          }
+        </style>
+      </Grid>} 
     </>
   );
 }

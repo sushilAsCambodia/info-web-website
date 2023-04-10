@@ -51,7 +51,7 @@ function a11yProps(index) {
 
 export default function NewsJournalTabs(props) {
   const {t} = useTranslation();
-  const {banners = [], categories = [], lang_id} = props; 
+  const {banners = [], categories = [], cards = [], lang_id} = props; 
   const {journals = []} = useSelector((state) => state.journal) 
   const dispatch = useDispatch();
   const theme = useTheme();
@@ -96,7 +96,7 @@ export default function NewsJournalTabs(props) {
           <Tab label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
         <TabPanel  value={value} index={0} >
-          <FullSilder banners={banners}/>
+          <FullSilder banners={banners} cards={cards}/>
           <MultiTabs categories={categories}/>
         </TabPanel>
         <TabPanel value={value} index={1} >
