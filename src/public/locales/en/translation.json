@@ -45,7 +45,7 @@
     "no_account":"Don’t have an account?",
     "login_via":"Login as Via",
     "validate_user_name":"The format of the user name is 6-16 letters or numbers",
-    "validate_account":"The format of the account number is 6-16 letters or numbers",
+    "validate_account":"The password format is a combination of 6-16 letters and numbers",
     "validate_password":"The password format is a combination of 6-16 letters and numbers",
     "cancel":"Cancel",
     "ok":"OK",
