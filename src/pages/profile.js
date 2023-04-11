@@ -17,7 +17,7 @@ import {
     Divider,
 } from "@mui/material";
 import Router from "next/router";
-import {logout, setLogout} from '@/store/reducers/userSlice';
+import {logout} from '@/store/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import UserProfileIcon from "@/components/svg/profile";
@@ -31,13 +31,12 @@ const Profile = () => {
     useEffect(() => {
         setMounted(true)
     }, [])
-    const {isLogin, profile } = useSelector((state) => state.user); 
+    const {isLogin, customer } = useSelector((state) => state.auth); 
     const dispatch = useDispatch();
     const handleLogout = () => {
         dispatch(logout(
             { 
                 callback: (res) => {
-                    dispatch(setLogout());
                     Router.push('/home');
                     // const {status_code} = res;
                     // if([200,201,202,203].includes(status_code)) {
@@ -110,7 +109,7 @@ const Profile = () => {
                                                 alignItems="center"
                                                 justifyContent="space-between">
                                                 <Grid item>
-                                                    <Typography fontWeight="600" fontSize="12px">{profile.user_name || 'Profile Name'}</Typography>
+                                                    <Typography fontWeight="600" fontSize="12px">{customer.user_name || 'Profile Name'}</Typography>
                                                 </Grid>
                                             </Grid>
                                         </Grid>

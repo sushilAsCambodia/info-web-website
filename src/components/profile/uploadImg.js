@@ -35,11 +35,11 @@ const ImgUpload =({
 
   
   const UploadImg =()=> {
-    const {profile} = useSelector((state) => state.user); 
-    const [userName,setUsername] = useState((profile && profile.user_name? profile.user_name : ''));
+    const {customer} = useSelector((state) => state.auth); 
+    const [userName,setUsername] = useState((customer && customer.user_name? customer.user_name : ''));
     const {t} = useTranslation();
     const[file,setFile]=useState('')
-    const[imagePreviewUrl,setImagePreviewUrl]=useState('https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true')
+    const[imagePreviewUrl,setImagePreviewUrl]=useState('https://github.com/OlgaKoplik/CodePen/blob/master/customer.jpg?raw=true')
     const photoUpload = (e) =>{
       e.preventDefault();
       const reader = new FileReader();
@@ -64,8 +64,8 @@ const ImgUpload =({
     };
     
     useEffect(() => {
-      setUsername((profile && profile.user_name? profile.user_name : ''));
-    },[profile])
+      setUsername((customer && customer.user_name? customer.user_name : ''));
+    },[customer])
     const list = (anchor) => (
       <Box
         sx={{ width: anchor === 'bottom' ? 'auto' : 250 }}

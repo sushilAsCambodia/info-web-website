@@ -6,19 +6,19 @@ import {
     List, 
   } from "@mui/material";
   import { useDispatch, useSelector } from 'react-redux';
-import {getSportByCategory} from '@/store/reducers/sportSlice'
+import {getNewsByCategory} from '@/store/actions/newsActions'
 import DataLoading from '../DataLoading';
 import Router from "next/router";
 import Empty from '../Empty';
 import moment from 'moment/moment';
 import utils from '@/common/utils';
 const DataTabComponent = ({id,lang_id}) => {
-    const {sports} = useSelector((state) => state.sport); 
+    const {news} = useSelector((state) => state.news); 
     const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(getSportByCategory(
+        dispatch(getNewsByCategory(
             {
-                params: { lang_id:lang_id,category_id: id,take:10 },
+                params: { lang_id:lang_id, category_id: id, take:10 },
                 callback:(res) => {
                     console.log(res,'callback')
                     setLoading(false);
@@ -32,7 +32,7 @@ const DataTabComponent = ({id,lang_id}) => {
             loading ? <DataLoading/> :
             (
                 <Grid item xs={12} sm={12} md={12} xl={12}>
-                    {sports && sports.length ?sports.map((sport,index) => {
+                    {news && news.length ? news.map((sport,index) => {
                         return (
                             <List key={index} sx={{padding:0}} onClick={() => Router.push({pathname:'/newsCardDetails'})}>
                                 <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }} >
@@ -50,7 +50,7 @@ const DataTabComponent = ({id,lang_id}) => {
                                                 onError={(e) => e.target.src = './assets/no-image.png'}
                                                 width="80px"
                                                 height="55px"
-                                                style={{objectFit:"contain"}}
+                                                style={{objectFit:"contain",borderRadius:'6px'}}
                                             />
                                         </Grid>
                                         <Grid item xs={9}>

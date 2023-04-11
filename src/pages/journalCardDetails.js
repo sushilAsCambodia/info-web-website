@@ -4,7 +4,7 @@ import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import {getJournalSync} from '@/store/reducers/jounalSlice'
+import {getJournal} from '@/store/actions/journalActions'
 import DataNotFound from '@/components/DataNotFound'; 
 import DataLoading from '@/components/DataLoading';
 
@@ -17,7 +17,7 @@ export default function JournalCardDetails() {
   const dispatch = useDispatch();
   useEffect(() => {
     setMounted(true);
-    dispatch(getJournalSync(
+    dispatch(getJournal(
       {
           params: {lang_id: query.lang_id,id:query.journal_id,fake:true},
           callback:(res) => {

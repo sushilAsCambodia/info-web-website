@@ -14,7 +14,7 @@ import JournalCard from '../homeJournal/JournalCard';
 import { useRouter }  from "next/router";
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
-import {getJournalSync,setJournal} from '@/store/reducers/jounalSlice'
+import {getJournal} from '@/store/actions/journalActions'
 import { useDispatch, useSelector } from 'react-redux';
 function TabPanel(props) {
   const { children, value, index, ...other } = props; 
@@ -70,8 +70,7 @@ export default function NewsJournalTabs(props) {
   }; 
   useEffect(() => {
     if(value === 1) {
-      dispatch(setJournal([]));
-      dispatch(getJournalSync(
+      dispatch(getJournal(
         {
             params: {lang_id: lang_id, fake:true},
             callback:(res) => {

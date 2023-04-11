@@ -20,7 +20,7 @@ import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
 import FormHelperText from '@mui/material/FormHelperText';
 import LoadingDialog from "@/components/Loading";
-import {login} from '@/store/reducers/userSlice';
+import {login} from '@/store/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
