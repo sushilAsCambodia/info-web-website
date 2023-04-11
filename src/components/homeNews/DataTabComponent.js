@@ -25,7 +25,7 @@ const DataTabComponent = ({id,lang_id}) => {
                 }
             }
         ));
-    },[]);
+    },[id]);
     const [loading,setLoading] = React.useState(true);
     return <Grid sx={{height:'250px', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
         {
@@ -35,38 +35,26 @@ const DataTabComponent = ({id,lang_id}) => {
                     {news && news.length ? news.map((sport,index) => {
                         return (
                             <List key={index} sx={{padding:0}} onClick={() => Router.push({pathname:'/newsCardDetails'})}>
-                                <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }} >
+                                <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }}>
                                     <Grid
-                                        item
-                                        xs={12}
-                                        sx={{borderRadius: "5px",padding:0 }}
+                                        container
+                                        sx={{ borderRadius: "5px",padding:0 }}
                                         boxShadow="none"
                                         display="flex"
-                                        alignItems="start"
-                                    >
-                                        <Grid item xs={3} display="flex" alignItems="center">
-                                            <img
-                                                src={sport.image ? sport.image?.path :'./assets/no-image.png'}
+                                        alignItems="end">
+                                        <Grid item xs={3} display="flex">
+                                            <img  src={sport.image ? sport.image?.path :'./assets/no-image.png'}
                                                 onError={(e) => e.target.src = './assets/no-image.png'}
-                                                width="80px"
-                                                height="55px"
-                                                style={{objectFit:"contain",borderRadius:'6px'}}
-                                            />
-                                        </Grid>
-                                        <Grid item xs={9}>
-                                            <Grid
-                                                item
-                                                xs={12}
-                                            >
-                                                <Grid item>
+                                                width="100%"
+                                                height="100%"
+                                                style={{objectFit:"contain",borderRadius:'6px'}}/>
+                                                <Grid item sx={{paddingLeft:'5px'}}>
                                                     <Typography fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.description,100)}}></Typography>
                                                     <Typography textAlign="left" fontSize="11px !important">
                                                         {moment(sport.created_at).format(utils.formatDate)}
                                                     </Typography>
                                                 </Grid>
-    
-                                            </Grid>
-                                        </Grid>
+                                        </Grid> 
                                     </Grid>
                                 </ListItem> 
                             </List>

@@ -98,21 +98,10 @@ const Profile = () => {
                                     display="flex"
                                     alignItems="center">
                                     { isLogin ? <>
-                                        <Grid item xs={2} display="flex" alignItems="center">
+                                        <Grid item xs={12} display="flex" alignItems="center">
                                             <img src="./assets/Profile/user-icon.png" />
-                                        </Grid>
-                                        <Grid item xs={10}>
-                                            <Grid
-                                                item
-                                                xs={12}
-                                                display="flex"
-                                                alignItems="center"
-                                                justifyContent="space-between">
-                                                <Grid item>
-                                                    <Typography fontWeight="600" fontSize="12px">{customer.user_name || 'Profile Name'}</Typography>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
+                                            &nbsp; <Typography fontWeight="600" fontSize="12px">{customer.user_name || 'Profile Name'}</Typography>
+                                        </Grid> 
                                     </>: <>
                                         <Grid item xs={2} display="flex" alignItems="center">
                                             <img src="./assets/Profile/user-icon.png" />
@@ -356,30 +345,16 @@ const Profile = () => {
                                     item
                                     xs={12}
                                     sx={{ padding: "12px 0px", borderRadius: "5px" }}
-                                    boxShadow="none"
-                                    display="flex"
-                                    alignItems="center"
-                                   
-                                >
-                                   
-                                    <Grid item xs={12} margin="0 auto">
-                                        <Grid
-                                            item
-                                            xs={12}
-                                            display="flex"
-                                            alignItems="center"
-                                            justifyContent="space-around"
-                                        >
-                                            <Grid item>
-                                            <Typography textAlign="center"><img src="./assets/Home/iosbtn.png" /></Typography>
+                                    boxShadow="none">
+                                    <Grid container spacing={1} display="flex" alignItems="center" justifyContent="center" >
+                                            <Grid item xs={6} md={6} >
+                                                <img src="/assets/Home/iosbtn.png" style={{width:'100%'}}/> 
                                             </Grid>
-                                            <Grid item display="flex" alignItems="center">
-                                            <Typography textAlign="center"><img src="./assets/Home/androidbtn.png" /></Typography>
+                                            <Grid item xs={6} md={6} >
+                                                <img src="/assets/Home/androidbtn.png" style={{width:'100%'}}/> 
                                             </Grid>
-                                        </Grid>
                                     </Grid>
                                 </Grid>
-
                             </ListItem>
                         </List>
                     </Grid>

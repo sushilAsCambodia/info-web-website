@@ -102,9 +102,13 @@ const Layout = (props) => {
     }
     const switchHeader = () => {
         if (router.pathname != '/') {
+            let title = '';
+            if(router.pathname === '/journalCardDetails') {
+                title = router.query?.title || '';
+            }
             if (pages.includes(router.pathname)) {
-                
                 return <Navigate
+                    title={title}
                     lead={<IconButton
                         onClick={() => router.back()}
                         size="large" 

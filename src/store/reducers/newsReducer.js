@@ -4,7 +4,7 @@ const initialState = {
   loading:true,
 }
 export default function (state = initialState, action) {
-  switch (action.type) {
+  switch (action.type) { 
     case 'news/list-by-category/fulfilled':
       return {
         ...state,

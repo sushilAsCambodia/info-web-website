@@ -4,7 +4,7 @@ export const getJournal = createAsyncThunk(
   "journal/list",
   async ({ params = {}, callback }) => {
     try {
-      const response = await api.get('/journal',params);
+      const response = await api.get('/journal/albums/all',params);
       const {data,status} = response;
       data['status_code'] = status;
       if(typeof callback == 'function') {

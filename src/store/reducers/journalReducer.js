@@ -5,6 +5,10 @@ const initialState = {
 }
 export default function (state = initialState, action) {
   switch (action.type) {
+    case 'journal/list/pending':
+      return {
+        ...initialState, 
+      };
     case 'journal/list/fulfilled':
       return {
         ...state,
