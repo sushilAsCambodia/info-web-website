@@ -104,21 +104,21 @@ export default function FullSilder(props) {
                   </Grid>
                   <Typography
                     position="absolute"
-                    fontSize="10px"
+                    fontSize="10px !important"
                     bottom="25%"
                     left="0"
                     right="0"
-                    sx={{color:'white'}}
+                    color='white'
                   >
                     {card.translate||'N/A'}
                   </Typography>
                   <Typography
                     position="absolute"
-                    fontSize="10px"
                     bottom="10%"
                     left="0"
                     right="0"
-                    sx={{color:'white'}}
+                    color='white'
+                    fontSize='10px !important'
                   >
                     {card.label||'N/A'}
                   </Typography>

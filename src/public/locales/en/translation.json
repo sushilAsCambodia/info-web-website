@@ -49,5 +49,9 @@
     "validate_password":"The password format is a combination of 6-16 letters and numbers",
     "cancel":"Cancel",
     "ok":"OK",
-    "user_name_wrong_format":"User name wrong format"
+    "user_name_wrong_format":"User name wrong format",
+    "signup_for_now":"Sign up for now",
+    "signup_via":"Sign up VIA",
+    "already_have_an_account":"Aready have an account?"
+
 }

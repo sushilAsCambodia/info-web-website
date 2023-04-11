@@ -48,5 +48,9 @@
     "validate_password":"ទម្រង់ពាក្យសម្ងាត់គឺជាការរួមបញ្ចូលគ្នានៃអក្សរ 6-16 និងលេខ",
     "cancel":"បោះបង់",
     "ok":"យល់ព្រម",
-    "user_name_wrong_format":"ឈ្មោះអ្នកប្រើខុសទម្រង់"
+    "user_name_wrong_format":"ឈ្មោះអ្នកប្រើខុសទម្រង់",
+    "signup_for_now":"ចុះឈ្មោះឥឡូវនេះ",
+    "signup_via":"ចុះឈ្មោះតាមរយៈ",
+    "already_have_an_account":"មានគណនីរួចហើយ?"
+
 }

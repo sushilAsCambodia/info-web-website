@@ -279,7 +279,7 @@ export default function Login() {
                 <Link underline="none" style={{ cursor: "pointer", color: "#F26522" }} onClick={goToForgotPassword}> {t('forgot_password')}</Link>
               </Grid>
               <Grid item container spacing={2} mt={1}>
-                <Grid item xs={12}  >
+                <Grid item xs={12} textAlign="center" textTransform="capitalize">
                   <Typography >{t('login_via')}</Typography>
                 </Grid>
               </Grid>
