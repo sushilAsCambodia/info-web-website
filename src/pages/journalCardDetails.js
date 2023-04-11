@@ -9,18 +9,18 @@ import DataNotFound from '@/components/DataNotFound';
 import DataLoading from '@/components/DataLoading';
 
 export default function JournalCardDetails() { 
-  const [mounted,setMounted] = useState(false);
+  const [loading,setLoading] = useState(true);
   const [jounal,setJournal] = useState({});
   const [images,setImages] = useState([]);
   const router = useRouter();
   const {query} = router;
   const dispatch = useDispatch();
   useEffect(() => {
-    setMounted(true);
     dispatch(getJournal(
       {
           params: {lang_id: query.lang_id,id:query.journal_id,fake:true},
           callback:(res) => {
+            console.log(res,'callbakc')
             const {status_code,data = {}} = res;
             if([200,201,202,203].includes(status_code)) {
               if(data && Object.keys(data).length) {
@@ -31,50 +31,48 @@ export default function JournalCardDetails() {
                     thumbnail:data.images[i],
                   })
                 }
-                setImages(images)
+                setImages(images);
                 setJournal(data);
               }
+              setLoading(false);
             }
           }
       }
     ));
   },[query])
-  return mounted && (
+  return  (
     <Grid container item textAlign="left" p={1} sx={{height:'100%',alignItems: jounal && Object.keys(jounal).length ?'auto':'center'}}>
       <Grid item xs={12}>
-        <Grid item xs={12}>
-          {jounal && Object.keys(jounal).length ? (
-            jounal.length<=0 ? <DataNotFound/> : <Grid item className='carouselcard'>
-            <ImageGallery
-              items={images}
-              showPlayButton={false}
-              showFullscreenButton={false}
-              showNav={true}
-              showBullets={false}
-              showThumbnails={true}
-              showIndex={false}
-              autoPlay={true}
-              slideDuration={1000}
-              slideInterval={5000}
-              slideOnThumbnailHover={true}
-              disableThumbnailScroll={false}
-              disableArrowKeys={false}
-              disableSwipe={false}
-              useBrowserFullscreen={true}
-              useTranslate3D={false}
-              lazyLoad={true}
-              thumbnailPosition="bottom"
-              className="image-gallery-bottom-left"
-              infinite={true}
-              thumbnailHeight={"50"}
-              thumbnailWidth={"50"}
-              slideWidth="400"
-              slideHeight="400"
-              originalHeight ="200px"
-            />
-          </Grid>
-          ) :<DataLoading/>}
-        </Grid>
+        {loading ? <DataLoading/> : jounal && Object.keys(jounal).length > 0 ? <Grid item className='carouselcard'>
+          <ImageGallery
+            items={images}
+            showPlayButton={false}
+            showFullscreenButton={false}
+            showNav={true}
+            showBullets={false}
+            showThumbnails={true}
+            showIndex={false}
+            autoPlay={true}
+            slideDuration={1000}
+            slideInterval={5000}
+            slideOnThumbnailHover={true}
+            disableThumbnailScroll={false}
+            disableArrowKeys={false}
+            disableSwipe={false}
+            useBrowserFullscreen={true}
+            useTranslate3D={false}
+            lazyLoad={true}
+            thumbnailPosition="bottom"
+            className="image-gallery-bottom-left"
+            infinite={true}
+            thumbnailHeight={"50"}
+            thumbnailWidth={"50"}
+            slideWidth="400"
+            slideHeight="400"
+            originalHeight ="200px"
+          />
+        </Grid> :<DataNotFound/> }
+        
       </Grid>
     </Grid>
   )

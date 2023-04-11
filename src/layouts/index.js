@@ -217,7 +217,7 @@ const Layout = (props) => {
             <Typography textAlign="left" fontSize="12px" className='yearheadline'>Year</Typography>
             <Box onClick={toggleDrawer('bottom', false)} sx={{display:'flex',justifyContent:'center',alignItems:'center', width: '26px',height:'26px',bgcolor:'white', borderRadius: '50%',position:'absolute',top: '-17px', left: '50%', transform: "translate(-50%, -50%)"}}>
                 <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.25 0.75L0.75 7.25M0.75 0.75L7.25 7.25" stroke="#8C8C8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.25 0.75L0.75 7.25M0.75 0.75L7.25 7.25" stroke="#8C8C8C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             </Box>
             <List sx={{padding:0}}>
