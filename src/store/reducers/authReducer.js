@@ -9,11 +9,11 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'customers/login/fulfilled': 
-      const customer = (({ customer }) => ({ customer }))(action.payload.data); 
-      window.localStorage.setItem('customer',JSON.stringify((customer?.customer||{})));
+      const customer = action.payload.data?.customer || {};
+      window.localStorage.setItem('customer',JSON.stringify((customer)));
       return {
         ...state,
-        ...customer,
+        customer: customer,
         loading: false,
         isLogin: true,
         status: 'completed',
