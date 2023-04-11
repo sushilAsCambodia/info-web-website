@@ -420,9 +420,6 @@ padding: 10px 0px;
   box-sizing: border-box;
    */
 }
-
-
-
 #holder {
   border: 2px dashed #000;
   border-right: 0px;
@@ -437,4 +434,35 @@ padding: 10px 0px;
   width:50%;
   height: 1px;
   background-color:#fff;
+}
+/* END  */
+/* JOURNALS COLUMNS */
+.singleLinesEllips{
+  display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+/* END  */
+
+#customCarouselBtn {
+  position: relative;
+}
+#customCarouselBtn .react-multi-carousel-list {
+  position: unset !important;
+}
+
+#customCarouselBtn .react-multiple-carousel__arrow::before{
+    color: #000 !important;
+}
+#customCarouselBtn .react-multiple-carousel__arrow--right {
+  top: -50px;
+  background-color: #dddddd !important;
+  right: calc(4% + -15px);
+}
+#customCarouselBtn .react-multiple-carousel__arrow--left {
+  top: -50px;
+  left: calc(95% + -100px) !important;
+  background-color: #dddddd !important;
 }

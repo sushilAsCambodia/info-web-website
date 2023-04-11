@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
-import { Typography, Divider } from "@mui/material";
+import { Typography, Divider, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import JournalItem from "@/common/JournalItem";
+import { Icon } from "@iconify/react";
 const responsive = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -38,7 +38,7 @@ const responsive = {
   },
 };
 
-export default function JournalsColumns(props) {
+export default function PartnersColumns(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
@@ -66,7 +66,7 @@ export default function JournalsColumns(props) {
           }}
         >
           <Typography variant="h5" paddingX="10px" fontWeight="bold">
-            Journals
+            Partners
           </Typography>
         </Divider>
       </Grid>
@@ -90,12 +90,68 @@ export default function JournalsColumns(props) {
           renderButtonGroupOutside={false}
           renderDotsOutside={false}
         >
-          <JournalItem />
-          <JournalItem />
-          <JournalItem />
-          <JournalItem />
-          <JournalItem />
-          <JournalItem />
+          <Grid
+            sx={{
+              margin: "5px",
+              borderRadius: "10px",
+              //   paddingX:"5px"
+            }}
+          >
+            <Grid
+              style={{
+                color: "white",
+                textAlign: "left",
+                height: "120px",
+                paddingX: "5px",
+                border: "1px solid grey",
+                borderRadius: "5px",
+              }}
+              container
+              alignItems="center"
+              justifyContent="space-around"
+            >
+              <Grid item padding="5px">
+                <img
+                  src="./assets/Logo/kk_exchange.png"
+                  style={{
+                    minWidth: "100px",
+                    maxHeight: "80px",
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid
+            sx={{
+              margin: "5px",
+              borderRadius: "10px",
+              //   paddingX:"5px"
+            }}
+          >
+            <Grid
+              style={{
+                color: "white",
+                textAlign: "left",
+                height: "120px",
+                paddingX: "5px",
+                border: "1px solid grey",
+                borderRadius: "5px",
+              }}
+              container
+              alignItems="center"
+              justifyContent="space-around"
+            >
+              <Grid item padding="5px">
+                <img
+                  src="./assets/Logo/clts-logo.png"
+                  style={{
+                    minWidth: "100px",
+                    maxHeight: "80px",
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
         </Carousel>
       </Grid>
     </Grid>

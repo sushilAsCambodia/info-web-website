@@ -5,88 +5,41 @@ import {
   Card,
   Typography,
   Container,
-  Button
+  Button,
 } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import NewsColumns from "@/components/homeNews/NewsColumns";
 import JournalsColumns from "@/components/homeNews/JournalsColumns";
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import utils from "@/common/utils";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
-import { getBannerSync } from "@/store/reducers/bannerSlice";
-import { useTheme } from "@mui/material/styles";
-import { Icon } from '@iconify/react';
-
+import PartnersColumns from "@/components/homeNews/PartnersColumns";
+import LandingPageBanner from "@/common/LandingPageBanner";
+import ResultsBanner from "@/components/homeNews/ResultsBanner";
 export default function Home() {
   const matches = useMediaQuery("(max-width:768px)");
-  const { banners } = useSelector((state) => state.banner);
-  const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-  const theme = useTheme();
-  const maxSteps = banners.length;
-  const [activeStep, setActiveStep] = useState(0);
-  const dispatch = useDispatch();
-  const { i18n } = useTranslation();
-  useEffect(() => {
-    dispatch(
-      getBannerSync({
-        params: { fake: true },
-        callback: (res) => {
-          console.log(res, "callback");
-        },
-      })
-    );
-  }, [i18n.language]);
-  
+
   const handleStepChange = (step) => {
     setActiveStep(step);
-  }; 
+  };
   return !matches ? (
-    <Container
+    <Grid
+      container
+      justifyContent="center"
       sx={{
-        position: "relative",
         height: "100vh",
         backgroundPosition: "center",
       }}
     >
-      <Grid item>
+      <Grid item width="1500px">
+        <ResultsBanner />
         <NewsColumns />
-        <Grid item sx={{ position: "relative", marginTop:'5px' }} className="mainautoplayswipeable">
-        <AutoPlaySwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={activeStep}
-          onChangeIndex={handleStepChange}
-          enableMouseEvents
-        >
-          {banners.map((step, index) => (
-            <div key={index}>
-              {Math.abs(activeStep - index) <= 2 ? (
-                <Grid
-                  item
-                  component="img"
-                  sx={{
-                    height: 255,
-                    display: "block",
-                    overflow: "hidden",
-                    width: "100%",
-                  }}
-                  src={step.image}
-                  alt={step.label}
-                />
-              ) : null}
-            </div>
-          ))}
-        </AutoPlaySwipeableViews>
-        
-      </Grid>
+        <Grid item>
+          <LandingPageBanner />
+        </Grid>
         <NewsColumns />
-        {/* <JournalsColumns/> */}
-        
+        <JournalsColumns />
+        <PartnersColumns />
       </Grid>
-    </Container>
+    </Grid>
   ) : (
     <Container
       sx={{

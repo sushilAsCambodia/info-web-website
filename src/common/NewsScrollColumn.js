@@ -9,13 +9,6 @@ import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
 
 const rows = [
   {
@@ -80,15 +73,25 @@ export default function NewsScrollColumn(props) {
           // border: "2px dashed red",
           padding: "15px",
           borderRadius: "10px",
-          background: "linear-gradient(to left, #FF6F31 50%, white 0%)",
+          border: "2px dashed red",
         }}
         className="half-border"
-        // position="relative"
+        position="relative"
       >
-        {/* <div id="holder" style={{ position: "absolute" }}>
-          <div id="mask" style={{ position: "relative" }}></div>
-        </div> */}
-        <Grid sx={{ backgroundColor: "black" }}>
+        <Grid
+          sx={{
+            position: "absolute",
+            // background: "linear-gradient(to left, #FF6F31 50%, white 0%)",
+            background:"#FF6F31",
+            height:545,
+            width:200,
+            right:"-1%",
+            top:-2,
+            borderRadius:"0px 10px 10px 0px"
+          }}
+        >
+        </Grid>
+        <Grid sx={{ backgroundColor: "black", borderRadius: "10px", position:"relative",zIndex:3 }}>
           <Grid
             style={{
               background: "black",
