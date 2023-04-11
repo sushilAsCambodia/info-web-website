@@ -11,12 +11,12 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import Router from "next/router";
+import { useTranslation } from "react-i18next";
 
 export default function ForgotPassword() {
+  const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-
   const goToLogin = () => {
     Router.push("/login");
   };
@@ -38,7 +38,7 @@ export default function ForgotPassword() {
         <Grid item container xs={12} sm={12} padding={2}>
           <Grid container alignItems="flex-end" alignContent="center" mb={8}>
             <Typography variant="h5" sx={{ position: "relative" }}>
-            Forgot Password
+            {t('forgot_password')}
             </Typography>
           </Grid>
           <form
@@ -54,7 +54,7 @@ export default function ForgotPassword() {
           >
             <Grid item xs={12} sm={12} mb={3}>
               <Typography fontWeight="bold" pb={1}>
-                Username
+                {t('user_name')}
               </Typography>
 
               <FormControl
@@ -67,7 +67,7 @@ export default function ForgotPassword() {
               >
                 <OutlinedInput
                   name="Username"
-                  placeholder="Username"
+                  placeholder={t('user_name')}
                   inputProps={{ maxLength: 16 }}
                   id="outlined-adornment-password"
                   type="text"
@@ -97,7 +97,7 @@ export default function ForgotPassword() {
                     textTransform: 'capitalize'
                   }}
                 >
-                Sumbit
+                {t('submit')}
                 </Button>
               </Grid>
             </Grid>
@@ -105,7 +105,7 @@ export default function ForgotPassword() {
             
             <Grid item container spacing={2} mt={1}>
               <Grid item xs={12}  >
-               <Typography  textAlign="center">Log In Via</Typography>
+               <Typography textAlign="center">{t('login_via')}</Typography>
               </Grid>
             </Grid>
             <Grid
@@ -120,9 +120,8 @@ export default function ForgotPassword() {
               }}
               underline="none"
             >
-              <Link underline="none" style={{ cursor: "pointer",  color: "#013B91", padding:"10px" }} ><Icon icon="ic:baseline-facebook" fontSize="35px" /></Link>
-              <Link underline="none" style={{ cursor: "pointer", color: "#00C2FF",padding:"10px"  }} ><Icon icon="ant-design:twitter-circle-filled" fontSize="35px" /></Link>
-              <Link underline="none" style={{ cursor: "pointer", color: "#0898D6",padding:"10px"  }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link>
+                             <Link underline="none" style={{ cursor: "pointer", color: "#013B91", padding: "10px" }} ><Icon icon="ic:baseline-facebook" fontSize="35px" /></Link>
+                <Link underline="none" style={{ cursor: "pointer", color: "#00C2FF", padding: "10px" }} ><Icon icon="flat-color-icons:google" fontSize="35px" /></Link>
             </Grid>
             <Grid
               item
@@ -136,7 +135,7 @@ export default function ForgotPassword() {
               }}
               underline="none"
             >
-              <Link underline="none" style={{ cursor: "pointer", fontSize:'12px',  color: "#000", padding:"10px", display:'flex' }} onClick={goToLogin} >Already have an account？<Typography style={{fontSize:'12px', cursor: "pointer", color: "#F26522"}}>Login</Typography></Link>
+              <Link underline="none" style={{ cursor: "pointer", fontSize:'12px',  color: "#000", padding:"10px", display:'flex' }} onClick={goToLogin} >{t('already_have_an_account')}<Typography style={{fontSize:'12px', cursor: "pointer", color: "#F26522"}}>{t('login')}</Typography></Link>
          
             </Grid>
           </form>

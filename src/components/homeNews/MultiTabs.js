@@ -35,7 +35,7 @@ TabPanel.propTypes = {
 
 
 export default function MultiTabs(props) {
-  const { categories } = props;
+  const { categories,lang_id } = props;
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -62,6 +62,9 @@ export default function MultiTabs(props) {
                 [`& .${tabsClasses.scrollButtons}`]: {
                   '&.Mui-disabled': { opacity: 0.3 },
                 },
+                '& .MuiTabs-indicator':{
+                  background: 'linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)'
+                }
               }}>
               { categories.map((category, index) => <Tab key={index} label={category.translation ? category.translation?.category_name : (category.category_name||'N/A')} />)}
             </Tabs>
@@ -70,7 +73,7 @@ export default function MultiTabs(props) {
             { categories.map((category,index) => {
                 return (
                   <TabPanel key={index} value={value} index={index}>
-                    <DataTabComponent id={category?.id}/>
+                    <DataTabComponent id={category?.id} lang_id={lang_id}/>
                   </TabPanel>
                 );
               })

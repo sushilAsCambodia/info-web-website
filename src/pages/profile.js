@@ -13,13 +13,18 @@ import {
     ListItemIcon,
     List,
     Dialog,
-    OutlinedInput,
+    Box,
     Divider,
 } from "@mui/material";
 import Router from "next/router";
 import {logout, setLogout} from '@/store/reducers/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import UserProfileIcon from "@/components/svg/profile";
+import AnnouncementIcon from "@/components/svg/announcement";
+import FeedbackIcon from "@/components/svg/feedback";
+import LogoutIcon from "@/components/svg/logout";
+import CustomerServiceIcon from "@/components/svg/customerService";
 const Profile = () => { 
     const {t} = useTranslation();
     const [mounted, setMounted] = useState(false);
@@ -175,10 +180,11 @@ const Profile = () => {
                                     sx={{ padding: "12px 0px", borderRadius: "5px" }}
                                     boxShadow="none"
                                     display="flex"
-                                    alignItems="center"
-                                >
+                                    alignItems="center">
                                     <Grid item xs={2} display="flex" alignItems="center">
-                                        <Icon icon="healthicons:ui-user-profile" fontSize="40px" color="#FF6E31" />
+                                        <Box display="flex" alignItems="center" justifyContent="center" textAlign="center" width="30px" height="30px" component="span" sx={{ border: '1px solid #FF6E31',borderRadius:'50%' }}>
+                                            <UserProfileIcon color="#FF6E31"/>
+                                        </Box>
                                     </Grid>
                                     <Grid item xs={10}>
                                         <Grid
@@ -210,7 +216,9 @@ const Profile = () => {
                                     alignItems="center"
                                 >
                                     <Grid item xs={2} display="flex" alignItems="center">
-                                        <Icon icon="mingcute:announcement-line" fontSize="40px" color="#FF6E31" />
+                                        <Box display="flex" alignItems="center" justifyContent="center" textAlign="center" width="30px" height="30px" component="span" sx={{ border: '1px solid #FF6E31',borderRadius:'50%' }}>
+                                            <AnnouncementIcon color="#FF6E31"/>
+                                        </Box>
                                     </Grid>
                                     <Grid item xs={10}>
                                         <Grid
@@ -242,7 +250,9 @@ const Profile = () => {
                                     alignItems="center"
                                 >
                                     <Grid item xs={2} display="flex" alignItems="center">
-                                        <Icon icon="ri:feedback-line" fontSize="40px" color="#FF6E31" />
+                                        <Box display="flex" alignItems="center" justifyContent="center" textAlign="center" width="30px" height="30px" component="span" sx={{ border: '1px solid #FF6E31',borderRadius:'50%' }}>
+                                            <FeedbackIcon size={20} color="#FF6E31"/>
+                                        </Box>
                                     </Grid>
                                     <Grid item xs={10}>
                                         <Grid
@@ -274,7 +284,10 @@ const Profile = () => {
                                     alignItems="center"
                                 >
                                     <Grid item xs={2} display="flex" alignItems="center">
-                                        <Icon icon="ri:customer-service-2-fill" fontSize="40px" color="#FF6E31" />
+                                        <Box display="flex" alignItems="center" justifyContent="center" textAlign="center" width="30px" height="30px" component="span" sx={{ border: '1px solid #FF6E31',borderRadius:'50%' }}>
+                                            {/* <CustomerServiceIcon color="#FF6E31"/> */}
+                                            <CustomerServiceIcon color="#FF6E31"/>
+                                        </Box>
                                     </Grid>
                                     <Grid item xs={10}>
                                         <Grid
@@ -306,7 +319,9 @@ const Profile = () => {
                                     alignItems="center"
                                 >
                                     <Grid item xs={2} display="flex" alignItems="center">
-                                        <Icon icon="mdi:logout-variant" fontSize="40px" color="#FF6E31" />
+                                        <Box display="flex" alignItems="center" justifyContent="center" textAlign="center" width="30px" height="30px" component="span" sx={{ border: '1px solid #FF6E31',borderRadius:'50%' }}>
+                                            <LogoutIcon size={17} color="#FF6E31"/>
+                                        </Box>
                                     </Grid>
                                      <Grid item xs={10}>
                                         <Grid

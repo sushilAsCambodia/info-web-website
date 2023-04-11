@@ -279,7 +279,7 @@ export default function Login() {
                 <Link underline="none" style={{ cursor: "pointer", color: "#F26522" }} onClick={goToForgotPassword}> {t('forgot_password')}</Link>
               </Grid>
               <Grid item container spacing={2} mt={1}>
-                <Grid item xs={12}  >
+                <Grid item xs={12} textAlign="center" textTransform="capitalize">
                   <Typography >{t('login_via')}</Typography>
                 </Grid>
               </Grid>
@@ -296,8 +296,8 @@ export default function Login() {
                 underline="none"
               >
                 <Link underline="none" style={{ cursor: "pointer", color: "#013B91", padding: "10px" }} ><Icon icon="ic:baseline-facebook" fontSize="35px" /></Link>
-                <Link underline="none" style={{ cursor: "pointer", color: "#00C2FF", padding: "10px" }} ><Icon icon="ant-design:twitter-circle-filled" fontSize="35px" /></Link>
-                <Link underline="none" style={{ cursor: "pointer", color: "#0898D6", padding: "10px" }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link>
+                <Link underline="none" style={{ cursor: "pointer", color: "#00C2FF", padding: "10px" }} ><Icon icon="flat-color-icons:google" fontSize="35px" /></Link>
+                {/* <Link underline="none" style={{ cursor: "pointer", color: "#0898D6", padding: "10px" }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link> */}
               </Grid>
               <Grid
                 item

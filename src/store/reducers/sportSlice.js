@@ -8,7 +8,7 @@ export const getSportByCategory = createAsyncThunk(
     "sport/getSportByCategory",
     async ({ params = {}, callback }, { getState, dispatch }) => {
       try {
-        const response = await api.get('/sport',params);
+        const response = await api.get('/news/news/all',params);
         const {data,status} = response;
         data['status_code'] = status;
         if(typeof callback == 'function') {
