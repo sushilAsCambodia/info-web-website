@@ -6,9 +6,7 @@ import AppBar from "@mui/material/AppBar";
 import { Typography, Divider } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
-import FullSilder from "./FullSilder";
-import MultiTabs from "./MultiTabs";
-import JournalCard from "../homeJournal/JournalCard";
+import NewsScrollColumn from "@/common/NewsScrollColumn";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -71,15 +69,14 @@ export default function NewsColumns(props) {
         </Divider>
       </Grid>
       <Grid item xs={12} container>
-        <Grid item xs={4} textAlign="center"sx={{  border:"2px dashed red",padding:"5px"
-}} >
-          news1
+        <Grid item xs={4} textAlign="center" padding="5px" >
+          <NewsScrollColumn/>
         </Grid>
-        <Grid item xs={4} textAlign="center">
-          news1
+        <Grid item xs={4} textAlign="center" padding="5px" >
+          <NewsScrollColumn/>
         </Grid>
-        <Grid item xs={4} textAlign="center">
-          news1
+        <Grid item xs={4} textAlign="center" padding="5px" >
+          <NewsScrollColumn/>
         </Grid>
       </Grid>
     </Grid>
