@@ -257,7 +257,7 @@ export default function Register() {
                       </InputAdornment>
                     }
                   />
-                  {errorPassword && <FormHelperText error>The format of the account number is 6-16 letters or numbers</FormHelperText>}
+                  {errorPassword && <FormHelperText error>The password format is a combination of 6-16 letters and numbers</FormHelperText>}
                 </FormControl>
               </Grid>
               <Grid item container spacing={2} mb={1}>
@@ -296,9 +296,8 @@ export default function Register() {
                 }}
                 underline="none"
               >
-                <Link underline="none" style={{ cursor: "pointer", color: "#013B91", padding: "10px" }} ><Icon icon="ic:baseline-facebook" fontSize="35px" /></Link>
-                <Link underline="none" style={{ cursor: "pointer", color: "#00C2FF", padding: "10px" }} ><Icon icon="ant-design:twitter-circle-filled" fontSize="35px" /></Link>
-                <Link underline="none" style={{ cursor: "pointer", color: "#0898D6", padding: "10px" }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link>
+                              <Link underline="none" style={{ cursor: "pointer", color: "#013B91", padding: "10px" }} ><Icon icon="ic:baseline-facebook" fontSize="35px" /></Link>
+                <Link underline="none" style={{ cursor: "pointer", color: "#00C2FF", padding: "10px" }} ><Icon icon="flat-color-icons:google" fontSize="35px" /></Link>
               </Grid>
               <Grid
                 item
