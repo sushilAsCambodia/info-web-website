@@ -189,6 +189,9 @@ const Layout = (props) => {
         case '/customerservice':
             title = t('customer_service_info_web')
             break;
+        case '/journalcarddetails':
+            title = t('journal_card_details_info_web')
+            break;
         case '/login':
             title = t('login_info_web')
             break;
