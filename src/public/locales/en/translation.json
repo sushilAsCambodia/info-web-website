@@ -32,7 +32,7 @@
     "submit":"Submit",
     "newscarddetails":"News card detail",
     "profile_detail_info_web":"Profile Detail | InfoWeb",
-    "announcement_info_web":"资料详情 | InfoWeb",
+    "announcement_info_web":"Announcement | InfoWeb",
     "send_your_feedback_here":"Send your feedback here",
     "feedback_content":"Feedback content",
     "contact":"Feedback content",
@@ -52,6 +52,8 @@
     "user_name_wrong_format":"User name wrong format",
     "signup_for_now":"Sign up for now",
     "signup_via":"Sign up VIA",
-    "already_have_an_account":"Aready have an account?"
+    "already_have_an_account":"Aready have an account?",
+    "feedback_info_web":"Feedback | InfoWeb",
+    "customer_service_info_web":"Customer Service | InfoWeb"
 
 }

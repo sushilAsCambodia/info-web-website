@@ -52,5 +52,8 @@
     "user_name_wrong_format":"用户名格式错误",
     "signup_for_now":"现在注册",
     "signup_via":"注册通过",
-    "already_have_an_account":"已有帐户？"
+    "already_have_an_account":"已有帐户？",
+    "feedback_info_web":"反馈 | InfoWeb",
+    "customer_service_info_web":"客户服务 | InfoWeb"
+
 }

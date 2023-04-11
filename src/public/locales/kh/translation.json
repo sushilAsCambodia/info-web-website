@@ -23,6 +23,7 @@
     "important_links":"តំណភ្ជាប់សំខាន់ៗ",
     "nick_name":"ឈ្មោះហៅក្រៅ",
     "profiledetail":"ពត៌មានលំអិត",
+    "announcement_info_web":"សេចក្តីប្រកាស | InfoWeb",
     "edit":"កែសម្រួល",
     "change_password":"ផ្លាស់ប្តូរពាក្យសម្ងាត់",
     "user_name":"ឈ្មោះ​អ្នកប្រើប្រាស់",
@@ -51,6 +52,7 @@
     "user_name_wrong_format":"ឈ្មោះអ្នកប្រើខុសទម្រង់",
     "signup_for_now":"ចុះឈ្មោះឥឡូវនេះ",
     "signup_via":"ចុះឈ្មោះតាមរយៈ",
-    "already_have_an_account":"មានគណនីរួចហើយ?"
-
+    "already_have_an_account":"មានគណនីរួចហើយ?",
+    "feedback_info_web":"មតិកែលម្អ | InfoWeb",
+    "customer_service_info_web":"សេវាកម្ម​អតិថិជន | InfoWeb"
 }
