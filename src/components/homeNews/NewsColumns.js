@@ -25,18 +25,6 @@ function TabPanel(props) {
   );
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
 
 export default function NewsColumns(props) {
   const { t } = useTranslation();
@@ -54,7 +42,7 @@ export default function NewsColumns(props) {
 
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={4}>
+      <Grid item xs={4} marginY="15px" >
         <Divider
           sx={{
             "&::before, &::after": {
@@ -65,7 +53,8 @@ export default function NewsColumns(props) {
             fontFamily: "system-ui",
           }}
         >
-          News
+          <Typography variant="h5" paddingX="10px" fontWeight="bold">News</Typography>
+          
         </Divider>
       </Grid>
       <Grid item xs={12} container>

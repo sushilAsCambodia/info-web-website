@@ -8,6 +8,7 @@ import {store} from '../store/store';
 import  '@/common/i18n';
 import Layout from '@/layouts';
 import { useTranslation } from 'react-i18next';
+
 const App = ({ Component, pageProps }) => {
   const {i18n} =  useTranslation();
   useEffect(() => {
