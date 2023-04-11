@@ -204,35 +204,51 @@ const Layout = (props) => {
 
     const list = (anchor) => (
         <Box
-            sx={{ width: anchor === 'bottom' ? 'auto' : 250 }}
+            sx={{ width: anchor === 'bottom' ? 'auto' : 250}}
             role="presentation"
             className="calendraDrawer">
             <Typography className="drawerline"></Typography>
             <br />
             <Typography textAlign="center" fontSize="12px">Choose the number of periods</Typography>
             <Typography textAlign="left" fontSize="12px" className='yearheadline'>Year</Typography>
-            <List>
-                <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
+            <Box onClick={toggleDrawer('bottom', false)} sx={{display:'flex',justifyContent:'center',alignItems:'center', width: '26px',height:'26px',bgcolor:'white', borderRadius: '50%',position:'absolute',top: '-17px', left: '50%', transform: "translate(-50%, -50%)"}}>
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.25 0.75L0.75 7.25M0.75 0.75L7.25 7.25" stroke="#8C8C8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </Box>
+            <List sx={{padding:0}}>
+                <ListItem disablePadding >
                     <Grid item xs={12} sm={12} width='100%'>
                         <Box sx={{ width: '100%' }}>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            {/* <Box sx={{ borderBottom: 1, borderColor: 'divider'}}> */}
                                 <Tabs 
+                                indicatorColor="transparent"
+                                TabIndicatorProps={{  children: <span className='dot-custom' style={{  
+                                    bottom:'-4px', 
+                                    width: '10px',
+                                    height: '10px',
+                                    background: 'red',
+                                    position: 'absolute',
+                                    left: '46%',
+                                    transform: 'translate(-50%, -50%)',
+                                    borderRadius: '50%',
+                                    zIndex: 9999}} /> }}
                                     variant="scrollable"
                                     scrollButtons 
                                     value={value} 
                                     onChange={handleChange} 
-                                    aria-label="basic tabs example" >
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2020" {...a11yProps(0)} />
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2021" {...a11yProps(1)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2022" {...a11yProps(2)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2023" {...a11yProps(3)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2024" {...a11yProps(4)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2025" {...a11yProps(5)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2026" {...a11yProps(6)} /> 
+                                    aria-label="basic tabs example" className='abc'>
+                                    <Tab sx={{padding:'0',minWidth:'80px', position:'relative'}} label="2020" {...a11yProps(0)} />
+                                    <Tab sx={{padding:'0',minWidth:'80px', position:'relative'}} label="2021" {...a11yProps(1)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px', position:'relative'}} label="2022" {...a11yProps(2)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px', position:'relative'}} label="2023" {...a11yProps(3)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px', position:'relative'}} label="2024" {...a11yProps(4)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px', position:'relative'}} label="2025" {...a11yProps(5)} /> 
+                                    <Tab sx={{padding:'0',minWidth:'80px', position:'relative'}} label="2026" {...a11yProps(6)} /> 
                                 </Tabs>
-                            </Box>
+                            {/* </Box> */}
                             <TabPanel value={value} index={0} padding="0px !important" >
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -275,7 +291,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel>
                             <TabPanel value={value} index={1}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -292,7 +308,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel> 
                             <TabPanel value={value} index={2} padding="0px !important" >
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -335,7 +351,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel>
                             <TabPanel value={value} index={3}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -351,7 +367,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel> 
                             <TabPanel value={value} index={4} padding="0px !important" >
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -394,7 +410,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel>
                             <TabPanel value={value} index={5}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -411,7 +427,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel> 
                             <TabPanel value={value} index={6}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -429,6 +445,20 @@ const Layout = (props) => {
                             </TabPanel> 
                         </Box>
                     </Grid>
+                    <style>
+                        {
+                            `
+                                .abc .MuiTab-root::before {
+                                    content: '';
+                                    width: 100%;
+                                    height: 1px;
+                                    position: absolute;
+                                    background: #ddd;
+                                    bottom: 5px;
+                                }
+                            `
+                        }
+                    </style>
                 </ListItem>
             </List>
         </Box>
@@ -446,11 +476,15 @@ const Layout = (props) => {
                 </main>
             </Container>
             {switchFooter()}
-            <Grid item >
-                <Drawer anchor={'bottom'} open={state['bottom']} onClose={toggleDrawer('bottom', false)}>
+            <Box>
+                <Drawer PaperProps={{
+                    style:{
+                        overflow:'initial'
+                    }
+                }} anchor={'bottom'} open={state['bottom']} onClose={toggleDrawer('bottom', false)}>
                     {list('bottom')}
                 </Drawer>
-            </Grid>
+            </Box>
         </>
     );
 }
