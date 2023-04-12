@@ -35,20 +35,20 @@ const DataTabComponent = ({id,lang_id}) => {
                 <Grid item xs={12} sm={12} md={12} xl={12}>
                     {news && news.length ? news.map((sport,index) => {
                         return (
-                            <List key={index} sx={{padding:0}} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
-                                <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }}>
+                            <List key={index} sx={{padding:'0px'}} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
+                                <ListItem sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }}>
                                     <Grid
                                         container
-                                        sx={{ borderRadius: "5px",padding:0 }}
+                                        sx={{ borderRadius: "5px",paddingTop:'10px' ,paddingBottom:'10px' }}
                                         boxShadow="none"
                                         display="flex"
                                         alignItems="start">
                                         <Grid item xs={3}>
-                                            <img  src={sport.image ? sport.image?.path :'./assets/no-image.png'}
+                                            <img src={sport.image ? sport.image?.path :'./assets/no-image.png'}
                                                 onError={(e) => e.target.src = './assets/no-image.png'}
                                                 width="100%"
-                                                height="100%"
-                                                style={{objectFit:"contain",borderRadius:'6px'}}/>
+                                                height="50px"
+                                                style={{objectFit:"cover",borderRadius:'6px'}}/>
                                                 
                                         </Grid> 
                                         <Grid item xs={9}>
