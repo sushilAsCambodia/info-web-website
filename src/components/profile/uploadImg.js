@@ -53,11 +53,13 @@ const UploadImg = () => {
     e.preventDefault();
     const reader = new FileReader();
     const file = e.target.files[0];
-    reader.onloadend = () => {
-      setFile(file);
-      setImagePreviewUrl(reader.result);
+    if(file) {
+      reader.onloadend = () => {
+        setFile(file);
+        setImagePreviewUrl(reader.result);
+      }
+      reader.readAsDataURL(file);
     }
-    reader.readAsDataURL(file);
   }
   // drawer start 
   const [state, setState] = useState({ bottom: false });
