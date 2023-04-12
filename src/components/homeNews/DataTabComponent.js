@@ -28,14 +28,14 @@ const DataTabComponent = ({id,lang_id}) => {
         ));
     },[id]);
     const [loading,setLoading] = React.useState(true);
-    return <Grid sx={{height:'250px', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
+    return <Grid sx={{height:news && news.length > 2 ? '250px' : 'auto', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
         {
             loading ? <DataLoading/> :
             (
                 <Grid item xs={12} sm={12} md={12} xl={12}>
                     {news && news.length ? news.map((sport,index) => {
                         return (
-                            <List key={index} sx={{padding:'0px'}} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
+                            <List key={index} sx={{padding:'5px'}} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
                                 <ListItem sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }}>
                                     <Grid
                                         container

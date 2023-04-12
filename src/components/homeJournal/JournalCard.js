@@ -24,7 +24,7 @@ export default function JournalCard(props) {
             <Typography fontSize="10px">{journal.album_name || 'N/A'}</Typography>
           </Grid>
         })
-        : <Grid mx="auto"><Empty /></Grid>}
+        : <Grid mx="auto"> <Empty /></Grid>}
     </Grid>
   )
 }
