@@ -57,7 +57,7 @@ export default function NewsSingle() {
 
   return (
     <Grid container justifyContent="center">
-      <Grid width="80%" my={1}>
+      <Grid my={1}>
         <Typography fontWeight="bold" variant="h5">
           News Details
         </Typography>

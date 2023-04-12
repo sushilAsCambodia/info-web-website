@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Typography, Divider, Button } from "@mui/material";
+import { Typography, Divider, Button,Link } from "@mui/material";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
@@ -51,7 +51,7 @@ export default function NewsSlider(props) {
                   <Slider {...settings}>
                     {news.map((item) => {
                       return (
-                        <Grid>
+                        <Grid component={Link} href="/newsSingle" color="black" sx={{textDecoration:"none"}} >
                           <Grid
                             key={item.id}
                             style={{
@@ -64,8 +64,8 @@ export default function NewsSlider(props) {
                               margin: "10px",
                             }}
                           >
-                            <Grid textAlign="left">{item.news}</Grid>
-                            <Grid textAlign="left">{item.date}</Grid>
+                            <Typography textAlign="left">{item.news}</Typography>
+                            <Typography textAlign="left">{item.date}</Typography>
                           </Grid>
                         </Grid>
                       );

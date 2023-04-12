@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
-import { Typography, Divider, Button } from "@mui/material";
+import { Typography, Divider, Button,Link } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
@@ -122,7 +122,7 @@ export default function NewsScrollColumn(props) {
           >
             {rows.map((row) => {
               return (
-                <Grid
+           <Grid component={Link} href="/newsSingle" color="black" sx={{textDecoration:"none"}} 
                   key={rows.id}
                   style={{
                     display: "flex",
@@ -134,8 +134,8 @@ export default function NewsScrollColumn(props) {
                     margin: "10px",
                   }}
                 >
-                  <Grid textAlign="left">{row.news}</Grid>
-                  <Grid textAlign="left">{row.date}</Grid>
+                  <Typography textAlign="left">{row.news}</Typography>
+                  <Typography textAlign="left">{row.date}</Typography>
                 </Grid>
               );
             })}

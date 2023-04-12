@@ -10,10 +10,10 @@ import LangSwitcher from "@/components/LangSwitcher";
 import { Icon } from "@iconify/react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect, useState } from "react";
-
+import { useRouter } from "next/router";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
-
+const router = useRouter()
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -125,12 +125,12 @@ const Header = () => {
             </Grid>
             <Grid xs={9} container color="black">
               <Grid>
-                <MenuItem>
+                <MenuItem onClick={()=>{router.push("/")}}>
                   <Typography textAlign="center">Home</Typography>
                 </MenuItem>
               </Grid>
               <Grid>
-                <MenuItem>
+                <MenuItem onClick={()=>router.push("/LotteryPage")}>
                   <Typography textAlign="center">Lottery Draw</Typography>
                 </MenuItem>
               </Grid>

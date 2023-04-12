@@ -22,14 +22,7 @@ export default function Index() {
   return !matches ? (
     <>
     <Grid
-      container
-      justifyContent="center"
-      sx={{
-        // height: "100vh",
-        backgroundPosition: "center",
-      }}
     >
-      <Grid item width="1500px">
         <ResultsBanner />
         <LinkBanner />
         <NewsColumns />
@@ -39,7 +32,6 @@ export default function Index() {
         <NewsColumns />
         <JournalsColumns />
         <PartnersColumns />
-      </Grid>
     </Grid>
     </>
   ) : (
