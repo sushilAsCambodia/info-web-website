@@ -23,6 +23,7 @@
     "important_links":"តំណភ្ជាប់សំខាន់ៗ",
     "nick_name":"ឈ្មោះហៅក្រៅ",
     "profiledetail":"ពត៌មានលំអិត",
+    "announcement_info_web":"សេចក្តីប្រកាស | InfoWeb",
     "edit":"កែសម្រួល",
     "change_password":"ផ្លាស់ប្តូរពាក្យសម្ងាត់",
     "user_name":"ឈ្មោះ​អ្នកប្រើប្រាស់",
@@ -39,7 +40,8 @@
     "login_to_enjoy":"ចូល​រីករាយ​ជាមួយ​មុខងារ​គួរ​ឱ្យ​រំភើប​បន្ថែម​ទៀត។",
     "login":"ចូល",
     "register":"ចុះឈ្ហោះ",
-    "forgot_password":"ភ្លេច​លេខសំងាត់?​",
+    "forgot_password":"ភ្លេច​លេខសំងាត់?",
+    "forgotpassword": "ភ្លេច​លេខសំងាត់",
     "no_account":"មិន​មាន​គណនី?",
     "login_via":"ចូល​តាម​រយៈ",
     "validate_user_name":"ទម្រង់ឈ្មោះអ្នកប្រើប្រាស់គឺ ៦-១៦ អក្សរ ឬលេខ",
@@ -47,5 +49,11 @@
     "validate_password":"ទម្រង់ពាក្យសម្ងាត់គឺជាការរួមបញ្ចូលគ្នានៃអក្សរ 6-16 និងលេខ",
     "cancel":"បោះបង់",
     "ok":"យល់ព្រម",
-    "user_name_wrong_format":"ឈ្មោះអ្នកប្រើខុសទម្រង់"
+    "user_name_wrong_format":"ឈ្មោះអ្នកប្រើខុសទម្រង់",
+    "signup_for_now":"ចុះឈ្មោះឥឡូវនេះ",
+    "signup_via":"ចុះឈ្មោះតាមរយៈ",
+    "already_have_an_account":"មានគណនីរួចហើយ?",
+    "feedback_info_web":"មតិកែលម្អ | InfoWeb",
+    "customer_service_info_web":"សេវាកម្ម​អតិថិជន | InfoWeb",
+    "journal_card_details_info_web":"ព័ត៌មានអំពីកាតទិនានុប្បវត្តិ | InfoWeb"
 }

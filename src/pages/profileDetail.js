@@ -57,4 +57,9 @@ paddingTop={5}
     )
 
 };
+export async function getStaticProps(context) {
+    return {
+      props: { auth:true }, // will be passed to the page component as props
+    }
+}
 export default ProfileDetail;

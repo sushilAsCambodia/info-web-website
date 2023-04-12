@@ -380,7 +380,7 @@ border-bottom: 1px solid #FF0000;
     border-bottom: groove 2px;
     margin: auto 0.25rem;
     box-shadow: 0 -2px;
-    width: 44px;
+    width: 28px;
 }
 
 .calendraDrawer .css-19kzrtu{
@@ -388,10 +388,7 @@ padding: 10px 0px;
 }
 
 .calendraDrawer .css-b4a6b0-MuiListItem-root{
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding:4px;
   background: rgb(255, 111, 49);
   color: rgb(255, 255, 255);
   border-radius: 4px;

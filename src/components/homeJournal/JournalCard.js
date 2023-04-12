@@ -1,77 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Typography } from '@mui/material'
 import Router from "next/router";
-export default function JournalCard() {
-  const card1 = "/assets/NewsJourney/Journalcard1.png";
-  const card2 = "/assets/NewsJourney/Journalcard2.png";
-  const card3 = "/assets/NewsJourney/Journalcard3.png";
-  const card4 = "/assets/NewsJourney/Journalcard4.png";
-  const card5 = "/assets/NewsJourney/Journalcard5.png";
-  const card6 = "/assets/NewsJourney/Journalcard6.png";
-  const card7 = "/assets/NewsJourney/Journalcard7.png";
-  const card8 = "/assets/NewsJourney/Journalcard8.png";
-  const card9 = "/assets/NewsJourney/Journalcard9.png";
-  const card10 = "/assets/NewsJourney/Journalcard10.png";
-
-  const cardDetail = () => {
-    Router.push("/journalCardDetails");
+import DataLoading from '../DataLoading';
+import { useSelector } from 'react-redux';
+import Empty from '../Empty';
+export default function JournalCard(props) {
+  const { lang_id } = props;
+  const { journals = [], loading } = useSelector((state) => state.journal)
+  const cardDetail = (journal_id,title='') => {
+    Router.push({ pathname: '/journalCardDetails', query: { journal_id, lang_id,title: title} });
   };
-
   return (
-
-    <Grid container item textAlign="left">
-      <Grid item xs={12}>
-
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Grid item display="grid" sx={{ gridTemplateColumns: "auto auto auto", gridGap: "10px" }} >
-            <Grid item onClick={cardDetail}>
-              <img src={card1} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card2} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card3} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card4} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card5} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card6} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card7} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card8} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card9} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card10} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
-            <Grid item onClick={cardDetail}>
-              <img src={card8} alt="一般" width="100%" height="auto" />
-              <Typography fontSize="10px">Jiuxiao 30 yards</Typography>
-            </Grid>
+    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{marginTop:'1px'}}>
+      {journals && journals.length > 0 ?
+        journals.map((journal, index) => {
+          return <Grid key={index} item xs={4} sm={4} md={4} lg={4} xl={4} onClick={() => cardDetail(journal.id,journal.album_name)}>
+            <img
+              src={journal.cover_img ? journal.cover_img : null}
+              alt={journal.album_name || ''}
+              width="100%"
+              style={{ objectFit: 'cover', height: "88.25px", borderRadius: '4px' }}
+            />
+            <Typography fontSize="10px">{journal.album_name || 'N/A'}</Typography>
           </Grid>
-        </Grid>
-      </Grid>
+        })
+        : <Grid mx="auto"><Empty /></Grid>}
     </Grid>
-
   )
 }

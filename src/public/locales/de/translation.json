@@ -41,6 +41,7 @@
     "login":"登录",
     "register":"登记",
     "forgot_password":"忘记密码?",
+    "forgotpassword": "忘记密码",
     "no_account":"没有账户?",
     "login_via":"通过以下方式登录",
     "validate_user_name":"账号格式为6-16位字母或数字",
@@ -48,5 +49,11 @@
     "validate_password":"密码格式为6-16位字母和数字组合",
     "cancel":"取消",
     "ok":"好的",
-    "user_name_wrong_format":"用户名格式错误"
+    "user_name_wrong_format":"用户名格式错误",
+    "signup_for_now":"现在注册",
+    "signup_via":"注册通过",
+    "already_have_an_account":"已有帐户？",
+    "feedback_info_web":"反馈 | InfoWeb",
+    "customer_service_info_web":"客户服务 | InfoWeb",
+    "journal_card_details_info_web":"日记卡详细信息 | InfoWeb"
 }

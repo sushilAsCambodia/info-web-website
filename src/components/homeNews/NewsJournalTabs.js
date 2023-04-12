@@ -14,6 +14,8 @@ import JournalCard from '../homeJournal/JournalCard';
 import { useRouter }  from "next/router";
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import {getJournal} from '@/store/actions/journalActions'
+import { useDispatch, useSelector } from 'react-redux';
 function TabPanel(props) {
   const { children, value, index, ...other } = props; 
   return (
@@ -49,11 +51,12 @@ function a11yProps(index) {
 
 export default function NewsJournalTabs(props) {
   const {t} = useTranslation();
-  const {banners = [], categories = []} = props; 
+  const {banners = [], categories = [], cards = [], lang_id} = props; 
+  const dispatch = useDispatch();
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
-  useEffect(()=>{
+  useEffect(() => {
     const hash = router.asPath.split('#')[1];
     if(hash == 'journal') {
       setValue(1);
@@ -63,13 +66,22 @@ export default function NewsJournalTabs(props) {
    }, [ router.asPath ]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-  const handleChangeIndex = (index) => {
-    setValue(index);
   }; 
+  useEffect(() => {
+    if(value === 1) {
+      dispatch(getJournal(
+        {
+            params: {lang_id: lang_id,take: 10},
+            callback:(res) => {
+              console.log(res,'callback')
+            }
+        }
+      ));
+    }
+  },[lang_id,value])
   return (
-    <Grid item className='tabclass'>
-      <Grid sx={{ padding:'10px 10px' }} >
+    <Grid item className='tabclass' sx={{height:'100%'}}>
+      <Grid sx={{ padding:'10px 10px',height:'100%' }} >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -82,11 +94,11 @@ export default function NewsJournalTabs(props) {
           <Tab label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
         <TabPanel  value={value} index={0} >
-          <FullSilder banners={banners}/>
-          <MultiTabs categories={categories}/>
+          <FullSilder banners={banners} cards={cards}/>
+          <MultiTabs categories={categories} lang_id={lang_id}/>
         </TabPanel>
         <TabPanel value={value} index={1} >
-          <JournalCard />
+          <JournalCard lang_id={lang_id}/>
         </TabPanel>
       </Grid>
     </Grid>

@@ -1,13 +1,17 @@
 import {combineReducers} from "redux";
-import bannerReducer from "./bannerSlice";
+import bannerReducer from "./bannerReducer";
 import drawerReducer from "./drawerReducer";
-import userReducer from "./userSlice";
-import categoryReducer from "./categorySlice";
-import sportReducer from "./sport";
-export const rootReducer = combineReducers({
+import authReducer from "./authReducer";
+import categoryReducer from "./categoryReducer";
+import newsReducer from "./newsReducer";
+import cardReducer from "./cardReducer";
+import journalReducer from "./journalReducer";
+export default  combineReducers({
     banner: bannerReducer,
     category: categoryReducer,
-    user: userReducer,
-    sport: sportReducer,
+    auth: authReducer,
+    news: newsReducer,
+    journal: journalReducer,
     drawer:drawerReducer,
+    card:cardReducer,
 });

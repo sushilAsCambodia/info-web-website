@@ -80,9 +80,9 @@ const sports = [
 ];
 export default function handler(req, res) {
     const {query} = req;
-    let data = [];
+    let data = sports;
     if(Object.keys(query).length) {
-        data = sports.filter(r => r.category_id == query.id);
+        // data = sports.filter(r => r.category_id == query.id);
     }
     setTimeout(() => {
         res.status(200).json({

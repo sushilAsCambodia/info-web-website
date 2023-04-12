@@ -20,9 +20,8 @@ import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
 import FormHelperText from '@mui/material/FormHelperText';
 import LoadingDialog from "@/components/Loading";
-import {login} from '@/store/reducers/userSlice';
+import {login} from '@/store/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { middleware } from '@/middleware';
 import { useTranslation } from "react-i18next";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -71,6 +70,10 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, [])
   const dispatch = useDispatch();
   const handleLogin = () => {
     dispatch(login(
@@ -134,13 +137,8 @@ export default function Login() {
       setErrorPassword(false);
     }
     setPassword(e.target.value)
-  }
-  useEffect(() => {
-    middleware(Router, (res) => {
-        console.log(res);
-    });
-  },[]);
-  return (
+  } 
+  return mounted && (
     <>
       <Grid
         container
@@ -281,7 +279,7 @@ export default function Login() {
                 <Link underline="none" style={{ cursor: "pointer", color: "#F26522" }} onClick={goToForgotPassword}> {t('forgot_password')}</Link>
               </Grid>
               <Grid item container spacing={2} mt={1}>
-                <Grid item xs={12}  >
+                <Grid item xs={12} textAlign="center" textTransform="capitalize">
                   <Typography >{t('login_via')}</Typography>
                 </Grid>
               </Grid>
@@ -298,8 +296,8 @@ export default function Login() {
                 underline="none"
               >
                 <Link underline="none" style={{ cursor: "pointer", color: "#013B91", padding: "10px" }} ><Icon icon="ic:baseline-facebook" fontSize="35px" /></Link>
-                <Link underline="none" style={{ cursor: "pointer", color: "#00C2FF", padding: "10px" }} ><Icon icon="ant-design:twitter-circle-filled" fontSize="35px" /></Link>
-                <Link underline="none" style={{ cursor: "pointer", color: "#0898D6", padding: "10px" }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link>
+                <Link underline="none" style={{ cursor: "pointer", color: "#00C2FF", padding: "10px" }} ><Icon icon="flat-color-icons:google" fontSize="35px" /></Link>
+                {/* <Link underline="none" style={{ cursor: "pointer", color: "#0898D6", padding: "10px" }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link> */}
               </Grid>
               <Grid
                 item

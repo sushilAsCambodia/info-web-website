@@ -1,5 +1,6 @@
 import axios from 'axios'
 import utils from '@/common/utils';
+import Cookies from 'js-cookie';
 const instance = axios.create({
     baseURL: utils.baseUrl || '',
     headers: {
@@ -29,7 +30,7 @@ export default {
             'content-type':'application/json; charset=utf-8'
         }; // override instance defaults
         if(auth) {
-            header['Authorization'] = 'Bearer '+ (localStorage.getItem(utils.tokenKey) || '');
+            header['Authorization'] = 'Bearer '+ (Cookies.get(utils.tokenKey) || '');
         }
         return instance({
             'method': 'POST',
