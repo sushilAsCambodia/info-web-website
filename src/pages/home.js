@@ -1,9 +1,9 @@
 import NewsJournalTabs from '@/components/homeNews/NewsJournalTabs';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import {getBannerSync} from '@/store/reducers/bannerSlice'
-import {getCardSync} from '@/store/reducers/cardSlice'
-import {getCategorySync} from '@/store/reducers/categorySlice'
+import {getBanner} from '@/store/actions/bannerActions'
+import {getCard} from '@/store/actions/cardActions'
+import {getCategory} from '@/store/actions/categoryActions'
 import { useEffect } from 'react';  
 import utils from '@/common/utils';
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const {i18n} = useTranslation();
     useEffect(() => { 
-        dispatch(getBannerSync(
+        dispatch(getBanner(
             {
                 params: { fake:true },
                 callback:(res) => {
@@ -21,7 +21,7 @@ const Home = () => {
                 }
             }
         ));
-        dispatch(getCardSync(
+        dispatch(getCard(
             {
                 params: { fake:true },
                 callback:(res) => {
@@ -29,7 +29,7 @@ const Home = () => {
                 }
             }
         ));
-        dispatch(getCategorySync(
+        dispatch(getCategory(
             {
                 params: {lang_id: utils.convertLangCodeToID(i18n.language)},
                 callback:(res) => {

@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import utils from "@/common/utils";
-import { getBannerSync } from "@/store/reducers/bannerSlice";
+import {getBanner} from '@/store/actions/bannerActions'
 import { useTheme } from "@mui/material/styles";
 import { Icon } from "@iconify/react";
 import Carousel from "react-multi-carousel";
@@ -47,14 +47,14 @@ export default function LandingPageBanner(props) {
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
   useEffect(() => {
-    dispatch(
-      getBannerSync({
-        params: { fake: true },
-        callback: (res) => {
-          console.log(res, "callback");
-        },
-      })
-    );
+    dispatch(getBanner(
+      {
+          params: { fake:true },
+          callback:(res) => {
+              console.log(res,'callback')
+          }
+      }
+  ));
   }, [i18n.language]);
 
   return (

@@ -41,15 +41,15 @@ export default function Navigate(props) {
                 <AppBar position="static" sx={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)',height: '56px'}}>
                     <Toolbar>
                         <Grid container spacing={2} alignItems="center" justifyContent="space-between">
-                            <Grid item xs={4}>
+                            <Grid item xs={2}>
                                 {lead}
                             </Grid>
-                            <Grid item xs={4} textAlign="center" sx={{whiteSpace:'nowrap'}}>
+                            <Grid item xs={8} textAlign="center" sx={{whiteSpace:'nowrap'}}>
                                 <Typography variant="h6" component="div" >
                                     {title}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={4} textAlign="end">
+                            <Grid item xs={2} textAlign="end">
                                 {tail}
                             </Grid>
                         </Grid>

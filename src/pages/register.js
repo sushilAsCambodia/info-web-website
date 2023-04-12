@@ -22,7 +22,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import LoadingDialog from "@/components/Loading";
 import FormHelperText from '@mui/material/FormHelperText';
 import { useDispatch, useSelector } from 'react-redux';
-import {register,login} from '@/store/reducers/userSlice';
+import {register,login} from '@/store/actions/authActions';
 import { useTranslation } from "react-i18next";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
