@@ -3,7 +3,6 @@ import { Chip, Divider, Grid, Link, Skeleton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import Slider from "react-slick";
 import {
   Card,
   CardHeader,
@@ -12,6 +11,7 @@ import {
   CardActions,
 } from "@mui/material";
 import MiddleShow from "./MiddleShow";
+import NewsSlider from "@/common/NewsSlider";
 export default function ResultsBanner({
   lang_id,
   winnerGalleryProducts,
@@ -65,21 +65,7 @@ export default function ResultsBanner({
     },
   ];
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    vertical: true,
-    verticalSwiping: true,
-    swipeToSlide: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnFocus: true,
-    arrows: false,
-    lazyLoad: false,
-    centerMode: false,
-  };
+
   useEffect(() => {
     setLoading(true);
     if (winnerGalleryProducts && winnerGalleryCustomers && winnerGalleryAll) {
@@ -141,41 +127,7 @@ export default function ResultsBanner({
       >
         <Grid item xs={3} border="1px solid grey" borderRadius="10px">
           <Grid>Latest Results</Grid>
-          <Grid overflow="auto" height="450px">
-            <Slider {...settings}>
-              <Grid width="100%" paddingX="10px">
-                <Card sx={{ border: "1px solid grey", marginY: "5px" }}>
-                  <Grid sx={{ fontSize: "15px",borderBottom:"1px solid grey" }} px={1}>29 Mar 2023, Monday</Grid>
-                  <CardHeader
-                    sx={{ padding: "10px" }}
-                    avatar={
-                      <Grid
-                        sx={{
-                          background: "#FFE0E0",
-                          borderRadius: "50%",
-                          width: "45px",
-                          height: "45px",
-                        }}
-                        textAlign="center"
-                      >
-                        <img
-                          width="40px"
-                          height="40px"
-                          src="./assets/Logo/superlotto-logo.png"
-                        />
-                      </Grid>
-                    }
-                    title={
-                      <Typography fontSize="13px" fontWeight="bold">
-                        Super Lotto
-                      </Typography>
-                    }
-                    subheader={lotto()}
-                  />
-                </Card>
-              </Grid>
-            </Slider>
-          </Grid>
+          <NewsSlider news={rows} />
         </Grid>
         <Grid xs={6}>
           <Grid
@@ -199,39 +151,7 @@ export default function ResultsBanner({
             </Grid>
           </Grid>
           <Grid overflow="auto" height="450px">
-            <Grid
-              sx={{
-                borderRadius: "0px 0px 10px 10px",
-                height: 440,
-                overflow: "auto",
-              }}
-              className="newsColumn"
-            >
-              {" "}
-              <Slider {...settings}>
-                {rows.map((row) => {
-                  return (
-                    <Grid>
-                      <Grid
-                        key={rows.id}
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          borderBottom: "2px solid grey",
-                          paddingBottom: "10px",
-                          marginBottom: "10px",
-                          // color: "white",
-                          margin: "10px",
-                        }}
-                      >
-                        <Grid textAlign="left">{row.news}</Grid>
-                        <Grid textAlign="left">{row.date}</Grid>
-                      </Grid>
-                    </Grid>
-                  );
-                })}
-              </Slider>
-            </Grid>
+            <NewsSlider news={rows}/>
           </Grid>
         </Grid>
       </Grid>

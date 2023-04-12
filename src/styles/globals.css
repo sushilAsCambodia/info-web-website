@@ -490,3 +490,11 @@ text-overflow: ellipsis;
   color: white;
 }
 /* END  */
+/* CARD DETAILS PAGE  */
+#category-select{
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+#category-select-label{
+  top: -5px
+}

@@ -14,13 +14,13 @@ import JournalsColumns from "@/components/homeNews/JournalsColumns";
 import PartnersColumns from "@/components/homeNews/PartnersColumns";
 import LandingPageBanner from "@/common/LandingPageBanner";
 import ResultsBanner from "@/components/homeNews/ResultsBanner";
+import LinkBanner from "@/components/homeNews/LinkBanner";
 import Header from "@/layouts_Desktop/header";
 import Footer from "@/layouts_Desktop/footer";
 export default function Index() {
   const matches = useMediaQuery("(max-width:768px)");
   return !matches ? (
     <>
-    <Header />
     <Grid
       container
       justifyContent="center"
@@ -31,6 +31,7 @@ export default function Index() {
     >
       <Grid item width="1500px">
         <ResultsBanner />
+        <LinkBanner />
         <NewsColumns />
         <Grid >
           <LandingPageBanner />
@@ -40,7 +41,6 @@ export default function Index() {
         <PartnersColumns />
       </Grid>
     </Grid>
-    <Footer />
     </>
   ) : (
     <Container
