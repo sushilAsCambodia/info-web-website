@@ -52,7 +52,7 @@ export default function JournalCardDetails() {
             showBullets={false}
             showThumbnails={true}
             showIndex={false}
-            autoPlay={true}
+            autoPlay={false}
             slideDuration={1000}
             slideInterval={5000}
             slideOnThumbnailHover={true}
@@ -64,27 +64,34 @@ export default function JournalCardDetails() {
             lazyLoad={true}
             thumbnailPosition="bottom"
             className="image-gallery-bottom-left"
-            infinite={true}
-            thumbnailHeight={"50"}
-            thumbnailWidth={"50"}
+            infinite={true} 
             slideWidth="400"
             slideHeight="400"
             originalHeight ="200px"
           />
           <style>
             {
-              `
+              ` 
+                @media (max-width: 320px) {
+                  .image-gallery-thumbnail {
+                    border: 3px solid transparent;
+                    width:59px;
+                  }
+                }
+                .image-gallery-slide{
+                  height:100%;
+                }
                 .image-gallery-thumbnail-image {
                   height:55px;
                   width:55px;
-                  object-fit:cover;
+                  object-fit:contain;
                   border-radius:3px;
                   overflow:hidden
                 }
                 .image-gallery-slides{
                   border-radius:6px;
                   overflow:hidden;
-                  max-height: 398px;
+                  height: 398px;
                 }
                 .image-gallery-thumbnails-wrapper{
                   margin-top:11px;
