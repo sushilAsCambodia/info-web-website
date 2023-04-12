@@ -476,3 +476,17 @@ text-overflow: ellipsis;
   color: white !important;
   background: red !important;
 }
+/* END */
+/* DESKTOP FOOTER  */
+.footerIcon{
+  background:#FFE0D2;
+  color: #949494;
+  width:50px !important;
+  height:50px !important;
+  border-radius:50px;
+}
+.footerIcon:hover{
+  background: linear-gradient(180deg, #FF0000 0%, #FF8024 100%);
+  color: white;
+}
+/* END  */

@@ -15,6 +15,7 @@ import PartnersColumns from "@/components/homeNews/PartnersColumns";
 import LandingPageBanner from "@/common/LandingPageBanner";
 import ResultsBanner from "@/components/homeNews/ResultsBanner";
 import Header from "@/layouts_Desktop/header";
+import Footer from "@/layouts_Desktop/footer";
 export default function Index() {
   const matches = useMediaQuery("(max-width:768px)");
   return !matches ? (
@@ -24,7 +25,7 @@ export default function Index() {
       container
       justifyContent="center"
       sx={{
-        height: "100vh",
+        // height: "100vh",
         backgroundPosition: "center",
       }}
     >
@@ -39,6 +40,7 @@ export default function Index() {
         <PartnersColumns />
       </Grid>
     </Grid>
+    <Footer />
     </>
   ) : (
     <Container
