@@ -95,9 +95,9 @@ export default function ResultsBanner({
   ]);   
    const lottos = [10, 10, 10, 10, 10, 11];
   const lotto = () => {
-    const bgColor = (index,length)=>{
-        if(index % 2 != 0 && index!=length-1)
-          return "grey"
+    const bgColor = (index,length,lotto)=>{
+       if (lotto == 11)
+          return "red"
       }
     
     return (
@@ -107,14 +107,13 @@ export default function ResultsBanner({
           width="fit-content"
           border="1px solid grey"
           borderRadius="10px"
+          className="lottoGrid"
         >
           {lottos.map((lotto, index) => {
             return (
               <>
-              {index==0 ? <Grid px={1} borderRadius="10px 0px 0px 10px" sx={{background:`${bgColor(index,lottos.length) }`}}>{lotto}</Grid>:''}
-              {index==lottos.length-1 ? <Grid px={1} borderRadius="0px 10px 10px 0px" sx={{background:`${bgColor(index,lottos.length) }`}}>{lotto}</Grid>:''}
-              {index!=lottos.length-1 && index!=0 ? <Grid px={1} sx={{background:`${bgColor(index,lottos.length) }`}}>{lotto}</Grid>:''}
-                {index == lottos.length - 1 ? (
+              <Grid px={1} className={`${lotto === 11 ? "hitLotto":"" }`}>{lotto}</Grid>
+                {/* {index == lottos.length - 1 ? (
                   ""
                 ) : (
                   <Divider
@@ -122,7 +121,7 @@ export default function ResultsBanner({
                     sx={{ borderColor: "grey" }}
                     flexItem
                   />
-                )}
+                )} */}
               </>
             );
           })}
@@ -154,14 +153,14 @@ export default function ResultsBanner({
                         sx={{
                           background: "#FFE0E0",
                           borderRadius: "50%",
-                          width: "35px",
-                          height: "35px",
+                          width: "45px",
+                          height: "45px",
                         }}
                         textAlign="center"
                       >
                         <img
-                          width="30px"
-                          height="30px"
+                          width="40px"
+                          height="40px"
                           src="./assets/Logo/superlotto-logo.png"
                         />
                       </Grid>
@@ -182,7 +181,7 @@ export default function ResultsBanner({
           <Grid
             xs={12}
             mx={1}
-            border="1px solid black"
+            border="1px solid grey"
             borderRadius="10px"
             height="100%"
           >

@@ -84,7 +84,7 @@ export default function NewsScrollColumn(props) {
             // background: "linear-gradient(to left, #FF6F31 50%, white 0%)",
             background:"#FF6F31",
             height:545,
-            width:200,
+            width:250,
             right:"-1%",
             top:-2,
             borderRadius:"0px 10px 10px 0px"

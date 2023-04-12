@@ -445,7 +445,7 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 /* END  */
-
+/* MIDDLE SHOW BANNER  */
 #customCarouselBtn {
   position: relative;
 }
@@ -465,4 +465,17 @@ text-overflow: ellipsis;
   top: -50px;
   left: calc(95% + -100px) !important;
   background-color: #dddddd !important;
+}
+.lottoGrid div:first-child{
+  border-radius:10px 0px 0px 10px
+}
+.lottoGrid div:last-child{
+  border-radius:0px 10px 10px 0px
+}
+.lottoGrid div:nth-child(odd){
+  background:#DDDDDD
+}
+.hitLotto{
+  color: white !important;
+  background: red !important;
 }

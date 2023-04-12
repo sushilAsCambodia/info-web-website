@@ -41,7 +41,7 @@ export default function NewsColumns(props) {
   }, [router.asPath]);
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container justifyContent="center" my={3}>
       <Grid item xs={4} marginY="15px" >
         <Divider
           sx={{
