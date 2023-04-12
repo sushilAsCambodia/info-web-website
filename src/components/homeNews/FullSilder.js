@@ -44,10 +44,11 @@ export default function FullSilder(props) {
                     item
                     component="img"
                     sx={{
-                      height: 255,
+                      height: 160,
                       display: "block",
                       overflow: "hidden",
                       width: "100%",
+                      objectFit:'cover'
                     }}
                     src={step.image}
                     alt={step.label}
