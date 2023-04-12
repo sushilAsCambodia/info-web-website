@@ -54,7 +54,7 @@ const DataTabComponent = ({id,lang_id}) => {
                                         <Grid item xs={9}>
                                         <Grid item sx={{paddingLeft:'5px'}}>
                                                     <Box fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.description,100)}}></Box>
-                                                    <Typography textAlign="left" fontSize="11px !important" whiteSpace="nowrap">
+                                                    <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="10px !important" whiteSpace="nowrap">
                                                         {moment(sport.created_at).format(utils.formatDate)}
                                                     </Typography>
                                                 </Grid>
