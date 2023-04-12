@@ -35,7 +35,7 @@ const DataTabComponent = ({id,lang_id}) => {
                 <Grid item xs={12} sm={12} md={12} xl={12}>
                     {news && news.length ? news.map((sport,index) => {
                         return (
-                            <List key={index} sx={{padding:0}} onClick={() => Router.push({pathname:'/newsCardDetails'})}>
+                            <List key={index} sx={{padding:0}} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
                                 <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }}>
                                     <Grid
                                         container

@@ -24,42 +24,23 @@ import ListItemButton from '@mui/material/ListItemButton';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 const ProfileDetail = () => {
-    
+
     return (
-        <>
+        <Grid container justifyContent="center" padding="0px 16px">
             <Grid
+                item
+                xs={12}
                 container
-             
-                justifyContent="center"
-                padding="0px 16px"
-            >
-                <Grid
-                    item
-                    xs={12}
-                    container
-                  
-                    className="uploadimg_main"
-                 
-paddingTop={5}
-                >
-                  <UploadImg />
-                </Grid>
+                className="uploadimg_main"
+                paddingTop={5}>
+                <UploadImg />
             </Grid>
-
-
-
-
-
-  
-
-
-        </>
+        </Grid>
     )
-
 };
 export async function getStaticProps(context) {
     return {
-      props: { auth:true }, // will be passed to the page component as props
+        props: { auth: true }, // will be passed to the page component as props
     }
 }
 export default ProfileDetail;

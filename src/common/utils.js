@@ -1,5 +1,5 @@
 export default {
-    formatDate:'YYYY-MM-D',
+    formatDate:'YYYY/MM/D',
     tokenKey: "token",
     baseUrl:"http://api-gateway-infoweb.kk-exchange.com:5000/api",
     convertLangCodeToID : (languageCode) => {

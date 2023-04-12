@@ -65,6 +65,7 @@ export default function FullSilder(props) {
               size="small"
               onClick={handleNext}
               disabled={activeStep === maxSteps - 1}
+              className="arrow-control-custom"
             >
               {theme.direction === "rtl" ? (
                 <KeyboardArrowLeft />
@@ -78,6 +79,7 @@ export default function FullSilder(props) {
               size="small"
               onClick={handleBack}
               disabled={activeStep === 0}
+              className="arrow-control-custom"
             >
               {theme.direction === "rtl" ? (
                 <KeyboardArrowRight />

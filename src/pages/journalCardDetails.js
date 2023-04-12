@@ -71,6 +71,31 @@ export default function JournalCardDetails() {
             slideHeight="400"
             originalHeight ="200px"
           />
+          <style>
+            {
+              `
+                .image-gallery-thumbnail-image {
+                  height:55px;
+                  width:55px;
+                  object-fit:cover;
+                  border-radius:3px;
+                  overflow:hidden
+                }
+                .image-gallery-slides{
+                  border-radius:6px;
+                  overflow:hidden;
+                  max-height: 398px;
+                }
+                .image-gallery-thumbnails-wrapper{
+                  margin-top:11px;
+                }
+                .image-gallery-content .image-gallery-slide .image-gallery-image {
+                  height:100%;
+                  object-fit:cover;
+                }
+              `
+            }
+          </style>
         </Grid> :<DataNotFound/> }
         
       </Grid>
