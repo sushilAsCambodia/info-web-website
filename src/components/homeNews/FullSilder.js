@@ -29,31 +29,33 @@ export default function FullSilder(props) {
   }; 
   return (
     <> 
-      <Grid item sx={{ position: "relative", marginTop:'5px' }} className="mainautoplayswipeable">
+    { (banners && banners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'5px' }} className="mainautoplayswipeable">
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={activeStep}
           onChangeIndex={handleStepChange}
           enableMouseEvents
         >
-          {banners.map((step, index) => (
-            <div key={index}>
-              {Math.abs(activeStep - index) <= 2 ? (
-                <Grid
-                  item
-                  component="img"
-                  sx={{
-                    height: 255,
-                    display: "block",
-                    overflow: "hidden",
-                    width: "100%",
-                  }}
-                  src={step.image}
-                  alt={step.label}
-                />
-              ) : null}
-            </div>
-          ))}
+          {
+            banners.map((step, index) => (
+              <div key={index}>
+                {Math.abs(activeStep - index) <= 2 ? (
+                  <Grid
+                    item
+                    component="img"
+                    sx={{
+                      height: 255,
+                      display: "block",
+                      overflow: "hidden",
+                      width: "100%",
+                    }}
+                    src={step.image}
+                    alt={step.label}
+                  />
+                ) : null}
+              </div>
+            ))
+          }
         </AutoPlaySwipeableViews>
         <MobileStepper
           steps={maxSteps}
@@ -85,7 +87,7 @@ export default function FullSilder(props) {
             </Button>
           }
         />
-      </Grid>
+      </Grid>}
       {cards && cards.length > 0 && <Grid item xs={12} sx={{marginTop:'5px',marginBottom:'5px'}}>
         <Tabs
           value={tabValue}

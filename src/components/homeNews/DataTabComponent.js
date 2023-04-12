@@ -4,68 +4,60 @@ import {
     ListItem, 
     Typography, 
     List, 
+    Box
   } from "@mui/material";
   import { useDispatch, useSelector } from 'react-redux';
-import {getSportByCategory} from '@/store/reducers/sportSlice'
+import {getNewsByCategory} from '@/store/actions/newsActions'
 import DataLoading from '../DataLoading';
 import Router from "next/router";
 import Empty from '../Empty';
 import moment from 'moment/moment';
 import utils from '@/common/utils';
 const DataTabComponent = ({id,lang_id}) => {
-    const {sports} = useSelector((state) => state.sport); 
+    const {news} = useSelector((state) => state.news); 
     const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(getSportByCategory(
+        dispatch(getNewsByCategory(
             {
-                params: { lang_id:lang_id,category_id: id,take:10 },
+                params: { lang_id:lang_id, category_id: id, take:10 },
                 callback:(res) => {
                     console.log(res,'callback')
                     setLoading(false);
                 }
             }
         ));
-    },[]);
+    },[id]);
     const [loading,setLoading] = React.useState(true);
     return <Grid sx={{height:'250px', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
         {
             loading ? <DataLoading/> :
             (
                 <Grid item xs={12} sm={12} md={12} xl={12}>
-                    {sports && sports.length ?sports.map((sport,index) => {
+                    {news && news.length ? news.map((sport,index) => {
                         return (
                             <List key={index} sx={{padding:0}} onClick={() => Router.push({pathname:'/newsCardDetails'})}>
-                                <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }} >
+                                <ListItem sx={{ padding:'10px',  borderBottom: '1px solid #D9D9D9;' }}>
                                     <Grid
-                                        item
-                                        xs={12}
-                                        sx={{borderRadius: "5px",padding:0 }}
+                                        container
+                                        sx={{ borderRadius: "5px",padding:0 }}
                                         boxShadow="none"
                                         display="flex"
-                                        alignItems="start"
-                                    >
-                                        <Grid item xs={3} display="flex" alignItems="center">
-                                            <img
-                                                src={sport.image ? sport.image?.path :'./assets/no-image.png'}
+                                        alignItems="start">
+                                        <Grid item xs={3}>
+                                            <img  src={sport.image ? sport.image?.path :'./assets/no-image.png'}
                                                 onError={(e) => e.target.src = './assets/no-image.png'}
-                                                width="80px"
-                                                height="55px"
-                                                style={{objectFit:"contain"}}
-                                            />
-                                        </Grid>
+                                                width="100%"
+                                                height="100%"
+                                                style={{objectFit:"contain",borderRadius:'6px'}}/>
+                                                
+                                        </Grid> 
                                         <Grid item xs={9}>
-                                            <Grid
-                                                item
-                                                xs={12}
-                                            >
-                                                <Grid item>
-                                                    <Typography fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.description,100)}}></Typography>
-                                                    <Typography textAlign="left" fontSize="11px !important">
+                                        <Grid item sx={{paddingLeft:'5px'}}>
+                                                    <Box fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.description,100)}}></Box>
+                                                    <Typography textAlign="left" fontSize="11px !important" whiteSpace="nowrap">
                                                         {moment(sport.created_at).format(utils.formatDate)}
                                                     </Typography>
                                                 </Grid>
-    
-                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </ListItem> 

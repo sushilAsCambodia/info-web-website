@@ -14,7 +14,7 @@ import JournalCard from '../homeJournal/JournalCard';
 import { useRouter }  from "next/router";
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
-import {getJournalSync,setJournal} from '@/store/reducers/jounalSlice'
+import {getJournal} from '@/store/actions/journalActions'
 import { useDispatch, useSelector } from 'react-redux';
 function TabPanel(props) {
   const { children, value, index, ...other } = props; 
@@ -52,7 +52,6 @@ function a11yProps(index) {
 export default function NewsJournalTabs(props) {
   const {t} = useTranslation();
   const {banners = [], categories = [], cards = [], lang_id} = props; 
-  const {journals = []} = useSelector((state) => state.journal) 
   const dispatch = useDispatch();
   const theme = useTheme();
   const router = useRouter();
@@ -70,12 +69,11 @@ export default function NewsJournalTabs(props) {
   }; 
   useEffect(() => {
     if(value === 1) {
-      dispatch(setJournal([]));
-      dispatch(getJournalSync(
+      dispatch(getJournal(
         {
-            params: {lang_id: lang_id, fake:true},
+            params: {lang_id: lang_id,take: 10},
             callback:(res) => {
-                console.log(res,'callback')
+              console.log(res,'callback')
             }
         }
       ));
@@ -100,7 +98,7 @@ export default function NewsJournalTabs(props) {
           <MultiTabs categories={categories} lang_id={lang_id}/>
         </TabPanel>
         <TabPanel value={value} index={1} >
-          <JournalCard journals={journals} lang_id={lang_id}/>
+          <JournalCard lang_id={lang_id}/>
         </TabPanel>
       </Grid>
     </Grid>

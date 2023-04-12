@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Grid, 
 } from "@mui/material";
@@ -40,6 +40,10 @@ export default function MultiTabs(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   }; 
+  // reset tab if lang changed
+  useEffect(() => {
+    setValue(0);
+  },[lang_id]);
   return (categories && categories.length > 0) && (
     <Grid
       item
