@@ -4,6 +4,7 @@ import {
     ListItem, 
     Typography, 
     List, 
+    Box
   } from "@mui/material";
   import { useDispatch, useSelector } from 'react-redux';
 import {getNewsByCategory} from '@/store/actions/newsActions'
@@ -41,20 +42,23 @@ const DataTabComponent = ({id,lang_id}) => {
                                         sx={{ borderRadius: "5px",padding:0 }}
                                         boxShadow="none"
                                         display="flex"
-                                        alignItems="end">
-                                        <Grid item xs={3} display="flex">
+                                        alignItems="start">
+                                        <Grid item xs={3}>
                                             <img  src={sport.image ? sport.image?.path :'./assets/no-image.png'}
                                                 onError={(e) => e.target.src = './assets/no-image.png'}
                                                 width="100%"
                                                 height="100%"
                                                 style={{objectFit:"contain",borderRadius:'6px'}}/>
-                                                <Grid item sx={{paddingLeft:'5px'}}>
-                                                    <Typography fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.description,100)}}></Typography>
+                                                
+                                        </Grid> 
+                                        <Grid item xs={9}>
+                                        <Grid item sx={{paddingLeft:'5px'}}>
+                                                    <Box fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.description,100)}}></Box>
                                                     <Typography textAlign="left" fontSize="11px !important" whiteSpace="nowrap">
                                                         {moment(sport.created_at).format(utils.formatDate)}
                                                     </Typography>
                                                 </Grid>
-                                        </Grid> 
+                                        </Grid>
                                     </Grid>
                                 </ListItem> 
                             </List>
