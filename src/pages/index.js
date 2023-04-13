@@ -21,32 +21,30 @@ export default function Index() {
   const matches = useMediaQuery("(max-width:768px)");
   return !matches ? (
     <>
-    <Grid
-    >
+      <Grid>
         <ResultsBanner />
         <LinkBanner />
         <NewsColumns />
-        <Grid >
+        <Grid>
           <LandingPageBanner />
         </Grid>
         <NewsColumns />
         <JournalsColumns />
         <PartnersColumns />
-    </Grid>
+      </Grid>
     </>
   ) : (
-    <Container sx={{
-      backgroundImage: 'url("./assets/Home/landingpagebg.jpg")',
-      position: "relative",
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
-      height: '100vh',
-      backgroundPosition: "center"
-    }}>
-      <Grid
-        container 
-        justifyContent="center"
-      >
+    <Container
+      sx={{
+        backgroundImage: 'url("./assets/Home/landingpagebg.jpg")',
+        position: "relative",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        height: "100vh",
+        backgroundPosition: "center",
+      }}
+    >
+      <Grid container justifyContent="center">
         <Grid item xs={12} sm={12} md={12} xl={12}>
           <Grid
             item

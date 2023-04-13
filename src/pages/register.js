@@ -11,6 +11,8 @@ import {
   OutlinedInput,
   Dialog,
   Divider,
+  FormControlLabel,
+  Checkbox
 } from "@mui/material";
 import Router from "next/router";
 import PropTypes from 'prop-types';
@@ -24,6 +26,8 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { useDispatch, useSelector } from 'react-redux';
 import {register,login} from '@/store/actions/authActions';
 import { useTranslation } from "react-i18next";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import FieldLanguageSwitcher from "@/components/fieldLangSwitcher";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -78,7 +82,8 @@ export default function Register() {
   }; 
   const dispatch = useDispatch();
   const [mounted, setMounted] = useState(false);
-  
+  const matches = useMediaQuery("(max-width:768px)");
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -153,7 +158,7 @@ export default function Register() {
     setOpen(false);
   };
 
-  return mounted && (
+  return matches ?(
     <>
       <Grid
         container
@@ -342,5 +347,367 @@ export default function Register() {
         </DialogActions>}
       </BootstrapDialog>
     </>
-  )
+  ):(
+    <Grid
+      p={15}
+      display="flex"
+      justifyContent='center'
+      sx={{    backgroundImage:"url('./assets/login/login_bg.png')"    }}
+    >
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="stretch"
+        width="65%"
+      >
+        <Grid
+          container
+          justifyContent="center"
+          item
+          xs={6}
+          sx={{
+            // background: "black",
+            backgroundImage: 'url("./assets/login/login.png")',
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "100% 100%",
+          }}
+          borderRadius="20px 0px 0px 20px"
+
+        >
+          <Grid xs={10} container alignContent="space-around">
+            <Typography
+              variant="h4"
+              fontWeight="bold"
+              color="white"
+              textAlign="center"
+            >
+              Anytime anywhere Wonderful information in the palm of your hand
+            </Typography>
+            <Grid container justifyContent="center">
+              <Grid item xs={12} sm={12} md={12} xl={12}>
+                <Grid
+                  item
+                  textAlign="center"
+                  sx={{
+                    left: "0",
+                    right: "0",
+                    bottom: "150px",
+                  }}
+                >
+                  <Typography fontWeight={700} fontSize="20px">
+                    DOWNLOAD APP
+                  </Typography>
+                </Grid>
+
+                <Grid
+                  item
+                  sx={{
+                    left: "0",
+                    right: "0",
+                    bottom: "90px",
+                  }}
+                >
+                  <Grid
+                    item
+                    xs={12}
+                    display="flex"
+                    justifyContent="space-between"
+                  >
+                    <Grid item xs={6}>
+                      <Typography textAlign="center">
+                        <img src="./assets/Home/iosbtn.png" />
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography textAlign="center">
+                        <img src="./assets/Home/androidbtn.png" />
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          container
+          alignItems="flex-start"
+          justifyContent="center"
+          // py={5}
+          sx={{background:"white"}}        
+          borderRadius="0px 20px 20px 0px"
+        >
+          <Grid
+            item
+            container
+            justifyContent="center"
+            xs={12}
+            // sx={{ minHeight: "500px" }}
+            alignContent="space-between"
+            height={600}
+          >
+            <Grid item container xs={12} sm={12} padding={2}>
+              <Grid my={2} container justifyContent="center">
+                <img src="./assets/Logo/footer_logo.png" />
+              </Grid>
+              <Grid xs={12} mb={2}>
+                <Divider
+                  sx={{
+                    "&::before, &::after": {
+                      borderColor: "#FF6F31",
+                    },
+                  }}
+                >
+                  <Typography variant="h5" fontWeight="bold">
+                    {t("login")}
+                  </Typography>
+                </Divider>
+              </Grid>
+              <form
+                className="lnr"
+                style={{
+                  boxSizing: "borderBox",
+                  flexWrap: "wrap",
+                  flexDirection: "row",
+                  alignItems: "flex-end",
+                  marginBottom: "16px",
+                  width: "100%",
+                }}
+              >
+                <Grid item xs={12} sm={12} mb={3}>
+                <FieldLanguageSwitcher />
+                </Grid>
+                <Grid item xs={12} sm={12} mb={3}>
+                  <FormControl
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                      borderRadius: "15px",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    <OutlinedInput
+                      name="Username"
+                      placeholder={t("user_name")}
+                      inputProps={{ maxLength: 16 }}
+                      id="outlined-adornment-username"
+                      type="text"
+                      value={username}
+                      onChange={(e) => onChangeUserName(e)}
+                      error={errorUserName}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle username visibility"
+                            edge="end"
+                          >
+                            <Icon icon="mdi:user" width={20} color="#F26522" />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                    {errorUserName && (
+                      <FormHelperText error>
+                        {t("validate_user_name")}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={12} mb={4}>
+                  <FormControl
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                      borderRadius: "15px",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    <OutlinedInput
+                      name="password"
+                      placeholder={t("password")}
+                      inputProps={{ maxLength: 16 }}
+                      id="outlined-adornment-password"
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => onChangePassword(e)}
+                      error={errorPassword}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            edge="end"
+                          >
+                            {showPassword ? (
+                              <Icon icon="ri:eye-close-fill" color="#F26522" />
+                            ) : (
+                              <Icon icon="ph:eye-bold" color="#F26522" />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                    {errorPassword && (
+                      <FormHelperText error>
+                        {t("validate_password")}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+              
+                <Grid item container spacing={2} mb={1}>
+                  <Grid item xs={6}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      disabled={loading ? true : false}
+                      sx={{
+                        color: "black",
+                        background: "#D4D4D4",
+                        textTransform: "capitalize",
+                      }}
+                      onClick={() => Router.push("/")}
+                    >
+                      {t("cancel")}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      disabled={loading ? true : false}
+                      sx={{
+                        color: "white",
+                        background: loading
+                          ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);"
+                          : "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
+                        textTransform: "capitalize",
+                      }}
+                      onClick={onSubmit}
+                    >
+                      {t("login")}
+                    </Button>
+                  </Grid>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={12}
+                  container
+                  sx={{
+                    cursor: "pointer",
+                    fontSize: { xs: "13px", sm: "inerited" },
+                  }}
+                  justifyContent="space-between"
+                  underline="none"
+                  alignItems="center"
+                >
+                  <Typography>Or you can sign up with</Typography>
+                  <Grid>
+                    <Link
+                      underline="none"
+                      style={{
+                        cursor: "pointer",
+                        color: "#013B91",
+                        padding: "10px",
+                      }}
+                    >
+                      <Icon icon="ic:baseline-facebook" fontSize="35px" />
+                    </Link>
+                    <Link
+                      underline="none"
+                      style={{
+                        cursor: "pointer",
+                        color: "#00C2FF",
+                        padding: "10px",
+                      }}
+                    >
+                      <Icon icon="flat-color-icons:google" fontSize="35px" />
+                    </Link>
+                    <Link
+                      underline="none"
+                      style={{
+                        cursor: "pointer",
+                        color: "#0898D6",
+                        padding: "10px",
+                      }}
+                    >
+                      <Icon
+                        icon="entypo-social:twitter-with-circle"
+                        fontSize="35px"
+                      />
+                    </Link>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                borderTop: "1px solid grey",
+              }}
+            >
+              <Grid
+                container
+                sx={{
+                  color: "#8C8C8C",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+                px={2}
+                py={1}
+                underline="none"
+              >
+                <Link
+                  underline="none"
+                  style={{
+                    cursor: "pointer",
+                    color: "#000",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                  onClick={()=>{Router.push('/login')}}
+                >
+                  <Typography>Dont have an account ?</Typography>
+                  <Typography
+                    style={{
+                      cursor: "pointer",
+                      color: "#F26522",
+                    }}
+                    mx={1}
+                  >
+                    Sign In Here
+                  </Typography>
+                </Link>
+                <Grid display="flex" sx={{cursor: "pointer"}}>
+                  <Icon icon="bi:chat-square-dots-fill" width={25} />
+                  <Typography mx={1}>Contact</Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <LoadingDialog loading={loading} setLoading={setLoading}></LoadingDialog>
+      {/* Login Dialog */}
+      <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        id="logindialog"
+      >
+        <DialogContent dividers sx={{ maxWidth: "290px" }}>
+          <Typography gutterBottom>{responseMessage}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            {t("ok")}
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
+    </Grid>
+  );
 }

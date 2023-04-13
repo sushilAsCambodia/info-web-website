@@ -85,6 +85,7 @@ const router = useRouter()
           </Grid>
         </Grid>
       </AppBar>
+      {router.pathname == '/login' || router.pathname == '/register' ? '':
       <AppBar
         position="static"
         style={{
@@ -96,8 +97,7 @@ const router = useRouter()
       >
         <Grid width="80%" sx={{ background: "white" }}>
           <Grid container justifyContent="space-between" alignItems="strech">
-            <Grid
-              xs={1}
+            <Grid xs={1}
               sx={{ background: "#373737", color: "white" }}
               display="flex"
               alignItems="center"
@@ -183,7 +183,20 @@ const router = useRouter()
                 </Menu>
               </Grid>
             </Grid>
-            <Grid xs={2} container alignItems="center" justifyContent="right">
+            <Grid xs={2} container alignItems="center" justifyContent="space-between">
+              <Button
+                variant="contain"
+                sx={{
+                  padding: "4px 8px",
+                  fontSize: "12px",
+                  background: 'linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)',
+                  color:"white"
+                }}
+              >
+                <Icon icon="material-symbols:app-shortcut" width={20} />
+                Download App
+              </Button>
+           
               <Button
                 variant="contain"
                 sx={{
@@ -199,7 +212,7 @@ const router = useRouter()
             </Grid>
           </Grid>
         </Grid>
-      </AppBar>
+      </AppBar>}
     </>
   );
 };

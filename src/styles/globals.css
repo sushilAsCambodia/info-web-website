@@ -498,3 +498,9 @@ text-overflow: ellipsis;
 #category-select-label{
   top: -5px
 }
+/* END  */
+/* LOTTERY PAGE  */
+.filterTabSelected{
+  background: #FF6F31 !important;
+  color: white !important;
+}

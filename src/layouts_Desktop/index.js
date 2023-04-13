@@ -23,11 +23,11 @@ const Layout = (props) => {
     let { children } = props;  
     let title = '';
 
-    let height = '';
-    if (router.pathname != '/') {
-        height = 'calc(100vh - 112px)';
+    let width = '';
+    if (router.pathname != '') {
+        width = '80%';
     } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
-        height = 'calc(100vh - 56px)';
+        width = '100%';
     }
 
     
@@ -38,8 +38,8 @@ const Layout = (props) => {
                 <meta property="og:title" content={title} key="title" />
             </Head>
             <Header />
-            <Container maxWidth="false" text sx={{ bgcolor: '#fff', height: height, padding: "0px !important", overflowY: 'auto' }}>
-                <main style={{height:'100%',width:"80%",margin:"auto"}}>
+            <Container maxWidth="false" text sx={{ bgcolor: '#fff', height: "100%", padding: "0px !important", overflowY: 'auto' }}>
+            <main style={{height:'100%',width:width,margin:"auto"}}>
                 {children}
                 </main>
             </Container>
