@@ -2,7 +2,7 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import { Grid, Menu } from "@mui/material";
+import { Grid, Menu,Fade } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
@@ -68,13 +68,18 @@ const router = useRouter()
             </Grid>
             <Grid item>
               <Button
+              onClick={()=>{router.push('/login')}}
                 variant="container"
                 sx={{
                   background: "white",
                   color: "red",
                   fontSize: "12px",
                   borderRadius: "20px",
-                }}
+          "&:hover": {
+            background: "red",
+            color:"white"
+          },
+        }}
               >
                 Login/Register
               </Button>
@@ -97,32 +102,41 @@ const router = useRouter()
       >
         <Grid width="80%" sx={{ background: "white" }}>
           <Grid container justifyContent="space-between" alignItems="strech">
-            <Grid xs={1}
-              sx={{ background: "#373737", color: "white" }}
-              display="flex"
-              alignItems="center"
-              onClick={handleScoreClick}
-
-            >
-              <Typography>Live Score </Typography>
-              {openScore ? (
-                    <Icon width={20} icon="material-symbols:keyboard-arrow-up-rounded" />
+            <Grid xs={1}>
+          <MenuItem
+        id="fade-button"
+        aria-controls={openScore ? 'fade-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={openScore ? 'true' : undefined}
+        onClick={handleScoreClick}
+        sx={{background:"#373737",
+          "&:hover": {
+            background: "grey",
+          },
+        }}
+      >
+       <Typography color="white">Live Score</Typography> 
+        {openScore ? (
+                    <Icon color="white" icon="material-symbols:keyboard-arrow-up-rounded" />
                   ) : (
-                    <Icon width={20} icon="material-symbols:keyboard-arrow-down-rounded" />
+                    <Icon color="white" icon="material-symbols:keyboard-arrow-down-rounded" />
                   )}
-              <Menu
-                  anchorEl={anchorScore}
-                  open={openScore}
-                  onClose={handleScoreClose}
-                  aria-controls={openScore ? "basic-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={openScore ? "true" : undefined}
-                >
-                  <MenuItem onClick={handleScoreClose}>Match 1</MenuItem>
-                  <MenuItem onClick={handleScoreClose}>Match 2</MenuItem>
-                  <MenuItem onClick={handleScoreClose}>Match 3</MenuItem>
-                </Menu>
-            </Grid>
+      </MenuItem>
+      <Menu
+        id="fade-menu"
+        MenuListProps={{
+          'aria-labelledby': 'fade-button',
+        }}
+        anchorEl={anchorScore}
+        open={openScore}
+        onClose={handleScoreClose}
+        TransitionComponent={Fade}
+      >
+        <MenuItem onClick={handleScoreClose}>score 1</MenuItem>
+        <MenuItem onClick={handleScoreClose}>score 2</MenuItem>
+        <MenuItem onClick={handleScoreClose}>score 3</MenuItem>
+      </Menu>
+      </Grid>
             <Grid xs={9} container color="black">
               <Grid>
                 <MenuItem onClick={()=>{router.push("/")}}>
@@ -157,7 +171,7 @@ const router = useRouter()
                   aria-expanded={open ? "true" : undefined}
                   onClick={handleClick}
                   sx={{
-                    color: `${!open ? "blue" : undefined}`,
+                    color: `${!open ? "#037DED" : undefined}`,
                     fontWeight: "bold",
                   }}
                 >
