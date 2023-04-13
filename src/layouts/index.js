@@ -179,6 +179,18 @@ const Layout = (props) => {
         case '/announcement':
             title = t('announcement_info_web')
             break;
+        case '/feedback':
+            title = t('feedback_info_web')
+            break;
+        case '/customerservice':
+            title = t('customer_service_info_web')
+            break;
+        case '/journalcarddetails':
+            title = t('journal_card_details_info_web')
+            break;
+        case '/newscarddetails':
+            title = t('news_card_details_info_web')
+            break;
         case '/login':
             title = t('login_info_web')
             break;
@@ -215,22 +227,36 @@ const Layout = (props) => {
                 <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
                     <Grid item xs={12} sm={12} width='100%'>
                         <Box sx={{ width: '100%' }}>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Tabs 
-                                    variant="scrollable"
-                                    scrollButtons 
-                                    value={value} 
-                                    onChange={handleChange} 
-                                    aria-label="basic tabs example" >
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2020" {...a11yProps(0)} />
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2021" {...a11yProps(1)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2022" {...a11yProps(2)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2023" {...a11yProps(3)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2024" {...a11yProps(4)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2025" {...a11yProps(5)} /> 
-                                    <Tab sx={{padding:'0',minWidth:'80px'}} label="2026" {...a11yProps(6)} /> 
-                                </Tabs>
-                            </Box>
+                            {/* <Box sx={{ borderBottom: 1, borderColor: 'divider'}}> */}
+                            <Tabs
+                                indicatorColor="transparent"
+                                TabIndicatorProps={{
+                                    children: <span className='dot-custom' style={{
+                                        bottom: '-4px',
+                                        width: '10px',
+                                        height: '10px',
+                                        background: 'red',
+                                        position: 'absolute',
+                                        left: '46%',
+                                        transform: 'translate(-50%, -50%)',
+                                        borderRadius: '50%',
+                                        zIndex: 9999
+                                    }} />
+                                }}
+                                variant="scrollable"
+                                scrollButtons
+                                value={value}
+                                onChange={handleChange}
+                                aria-label="basic tabs example" className='scrollable-custom'>
+                                <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2020" {...a11yProps(0)} />
+                                <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2021" {...a11yProps(1)} />
+                                <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2022" {...a11yProps(2)} />
+                                <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2023" {...a11yProps(3)} />
+                                <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2024" {...a11yProps(4)} />
+                                <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2025" {...a11yProps(5)} />
+                                <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2026" {...a11yProps(6)} />
+                            </Tabs>
+                            {/* </Box> */}
                             <TabPanel value={value} index={0} padding="0px !important" >
                                 <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -429,6 +455,20 @@ const Layout = (props) => {
                             </TabPanel> 
                         </Box>
                     </Grid>
+                    <style>
+                        {
+                            `
+                                .scrollable-custom .MuiTab-root::before {
+                                    content: '';
+                                    width: 100%;
+                                    height: 1px;
+                                    position: absolute;
+                                    background: #ddd;
+                                    bottom: 5px;
+                                }
+                            `
+                        }
+                    </style>
                 </ListItem>
             </List>
         </Box>

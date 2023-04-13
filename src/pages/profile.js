@@ -37,17 +37,7 @@ const Profile = () => {
         dispatch(logout(
             { 
                 callback: (res) => {
-                    Router.push('/home');
-                    // const {status_code} = res;
-                    // if([200,201,202,203].includes(status_code)) {
-                    //     setLogout();
-                    //     Router.push('/home');
-                    // }else if(status_code === 419) {
-                    //     setLogout();
-                    // }else {
-                    //     setLogout();
-                    //     Router.push('/home');
-                    // }
+                    Router.push('/home'); 
                 },
                 auth: true
             },

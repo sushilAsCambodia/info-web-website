@@ -35,17 +35,18 @@ export default function Index() {
     </Grid>
     </>
   ) : (
-    <Container
-      sx={{
-        backgroundImage: 'url("./assets/Home/landingpagebg.jpg")',
-        position: "relative",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        height: "100vh",
-        backgroundPosition: "center",
-      }}
-    >
-      <Grid container xs={12} justifyContent="center">
+    <Container sx={{
+      backgroundImage: 'url("./assets/Home/landingpagebg.jpg")',
+      position: "relative",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      height: '100vh',
+      backgroundPosition: "center"
+    }}>
+      <Grid
+        container 
+        justifyContent="center"
+      >
         <Grid item xs={12} sm={12} md={12} xl={12}>
           <Grid
             item

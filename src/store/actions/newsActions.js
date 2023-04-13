@@ -21,3 +21,25 @@ export const getNewsByCategory = createAsyncThunk(
     }
   },
 );
+
+export const getNewsById = createAsyncThunk(
+  "news/list-by-id",
+  async ({ id, params = {}, callback }, { getState, dispatch }) => {
+    try {
+      const response = await api.get(`/news/news-details/${id}`,params);
+      const {data,status} = response;
+      data['status_code'] = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      return data;
+    } catch (error) {
+      const {status, data} = error.response;
+      data['status_code']  = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      return data;
+    }
+  },
+);

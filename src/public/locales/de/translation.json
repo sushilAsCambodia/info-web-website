@@ -55,5 +55,8 @@
     "already_have_an_account":"已有帐户？",
     "feedback_info_web":"反馈 | InfoWeb",
     "customer_service_info_web":"客户服务 | InfoWeb",
-    "journal_card_details_info_web":"日记卡详细信息 | InfoWeb"
+    "journal_card_details_info_web":"日记卡详细信息 | InfoWeb",
+    "input_your_feedback":"请输入您的意见，不要超过500个字符",
+    "required_feedback": "需要反馈",
+    "news_card_details_info_web":"细节 | InfoWeb"
 }
