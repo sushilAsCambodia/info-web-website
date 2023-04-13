@@ -81,7 +81,7 @@ export default function NewsJournalTabs(props) {
   },[lang_id,value])
   return (
     <Grid item className='tabclass' sx={{height:'100%'}}>
-      <Grid sx={{ padding:'10px 10px',height:'100%' }} >
+      <Grid sx={{ height:'100%' }} >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -89,6 +89,7 @@ export default function NewsJournalTabs(props) {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
+          sx={{paddingTop:'10px',paddingBottom:'10px'}}
         >
           <Tab label={t('news')} {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
           <Tab label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>

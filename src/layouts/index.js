@@ -192,6 +192,9 @@ const Layout = (props) => {
         case '/journalcarddetails':
             title = t('journal_card_details_info_web')
             break;
+        case '/newscarddetails':
+            title = t('news_card_details_info_web')
+            break;
         case '/login':
             title = t('login_info_web')
             break;
@@ -253,7 +256,7 @@ const Layout = (props) => {
                                 scrollButtons
                                 value={value}
                                 onChange={handleChange}
-                                aria-label="basic tabs example" className='abc'>
+                                aria-label="basic tabs example" className='scrollable-custom'>
                                 <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2020" {...a11yProps(0)} />
                                 <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2021" {...a11yProps(1)} />
                                 <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2022" {...a11yProps(2)} />
@@ -464,7 +467,7 @@ const Layout = (props) => {
                     <style>
                         {
                             `
-                                .abc .MuiTab-root::before {
+                                .scrollable-custom .MuiTab-root::before {
                                     content: '';
                                     width: 100%;
                                     height: 1px;

@@ -10,17 +10,14 @@ const ThemConfiguration = () => {
               root: {
                 // Some CSS
                 fontSize: '1rem',
-                color:'#000'
+                color:'#000',  
+                "&.Mui-disabled:not(.arrow-control-custom)": {
+                  background: "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%)",
+                  color: "#676666"
+                }
               },
             },
-            variants: [
-              // {
-              //   props: { variant: 'outlined' },
-              //   style: {
-              //     textTransform: 'none',
-              //     border: `1px solde ${blue[500]}`,
-              //   },
-              // },
+            variants: [ 
               {
                 props: { variant: 'dashed' },
                 style: {

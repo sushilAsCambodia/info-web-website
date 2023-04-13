@@ -55,5 +55,8 @@
     "already_have_an_account":"មានគណនីរួចហើយ?",
     "feedback_info_web":"មតិកែលម្អ | InfoWeb",
     "customer_service_info_web":"សេវាកម្ម​អតិថិជន | InfoWeb",
-    "journal_card_details_info_web":"ព័ត៌មានអំពីកាតទិនានុប្បវត្តិ | InfoWeb"
+    "journal_card_details_info_web":"ព័ត៌មានអំពីកាតទិនានុប្បវត្តិ | InfoWeb",
+    "input_your_feedback":"សូមបញ្ចូលមតិកែលម្អរបស់អ្នក កុំលើសពី 500 តួអក្សរ",
+    "required_feedback": "មតិកែលម្អត្រូវបានទាមទារ",
+    "news_card_details_info_web":"ព័ត៌មានលំអិត | InfoWeb"
 }
