@@ -14,8 +14,6 @@ export default function fieldLanguageSwitcher() {
   const [lang, setLang] = React.useState('')
 
   const [langLabel,setLangLabel] = React.useState('')
-
-  
   
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

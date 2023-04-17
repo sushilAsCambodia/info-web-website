@@ -104,7 +104,7 @@ const Header = () => {
                     Login/Register
                   </Button>
                   :
-                  < ProfileDropDown /> }
+                  < ProfileDropDown customer={customer} logout={handleLogout}/> }
                 </Grid>
                 <Grid item>
                   <LangSwitcher />
