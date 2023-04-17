@@ -1,5 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback  } from "react";
+import { updateNickName,updatePassword,uploadProfile } from "@/store/actions/authActions";
+import { useDispatch, useSelector } from 'react-redux';
+import utils from "@/common/utils";
 import {
   Grid,
   ListItem,
@@ -19,6 +22,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export default function ProfileInfo(props) {
   const { categories, lang_id } = props;
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const [password, setPassword] = useState("");
   const [confirmpassword,setConfirmPassword] = useState('');
@@ -34,62 +38,80 @@ export default function ProfileInfo(props) {
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
-    if (e.target.value == "") {
-      setErrorPasswordMessage("Password is required");
+    if(e.target.value == '') {
+      setErrorPasswordMessage('Password is required');
       setErrorPassword(true);
-    } else {
-      setErrorPassword(false);
+    }else { 
+      setErrorPassword(false); 
     }
-    if (confirmpassword != "") {
-      if (confirmpassword != e.target.value) {
-        setConfirmErrorPasswordMessage("Password is not match");
+    if(confirmpassword!='') {
+      if(confirmpassword != e.target.value) {
+        setConfirmErrorPasswordMessage('Password is not match');
         setErrorConfirmPassword(true);
-      } else {
+      }else {
         setErrorConfirmPassword(false);
       }
     }
-    if (e.target.value.length < 6) {
-      setErrorPasswordMessage(t("validate_password"));
+    if(e.target.value.length < 6) {
+      setErrorPasswordMessage(t('validate_password'));
       setErrorPassword(true);
     }
   };
   const onChangeConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
-    if (e.target.value == "") {
-      setErrorPasswordMessage("Confirm Password is required");
+    if(e.target.value == '') {
+      setErrorPasswordMessage('Confirm Password is required');
       setErrorConfirmPassword(true);
-    } else {
+    }else { 
+        setErrorConfirmPassword(false); 
+    } 
+    if(password != e.target.value) {
+      setConfirmErrorPasswordMessage('Password is not match');
+      setErrorConfirmPassword(true);
+    }else {
       setErrorConfirmPassword(false);
     }
-    if (password != e.target.value) {
-      setConfirmErrorPasswordMessage("Password is not match");
-      setErrorConfirmPassword(true);
-    } else {
-      setErrorConfirmPassword(false);
-    }
-    if (e.target.value.length < 6) {
-      setConfirmErrorPasswordMessage(t("validate_password"));
+    if(e.target.value.length < 6) {
+      setConfirmErrorPasswordMessage(t('validate_password'));
       setErrorConfirmPassword(true);
     }
   };
   const onSubmit = () => {
-    if (password == "" && confirmpassword == "") {
-      setErrorPasswordMessage("Password is required");
-      setConfirmErrorPasswordMessage("Confirm Password is required");
+    if(password == '' && confirmpassword == '') {
+      setErrorPasswordMessage('Password is required');
+      setConfirmErrorPasswordMessage('Confirm Password is required');
       setErrorPassword(true);
       setErrorConfirmPassword(true);
       return;
-    } else if (password === "") {
-      setErrorPasswordMessage("Password is required");
+    }else if(password === '') {
+      setErrorPasswordMessage('Password is required');
       setErrorPassword(true);
       return;
-    } else if (confirmpassword === "") {
-      setConfirmErrorPasswordMessage("Confirm Password is required");
+    }else if(confirmpassword === '') {
+      setConfirmErrorPasswordMessage('Confirm Password is required');
       setErrorConfirmPassword(true);
       return;
     }
-    if (!errorPassword && !errorConfirmPassword && !errorPasswordNotMatch) {
-      console.log("@TODO: safe save password");
+    if(!errorPassword && !errorConfirmPassword && !errorPasswordNotMatch) {
+      dispatch(
+        updatePassword(
+          {
+            body: {
+              password
+            },
+            callback:(res) => {
+              let {status_code, message = ''} = res; 
+              setOpenDialog(true);
+              setResponseMessage(t(message));
+              if([200,201,202,203,204].includes(status_code)) {
+                setPassword('');
+                setConfirmPassword('');
+              }
+            },
+            auth: true
+          }
+        )
+      );
     }
   };
   const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
@@ -103,6 +125,31 @@ export default function ProfileInfo(props) {
   const handleMouseDownConfirmPassword = (event) => {
     event.preventDefault();
   };
+
+  const onUpdateUserName = () => {
+    if(!errorUserName) {
+      dispatch(
+        updateNickName(
+          {
+            body:{
+              user_name: userName
+            },
+            callback:(res) => {
+              let { message = ''} = res;
+              if(message ==='user_name_unique') {
+                message = 'update_user_name_unique';
+              }
+              setOpenDialog(true);
+              setResponseMessage(t(message));
+            },
+            auth: true
+          }
+        )
+      );
+    }
+  };
+
+  
   return (
     <Grid>
           <Grid>
