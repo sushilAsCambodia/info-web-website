@@ -89,7 +89,13 @@ const Profile = () => {
                                     alignItems="center">
                                     { isLogin ? <>
                                         <Grid item xs={12} display="flex" alignItems="center">
-                                            <img src="./assets/Profile/user-icon.png" />
+                                            <img 
+                                                src={customer && customer.image ? customer.image.path : "/assets/Profile/user-icon.png"}
+                                                width={50}
+                                                height={50}
+                                                style={{objectFit:'conver', borderRadius:'50%'}}
+                                                onError={(e) => e.target.src = "/assets/Profile/user-icon.png"}
+                                            />
                                             &nbsp; <Typography fontWeight="600" fontSize="12px">{customer.user_name || 'Profile Name'}</Typography>
                                         </Grid> 
                                     </>: <>
