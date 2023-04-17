@@ -44,6 +44,7 @@ const UploadImg = () => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState(); 
   const dispatch = useDispatch();
   const [errorUserName,setErrorUserName] = useState(false);
+  const [errorUserNameMessage,setErrorUserNameMessage] = useState('');
   const [editUserName,setEditUserName] = useState(false);
   const [editPassword,setEditPassword] = useState(false);
   const [password,setPassword] = useState('');
@@ -123,8 +124,14 @@ const UploadImg = () => {
     setUsername(e.target.value)
     if(e.target.value == '') {
       setErrorUserName(true);
+      setErrorUserNameMessage(t('user_name_required'));
     }else {
-      setErrorUserName(false)
+      if(e.target.value.length > 5) {
+        setErrorUserName(false);
+      }else {
+        setErrorUserName(true);
+        setErrorUserNameMessage(t('validate_user_name'));
+      }
     }
   }
   const onUpdateUserName = () => {
@@ -286,7 +293,7 @@ const UploadImg = () => {
                   </InputAdornment>
                 }
               />
-              {errorUserName && <FormHelperText error>Error username</FormHelperText>}
+              {errorUserName && <FormHelperText error>{errorUserNameMessage}</FormHelperText>}
             </FormControl>
           </Grid>
         </ListItem>}

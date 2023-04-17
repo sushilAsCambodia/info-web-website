@@ -325,6 +325,18 @@ padding: 0px;
   border-top-right-radius: 15px;
 }
 
+.uploadimg_main .desktop-file-upload {
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  padding: 6px;
+  cursor: pointer;
+  background-image: var(--uploadImg);
+  width: 60px;
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 /* drawerline model css  */
 
 .drawerline.css-ahj2mt-MuiTypography-root {
