@@ -13,7 +13,7 @@ import { Grid, Tabs, Tab } from "@mui/material";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function FullSilder(props) {
-  const { banners = [],cards = [] } = props;
+  const { banners = [],cards = [], isWeb = false } = props;
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const [tabValue, setTabValue] = React.useState(0);
@@ -29,7 +29,7 @@ export default function FullSilder(props) {
   }; 
   return (
     <> 
-    { (banners && banners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'5px' }} className="mainautoplayswipeable">
+    { (banners && banners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={activeStep}
@@ -44,7 +44,7 @@ export default function FullSilder(props) {
                     item
                     component="img"
                     sx={{
-                      height: 160,
+                      height: isWeb ? 300 :  160,
                       display: "block",
                       overflow: "hidden",
                       width: "100%",
@@ -61,6 +61,19 @@ export default function FullSilder(props) {
         <MobileStepper
           steps={maxSteps}
           activeStep={activeStep}
+          sx={[
+            {
+              position:'absolute',
+              background:'transparent',
+              transform: 'translate(-50%, -50%)',
+              left:'50%',
+              top:'50%',
+              width: '100%'  
+            },
+            {
+              '& .MuiMobileStepper-dots': { display: 'none' },
+            },
+          ]}
           nextButton={
             <Button
               size="small"
@@ -99,8 +112,16 @@ export default function FullSilder(props) {
           aria-label="scrollable auto tabs example"
           className="MuiTabs-custom-tab"
           TabIndicatorProps={{
-            style: {display:'none' }
-          }}>
+            style: { display:'none' }
+          }}
+          sx={{
+            '& .MuiButtonBase-root .MuiSvgIcon-root': {
+              background:'#FF6F31',
+              borderRadius:'50%',
+              color:'white'
+            }
+          }}
+          >
           {
             cards.map((card,index) => {
               return <Tab key={index} onClick={()=> setTabValue(0)} sx={{ padding: '5px'}} label={<Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
