@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '@/services/http';
-export const createFeedback = createAsyncThunk(
-  "feedback/create",
-  async ({ body = {}, callback }) => {
+export const getCustomerService = createAsyncThunk(
+  "customer-service-settings/list",
+  async ({ params = {}, callback }) => {
     try {
-      const response = await api.post('/auth/feedbacks', body, true);
+      const response = await api.get('/auth/customer-service-settings/all', params);
       const {data,status} = response;
       data['status_code'] = status;
       if(typeof callback == 'function') {
