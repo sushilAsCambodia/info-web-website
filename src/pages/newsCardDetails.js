@@ -21,7 +21,7 @@ const NewsCardDetails = () => {
             dispatch(
                 getNewsById({
                     id,
-                    params:{},
+                    params: {},
                     callback:(res) => {
                         console.log(res,'callback');
                     }

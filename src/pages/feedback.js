@@ -8,22 +8,30 @@ import {
   IconButton,
   InputAdornment, 
   OutlinedInput, 
-  TextField
+  TextField,
+  FormHelperText 
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { createFeedback } from "@/store/actions/feedbackActions";
 import { useDispatch, useSelector } from 'react-redux';
+import utils from '@/common/utils';
+import LoadingDialog from "@/components/Loading";
+import DialogMessage from "@/components/DialogMessage";
 const Feedback = () => {
-  const {loading} = useSelector((state) => state.feedback)
+  const {loading} = useSelector((state) => state.feedback);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [content,setContent]  = useState('');
   const [contact,setContact]  = useState('');
+  const [openDialog,setOpenDialog]  = useState(false);
   const [errorContent,setErrorContent]  = useState(false);
+  const [errorEmail,setErrorEmail]  = useState(false);
+  const [errorEmailMessage,setErrorEmailMessage]  = useState('');
+  const [responseMessage,setResponseMessage]  = useState('');
   const onChangeContent = (e) => {
-    if(e.target.value.length <=500) {
+    if(e.target.value.length <= 500) {
       setContent(e.target.value)
-      if(e.target.value!='') {
+      if(e.target.value != '') {
         setErrorContent(false);
       }else {
         setErrorContent(true);
@@ -32,33 +40,49 @@ const Feedback = () => {
   }
   const onChangeContact = (e) => {
     setContact(e.target.value);
+    if(e.target.value!='') {
+      const isValidEmail = utils.validateEmail(e.target.value);
+      if(isValidEmail) {
+        setErrorEmail(false)
+      }else {
+        setErrorEmailMessage('invalid_email');
+        setErrorEmail(true);
+      }
+    }
   }
   const onSubmit = () => {
-    if(content === '') {
+    if(content == '' && contact == '') {
       setErrorContent(true);
+      setErrorEmail(true);
+      setErrorEmailMessage('contact_required');
+    }else if (content == '') {
+      setErrorContent(true);
+    }else if (content == '') {
+      setErrorEmailMessage('contact_required');
+      setErrorEmail(true);
     }else {
-      setErrorContent(false);
-      if(!errorContent) {
+      if(!errorContent && !errorEmail) { 
         dispatch(createFeedback({
           body: {
-            content: content,
+            feedback_content: content,
             contact: contact
           },
           callback:(res) => {
-            console.log('call' , res)
+            const {message = '' } = res;
+            setResponseMessage(t(message));
+            setOpenDialog(true);
           }
         }))
       }
     } 
   };
-  return (
+  return loading ? <LoadingDialog loading={loading}/> : ( 
     <>
       <Grid
         container
         alignItems="flex-start"
         justifyContent="center"
         padding="0px 16px">
-
         <Grid
           item
           xs={12}
@@ -86,7 +110,7 @@ const Feedback = () => {
                 value={content}
                 onChange={onChangeContent}
                 error={errorContent}
-                helperText={errorContent ? t('required_feedback') : ''}/>
+                helperText={errorContent ? t('feedback_content_required') : ''}/>
             </Grid>
 
             <Grid item xs={12} paddingTop="10px">
@@ -102,23 +126,23 @@ const Feedback = () => {
                 }}
               >
                 <OutlinedInput
-                  name="Username"
-                  placeholder={t('user_name')}
-                  inputProps={{ maxLength: 16 }}
-                  id="outlined-adornment-password"
+                  name="email"
+                  placeholder={t('email')}
+                  id="outlined-adornment-email"
                   type="text"
                   value={contact}
                   onChange={onChangeContact}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label="toggle password visibility"
+                        aria-label="toggle email visibility"
                         edge="end">
                         <Icon icon="ooui:message" width={20} color="#F26522" />
                       </IconButton>
                     </InputAdornment>
                   }
                 />
+                {errorEmail && <FormHelperText error>{t(errorEmailMessage)}</FormHelperText>}
               </FormControl>
             </Grid>
             <Grid item xs={12} paddingTop="30px">
@@ -132,16 +156,19 @@ const Feedback = () => {
                     "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
                   textTransform: 'capitalize'
                 }}
-                onClick={onSubmit}
-              >
+                onClick={onSubmit}>
                 {t('submit')}
               </Button>
             </Grid>
-
           </Grid>
-
         </Grid>
       </Grid>
+      <DialogMessage 
+        open={openDialog} 
+        setOpen={setOpenDialog} 
+        message={responseMessage} 
+        redirect={{pathname:'/profile'}}
+      />
     </>
   )
 
