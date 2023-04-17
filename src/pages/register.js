@@ -13,6 +13,7 @@ import {
   Divider,
   FormControlLabel,
   Checkbox,
+  InputLabel,
 } from "@mui/material";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -72,8 +73,10 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const goToLogin = () => {
@@ -104,7 +107,7 @@ export default function Register() {
                 callback: (res) => {
                   const { status_code } = res;
                   if ([200, 201, 202, 203].includes(status_code)) {
-                    Router.push("/home");
+                    matches ? Router.push("/home") : Router.push("/");
                   }
                 },
               })
@@ -115,9 +118,10 @@ export default function Register() {
     );
   };
   const onSubmit = () => {
-    if (username == "" && password == "") {
+    if (username == "" && password == "" && confirmPassword == "") {
       setErrorUserName(true);
       setErrorPassword(true);
+      setErrorConfirmPassword(true);
       return false;
     } else if (password == "") {
       setErrorPassword(true);
@@ -126,7 +130,7 @@ export default function Register() {
       setErrorUserName(true);
       return false;
     }
-    if (!errorPassword && !errorUserName) {
+    if (!errorPassword && !errorUserName && !errorConfirmPassword) {
       setLoading(true);
       handleSignup();
     }
@@ -146,6 +150,15 @@ export default function Register() {
       setErrorPassword(false);
     }
     setPassword(e.target.value);
+  };
+
+  const onChangeConfirmPassword = (e) => {
+    if (!password || e.target.value != password) {
+      setErrorConfirmPassword(true);
+    } else {
+      setErrorConfirmPassword(false);
+    }
+    setConfirmPassword(e.target.value);
   };
   // Register Dialog
   const [open, setOpen] = React.useState(false);
@@ -502,11 +515,11 @@ export default function Register() {
             alignContent="space-between"
             height={600}
           >
-            <Grid item container xs={12} sm={12} padding={2}>
+            <Grid item container xs={12} sm={12} paddingX={2}>
               <Grid my={2} container justifyContent="center">
                 <img src="./assets/Logo/footer_logo.png" />
               </Grid>
-              <Grid xs={12} mb={2}>
+              <Grid xs={12}>
                 <Divider
                   sx={{
                     "&::before, &::after": {
@@ -535,16 +548,20 @@ export default function Register() {
                 </Grid>
                 <Grid item xs={12} sm={12} mb={1}>
                   <FormControl
-                    variant="outlined"
+                    // variant="outlined"
                     fullWidth
                     sx={{
                       borderRadius: "15px",
                       marginBottom: "5px",
                     }}
                   >
+                    <InputLabel htmlFor="component-outlined">
+                      {t("user_name")}
+                    </InputLabel>
                     <OutlinedInput
                       name="Username"
                       placeholder={t("user_name")}
+                      label={t("user_name")}
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-username"
                       type="text"
@@ -578,9 +595,14 @@ export default function Register() {
                       marginBottom: "5px",
                     }}
                   >
+                    <InputLabel htmlFor="component-outlined">
+                      {t("password")}
+                    </InputLabel>
+
                     <OutlinedInput
                       name="password"
                       placeholder={t("password")}
+                      label={t("password")}
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
@@ -619,15 +641,20 @@ export default function Register() {
                       marginBottom: "5px",
                     }}
                   >
+                    <InputLabel htmlFor="component-outlined">
+                      {t("confirm_password")}
+                    </InputLabel>
+
                     <OutlinedInput
                       name="password"
-                      placeholder={t("password")}
+                      placeholder={t("confirm_password")}
+                      label={t("confirm_password")}
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => onChangePassword(e)}
-                      error={errorPassword}
+                      value={confirmPassword}
+                      onChange={(e) => onChangeConfirmPassword(e)}
+                      error={errorConfirmPassword}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -644,9 +671,9 @@ export default function Register() {
                         </InputAdornment>
                       }
                     />
-                    {errorPassword && (
+                    {errorConfirmPassword && (
                       <FormHelperText error>
-                        {t("validate_password")}
+                        Password Must Be Matching
                       </FormHelperText>
                     )}
                   </FormControl>

@@ -15,6 +15,8 @@ import {
   Divider,
   Checkbox,
   FormControlLabel,
+  InputLabel,
+  FilledInput,
 } from "@mui/material";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -101,7 +103,7 @@ export default function Login() {
           setOpen(true);
           if ([200, 201, 202, 203].includes(status_code)) {
             setTimeout(() => {
-              Router.push("/home");
+              matches ? Router.push("/home") : Router.push("/");
             }, 1000);
           }
         },
@@ -410,15 +412,10 @@ export default function Login() {
     <Grid
       p={15}
       display="flex"
-      justifyContent='center'
-      sx={{    backgroundImage:"url('./assets/login/login_bg.png')"    }}
+      justifyContent="center"
+      sx={{ backgroundImage: "url('./assets/login/login_bg.png')" }}
     >
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="stretch"
-        width="65%"
-      >
+      <Grid container justifyContent="center" alignItems="stretch" width="65%">
         <Grid
           container
           justifyContent="center"
@@ -431,7 +428,6 @@ export default function Login() {
             backgroundSize: "100% 100%",
           }}
           borderRadius="20px 0px 0px 20px"
-
         >
           <Grid xs={10} container alignContent="space-around">
             <Typography
@@ -495,7 +491,7 @@ export default function Login() {
           alignItems="flex-start"
           justifyContent="center"
           // py={5}
-          sx={{background:"white"}}        
+          sx={{ background: "white" }}
           borderRadius="0px 20px 20px 0px"
         >
           <Grid
@@ -536,7 +532,7 @@ export default function Login() {
                 }}
               >
                 <Grid item xs={12} sm={12} mb={3}>
-                <FieldLanguageSwitcher />
+                  <FieldLanguageSwitcher />
                 </Grid>
                 <Grid item xs={12} sm={12} mb={3}>
                   <FormControl
@@ -547,9 +543,14 @@ export default function Login() {
                       marginBottom: "5px",
                     }}
                   >
+                    <InputLabel htmlFor="component-outlined">
+                      {t("user_name")}
+                    </InputLabel>
+
                     <OutlinedInput
                       name="Username"
                       placeholder={t("user_name")}
+                      label={t("user_name")}
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-username"
                       type="text"
@@ -583,9 +584,13 @@ export default function Login() {
                       marginBottom: "5px",
                     }}
                   >
+                    <InputLabel htmlFor="component-outlined">
+                    {t("password")}
+                    </InputLabel>
                     <OutlinedInput
                       name="password"
                       placeholder={t("password")}
+                      label={t("password")}
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
@@ -758,7 +763,7 @@ export default function Login() {
                     Sign Up Here
                   </Typography>
                 </Link>
-                <Grid display="flex" sx={{cursor: "pointer"}}>
+                <Grid display="flex" sx={{ cursor: "pointer" }}>
                   <Icon icon="bi:chat-square-dots-fill" width={25} />
                   <Typography mx={1}>Contact</Typography>
                 </Grid>

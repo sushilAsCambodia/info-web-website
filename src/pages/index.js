@@ -23,7 +23,7 @@ export default function Index() {
     <>
       <Grid>
         <ResultsBanner />
-        <LinkBanner />
+        {/* <LinkBanner /> */}
         <NewsColumns />
         <Grid>
           <LandingPageBanner />
