@@ -225,7 +225,7 @@ const Layout = (props) => {
         for (let i = 0; i < length; i++) {
             tabPanels.push(<TabPanel value={value} index={i} padding="0px !important" >
                         <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "center", textAlign: "center !important" }}>
-                            <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                            <ListItem className='active-issue' style={{ justifyContent: "center", textAlign: "center !important" }}>
                                 <Typography fontSize="10px">Issue 01</Typography>
                             </ListItem>
                             <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>

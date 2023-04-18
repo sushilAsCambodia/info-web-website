@@ -58,7 +58,7 @@ export default function DialogDesktop() {
                 <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                     <Typography fontSize="10px">Issue 01</Typography>
                 </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                <ListItem className='active-issue' style={{ justifyContent: "center", textAlign: "center !important" }}>
                     <Typography fontSize="10px">Issue 02</Typography>
                 </ListItem>
                 <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
