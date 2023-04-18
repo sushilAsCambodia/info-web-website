@@ -115,7 +115,7 @@ export default function DialogDesktop() {
                                 sx={{
                                     position:'relative',
                                     '& .Mui-selected': {
-                                        color:'#FF0000',
+                                        color:'#FF0000 !important',
                                         fontWeight:'bold'
                                     }
                                 }}

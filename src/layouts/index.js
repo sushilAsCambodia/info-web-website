@@ -254,7 +254,7 @@ const Layout = (props) => {
                                 onChange={handleChange}
                                 sx={{
                                     '& .Mui-selected': {
-                                        color:'#FF0000',
+                                        color:'#FF0000 !important',
                                         fontWeight:'bold'
                                     }
                                 }}

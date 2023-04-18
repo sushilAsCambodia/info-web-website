@@ -28,8 +28,7 @@ export default function CardSlice() {
             '& .MuiTabs-indicator':{
                 display:'none'
             }
-        }}
-
+        }} 
         aria-label="scrollable auto tabs example">
         <Tab disableRipple label={
             <Card sx={{ display: 'flex', width:248,height:90.54,padding:'7px'}}>
