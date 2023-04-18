@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import Pagination from '@mui/material/Pagination';
 import {
     Button,
     Typography,
@@ -19,63 +20,60 @@ import {
     OutlinedInput,
     Divider,
 } from "@mui/material";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-function handleClick(event) {
-    event.preventDefault();
-    console.info('You clicked a breadcrumb.');
-}
+
 
 
 const rows = [
     {
-      id: 1,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "03 Apr 2023",
+        id: 1,
+        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        date: "03 Apr 2023",
     },
     {
-      id: 2,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "03 Apr 2023",
+        id: 2,
+        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        date: "03 Apr 2023",
     },
     {
-      id: 3,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "03 Apr 2023",
+        id: 3,
+        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        date: "03 Apr 2023",
     },
     {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "03 Apr 2023",
+        id: 4,
+        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        date: "03 Apr 2023",
     },
     {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "03 Apr 2023",
+        id: 4,
+        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        date: "03 Apr 2023",
     },
     {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "03 Apr 2023",
+        id: 4,
+        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        date: "03 Apr 2023",
     },
     {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "03 Apr 2023",
+        id: 4,
+        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        date: "03 Apr 2023",
     },
     {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "03 Apr 2023",
+        id: 4,
+        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        date: "03 Apr 2023",
     },
-  ];
+];
 
-const Announcement = () => { 
+const Announcement = () => {
     const matches = useMediaQuery("(max-width:768px)");
-
+    const router = useRouter();
     const breadcrumbs = [
-        <Link underline="hover" component={Link} key="1" color="inherit" href="/" onClick={handleClick}>
+        <Link underline="hover" component={Link} key="1" color="inherit"  sx={{cursor:"pointer"}}   onClick={()=>router.push('/')}>
             Home
         </Link>,
         <Typography key="2" color="#F24E1E">
@@ -83,8 +81,8 @@ const Announcement = () => {
         </Typography>,
     ];
     return !matches ? (
-       <>
-          <Grid
+        <>
+            <Grid
                 container
                 alignItems="flex-start"
                 justifyContent="center"
@@ -114,29 +112,36 @@ const Announcement = () => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-                    <List sx={{ padding: "0px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto", gridGap: "20px", justifyContent: "flex-start", textAlign: "center !important" }}>
-                        {rows.map((row) => {
-                          return (
-                            <ListItem sx={{ padding: "20px 60px 20px 20px !important", backgroundColor: "#FFF5F0", borderRadius: "11px", border: "1px solid #FF6F31", }}>
-                                <Grid item xs={12}>
-                                    <Grid item>
-                                        <Typography fontWeight="500" fontSize="12px" color="#000">{row.news}</Typography>
-                                        <Typography paddingTop={1} textAlign="left" fontSize="10px !important" color="#8C8C8C">
-                                        {row.date}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </ListItem>
-                              );
+                        <List sx={{ padding: "0px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto", gridGap: "20px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                            {rows.map((row) => {
+                                return (
+                                    <ListItem sx={{ padding: "20px 60px 20px 20px !important", backgroundColor: "#FFF5F0", borderRadius: "11px", border: "1px solid #FF6F31", }}>
+                                        <Grid item xs={12}>
+                                            <Grid item>
+                                                <Typography fontWeight="500" fontSize="12px" color="#000">{row.news}</Typography>
+                                                <Typography paddingTop={1} textAlign="left" fontSize="10px !important" color="#8C8C8C">
+                                                    {row.date}
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </ListItem>
+                                );
                             })}
-                            
+
                         </List>
                     </Grid>
+
+                    <Grid item xs={12} textAlign="center" display="flex" justifyContent="center" paddingTop={3}>
+                        <Stack spacing={2} sx={{ textAlign: "center" }}>
+                            <Pagination count={5} variant="outlined" shape="rounded" />
+                        </Stack>
+                    </Grid>
+
                 </Grid>
             </Grid>
-       </>
-        ) : (
-       <>
+        </>
+    ) : (
+        <>
             <Grid
                 container
                 alignItems="flex-start"
@@ -344,7 +349,7 @@ const Announcement = () => {
 
                             </ListItem>
                             <Divider />
-                            
+
                         </List>
                         <Divider />
                     </Grid>

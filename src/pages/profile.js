@@ -31,6 +31,7 @@ import { BorderBottom } from "@mui/icons-material";
 import ProfileInfo from "@/components/profilePage/profileInfo";
 import Feedback from "./feedback";
 import { useRouter } from "next/router";
+import ProfileAnnouncement from "@/components/profilePage/profileannouncement";
 const Profile = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
@@ -148,7 +149,7 @@ function TabPanel(props) {
 
   return !matches ? (
     <Grid display="flex" justifyContent="center" pt={9} minHeight={750}>
-     <Grid sx={{ width: 700 }}>
+     <Grid sx={{ width: 700 }} className="profiletab">
         <CusTabs
           value={value}
           onChange={handleChange}
@@ -168,7 +169,7 @@ function TabPanel(props) {
           <ProfileInfo />
         </TabPanel>
         <TabPanel value={value} index={1} >
-          Item Two
+        <ProfileAnnouncement />
         </TabPanel>
         <TabPanel value={value} index={2} >
           <Card sx={{padding:"15px"}} elevation={5}>
