@@ -104,6 +104,7 @@ export default function NewsScrollColumn(props) {
           >
             <Typography>Internation news</Typography>
             <Button
+            component={Link} href="/news"
               variant="contained"
               sx={{ background: "#FFD233", padding: "2px", fontSize: "13px" }}
             >
