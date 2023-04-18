@@ -12,6 +12,15 @@ export default function DialogDesktop() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    const itemListElem = (length) => {
+        const items = [];
+        for (let i = 0; i < length; i++) {
+            items.push(<ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+            <Typography fontSize="10px">Issue {i<9?'0'+(i+1):(i+1)}</Typography>
+            </ListItem>);
+        }
+        return items;
+    }
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
         return (
@@ -46,6 +55,7 @@ export default function DialogDesktop() {
     const tabElms = (length) => {
         let tabs = [];
         for (let i = 0 ; i < length ; i++) {
+            console.log(2020+i)
             tabs.push(<Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={2020+i} {...a11yProps(i)} /> );
         }
         return tabs;
@@ -54,46 +64,8 @@ export default function DialogDesktop() {
         let tabPanels = [];
         for (let i = 0 ; i < length ; i++) {
             tabPanels.push( <TabPanel value={value} index={i} padding="0px !important" >
-            <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 01</Typography>
-                </ListItem>
-                <ListItem className='active-issue' style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 02</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 03</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 04</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 05</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 06</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 07</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 08</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 09</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 10</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 11</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 12</Typography>
-                </ListItem>
-                <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                    <Typography fontSize="10px">Issue 13</Typography>
-                </ListItem>
+            <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                {itemListElem(20)}
             </List>
         </TabPanel>);
         }
@@ -168,7 +140,7 @@ export default function DialogDesktop() {
                                     transform: translate(-50%, -50%);
                                 }
                                 .issue-card-custom .MuiTabs-scroller > .MuiTabs-flexContainer{
-                                    justify-content:center
+                                    // justify-content:center
                                 }
                                 .issue-card-custom > .MuiButtonBase-root svg {
                                     background: #FF6F31;
