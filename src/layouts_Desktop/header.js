@@ -250,6 +250,7 @@ const Header = () => {
                         "linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)",
                       color: "white",
                     }}
+                    onClick={()=>router.push('/download')}
                   >
                     <Icon icon="material-symbols:app-shortcut" width={20} />
                     Download App

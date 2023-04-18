@@ -24,13 +24,13 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
-import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import ProfileInfo from "@/components/profilePage/profileInfo";
 import Feedback from "./feedback";
 import { useRouter } from "next/router";
 import DialogMessage from "@/components/DialogMessage";
+import Announcement from "./announcement";
 const Profile = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
@@ -170,7 +170,7 @@ function TabPanel(props) {
           <ProfileInfo setOpenDialog={setOpenDialog} openDialog={openDialog} setResponseMessage={setResponseMessage}/>
         </TabPanel>
         <TabPanel value={value} index={1} >
-          Item Two
+          <Announcement />
         </TabPanel>
         <TabPanel value={value} index={2} >
           <Card sx={{padding:"15px"}} elevation={5}>

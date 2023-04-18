@@ -26,7 +26,7 @@ const Layout = (props) => {
     let width = '';
     if (router.pathname != '') {
         width = '80%';
-    } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
+    } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword' || router.pathname == '/download') {
         width = '100%';
     }
 
