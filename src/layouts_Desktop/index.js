@@ -55,7 +55,7 @@ const Layout = (props) => {
 
                     }
                     #__next {
-                        min-height: 100vh;
+                        // min-height: 100vh;
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
