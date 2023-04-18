@@ -14,9 +14,6 @@ import CardSlice from './CardSlide';
 import Issue from './Issue';
 export default function DialogDesktop() {
   const { banners } = useSelector((state) => state.banner);
-  const { cards } = useSelector((state) => state.card);
-  const { categories } = useSelector((state) => state.category);
-  const [value, setValue] = React.useState(0);
   const dispatch = useDispatch();
   const { i18n } = useTranslation(); 
   useEffect(() => {
@@ -27,23 +24,7 @@ export default function DialogDesktop() {
           console.log(res, 'callback')
         }
       }
-    ));
-    dispatch(getCard(
-      {
-        params: { fake: true },
-        callback: (res) => {
-          console.log(res, 'callback')
-        }
-      }
-    ));
-    dispatch(getCategory(
-      {
-        params: { lang_id: utils.convertLangCodeToID(i18n.language) },
-        callback: (res) => {
-          console.log(res, 'callback')
-        }
-      }
-    ));
+    ));  
   }, [i18n.language]);
   const [open, setOpen] = React.useState(true);
 
@@ -54,6 +35,7 @@ export default function DialogDesktop() {
   const handleClose = () => {
     setOpen(false);
   }; 
+  
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -67,9 +49,9 @@ export default function DialogDesktop() {
         aria-describedby="alert-dialog-description"
       >
         <DialogContent sx={{ padding: 1 }}>
-          <FullSilder banners={banners} cards={cards} isWeb={true} />
+          <FullSilder banners={banners} isWeb={true} />
           <CardSlice />
-          <Issue></Issue>
+          <Issue/>
         </DialogContent>
       </Dialog>
     </div>
