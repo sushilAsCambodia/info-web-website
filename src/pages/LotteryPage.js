@@ -50,16 +50,16 @@ export default function LotteryPage() {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+  function createData(img,name, calories, fat, carbs, id) {
+    return {img, name, calories, fat, carbs, id };
   }
 
   const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png','Frozen yoghurt', 159, 6.0, 24, 1),
+    createData('http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg','Ice cream sandwich', 237, 9.0, 37, 2),
+    createData('http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg','Eclair', 262, 16.0, 24, 3),
+    createData('http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg','Cupcake', 305, 3.7, 67, 4),
+    createData('http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg','Gingerbread', 356, 16.0, 49, 5),
   ];
   return (
     <>
@@ -111,7 +111,7 @@ export default function LotteryPage() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledHeaderCell width="250px">Dessert (100g serving)</StyledHeaderCell>
+            <StyledHeaderCell width="300px">Dessert (100g serving)</StyledHeaderCell>
             <StyledHeaderCell width="100px" align="left">Calories</StyledHeaderCell>
             <StyledHeaderCell width="100px" align="left">Fat&nbsp;(g)</StyledHeaderCell>
             <StyledHeaderCell width="500px" align="center">Carbs&nbsp;(g)</StyledHeaderCell>
@@ -123,15 +123,15 @@ export default function LotteryPage() {
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell  component="th" scope="row">
-                {row.name}
+              <StyledTableCell sx={{display:"flex",alignItems:"center"}} component="th" scope="row">
+              <img width="30px" src={row.img} style={{marginRight:"10px"}} /> <Typography>{row.name}</Typography> 
               </StyledTableCell>
               <StyledTableCell align="right">{row.calories}</StyledTableCell>
               <StyledTableCell align="right">{row.fat}</StyledTableCell>
               <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
