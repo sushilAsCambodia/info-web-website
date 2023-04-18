@@ -13,7 +13,7 @@ import { Grid, Tabs, Tab } from "@mui/material";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function FullSilder(props) {
-  const { banners = [],cards = [], isWeb = false } = props;
+  const { banners = [], isWeb = false } = props;
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const [tabValue, setTabValue] = React.useState(0);
@@ -103,70 +103,6 @@ export default function FullSilder(props) {
             </Button>
           }
         />
-      </Grid>}
-      {cards && cards.length > 0 && <Grid item xs={12} sx={{marginTop:'5px',marginBottom:'5px'}}>
-        <Tabs
-          value={tabValue}
-          onChange={(e) => setTabValue(e.target.value)}
-          variant="scrollable"
-          aria-label="scrollable auto tabs example"
-          className="MuiTabs-custom-tab"
-          TabIndicatorProps={{
-            style: { display:'none' }
-          }}
-          sx={{
-            '& .MuiButtonBase-root .MuiSvgIcon-root': {
-              background:'#FF6F31',
-              borderRadius:'50%',
-              color:'white'
-            }
-          }}
-          >
-          {
-            cards.map((card,index) => {
-              return <Tab key={index} onClick={()=> setTabValue(0)} sx={{ padding: '5px'}} label={<Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
-                  <Grid sx={{background:`url(${card.image})`}} alt="机率" width="80px" height="80px" className="card-custom">
-                    <span></span>
-                  </Grid>
-                  <Typography
-                    position="absolute"
-                    fontSize="10px !important"
-                    bottom="25%"
-                    left="0"
-                    right="0"
-                    color='white'
-                  >
-                    {card.translate||'N/A'}
-                  </Typography>
-                  <Typography
-                    position="absolute"
-                    bottom="10%"
-                    left="0"
-                    right="0"
-                    color='white'
-                    fontSize='10px !important'
-                  >
-                    {card.label||'N/A'}
-                  </Typography>
-                </Grid>}>
-              </Tab> 
-            })
-          }
-          
-        </Tabs> 
-        <style>
-          {
-            `
-              .card-custom > span{
-                position: absolute;
-                height: 100%;
-                left: 0;
-                right: 0;
-                background:linear-gradient(360deg, #FF0000 0%, rgba(255, 110, 49, 0.37) 100%)
-              }
-            `
-          }
-        </style>
       </Grid>} 
     </>
   );

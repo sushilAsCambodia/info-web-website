@@ -13,6 +13,7 @@ import {getCard} from '@/store/actions/cardActions'
 import {getCategory} from '@/store/actions/categoryActions'
 import { useEffect } from 'react';  
 import utils from '@/common/utils';
+import CardSlice from './CardSlide';
 export default function DialogDesktop() {
     const {banners} = useSelector((state) => state.banner);
     const {cards} = useSelector((state) => state.card);
@@ -69,13 +70,8 @@ export default function DialogDesktop() {
       > 
         <DialogContent sx={{padding:1}}>
           <FullSilder banners={banners} cards={cards} isWeb={true}/>
+          <CardSlice/>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

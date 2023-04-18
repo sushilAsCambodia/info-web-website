@@ -22,7 +22,7 @@ export default function JournalCardDetails() {
           callback:(res) => {
             console.log(res,'callbakc')
             const {status_code,data = {}} = res;
-            if([200,201,202,203].includes(status_code)) {
+            if([200,201,202,203,204].includes(status_code)) {
               if(data && Object.keys(data).length) {
                 const images =  [];
                 for (let i = 0; i < data.images.length; i++) {

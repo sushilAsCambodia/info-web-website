@@ -223,8 +223,8 @@ const Layout = (props) => {
             <br />
             <Typography textAlign="center" fontSize="12px">Choose the number of periods</Typography>
             <Typography textAlign="left" fontSize="12px" className='yearheadline'>Year</Typography>
-            <List>
-                <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
+            <List sx={{padding:'0px'}}>
+                <ListItem disablePadding>
                     <Grid item xs={12} sm={12} width='100%'>
                         <Box sx={{ width: '100%' }}>
                             {/* <Box sx={{ borderBottom: 1, borderColor: 'divider'}}> */}
@@ -258,7 +258,7 @@ const Layout = (props) => {
                             </Tabs>
                             {/* </Box> */}
                             <TabPanel value={value} index={0} padding="0px !important" >
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -301,7 +301,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel>
                             <TabPanel value={value} index={1}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -318,7 +318,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel> 
                             <TabPanel value={value} index={2} padding="0px !important" >
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -361,7 +361,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel>
                             <TabPanel value={value} index={3}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -377,7 +377,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel> 
                             <TabPanel value={value} index={4} padding="0px !important" >
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -420,7 +420,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel>
                             <TabPanel value={value} index={5}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
@@ -437,7 +437,7 @@ const Layout = (props) => {
                                 </List>
                             </TabPanel> 
                             <TabPanel value={value} index={6}>
-                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
