@@ -65,5 +65,8 @@
     "created_successfully":"បានបង្កើតដោយជោគជ័យ",
     "updated_successfully":"បានកែប្រែដោយជោគជ័យ",
     "update_user_name_unique":"This account already exists",
-    "password_required":"Password is required"
+    "password_required":"Password is required",
+    "forgot_password_info_web":"ភ្លេច​លេខសំងាត់ | InfoWeb",
+    "login_info_web":"ចូល | InfoWeb",
+    "register_info_web":"ចុះឈ្ហោះ | InfoWeb"
 }

@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 import Empty from '../Empty';
 export default function JournalCard(props) {
   const { lang_id } = props;
-  const { journals = [], loading } = useSelector((state) => state.journal)
-  const cardDetail = (journal_id,title='') => {
-    Router.push({ pathname: '/journalCardDetails', query: { journal_id, lang_id,title: title} });
+  const { journals = [], loading } = useSelector((state) => state.journal);
+  const cardDetail = (album_id,title='') => {
+    Router.push({ pathname: '/journalCardDetails', query: { album_id, lang_id,title: title} });
   };
   return (
     loading ? <DataLoading /> : <Grid container item spacing={1} sx={{marginTop:'1px', padding:'10px'}}>

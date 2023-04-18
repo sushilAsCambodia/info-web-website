@@ -139,7 +139,6 @@ export default function DialogDesktop() {
                                 aria-label="basic tabs example" className='scrollable-custom issue-card-custom'>
                                 {tabElms(13)}
                             </Tabs>
-                            {/* </Box> */}
                             {tabPanelElms(13)}
                         </Box>
                     </Grid>

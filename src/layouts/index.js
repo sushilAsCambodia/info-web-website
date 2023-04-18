@@ -195,7 +195,7 @@ const Layout = (props) => {
             title = t('login_info_web')
             break;
         case '/register':
-            title = t('regiter_info_web')
+            title = t('register_info_web')
             break;
         case '/forgotpassword':
             title = t('forgot_password_info_web')
@@ -247,6 +247,12 @@ const Layout = (props) => {
                                 scrollButtons
                                 value={value}
                                 onChange={handleChange}
+                                sx={{
+                                    '& .Mui-selected': {
+                                        color:'#FF0000',
+                                        fontWeight:'bold'
+                                    }
+                                }}
                                 aria-label="basic tabs example" className='scrollable-custom'>
                                 <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2020" {...a11yProps(0)} />
                                 <Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label="2021" {...a11yProps(1)} />

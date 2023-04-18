@@ -65,5 +65,8 @@
     "created_successfully":"Created successfully",
     "updated_successfully":"Updated successfully",
     "update_user_name_unique":"This account already exists",
-    "password_required":"Password is required"
+    "password_required":"Password is required",
+    "forgot_password_info_web":"Forgot password | InfoWeb",
+    "login_info_web":"Login | InfoWeb",
+    "register_info_web":"Register | InfoWeb"
 }
