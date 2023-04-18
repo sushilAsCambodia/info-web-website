@@ -1,13 +1,14 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import LoadingDialog from "../Loading";
+import DialogMessage from "../DialogMessage";
 import {
   updateNickName,
   updatePassword,
   uploadProfile,
 } from "@/store/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
-import utils from "@/common/utils";
 import {
   Grid,
   Paper,
@@ -21,34 +22,29 @@ import {
   FormHelperText,
   Divider,
   InputLabel,
+  Drawer
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-const ImgUpload = ({ onChange, src }) => {
-  return (
-    <label
-      htmlFor="photo-upload"
-      className="desktop-file-upload fas"
-      style={{ "--uploadImg": "url('/assets/Profile/profile_upload.png')" }}
-    >
-      <div className="">
-        <img htmlFor="photo-upload" src={src} />
-      </div>
-      <input id="photo-upload" type="file" onChange={onChange} />
-    </label>
-  );
-};
+import { useRouter } from "next/router";
+
+
+
 export default function ProfileInfo(props) {
   const { categories, lang_id } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { customer, loading } = useSelector((state) => state.auth);
+  const [openDialog,setOpenDialog]  = useState(false);
+  const [openDialogString,setOpenDialogString]  = useState('false');
+  const [responseMessage,setResponseMessage]  = useState('');
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState();
   const [userName, setUsername] = useState(
     customer && customer.user_name ? customer.user_name : ""
   );
+
   const [editUsername, setEditUsername] = useState(true);
 
   const [password, setPassword] = useState("");
@@ -58,11 +54,64 @@ export default function ProfileInfo(props) {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [errorPassword, setErrorPassword] = useState(false);
-  const [errorPasswordNotMatch, setErrorPasswordNotMatch] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
   const [errorConfirmPasswordMessage, setConfirmErrorPasswordMessage] =
     useState("");
+  const [errorUserName, setErrorUserName] = useState(false);
+  const [errorUserNameMessage, setErrorUserNameMessage] = useState("");
+  const [file,setFile]  = useState(undefined);
+
+  const router = useRouter();
+
+
+  const ImgUpload = ({ onChange, src }) => {
+    return (
+      <label
+        htmlFor="photo-upload"
+        className="desktop-file-upload fas"
+        style={{ "--uploadImg": `${imagePreviewUrl ? "" : "url('/assets/Profile/profile_upload.png')"}` }}
+      >
+          <img htmlFor="photo-upload" width={50} src={src} style={{borderRadius:"50px"}}/>
+        <input id="photo-upload" type="file" onChange={onChange} />
+      </label>
+    );
+  };
+  
+  useEffect(() => {
+    setUsername((customer && customer.user_name ? customer.user_name : ''));
+    if(customer && customer.image) {
+      setImagePreviewUrl( customer.image.path || '');
+    }
+  }, [customer]);
+  const updateProfilePhoto = (file) => {
+    dispatch(
+      uploadProfile(
+        {
+          body: {
+            image: file
+          },
+          callback:(res) => {
+            let { message = ''} = res; 
+            setOpenDialog(true);
+            setResponseMessage(t(message));
+            console.log('update',res)
+            setOpenDialogString('test')
+            console.log('openDialogString test:::',openDialogString)
+          },
+          auth: true,
+          formdata: true
+        }
+      )
+    )
+  }
+  useEffect(()=> {
+    if(file) {
+      console.log( file,'file');
+      updateProfilePhoto(file);
+    }
+  } ,[file])
+
 
   const photoUpload = (e) => {
     e.preventDefault();
@@ -133,7 +182,7 @@ export default function ProfileInfo(props) {
       setErrorConfirmPassword(true);
       return;
     }
-    if (!errorPassword && !errorConfirmPassword && !errorPasswordNotMatch) {
+    if (!errorPassword && !errorConfirmPassword) {
       dispatch(
         updatePassword({
           body: {
@@ -165,7 +214,20 @@ export default function ProfileInfo(props) {
   const handleMouseDownConfirmPassword = (event) => {
     event.preventDefault();
   };
-
+  const onChangeUserName = (e) => {
+    setUsername(e.target.value)
+    if (e.target.value == "") {
+      setErrorUserName(true);
+      setErrorUserNameMessage(t("user_name_required"));
+    } else {
+      if (e.target.value.length > 5) {
+        setErrorUserName(false);
+      } else {
+        setErrorUserName(true);
+        setErrorUserNameMessage(t("validate_user_name"));
+      }
+    }
+  };
   const onUpdateUserName = () => {
     if (!errorUserName) {
       dispatch(
@@ -174,16 +236,25 @@ export default function ProfileInfo(props) {
             user_name: userName,
           },
           callback: (res) => {
-            let { message = "" } = res;
+            let {status_code, message} = res; 
             if (message === "user_name_unique") {
               message = "update_user_name_unique";
             }
-            setOpenDialog(true);
-            setResponseMessage(t(message));
+              console.log("try:::",message)
+
+              setResponseMessage(t(message));
+              setEditUsername(!editUsername);
+         
+            // if (![200, 201, 202, 203, 204].includes(status_code)) {
+            //   setPassword("");
+            //   setConfirmPassword("");
+            // }
           },
           auth: true,
         })
       );
+      setOpenDialog(true);
+      console.log("updateusername:::",openDialog)
     }
   };
 
@@ -203,6 +274,7 @@ export default function ProfileInfo(props) {
         <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
 
         <FormControl fullWidth id="nickNameFormControl">
+          <InputLabel>{t("user_name")}</InputLabel>
           <FilledInput
             disabled={editUsername}
             name="nickname"
@@ -211,7 +283,7 @@ export default function ProfileInfo(props) {
             id="nicknameInputField"
             type="text"
             value={userName}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={onChangeUserName}
             sx={{ background: "#fff" }}
             endAdornment={
               <InputAdornment position="end" background="#fff">
@@ -246,9 +318,7 @@ export default function ProfileInfo(props) {
                       textTransform: "capitalize",
                       border: "1px solid grey",
                     }}
-                    onClick={() => {
-                      setEditUsername(!editUsername);
-                    }}
+                    onClick={onUpdateUserName}
                   >
                     {t("submit")}
                   </Button>
@@ -258,6 +328,7 @@ export default function ProfileInfo(props) {
           />
         </FormControl>
       </Grid>
+
       <Grid xs={12} my={5}>
         <Divider
           id="changePasswordDivider"
@@ -272,6 +343,7 @@ export default function ProfileInfo(props) {
           <Typography variant="h5">change password</Typography>
         </Divider>
       </Grid>
+
       <Grid item xs={12}>
         <FormControl
           variant="outlined"
@@ -311,7 +383,7 @@ export default function ProfileInfo(props) {
           )}
         </FormControl>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} my={1}>
         <FormControl
           variant="outlined"
           fullWidth
@@ -320,16 +392,17 @@ export default function ProfileInfo(props) {
             marginBottom: "5px",
           }}
         >
-                    <InputLabel>{t("password")}</InputLabel>
+          <InputLabel>{t("confirm_password")}</InputLabel>
 
           <OutlinedInput
             sx={{ paddingRight: "10px" }}
             name="confirm_password"
             // placeholder={t("confirm_password")}
+            label={t("confirm_password")}
             inputProps={{ maxLength: 16 }}
             id="outlined-adornment-confirmpassword"
             type={showConfirmPassword ? "text" : "password"}
-            error={errorConfirmPassword || errorPasswordNotMatch}
+            error={errorConfirmPassword}
             value={confirmpassword}
             onChange={onChangeConfirmPassword}
             endAdornment={
@@ -350,6 +423,7 @@ export default function ProfileInfo(props) {
           )}
         </FormControl>
       </Grid>
+
       <Grid item xs={6} pr={1}>
         <Button
           disableElevation
@@ -360,7 +434,7 @@ export default function ProfileInfo(props) {
             background: "#D4D4D4",
             textTransform: "capitalize",
           }}
-          onClick={onSubmit}
+          onClick={()=>router.push('/')}
         >
           {t("cancel")}
         </Button>
@@ -381,6 +455,14 @@ export default function ProfileInfo(props) {
           {t("submit")}
         </Button>
       </Grid>
+
+      
+      <LoadingDialog loading={loading}/>
+      <DialogMessage
+        open={openDialog} 
+        // setOpen={setOpenDialog} 
+        message={responseMessage}
+      />
     </Paper>
   );
 }
