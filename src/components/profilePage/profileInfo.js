@@ -20,13 +20,18 @@ import {
   Button,
   FormHelperText,
   Divider,
+  InputLabel,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 const ImgUpload = ({ onChange, src }) => {
   return (
-    <label htmlFor="photo-upload" className="desktop-file-upload fas" style={{'--uploadImg':"url('/assets/Profile/profile_upload.png')"}}>
+    <label
+      htmlFor="photo-upload"
+      className="desktop-file-upload fas"
+      style={{ "--uploadImg": "url('/assets/Profile/profile_upload.png')" }}
+    >
       <div className="">
         <img htmlFor="photo-upload" src={src} />
       </div>
@@ -44,6 +49,7 @@ export default function ProfileInfo(props) {
   const [userName, setUsername] = useState(
     customer && customer.user_name ? customer.user_name : ""
   );
+  const [editUsername, setEditUsername] = useState(true);
 
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
@@ -182,7 +188,7 @@ export default function ProfileInfo(props) {
   };
 
   return (
-    <Paper sx={{ padding: "20px" }} elevation={5} component={Grid} container>
+    <Paper sx={{ padding: "40px" }} elevation={5} component={Grid} container>
       <Grid
         item
         xs={12}
@@ -191,45 +197,70 @@ export default function ProfileInfo(props) {
         flexWrap="nowrap"
         border="1px solid grey"
         p={2}
+        borderRadius="10px"
         className="uploadimg_main"
       >
         <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
 
-        <FormControl fullWidth>
+        <FormControl fullWidth id="nickNameFormControl">
           <FilledInput
+            disabled={editUsername}
             name="nickname"
             placeholder={t("user_name")}
             inputProps={{ maxLength: 16 }}
-            id="outlined-adornment-nickname"
+            id="nicknameInputField"
             type="text"
             value={userName}
             onChange={(e) => setUsername(e.target.value)}
-            sx={{ background: "white" }}
+            sx={{ background: "#fff" }}
             endAdornment={
-              <InputAdornment position="end">
-                <Button
-                  disableElevation
-                  variant="contained"
-                  sx={{
-                    color: "black",
-                    background: "#EFEEEE",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  <Icon
-                    icon="mdi:circle-edit-outline"
-                    width={20}
-                    style={{ marginRight: "5px" }}
-                  />
-                  {t("edit")}
-                </Button>
+              <InputAdornment position="end" background="#fff">
+                {editUsername ? (
+                  <Button
+                    disableElevation
+                    variant="contained"
+                    sx={{
+                      color: "black",
+                      background: "#EFEEEE",
+                      textTransform: "capitalize",
+                      border: "1px solid grey",
+                    }}
+                    onClick={() => {
+                      setEditUsername(!editUsername);
+                    }}
+                  >
+                    <Icon
+                      icon="mdi:circle-edit-outline"
+                      width={20}
+                      style={{ marginRight: "5px" }}
+                    />
+                    {t("edit")}
+                  </Button>
+                ) : (
+                  <Button
+                    disableElevation
+                    variant="contained"
+                    sx={{
+                      color: "black",
+                      background: "#EFEEEE",
+                      textTransform: "capitalize",
+                      border: "1px solid grey",
+                    }}
+                    onClick={() => {
+                      setEditUsername(!editUsername);
+                    }}
+                  >
+                    {t("submit")}
+                  </Button>
+                )}
               </InputAdornment>
             }
           />
         </FormControl>
       </Grid>
-      <Grid xs={12}>
+      <Grid xs={12} my={5}>
         <Divider
+          id="changePasswordDivider"
           sx={{
             "&:before": {
               width: "0px",
@@ -242,9 +273,6 @@ export default function ProfileInfo(props) {
         </Divider>
       </Grid>
       <Grid item xs={12}>
-        <Typography fontWeight="bold" pb={1} textAlign="left">
-          {t("password")}
-        </Typography>
         <FormControl
           variant="outlined"
           fullWidth
@@ -253,10 +281,12 @@ export default function ProfileInfo(props) {
             marginBottom: "5px",
           }}
         >
+          <InputLabel>{t("password")}</InputLabel>
           <OutlinedInput
             fullWidth
+            label={t("password")}
             name="password"
-            placeholder={t("password")}
+            // placeholder={t("password")}
             inputProps={{ maxLength: 16 }}
             id="outlined-adornment-password"
             type={showPassword ? "text" : "password"}
@@ -282,9 +312,6 @@ export default function ProfileInfo(props) {
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        <Typography fontWeight="bold" pb={1} textAlign="left">
-          {t("confirm_password")}
-        </Typography>
         <FormControl
           variant="outlined"
           fullWidth
@@ -293,10 +320,12 @@ export default function ProfileInfo(props) {
             marginBottom: "5px",
           }}
         >
+                    <InputLabel>{t("password")}</InputLabel>
+
           <OutlinedInput
             sx={{ paddingRight: "10px" }}
             name="confirm_password"
-            placeholder={t("confirm_password")}
+            // placeholder={t("confirm_password")}
             inputProps={{ maxLength: 16 }}
             id="outlined-adornment-confirmpassword"
             type={showConfirmPassword ? "text" : "password"}

@@ -337,6 +337,16 @@ padding: 0px;
   background-size: contain;
   background-repeat: no-repeat;
 }
+#nicknameInputField:disabled {
+  background-color: #ffffff;
+  color: black;
+}
+#nickNameFormControl div{
+  background: #fff;
+}
+#changePasswordDivider .MuiDivider-wrapper{
+  padding-left: 0 !important;
+}
 /* drawerline model css  */
 
 .drawerline.css-ahj2mt-MuiTypography-root {
