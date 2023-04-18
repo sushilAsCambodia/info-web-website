@@ -15,7 +15,7 @@ export default function DialogDesktop() {
     const itemListElem = (length) => {
         const items = [];
         for (let i = 0; i < length; i++) {
-            items.push(<ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+            items.push(<ListItem className={i==4?'active-issue':''} style={{ justifyContent: "center", textAlign: "center !important" }}>
             <Typography fontSize="10px">Issue {i<9?'0'+(i+1):(i+1)}</Typography>
             </ListItem>);
         }
