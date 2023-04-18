@@ -4,7 +4,7 @@ export const createFeedback = createAsyncThunk(
   "feedback/create",
   async ({ body = {}, callback }) => {
     try {
-      const response = await api.post('/feedback/create', body);
+      const response = await api.post('/auth/feedbacks', body, true);
       const {data,status} = response;
       data['status_code'] = status;
       if(typeof callback == 'function') {

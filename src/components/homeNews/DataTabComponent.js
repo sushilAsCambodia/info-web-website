@@ -49,15 +49,14 @@ const DataTabComponent = ({id,lang_id}) => {
                                                 width="100%"
                                                 height="50px"
                                                 style={{objectFit:"cover",borderRadius:'6px'}}/>
-                                                
                                         </Grid> 
                                         <Grid item xs={9}>
-                                        <Grid item sx={{paddingLeft:'5px'}}>
-                                                    <Box fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.description,100)}}></Box>
-                                                    <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="10px !important" whiteSpace="nowrap">
-                                                        {moment(sport.created_at).format(utils.formatDate)}
-                                                    </Typography>
-                                                </Grid>
+                                            <Grid item sx={{paddingLeft:'5px'}}>
+                                                <Box fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.description,100)}}></Box>
+                                                <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="10px !important" whiteSpace="nowrap">
+                                                    {moment(sport.created_at).format(utils.formatDate)}
+                                                </Typography>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </ListItem> 

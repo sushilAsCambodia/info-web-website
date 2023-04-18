@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback  } from "react";
 import {
   Button,
   Typography,
@@ -14,9 +14,13 @@ import {
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { updateNickName,updatePassword,uploadProfile } from "@/store/actions/authActions";
+import { useDispatch, useSelector } from 'react-redux';
+import utils from "@/common/utils";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import LoadingDialog from "../Loading";
+import DialogMessage from "../DialogMessage";
 const ImgUpload = ({
   onChange,
   src
@@ -34,21 +38,25 @@ const ImgUpload = ({
 
 
 const UploadImg = () => {
-  const { customer } = useSelector((state) => state.auth);
+  const { customer, loading } = useSelector((state) => state.auth);
   const [userName, setUsername] = useState((customer && customer.user_name ? customer.user_name : ''));
-  const { t } = useTranslation();
-  const [file, setFile] = useState('');
-  const [imagePreviewUrl, setImagePreviewUrl] = useState();
-  const [errorPasswordNotMatch,setErrorPasswordNotMatch] = useState(false);
+  const { t } = useTranslation(); 
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(); 
+  const dispatch = useDispatch();
   const [errorUserName,setErrorUserName] = useState(false);
+  const [errorUserNameMessage,setErrorUserNameMessage] = useState('');
   const [editUserName,setEditUserName] = useState(false);
   const [editPassword,setEditPassword] = useState(false);
   const [password,setPassword] = useState('');
   const [errorPassword,setErrorPassword] = useState(false);
+  const [errorPasswordNotMatch,setErrorPasswordNotMatch] = useState(false);
   const [errorPasswordMessage,setErrorPasswordMessage] = useState('');
   const [confirmpassword,setConfirmPassword] = useState('');
   const [errorConfirmPasswordMessage,setConfirmErrorPasswordMessage] = useState('');
   const [errorConfirmPassword,setErrorConfirmPassword] = useState(false);
+  const [responseMessage,setResponseMessage]  = useState('');
+  const [openDialog,setOpenDialog]  = useState(false);
+  const [file,setFile]  = useState(undefined);
   const photoUpload = (e) => {
     e.preventDefault();
     const reader = new FileReader();
@@ -61,12 +69,39 @@ const UploadImg = () => {
       reader.readAsDataURL(file);
     }
   }
+  const updateProfilePhoto = (file) => {
+    dispatch(
+      uploadProfile(
+        {
+          body: {
+            image: file
+          },
+          callback:(res) => {
+            console.log('callback profile',res)
+            let { message = ''} = res; 
+            setOpenDialog(true);
+            setResponseMessage(t(message));
+          },
+          auth: true,
+          formdata: true
+        }
+      )
+    )
+  }
+  useEffect(()=> {
+    if(file) {
+      console.log( file,'file');
+      updateProfilePhoto(file);
+    }
+  } ,[file])
   // drawer start 
   const [state, setState] = useState({ bottom: false });
   const toggleDrawer = (anchor, open, edit = '') => (event) => {
     if(edit === 'editUser') {
+      setEditPassword(false);
       setEditUserName(true);
     }else if(edit==='editPassword') {
+      setEditUserName(false);
       setEditPassword(true);
     }
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -81,18 +116,44 @@ const UploadImg = () => {
 
   useEffect(() => {
     setUsername((customer && customer.user_name ? customer.user_name : ''));
+    if(customer && customer.image) {
+      setImagePreviewUrl( customer.image.path || '');
+    }
   }, [customer]);
   const onChangeUserName = (e) => {
     setUsername(e.target.value)
     if(e.target.value == '') {
       setErrorUserName(true);
+      setErrorUserNameMessage(t('user_name_required'));
     }else {
-      setErrorUserName(false)
+      if(e.target.value.length > 5) {
+        setErrorUserName(false);
+      }else {
+        setErrorUserName(true);
+        setErrorUserNameMessage(t('validate_user_name'));
+      }
     }
   }
   const onUpdateUserName = () => {
     if(!errorUserName) {
-      console.log('@TODO: update username',userName)
+      dispatch(
+        updateNickName(
+          {
+            body:{
+              user_name: userName
+            },
+            callback:(res) => {
+              let { message = ''} = res;
+              if(message ==='user_name_unique') {
+                message = 'update_user_name_unique';
+              }
+              setOpenDialog(true);
+              setResponseMessage(t(message));
+            },
+            auth: true
+          }
+        )
+      );
     }
   };
   const onChangePassword = (e) => {
@@ -101,7 +162,7 @@ const UploadImg = () => {
       setErrorPasswordMessage('Password is required');
       setErrorPassword(true);
     }else { 
-        setErrorPassword(false); 
+      setErrorPassword(false); 
     }
     if(confirmpassword!='') {
       if(confirmpassword != e.target.value) {
@@ -152,7 +213,25 @@ const UploadImg = () => {
       return;
     }
     if(!errorPassword && !errorConfirmPassword && !errorPasswordNotMatch) {
-      console.log('@TODO: safe save password');
+      dispatch(
+        updatePassword(
+          {
+            body: {
+              password
+            },
+            callback:(res) => {
+              let {status_code, message = ''} = res; 
+              setOpenDialog(true);
+              setResponseMessage(t(message));
+              if([200,201,202,203,204].includes(status_code)) {
+                setPassword('');
+                setConfirmPassword('');
+              }
+            },
+            auth: true
+          }
+        )
+      );
     }
   };
 
@@ -214,7 +293,7 @@ const UploadImg = () => {
                   </InputAdornment>
                 }
               />
-              {errorUserName && <FormHelperText error>Error username</FormHelperText>}
+              {errorUserName && <FormHelperText error>{errorUserNameMessage}</FormHelperText>}
             </FormControl>
           </Grid>
         </ListItem>}
@@ -323,6 +402,16 @@ const UploadImg = () => {
       </List>
     </Box>
   );
+  const callback = useCallback((data) => {
+    if(data) {
+      setState({ ...state, bottom: false }); 
+    }
+  }, []);
+  const onCloseDrawer = () => {
+    setEditPassword(false);
+    setEditUserName(false);
+    setState({ ...state, bottom: false });
+  }
   return (
     <>
       <Grid item xs={12} textAlign="center">
@@ -389,10 +478,17 @@ const UploadImg = () => {
         </form>
       </Grid>
       <Grid>
-        <Drawer anchor={'bottom'} open={state['bottom']} onClose={toggleDrawer('bottom', false)}>
+        <Drawer anchor={'bottom'} open={state['bottom']} onClose={onCloseDrawer}>
           {list('bottom')}
         </Drawer>
       </Grid>
+      <LoadingDialog loading={loading}/>
+      <DialogMessage
+        open={openDialog} 
+        setOpen={setOpenDialog} 
+        message={responseMessage}
+        onClosed={callback}
+      />
     </>
   )
 }

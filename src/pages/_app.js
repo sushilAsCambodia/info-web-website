@@ -1,29 +1,42 @@
-import {useEffect} from 'react';
+import { useEffect } from "react";
 
-import '@/styles/globals.css' 
-import ThemConfiguration from '../config/themeConfiguration'; 
-import { ThemeProvider } from '@mui/material/styles';
-import { Provider } from 'react-redux';
-import {store} from '../store/store';
-import  '@/common/i18n';
-import Layout from '@/layouts';
-import { useTranslation } from 'react-i18next';
+import "@/styles/globals.css";
+import ThemConfiguration from "../config/themeConfiguration";
+import { ThemeProvider } from "@mui/material/styles";
+import { Provider } from "react-redux";
+import { store } from "../store/store";
+import "@/common/i18n";
+import Layout from "@/layouts";
+import Layout_D from "@/layouts_Desktop";
+import { useTranslation } from "react-i18next";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 const App = ({ Component, pageProps }) => {
-  const {i18n} =  useTranslation();
+  const { i18n } = useTranslation();
+  const matches = useMediaQuery("(max-width:768px)");
+
   useEffect(() => {
-    if(typeof window !='undefined') {
-      const lang = window.localStorage.getItem('lang') || 'en';
+    if (typeof window != "undefined") {
+      const lang = window.localStorage.getItem("lang") || "en";
       i18n.changeLanguage(lang);
     }
-  },[])
-  return <>
-    <Provider store={store}>
-      <ThemeProvider theme={ThemConfiguration()}>
-          <Layout {...pageProps}>
-            <Component {...pageProps} />
-          </Layout>
-      </ThemeProvider>
-    </Provider>
-  </>
-}
+  }, []);
+  return (
+    <>
+      <Provider store={store}>
+        <ThemeProvider theme={ThemConfiguration()}>
+          {matches ? (
+            <Layout {...pageProps}>
+              <Component {...pageProps} />
+            </Layout>
+          ) : (
+            <Layout_D {...pageProps}>
+              <Component {...pageProps} />
+            </Layout_D>
+          )}
+        </ThemeProvider>
+      </Provider>
+    </>
+  );
+};
 export default App;

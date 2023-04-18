@@ -75,7 +75,7 @@ const Layout = (props) => {
         setMounted(true);
     }, []);
     const { t } = useTranslation();
-    let { children } = props;
+    let { children } = props;  
     let title = '';
     const pages = [
         '/lottery',
@@ -102,16 +102,12 @@ const Layout = (props) => {
     }
     const switchHeader = () => {
         if (router.pathname != '/') {
-            let title = '';
-            if (router.pathname === '/journalCardDetails') {
-                title = router.query?.title || '';
-            }
             if (pages.includes(router.pathname)) {
+                
                 return <Navigate
-                    title={title}
                     lead={<IconButton
                         onClick={() => router.back()}
-                        size="large"
+                        size="large" 
                         edge="start"
                         color="inherit"
                         aria-label="menu"
@@ -129,7 +125,7 @@ const Layout = (props) => {
                     } />
             } else if (innerpages.includes(router.pathname)) {
                 let title = router.pathname.replace('/', '').toLowerCase();
-
+                
                 return <Navigate
                     title={t(title)}
                     lead={<IconButton
@@ -205,7 +201,7 @@ const Layout = (props) => {
             title = t('forgot_password_info_web')
             break;
         default:
-            break; 
+            break;
     }
 
     const [state, setState] = useState({ bottom: false });
@@ -227,13 +223,8 @@ const Layout = (props) => {
             <br />
             <Typography textAlign="center" fontSize="12px">Choose the number of periods</Typography>
             <Typography textAlign="left" fontSize="12px" className='yearheadline'>Year</Typography>
-            <Box onClick={toggleDrawer('bottom', false)} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '26px', height: '26px', bgcolor: 'white', borderRadius: '50%', position: 'absolute', top: '-17px', left: '50%', transform: "translate(-50%, -50%)" }}>
-                <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.25 0.75L0.75 7.25M0.75 0.75L7.25 7.25" stroke="#8C8C8C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-            </Box>
-            <List sx={{ padding: 0 }}>
-                <ListItem disablePadding >
+            <List>
+                <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
                     <Grid item xs={12} sm={12} width='100%'>
                         <Box sx={{ width: '100%' }}>
                             {/* <Box sx={{ borderBottom: 1, borderColor: 'divider'}}> */}
@@ -267,11 +258,11 @@ const Layout = (props) => {
                             </Tabs>
                             {/* </Box> */}
                             <TabPanel value={value} index={0} padding="0px !important" >
-                                <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 02</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -280,13 +271,13 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 04</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 05</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 06</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 07</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -295,7 +286,7 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 09</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 10</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -304,14 +295,17 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 12</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 13</Typography>
                                     </ListItem>
                                 </List>
                             </TabPanel>
                             <TabPanel value={value} index={1}>
-                                <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -320,18 +314,15 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                        <Typography fontSize="10px">Issue 01</Typography>
-                                    </ListItem>
-
+                                
                                 </List>
-                            </TabPanel>
+                            </TabPanel> 
                             <TabPanel value={value} index={2} padding="0px !important" >
-                                <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 02</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -340,13 +331,13 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 04</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 05</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 06</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 07</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -355,7 +346,7 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 09</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 10</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -364,17 +355,17 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 12</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 13</Typography>
                                     </ListItem>
                                 </List>
                             </TabPanel>
                             <TabPanel value={value} index={3}>
-                                <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -384,13 +375,13 @@ const Layout = (props) => {
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
                                 </List>
-                            </TabPanel>
+                            </TabPanel> 
                             <TabPanel value={value} index={4} padding="0px !important" >
-                                <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 02</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -399,13 +390,13 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 04</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 05</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 06</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 07</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -414,7 +405,7 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 09</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 10</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -423,14 +414,17 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 12</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 13</Typography>
                                     </ListItem>
                                 </List>
                             </TabPanel>
                             <TabPanel value={value} index={5}>
-                                <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -439,15 +433,15 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                        <Typography fontSize="10px">Issue 01</Typography>
-                                    </ListItem>
-
+                                
                                 </List>
-                            </TabPanel>
+                            </TabPanel> 
                             <TabPanel value={value} index={6}>
-                                <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                                <List sx={{ padding: "0px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue 01</Typography>
+                                    </ListItem>
+                                    <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
@@ -456,12 +450,9 @@ const Layout = (props) => {
                                     <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
                                         <Typography fontSize="10px">Issue 01</Typography>
                                     </ListItem>
-                                    <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                        <Typography fontSize="10px">Issue 01</Typography>
-                                    </ListItem>
-
+                                
                                 </List>
-                            </TabPanel>
+                            </TabPanel> 
                         </Box>
                     </Grid>
                     <style>
@@ -490,20 +481,16 @@ const Layout = (props) => {
             </Head>
             {switchHeader()}
             <Container maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding: "0px !important", overflowY: 'auto' }}>
-                <main style={{ height: '100%' }}>
-                    {children}
+                <main style={{height:'100%'}}>
+                {children}
                 </main>
             </Container>
             {switchFooter()}
-            <Box>
-                <Drawer PaperProps={{
-                    style: {
-                        overflow: 'initial'
-                    }
-                }} anchor={'bottom'} open={state['bottom']} onClose={toggleDrawer('bottom', false)}>
+            <Grid item >
+                <Drawer anchor={'bottom'} open={state['bottom']} onClose={toggleDrawer('bottom', false)}>
                     {list('bottom')}
                 </Drawer>
-            </Box>
+            </Grid>
         </>
     );
 }
