@@ -32,13 +32,11 @@ import { useRouter } from "next/router";
 
 
 export default function ProfileInfo(props) {
-  const { categories, lang_id } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { customer, loading } = useSelector((state) => state.auth);
-  const [openDialog,setOpenDialog]  = useState(false);
-  const [openDialogString,setOpenDialogString]  = useState('false');
-  const [responseMessage,setResponseMessage]  = useState('');
+  const {openDialog,setOpenDialog,setResponseMessage} = props
+  const { customer, loading,status } = useSelector((state) => state.auth);
+  // const [openDialog,setOpenDialog]  = useState(false);
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState();
   const [userName, setUsername] = useState(
@@ -96,8 +94,6 @@ export default function ProfileInfo(props) {
             setOpenDialog(true);
             setResponseMessage(t(message));
             console.log('update',res)
-            setOpenDialogString('test')
-            console.log('openDialogString test:::',openDialogString)
           },
           auth: true,
           formdata: true
@@ -228,37 +224,42 @@ export default function ProfileInfo(props) {
       }
     }
   };
+  
   const onUpdateUserName = () => {
     if (!errorUserName) {
-      dispatch(
-        updateNickName({
-          body: {
-            user_name: userName,
-          },
-          callback: (res) => {
-            let {status_code, message} = res; 
-            if (message === "user_name_unique") {
-              message = "update_user_name_unique";
-            }
-              console.log("try:::",message)
-
-              setResponseMessage(t(message));
-              setEditUsername(!editUsername);
-         
-            // if (![200, 201, 202, 203, 204].includes(status_code)) {
-            //   setPassword("");
-            //   setConfirmPassword("");
-            // }
-          },
-          auth: true,
-        })
-      );
+      try {
+        dispatch(
+          updateNickName({
+            body: {
+              user_name: userName,
+            },
+            callback:(res)=> {
+             
+              let {status_code, message} = res; 
+              if (message === "user_name_unique") {
+                message = "update_user_name_unique";
+              }
+                console.log("try:::",message)
+                console.log(openDialog, typeof setOpenDialog)
+                setResponseMessage(t(message));
+                setEditUsername(!editUsername);
+           
+            },
+            auth: true,
+          })
+        );
+              
+      } catch (error) {
+        console.log(error)
+      }
       setOpenDialog(true);
-      console.log("updateusername:::",openDialog)
+      console.log("status:::",status)
     }
+
   };
 
   return (
+    <>
     <Paper sx={{ padding: "40px" }} elevation={5} component={Grid} container>
       <Grid
         item
@@ -455,14 +456,8 @@ export default function ProfileInfo(props) {
           {t("submit")}
         </Button>
       </Grid>
-
-      
-      <LoadingDialog loading={loading}/>
-      <DialogMessage
-        open={openDialog} 
-        // setOpen={setOpenDialog} 
-        message={responseMessage}
-      />
     </Paper>
+     <LoadingDialog loading={loading}/>
+     </>
   );
 }

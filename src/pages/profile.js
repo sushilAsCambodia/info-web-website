@@ -27,16 +27,18 @@ import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { BorderBottom } from "@mui/icons-material";
 import ProfileInfo from "@/components/profilePage/profileInfo";
 import Feedback from "./feedback";
 import { useRouter } from "next/router";
+import DialogMessage from "@/components/DialogMessage";
 const Profile = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
   const matches = useMediaQuery("(max-width:768px)");
   const router = useRouter();
   const [value, setValue] = useState(0);
+  const [openDialog,setOpenDialog]=useState(false)
+  const [responseMessage,setResponseMessage]  = useState('');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -165,7 +167,7 @@ function TabPanel(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} >
-          <ProfileInfo />
+          <ProfileInfo setOpenDialog={setOpenDialog} openDialog={openDialog} setResponseMessage={setResponseMessage}/>
         </TabPanel>
         <TabPanel value={value} index={1} >
           Item Two
@@ -177,6 +179,12 @@ function TabPanel(props) {
         </TabPanel>
       </SwipeableViews>
     </Grid>
+    <DialogMessage
+       open={openDialog} 
+       setOpen={setOpenDialog} 
+       message={responseMessage}
+      //  onClosed={()=>setOpenDialog(false)}
+     />
     </Grid>
   ) : (
     <>

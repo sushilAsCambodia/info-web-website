@@ -64,6 +64,6 @@
     "contact_required":"Contact is required",
     "created_successfully":"Created successfully",
     "updated_successfully":"Updated successfully",
-    "update_user_name_unique":"This account already exists",
+    "update_user_name_unique":"This username already exists",
     "password_required":"Password is required"
 }
