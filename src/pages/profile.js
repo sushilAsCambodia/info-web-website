@@ -4,18 +4,12 @@ import { styled } from '@mui/material/styles';
 import {
   Button,
   Typography,
-  FormControl,
   Grid,
-  IconButton,
-  InputAdornment,
-  Link,
   ListItem,
-  ListItemText,
-  ListItemIcon,
   List,
-  Dialog,
   Box,
   Divider,
+  Card
 } from "@mui/material";
 import Router from "next/router";
 import { logout } from "@/store/actions/authActions";
@@ -35,13 +29,14 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { BorderBottom } from "@mui/icons-material";
 import ProfileInfo from "@/components/profilePage/profileInfo";
+import Feedback from "./feedback";
+import { useRouter } from "next/router";
 const Profile = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
   const matches = useMediaQuery("(max-width:768px)");
-
-
-  const [value, setValue] = React.useState(0);
+  const router = useRouter();
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -51,6 +46,17 @@ const Profile = () => {
     setValue(index);
   };
 
+  useEffect(() => {
+    const hash = router.asPath.split('#')[1];
+    if(hash == 'feedback') {
+      setValue(2);
+    }else if(hash == 'system'){
+      setValue(1)
+    }
+     else {
+      setValue(0);
+    }
+   }, [ router.asPath ]);
 
   useEffect(() => {
     setMounted(true);
@@ -141,7 +147,7 @@ function TabPanel(props) {
   }
 
   return !matches ? (
-    <Grid display="flex" justifyContent="center" py={5}>
+    <Grid display="flex" justifyContent="center" pt={9} minHeight={750}>
      <Grid sx={{ width: 700 }}>
         <CusTabs
           value={value}
@@ -149,11 +155,10 @@ function TabPanel(props) {
           variant="fullWidth"
           sx={{color:"black"}}
           indicatorColor="transparent"
-          
           >
-          <CusTab label="Item One" {...a11yProps(0)} />
-          <CusTab label="Item Two" {...a11yProps(1)} />
-          <CusTab label="Item Three" {...a11yProps(2)} />
+          <CusTab label="Personal Information" {...a11yProps(0)} onClick={() => router.push('/profile#profile')}/>
+          <CusTab label="System Annoucement" {...a11yProps(1)} onClick={() => router.push('/profile#system')}/>
+          <CusTab label="Feedback" {...a11yProps(2)} onClick={() => router.push('/profile#feedback')}/>
         </CusTabs>
       <SwipeableViews
         index={value}
@@ -166,7 +171,9 @@ function TabPanel(props) {
           Item Two
         </TabPanel>
         <TabPanel value={value} index={2} >
-          Item Three
+          <Card sx={{padding:"15px"}} elevation={5}>
+          <Feedback />
+          </Card>
         </TabPanel>
       </SwipeableViews>
     </Grid>

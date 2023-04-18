@@ -344,6 +344,9 @@ padding: 0px;
 #nickNameFormControl div{
   background: #fff;
 }
+#nickNameFormControl .css-nmju5p-MuiInputBase-root-MuiFilledInput-root.Mui-disabled:before{
+  margin-left: 10px;
+}
 #changePasswordDivider .MuiDivider-wrapper{
   padding-left: 0 !important;
 }
