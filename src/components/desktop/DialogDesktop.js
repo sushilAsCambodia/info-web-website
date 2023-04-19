@@ -6,7 +6,7 @@ import FullSilder from '../homeNews/FullSilder';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBanner } from '@/store/actions/bannerActions'
-import { getCard } from '@/store/actions/cardActions'
+import { getCard } from '@/store/actions/advertiseActions'
 import { getCategory } from '@/store/actions/categoryActions'
 import { useEffect } from 'react';
 import utils from '@/common/utils';

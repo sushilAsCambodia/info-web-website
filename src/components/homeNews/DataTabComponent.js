@@ -21,7 +21,6 @@ const DataTabComponent = ({id,lang_id}) => {
             {
                 params: { lang_id:lang_id, category_id: id, take:10 },
                 callback:(res) => {
-                    console.log(res,'callback')
                     setLoading(false);
                 }
             }
