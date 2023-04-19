@@ -254,7 +254,7 @@ const UploadImg = () => {
   const list = (anchor) => (
     <Box sx={{ width: anchor === 'bottom' ? 'auto' : 250 }} role="presentation">
       <Typography className="drawerline"></Typography>
-      <List sx={{ padding: "70px 16px" }}>
+      <List sx={{ padding: "25px 20px 0 20px" }}>
         {editUserName && <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
           <Grid item xs={12} sm={12} >
             <Typography fontWeight="bold" pb={1} textAlign="left">
@@ -299,7 +299,7 @@ const UploadImg = () => {
         </ListItem>}
         {
           editPassword && <>
-            <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
+            <ListItem disablePadding>
               <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
                   {t('password')}
@@ -313,7 +313,6 @@ const UploadImg = () => {
                   }}
                 >
                   <OutlinedInput
-                    sx={{ paddingRight: "10px" }}
                     name="password"
                     placeholder={t('password')}
                     inputProps={{ maxLength: 16 }}
@@ -427,8 +426,7 @@ const UploadImg = () => {
               sx={{
                 borderRadius: "15px",
                 marginBottom: "5px",
-              }}
-            >
+              }}>
               <OutlinedInput
                 sx={{ paddingRight: "10px" }}
                 name="nickname"
@@ -487,8 +485,7 @@ const UploadImg = () => {
         open={openDialog} 
         setOpen={setOpenDialog} 
         message={responseMessage}
-        onClosed={callback}
-      />
+        onClosed={callback}/>
     </>
   )
 }

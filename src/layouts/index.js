@@ -216,14 +216,14 @@ const Layout = (props) => {
     const tabElem = (length) => {
         const tabs = [];
         for (let i = 0; i < length; i++) {
-            tabs.push(<Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={2020+i} {...a11yProps(i)} /> );
+            tabs.push(<Tab key={i} sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={2020+i} {...a11yProps(i)} /> );
         }
         return tabs;
     }
     const tabPanelElms = (length) => {
         const tabPanels = [];
         for (let i = 0; i < length; i++) {
-            tabPanels.push(<TabPanel value={value} index={i} padding="0px !important" >
+            tabPanels.push(<TabPanel key={i} value={value} index={i} padding="0px !important" >
                         <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "center", textAlign: "center !important" }}>
                             <ListItem className='active-issue' style={{ justifyContent: "center", textAlign: "center !important" }}>
                                 <Typography fontSize="10px">Issue 01</Typography>
