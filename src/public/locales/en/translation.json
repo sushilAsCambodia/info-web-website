@@ -65,5 +65,8 @@
     "created_successfully":"Created successfully",
     "updated_successfully":"Updated successfully",
     "update_user_name_unique":"This username already exists",
-    "password_required":"Password is required"
+    "password_required":"Password is required",
+    "system_announcement":"System Announcement",
+    "announcement_paragrap":"Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center."
+
 }

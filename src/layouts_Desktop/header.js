@@ -118,6 +118,9 @@ const Header = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              boxShadow:"0px 2px 10px rgba(0, 0, 0, 0.1);",
+        
+            
             }}
             sx={{
               background: "linear-gradient(to right, #373737 50%, white 0%)",
