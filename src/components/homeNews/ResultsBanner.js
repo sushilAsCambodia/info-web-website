@@ -114,9 +114,14 @@ export default function ResultsBanner({
           <Grid>Latest Results</Grid>
           {/* <NewsSlider news={rows} /> */}
           <Grid overflow="auto" height="430px">
-            <Slider {...settings}>
-              <LottoList />
-            </Slider>
+            {/* <Slider {...settings}> */}
+            <LottoList />
+            <LottoList />
+            <LottoList />
+            <LottoList />
+            <LottoList />
+            <LottoList />
+            {/* </Slider> */}
           </Grid>
         </Grid>
         <Grid item xs={6}>
