@@ -17,6 +17,7 @@ import ResultsBanner from "@/components/homeNews/ResultsBanner";
 import LinkBanner from "@/components/homeNews/LinkBanner";
 import Header from "@/layouts_Desktop/header";
 import Footer from "@/layouts_Desktop/footer";
+import DialogDesktop from "@/components/desktop/DialogDesktop";
 export default function Index() {
   const matches = useMediaQuery("(max-width:768px)");
   return !matches ? (
@@ -31,6 +32,7 @@ export default function Index() {
         <NewsColumns />
         <JournalsColumns />
         <PartnersColumns />
+        <DialogDesktop/>
       </Grid>
     </>
   ) : (

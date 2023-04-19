@@ -172,17 +172,15 @@ export default function Register() {
 
   return matches ? (
     <>
-      <Grid container alignItems="flex-start" justifyContent="center">
+      <Grid container alignItems="center" justifyContent="center" height="100%">
         <Grid
           item
           container
-          maxWidth="500px"
-          mt={10}
-          mb={10}
+          maxWidth="500px" 
           sx={{ minHeight: "500px" }}
         >
           <Grid item container xs={12} sm={12} padding={2}>
-            <Grid container alignItems="flex-end" alignContent="center" mb={8}>
+            <Grid container alignItems="flex-end" alignContent="center" mb={4}>
               <Typography variant="h5" sx={{ position: "relative" }}>
                 {t("register")}
               </Typography>

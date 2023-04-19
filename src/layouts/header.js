@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import LangSwitcher from '@/components/LangSwitcher';
 const Header = () => {   
   return (
-    <AppBar position="static" style={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)',height: '56px'}} >
+    <AppBar position="static" style={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)',minHeight: '56px', justifyContent:'center'}} >
       <Container maxWidth={false}>
         <Toolbar disableGutters>
           <Typography

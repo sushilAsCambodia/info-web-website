@@ -4,26 +4,16 @@ import {
     Button,
     Typography,
     FormControl,
-    Grid,
-    IconButton,
-    InputAdornment,
-    Link,
-    ListItem,
-    ListItemText,
-    ListItemIcon,
-    List,
-    Dialog,
-    OutlinedInput,
-    Divider,
-    TextField
-} from "@mui/material";
-import Router from "next/router";
-import TextareaAutosize from '@mui/base/TextareaAutosize';
-import { width } from "@mui/system";
+    Grid, 
+    ListItem, 
+    List, 
+} from "@mui/material";   
 import { useTranslation } from "react-i18next";
 import { getCustomerService } from "@/store/actions/customerServiceActions";
 import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link'
 import utils from "@/common/utils";
+
 const CustomerService = () => { 
     const {loading, data} = useSelector((state) => state.customer_service);
     const dispatch = useDispatch();
@@ -63,9 +53,11 @@ const CustomerService = () => {
                             </Typography>
                            <List sx={{ display:"flex", justifyContent:"center"  }}>
                             {
-                                data && data.length > 0 && data.map((social) => {
-                                    return <ListItem sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}>
-                                        <img src={social.icon||''} height={28} width={29} style={{objectFit: 'contain'}}></img>
+                                data && data.length > 0 && data.map((social,key) => {
+                                    return <ListItem key={key} sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}>
+                                        <Link href={social.account || ''} target="_blank">
+                                            <img src={social.icon || ''} height={28} width={29} style={{objectFit: 'contain'}}></img>
+                                        </Link>
                                     </ListItem>;
                                 })
                             } 

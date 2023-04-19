@@ -418,9 +418,20 @@ padding: 0px 0px;
 
 .calendraDrawer .css-b4a6b0-MuiListItem-root{
   padding:4px;
-  background: rgb(255, 111, 49);
-  color: rgb(255, 255, 255);
+  background: #FAFAFA;
+  color: #8C8C8C;
   border-radius: 4px;
+  border: 1px solid #DDDDDD;
+}
+.calendraDrawer .css-b4a6b0-MuiListItem-root > p{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.calendraDrawer .css-b4a6b0-MuiListItem-root.active-issue {
+  background: rgb(255, 111, 49);
+  color: #fff;
+  border:none
 }
 /* NEWS SCROLL CLOUMN  */
 .newsColumn {
@@ -529,8 +540,10 @@ text-overflow: ellipsis;
   background: #FF6F31 !important;
   color: white !important;
 }
-
-
+.arrow-control-custom svg{
+  background-color: white;
+  border-radius: 50%;
+}
 
 /* system profile css  */
 .profiletab .css-v0pgo8-MuiButtonBase-root-MuiTab-root.Mui-selected{

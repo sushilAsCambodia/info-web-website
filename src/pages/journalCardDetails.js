@@ -4,7 +4,7 @@ import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import {getJournal} from '@/store/actions/journalActions'
+import {getJournalDetial} from '@/store/actions/journalActions'
 import DataNotFound from '@/components/DataNotFound'; 
 import DataLoading from '@/components/DataLoading';
 
@@ -16,29 +16,37 @@ export default function JournalCardDetails() {
   const {query} = router;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getJournal(
-      {
-          params: {lang_id: query.lang_id,id:query.journal_id,fake:true},
-          callback:(res) => {
-            console.log(res,'callbakc')
-            const {status_code,data = {}} = res;
-            if([200,201,202,203].includes(status_code)) {
-              if(data && Object.keys(data).length) {
-                const images =  [];
-                for (let i = 0; i < data.images.length; i++) {
-                  images.push({
-                    original:data.images[i],
-                    thumbnail:data.images[i],
-                  })
+    if(query.album_id) {
+      dispatch(getJournalDetial(
+        {
+            id:query.album_id,
+            params: {lang_id: query.lang_id},
+            callback:(res) => {
+              const {status_code,data = []} = res;
+              if([200,201,202,203,204].includes(status_code)) {
+                if(Array.isArray(data) && data.length > 0) {
+                  const item = data[0];
+                  const images =  [
+                    {
+                      original:item.cover_img,
+                      thumbnail:item.cover_img,
+                    }
+                  ];
+                  for (let i = 0; i < item.album_slavs.length; i++) {
+                    images.push({
+                      original:item.album_slavs[i].images,
+                      thumbnail:item.album_slavs[i].images,
+                    })
+                  }
+                  setImages(images);
+                  setJournal(data);
                 }
-                setImages(images);
-                setJournal(data);
+                setLoading(false);
               }
-              setLoading(false);
             }
-          }
-      }
-    ));
+        }
+      ));
+    }
   },[query])
   return  (
     <Grid container item textAlign="left" p={1} sx={{height:'100%',alignItems: jounal && Object.keys(jounal).length ?'auto':'center'}}>
