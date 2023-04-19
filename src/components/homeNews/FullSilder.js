@@ -13,7 +13,7 @@ import { Grid, Tabs, Tab } from "@mui/material";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function FullSilder(props) {
-  const { banners = [],cards = [] } = props;
+  const { banners = [], isWeb = false } = props;
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const [tabValue, setTabValue] = React.useState(0);
@@ -29,7 +29,7 @@ export default function FullSilder(props) {
   }; 
   return (
     <> 
-    { (banners && banners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'5px' }} className="mainautoplayswipeable">
+    { (banners && banners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={activeStep}
@@ -44,10 +44,11 @@ export default function FullSilder(props) {
                     item
                     component="img"
                     sx={{
-                      height: 255,
+                      height: isWeb ? 300 :  160,
                       display: "block",
                       overflow: "hidden",
                       width: "100%",
+                      objectFit:'cover'
                     }}
                     src={step.image}
                     alt={step.label}
@@ -60,11 +61,25 @@ export default function FullSilder(props) {
         <MobileStepper
           steps={maxSteps}
           activeStep={activeStep}
+          sx={[
+            {
+              position:'absolute',
+              background:'transparent',
+              transform: 'translate(-50%, -50%)',
+              left:'50%',
+              top:'50%',
+              width: '100%'  
+            },
+            {
+              '& .MuiMobileStepper-dots': { display: 'none' },
+            },
+          ]}
           nextButton={
             <Button
               size="small"
               onClick={handleNext}
               disabled={activeStep === maxSteps - 1}
+              className="arrow-control-custom"
             >
               {theme.direction === "rtl" ? (
                 <KeyboardArrowLeft />
@@ -78,6 +93,7 @@ export default function FullSilder(props) {
               size="small"
               onClick={handleBack}
               disabled={activeStep === 0}
+              className="arrow-control-custom"
             >
               {theme.direction === "rtl" ? (
                 <KeyboardArrowRight />
@@ -87,62 +103,6 @@ export default function FullSilder(props) {
             </Button>
           }
         />
-      </Grid>}
-      {cards && cards.length > 0 && <Grid item xs={12} sx={{marginTop:'5px',marginBottom:'5px'}}>
-        <Tabs
-          value={tabValue}
-          onChange={(e) => setTabValue(e.target.value)}
-          variant="scrollable"
-          aria-label="scrollable auto tabs example"
-          className="MuiTabs-custom-tab"
-          TabIndicatorProps={{
-            style: {display:'none' }
-          }}>
-          {
-            cards.map((card,index) => {
-              return <Tab key={index} onClick={()=> setTabValue(0)} sx={{ padding: '5px'}} label={<Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
-                  <Grid sx={{background:`url(${card.image})`}} alt="机率" width="80px" height="80px" className="card-custom">
-                    <span></span>
-                  </Grid>
-                  <Typography
-                    position="absolute"
-                    fontSize="10px !important"
-                    bottom="25%"
-                    left="0"
-                    right="0"
-                    color='white'
-                  >
-                    {card.translate||'N/A'}
-                  </Typography>
-                  <Typography
-                    position="absolute"
-                    bottom="10%"
-                    left="0"
-                    right="0"
-                    color='white'
-                    fontSize='10px !important'
-                  >
-                    {card.label||'N/A'}
-                  </Typography>
-                </Grid>}>
-              </Tab> 
-            })
-          }
-          
-        </Tabs> 
-        <style>
-          {
-            `
-              .card-custom > span{
-                position: absolute;
-                height: 100%;
-                left: 0;
-                right: 0;
-                background:linear-gradient(360deg, #FF0000 0%, rgba(255, 110, 49, 0.37) 100%)
-              }
-            `
-          }
-        </style>
       </Grid>} 
     </>
   );

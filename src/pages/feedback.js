@@ -1,71 +1,122 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import {
-    Button,
-    Typography,
-    FormControl,
-    Grid,
-    IconButton,
-    InputAdornment,
-    Link,
-    ListItem,
-    ListItemText,
-    ListItemIcon,
-    List,
-    Dialog,
-    OutlinedInput,
-    Divider,
-    TextField
+  Button,
+  Typography,
+  FormControl,
+  Grid,
+  IconButton,
+  InputAdornment, 
+  OutlinedInput, 
+  TextField,
+  FormHelperText 
 } from "@mui/material";
-import Router from "next/router";
-import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { useTranslation } from "react-i18next";
-  
-const Feedback = () => { 
-    const {t} = useTranslation();
-    return (
-        <>
-            <Grid
-                container
-                alignItems="flex-start"
-                justifyContent="center"
-                padding="0px 16px"
-            >
-         
-                <Grid
-                    item
-                    xs={12}
-                    container
-                    alignContent="flex-start"
-                    alignItems="center"
-                    overflow="auto"
-                >
-                    <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-                        <Grid item xs={12} paddingTop="15px">
-                            <Typography fontSize="18px">
-                              {t('send_your_feedback_here')}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12} paddingTop="30px">
-                            <Typography paddingBottom="20px">
-                            {t('feedback_content')}
-                            </Typography>
-                            <TextField
-                            fullWidth
-                                id="outlined-multiline-static"
-                                multiline
-                                rows={6}
-                                defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, Ut enim ad minim veniam,"
-                              />
-                        </Grid>
+import { createFeedback } from "@/store/actions/feedbackActions";
+import { useDispatch, useSelector } from 'react-redux';
+import utils from '@/common/utils';
+import LoadingDialog from "@/components/Loading";
+import DialogMessage from "@/components/DialogMessage";
+const Feedback = () => {
+  const {loading} = useSelector((state) => state.feedback);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const [content,setContent]  = useState('');
+  const [contact,setContact]  = useState('');
+  const [openDialog,setOpenDialog]  = useState(false);
+  const [errorContent,setErrorContent]  = useState(false);
+  const [errorEmail,setErrorEmail]  = useState(false);
+  const [errorEmailMessage,setErrorEmailMessage]  = useState('');
+  const [responseMessage,setResponseMessage]  = useState('');
+  const onChangeContent = (e) => {
+    if(e.target.value.length <= 500) {
+      setContent(e.target.value)
+      if(e.target.value != '') {
+        setErrorContent(false);
+      }else {
+        setErrorContent(true);
+      }
+    }
+  }
+  const onChangeContact = (e) => {
+    setContact(e.target.value);
+    if(e.target.value!='') {
+      const isValidEmail = utils.validateEmail(e.target.value);
+      if(isValidEmail) {
+        setErrorEmail(false)
+      }else {
+        setErrorEmailMessage('invalid_email');
+        setErrorEmail(true);
+      }
+    }
+  }
+  const onSubmit = () => {
+    if(content == '' && contact == '') {
+      setErrorContent(true);
+      setErrorEmail(true);
+      setErrorEmailMessage('contact_required');
+    }else if (content == '') {
+      setErrorContent(true);
+    }else if (content == '') {
+      setErrorEmailMessage('contact_required');
+      setErrorEmail(true);
+    }else {
+      if(!errorContent && !errorEmail) { 
+        dispatch(createFeedback({
+          body: {
+            feedback_content: content,
+            contact: contact
+          },
+          callback:(res) => {
+            const {message = '' } = res;
+            setResponseMessage(t(message));
+            setOpenDialog(true);
+          }
+        }))
+      }
+    } 
+  };
+  return loading ? <LoadingDialog loading={loading}/> : ( 
+    <>
+      <Grid
+        container
+        alignItems="flex-start"
+        justifyContent="center"
+        padding="0px 16px">
+        <Grid
+          item
+          xs={12}
+          container
+          alignContent="flex-start"
+          alignItems="center"
+          overflow="auto"
+        >
+          <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+            <Grid item xs={12} paddingTop="15px">
+              <Typography fontSize="18px">
+                {t('send_your_feedback_here')}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} paddingTop="10px">
+              <Typography paddingBottom="20px" fontSize="12px">
+                {t('feedback_content')} <Typography component="span" sx={{color:'red'}}>*</Typography>
+              </Typography>
+              <TextField
+                fullWidth
+                id="outlined-multiline-static"
+                multiline
+                rows={6}
+                placeholder="Please input your feedback, do not exceed 500 characters"
+                value={content}
+                onChange={onChangeContent}
+                error={errorContent}
+                helperText={errorContent ? t('feedback_content_required') : ''}/>
+            </Grid>
 
-                        <Grid item xs={12} paddingTop="30px">
-                            <Typography paddingBottom="20px">
-                            {t('contact')} 
-                            </Typography>
-                       
-
+            <Grid item xs={12} paddingTop="10px">
+              <Typography paddingBottom="20px" fontSize="12px">
+                {t('contact')}
+              </Typography> 
               <FormControl
                 variant="outlined"
                 fullWidth
@@ -75,46 +126,51 @@ const Feedback = () => {
                 }}
               >
                 <OutlinedInput
-                  name="Username"
-                  placeholder={t('user_name')} 
-                  inputProps={{ maxLength: 16 }}
-                  id="outlined-adornment-password"
+                  name="email"
+                  placeholder={t('email')}
+                  id="outlined-adornment-email"
                   type="text"
+                  value={contact}
+                  onChange={onChangeContact}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label="toggle password visibility"
-                        edge="end"
-                      >
+                        aria-label="toggle email visibility"
+                        edge="end">
                         <Icon icon="ooui:message" width={20} color="#F26522" />
                       </IconButton>
                     </InputAdornment>
                   }
                 />
+                {errorEmail && <FormHelperText error>{t(errorEmailMessage)}</FormHelperText>}
               </FormControl>
-                        </Grid>
-                        <Grid item xs={12} paddingTop="30px">
-                        <Button
-                  fullWidth
-                  variant="contained"
-                  sx={{
-                    color: "white",
-                    background:
-                      "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
-                    textTransform: 'capitalize'
-                  }}
-                 
-                >
-                 {t('submit')}
-                </Button>
-                        </Grid>
-                     
-                    </Grid>
-                  
-                </Grid>
             </Grid>
-        </>
-    )
+            <Grid item xs={12} paddingTop="30px">
+              <Button
+                fullWidth
+                variant="contained"
+                disabled={loading}
+                sx={{
+                  color:"white",
+                  background:
+                    "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
+                  textTransform: 'capitalize'
+                }}
+                onClick={onSubmit}>
+                {t('submit')}
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <DialogMessage 
+        open={openDialog} 
+        setOpen={setOpenDialog} 
+        message={responseMessage} 
+        redirect={{pathname:'/profile'}}
+      />
+    </>
+  )
 
 };
 export default Feedback;

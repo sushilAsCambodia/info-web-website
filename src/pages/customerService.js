@@ -4,25 +4,28 @@ import {
     Button,
     Typography,
     FormControl,
-    Grid,
-    IconButton,
-    InputAdornment,
-    Link,
-    ListItem,
-    ListItemText,
-    ListItemIcon,
-    List,
-    Dialog,
-    OutlinedInput,
-    Divider,
-    TextField
-} from "@mui/material";
-import Router from "next/router";
-import TextareaAutosize from '@mui/base/TextareaAutosize';
-import { width } from "@mui/system";
+    Grid, 
+    ListItem, 
+    List, 
+} from "@mui/material";   
 import { useTranslation } from "react-i18next";
+import { getCustomerService } from "@/store/actions/customerServiceActions";
+import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link'
+import utils from "@/common/utils";
+
 const CustomerService = () => { 
-    const {t} = useTranslation();
+    const {loading, data} = useSelector((state) => state.customer_service);
+    const dispatch = useDispatch();
+    const { t,i18n } = useTranslation();
+    useEffect(() => {
+        dispatch(getCustomerService({
+            params: {lang_id: utils.convertLangCodeToID(i18n.language)},
+            callback:(res) => {
+                console.log(res,'abc')
+            }
+          }))
+    },[i18n.language])
     return (
         <>
             <Grid
@@ -41,26 +44,25 @@ const CustomerService = () => {
                     overflow="auto"
                 >
                     <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-                        <Grid item xs={12} paddingTop="15px">
-                            <Typography fontSize="18px" textAlign="center">
-                            <img src="./assets/Profile/servicebigimg.png" width="100%" />
-                            </Typography>
+                        <Grid item xs={12} paddingTop="15px" textAlign="center">
+                            <img src="./assets/Profile/servicebigimg.png" />
                         </Grid>
                         <Grid item xs={12} >
                             <Typography paddingBottom="20px" textAlign="center">
                                 {t('contact_customer_service_via')}
                             </Typography>
                            <List sx={{ display:"flex", justifyContent:"center"  }}>
-                            <ListItem sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}><Icon icon="logos:whatsapp-icon" fontSize="35px" /></ListItem>
-                            <ListItem sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}><Icon icon="logos:telegram" fontSize="35px" /></ListItem>
-                            <ListItem sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}><Icon icon="logos:whatsapp-icon" fontSize="35px" /></ListItem>
-                            <ListItem sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}><Icon icon="logos:telegram" fontSize="35px" /></ListItem>
-                            <ListItem sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}><Icon icon="logos:telegram" fontSize="35px" /></ListItem>
-                            <ListItem sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}><Icon icon="logos:whatsapp-icon" fontSize="35px" /></ListItem>
+                            {
+                                data && data.length > 0 && data.map((social,key) => {
+                                    return <ListItem key={key} sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}>
+                                        <Link href={social.account || ''} target="_blank">
+                                            <img src={social.icon || ''} height={28} width={29} style={{objectFit: 'contain'}}></img>
+                                        </Link>
+                                    </ListItem>;
+                                })
+                            } 
                            </List>
-                        </Grid>
-
-                     
+                        </Grid> 
                     </Grid>
                   
                 </Grid>

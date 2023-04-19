@@ -35,7 +35,7 @@
     "announcement_info_web":"Announcement | InfoWeb",
     "send_your_feedback_here":"Send your feedback here",
     "feedback_content":"Feedback content",
-    "contact":"Feedback content",
+    "contact":"Contact",
     "contact_customer_service_via":"Contact Customer Service Via",
     "login_to_enjoy":"Log in to enjoy more exciting features",
     "login":"Login",
@@ -55,6 +55,18 @@
     "already_have_an_account":"Aready have an account?",
     "feedback_info_web":"Feedback | InfoWeb",
     "customer_service_info_web":"Customer Service | InfoWeb",
-    "journal_card_details_info_web":"Journal Card Details | InfoWeb"
-
+    "journal_card_details_info_web":"Journal Card Details | InfoWeb",
+    "input_your_feedback":"Please input your feedback, do not exceed 500 characters",
+    "feedback_content_required": "Feedback is required",
+    "news_card_details_info_web":"News Card Details | InfoWeb",
+    "email": "Email",
+    "invalid_email":"Invalid email",
+    "contact_required":"Contact is required",
+    "created_successfully":"Created successfully",
+    "updated_successfully":"Updated successfully",
+    "update_user_name_unique":"This account already exists",
+    "password_required":"Password is required",
+    "forgot_password_info_web":"Forgot password | InfoWeb",
+    "login_info_web":"Login | InfoWeb",
+    "register_info_web":"Register | InfoWeb"
 }

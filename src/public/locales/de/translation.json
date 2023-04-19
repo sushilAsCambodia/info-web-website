@@ -55,5 +55,18 @@
     "already_have_an_account":"已有帐户？",
     "feedback_info_web":"反馈 | InfoWeb",
     "customer_service_info_web":"客户服务 | InfoWeb",
-    "journal_card_details_info_web":"日记卡详细信息 | InfoWeb"
+    "journal_card_details_info_web":"日记卡详细信息 | InfoWeb",
+    "input_your_feedback":"请输入您的意见，不要超过500个字符",
+    "feedback_content_required": "需要反馈",
+    "news_card_details_info_web":"细节 | InfoWeb",
+    "email": "电子邮件",
+    "invalid_email":"不合规电邮",
+    "contact_required":"需要联系方式",
+    "created_successfully":"创建成功",
+    "updated_successfully":"Updated successfully",
+    "update_user_name_unique":"This account already exists",
+    "password_required":"Password  is required",
+    "forgot_password_info_web":"忘记密码 | InfoWeb",
+    "login_info_web":"登录 | InfoWeb",
+    "register_info_web":"登记 | InfoWeb"
 }

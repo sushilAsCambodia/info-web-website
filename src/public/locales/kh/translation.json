@@ -55,5 +55,18 @@
     "already_have_an_account":"មានគណនីរួចហើយ?",
     "feedback_info_web":"មតិកែលម្អ | InfoWeb",
     "customer_service_info_web":"សេវាកម្ម​អតិថិជន | InfoWeb",
-    "journal_card_details_info_web":"ព័ត៌មានអំពីកាតទិនានុប្បវត្តិ | InfoWeb"
+    "journal_card_details_info_web":"ព័ត៌មានអំពីកាតទិនានុប្បវត្តិ | InfoWeb",
+    "input_your_feedback":"សូមបញ្ចូលមតិកែលម្អរបស់អ្នក កុំលើសពី 500 តួអក្សរ",
+    "feedback_content_required": "សូមបញ្ចូលមតិកែលម្អ",
+    "news_card_details_info_web":"ព័ត៌មានលំអិត | InfoWeb",
+    "email": "អ៊ីមែល",
+    "invalid_email":"អ៊ីមែលមិនត្រឹមត្រូវ",
+    "contact_required":"សូមបញ្ចូលទំនាក់ទំនង",
+    "created_successfully":"បានបង្កើតដោយជោគជ័យ",
+    "updated_successfully":"បានកែប្រែដោយជោគជ័យ",
+    "update_user_name_unique":"This account already exists",
+    "password_required":"Password is required",
+    "forgot_password_info_web":"ភ្លេច​លេខសំងាត់ | InfoWeb",
+    "login_info_web":"ចូល | InfoWeb",
+    "register_info_web":"ចុះឈ្ហោះ | InfoWeb"
 }

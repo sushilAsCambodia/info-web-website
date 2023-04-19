@@ -9,15 +9,22 @@ const instance = axios.create({
 });
 
 export default {
-    get: (url, params = {}) => {
+    get: (url, params = {}, auth = false) => {
+        const header = { 
+            'content-type':'application/json; charset=utf-8'
+        }; 
         let fakeUrl = undefined;
         if(Object.keys(params).length > 0 && params?.fake === true) {
             fakeUrl  = 'http://localhost:3000/api';
+        }
+        if(auth) {
+            header['Authorization'] = 'Bearer '+ (Cookies.get(utils.tokenKey) || '');
         }
         return instance({
             'method': 'GET',
             'url': (fakeUrl ? fakeUrl : '') + url,
             'params': params,
+            'headers': header,
             transformResponse: [function (data) { 
                 const json = JSON.parse(data)
                 data = json
@@ -25,12 +32,15 @@ export default {
             }],
         });
     },
-    post: (url, body = {}, auth = false) => {
+    post: (url, body = {}, auth = false, formdata = false) => {
         const header = { 
             'content-type':'application/json; charset=utf-8'
         }; // override instance defaults
         if(auth) {
             header['Authorization'] = 'Bearer '+ (Cookies.get(utils.tokenKey) || '');
+        }
+        if(formdata) {
+            header["Content-Type"] = "multipart/form-data";
         }
         return instance({
             'method': 'POST',

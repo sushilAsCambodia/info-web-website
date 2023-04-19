@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import {getJournal} from '@/store/actions/journalActions'
 import { useDispatch, useSelector } from 'react-redux';
+import CardSlide from './CardSlide';
 function TabPanel(props) {
   const { children, value, index, ...other } = props; 
   return (
@@ -81,7 +82,7 @@ export default function NewsJournalTabs(props) {
   },[lang_id,value])
   return (
     <Grid item className='tabclass' sx={{height:'100%'}}>
-      <Grid sx={{ padding:'10px 10px',height:'100%' }} >
+      <Grid sx={{ height:'100%' }} >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -89,12 +90,14 @@ export default function NewsJournalTabs(props) {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
+          sx={{paddingTop:'10px',paddingBottom:'10px'}}
         >
           <Tab label={t('news')} {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
           <Tab label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
         <TabPanel  value={value} index={0} >
-          <FullSilder banners={banners} cards={cards}/>
+          <FullSilder banners={banners}/>
+          <CardSlide cards={cards}/>
           <MultiTabs categories={categories} lang_id={lang_id}/>
         </TabPanel>
         <TabPanel value={value} index={1} >
