@@ -9,11 +9,12 @@ import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-
+import { useDispatch,useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
 import JournalItem from "@/common/JournalItem";
+import { getJournal } from "@/store/actions/journalActions";
+
 const responsive = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -43,6 +44,10 @@ export default function JournalsColumns(props) {
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
+  const {lang_id=[]} = props; 
+  const dispatch = useDispatch();
+  const { journals = [], loading } = useSelector((state) => state.journal);
+
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
@@ -52,6 +57,16 @@ export default function JournalsColumns(props) {
     }
   }, [router.asPath]);
 
+  useEffect(() => {
+      dispatch(getJournal(
+        {
+            params: {lang_id: lang_id,take: 10},
+            callback:(res) => {
+              console.log('getJournal:::',res)
+            }
+        }
+      ));
+  },[lang_id])
   return (
     <Grid container justifyContent="center">
       <Grid item xs={4} marginY="15px">
@@ -90,12 +105,9 @@ export default function JournalsColumns(props) {
           renderButtonGroupOutside={false}
           renderDotsOutside={false}
         >
-          <JournalItem />
-          <JournalItem />
-          <JournalItem />
-          <JournalItem />
-          <JournalItem />
-          <JournalItem />
+          {journals.map((item,index)=>{
+            return(<><JournalItem item={item}/></>)
+          })}
         </Carousel>
       </Grid>
     </Grid>

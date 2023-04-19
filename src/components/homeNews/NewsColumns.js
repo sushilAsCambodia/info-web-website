@@ -10,39 +10,35 @@ import NewsScrollColumn from "@/common/NewsScrollColumn";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-  return (
-    <Grid
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Grid>{children}</Grid>}
-    </Grid>
-  );
-}
+import { useDispatch, useSelector } from "react-redux";
+import utils from "@/common/utils";
 
+import { getCategory } from "@/store/actions/categoryActions";
 
 export default function NewsColumns(props) {
-  const { t } = useTranslation();
+  const dispatch = useDispatch();
   const theme = useTheme();
   const router = useRouter();
-  const [value, setValue] = React.useState(0);
+  const {lang_id=[]} = props; 
+  const { categories=[] } = useSelector((state) => state.category);
+
+  console.log("category:::", categories);
+  console.log("lang_id:::", lang_id);
+
   useEffect(() => {
-    const hash = router.asPath.split("#")[1];
-    if (hash == "journal") {
-      setValue(1);
-    } else {
-      setValue(0);
-    }
-  }, [router.asPath]);
+    dispatch(
+      getCategory({
+        params: { lang_id: lang_id },
+        callback: (res) => {
+          console.log("getCategorys:::", res);
+        },
+      })
+    );
+  }, [lang_id]);
 
   return (
     <Grid container justifyContent="center" my={3}>
-      <Grid item xs={4} marginY="15px" >
+      <Grid item xs={4} marginY="15px">
         <Divider
           sx={{
             "&::before, &::after": {
@@ -53,20 +49,18 @@ export default function NewsColumns(props) {
             fontFamily: "system-ui",
           }}
         >
-          <Typography variant="h5" paddingX="10px" fontWeight="bold">News</Typography>
-          
+          <Typography variant="h5" paddingX="10px" fontWeight="bold">
+            News
+          </Typography>
         </Divider>
       </Grid>
-      <Grid item xs={12} container>
-        <Grid item xs={4} textAlign="center" padding="5px" >
-          <NewsScrollColumn/>
-        </Grid>
-        <Grid item xs={4} textAlign="center" padding="5px" >
-          <NewsScrollColumn/>
-        </Grid>
-        <Grid item xs={4} textAlign="center" padding="5px" >
-          <NewsScrollColumn/>
-        </Grid>
+      <Grid item xs={12} container justifyContent="center">
+        {categories.length>0 ? categories.map((item,index) => {
+          return (
+          <NewsScrollColumn newsCategory={item} lang_id={lang_id} />
+          );
+        }):<Typography>No News Today</Typography>
+      }
       </Grid>
     </Grid>
   );
