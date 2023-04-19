@@ -12,6 +12,24 @@ import {
 } from "@mui/material";
 import MiddleShow from "./MiddleShow";
 import NewsSlider from "@/common/NewsSlider";
+import Slider from "react-slick";
+import LottoList from "@/common/LottoList";
+const settings = {
+  dots: false,
+  infinite: true,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  vertical: true,
+  verticalSwiping: true,
+  swipeToSlide: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  pauseOnFocus: true,
+  arrows: false,
+  lazyLoad: false,
+  centerMode: false,
+};
+
 export default function ResultsBanner({
   lang_id,
   winnerGalleryProducts,
@@ -79,42 +97,9 @@ export default function ResultsBanner({
     winnerGalleryAll,
     lang_id,
   ]);   
-   const lottos = [10, 10, 10, 10, 10, 11];
-  const lotto = () => {
-    const bgColor = (index,length,lotto)=>{
-       if (lotto == 11)
-          return "red"
-      }
-    
-    return (
-      <>
-        <Grid
-          container
-          width="fit-content"
-          border="1px solid grey"
-          borderRadius="10px"
-          className="lottoGrid"
-        >
-          {lottos.map((lotto, index) => {
-            return (
-              <>
-              <Grid px={1} className={`${lotto === 11 ? "hitLotto":"" }`}>{lotto}</Grid>
-                {/* {index == lottos.length - 1 ? (
-                  ""
-                ) : (
-                  <Divider
-                    orientation="vertical"
-                    sx={{ borderColor: "grey" }}
-                    flexItem
-                  />
-                )} */}
-              </>
-            );
-          })}
-        </Grid>
-      </>
-    );
-  };
+
+   
+  
   return (
     <>
       <Grid
@@ -127,7 +112,12 @@ export default function ResultsBanner({
       >
         <Grid item xs={3} border="1px solid grey" borderRadius="10px">
           <Grid>Latest Results</Grid>
-          <NewsSlider news={rows} />
+          {/* <NewsSlider news={rows} /> */}
+          <Grid overflow="auto" height="430px">
+            <Slider {...settings}>
+              <LottoList />
+            </Slider>
+          </Grid>
         </Grid>
         <Grid xs={6}>
           <Grid
