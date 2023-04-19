@@ -1,6 +1,7 @@
 const initialState = { 
     status: 'idle',
     journals:[],
+    issues:[],
     loading:false,
 }
 export default function (state = initialState, action) {
@@ -32,6 +33,29 @@ export default function (state = initialState, action) {
         status:'completed',
         loading: false
       };
+    // issue block
+    case 'journal/issue/list/pending':
+      return {
+        ...initialState, 
+        loading:true,
+        issues:[],
+        status:'pending'
+      };
+    case 'journal/issue/list/fulfilled':
+      return {
+        ...state,
+        status:'completed',
+        issues: action.payload?.data || [],
+        loading: false
+      };
+    case 'journal/issue/list/rejected':
+      return {
+        ...initialState, 
+        loading:false,
+        issues:[],
+        status:'failed'
+      };
+    // end issue block
   }
   return state;
 }
