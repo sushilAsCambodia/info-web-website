@@ -26,6 +26,7 @@ export default function JournalCardDetails() {
     }
   },[query])
   useEffect(() => {
+    console.log(journalDetail)
     if(Object.keys(journalDetail).length) {
       if(Array.isArray(journalDetail) && journalDetail.length > 0) {
         const item = journalDetail[0];
@@ -48,9 +49,9 @@ export default function JournalCardDetails() {
     }
   },[journalDetail]);
   return  (
-    <Grid container item textAlign="left" p={1} sx={{height:'100%',alignItems: journalDetail && Object.keys(journalDetail).length ?'auto':'center'}}>
+    <Grid container item textAlign="left" p={1} sx={{height:'100%',alignItems: images.length ?'auto':'center'}}>
       <Grid item xs={12}>
-        {loading ? <DataLoading/> : journalDetail && Object.keys(journalDetail).length > 0 ? <Grid item className='carouselcard'>
+        {loading ? <DataLoading/> : images.length > 0 ? <Grid item className='carouselcard'>
           <ImageGallery
             items={images}
             showPlayButton={false}
