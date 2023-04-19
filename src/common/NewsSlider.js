@@ -49,9 +49,9 @@ export default function NewsSlider(props) {
                 >
                   {" "}
                   <Slider {...settings}>
-                    {news.map((item) => {
+                    {news.map((item,index) => {
                       return (
-                        <Grid component={Link} href="/newsSingle" color="black" sx={{textDecoration:"none"}} >
+                        <Grid key={index} component={Link} href="/newsSingle" color="black" sx={{textDecoration:"none"}} >
                           <Grid
                             key={item.id}
                             style={{

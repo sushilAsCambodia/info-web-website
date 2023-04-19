@@ -13,6 +13,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
 import ProfileDropDown from "@/components/header/ProfileDropDown";
+import Link from "next/link";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const {customer,isLogin} = useSelector((state) => state.auth);
@@ -64,9 +65,9 @@ const Header = () => {
           >
             <Grid width="80%" container justifyContent="space-between">
               <Grid xs={6}>
-                <a href="/">
+                <Link href="/">
                   <img src="./assets/Logo/logowhite.png" />
-                </a>
+                </Link>
               </Grid>
               <Grid
                 xs={6}

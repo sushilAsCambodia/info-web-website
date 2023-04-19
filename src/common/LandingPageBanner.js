@@ -81,6 +81,7 @@ export default function LandingPageBanner(props) {
         >
           {banners.map((banner, index) => (
             <Grid
+              key={index}
               style={{
                 color: "white",
                 textAlign: "left",

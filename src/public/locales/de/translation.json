@@ -65,5 +65,8 @@
     "created_successfully":"创建成功",
     "updated_successfully":"Updated successfully",
     "update_user_name_unique":"This account already exists",
-    "password_required":"Password  is required"
+    "password_required":"Password  is required",
+    "forgot_password_info_web":"忘记密码 | InfoWeb",
+    "login_info_web":"登录 | InfoWeb",
+    "register_info_web":"登记 | InfoWeb"
 }

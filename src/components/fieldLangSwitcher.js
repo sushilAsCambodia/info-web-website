@@ -9,7 +9,7 @@ import { Select,FormControl,InputLabel,InputAdornment,IconButton } from '@mui/ma
 import { Icon } from '@iconify/react';
 
 
-export default function fieldLanguageSwitcher() {
+export default function FieldLanguageSwitcher() {
   const {i18n} =  useTranslation();
   const [lang, setLang] = React.useState('')
 
