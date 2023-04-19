@@ -18,9 +18,9 @@ export default function JournalCardDetails() {
     if(query.album_id) {
       dispatch(getJournalDetial(
         {
-            id:query.album_id,
-            params: {lang_id: query.lang_id},
-            callback:(res) => {}
+          id:query.album_id,
+          params: {lang_id: query.lang_id},
+          callback:(res) => {}
         }
       ));
     }
@@ -30,12 +30,13 @@ export default function JournalCardDetails() {
       if(Array.isArray(journalDetail) && journalDetail.length > 0) {
         const item = journalDetail[0];
         const images = [];
-        if(item.hasOwnProperty('cover_img')) {
-          images.push({
-            original:item.cover_img,
-            thumbnail:item.cover_img,
-          });
-        }
+        // cover of detail
+        // if(item.hasOwnProperty('cover_img')) {
+        //   images.push({
+        //     original:item.cover_img,
+        //     thumbnail:item.cover_img,
+        //   });
+        // }
         for (let i = 0; i < item.album_slavs.length; i++) {
           images.push({
             original:item.album_slavs[i].images,
@@ -109,7 +110,7 @@ export default function JournalCardDetails() {
               `
             }
           </style>
-        </Grid> :<DataNotFound/> }
+        </Grid> : <DataNotFound/> }
         
       </Grid>
     </Grid>

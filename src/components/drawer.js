@@ -48,7 +48,7 @@ function a11yProps(index) {
 const DrawerComponent = (props) => {
     const {openDrawer = { anchor:'bottom', open: false }, setOpenDrawer} = props;
     const [value, setValue] = React.useState(0);
-    const [activeIssue, setActiveIssue] = React.useState(-1);
+    const [activeIssue, setActiveIssue] = React.useState(0);
     const { loading, issue = {}, years = [] } = useSelector(state => state.journal);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -126,7 +126,7 @@ const DrawerComponent = (props) => {
         }
         return tabPanels;
     }
-    return <Drawer className='custom-drawer-wrapper' anchor={openDrawer['anchor']} open={openDrawer['open']} onClose={() => { setOpenDrawer({open: false,anchor:'bottom'});setActiveIssue(-1)}}>
+    return <Drawer className='custom-drawer-wrapper' anchor={openDrawer['anchor']} open={openDrawer['open']} onClose={() => { setOpenDrawer({open: false,anchor:'bottom'});setActiveIssue(0)}}>
         <Box
             sx={{ width: openDrawer['anchor'] === 'bottom' ? 'auto' : 250}}
             role="presentation"
