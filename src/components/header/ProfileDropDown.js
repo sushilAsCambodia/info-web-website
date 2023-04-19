@@ -88,7 +88,7 @@ export default function ProfileDropDown(props) {
       >
         <MenuItem
           onClick={() => {
-            router.push("/profile");
+            router.push("/profile"),handleClose();
           }}
           disableRipple
           sx={{ justifyContent: "flex-end" }}
