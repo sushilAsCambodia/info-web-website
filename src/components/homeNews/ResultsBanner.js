@@ -129,8 +129,9 @@ export default function ResultsBanner({
           <Grid>Latest Results</Grid>
           <NewsSlider news={rows} />
         </Grid>
-        <Grid xs={6}>
+        <Grid item xs={6}>
           <Grid
+            item
             xs={12}
             mx={1}
             border="1px solid grey"

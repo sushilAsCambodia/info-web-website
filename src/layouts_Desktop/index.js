@@ -38,7 +38,7 @@ const Layout = (props) => {
                 <meta property="og:title" content={title} key="title" />
             </Head>
             <Header />
-            <Container maxWidth="false" text sx={{ bgcolor: '#fff', height: "100%", padding: "0px !important", overflowY: 'auto' }}>
+            <Container maxWidth="false" sx={{ bgcolor: '#fff', height: "100%", padding: "0px !important", overflowY: 'auto' }}>
             <main style={{height:'100%',width:width,margin:"auto"}}>
                 {children}
                 </main>
