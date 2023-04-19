@@ -31,6 +31,11 @@ export default function DialogDesktop(props) {
   const handleClose = () => {
     setOpen(false);
   }; 
+  useEffect(() => {
+    if(open) {
+      console.log('@TODO fetch API here')
+    }
+  },[open]);
   return (
     <div> 
       <Dialog
