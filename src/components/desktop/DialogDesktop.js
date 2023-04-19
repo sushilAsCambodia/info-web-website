@@ -13,7 +13,8 @@ import utils from '@/common/utils';
 import CardSlice from './CardSlide';
 import Issue from './Issue';
 import { Typography } from '@mui/material';
-export default function DialogDesktop() {
+export default function DialogDesktop(props) {
+  const {open,setOpen} = props;
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
   const { i18n } = useTranslation(); 
@@ -26,17 +27,10 @@ export default function DialogDesktop() {
         }
       }
     ));  
-  }, [i18n.language]);
-  const [open, setOpen] = React.useState(true);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
+  }, [i18n.language]); 
   const handleClose = () => {
     setOpen(false);
   }; 
-  
   return (
     <div> 
       <Dialog

@@ -15,7 +15,7 @@ export default function JournalItem(props) {
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
-  const {item=[]} = props; 
+  const {item=[], setOpen} = props; 
 
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
@@ -29,6 +29,7 @@ export default function JournalItem(props) {
   return (
     <>
       <Grid
+        onClick={() => setOpen(true)}
         sx={{
           margin: "5px",
           borderRadius: "10px",

@@ -17,7 +17,6 @@ import ResultsBanner from "@/components/homeNews/ResultsBanner";
 import LinkBanner from "@/components/homeNews/LinkBanner";
 import Header from "@/layouts_Desktop/header";
 import Footer from "@/layouts_Desktop/footer";
-import DialogDesktop from "@/components/desktop/DialogDesktop";
 import { useTranslation } from "react-i18next";
 
 import utils from "@/common/utils";
@@ -31,12 +30,10 @@ export default function Index() {
       <Grid>
         <ResultsBanner />
         {/* <LinkBanner /> */}
-        
           <LandingPageBanner />
         <NewsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <JournalsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <PartnersColumns />
-        <DialogDesktop/>
       </Grid>
     </>
   ) : (

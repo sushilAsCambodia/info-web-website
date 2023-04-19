@@ -14,7 +14,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import JournalItem from "@/common/JournalItem";
 import { getJournal } from "@/store/actions/journalActions";
-
+import DialogDesktop from "@/components/desktop/DialogDesktop";
 const responsive = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -44,10 +44,10 @@ export default function JournalsColumns(props) {
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
   const {lang_id=[]} = props; 
   const dispatch = useDispatch();
   const { journals = [], loading } = useSelector((state) => state.journal);
-
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
@@ -68,48 +68,51 @@ export default function JournalsColumns(props) {
       ));
   },[lang_id])
   return (
-    <Grid container justifyContent="center">
-      <Grid item xs={4} marginY="15px">
-        <Divider
-          sx={{
-            "&::before, &::after": {
-              borderColor: "red",
-            },
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            fontFamily: "system-ui",
-          }}
-        >
-          <Typography variant="h5" paddingX="10px" fontWeight="bold">
-            Journals
-          </Typography>
-        </Divider>
+    <>
+      <Grid container justifyContent="center">
+        <Grid item xs={4} marginY="15px">
+          <Divider
+            sx={{
+              "&::before, &::after": {
+                borderColor: "red",
+              },
+              fontWeight: "bold",
+              textTransform: "uppercase",
+              fontFamily: "system-ui",
+            }}
+          >
+            <Typography variant="h5" paddingX="10px" fontWeight="bold">
+              Journals
+            </Typography>
+          </Divider>
+        </Grid>
+        <Grid item xs={12}>
+          <Carousel
+            responsive={responsive}
+            additionalTransfrom={0}
+            arrows
+            autoPlaySpeed={3000}
+            centerMode={false}
+            containerClass="container-with-dots"
+            dotListClass=""
+            draggable
+            focusOnSelect={false}
+            infinite
+            itemClass=""
+            keyBoardControl
+            minimumTouchDrag={80}
+            pauseOnHover
+            renderArrowsWhenDisabled={false}
+            renderButtonGroupOutside={false}
+            renderDotsOutside={false}
+          >
+            {journals.map((item,index)=>{
+              return <JournalItem setOpen={setOpen} key={index} item={item}/>;
+            })}
+          </Carousel>
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Carousel
-          responsive={responsive}
-          additionalTransfrom={0}
-          arrows
-          autoPlaySpeed={3000}
-          centerMode={false}
-          containerClass="container-with-dots"
-          dotListClass=""
-          draggable
-          focusOnSelect={false}
-          infinite
-          itemClass=""
-          keyBoardControl
-          minimumTouchDrag={80}
-          pauseOnHover
-          renderArrowsWhenDisabled={false}
-          renderButtonGroupOutside={false}
-          renderDotsOutside={false}
-        >
-          {journals.map((item,index)=>{
-            return <JournalItem key={index} item={item}/>;
-          })}
-        </Carousel>
-      </Grid>
-    </Grid>
+      <DialogDesktop open={open} setOpen={setOpen}/>
+    </>
   );
 }
