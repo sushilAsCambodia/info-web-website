@@ -30,6 +30,7 @@ export default function MatchItem(props) {
       <Grid textAlign="center" border="1px solid grey" borderRadius="10px">
         <Grid
           borderBottom="1px solid grey"
+          item
           xs={12}
           px={1}
           container
@@ -39,24 +40,24 @@ export default function MatchItem(props) {
           <Typography>Denmark</Typography>
           <Icon icon="ic:round-star" width={20} />
         </Grid>
-        <Grid xs={12} px={1} py={1}>
+        <Grid item xs={12} px={1} py={1}>
           <Grid container justifyContent="space-between">
             <Typography>Liverpool</Typography>
             <Typography>chelsea</Typography>
           </Grid>
           <Grid container justifyContent="space-between" alignItems="center">
-            <Grid xs={2} display="flex" justifyContent="space-between">
+            <Grid item xs={2} display="flex" justifyContent="space-between">
               <img width="20px" src="./assets/Logo/team.png" />{" "}
               <Typography>3</Typography>
             </Grid>
-            <Grid xs={8} container justifyContent="center">
+            <Grid item xs={8} container justifyContent="center">
               <Grid container justifyContent="center" alignItems="center" position="relative">
               <Icon icon="bi:dot" width="40px" color="red" style={{position:"absolute",left:"20px"}}/>
                 <Typography color="red">Live</Typography>
               </Grid>
               <Typography>First Half 30:22</Typography>
             </Grid>
-            <Grid xs={2} display="flex" justifyContent="space-between">
+            <Grid item xs={2} display="flex" justifyContent="space-between">
               <Typography>5</Typography>
               <img width="20px" src="./assets/Logo/team.png" />{" "}
             </Grid>

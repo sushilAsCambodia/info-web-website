@@ -4,7 +4,6 @@ const initialState = {
   loading: true
 }
 export default function (state = initialState, action) {
-  console.log(action.type);
   switch (action.type) {
     case 'banner/list/pending':
       return {

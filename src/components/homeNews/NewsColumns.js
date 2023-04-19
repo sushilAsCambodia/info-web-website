@@ -57,7 +57,7 @@ export default function NewsColumns(props) {
       <Grid item xs={12} container justifyContent="center">
         {categories.length>0 ? categories.map((item,index) => {
           return (
-          <NewsScrollColumn newsCategory={item} lang_id={lang_id} />
+          <NewsScrollColumn key={index} newsCategory={item} lang_id={lang_id} />
           );
         }):<Typography>No News Today</Typography>
       }

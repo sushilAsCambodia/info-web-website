@@ -64,12 +64,13 @@ const Header = () => {
             }}
           >
             <Grid width="80%" container justifyContent="space-between">
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <Link href="/">
                   <img src="./assets/Logo/logowhite.png" />
                 </Link>
               </Grid>
               <Grid
+                item
                 xs={6}
                 container
                 spacing={2}
@@ -119,9 +120,7 @@ const Header = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              boxShadow:"0px 2px 10px rgba(0, 0, 0, 0.1);",
-        
-            
+              boxShadow:"0px 2px 10px rgba(0, 0, 0, 0.1)",
             }}
             sx={{
               background: "linear-gradient(to right, #373737 50%, white 0%)",
@@ -133,7 +132,7 @@ const Header = () => {
                 justifyContent="space-between"
                 alignItems="strech"
               >
-                <Grid xs={1}>
+                <Grid item xs={1}>
                   <MenuItem
                     id="fade-button"
                     aria-controls={openScore ? "fade-menu" : undefined}
@@ -175,7 +174,7 @@ const Header = () => {
                     <MenuItem onClick={handleScoreClose}>score 3</MenuItem>
                   </Menu>
                 </Grid>
-                <Grid xs={9} container color="black">
+                <Grid item xs={9} container color="black">
                   <Grid>
                     <MenuItem
                       onClick={() => {
@@ -240,6 +239,7 @@ const Header = () => {
                   </Grid>
                 </Grid>
                 <Grid
+                  item
                   xs={2}
                   container
                   alignItems="center"

@@ -119,8 +119,9 @@ export default function ResultsBanner({
             </Slider>
           </Grid>
         </Grid>
-        <Grid xs={6}>
+        <Grid item xs={6}>
           <Grid
+            item
             xs={12}
             mx={1}
             border="1px solid grey"

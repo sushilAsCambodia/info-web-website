@@ -106,7 +106,7 @@ export default function JournalsColumns(props) {
           renderDotsOutside={false}
         >
           {journals.map((item,index)=>{
-            return(<><JournalItem item={item}/></>)
+            return <JournalItem key={index} item={item}/>;
           })}
         </Carousel>
       </Grid>

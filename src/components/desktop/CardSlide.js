@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
+import {Grid} from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
@@ -18,7 +19,7 @@ export default function CardSlice() {
   const tabElem = (length) => {
     const tabs = [];
     for (let i = 0; i < length; i++) {
-        tabs.push(<Tab disableRipple label={
+        tabs.push(<Tab key={i} disableRipple label={
             <Card sx={{ display: 'flex', width:248,height:90.54,padding:'7px'}}>
                 <CardMedia
                     component="img"
@@ -38,21 +39,22 @@ export default function CardSlice() {
                             &nbsp;
                             2023
                         </Typography>
-                        <Button
-                            variant="contained"
-                            disabled={loading ? true : false}
-                            size="small"
+                        <Grid
+                            // disabled={loading ? true : false}
                             sx={{
+                                textAlign:'center',
                                 color: "white",
                                 background: loading
                                     ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);"
                                     : "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
                                 textTransform: "capitalize",
                                 fontSize:'8px',
-                                borderRadius: '10px'
+                                borderRadius: '10px',
+                                padding:'5px',
+                                width:'77px'
                             }}>
                             Latest Issue 094
-                        </Button>
+                        </Grid>
                     </CardContent> 
                 </Box>
             </Card>

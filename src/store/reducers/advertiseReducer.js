@@ -1,0 +1,30 @@
+const initialState = { 
+  status: 'idle',
+  advertises:[],
+  loading:false
+} 
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case 'advertise/list/pending':
+      return {
+        ...state, 
+        status:'pending',
+        loading: true
+      };
+    case 'advertise/list/fulfilled':
+      return {
+        ...state,
+        advertises: action.payload?.data || [],
+        status:'completed',
+        loading: false
+      };
+    case 'advertise/list/rejected':
+      return {
+        ...state, 
+        status:'failed',
+        advertises:[],
+        loading: false
+      };
+  }
+  return state;
+} 

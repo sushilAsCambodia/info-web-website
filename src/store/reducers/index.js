@@ -4,7 +4,7 @@ import drawerReducer from "./drawerReducer";
 import authReducer from "./authReducer";
 import categoryReducer from "./categoryReducer";
 import newsReducer from "./newsReducer";
-import cardReducer from "./cardReducer";
+import advertiseReducer from "./advertiseReducer";
 import journalReducer from "./journalReducer";
 import feedbackReducer from "./feedbackReducer";
 import customerServiceReducer from "./customerServiceReducer";
@@ -15,7 +15,7 @@ export default  combineReducers({
     news: newsReducer,
     journal: journalReducer,
     drawer:drawerReducer,
-    card:cardReducer,
+    advertise:advertiseReducer,
     feedback:feedbackReducer,
     customer_service:customerServiceReducer,
 });

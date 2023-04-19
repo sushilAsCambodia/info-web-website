@@ -15,7 +15,7 @@ export default function DialogDesktop() {
     const itemListElem = (length) => {
         const items = [];
         for (let i = 0; i < length; i++) {
-            items.push(<ListItem className={i==4?'active-issue':''} style={{ justifyContent: "center", textAlign: "center !important" }}>
+            items.push(<ListItem key={i} className={i==4?'active-issue':''} style={{ justifyContent: "center", textAlign: "center !important" }}>
             <Typography fontSize="10px">Issue {i<9?'0'+(i+1):(i+1)}</Typography>
             </ListItem>);
         }
@@ -55,14 +55,14 @@ export default function DialogDesktop() {
     const tabElms = (length) => {
         let tabs = [];
         for (let i = 0 ; i < length ; i++) {
-            tabs.push(<Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={2020+i} {...a11yProps(i)} /> );
+            tabs.push(<Tab key={i} sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={2020+i} {...a11yProps(i)} /> );
         }
         return tabs;
     };
     const tabPanelElms = (length) => {
         let tabPanels = [];
         for (let i = 0 ; i < length ; i++) {
-            tabPanels.push( <TabPanel value={value} index={i} padding="0px !important" >
+            tabPanels.push( <TabPanel key={i} value={value} index={i} padding="0px !important" >
             <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                 {itemListElem(20)}
             </List>
