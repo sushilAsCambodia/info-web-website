@@ -10,6 +10,11 @@ import Drawer from '@mui/material/Drawer';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIssue, getYear, getSelectedIssue } from '@/store/actions/journalActions';
+import { useRouter } from 'next/router';
+import DataLoading from './DataLoading';
+import DataNotFound from './DataNotFound';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -41,69 +46,87 @@ function a11yProps(index) {
     };
 }
 const DrawerComponent = (props) => {
-    const {openDrawer = {anchor:'bottom',open:false},setOpenDrawer} = props;
-    
+    const {openDrawer = { anchor:'bottom', open: false }, setOpenDrawer} = props;
     const [value, setValue] = React.useState(0);
+    const [activeIssue, setActiveIssue] = React.useState(-1);
+    const { loading, issue = {}, years = [] } = useSelector(state => state.journal);
     const handleChange = (event, newValue) => {
         setValue(newValue);
-    };
-    const tabElem = (length) => {
-        const tabs = [];
-        for (let i = 0; i < length; i++) {
-            tabs.push(<Tab key={i} sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={2020+i} {...a11yProps(i)} /> );
+    }; 
+    const dispatch = useDispatch(); 
+    const router = useRouter();
+    useEffect(() => {
+        if(router.query?.album_id) {
+            dispatch(
+                getYear(
+                    {
+                        params:{
+                            albumId: router.query?.album_id,
+                        },
+                        callback:(res) => {
+                            console.log('callback year',res);
+                        }
+                    }
+                )
+            );
+            
         }
-        return tabs;
+    },[router.query]);
+    useEffect(() => {
+        if(years.length  > 0) {
+            fetchIssue(years[value]);
+        }
+    },[years]);
+    const fetchIssue = (issueDate) => {
+        dispatch(
+            getIssue(
+                {
+                    params: {
+                        albumId: router.query?.album_id,
+                        issueDate
+                    },
+                    callback:(res) => {
+                        console.log(res,'callback issue')
+                    }
+                }
+            )
+        )
+    };
+    const openIssue = (issue,index) => {
+        setActiveIssue(index);
+        dispatch(
+            getSelectedIssue(
+                {
+                    params: {
+                        albumId: router.query?.album_id,
+                        issue:issue,
+                        issueDate:years[value]
+                    },
+                    callback:(res) => {
+                        console.log(res,'selected');
+                    },
+                }
+            )
+        );
     }
     const tabPanelElms = (length) => {
         const tabPanels = [];
         for (let i = 0; i < length; i++) {
             tabPanels.push(<TabPanel key={i} value={value} index={i} padding="0px !important" >
                         <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "center", textAlign: "center !important" }}>
-                            <ListItem className='active-issue' style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 01</Typography>
-                            </ListItem>
-                            <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 02</Typography>
-                            </ListItem>
-                            <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 03</Typography>
-                            </ListItem>
-                            <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 04</Typography>
-                            </ListItem>
-                            <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 05</Typography>
-                            </ListItem>
-                            <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 06</Typography>
-                            </ListItem>
-                            <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 07</Typography>
-                            </ListItem>
-                            <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 08</Typography>
-                            </ListItem>
-                            <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 09</Typography>
-                            </ListItem>
-                            <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 10</Typography>
-                            </ListItem>
-                            <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 11</Typography>
-                            </ListItem>
-                            <ListItem style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 12</Typography>
-                            </ListItem>
-                            <ListItem style={{justifyContent: "center", textAlign: "center !important" }}>
-                                <Typography fontSize="10px">Issue 13</Typography>
-                            </ListItem>
+                            {
+                                issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
+                                    return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue':''} style={{ justifyContent: "center", textAlign: "center !important" }}>
+                                        <Typography fontSize="10px">Issue {is.issue || ''}</Typography>
+                                    </ListItem>
+                                })
+                            } 
                         </List>
                     </TabPanel>);
         }
         return tabPanels;
     }
-    return <Drawer className='custom-drawer-wrapper' anchor={openDrawer['anchor']} open={openDrawer['open']} onClose={() => setOpenDrawer({open: false,anchor:'bottom'})}>
+    return <Drawer className='custom-drawer-wrapper' anchor={openDrawer['anchor']} open={openDrawer['open']} onClose={() => { setOpenDrawer({open: false,anchor:'bottom'});setActiveIssue(-1)}}>
         <Box
             sx={{ width: openDrawer['anchor'] === 'bottom' ? 'auto' : 250}}
             role="presentation"
@@ -120,7 +143,7 @@ const DrawerComponent = (props) => {
             <List sx={{padding:'0px'}}>
                 <ListItem disablePadding>
                     <Grid item xs={12} sm={12} width='100%'>
-                        <Box sx={{ width: '100%' }}>
+                        {years.length > 0 ? <Box sx={{ width: '100%' }}>
                             <Tabs
                                 indicatorColor="transparent"
                                 TabIndicatorProps={{
@@ -141,29 +164,32 @@ const DrawerComponent = (props) => {
                                 value={value}
                                 onChange={handleChange}
                                 sx={{
+                                    position:"relative",
                                     '& .Mui-selected': {
                                         color:'#FF0000 !important',
                                         fontWeight:'bold'
+                                    },
+                                    '&:before':{
+                                        content:'""',
+                                        height:'1px',
+                                        width:'100%',
+                                        background:'#DDDDDD',
+                                        position:'absolute',
+                                        bottom:'5px'
                                     }
                                 }}
                                 aria-label="basic tabs example" className='scrollable-custom'>
-                                {tabElem(12)}
+                                {years.length > 0 && years.map((res,index) => {
+                                    return <Tab onClick={() => fetchIssue(res)} key={index} sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={res} {...a11yProps(index)} />;
+                                })}
                             </Tabs>
-                            {/* </Box> */}
-                            {tabPanelElms(12)}
-                        </Box>
+                            {loading ? <DataLoading/> : (issue && issue.hasOwnProperty('data') && issue.data.length <= 0 ? <DataNotFound height={200} width={200}/> : tabPanelElms(12))} 
+                        </Box>:<DataNotFound height={200} width={200}/>}
+                        
                     </Grid>
                     <style>
                         {
-                            `
-                                .scrollable-custom .MuiTab-root::before {
-                                    content: '';
-                                    width: 100%;
-                                    height: 1px;
-                                    position: absolute;
-                                    background: #ddd;
-                                    bottom: 5px;
-                                }
+                            ` 
                                 .custom-drawer-wrapper .MuiDrawer-paper{
                                     overflow-y: initial;
                                 }

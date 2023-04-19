@@ -155,7 +155,7 @@ const Layout = (props) => {
             {switchHeader()}
             <Container maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding: "0px !important", overflowY: 'auto' }}>
                 <main style={{height:'100%'}}>
-                {children}
+                    {children}
                 </main>
             </Container>
             {switchFooter()}

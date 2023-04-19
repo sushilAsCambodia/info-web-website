@@ -3,14 +3,13 @@ import { Grid, Typography } from '@mui/material'
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {getJournalDetial} from '@/store/actions/journalActions'
 import DataNotFound from '@/components/DataNotFound'; 
 import DataLoading from '@/components/DataLoading';
 
 export default function JournalCardDetails() { 
-  const [loading,setLoading] = useState(true);
-  const [jounal,setJournal] = useState({});
+  const {loading, journalDetail = {}} = useSelector(state => state.journal);
   const [images,setImages] = useState([]);
   const router = useRouter();
   const {query} = router;
@@ -21,37 +20,36 @@ export default function JournalCardDetails() {
         {
             id:query.album_id,
             params: {lang_id: query.lang_id},
-            callback:(res) => {
-              const {status_code,data = []} = res;
-              if([200,201,202,203,204].includes(status_code)) {
-                if(Array.isArray(data) && data.length > 0) {
-                  const item = data[0];
-                  const images =  [
-                    {
-                      original:item.cover_img,
-                      thumbnail:item.cover_img,
-                    }
-                  ];
-                  for (let i = 0; i < item.album_slavs.length; i++) {
-                    images.push({
-                      original:item.album_slavs[i].images,
-                      thumbnail:item.album_slavs[i].images,
-                    })
-                  }
-                  setImages(images);
-                  setJournal(data);
-                }
-                setLoading(false);
-              }
-            }
+            callback:(res) => {}
         }
       ));
     }
   },[query])
+  useEffect(() => {
+    if(Object.keys(journalDetail).length) {
+      if(Array.isArray(journalDetail) && journalDetail.length > 0) {
+        const item = journalDetail[0];
+        const images = [];
+        if(item.hasOwnProperty('cover_img')) {
+          images.push({
+            original:item.cover_img,
+            thumbnail:item.cover_img,
+          });
+        }
+        for (let i = 0; i < item.album_slavs.length; i++) {
+          images.push({
+            original:item.album_slavs[i].images,
+            thumbnail:item.album_slavs[i].images,
+          })
+        }
+        setImages(images);
+      }
+    }
+  },[journalDetail]);
   return  (
-    <Grid container item textAlign="left" p={1} sx={{height:'100%',alignItems: jounal && Object.keys(jounal).length ?'auto':'center'}}>
+    <Grid container item textAlign="left" p={1} sx={{height:'100%',alignItems: journalDetail && Object.keys(journalDetail).length ?'auto':'center'}}>
       <Grid item xs={12}>
-        {loading ? <DataLoading/> : jounal && Object.keys(jounal).length > 0 ? <Grid item className='carouselcard'>
+        {loading ? <DataLoading/> : journalDetail && Object.keys(journalDetail).length > 0 ? <Grid item className='carouselcard'>
           <ImageGallery
             items={images}
             showPlayButton={false}
