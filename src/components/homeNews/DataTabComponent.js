@@ -16,6 +16,7 @@ import utils from '@/common/utils';
 const DataTabComponent = ({id,lang_id}) => {
     const {news} = useSelector((state) => state.news); 
     const dispatch = useDispatch();
+    console.log("datatabcomp news :::",news)
     React.useEffect(() => {
         dispatch(getNewsByCategory(
             {

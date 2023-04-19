@@ -119,6 +119,9 @@ const Header = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              boxShadow:"0px 2px 10px rgba(0, 0, 0, 0.1);",
+        
+            
             }}
             sx={{
               background: "linear-gradient(to right, #373737 50%, white 0%)",
@@ -251,6 +254,7 @@ const Header = () => {
                         "linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)",
                       color: "white",
                     }}
+                    onClick={()=>router.push('/download')}
                   >
                     <Icon icon="material-symbols:app-shortcut" width={20} />
                     Download App

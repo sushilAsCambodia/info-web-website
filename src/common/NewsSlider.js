@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
+import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
 
 const settings = {
@@ -29,13 +30,25 @@ export default function NewsSlider(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { news } = props; 
+  const { catId = [], lang_id = [],news=[] } = props;
 
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
-  
+  const [newsList, setNewsList] = useState([]);
 
+  useEffect(() => {
+    dispatch(
+      getNewsByCategory({
+        params: { lang_id: lang_id, category_id: catId, take: 10 },
+        callback: (res) => {
+          console.log(catId,"newsSlider:::",res)
+          setNewsList(res.data);
+          setLoading(false);
+        },
+      })
+    );
+  }, []);
   return (
     <>
       <Grid overflow="auto" height="450px">
@@ -49,9 +62,9 @@ export default function NewsSlider(props) {
                 >
                   {" "}
                   <Slider {...settings}>
-                    {news.map((item,index) => {
+                    {newsList && newsList.map((item) => {
                       return (
-                        <Grid key={index} component={Link} href="/newsSingle" color="black" sx={{textDecoration:"none"}} >
+                        <Grid component={Link} href="/announcement" color="black" sx={{textDecoration:"none"}} >
                           <Grid
                             key={item.id}
                             style={{

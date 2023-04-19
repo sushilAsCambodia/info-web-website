@@ -17,10 +17,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import utils from '@/common/utils';
 import LoadingDialog from "@/components/Loading";
 import DialogMessage from "@/components/DialogMessage";
+import { useRouter } from "next/router";
+
 const Feedback = () => {
   const {loading} = useSelector((state) => state.feedback);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const router = useRouter();
+
+  const [profilePage,setProfilePage]  = useState(false);
   const [content,setContent]  = useState('');
   const [contact,setContact]  = useState('');
   const [openDialog,setOpenDialog]  = useState(false);
@@ -76,6 +81,12 @@ const Feedback = () => {
       }
     } 
   };
+  useEffect(() => {
+    const hash = router.asPath;
+    if(hash == '/profile#feedback') {
+      setProfilePage(true);
+    }
+   }, [ router.asPath ]);
   return loading ? <LoadingDialog loading={loading}/> : ( 
     <>
       <Grid
@@ -97,6 +108,7 @@ const Feedback = () => {
                 {t('send_your_feedback_here')}
               </Typography>
             </Grid>
+            <Grid item display="flex" flexDirection={`${profilePage? "column-reverse":"column" }`}>
             <Grid item xs={12} paddingTop="10px">
               <Typography paddingBottom="20px" fontSize="12px">
                 {t('feedback_content')} <Typography component="span" sx={{color:'red'}}>*</Typography>
@@ -145,6 +157,8 @@ const Feedback = () => {
                 {errorEmail && <FormHelperText error>{t(errorEmailMessage)}</FormHelperText>}
               </FormControl>
             </Grid>
+            </Grid>
+
             <Grid item xs={12} paddingTop="30px">
               <Button
                 fullWidth

@@ -26,7 +26,7 @@ const Layout = (props) => {
     let width = '';
     if (router.pathname != '') {
         width = '80%';
-    } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
+    } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword' || router.pathname == '/download') {
         width = '100%';
     }
 
@@ -55,7 +55,7 @@ const Layout = (props) => {
 
                     }
                     #__next {
-                        min-height: 100vh;
+                        // min-height: 100vh;
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;

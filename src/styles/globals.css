@@ -344,6 +344,9 @@ padding: 0px;
 #nickNameFormControl div{
   background: #fff;
 }
+#nickNameFormControl .css-nmju5p-MuiInputBase-root-MuiFilledInput-root.Mui-disabled:before{
+  margin-left: 10px;
+}
 #changePasswordDivider .MuiDivider-wrapper{
   padding-left: 0 !important;
 }
@@ -540,4 +543,13 @@ text-overflow: ellipsis;
 .arrow-control-custom svg{
   background-color: white;
   border-radius: 50%;
+}
+
+/* system profile css  */
+.profiletab .css-v0pgo8-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  border-radius:0px
+
+}
+.css-m9gpap-MuiListItem-root:hover{
+border: 2px solid red;
 }

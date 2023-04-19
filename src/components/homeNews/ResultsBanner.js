@@ -144,7 +144,7 @@ export default function ResultsBanner({
           <Grid px={1.5} container justifyContent="space-between" width="100%">
             <Grid>Announcements</Grid>
             <Grid
-              component={Link}
+              component={Link} href="/announcement"
               style={{ color: "blue", textDecoration: "none" }}
             >
               View all
