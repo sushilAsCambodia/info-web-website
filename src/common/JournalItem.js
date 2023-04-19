@@ -15,6 +15,8 @@ export default function JournalItem(props) {
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
+  const {item=[]} = props; 
+
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
@@ -48,7 +50,7 @@ export default function JournalItem(props) {
         >
           <Grid item xs={6} padding="5px" >
             <img
-              src="./assets/NewsJourney/Journalcard1.png"
+              src={item.cover_img}
               style={{
                 minWidth: "100px",
                 maxHeight: "80px",
@@ -60,7 +62,7 @@ export default function JournalItem(props) {
           <Grid item xs={6} display="flex" alignItems="center">
             <Grid display="flex" flexDirection="column">
                 <Typography color="black" fontWeight="bold" fontSize="15px" className="singleLinesEllips">
-                  God of Wealth
+                  {item.album_name}
                 </Typography>
                 <Grid display="flex">
                   <Icon icon="ic:outline-calendar-today" color="grey" />

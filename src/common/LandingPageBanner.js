@@ -59,7 +59,7 @@ export default function LandingPageBanner(props) {
 
   return (
     <>
-      <Grid>
+      <Grid mt={2}>
         <Carousel
           responsive={responsive}
           additionalTransfrom={0}
