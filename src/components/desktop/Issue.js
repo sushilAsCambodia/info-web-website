@@ -55,7 +55,6 @@ export default function DialogDesktop() {
     const tabElms = (length) => {
         let tabs = [];
         for (let i = 0 ; i < length ; i++) {
-            console.log(2020+i)
             tabs.push(<Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={2020+i} {...a11yProps(i)} /> );
         }
         return tabs;
