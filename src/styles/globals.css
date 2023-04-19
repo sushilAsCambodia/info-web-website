@@ -431,7 +431,7 @@ padding: 0px 0px;
 .calendraDrawer .css-b4a6b0-MuiListItem-root.active-issue {
   background: rgb(255, 111, 49);
   color: #fff;
-  border:none
+  border: 1px solid transparent;
 }
 /* NEWS SCROLL CLOUMN  */
 .newsColumn {
