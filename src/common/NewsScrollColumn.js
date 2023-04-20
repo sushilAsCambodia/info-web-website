@@ -32,6 +32,7 @@ export default function NewsScrollColumn(props) {
         params: { lang_id: lang_id, category_id: newsCategory.id, take: 10 },
         callback: (res) => {
           setNewsList(res.data);
+          console.log(newsCategory.id,"newsscrollcol:::",newsList)
         },
       })
     );

@@ -22,8 +22,6 @@ export default function NewsColumns(props) {
   const {lang_id=[]} = props; 
   const { categories=[] } = useSelector((state) => state.category);
 
-  console.log("category:::", categories);
-  console.log("lang_id:::", lang_id);
 
   useEffect(() => {
     dispatch(
