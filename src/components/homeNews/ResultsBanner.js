@@ -30,76 +30,11 @@ const settings = {
   centerMode: false,
 };
 
-export default function ResultsBanner({
-  lang_id,
-  winnerGalleryProducts,
-  winnerGalleryCustomers,
-  winnerGalleryAll,
-}) {
-  const { t } = useTranslation();
+export default function ResultsBanner(props) {
+  const {lang_id=[]} = props; 
 
   const [loading, setLoading] = useState(false);
-
-  const rows = [
-    {
-      id: 1,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 2,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 3,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-  ];
-
-
-  useEffect(() => {
-    setLoading(true);
-    if (winnerGalleryProducts && winnerGalleryCustomers && winnerGalleryAll) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 4000);
-    }
-  }, [
-    winnerGalleryProducts,
-    winnerGalleryCustomers,
-    winnerGalleryAll,
-    lang_id,
-  ]);   
-
    
-  
   return (
     <>
       <Grid
@@ -111,7 +46,7 @@ export default function ResultsBanner({
         marginTop="10px"
       >
         <Grid item xs={3} border="1px solid grey" borderRadius="10px">
-          <Grid>Latest Results</Grid>
+          <Typography px={1.5} mb={1}>Latest Results</Typography>
           {/* <NewsSlider news={rows} /> */}
           <Grid overflow="auto" height="430px">
             {/* <Slider {...settings}> */}
@@ -137,17 +72,16 @@ export default function ResultsBanner({
           </Grid>
         </Grid>
         <Grid item xs={3} border="1px solid grey" borderRadius="10px">
-          <Grid px={1.5} container justifyContent="space-between" width="100%">
-            <Grid>Announcements</Grid>
+          <Grid px={1.5} mb={1} container justifyContent="space-between" width="100%">
+            <Typography>Announcements</Typography>
             <Grid
               component={Link} href="/announcement"
-              style={{ color: "blue", textDecoration: "none" }}
-            >
-              View all
+              style={{ color: "#037DED", textDecoration: "none" }}
+            ><Typography>View all</Typography>
             </Grid>
           </Grid>
           <Grid overflow="auto" height="450px">
-            <NewsSlider news={rows}/>
+            <NewsSlider lang_id={lang_id} catId={1}/>
           </Grid>
         </Grid>
       </Grid>

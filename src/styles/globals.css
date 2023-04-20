@@ -520,6 +520,7 @@ text-overflow: ellipsis;
   width:50px !important;
   height:50px !important;
   border-radius:50px;
+  cursor: pointer;
 }
 .footerIcon:hover{
   background: linear-gradient(180deg, #FF0000 0%, #FF8024 100%);

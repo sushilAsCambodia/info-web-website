@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
+import moment from "moment/moment";
+import utils from "./utils";
 
 const settings = {
   dots: false,
@@ -30,7 +32,7 @@ export default function NewsSlider(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { catId = [], lang_id = []} = props;
+  const { catId = [], lang_id = [] } = props;
 
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
@@ -56,17 +58,18 @@ export default function NewsSlider(props) {
         <Grid
           sx={{
             borderRadius: "0px 0px 10px 10px",
-            minHeight:300, maxHeight: 440,
+            minHeight: 300,
+            maxHeight: 440,
             overflow: "auto",
           }}
           className="newsColumn"
         >
           {" "}
           {/* <Slider {...settings}> */}
-            {newsList &&
-              newsList.map((item) => {
-                return (
-                  <Grid
+          {newsList &&
+            newsList.map((item) => {
+              return (
+                <Grid
                   component={Link}
                   onClick={() =>
                     router.push({
@@ -74,27 +77,33 @@ export default function NewsSlider(props) {
                       query: { news_id: item.id },
                     })
                   }
-                    color="black"
-                    sx={{ textDecoration: "none" }}
+                  color="black"
+                  sx={{ textDecoration: "none" }}
+                >
+                  <Grid
+                    key={item.id}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      borderBottom: "2px solid grey",
+                      paddingBottom: "10px",
+                      marginBottom: "10px",
+                      // color: "white",
+                      margin: "10px",
+                    }}
                   >
-                    <Grid
-                      key={item.id}
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        borderBottom: "2px solid grey",
-                        paddingBottom: "10px",
-                        marginBottom: "10px",
-                        // color: "white",
-                        margin: "10px",
-                      }}
+                    <Typography textAlign="left">{item.title}</Typography>
+                    <Typography
+                      textAlign="left"
+                      fontSize="11px"
+                      color="#8C8C8C"
                     >
-                      <Typography textAlign="left">{item.title}</Typography>
-                      <Typography textAlign="left">{item.date}</Typography>
-                    </Grid>
+                      {moment(item.release_date).format(utils.letterFormat)}
+                    </Typography>
                   </Grid>
-                );
-              })}
+                </Grid>
+              );
+            })}
           {/* </Slider> */}
         </Grid>
       </Grid>

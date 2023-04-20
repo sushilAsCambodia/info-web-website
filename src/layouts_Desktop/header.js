@@ -1,6 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import {logout} from '@/store/actions/authActions';
+import { logout } from "@/store/actions/authActions";
 import { Grid, Menu, Fade } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -9,14 +9,15 @@ import LangSwitcher from "@/components/LangSwitcher";
 import { Icon } from "@iconify/react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect, useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
 import ProfileDropDown from "@/components/header/ProfileDropDown";
 import Link from "next/link";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
-  const {customer,isLogin} = useSelector((state) => state.auth);
+  const matches2 = useMediaQuery("(max-width:1024px)");
+  const { customer, isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -28,15 +29,15 @@ const Header = () => {
     setAnchorEl(null);
   };
   const handleLogout = () => {
-    dispatch(logout(
-        { 
-            callback: (res) => {
-                router.push('/'); 
-            },
-            auth: true
+    dispatch(
+      logout({
+        callback: (res) => {
+          router.push("/");
         },
-    ));
-}
+        auth: true,
+      })
+    );
+  };
   const [anchorScore, setAnchorScore] = useState(null);
   const openScore = Boolean(anchorScore);
   const handleScoreClick = (event) => {
@@ -45,7 +46,12 @@ const Header = () => {
   const handleScoreClose = () => {
     setAnchorScore(null);
   };
-
+  const menuList = [
+    { label: "Lottery Draw", page: "LotteryPage" },
+    { label: "Data Chart", page: "DataChart" },
+    { label: "FootBall", page: "FootBall" },
+    { label: "BasketBall", page: "BasketBall" },
+  ];
   return (
     <>
       {router.pathname == "/login" || router.pathname == "/register" ? (
@@ -63,7 +69,11 @@ const Header = () => {
               alignItems: "center",
             }}
           >
-            <Grid width="80%" container justifyContent="space-between">
+            <Grid
+              width={{ xs: "95%", xl: "80%" }}
+              container
+              justifyContent="space-between"
+            >
               <Grid item xs={6}>
                 <Link href="/">
                   <img src="./assets/Logo/logowhite.png" />
@@ -86,27 +96,31 @@ const Header = () => {
                   <Icon width={20} icon="material-symbols:search-rounded" />
                 </Grid>
                 <Grid item>
-                  {!isLogin?
-                  <Button
-                    onClick={() => {
-                      router.push("/login");
-                    }}
-                    variant="container"
-                    sx={{
-                      background: "white",
-                      color: "red",
-                      fontSize: "12px",
-                      borderRadius: "20px",
-                      "&:hover": {
-                        background: "red",
-                        color: "white",
-                      },
-                    }}
-                  >
-                    Login/Register
-                  </Button>
-                  :
-                  < ProfileDropDown customer={customer} logout={handleLogout}/> }
+                  {!isLogin ? (
+                    <Button
+                      onClick={() => {
+                        router.push("/login");
+                      }}
+                      variant="container"
+                      sx={{
+                        background: "white",
+                        color: "red",
+                        fontSize: "12px",
+                        borderRadius: "20px",
+                        "&:hover": {
+                          background: "red",
+                          color: "white",
+                        },
+                      }}
+                    >
+                      Login/Register
+                    </Button>
+                  ) : (
+                    <ProfileDropDown
+                      customer={customer}
+                      logout={handleLogout}
+                    />
+                  )}
                 </Grid>
                 <Grid item>
                   <LangSwitcher />
@@ -120,19 +134,19 @@ const Header = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              boxShadow:"0px 2px 10px rgba(0, 0, 0, 0.1)",
+              boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
             }}
             sx={{
               background: "linear-gradient(to right, #373737 50%, white 0%)",
             }}
           >
-            <Grid width="80%" sx={{ background: "white" }}>
+            <Grid width={{ xs: "95%", xl: "80%" }} sx={{ background: "white" }}>
               <Grid
                 container
                 justifyContent="space-between"
                 alignItems="strech"
               >
-                <Grid item xs={1}>
+                <Grid item xs={2} md={1}>
                   <MenuItem
                     id="fade-button"
                     aria-controls={openScore ? "fade-menu" : undefined}
@@ -144,6 +158,7 @@ const Header = () => {
                       "&:hover": {
                         background: "grey",
                       },
+                      paddingLeft: "0px",
                     }}
                   >
                     <Typography color="white">Live Score</Typography>
@@ -174,7 +189,7 @@ const Header = () => {
                     <MenuItem onClick={handleScoreClose}>score 3</MenuItem>
                   </Menu>
                 </Grid>
-                <Grid item xs={9} container color="black">
+                <Grid item xs={6} lg={7.5} container color="black">
                   <Grid>
                     <MenuItem
                       onClick={() => {
@@ -184,26 +199,16 @@ const Header = () => {
                       <Typography textAlign="center">Home</Typography>
                     </MenuItem>
                   </Grid>
-                  <Grid>
-                    <MenuItem onClick={() => router.push("/LotteryPage")}>
-                      <Typography textAlign="center">Lottery Draw</Typography>
-                    </MenuItem>
-                  </Grid>
-                  <Grid>
-                    <MenuItem>
-                      <Typography textAlign="center">Data Chart</Typography>
-                    </MenuItem>
-                  </Grid>
-                  <Grid>
-                    <MenuItem>
-                      <Typography textAlign="center">Foot Ball</Typography>
-                    </MenuItem>
-                  </Grid>
-                  <Grid>
-                    <MenuItem>
-                      <Typography textAlign="center">BasketBall</Typography>
-                    </MenuItem>
-                  </Grid>
+                  {!matches2 ? menuList.map((item) => {
+                    return (
+                      <Grid>
+                        <MenuItem sx={{paddingX:{xs:"5px",lg:"15px"}}} onClick={() => router.push(`/${item.page}`)}>
+                          <Typography  textAlign="center">{item.label}</Typography>
+                        </MenuItem>
+                      </Grid>
+                    );
+                  }) : ''}
+                 
                   <Grid>
                     <MenuItem
                       id="basic-button"
@@ -232,6 +237,13 @@ const Header = () => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
+                      {matches2 ? menuList.map((item) => {
+                    return (
+                        <MenuItem onClick={() => router.push(`/${item.page}`)}>
+                          <Typography textAlign="center">{item.label}</Typography>
+                        </MenuItem>
+                    );
+                  }) : ''}
                       <MenuItem onClick={handleClose}>Profile</MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
                       <MenuItem onClick={handleClose}>Logout</MenuItem>
@@ -240,21 +252,23 @@ const Header = () => {
                 </Grid>
                 <Grid
                   item
-                  xs={2}
+                  xs={4}
+                  lg={2.5}
                   container
                   alignItems="center"
-                  justifyContent="space-between"
+                  justifyContent="flex-end"
                 >
                   <Button
                     variant="contain"
                     sx={{
                       padding: "4px 8px",
+                      marginRight: "5px",
                       fontSize: "12px",
                       background:
                         "linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)",
                       color: "white",
                     }}
-                    onClick={()=>router.push('/download')}
+                    onClick={() => router.push("/download")}
                   >
                     <Icon icon="material-symbols:app-shortcut" width={20} />
                     Download App

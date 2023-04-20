@@ -57,10 +57,10 @@ export default function NewsScrollColumn(props) {
                 position: "absolute",
                 // background: "linear-gradient(to left, #FF6F31 50%, white 0%)",
                 background: "#FF6F31",
-                height: 545,
+                height: 555,
                 width: 250,
                 right: "-1%",
-                top: -2,
+                top: -3,
                 borderRadius: "0px 10px 10px 0px",
               }}
             ></Grid>
@@ -142,6 +142,7 @@ export default function NewsScrollColumn(props) {
                           "-webkit-transform": "scale(1)",
                           transitionDuration: "0.7s",
                         },
+                        cursor:"pointer"
                       }}
                     >
                       <Typography textAlign="left">{item.title}</Typography>

@@ -29,7 +29,7 @@ export default function Index() {
   return !matches ? (
     <>
       <Grid>
-        <ResultsBanner />
+        <ResultsBanner lang_id={utils.convertLangCodeToID(i18n.language)}/>
         {/* <LinkBanner /> */}
         
           <LandingPageBanner />
