@@ -420,12 +420,12 @@ export default function Register() {
     </>
   ) : (
     <Grid
-      p={15}
-      display="flex"
+    p={{xs:2, md:10}}
+    display="flex"
       justifyContent="center"
       sx={{ backgroundImage: "url('./assets/login/login_bg.png')" }}
     >
-      <Grid container justifyContent="center" alignItems="stretch" width="65%">
+      <Grid container justifyContent="center" alignItems="stretch" width={{xs:"1000px", lg:"90%",xl:"65%"}}>
         <Grid
           container
           justifyContent="center"
@@ -776,7 +776,7 @@ export default function Register() {
                   justifyContent: "space-between",
                   alignItems: "center",
                 }}
-                px={2}
+                px={1}
                 py={1}
                 underline="none"
               >

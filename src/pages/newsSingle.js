@@ -19,6 +19,8 @@ import utils from "@/common/utils";
 import { useTranslation } from "react-i18next";
 import { getCategory } from "@/store/actions/categoryActions";
 import { getNewsByCategory } from "@/store/actions/newsActions";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import NewsCardDetails from "./newsCardDetails";
 
 
 export default function NewsSingle() {
@@ -26,6 +28,7 @@ export default function NewsSingle() {
   const lang_id = utils.convertLangCodeToID(i18n.language);
   const { categories = [] } = useSelector((state) => state.category);
   const [newsCat, setNewsCat] = useState(0);
+  const matches = useMediaQuery("(max-width:768px)");
 
   const { loading, newsDetail = {} } = useSelector((state) => state.news);
   const { query } = router;
@@ -64,14 +67,14 @@ export default function NewsSingle() {
     return categories[index].id;
   };
 
-  return (
-    <Grid container justifyContent="center">
+  return !matches ? (
+    <Grid justifyContent="center">
       <Grid my={1}>
         <Typography fontWeight="bold" variant="h5">
           News Details
         </Typography>
-        <Grid container sx={{ width: "80vw" }}>
-          <Grid xs={9} p={1}>
+        <Grid container>
+          <Grid xs={8} md={9} py={1}>
             <Grid border="1px solid grey" borderRadius="10px" p={2}>
               <Typography fontWeight="bold" variant="h4">
                 {newsDetail.title || ""}
@@ -99,7 +102,7 @@ export default function NewsSingle() {
             </Grid>
           </Grid>
           {categories.length > 0 ?
-          <Grid xs={3} p={1}>
+          <Grid xs={4} md={3} p={1}>
             <Grid container border="1px solid grey" borderRadius="10px" p={2}>
               <Grid xs={12}>
                 <Typography fontWeight="bold">{categories[0].category_name }</Typography>
@@ -138,5 +141,5 @@ export default function NewsSingle() {
         </Grid>
       </Grid>
     </Grid>
-  );
+  ):( <NewsCardDetails/>)
 }

@@ -16,7 +16,7 @@ import ProfileDropDown from "@/components/header/ProfileDropDown";
 import Link from "next/link";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
-  const matches2 = useMediaQuery("(max-width:1024px)");
+  const matches2 = useMediaQuery("(max-width:1074px)");
   const { customer, isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -74,14 +74,14 @@ const Header = () => {
               container
               justifyContent="space-between"
             >
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <Link href="/">
                   <img src="./assets/Logo/logowhite.png" />
                 </Link>
               </Grid>
               <Grid
                 item
-                xs={6}
+                xs={8}
                 container
                 spacing={2}
                 sx={{ alignItems: "center", justifyContent: "flex-end" }}
@@ -146,7 +146,7 @@ const Header = () => {
                 justifyContent="space-between"
                 alignItems="strech"
               >
-                <Grid item xs={2} md={1}>
+                <Grid item xs={3} sm={2} md={2} lg={1}>
                   <MenuItem
                     id="fade-button"
                     aria-controls={openScore ? "fade-menu" : undefined}
@@ -160,6 +160,7 @@ const Header = () => {
                       },
                       paddingLeft: "0px",
                     }}
+                    
                   >
                     <Typography color="white">Live Score</Typography>
                     {openScore ? (
@@ -189,7 +190,7 @@ const Header = () => {
                     <MenuItem onClick={handleScoreClose}>score 3</MenuItem>
                   </Menu>
                 </Grid>
-                <Grid item xs={6} lg={7.5} container color="black">
+                <Grid item xs={6} md={6} lg={8} container color="black">
                   <Grid>
                     <MenuItem
                       onClick={() => {

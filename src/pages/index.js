@@ -31,8 +31,7 @@ export default function Index() {
       <Grid>
         <ResultsBanner lang_id={utils.convertLangCodeToID(i18n.language)}/>
         {/* <LinkBanner /> */}
-        
-          <LandingPageBanner />
+        <LandingPageBanner />
         <NewsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <JournalsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <PartnersColumns />

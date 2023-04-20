@@ -372,7 +372,7 @@ export default function Login() {
                   }}
                   onClick={goToRegister}
                 >
-                  {t("no_account")}{" "}
+                  {t("no_account")}
                   <Typography
                     style={{
                       fontSize: "12px",
@@ -408,12 +408,12 @@ export default function Login() {
     </>
   ) : (
     <Grid
-      p={15}
+      p={{xs:2, md:10}}
       display="flex"
       justifyContent="center"
       sx={{ backgroundImage: "url('./assets/login/login_bg.png')" }}
     >
-      <Grid container justifyContent="center" alignItems="stretch" width="65%">
+      <Grid container justifyContent="center" alignItems="stretch" width={{xs:"1000px", lg:"90%",xl:"65%"}}>
         <Grid
           container
           justifyContent="center"
@@ -736,7 +736,7 @@ export default function Login() {
                   justifyContent: "space-between",
                   alignItems: "center",
                 }}
-                px={2}
+                px={1}
                 py={1}
                 underline="none"
               >
@@ -765,7 +765,7 @@ export default function Login() {
                   <Icon icon="bi:chat-square-dots-fill" width={25} />
                   <Typography mx={1}>Contact</Typography>
                 </Grid>
-              </Grid>
+              </Grid> 
             </Grid>
           </Grid>
         </Grid>

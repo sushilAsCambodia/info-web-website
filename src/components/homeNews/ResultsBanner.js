@@ -50,7 +50,7 @@ export default function ResultsBanner(props) {
         spacing={1}
         marginTop="10px"
       >
-        <Grid item xs={12} lg={2.5} border="1px solid grey" borderRadius="10px">
+        <Grid item xs={12} lg={3} xl={2.5} border="1px solid grey" borderRadius="10px">
           <Typography px={1.5} mb={1}>Latest Results</Typography>
           {/* <NewsSlider news={rows} /> */}
           {/* <Grid overflow="auto" height="430px"> */}
@@ -65,7 +65,7 @@ export default function ResultsBanner(props) {
             {/* </Slider> */}
           </Grid>
         </Grid>
-        <Grid  xs={12} lg={7} py={{xs:1,lg:0}} px={{xs:0,lg:1}}>
+        <Grid  xs={12} lg={7} xl={7.5} py={{xs:1,lg:0}} px={{xs:0,lg:1}}>
           <Grid
             
             xs={12}

@@ -114,7 +114,7 @@ const Announcement = () => {
                         <Grid container>
                             {rows.map((row) => {
                                 return (
-                                    <Grid xs={12} sm={6} md={4} sx={{ padding: "10px", textAlign:"left",  }}>
+                                    <Grid xs={12} sm={6} md={4} lg={3} sx={{ padding: "10px", textAlign:"left",  }}>
                                             <Grid item sx={{backgroundColor: "#FFF5F0",border: "1px solid #FF6F31",borderRadius: "11px",padding:"10px"  }}>
                                                 <Typography fontWeight="500" className="twoLinesEllip" color="#000">{row.news}</Typography>
                                                 <Typography paddingTop={1} textAlign="left" fontSize="12px" color="#8C8C8C">
