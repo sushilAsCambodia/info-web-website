@@ -94,8 +94,8 @@ export default function JournalsColumns(props) {
         <style>
           {
             ` .react-multiple-carousel__arrow {
-                min-width: 20px;
-                min-height: 20px;
+                min-width: 24px;
+                min-height: 24px;
                 background: linear-gradient(0deg, #EFEFEF, #EFEFEF),
                 linear-gradient(0deg, #FFFFFF, #FFFFFF);
               }
