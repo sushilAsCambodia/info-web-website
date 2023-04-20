@@ -117,19 +117,25 @@ const News = () => {
                         border: "1px solid #FF6F31",
                       }}
                     >
-                      <Typography>{item.title}</Typography>
-                      <Typography
+                      <Typography  sx={{
+                        overflow: 'hidden',
+                        display: '-webkit-box',
+                        '-webkit-line-clamp': '3', 
+                                'line-clamp': '3', 
+                        '-webkit-box-orient': 'vertical',
+                      }}>{item.title}</Typography>
+                      {/* <Typography
                       sx={{
                         overflow: 'hidden',
                         display: '-webkit-box',
-                        '-webkit-line-clamp': '3', /* number of lines to show */
+                        '-webkit-line-clamp': '3', 
                                 'line-clamp': '3', 
                         '-webkit-box-orient': 'vertical',
                       }}
                         dangerouslySetInnerHTML={{
                           __html: item.description || "",
                         }}
-                      ></Typography>
+                      ></Typography> */}
                       <Typography
                         paddingTop={1}
                         textAlign="left"

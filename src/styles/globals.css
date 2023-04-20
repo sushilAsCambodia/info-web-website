@@ -554,3 +554,19 @@ text-overflow: ellipsis;
 .css-m9gpap-MuiListItem-root:hover{
 border: 2px solid red;
 }
+/* RESULT BANNER  */
+.verticleLotto{
+  display: flex; 
+  flex-direction:row; 
+  width: 100%;
+}
+.horizontalLotto{
+  height:430px
+}
+.twoLinesEllip{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
+}

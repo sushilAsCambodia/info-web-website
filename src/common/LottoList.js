@@ -75,9 +75,9 @@ export default function LottoList(props) {
   };
   return (
     <>
-      <Grid width="100%" paddingX="10px">
-                <Card sx={{ border: "1px solid grey", marginY: "5px" }}>
-                  <Grid sx={{ fontSize: "15px",borderBottom:"1px solid grey" }} px={1}>29 Mar 2023, Monday</Grid>
+      <div style={{paddingRight:"10px" }}>
+                <Card sx={{ border: "1px solid grey", marginY: "5px",width:"max-content" }}>
+                  <Grid sx={{ fontSize: "15px",borderBottom:"1px solid grey", }} px={1}>29 Mar 2023, Monday</Grid>
                   <CardHeader
                     sx={{ padding: "10px" }}
                     avatar={
@@ -105,7 +105,7 @@ export default function LottoList(props) {
                     subheader={lotto()}
                   />
                 </Card>
-              </Grid>
+              </div>
     </>
   );
 }
