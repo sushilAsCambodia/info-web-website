@@ -1,12 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
-import { useTheme } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
 import { Typography, Divider } from "@mui/material";
-import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
-import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
@@ -97,6 +91,27 @@ export default function JournalsColumns(props) {
               return <JournalItem setOpen={setOpen} setAlbumId={setAlbumId} key={index} item={item}/>;
             })}
           </Carousel>
+        <style>
+          {
+            ` .react-multiple-carousel__arrow {
+                min-width: 20px;
+                min-height: 20px;
+                background: linear-gradient(0deg, #EFEFEF, #EFEFEF),
+                linear-gradient(0deg, #FFFFFF, #FFFFFF);
+              }
+              .react-multiple-carousel__arrow--left {
+                left:0;
+              }
+              .react-multiple-carousel__arrow--right {
+                right:0; 
+              }
+              .react-multiple-carousel__arrow::before {
+                font-size: 10px;
+                color: #444444;
+              }
+            `
+          }
+        </style>
         </Grid>
       </Grid>
       {/* Show dialog album here */}
