@@ -49,7 +49,7 @@ export default function NewsSlider(props) {
         },
       })
     );
-  }, []);
+  }, [catId]);
   return (
     <>
       <Grid overflow="auto" minHeight="300px" maxHeight="450px">
@@ -67,8 +67,13 @@ export default function NewsSlider(props) {
               newsList.map((item) => {
                 return (
                   <Grid
-                    component={Link}
-                    href="/announcement"
+                  component={Link}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/newsSingle",
+                      query: { news_id: item.id },
+                    })
+                  }
                     color="black"
                     sx={{ textDecoration: "none" }}
                   >
