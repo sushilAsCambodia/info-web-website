@@ -40,32 +40,19 @@ const responsive = {
 };
 
 export default function JournalsColumns(props) {
-  const { t } = useTranslation();
-  const theme = useTheme();
-  const router = useRouter();
-  const [value, setValue] = React.useState(0);
+  const { t } = useTranslation(); 
   const [open, setOpen] = React.useState(false);
-  const {lang_id=[]} = props; 
+  const [albumId, setAlbumId] = React.useState('');
+  const {lang_id=''} = props; 
   const dispatch = useDispatch();
-  const { journals = [], loading } = useSelector((state) => state.journal);
+  const { journals = [], loading } = useSelector((state) => state.journal); 
   useEffect(() => {
-    const hash = router.asPath.split("#")[1];
-    if (hash == "journal") {
-      setValue(1);
-    } else {
-      setValue(0);
-    }
-  }, [router.asPath]);
-
-  useEffect(() => {
-      dispatch(getJournal(
-        {
-            params: {lang_id: lang_id,take: 10},
-            callback:(res) => {
-              console.log('getJournal:::',res)
-            }
-        }
-      ));
+    dispatch(getJournal(
+      {
+        params: {lang_id: lang_id, take: 10},
+        callback:(res) => { }
+      }
+    ));
   },[lang_id])
   return (
     <>
@@ -107,12 +94,13 @@ export default function JournalsColumns(props) {
             renderDotsOutside={false}
           >
             {journals.map((item,index)=>{
-              return <JournalItem setOpen={setOpen} key={index} item={item}/>;
+              return <JournalItem setOpen={setOpen} setAlbumId={setAlbumId} key={index} item={item}/>;
             })}
           </Carousel>
         </Grid>
       </Grid>
-      <DialogDesktop open={open} setOpen={setOpen}/>
+      {/* Show dialog album here */}
+      <DialogDesktop open={open} albumId={albumId} setOpen={setOpen}/>
     </>
   );
 }

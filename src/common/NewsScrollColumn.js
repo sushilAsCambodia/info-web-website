@@ -21,7 +21,7 @@ export default function NewsScrollColumn(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { newsCategory = [], lang_id = [] } = props;
+  const { newsCategory = [], lang_id = '' } = props;
   const [newsList, setNewsList] = useState([]);
 
 

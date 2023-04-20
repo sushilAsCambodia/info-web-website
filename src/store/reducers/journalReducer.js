@@ -3,7 +3,7 @@ import moment from "moment/moment";
 const initialState = { 
     status: 'idle',
     journals:[],
-    journalDetail:{},
+    journalDetail:[],
     issue:{},
     years:[],
     loading:false,
@@ -28,19 +28,20 @@ export default function (state = initialState, action) {
       return {
         ...state, 
         loading:true,
+        journalDetail: [],
         status:'pending'
       };
     case 'journal/album-details/rejected':
       return {
         ...state, 
         loading:false,
-        journalDetail: {},
+        journalDetail: [],
         status:'failed'
       };
     case 'journal/album-details/fulfilled':
       return {
         ...state,
-        journalDetail: action.payload?.data || {},
+        journalDetail: action.payload?.data || [],
         status:'completed',
         loading: false
       };
@@ -78,6 +79,7 @@ export default function (state = initialState, action) {
       };
     case 'journal/album/year/fulfilled':
       const {data} = action.payload;
+      // let uniqueYear = [2020,2021,2022,2023,2024,2025];
       let uniqueYear = [];
       if(data && Object.keys(data).length) {
         const years = data?.data || [];
@@ -110,6 +112,9 @@ export default function (state = initialState, action) {
       return {
         ...state, 
         loading:true,
+        journalDetail: [{
+          album_slavs:   []
+        }],
         status:'pending'
       };
     case 'journal/album/selected-issue/fulfilled':

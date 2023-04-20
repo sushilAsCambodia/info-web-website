@@ -10,26 +10,13 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
+import moment from "moment/moment";
 export default function JournalItem(props) {
-  const { t } = useTranslation();
-  const theme = useTheme();
-  const router = useRouter();
-  const [value, setValue] = React.useState(0);
-  const {item=[], setOpen} = props; 
-
-  useEffect(() => {
-    const hash = router.asPath.split("#")[1];
-    if (hash == "journal") {
-      setValue(1);
-    } else {
-      setValue(0);
-    }
-  }, [router.asPath]);
-
+  const {item={}, setOpen, setAlbumId} = props;  
   return (
     <>
       <Grid
-        onClick={() => setOpen(true)}
+        onClick={() => {setOpen(true);setAlbumId(item.id)}}
         sx={{
           margin: "5px",
           borderRadius: "10px",
@@ -69,7 +56,7 @@ export default function JournalItem(props) {
                   <Icon icon="ic:outline-calendar-today" color="grey" />
                   <Typography color="grey" fontSize="12px" ml={1}>
                     {" "}
-                    2023
+                    {moment(item.issue_date).format('yyyy')}
                   </Typography>
                 </Grid>
                 <Button
@@ -84,7 +71,7 @@ export default function JournalItem(props) {
                     marginTop:"10px"
                   }}
                 >
-                  Latest Issue 094
+                  Latest Issue {item.issue||''}
                 </Button>
             </Grid>
           </Grid>

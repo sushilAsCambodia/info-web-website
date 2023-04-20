@@ -40,19 +40,26 @@ export default function FullSilder(props) {
             banners.map((step, index) => (
               <div key={index}>
                 {Math.abs(activeStep - index) <= 2 ? (
-                  <Grid
-                    item
-                    component="img"
-                    sx={{
-                      height: isWeb ? 300 :  160,
-                      display: "block",
-                      overflow: "hidden",
-                      width: "100%",
-                      objectFit:'cover'
-                    }}
-                    src={step.image}
-                    alt={step.label}
-                  />
+                  <Grid item component="div" sx={{
+                    height: isWeb ? 560 :  160,
+                    display: "block",
+                    overflow: "hidden",
+                    width: "100%",
+                    objectFit:'cover'
+                  }}>
+                    <Grid
+                      item
+                      component="img"
+                      sx={{
+                        height: '100%',
+                        display: "block",
+                        overflow: "hidden",
+                        width: "100%",
+                        objectFit:'cover'
+                      }}
+                      src={step.image} 
+                    />
+                  </Grid>
                 ) : null}
               </div>
             ))
