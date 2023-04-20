@@ -37,27 +37,20 @@ export default function FullSilder(props) {
           enableMouseEvents
         >
           {
-            banners.map((step, index) => (
+            banners.map((banner, index) => (
               <div key={index}>
                 {Math.abs(activeStep - index) <= 2 ? (
                   <Grid item component="div" sx={{
                     height: isWeb ? 560 :  160,
-                    display: "block",
-                    overflow: "hidden",
-                    width: "100%",
-                    objectFit:'cover'
                   }}>
-                    <Grid
-                      item
-                      component="img"
-                      sx={{
+                    <img
+                      style={{
                         height: '100%',
-                        display: "block",
-                        overflow: "hidden",
                         width: "100%",
                         objectFit:'cover'
                       }}
-                      src={step.image} 
+                      src={banner.image?.path || '/assets/no-image.png'}
+                      onError={(e) => e.target.src = '/assets/no-image.png'}
                     />
                   </Grid>
                 ) : null}

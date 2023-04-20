@@ -45,9 +45,7 @@ export default function DialogDesktop(props) {
                         albumId: albumId,
                         issueDate
                     },
-                    callback:(res) => {
-                        console.log(res,'callback issue')
-                    }
+                    callback:(res) => {  }
                 }
             )
         )

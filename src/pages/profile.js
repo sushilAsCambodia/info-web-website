@@ -217,7 +217,11 @@ function TabPanel(props) {
                   {isLogin ? (
                     <>
                       <Grid item xs={12} display="flex" alignItems="center">
-                        <img src="./assets/Profile/user-icon.png" />
+                        <img 
+                          src={customer.image?.path} 
+                          style={{ height:50,width:50,borderRadius:'50%'}}
+                          onError={(e) => e.target.src = '/assets/Profile/user-icon.png'}
+                        />
                         &nbsp;{" "}
                         <Typography fontWeight="600" fontSize="12px">
                           {customer.user_name || "Profile Name"}
@@ -227,7 +231,7 @@ function TabPanel(props) {
                   ) : (
                     <>
                       <Grid item xs={2} display="flex" alignItems="center">
-                        <img src="./assets/Profile/user-icon.png" />
+                        <img src="/assets/Profile/user-icon.png" />
                       </Grid>
                       <Grid item xs={10}>
                         <Grid

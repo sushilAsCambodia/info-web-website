@@ -7,7 +7,16 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case 'banner/list/pending':
       return {
-        ...initialState, 
+        ...state, 
+        status:'pending',
+        loading: true
+      };
+    case 'banner/list/rejected':
+      return {
+        ...state, 
+        status:'failed',
+        banners:[],
+        loading: false
       };
     case 'banner/list/fulfilled':
       return {

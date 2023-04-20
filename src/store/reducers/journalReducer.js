@@ -7,6 +7,7 @@ const initialState = {
     issue:{},
     years:[],
     loading:false,
+    loadingJournalDetail:false,
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -27,14 +28,14 @@ export default function (state = initialState, action) {
     case 'journal/album-details/pending':
       return {
         ...state, 
-        loading:true,
+        loadingJournalDetail:true,
         journalDetail: [],
         status:'pending'
       };
     case 'journal/album-details/rejected':
       return {
         ...state, 
-        loading:false,
+        loadingJournalDetail:false,
         journalDetail: [],
         status:'failed'
       };
@@ -43,7 +44,7 @@ export default function (state = initialState, action) {
         ...state,
         journalDetail: action.payload?.data || [],
         status:'completed',
-        loading: false
+        loadingJournalDetail: false
       };
     // end journal detail
     // issue block

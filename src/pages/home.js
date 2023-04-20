@@ -15,7 +15,9 @@ const Home = () => {
     useEffect(() => { 
         dispatch(getBanner(
             {
-                params: { fake:true },
+                params: {
+                    lang_id: utils.convertLangCodeToID(i18n.language)
+                },
                 callback:(res) => { }
             }
         ));
