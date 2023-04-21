@@ -82,7 +82,7 @@ export default function NewsScrollColumn(props) {
                   borderRadius: "10px 10px 0px 0px",
                 }}
               >
-                <Typography variant="h5">
+                <Typography variant="h5" >
                   {newsCategory.translation
                     ? newsCategory.translation?.category_name
                     : newsCategory.category_name || "N/A"}
@@ -122,9 +122,8 @@ export default function NewsScrollColumn(props) {
                           query: { news_id: item.id },
                         })
                       }
-                      color="black"
                       key={index}
-                      // className="newsLinkTransform"
+                      className="newsLinkTransform"
                       sx={{
                         display: "flex",
                         flexDirection: "column",
@@ -132,16 +131,6 @@ export default function NewsScrollColumn(props) {
                         paddingBottom: "10px",
                         marginBottom: "10px",
                         margin: "10px",
-                        color: "white",
-                        webkitTransform : "scale(0.95)",
-                        transitionDuration: "0.4s",
-                        "&:hover": {
-                          borderBottom: "2px solid orange",
-                          color: "orange",
-                          webkitTransform: "scale(1)",
-                          transitionDuration: "0.4s",
-                          textDecoration:"underline"
-                        },
                         cursor:"pointer"
                       }}
                     >
