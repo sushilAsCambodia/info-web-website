@@ -21,7 +21,6 @@ const Layout = (props) => {
     }, []);
     useEffect(() => {
         if(i18n.language) {
-            console.log(i18n.language,'header');
             if(i18n.language == 'kh') {
                 document.documentElement.setAttribute('lang',i18n.language);
             }
