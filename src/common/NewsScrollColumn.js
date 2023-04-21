@@ -134,12 +134,12 @@ export default function NewsScrollColumn(props) {
                         marginBottom: "10px",
                         color: "white",
                         margin: "10px",
-                        "-webkit-transform": "scale(0.9)",
+                        webkitTransform : "scale(0.9)",
                         transitionDuration: "0.7s",
                         "&:hover": {
                           borderBottom: "2px solid orange",
                           color: "orange",
-                          "-webkit-transform": "scale(1)",
+                          webkitTransform: "scale(1)",
                           transitionDuration: "0.7s",
                         },
                         cursor:"pointer"

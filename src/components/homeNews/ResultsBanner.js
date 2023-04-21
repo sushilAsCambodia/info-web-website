@@ -65,9 +65,9 @@ export default function ResultsBanner(props) {
             {/* </Slider> */}
           </Grid>
         </Grid>
-        <Grid  xs={12} lg={7} xl={7.5} py={{xs:1,lg:0}} px={{xs:0,lg:1}}>
+        <Grid item xs={12} lg={7} xl={7.5} py={{xs:1,lg:0}} px={{xs:0,lg:1}}>
           <Grid
-            
+            item
             xs={12}
             border="1px solid grey"
             borderRadius="10px"

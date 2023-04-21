@@ -200,9 +200,9 @@ const Header = () => {
                       <Typography textAlign="center">Home</Typography>
                     </MenuItem>
                   </Grid>
-                  {!matches2 ? menuList.map((item) => {
+                  {!matches2 ? menuList.map((item,index) => {
                     return (
-                      <Grid>
+                      <Grid key={index}>
                         <MenuItem sx={{paddingX:{xs:"5px",lg:"15px"}}} onClick={() => router.push(`/${item.page}`)}>
                           <Typography  textAlign="center">{item.label}</Typography>
                         </MenuItem>
