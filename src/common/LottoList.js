@@ -75,7 +75,7 @@ export default function LottoList(props) {
   };
   return (
     <>
-      <div style={{paddingRight:"10px" }}>
+      <div style={{paddingRight:"10px",display:"flex",justifyContent:"center" }}>
                 <Card sx={{ border: "1px solid grey", marginY: "5px",width:"max-content" }}>
                   <Grid sx={{ fontSize: "15px",borderBottom:"1px solid grey", }} px={1}>29 Mar 2023, Monday</Grid>
                   <CardHeader
