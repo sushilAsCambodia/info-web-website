@@ -70,7 +70,7 @@ export default function NewsSlider(props) {
             newsList.map((item,index) => {
               return (
                 <Grid
-                key={index}
+                  key={index}
                   component={Link}
                   onClick={() =>
                     router.push({

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import LoadingDialog from "../Loading";
