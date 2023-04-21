@@ -14,11 +14,18 @@ const Layout = (props) => {
     const [openDrawer, setOpenDrawer] = useState({ 
         open:false,
         anchor:'bottom'
-     }); 
+    }); 
+    const { t,i18n } = useTranslation();
     useEffect(() => {
         setMounted(true);
     }, []);
-    const { t } = useTranslation();
+    useEffect(() => {
+        if(i18n.language) {
+            if(i18n.language == 'kh') {
+                document.documentElement.setAttribute('lang',i18n.language);
+            }
+        }
+    },[i18n.language])
     let { children } = props;  
     let title = '';
     const pages = [
@@ -150,7 +157,7 @@ const Layout = (props) => {
         <>
             <Head>
                 <title>{title}</title>
-                <meta property="og:title" content={title} key="title" />
+                <meta property="og:title" content={title} key="title" /> 
             </Head>
             {switchHeader()}
             <Container maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding: "0px !important", overflowY: 'auto' }}>

@@ -118,7 +118,7 @@ const Feedback = () => {
                 id="outlined-multiline-static"
                 multiline
                 rows={6}
-                placeholder="Please input your feedback, do not exceed 500 characters"
+                placeholder={t('do_not_exceed_characters')}
                 value={content}
                 onChange={onChangeContent}
                 error={errorContent}

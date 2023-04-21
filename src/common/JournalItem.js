@@ -41,10 +41,11 @@ export default function JournalItem(props) {
             <img
               src={item.cover_img}
               style={{
-                minWidth: "100px",
+                width: "100%",
                 maxHeight: "80px",
                 border: "5px solid #FFE0E0",
                 borderRadius: "5px",
+                objectFit:'contain'
               }}
             />
           </Grid>

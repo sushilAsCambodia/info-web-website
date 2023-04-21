@@ -49,7 +49,7 @@ export default function FullSilder(props) {
                         width: "100%",
                         objectFit:'cover'
                       }}
-                      src={banner.image?.path || '/assets/no-image.png'}
+                      src={banner.file || '/assets/no-image.png'}
                       onError={(e) => e.target.src = '/assets/no-image.png'}
                     />
                   </Grid>
