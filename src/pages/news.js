@@ -2,35 +2,37 @@ import React, { useEffect, useState } from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Pagination from "@mui/material/Pagination";
-
 import {
   Typography,
   Stack,
   Grid,
   Link,
 } from "@mui/material";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTranslation } from "react-i18next";
 import utils from "@/common/utils";
 import moment from "moment/moment";
-
-import { getNewsByCategory } from "@/store/actions/newsActions";
+import { getNewsByCategory,getNewsAll } from "@/store/actions/newsActions";
 const News = () => {
   const matches = useMediaQuery("(max-width:768px)");
+  const {t} = useTranslation()
   const { i18n } = useTranslation();
   const lang_id = utils.convertLangCodeToID(i18n.language);
 
-  const { news } = useSelector((state) => state.news);
+  const { newsAll } = useSelector((state) => state.news);
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState('');
 
   const [allNews, setAllNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log("news:::", news);
+  console.log("newsAll:::", newsAll);
   const breadcrumbs = [
     <Link
       underline="hover"
@@ -47,18 +49,25 @@ const News = () => {
     </Typography>,
   ];
 
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
   useEffect(() => {
+    setLoading(true);
+
     dispatch(
-      getNewsByCategory({
-        params: { lang_id: lang_id,rowsPerPage:10,shortTitle:'',category_id:'' },
+      getNewsAll({
+        params: { lang_id: lang_id,rowsPerPage:10,shortTitle:'',category_id:'',page:currentPage },
         callback: (res) => {
-          console.log("News Page:::", res);
-          // setAllNews(res.data);
+          // console.log("News Page:::", res.data.data);
+          // setAllNews(res.data.data);
+          setTotalPage(res.data.last_page)
           setLoading(false);
         },
       })
     );
-  }, [lang_id]);
+  }, [lang_id,currentPage]);
   return (
     <>
       <Grid
@@ -89,7 +98,7 @@ const News = () => {
           >
             <Grid>
               <Typography variant="h5" fontWeight={600}>
-                News
+                {t("news")}
               </Typography>
             </Grid>
             <Grid>
@@ -105,9 +114,15 @@ const News = () => {
           </Grid>
           {!loading ? (
             <Grid container padding="0px">
-              {news.data.map((item, index) => {
+              {newsAll.data.map((item, index) => {
                 return (
-                  <Grid xs={12} sm={6} md={3} key={index} p={1}>
+                  <Grid item xs={12} sm={6} md={3} key={index} p={1} 
+                  onClick={() =>
+                    router.push({
+                      pathname: "/newsSingle",
+                      query: { news_id: item.id },
+                    })
+                  }>
                     <Grid
                       item
                       p={2}
@@ -125,7 +140,7 @@ const News = () => {
                       <Typography
                         paddingTop={1}
                         textAlign="left"
-                        fontSize="10px !important"
+                        fontSize="12px !important"
                         color="#8C8C8C"
                       >
                         {moment(item.release_date).format(utils.letterFormat)}
@@ -138,6 +153,7 @@ const News = () => {
           ) : (
             "loading"
           )}
+          {totalPage == 1 ? '':
           <Grid
             item
             xs={12}
@@ -147,9 +163,10 @@ const News = () => {
             paddingTop={3}
           >
             <Stack spacing={2} sx={{ textAlign: "center" }}>
-              <Pagination count={5} variant="outlined" shape="rounded" />
+              <Pagination count={totalPage ? totalPage:1} variant="outlined" shape="rounded" onChange={handleChange}/>
             </Stack>
           </Grid>
+          }
         </Grid>
       </Grid>
     </>
