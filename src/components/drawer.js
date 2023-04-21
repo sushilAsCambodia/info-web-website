@@ -74,6 +74,7 @@ const DrawerComponent = (props) => {
     },[router.query]);
     useEffect(() => {
         if(years.length  > 0) {
+            console.log('fetching');
             fetchIssue(years[value]);
         }
     },[years]);
