@@ -27,7 +27,7 @@
     "change_password":"更改密码",
     "user_name":"用户名",
     "password":"确认密码",
-    "confirm_password":"Confirm password",
+    "confirm_password":"确认密码",
     "save":"节省",
     "submit":"提交",
     "newscarddetails":"细节",
@@ -72,6 +72,7 @@
     "forgot_password_info_web":"忘记密码 | InfoWeb",
     "login_info_web":"登录 | InfoWeb",
     "register_info_web":"登记 | InfoWeb",
+    "do_not_exceed_characters":"Please input your feedback, do not exceed 500 characters",
 
     "or_sign_up_via":"Or you can sign up with",
     "slogan":"Anytime anywhere Wonderful information in the palm of your hand",
