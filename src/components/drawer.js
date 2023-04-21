@@ -109,22 +109,28 @@ const DrawerComponent = (props) => {
             )
         );
     }
-    const tabPanelElms = (length) => {
-        const tabPanels = [];
-        for (let i = 0; i < length; i++) {
-            tabPanels.push(<TabPanel key={i} value={value} index={i} padding="0px !important" >
-                        <List sx={{ padding: "10px !important", margin: "0px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "center", textAlign: "center !important" }}>
-                            {
-                                issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
-                                    return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue':''} style={{ justifyContent: "center", textAlign: "center !important" }}>
-                                        <Typography fontSize="10px">Issue {is.issue || ''}</Typography>
-                                    </ListItem>
-                                })
-                            } 
-                        </List>
-                    </TabPanel>);
+    const items = () => {
+        const items = [];
+        for (let index = 0; index < 12; index++) {
+           items.push(<ListItem key={index} className={activeIssue == index ? 'active-issue':''} style={{ width:'53px', justifyContent: "center", textAlign: "center !important" }}>
+           <Typography fontSize="10px">Issue  </Typography>
+       </ListItem>)
+            
         }
-        return tabPanels;
+        return items;
+    }
+    const tabPanelElms = ( ) => { 
+        return <TabPanel  value={value} index={value} padding="0px !important" >
+            <List sx={{  margin: "5px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                {
+                    issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
+                        return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue':''} style={{ width:'53px', justifyContent: "center", textAlign: "center !important" }}>
+                            <Typography fontSize="10px">Issue {is.issue || ''}</Typography>
+                        </ListItem>
+                    })
+                } 
+            </List>
+        </TabPanel>
     }
     return <Drawer className='custom-drawer-wrapper' anchor={openDrawer['anchor']} open={openDrawer['open']} onClose={() => { setOpenDrawer({open: false,anchor:'bottom'});setActiveIssue(0)}}>
         <Box
@@ -153,7 +159,7 @@ const DrawerComponent = (props) => {
                                         height: '10px',
                                         background: 'red',
                                         position: 'absolute',
-                                        left: '46%',
+                                        left: '50%',
                                         transform: 'translate(-50%, -50%)',
                                         borderRadius: '50%',
                                         zIndex: 9999
@@ -180,10 +186,10 @@ const DrawerComponent = (props) => {
                                 }}
                                 aria-label="basic tabs example" className='scrollable-custom'>
                                 {years.length > 0 && years.map((res,index) => {
-                                    return <Tab onClick={() => fetchIssue(res)} key={index} sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={res} {...a11yProps(index)} />;
+                                    return <Tab onClick={() => fetchIssue(res)} key={index} sx={{ padding: '0', minWidth: '56px', position: 'relative' }} label={res} {...a11yProps(index)} />;
                                 })}
                             </Tabs>
-                            {loading ? <DataLoading/> : (issue && issue.hasOwnProperty('data') && issue.data.length <= 0 ? <DataNotFound height={200} width={200}/> : tabPanelElms(12))} 
+                            {loading ? <DataLoading size={20}/> : (issue && issue.hasOwnProperty('data') && issue.data.length <= 0 ? <DataNotFound height={200} width={200}/> : tabPanelElms())} 
                         </Box>:<DataNotFound height={200} width={200}/>}
                         
                     </Grid>

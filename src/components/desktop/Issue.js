@@ -7,20 +7,52 @@ import Grid from '@mui/material/Grid';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
-export default function DialogDesktop() {
+import { useDispatch, useSelector } from 'react-redux';
+import { getIssue, getYear, getSelectedIssue } from '@/store/actions/journalActions';
+import DataLoading from '../DataLoading';
+import DataNotFound from '../DataNotFound';
+export default function DialogDesktop(props) {
+    const dispatch = useDispatch();
+    const { albumId = undefined } = props;
     const [value, setValue] = React.useState(0);
+    const [activeIssue, setActiveIssue] = React.useState(0);
+    const { loading, issue = {}, years = [] } = useSelector(state => state.journal);
+    React.useEffect(() => {
+        if(albumId) {
+            dispatch(
+                getYear(
+                    {
+                        params:{
+                            albumId: albumId,
+                        },
+                        callback:(res) => { }
+                    }
+                )
+            );
+            
+        }
+    },[albumId]);
+    React.useEffect(() => {
+        if(years.length  > 0) {
+            fetchIssue(years[value]);
+        }
+    },[years]);
+    const fetchIssue = (issueDate) => {
+        dispatch(
+            getIssue(
+                {
+                    params: {
+                        albumId: albumId,
+                        issueDate
+                    },
+                    callback:(res) => {  }
+                }
+            )
+        )
+    };
     const handleChange = (event, newValue) => {
         setValue(newValue);
-    };
-    const itemListElem = (length) => {
-        const items = [];
-        for (let i = 0; i < length; i++) {
-            items.push(<ListItem className={i==4?'active-issue':''} style={{ justifyContent: "center", textAlign: "center !important" }}>
-            <Typography fontSize="10px">Issue {i<9?'0'+(i+1):(i+1)}</Typography>
-            </ListItem>);
-        }
-        return items;
-    }
+    }; 
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
         return (
@@ -51,106 +83,129 @@ export default function DialogDesktop() {
             id: `simple-tab-${index}`,
             'aria-controls': `simple-tabpanel-${index}`,
         };
+    } 
+    const items = (length = 20) => {
+        const its = [];
+        for (let index = 0; index < length; index++) {
+            its.push(<ListItem key={index}  style={{ width: '53px', justifyContent: "center", textAlign: "center !important" }}>
+            <Typography fontSize="10px">Issue </Typography>
+        </ListItem>)
+            
+        }
+        return its;
     }
-    const tabElms = (length) => {
-        let tabs = [];
-        for (let i = 0 ; i < length ; i++) {
-            tabs.push(<Tab sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={2020+i} {...a11yProps(i)} /> );
-        }
-        return tabs;
+    const tabPanelElms = () => { 
+        return <TabPanel value={value} index={value} padding="0px !important" >
+        <List sx={{  margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto auto auto auto auto auto", gridGap: "4px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                {
+                    issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
+                        return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue':''} style={{ width: '53px', justifyContent: "center", textAlign: "center !important" }}>
+                            <Typography fontSize="10px">Issue {is.issue || ''}</Typography>
+                        </ListItem>
+                    })
+                } 
+        </List>
+    </TabPanel>
     };
-    const tabPanelElms = (length) => {
-        let tabPanels = [];
-        for (let i = 0 ; i < length ; i++) {
-            tabPanels.push( <TabPanel value={value} index={i} padding="0px !important" >
-            <List sx={{ padding: "10px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto auto auto auto auto auto", gridGap: "10px", justifyContent: "flex-start", textAlign: "center !important" }}>
-                {itemListElem(20)}
-            </List>
-        </TabPanel>);
-        }
-        return tabPanels;
-    };
+    const openIssue = (issue,index) => {
+        setActiveIssue(index);
+        dispatch(
+            getSelectedIssue(
+                {
+                    params: {
+                        albumId: albumId,
+                        issue:issue,
+                        issueDate:years[value]
+                    },
+                    callback:(res) => {},
+                }
+            )
+        );
+    }
     return (
-        <Box
-            role="presentation"
-            className="calendraDrawer">
-            <Typography textAlign="left" fontSize="16px" color="#000" fontWeight="bold">Choose the number of periods</Typography>
-            <Typography textAlign="left" fontSize="12px" className='yearheadline'>Year</Typography>
-            <List sx={{ padding: '0px' }}>
-                <ListItem disablePadding>
-                    <Grid item xs={12} sm={12} width='100%'>
-                        <Box sx={{ width: '100%' }}>
-                            {/* <Box sx={{ borderBottom: 1, borderColor: 'divider'}}> */}
-                            <Tabs
-                                indicatorColor="transparent" 
-                                sx={{
-                                    position:'relative',
-                                    '& .Mui-selected': {
-                                        color:'#FF0000 !important',
-                                        fontWeight:'bold'
+        <>
+            {years.length > 0 ? <Box
+                role="presentation"
+                className="calendraDrawer">
+                <Typography textAlign="left" fontSize="16px" color="#000" fontWeight="bold">Choose the number of periods</Typography>
+                <Typography padding="5px 0 0 0" textAlign="left" fontSize="11px" className='yearheadline'>Year</Typography>
+                <List sx={{ padding: '0px' }}>
+                    <ListItem disablePadding>
+                        <Grid item xs={12} sm={12} width='100%'>
+                            <Box sx={{ width: '100%' }}>
+                                <Tabs
+                                    indicatorColor="transparent" 
+                                    sx={{
+                                        position:'relative',
+                                        '& .Mui-selected': {
+                                            color:'#FF0000 !important',
+                                            fontWeight:'bold'
+                                        },
+                                        '&:before':{
+                                            content:'""',
+                                            height:'1px',
+                                            width:'100%',
+                                            background:'#DDDDDD',
+                                            position:'absolute',
+                                            bottom:'5px'
+                                        }
+                                    }}
+                                    TabIndicatorProps={{
+                                        children: <span className='dot-custom' style={{
+                                            bottom: '-4px',
+                                            width: '10px',
+                                            height: '10px',
+                                            background: 'red',
+                                            position: 'absolute',
+                                            left: '50%',
+                                            transform: 'translate(-50%, -50%)',
+                                            borderRadius: '50%',
+                                            zIndex: 9999
+                                        }} />
+                                    }}
+                                    variant="scrollable"
+                                    scrollButtons
+                                    value={value}
+                                    onChange={handleChange} 
+                                    aria-label="basic tabs example" className='scrollable-custom issue-card-custom'>
+                                    {years.length > 0 && years.map((year,index) => {
+                                        return <Tab key={index} sx={{ padding: '0', minWidth: '53px', position: 'relative' }} label={year} {...a11yProps(index)} />
+                                    })}
+                                </Tabs>
+                                {loading ? <DataLoading size={20}/> : (issue && issue.hasOwnProperty('data') && issue.data.length <= 0 ? <DataNotFound height={200} width={200}/> : tabPanelElms())} 
+                            </Box>
+                        </Grid>
+                        <style>
+                            {
+                                ` 
+                                    .issue-card-custom > .MuiButtonBase-root:first-child {
+                                        position: absolute;
+                                        top: 47%;
+                                        z-index: 9;
+                                        left: 15px;
+                                        transform: translate(-50%, -50%);
                                     }
-                                }}
-                                TabIndicatorProps={{
-                                    children: <span className='dot-custom' style={{
-                                        bottom: '-4px',
-                                        width: '10px',
-                                        height: '10px',
-                                        background: 'red',
-                                        position: 'absolute',
-                                        left: '46%',
-                                        transform: 'translate(-50%, -50%)',
-                                        borderRadius: '50%',
-                                        zIndex: 9999
-                                    }} />
-                                }}
-                                variant="scrollable"
-                                scrollButtons
-                                value={value}
-                                onChange={handleChange}
-                                aria-label="basic tabs example" className='scrollable-custom issue-card-custom'>
-                                {tabElms(13)}
-                            </Tabs>
-                            {tabPanelElms(13)}
-                        </Box>
-                    </Grid>
-                    <style>
-                        {
-                            `
-                                .scrollable-custom .MuiTab-root::before {
-                                    content: '';
-                                    width: 100%;
-                                    height: 1px;
-                                    position: absolute;
-                                    background: #ddd;
-                                    bottom: 5px;
-                                }
-                                .issue-card-custom > .MuiButtonBase-root:first-child {
-                                    position: absolute;
-                                    top: 47%;
-                                    z-index: 9;
-                                    left: 15px;
-                                    transform: translate(-50%, -50%);
-                                }
-                                .issue-card-custom > .MuiButtonBase-root:last-child {
-                                    position: absolute;
-                                    top: 47%;
-                                    z-index: 9;
-                                    right:-29px;
-                                    transform: translate(-50%, -50%);
-                                }
-                                .issue-card-custom .MuiTabs-scroller > .MuiTabs-flexContainer{
-                                    // justify-content:center
-                                }
-                                .issue-card-custom > .MuiButtonBase-root svg {
-                                    background: #FF6F31;
-                                    border-radius:50%;
-                                    color:#fff;
-                                }
-                            `
-                        }
-                    </style>
-                </ListItem>
-            </List>
-        </Box>
+                                    .issue-card-custom > .MuiButtonBase-root:last-child {
+                                        position: absolute;
+                                        top: 47%;
+                                        z-index: 9;
+                                        right:-29px;
+                                        transform: translate(-50%, -50%);
+                                    }
+                                    .issue-card-custom .MuiTabs-scroller > .MuiTabs-flexContainer{
+                                        // justify-content:center
+                                    }
+                                    .issue-card-custom > .MuiButtonBase-root svg {
+                                        background: #FF6F31;
+                                        border-radius:50%;
+                                        color:#fff;
+                                    }
+                                `
+                            }
+                        </style>
+                    </ListItem>
+                </List>
+            </Box> : ""}
+        </>
     );
 }

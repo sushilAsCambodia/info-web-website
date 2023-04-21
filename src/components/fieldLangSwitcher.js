@@ -13,7 +13,7 @@ export default function FieldLanguageSwitcher() {
   const {i18n} =  useTranslation();
   const [lang, setLang] = React.useState('')
 
-  const [langLabel,setLangLabel] = React.useState('')
+  const [langLabel,setLangLabel] = React.useState(i18n ? i18n.language:'en')
   
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -46,6 +46,8 @@ export default function FieldLanguageSwitcher() {
     }
     return language;
   }
+  console.log("lang:::",langLabel)
+  console.log("il8n:::",i18n)
   return (
     <>
     <FormControl sx={{ minWidth: 120 }} 

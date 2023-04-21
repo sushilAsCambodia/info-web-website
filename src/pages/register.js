@@ -420,12 +420,12 @@ export default function Register() {
     </>
   ) : (
     <Grid
-      p={15}
-      display="flex"
+    p={{xs:2, md:10}}
+    display="flex"
       justifyContent="center"
       sx={{ backgroundImage: "url('./assets/login/login_bg.png')" }}
     >
-      <Grid container justifyContent="center" alignItems="stretch" width="65%">
+      <Grid container justifyContent="center" alignItems="stretch" width={{xs:"1000px", lg:"90%",xl:"65%"}}>
         <Grid
           container
           justifyContent="center"
@@ -460,7 +460,7 @@ export default function Register() {
                   }}
                 >
                   <Typography fontWeight={700} fontSize="20px">
-                    DOWNLOAD APP
+                  {t("download_app")}
                   </Typography>
                 </Grid>
 
@@ -706,7 +706,7 @@ export default function Register() {
                       }}
                       onClick={onSubmit}
                     >
-                      {t("sign_up")}
+                      {t("signup_for_now")}
                     </Button>
                   </Grid>
                 </Grid>
@@ -776,7 +776,7 @@ export default function Register() {
                   justifyContent: "space-between",
                   alignItems: "center",
                 }}
-                px={2}
+                px={1}
                 py={1}
                 underline="none"
               >
@@ -792,7 +792,7 @@ export default function Register() {
                     Router.push("/login");
                   }}
                 >
-                  <Typography>Already have an Account ?</Typography>
+                  <Typography>{t("already_have_an_account")}</Typography>
                   <Typography
                     style={{
                       cursor: "pointer",
@@ -805,7 +805,7 @@ export default function Register() {
                 </Link>
                 <Grid display="flex" sx={{ cursor: "pointer" }}>
                   <Icon icon="bi:chat-square-dots-fill" width={25} />
-                  <Typography mx={1}>Contact</Typography>
+                  <Typography mx={1}>{t("contact")}</Typography>
                 </Grid>
               </Grid>
             </Grid>

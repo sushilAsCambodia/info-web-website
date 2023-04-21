@@ -85,7 +85,7 @@ export default function LandingPageBanner(props) {
               style={{
                 color: "white",
                 textAlign: "left",
-                height: "350px",
+                height: "200px",
                 // border: "1px solid grey",
                 borderRadius: "5px",
               }}
@@ -99,7 +99,7 @@ export default function LandingPageBanner(props) {
                 alt={banner.label}
                 style={{
                   width: "100%",
-                  objectPosition:"0px -200px",
+                  objectPosition:"0px -300px",
                   // maxHeight: "80px",
                 //   objectFit: "fill",
                 //   width: "100%",

@@ -2,12 +2,13 @@ import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-const CardSlide = (props) => {
-    const {cards = []} = props;
+import Link from 'next/link';
+const AdvertiseSlide = (props) => {
+    const {advertises = []} = props;
     const [tabValue, setTabValue] = React.useState(0);
     return <>
     {
-        cards && cards.length > 0 && <Grid item   sx={{marginTop:'5px',marginBottom:'5px'}}>
+        advertises && advertises.length > 0 && <Grid item   sx={{marginTop:'5px',marginBottom:'5px'}}>
         <Tabs
           value={tabValue}
           onChange={(e) => setTabValue(e.target.value)}
@@ -27,13 +28,16 @@ const CardSlide = (props) => {
           }}
           >
           {
-            cards.map((card,index) => {
+            advertises.map((card,index) => {
               return <Tab 
                   key={index} 
                   onClick={()=> setTabValue(0)} 
                   sx={{ padding: '5px'}} 
-                  label={<Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
-                  <Grid sx={{background:`url(${card.image})`}} alt="机率" width="80px" height="80px" className="card-custom">
+                  label={<Link href={card.ads_link} target='_blank'><Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
+                  <Grid 
+                    sx={{backgroundImage:`url(${card.icon})`, backgroundSize:'cover'}} 
+                    alt="机率" width="80px" height="80px" className="card-custom"
+                  >
                     <span></span>
                   </Grid>
                   <Typography
@@ -43,8 +47,11 @@ const CardSlide = (props) => {
                     left="0"
                     right="0"
                     color='white'
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
                   >
-                    {card.translate||'N/A'}
+                    {card.title||'N/A'}
                   </Typography>
                   <Typography
                     position="absolute"
@@ -53,10 +60,13 @@ const CardSlide = (props) => {
                     right="0"
                     color='white'
                     fontSize='10px !important'
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
                   >
-                    {card.label||'N/A'}
+                    {card.description||'N/A'}
                   </Typography>
-                </Grid>}>
+                </Grid></Link>}>
               </Tab> 
             })
           }
@@ -93,4 +103,4 @@ const CardSlide = (props) => {
     }
     </>;
 }
-export default CardSlide;
+export default AdvertiseSlide;

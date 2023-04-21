@@ -16,13 +16,12 @@ import utils from '@/common/utils';
 const DataTabComponent = ({id,lang_id}) => {
     const {news} = useSelector((state) => state.news); 
     const dispatch = useDispatch();
-    console.log("datatabcomp news :::",news)
+    // console.log("datatabcomp news :::",news)
     React.useEffect(() => {
         dispatch(getNewsByCategory(
             {
                 params: { lang_id:lang_id, category_id: id, take:10 },
                 callback:(res) => {
-                    console.log(res,'callback')
                     setLoading(false);
                 }
             }

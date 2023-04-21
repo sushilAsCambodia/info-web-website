@@ -181,7 +181,7 @@ const Feedback = () => {
         open={openDialog} 
         setOpen={setOpenDialog} 
         message={responseMessage} 
-        redirect={{pathname:'/profile'}}
+        // redirect={{pathname:'/profile'}}
       />
     </>
   )

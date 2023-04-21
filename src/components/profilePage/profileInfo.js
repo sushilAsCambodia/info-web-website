@@ -311,13 +311,18 @@ export default function ProfileInfo(props) {
                   </Button>
                 ) : (
                   <Button
-                    disableElevation
+                  disabled={errorUserName}
+                    // disableElevation
                     variant="contained"
                     sx={{
-                      color: "black",
-                      background: "#EFEEEE",
+                      color: "white",
+                      background: "#FF6F31",
                       textTransform: "capitalize",
-                      border: "1px solid grey",
+                      // border: "1px solid grey",
+                      "&:hover": {
+                        background: "#ff1b1b"
+                      },
+            
                     }}
                     onClick={onUpdateUserName}
                   >
@@ -327,6 +332,8 @@ export default function ProfileInfo(props) {
               </InputAdornment>
             }
           />
+                        {errorUserName && <FormHelperText error>{errorUserNameMessage}</FormHelperText>}
+
         </FormControl>
       </Grid>
 
@@ -341,7 +348,7 @@ export default function ProfileInfo(props) {
           }}
           textAlign="left"
         >
-          <Typography variant="h5">change password</Typography>
+          <Typography variant="h5">{t("change_password")}</Typography>
         </Divider>
       </Grid>
 
@@ -434,6 +441,9 @@ export default function ProfileInfo(props) {
             color: "#6F6F6F",
             background: "#D4D4D4",
             textTransform: "capitalize",
+            "&:hover": {
+              color: "white"
+            },
           }}
           onClick={()=>router.push('/')}
         >

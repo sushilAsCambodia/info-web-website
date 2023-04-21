@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import {getJournal} from '@/store/actions/journalActions'
 import { useDispatch, useSelector } from 'react-redux';
-import CardSlide from './CardSlide';
+import AdvertiseSlide from './AdvertiseSlide';
 function TabPanel(props) {
   const { children, value, index, ...other } = props; 
   return (
@@ -52,7 +52,7 @@ function a11yProps(index) {
 
 export default function NewsJournalTabs(props) {
   const {t} = useTranslation();
-  const {banners = [], categories = [], cards = [], lang_id} = props; 
+  const {banners = [], categories = [], advertises = [], lang_id} = props; 
   const dispatch = useDispatch();
   const theme = useTheme();
   const router = useRouter();
@@ -73,9 +73,7 @@ export default function NewsJournalTabs(props) {
       dispatch(getJournal(
         {
             params: {lang_id: lang_id,take: 10},
-            callback:(res) => {
-              console.log(res,'callback')
-            }
+            callback:(res) => { }
         }
       ));
     }
@@ -97,7 +95,7 @@ export default function NewsJournalTabs(props) {
         </Tabs>
         <TabPanel  value={value} index={0} >
           <FullSilder banners={banners}/>
-          <CardSlide cards={cards}/>
+          <AdvertiseSlide advertises={advertises}/>
           <MultiTabs categories={categories} lang_id={lang_id}/>
         </TabPanel>
         <TabPanel value={value} index={1} >
