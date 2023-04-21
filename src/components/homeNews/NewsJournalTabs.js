@@ -88,10 +88,11 @@ export default function NewsJournalTabs(props) {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
+          className='mui-home-tab-wrapper'
           sx={{paddingTop:'10px',paddingBottom:'10px'}}
         >
-          <Tab label={t('news')} {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
-          <Tab label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
+          <Tab className='mui-custom-home' label={t('news')} {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
+          <Tab className='mui-custom-journal' label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
         <TabPanel  value={value} index={0} >
           <FullSilder banners={banners}/>

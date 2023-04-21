@@ -218,7 +218,7 @@ function TabPanel(props) {
                     <>
                       <Grid item xs={12} display="flex" alignItems="center">
                         <img 
-                          src={customer.image?.path} 
+                          src={customer.image?.path || '/assets/Profile/user-icon.png'} 
                           style={{ height:50,width:50,borderRadius:'50%'}}
                           onError={(e) => e.target.src = '/assets/Profile/user-icon.png'}
                         />

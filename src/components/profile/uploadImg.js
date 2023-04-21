@@ -476,7 +476,7 @@ const UploadImg = () => {
         </form>
       </Grid>
       <Grid>
-        <Drawer anchor={'bottom'} open={state['bottom']} onClose={onCloseDrawer}>
+        <Drawer className="mui-profile-drawer-wrapper" anchor={'bottom'} open={state['bottom']} onClose={onCloseDrawer}>
           {list('bottom')}
         </Drawer>
       </Grid>
