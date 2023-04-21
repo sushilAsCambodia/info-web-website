@@ -20,7 +20,7 @@ const Footer = () => {
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Typography>
       </Grid>
-      <Grid container item xs={6} display="flex" spacing={2} textAlign="center">
+      <Grid container item xs={6} spacing={2} justifyContent="center">
         <Grid className="footerIcon" mx={1} container justifyContent="center" alignItems="center" >
           <Icon width={30} icon="ri:facebook-fill" />
         </Grid>

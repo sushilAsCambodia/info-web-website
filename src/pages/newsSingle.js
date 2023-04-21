@@ -19,15 +19,17 @@ import utils from "@/common/utils";
 import { useTranslation } from "react-i18next";
 import { getCategory } from "@/store/actions/categoryActions";
 import { getNewsByCategory } from "@/store/actions/newsActions";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import NewsCardDetails from "./newsCardDetails";
 
 
 export default function NewsSingle() {
   const { i18n } = useTranslation();
   const lang_id = utils.convertLangCodeToID(i18n.language);
   const { categories = [] } = useSelector((state) => state.category);
-  const [newsCat, setNewsCat] = useState('');
+  const [newsCat, setNewsCat] = useState(0);
+  const matches = useMediaQuery("(max-width:768px)");
 
-  console.log("newssingle category:::", categories);
   const { loading, newsDetail = {} } = useSelector((state) => state.news);
   const { query } = router;
   const id = query?.news_id || undefined;
@@ -65,16 +67,16 @@ export default function NewsSingle() {
     return categories[index].id;
   };
 
-  return (
-    <Grid container justifyContent="center">
+  return !matches ? (
+    <Grid justifyContent="center">
       <Grid my={1}>
         <Typography fontWeight="bold" variant="h5">
           News Details
         </Typography>
-        <Grid container sx={{ width: "80vw" }}>
-          <Grid xs={9} p={1}>
+        <Grid container>
+          <Grid xs={8} md={9} py={1}>
             <Grid border="1px solid grey" borderRadius="10px" p={2}>
-              <Typography fontWeight="bold" variant="h5">
+              <Typography fontWeight="bold" variant="h4">
                 {newsDetail.title || ""}
               </Typography>
               <Typography color="#8C8C8C" pt={1} fontSize="12px">
@@ -89,17 +91,18 @@ export default function NewsSingle() {
                   width="100%"
                   style={{
                     objectFit: "cover",
-                    borderRadius: "6px",
+                    borderRadius: "10px",
                     maxHeight: "600px",
                   }}
                 />
                 {/* <img width="100%" src="./assets/NewsCards/card_detail.png" /> */}
-                <Typography>{newsDetail.description || ""}</Typography>{" "}
+                <Typography my={2} dangerouslySetInnerHTML={{ __html: newsDetail.description || '' }}></Typography>
+
               </Grid>
             </Grid>
           </Grid>
           {categories.length > 0 ?
-          <Grid xs={3} p={1}>
+          <Grid xs={4} md={3} p={1}>
             <Grid container border="1px solid grey" borderRadius="10px" p={2}>
               <Grid xs={12}>
                 <Typography fontWeight="bold">{categories[0].category_name }</Typography>
@@ -109,7 +112,7 @@ export default function NewsSingle() {
                 <Typography fontWeight="bold">{categories[1].category_name}</Typography>
                 <NewsSlider lang_id={lang_id} catId={categories[1].id}  />
               </Grid>
-              <Grid xs={12}>{newsCat}
+              <Grid xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id="category-select-label">
                     Select Category
@@ -120,24 +123,23 @@ export default function NewsSingle() {
                     value={newsCat}
                     label="Select Category"
                     onChange={handleChange}
-                    style={{ paddingY: "0px" }}
-                    defaultValue={1}
+                    defaultValue={categories[newsCat].id}
                   >
                     {categories.map((item, index) => {
                       return (
-                        <MenuItem value={item.id}>
+                        <MenuItem value={index}>
                           {item.category_name}
                         </MenuItem>
                       );
                     })}
                   </Select>
                 </FormControl>
-                <NewsSlider lang_id={lang_id} catId={newsCat}  />
+                <NewsSlider lang_id={lang_id} catId={categories[newsCat].id}  />
               </Grid>
             </Grid>
           </Grid>:'loading'}
         </Grid>
       </Grid>
     </Grid>
-  );
+  ):( <NewsCardDetails/>)
 }

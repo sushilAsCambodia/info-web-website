@@ -14,6 +14,9 @@ import MiddleShow from "./MiddleShow";
 import NewsSlider from "@/common/NewsSlider";
 import Slider from "react-slick";
 import LottoList from "@/common/LottoList";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import AnnouncementItem from "@/common/AnnouncementItem";
+
 const settings = {
   dots: false,
   infinite: true,
@@ -30,76 +33,13 @@ const settings = {
   centerMode: false,
 };
 
-export default function ResultsBanner({
-  lang_id,
-  winnerGalleryProducts,
-  winnerGalleryCustomers,
-  winnerGalleryAll,
-}) {
-  const { t } = useTranslation();
+const announcement =[{title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',date:"03 Apr 2023"}]
+export default function ResultsBanner(props) {
+  const {lang_id=[]} = props; 
 
   const [loading, setLoading] = useState(false);
+  const matches = useMediaQuery("(max-width:1199px)");
 
-  const rows = [
-    {
-      id: 1,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 2,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 3,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-    {
-      id: 4,
-      news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      date: "10/22/2023",
-    },
-  ];
-
-
-  useEffect(() => {
-    setLoading(true);
-    if (winnerGalleryProducts && winnerGalleryCustomers && winnerGalleryAll) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 4000);
-    }
-  }, [
-    winnerGalleryProducts,
-    winnerGalleryCustomers,
-    winnerGalleryAll,
-    lang_id,
-  ]);   
-
-   
-  
   return (
     <>
       <Grid
@@ -110,10 +50,11 @@ export default function ResultsBanner({
         spacing={1}
         marginTop="10px"
       >
-        <Grid item xs={3} border="1px solid grey" borderRadius="10px">
-          <Grid>Latest Results</Grid>
+        <Grid item xs={12} lg={3} xl={2.5} border="1px solid grey" borderRadius="10px">
+          <Typography px={1.5} mb={1}>Latest Results</Typography>
           {/* <NewsSlider news={rows} /> */}
-          <Grid overflow="auto" height="430px">
+          {/* <Grid overflow="auto" height="430px"> */}
+          <Grid overflow="auto" className={matches ? 'verticleLotto': 'horizontalLotto'} >
             {/* <Slider {...settings}> */}
             <LottoList />
             <LottoList />
@@ -124,11 +65,10 @@ export default function ResultsBanner({
             {/* </Slider> */}
           </Grid>
         </Grid>
-        <Grid item xs={6}>
+        <Grid  xs={12} lg={7} xl={7.5} py={{xs:1,lg:0}} px={{xs:0,lg:1}}>
           <Grid
-            item
+            
             xs={12}
-            mx={1}
             border="1px solid grey"
             borderRadius="10px"
             height="100%"
@@ -136,18 +76,23 @@ export default function ResultsBanner({
             <MiddleShow />
           </Grid>
         </Grid>
-        <Grid item xs={3} border="1px solid grey" borderRadius="10px">
-          <Grid px={1.5} container justifyContent="space-between" width="100%">
-            <Grid>Announcements</Grid>
+        <Grid item xs={12} lg={2} border="1px solid grey" borderRadius="10px">
+          <Grid px={1.5} mb={1} container justifyContent="space-between" width="100%">
+            <Typography>Announcements</Typography>
             <Grid
               component={Link} href="/announcement"
-              style={{ color: "blue", textDecoration: "none" }}
-            >
-              View all
+              style={{ color: "#037DED", textDecoration: "none" }}
+            ><Typography>View all</Typography>
             </Grid>
           </Grid>
-          <Grid overflow="auto" height="450px">
-            <NewsSlider news={rows}/>
+          <Grid overflow="auto" className={matches ? 'verticleLotto': 'horizontalLotto'} >
+          <AnnouncementItem announcement={announcement}/>          
+          <AnnouncementItem announcement={announcement}/>
+          <AnnouncementItem announcement={announcement}/>
+          <AnnouncementItem announcement={announcement}/>
+          <AnnouncementItem announcement={announcement}/>
+          <AnnouncementItem announcement={announcement}/>
+          
           </Grid>
         </Grid>
       </Grid>
