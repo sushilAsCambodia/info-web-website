@@ -4,7 +4,7 @@ export const getNewsByCategory = createAsyncThunk(
   "news/list-by-category",
   async ({ params = {}, callback }, { getState, dispatch }) => {
     try {
-      const response = await api.get('/news/news/all',params);
+      const response = await api.get('/news/news/viewAll',params);
       const {data,status} = response;
       data['status_code'] = status;
       if(typeof callback == 'function') {

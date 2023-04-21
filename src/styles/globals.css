@@ -581,13 +581,7 @@ border: 2px solid red;
 .horizontalLotto{
   height:470px
 }
-.twoLinesEllip{
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* number of lines to show */
-          line-clamp: 2; 
-  -webkit-box-orient: vertical;
-}
+
 /* LOTTERY PAGE  */
 .lotteryPageHit{
   color: white !important;
@@ -596,4 +590,12 @@ border: 2px solid red;
 .lotteryPageMiss{
   color: white !important;
   background: red !important;
+}
+/* END  */
+.twoLinesEllip{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }

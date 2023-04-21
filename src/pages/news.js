@@ -50,7 +50,7 @@ const News = () => {
   useEffect(() => {
     dispatch(
       getNewsByCategory({
-        params: { lang_id: lang_id, take: 10 },
+        params: { lang_id: lang_id,rowsPerPage:10,shortTitle:'',category_id:'' },
         callback: (res) => {
           console.log("News Page:::", res);
           // setAllNews(res.data);
@@ -105,7 +105,7 @@ const News = () => {
           </Grid>
           {!loading ? (
             <Grid container padding="0px">
-              {news.map((item, index) => {
+              {news.data.map((item, index) => {
                 return (
                   <Grid xs={12} sm={6} md={3} key={index} p={1}>
                     <Grid
@@ -115,27 +115,13 @@ const News = () => {
                         backgroundColor: "#FFF5F0",
                         borderRadius: "11px",
                         border: "1px solid #FF6F31",
+                        minHeight:"145px"
                       }}
                     >
-                      <Typography  sx={{
-                        overflow: 'hidden',
-                        display: '-webkit-box',
-                        '-webkit-line-clamp': '3', 
-                                'line-clamp': '3', 
-                        '-webkit-box-orient': 'vertical',
-                      }}>{item.title}</Typography>
-                      {/* <Typography
-                      sx={{
-                        overflow: 'hidden',
-                        display: '-webkit-box',
-                        '-webkit-line-clamp': '3', 
-                                'line-clamp': '3', 
-                        '-webkit-box-orient': 'vertical',
-                      }}
-                        dangerouslySetInnerHTML={{
-                          __html: item.description || "",
-                        }}
-                      ></Typography> */}
+                      <Typography title={item.title}  
+                      className="twoLinesEllip"
+                     >{item.title}</Typography>
+                      
                       <Typography
                         paddingTop={1}
                         textAlign="left"
