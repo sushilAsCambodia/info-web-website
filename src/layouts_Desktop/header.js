@@ -49,8 +49,8 @@ const Header = () => {
     setAnchorScore(null);
   };
   const menuList = [
-    { label: "Lottery Draw", page: "LotteryPage" },
-    { label: "Data Chart", page: "DataChart" },
+    { label: t("lottery_draw"), page: "LotteryPage" },
+    { label: t("data_chart"), page: "DataChart" },
     { label: "FootBall", page: "FootBall" },
     { label: "BasketBall", page: "BasketBall" },
   ];
@@ -115,7 +115,7 @@ const Header = () => {
                         },
                       }}
                     >
-                      Login/Register
+                      {t("login")}/{t("register")}
                     </Button>
                   ) : (
                     <ProfileDropDown

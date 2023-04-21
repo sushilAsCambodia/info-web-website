@@ -9,8 +9,10 @@ import {
 } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 export default function Index() {
   const matches = useMediaQuery("(max-width:393px)");
+  const {t} = useTranslation()
   return (
     <Grid
       sx={{
@@ -69,15 +71,15 @@ export default function Index() {
         
       >
         <Grid textAlign="center" mt={5}>
-          <Typography variant="h5" fontWeight="bold" color="white">Wonderful information in the palm of</Typography>
-          <Typography variant="h3" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>YOUR HAND</Typography>
+          <Typography variant="h5" fontWeight="bold" color="white">{t("half_slogan")}</Typography>
+          <Typography variant="h3" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>{t("your_hand")}</Typography>
         </Grid>
         <Grid textAlign="center" pl={10}>
           <img src="./assets/Download/football.png"/>
         </Grid>
         <Grid item textAlign="center" mt={2}>
           <Typography fontWeight={700} fontSize="20px">
-            DOWNLOAD APP
+            {t("download_app")}
           </Typography>
         </Grid>
 

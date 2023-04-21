@@ -1,10 +1,10 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useTranslation } from "react-i18next";
 import {
   Select,
   FormControl,
@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 export default function ProfileDropDown(props) {
   const { customer, logout } = props;
   const { i18n } = useTranslation();
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const router = useRouter();
@@ -93,7 +94,7 @@ export default function ProfileDropDown(props) {
           disableRipple
           sx={{ justifyContent: "flex-end" }}
         >
-          Profile
+          {t("profile")}
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem
@@ -101,7 +102,7 @@ export default function ProfileDropDown(props) {
           disableRipple
           sx={{ justifyContent: "flex-end" }}
         >
-          log out
+           {t("logout")}
         </MenuItem>
       </StyledMenu>
     </div>

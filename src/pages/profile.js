@@ -159,9 +159,9 @@ function TabPanel(props) {
           sx={{color:"black"}}
           indicatorColor="transparent"
           >
-          <CusTab label="Personal Information" {...a11yProps(0)} onClick={() => router.push('/profile#profile')}/>
-          <CusTab label="System Annoucement" {...a11yProps(1)} onClick={() => router.push('/profile#system')}/>
-          <CusTab label="Feedback" {...a11yProps(2)} onClick={() => router.push('/profile#feedback')}/>
+          <CusTab label={t("personal_information")} {...a11yProps(0)} onClick={() => router.push('/profile#profile')}/>
+          <CusTab label={t("system_announcement")} {...a11yProps(1)} onClick={() => router.push('/profile#system')}/>
+          <CusTab label={t("feedback")} {...a11yProps(2)} onClick={() => router.push('/profile#feedback')}/>
         </CusTabs>
       <SwipeableViews
         index={value}

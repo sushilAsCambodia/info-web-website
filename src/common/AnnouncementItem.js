@@ -41,7 +41,7 @@ export default function AnnouncementItem(props) {
 
   return (
     <>
-      <div style={{ paddingRight: "10px" }}>
+      <div style={{ paddingRight: "10px",cursor:"pointer" }}>
         <Grid
           sx={{
             borderBottom: "2px solid grey",
@@ -53,7 +53,11 @@ export default function AnnouncementItem(props) {
           <Typography
             title={announcement[0].title}
             className="twoLinesEllip"
-            sx={{ fontSize: "14px" }}
+            sx={{ fontSize: "14px",  
+            "&:hover": {
+              textDecoration:"underline"
+            },
+   }}
             px={1}
           >
             {announcement[0].title}
