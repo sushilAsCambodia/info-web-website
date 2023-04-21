@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import LoadingDialog from "../Loading";
@@ -82,9 +81,9 @@ export default function ProfileAnnouncement() {
 
         <Grid item xs={12} textAlign="center" sm={12} md={12} xl={12} padding="0px" className="profileannouncement">
           <List sx={{ padding: "0px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto", gridGap: "20px", justifyContent: "flex-start", textAlign: "center !important" }}>
-            {rows.map((row) => {
+            {rows.map((row,index) => {
               return (
-                <ListItem sx={{ padding: "16px 5px 16px 16px!important", borderRadius: "6px", border: "2px solid #DDDDDD", }} className="listitem">
+                <ListItem key={index} sx={{ padding: "16px 5px 16px 16px!important", borderRadius: "6px", border: "2px solid #DDDDDD", }} className="listitem">
                   <Grid item xs={12}>
                     <Grid item>
                       <Grid item display="flex" justifyContent="space-between" alignItems="center">

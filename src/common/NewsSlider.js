@@ -67,9 +67,10 @@ export default function NewsSlider(props) {
           {" "}
           {/* <Slider {...settings}> */}
           {newsList &&
-            newsList.map((item) => {
+            newsList.map((item,index) => {
               return (
                 <Grid
+                  key={index}
                   component={Link}
                   onClick={() =>
                     router.push({
