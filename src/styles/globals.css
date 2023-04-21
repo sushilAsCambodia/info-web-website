@@ -40,7 +40,12 @@
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
 }
-
+html[lang=kh] {
+  font-family: 'Kantumruy Pro', sans-serif;
+}
+html[lang=kh] .MuiBottomNavigationAction-label, html[lang=kh] .MuiTypography-root, html[lang=kh] .MuiButtonBase-root{
+  font-family: 'Kantumruy Pro', sans-serif;
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

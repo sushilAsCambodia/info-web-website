@@ -71,5 +71,6 @@
     
     "forgot_password_info_web":"ភ្លេច​លេខសំងាត់ | InfoWeb",
     "login_info_web":"ចូល | InfoWeb",
-    "register_info_web":"ចុះឈ្ហោះ | InfoWeb"
+    "register_info_web":"ចុះឈ្ហោះ | InfoWeb",
+    "do_not_exceed_characters":"សូមធ្វើការបញ្ចូលមតិរបស់អ្នកកុំលើសពី 500 តួអក្សរ"
 }

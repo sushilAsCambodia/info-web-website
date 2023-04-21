@@ -71,5 +71,6 @@
 
     "forgot_password_info_web":"Forgot password | InfoWeb",
     "login_info_web":"Login | InfoWeb",
-    "register_info_web":"Register | InfoWeb"
+    "register_info_web":"Register | InfoWeb",
+    "do_not_exceed_characters":"Please input your feedback, do not exceed 500 characters"
 }
