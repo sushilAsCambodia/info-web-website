@@ -11,12 +11,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 import ProfileDropDown from "@/components/header/ProfileDropDown";
 import Link from "next/link";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const matches2 = useMediaQuery("(max-width:1074px)");
+  const { t } = useTranslation();
   const { customer, isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -197,7 +199,7 @@ const Header = () => {
                         router.push("/");
                       }}
                     >
-                      <Typography textAlign="center">Home</Typography>
+                      <Typography textAlign="center">{t('home')}</Typography>
                     </MenuItem>
                   </Grid>
                   {!matches2 ? menuList.map((item,index) => {
@@ -272,7 +274,7 @@ const Header = () => {
                     onClick={() => router.push("/download")}
                   >
                     <Icon icon="material-symbols:app-shortcut" width={20} />
-                    Download App
+                    {t('download_app')}
                   </Button>
 
                   <Button
@@ -285,7 +287,7 @@ const Header = () => {
                     }}
                   >
                     <Icon icon="ic:round-star-border" width={20} />
-                    Favorite
+                    {t('favorites')}
                   </Button>
                 </Grid>
               </Grid>

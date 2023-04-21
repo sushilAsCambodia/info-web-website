@@ -71,5 +71,16 @@
 
     "forgot_password_info_web":"Forgot password | InfoWeb",
     "login_info_web":"Login | InfoWeb",
-    "register_info_web":"Register | InfoWeb"
+    "register_info_web":"Register | InfoWeb",
+
+    "or_sign_up_via":"Or you can sign up with",
+    "sign_up_here":"Sign Up Here",
+    "slogan":"Anytime anywhere Wonderful information in the palm of your hand",
+    "sign_in_here":"Sign In Here",
+    "favorites":"Favorites",
+    "more":"More",
+    "view_all":"View All",
+    "latest_results":"Latest Results",
+    "match_reccomendation":"Match Reccomendation",
+    "partners":"Partners"
 }

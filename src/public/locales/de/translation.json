@@ -71,5 +71,15 @@
 
     "forgot_password_info_web":"忘记密码 | InfoWeb",
     "login_info_web":"登录 | InfoWeb",
-    "register_info_web":"登记 | InfoWeb"
+    "register_info_web":"登记 | InfoWeb",
+
+    "or_sign_up_via":"Or you can sign up with",
+    "slogan":"Anytime anywhere Wonderful information in the palm of your hand",
+    "sign_in_here":"Sign In Here",
+    "favorites":"收藏夹",
+    "more":"More",
+    "view_all":"View All",
+    "latest_results":"Latest Results",
+    "match_reccomendation":"Match Reccomendation",
+    "partners":"Partners"
 }

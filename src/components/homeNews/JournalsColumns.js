@@ -17,7 +17,7 @@ const responsive = {
   desktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 1320, min: 1025 },
-    items: 5,
+    items: 4,
   },
   tablet: {
     breakpoint: { max: 1024, min: 685 },
@@ -63,7 +63,7 @@ export default function JournalsColumns(props) {
             }}
           >
             <Typography variant="h5" paddingX="10px" fontWeight="bold">
-              Journals
+              {t("journal")}
             </Typography>
           </Divider>
         </Grid>
@@ -87,9 +87,9 @@ export default function JournalsColumns(props) {
             renderButtonGroupOutside={false}
             renderDotsOutside={false}
           >
-            {journals.map((item,index)=>{
+            {journals && journals.length > 0 ? journals.map((item,index)=>{
               return <JournalItem setOpen={setOpen} setAlbumId={setAlbumId} key={index} item={item}/>;
-            })}
+            }):"No Journal Today"}
           </Carousel>
         <style>
           {

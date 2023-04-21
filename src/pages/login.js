@@ -448,7 +448,7 @@ export default function Login() {
                   }}
                 >
                   <Typography fontWeight={700} fontSize="20px">
-                    DOWNLOAD APP
+                  {t("download_app")}
                   </Typography>
                 </Grid>
 
@@ -763,7 +763,7 @@ export default function Login() {
                 </Link>
                 <Grid display="flex" sx={{ cursor: "pointer" }}>
                   <Icon icon="bi:chat-square-dots-fill" width={25} />
-                  <Typography mx={1}>Contact</Typography>
+                  <Typography mx={1}>{t("contact")}</Typography>
                 </Grid>
               </Grid> 
             </Grid>
