@@ -7,11 +7,12 @@ import Navigate from '@/components/navigate';
 import { Grid, IconButton } from '@mui/material';
 import Head from 'next/head'
 import { useTranslation } from 'react-i18next';
-
+import {useMediaQuery} from '@mui/material';
 
 const Layout = (props) => {
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
+    const matches = useMediaQuery("(max-width:1535px)");
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -25,7 +26,7 @@ const Layout = (props) => {
 
     let width = '';
     if (router.pathname != '') {
-        width = '80%';
+        width = matches ? '95%':'80%';
     } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword' || router.pathname == '/download') {
         width = '100%';
     }
@@ -38,7 +39,7 @@ const Layout = (props) => {
                 <meta property="og:title" content={title} key="title" />
             </Head>
             <Header />
-            <Container maxWidth="false" text sx={{ bgcolor: '#fff', height: "100%", padding: "0px !important", overflowY: 'auto' }}>
+            <Container maxWidth="false" sx={{ bgcolor: '#fff', height: "100%", padding: "0px !important", overflowY: 'auto' }}>
             <main style={{height:'100%',width:width,margin:"auto"}}>
                 {children}
                 </main>

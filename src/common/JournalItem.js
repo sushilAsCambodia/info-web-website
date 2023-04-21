@@ -10,25 +10,14 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
+import moment from "moment/moment";
 export default function JournalItem(props) {
-  const { t } = useTranslation();
-  const theme = useTheme();
-  const router = useRouter();
-  const [value, setValue] = React.useState(0);
-  const {item=[]} = props; 
-
-  useEffect(() => {
-    const hash = router.asPath.split("#")[1];
-    if (hash == "journal") {
-      setValue(1);
-    } else {
-      setValue(0);
-    }
-  }, [router.asPath]);
-
+  const {item={}, setOpen, setAlbumId} = props;  
+  console.log("item :::",item)
   return (
     <>
       <Grid
+        onClick={() => {setOpen(true);setAlbumId(item.id)}}
         sx={{
           margin: "5px",
           borderRadius: "10px",
@@ -48,7 +37,7 @@ export default function JournalItem(props) {
           alignItems="center"
           justifyContent="space-around"
         >
-          <Grid item xs={6} padding="5px" >
+          <Grid item xs={7} padding="5px" textAlign="center">
             <img
               src={item.cover_img}
               style={{
@@ -59,8 +48,8 @@ export default function JournalItem(props) {
               }}
             />
           </Grid>
-          <Grid item xs={6} display="flex" alignItems="center">
-            <Grid display="flex" flexDirection="column">
+          <Grid item xs={5} display="flex" alignItems="center" justifyContent="center">
+            <Grid display="flex" flexDirection="column" alignItems="flex-start">
                 <Typography color="black" fontWeight="bold" fontSize="15px" className="singleLinesEllips">
                   {item.album_name}
                 </Typography>
@@ -68,7 +57,7 @@ export default function JournalItem(props) {
                   <Icon icon="ic:outline-calendar-today" color="grey" />
                   <Typography color="grey" fontSize="12px" ml={1}>
                     {" "}
-                    2023
+                    {moment(item.issue_date).format('yyyy')}
                   </Typography>
                 </Grid>
                 <Button
@@ -83,7 +72,7 @@ export default function JournalItem(props) {
                     marginTop:"10px"
                   }}
                 >
-                  Latest Issue 094
+                  Latest Issue {item.issue||''}
                 </Button>
             </Grid>
           </Grid>

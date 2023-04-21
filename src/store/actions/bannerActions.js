@@ -4,7 +4,7 @@ export const getBanner = createAsyncThunk(
   "banner/list",
   async ({ params = {}, callback }) => {
     try {
-      const response = await api.get('/banner',params);
+      const response = await api.get('/news/banners/all',params);
       const {data,status} = response;
       data['status_code'] = status;
       if(typeof callback == 'function') {

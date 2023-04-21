@@ -111,25 +111,21 @@ const Announcement = () => {
                             </Stack>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-                        <List sx={{ padding: "0px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto", gridGap: "20px", justifyContent: "flex-start", textAlign: "center !important" }}>
+                        <Grid container>
                             {rows.map((row) => {
                                 return (
-                                    <ListItem sx={{ padding: "20px 60px 20px 20px !important", backgroundColor: "#FFF5F0", borderRadius: "11px", border: "1px solid #FF6F31", }}>
-                                        <Grid item xs={12}>
-                                            <Grid item>
-                                                <Typography fontWeight="500" fontSize="12px" color="#000">{row.news}</Typography>
-                                                <Typography paddingTop={1} textAlign="left" fontSize="10px !important" color="#8C8C8C">
+                                    <Grid xs={12} sm={6} md={4} lg={3} sx={{ padding: "10px", textAlign:"left",  }}>
+                                            <Grid item sx={{backgroundColor: "#FFF5F0",border: "1px solid #FF6F31",borderRadius: "11px",padding:"10px"  }}>
+                                                <Typography fontWeight="500" className="twoLinesEllip" color="#000">{row.news}</Typography>
+                                                <Typography paddingTop={1} textAlign="left" fontSize="12px" color="#8C8C8C">
                                                     {row.date}
                                                 </Typography>
                                             </Grid>
-                                        </Grid>
-                                    </ListItem>
+                                    </Grid>
                                 );
                             })}
 
-                        </List>
-                    </Grid>
+                        </Grid>
 
                     <Grid item xs={12} textAlign="center" display="flex" justifyContent="center" paddingTop={3}>
                         <Stack spacing={2} sx={{ textAlign: "center" }}>

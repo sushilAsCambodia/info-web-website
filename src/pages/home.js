@@ -2,44 +2,42 @@ import NewsJournalTabs from '@/components/homeNews/NewsJournalTabs';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import {getBanner} from '@/store/actions/bannerActions'
-import {getCard} from '@/store/actions/cardActions'
+import {getAdvertise} from '@/store/actions/advertiseActions'
 import {getCategory} from '@/store/actions/categoryActions'
 import { useEffect } from 'react';  
 import utils from '@/common/utils';
 const Home = () => {
     const {banners} = useSelector((state) => state.banner);
-    const {cards} = useSelector((state) => state.card);
+    const {advertises} = useSelector((state) => state.advertise);
     const {categories} = useSelector((state) => state.category); 
     const dispatch = useDispatch();
     const {i18n} = useTranslation();
     useEffect(() => { 
         dispatch(getBanner(
             {
-                params: { fake:true },
-                callback:(res) => {
-                    console.log(res,'callback')
-                }
+                params: {
+                    lang_id: utils.convertLangCodeToID(i18n.language)
+                },
+                callback:(res) => { }
             }
         ));
-        dispatch(getCard(
+        dispatch(getAdvertise(
             {
-                params: { fake:true },
-                callback:(res) => {
-                    console.log(res,'callback')
-                }
+                params: {
+                    lang_id: utils.convertLangCodeToID(i18n.language)
+                },
+                callback:(res) => { }
             }
-        ));
+        )); 
         dispatch(getCategory(
             {
                 params: {lang_id: utils.convertLangCodeToID(i18n.language)},
-                callback:(res) => {
-                    console.log(res,'callback')
-                }
+                callback:(res) => { }
             }
         ));
     },[i18n.language]); 
     return <>
-        <NewsJournalTabs banners={banners} categories={categories} cards={cards} lang_id={utils.convertLangCodeToID(i18n.language)}/>
+        <NewsJournalTabs banners={banners} categories={categories} advertises={advertises} lang_id={utils.convertLangCodeToID(i18n.language)}/>
     </>
 };
 export default Home;

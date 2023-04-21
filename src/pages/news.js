@@ -1,144 +1,172 @@
 import React, { useEffect, useState } from "react";
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import Pagination from '@mui/material/Pagination';
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import Pagination from "@mui/material/Pagination";
 
 import {
-    Button,
-    Typography,
-    Stack,
-    FormControl,
-    Grid,
-    IconButton,
-    InputAdornment,
-    Link,
-    Icon,
-    ListItem,
-    ListItemText,
-    ListItemIcon,
-    List,
-    Dialog,
-    OutlinedInput,
-    Divider,
+  Typography,
+  Stack,
+  Grid,
+  Link,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTranslation } from "react-i18next";
+import utils from "@/common/utils";
+import moment from "moment/moment";
 
-
-const rows = [
-    {
-        id: 1,
-        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
-    },
-    {
-        id: 2,
-        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
-    },
-    {
-        id: 3,
-        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
-    },
-    {
-        id: 4,
-        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
-    },
-    {
-        id: 4,
-        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
-    },
-    {
-        id: 4,
-        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
-    },
-    {
-        id: 4,
-        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
-    },
-    {
-        id: 4,
-        news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
-    },
-];
-
+import { getNewsByCategory } from "@/store/actions/newsActions";
 const News = () => {
-    const matches = useMediaQuery("(max-width:768px)");
-    const router = useRouter();
+  const matches = useMediaQuery("(max-width:768px)");
+  const { i18n } = useTranslation();
+  const lang_id = utils.convertLangCodeToID(i18n.language);
 
-    const breadcrumbs = [
-        <Link underline="hover" component={Link} key="1" color="inherit"  sx={{cursor:"pointer"}}   onClick={()=>router.push('/')}>
-            Home
-        </Link>,
-        <Typography key="2" color="#F24E1E">
-            News
-        </Typography>,
-    ];
-    return (
-        <>
-            <Grid
-                container
-                alignItems="flex-start"
-                justifyContent="center"
-                padding="20px 16px"
-            >
-                <Grid
-                    item
-                    xs={12}
-                    container
-                    alignContent="flex-start"
-                    alignItems="center"
-                    overflow="auto"
-                >
-                    <Grid item xs={12} sm={12} md={12} xl={12} padding="0px" display="flex" justifyContent="space-between" alignItems="center" paddingBottom={2}>
-                        <Grid>
-                            <Typography variant="h5" fontWeight={600}>News</Typography>
-                        </Grid>
-                        <Grid>
-                            <Stack spacing={2}>
-                                <Breadcrumbs
-                                    separator={<NavigateNextIcon fontSize="small" />}
-                                    aria-label="breadcrumb"
-                                >
-                                    {breadcrumbs}
-                                </Breadcrumbs>
-                            </Stack>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-                        <List sx={{ padding: "0px !important", margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto", gridGap: "20px", justifyContent: "flex-start", textAlign: "center !important" }}>
-                            {rows.map((row) => {
-                                return (
-                                    <ListItem sx={{ padding: "20px 60px 20px 20px !important", backgroundColor: "#FFF5F0", borderRadius: "11px", border: "1px solid #FF6F31", }}>
-                                        <Grid item xs={12}>
-                                            <Grid item>
-                                                <Typography fontWeight="500" fontSize="12px" color="#000">{row.news}</Typography>
-                                                <Typography paddingTop={1} textAlign="left" fontSize="10px !important" color="#8C8C8C">
-                                                    {row.date}
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                    </ListItem>
-                                );
-                            })}
+  const { news } = useSelector((state) => state.news);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-                        </List>
-                    </Grid>
-                    <Grid item xs={12} textAlign="center" display="flex" justifyContent="center" paddingTop={3}>
-                        <Stack spacing={2} sx={{ textAlign: "center" }}>
-                            <Pagination count={5} variant="outlined" shape="rounded" />
-                        </Stack>
-                    </Grid>
-                </Grid>
+  const [allNews, setAllNews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  console.log("news:::", news);
+  const breadcrumbs = [
+    <Link
+      underline="hover"
+      component={Link}
+      key="1"
+      color="inherit"
+      sx={{ cursor: "pointer" }}
+      onClick={() => router.push("/")}
+    >
+      Home
+    </Link>,
+    <Typography key="2" color="#F24E1E">
+      News
+    </Typography>,
+  ];
+
+  useEffect(() => {
+    dispatch(
+      getNewsByCategory({
+        params: { lang_id: lang_id, take: 10 },
+        callback: (res) => {
+          console.log("News Page:::", res);
+          // setAllNews(res.data);
+          setLoading(false);
+        },
+      })
+    );
+  }, [lang_id]);
+  return (
+    <>
+      <Grid
+        container
+        alignItems="flex-start"
+        justifyContent="center"
+        padding="20px 16px"
+      >
+        <Grid
+          item
+          xs={12}
+          container
+          alignContent="flex-start"
+          alignItems="center"
+          overflow="auto"
+        >
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={12}
+            xl={12}
+            padding="0px"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            paddingBottom={2}
+          >
+            <Grid>
+              <Typography variant="h5" fontWeight={600}>
+                News
+              </Typography>
             </Grid>
-        </>
-    )
-
+            <Grid>
+              <Stack spacing={2}>
+                <Breadcrumbs
+                  separator={<NavigateNextIcon fontSize="small" />}
+                  aria-label="breadcrumb"
+                >
+                  {breadcrumbs}
+                </Breadcrumbs>
+              </Stack>
+            </Grid>
+          </Grid>
+          {!loading ? (
+            <Grid container padding="0px">
+              {news.map((item, index) => {
+                return (
+                  <Grid xs={12} sm={6} md={3} key={index} p={1}>
+                    <Grid
+                      item
+                      p={2}
+                      sx={{
+                        backgroundColor: "#FFF5F0",
+                        borderRadius: "11px",
+                        border: "1px solid #FF6F31",
+                      }}
+                    >
+                      <Typography  sx={{
+                        overflow: 'hidden',
+                        display: '-webkit-box',
+                        '-webkit-line-clamp': '3', 
+                                'line-clamp': '3', 
+                        '-webkit-box-orient': 'vertical',
+                      }}>{item.title}</Typography>
+                      {/* <Typography
+                      sx={{
+                        overflow: 'hidden',
+                        display: '-webkit-box',
+                        '-webkit-line-clamp': '3', 
+                                'line-clamp': '3', 
+                        '-webkit-box-orient': 'vertical',
+                      }}
+                        dangerouslySetInnerHTML={{
+                          __html: item.description || "",
+                        }}
+                      ></Typography> */}
+                      <Typography
+                        paddingTop={1}
+                        textAlign="left"
+                        fontSize="10px !important"
+                        color="#8C8C8C"
+                      >
+                        {moment(item.release_date).format(utils.letterFormat)}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          ) : (
+            "loading"
+          )}
+          <Grid
+            item
+            xs={12}
+            textAlign="center"
+            display="flex"
+            justifyContent="center"
+            paddingTop={3}
+          >
+            <Stack spacing={2} sx={{ textAlign: "center" }}>
+              <Pagination count={5} variant="outlined" shape="rounded" />
+            </Stack>
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
+  );
 };
 export default News;

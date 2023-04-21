@@ -13,14 +13,14 @@ const Footer = () => {
 
   return (
     <Grid container alignItems="center" flexDirection="column" py={2} sx={{background:"#FAFAFA"}}>
-      <Grid xs={4} textAlign="center">
+      <Grid item xs={4} textAlign="center">
         <img src="./assets/Logo/footer_logo.png"/>
         <Typography my={2}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Typography>
       </Grid>
-      <Grid xs={6} display="flex" spacing={2} textAlign="center">
+      <Grid container item xs={6} spacing={2} justifyContent="center">
         <Grid className="footerIcon" mx={1} container justifyContent="center" alignItems="center" >
           <Icon width={30} icon="ri:facebook-fill" />
         </Grid>

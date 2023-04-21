@@ -21,7 +21,7 @@ export default function NewsScrollColumn(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { newsCategory = [], lang_id = [] } = props;
+  const { newsCategory = [], lang_id = '' } = props;
   const [newsList, setNewsList] = useState([]);
 
 
@@ -32,6 +32,7 @@ export default function NewsScrollColumn(props) {
         params: { lang_id: lang_id, category_id: newsCategory.id, take: 10 },
         callback: (res) => {
           setNewsList(res.data);
+          console.log(newsCategory.id,"newsscrollcol:::",newsList)
         },
       })
     );
@@ -40,7 +41,7 @@ export default function NewsScrollColumn(props) {
   return (
     <>
       {
-        <Grid item xs={4} textAlign="center" padding="5px">
+        <Grid item xs={6} lg={4} textAlign="center" padding="5px">
           <Grid
             sx={{
               // border: "2px dashed red",
@@ -56,10 +57,10 @@ export default function NewsScrollColumn(props) {
                 position: "absolute",
                 // background: "linear-gradient(to left, #FF6F31 50%, white 0%)",
                 background: "#FF6F31",
-                height: 545,
+                height: 555,
                 width: 250,
                 right: "-1%",
-                top: -2,
+                top: -3,
                 borderRadius: "0px 10px 10px 0px",
               }}
             ></Grid>
@@ -81,7 +82,7 @@ export default function NewsScrollColumn(props) {
                   borderRadius: "10px 10px 0px 0px",
                 }}
               >
-                <Typography variant="h5">
+                <Typography variant="h5" >
                   {newsCategory.translation
                     ? newsCategory.translation?.category_name
                     : newsCategory.category_name || "N/A"}
@@ -96,7 +97,7 @@ export default function NewsScrollColumn(props) {
                     fontSize: "13px",
                   }}
                 >
-                  More
+                  {t("more")}
                 </Button>
               </Grid>
 
@@ -115,32 +116,22 @@ export default function NewsScrollColumn(props) {
                 newsList.map((item, index) => {
                   return (
                     <Grid
-                      component={Link}
                       onClick={() =>
                         Router.push({
                           pathname: "/newsSingle",
                           query: { news_id: item.id },
                         })
                       }
-                      color="black"
                       key={index}
+                      className="newsLinkTransform"
                       sx={{
-                        textDecoration: "none",
                         display: "flex",
                         flexDirection: "column",
                         borderBottom: "2px solid white",
                         paddingBottom: "10px",
                         marginBottom: "10px",
-                        color: "white",
                         margin: "10px",
-                        "-webkit-transform": "scale(0.9)",
-                        transitionDuration: "0.7s",
-                        "&:hover": {
-                          borderBottom: "2px solid orange",
-                          color: "orange",
-                          "-webkit-transform": "scale(1)",
-                          transitionDuration: "0.7s",
-                        },
+                        cursor:"pointer"
                       }}
                     >
                       <Typography textAlign="left">{item.title}</Typography>
@@ -150,7 +141,7 @@ export default function NewsScrollColumn(props) {
                     </Grid>
                   );
                 }):
-                <Typography variant="h4" color="white">No News</Typography>
+                <Typography variant="h4" color="white">{t("no_news")}</Typography>
                 }
               </Grid>
             </Grid>
