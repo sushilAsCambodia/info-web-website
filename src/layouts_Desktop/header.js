@@ -240,9 +240,9 @@ const Header = () => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
-                      {matches2 ? menuList.map((item) => {
+                      {matches2 ? menuList.map((item,index) => {
                     return (
-                        <MenuItem onClick={() => router.push(`/${item.page}`)}>
+                        <MenuItem key={index} onClick={() => router.push(`/${item.page}`)}>
                           <Typography textAlign="center">{item.label}</Typography>
                         </MenuItem>
                     );

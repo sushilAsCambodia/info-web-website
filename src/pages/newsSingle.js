@@ -127,7 +127,7 @@ export default function NewsSingle() {
                   >
                     {categories.map((item, index) => {
                       return (
-                        <MenuItem value={index}>
+                        <MenuItem key={index} value={index}>
                           {item.category_name}
                         </MenuItem>
                       );
