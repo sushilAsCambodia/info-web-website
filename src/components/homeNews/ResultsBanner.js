@@ -16,7 +16,6 @@ import Slider from "react-slick";
 import LottoList from "@/common/LottoList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import AnnouncementItem from "@/common/AnnouncementItem";
-
 const settings = {
   dots: false,
   infinite: true,
@@ -36,7 +35,7 @@ const settings = {
 const announcement =[{title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',date:"03 Apr 2023"}]
 export default function ResultsBanner(props) {
   const {lang_id=[]} = props; 
-
+const {t} = useTranslation();
   const [loading, setLoading] = useState(false);
   const matches = useMediaQuery("(max-width:1199px)");
 
@@ -47,14 +46,13 @@ export default function ResultsBanner(props) {
         container
         className="middle-grid"
         justifyContent="center"
-        spacing={1}
         marginTop="10px"
       >
         <Grid item xs={12} lg={3} xl={2.5} border="1px solid grey" borderRadius="10px">
-          <Typography px={1.5} mb={1}>Latest Results</Typography>
+          <Typography px={1.5} mb={1}>{t("latest_results")}</Typography>
           {/* <NewsSlider news={rows} /> */}
           {/* <Grid overflow="auto" height="430px"> */}
-          <Grid overflow="auto" className={matches ? 'verticleLotto': 'horizontalLotto'} >
+          <Grid overflow="auto" className={matches ? 'verticleLotto': 'horizontalLotto'} px={1}>
             {/* <Slider {...settings}> */}
             <LottoList />
             <LottoList />
@@ -78,14 +76,14 @@ export default function ResultsBanner(props) {
         </Grid>
         <Grid item xs={12} lg={2} border="1px solid grey" borderRadius="10px">
           <Grid px={1.5} mb={1} container justifyContent="space-between" width="100%">
-            <Typography>Announcements</Typography>
+            <Typography>{t("announcement")}</Typography>
             <Grid
               component={Link} href="/announcement"
               style={{ color: "#037DED", textDecoration: "none" }}
-            ><Typography>View all</Typography>
+            ><Typography>{t("view_all")}</Typography>
             </Grid>
           </Grid>
-          <Grid overflow="auto" className={matches ? 'verticleLotto': 'horizontalLotto'} >
+          <Grid overflow="auto" className={matches ? 'verticleLotto': 'horizontalLotto'} px={1}>
           <AnnouncementItem announcement={announcement}/>          
           <AnnouncementItem announcement={announcement}/>
           <AnnouncementItem announcement={announcement}/>

@@ -82,7 +82,7 @@ export default function NewsScrollColumn(props) {
                   borderRadius: "10px 10px 0px 0px",
                 }}
               >
-                <Typography variant="h5">
+                <Typography variant="h5" >
                   {newsCategory.translation
                     ? newsCategory.translation?.category_name
                     : newsCategory.category_name || "N/A"}
@@ -97,7 +97,7 @@ export default function NewsScrollColumn(props) {
                     fontSize: "13px",
                   }}
                 >
-                  More
+                  {t("more")}
                 </Button>
               </Grid>
 
@@ -116,32 +116,21 @@ export default function NewsScrollColumn(props) {
                 newsList.map((item, index) => {
                   return (
                     <Grid
-                      component={Link}
                       onClick={() =>
                         Router.push({
                           pathname: "/newsSingle",
                           query: { news_id: item.id },
                         })
                       }
-                      color="black"
                       key={index}
+                      className="newsLinkTransform"
                       sx={{
-                        textDecoration: "none",
                         display: "flex",
                         flexDirection: "column",
                         borderBottom: "2px solid white",
                         paddingBottom: "10px",
                         marginBottom: "10px",
-                        color: "white",
                         margin: "10px",
-                        webkitTransform : "scale(0.9)",
-                        transitionDuration: "0.7s",
-                        "&:hover": {
-                          borderBottom: "2px solid orange",
-                          color: "orange",
-                          webkitTransform: "scale(1)",
-                          transitionDuration: "0.7s",
-                        },
                         cursor:"pointer"
                       }}
                     >
@@ -152,7 +141,7 @@ export default function NewsScrollColumn(props) {
                     </Grid>
                   );
                 }):
-                <Typography variant="h4" color="white">No News</Typography>
+                <Typography variant="h4" color="white">{t("no_news")}</Typography>
                 }
               </Grid>
             </Grid>

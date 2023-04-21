@@ -37,7 +37,7 @@ export default function LottoList(props) {
   const { i18n } = useTranslation();
   const [newsList, setNewsList] = useState([]);
 
-  const lottos = [10, 10, 10, 10, 10, 11];
+  const lottos = [10, 80, 10, 10, 10, 11];
   const lotto = () => {
     const bgColor = (index,length,lotto)=>{
        if (lotto == 11)
@@ -48,7 +48,7 @@ export default function LottoList(props) {
       <>
         <Grid
           container
-          width="fit-content"
+          width="max-content"
           border="1px solid grey"
           borderRadius="10px"
           className="lottoGrid"
@@ -62,8 +62,8 @@ export default function LottoList(props) {
   };
   return (
     <>
-      <div style={{paddingRight:"10px" }}>
-                <Card sx={{ border: "1px solid grey", marginY: "5px",width:"max-content" }}>
+      <div style={{paddingRight:"10px",display:"flex",justifyContent:"center" }}>
+                <Card sx={{ border: "1px solid grey", marginY: "5px",width:"max-content",overflow:"auto" }}>
                   <Grid sx={{ fontSize: "15px",borderBottom:"1px solid grey", }} px={1}>29 Mar 2023, Monday</Grid>
                   <CardHeader
                     sx={{ padding: "10px" }}

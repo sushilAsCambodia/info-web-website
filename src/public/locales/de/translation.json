@@ -72,5 +72,21 @@
     "forgot_password_info_web":"忘记密码 | InfoWeb",
     "login_info_web":"登录 | InfoWeb",
     "register_info_web":"登记 | InfoWeb",
-    "do_not_exceed_characters":"Please input your feedback, do not exceed 500 characters"
+    "do_not_exceed_characters":"Please input your feedback, do not exceed 500 characters",
+
+    "or_sign_up_via":"Or you can sign up with",
+    "slogan":"Anytime anywhere Wonderful information in the palm of your hand",
+    "sign_in_here":"Sign In Here",
+    "favorites":"收藏夹",
+    "more":"More",
+    "view_all":"View All",
+    "latest_results":"Latest Results",
+    "match_reccomendation":"Match Reccomendation",
+    "partners":"Partners",
+    "half_slogan":"Anytime anywhere Wonderful information in the palm of",
+    "your_hand":"YOUR HAND",
+    "lottery_draw":"Lottery Draw",
+    "data_chart":"Data Chart",
+    "personal_information":"Personal Information",
+    "no_news":"No News"
 }

@@ -13,6 +13,7 @@ import { Icon } from "@iconify/react";
 import moment from "moment/moment";
 export default function JournalItem(props) {
   const {item={}, setOpen, setAlbumId} = props;  
+  console.log("item :::",item)
   return (
     <>
       <Grid
@@ -36,7 +37,7 @@ export default function JournalItem(props) {
           alignItems="center"
           justifyContent="space-around"
         >
-          <Grid item xs={6} padding="5px" >
+          <Grid item xs={7} padding="5px" textAlign="center">
             <img
               src={item.cover_img}
               style={{
@@ -48,8 +49,8 @@ export default function JournalItem(props) {
               }}
             />
           </Grid>
-          <Grid item xs={6} display="flex" alignItems="center">
-            <Grid display="flex" flexDirection="column">
+          <Grid item xs={5} display="flex" alignItems="center" justifyContent="center">
+            <Grid display="flex" flexDirection="column" alignItems="flex-start">
                 <Typography color="black" fontWeight="bold" fontSize="15px" className="singleLinesEllips">
                   {item.album_name}
                 </Typography>

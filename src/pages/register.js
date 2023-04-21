@@ -460,7 +460,7 @@ export default function Register() {
                   }}
                 >
                   <Typography fontWeight={700} fontSize="20px">
-                    DOWNLOAD APP
+                  {t("download_app")}
                   </Typography>
                 </Grid>
 
@@ -706,7 +706,7 @@ export default function Register() {
                       }}
                       onClick={onSubmit}
                     >
-                      {t("sign_up")}
+                      {t("signup_for_now")}
                     </Button>
                   </Grid>
                 </Grid>
@@ -792,7 +792,7 @@ export default function Register() {
                     Router.push("/login");
                   }}
                 >
-                  <Typography>Already have an Account ?</Typography>
+                  <Typography>{t("already_have_an_account")}</Typography>
                   <Typography
                     style={{
                       cursor: "pointer",
@@ -805,7 +805,7 @@ export default function Register() {
                 </Link>
                 <Grid display="flex" sx={{ cursor: "pointer" }}>
                   <Icon icon="bi:chat-square-dots-fill" width={25} />
-                  <Typography mx={1}>Contact</Typography>
+                  <Typography mx={1}>{t("contact")}</Typography>
                 </Grid>
               </Grid>
             </Grid>

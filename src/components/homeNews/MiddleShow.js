@@ -99,7 +99,7 @@ export default function MiddleShow(props) {
       </Grid>
       <Grid container mt={2}>
         <Grid item xs={12} mx={1} container justifyContent="space-between" height="40px">
-          <Typography>Match Reccomendation</Typography>
+          <Typography>{t("match_reccomendation")}</Typography>
         </Grid>
         <Grid item xs={12} id="customCarouselBtn">
           <Carousel

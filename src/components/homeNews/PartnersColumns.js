@@ -22,11 +22,11 @@ const responsive = {
   desktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 1320, min: 1025 },
-    items: 5,
+    items: 4,
   },
   tablet: {
     breakpoint: { max: 1024, min: 685 },
-    items: 5,
+    items: 3,
   },
   mobile: {
     breakpoint: { max: 686, min: 321 },
@@ -66,7 +66,7 @@ export default function PartnersColumns(props) {
           }}
         >
           <Typography variant="h5" paddingX="10px" fontWeight="bold">
-            Partners
+            {t("partners")}
           </Typography>
         </Divider>
       </Grid>
@@ -99,8 +99,6 @@ export default function PartnersColumns(props) {
           >
             <Grid
               style={{
-                color: "white",
-                textAlign: "left",
                 height: "120px",
                 paddingX: "5px",
                 border: "1px solid grey",
@@ -108,14 +106,15 @@ export default function PartnersColumns(props) {
               }}
               container
               alignItems="center"
-              justifyContent="space-around"
+              justifyContent="center"
             >
               <Grid item padding="5px">
                 <img
-                  src="./assets/Logo/kk_exchange.png"
+                  src="./assets/Logo/clts-logo.png"
                   style={{
                     minWidth: "100px",
                     maxHeight: "80px",
+                    maxWidth:"150px"
                   }}
                 />
               </Grid>
@@ -130,8 +129,6 @@ export default function PartnersColumns(props) {
           >
             <Grid
               style={{
-                color: "white",
-                textAlign: "left",
                 height: "120px",
                 paddingX: "5px",
                 border: "1px solid grey",
@@ -139,14 +136,15 @@ export default function PartnersColumns(props) {
               }}
               container
               alignItems="center"
-              justifyContent="space-around"
+              justifyContent="center"
             >
               <Grid item padding="5px">
                 <img
-                  src="./assets/Logo/clts-logo.png"
+                  src="./assets/Logo/kk_exchange.png"
                   style={{
                     minWidth: "100px",
                     maxHeight: "80px",
+                    maxWidth:"200px"
                   }}
                 />
               </Grid>
