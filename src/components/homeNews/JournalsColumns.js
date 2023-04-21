@@ -67,7 +67,7 @@ export default function JournalsColumns(props) {
             </Typography>
           </Divider>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} className="home-carousel-wrapper">
           <Carousel
             responsive={responsive}
             additionalTransfrom={0}
@@ -99,11 +99,11 @@ export default function JournalsColumns(props) {
                 background: linear-gradient(0deg, #EFEFEF, #EFEFEF),
                 linear-gradient(0deg, #FFFFFF, #FFFFFF);
               }
-              .react-multiple-carousel__arrow--left {
-                left:0;
+              .home-carousel-wrapper .react-multiple-carousel__arrow--left {
+                left:20px;
               }
-              .react-multiple-carousel__arrow--right {
-                right:0; 
+              .home-carousel-wrapper .react-multiple-carousel__arrow--right {
+                right:20px; 
               }
               .react-multiple-carousel__arrow::before {
                 font-size: 10px;
