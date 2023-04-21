@@ -488,6 +488,7 @@ text-overflow: ellipsis;
 
 #customCarouselBtn .react-multiple-carousel__arrow::before{
     color: #000 !important;
+    font-weight: bold;
 }
 #customCarouselBtn .react-multiple-carousel__arrow--right {
   top: -50px;
@@ -496,7 +497,7 @@ text-overflow: ellipsis;
 }
 #customCarouselBtn .react-multiple-carousel__arrow--left {
   top: -50px;
-  left: calc(95% + -100px) !important;
+  left: calc(100% + -100px) !important;
   background-color: #dddddd !important;
 }
 .lottoGrid div:first-child{

@@ -54,20 +54,7 @@ export default function LottoList(props) {
           className="lottoGrid"
         >
           {lottos.map((lotto, index) => {
-            return (
-              <>
-              <Grid px={1} className={`${lotto === 11 ? "hitLotto":"" }`}>{lotto}</Grid>
-                {/* {index == lottos.length - 1 ? (
-                  ""
-                ) : (
-                  <Divider
-                    orientation="vertical"
-                    sx={{ borderColor: "grey" }}
-                    flexItem
-                  />
-                )} */}
-              </>
-            );
+            return <Grid key={index} px={1} className={`${lotto === 11 ? "hitLotto":"" }`}>{lotto}</Grid>;
           })}
         </Grid>
       </>
