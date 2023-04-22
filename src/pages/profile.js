@@ -49,13 +49,14 @@ const Profile = () => {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-  useEffect(() => {
-    if(Cookies.get('token')) {
-      setMounted(true);
-    }else {
-      router.push('/login');
-    }
-  },[]);
+  // @todo check token in client
+  // useEffect(() => {
+  //   if(Cookies.get('token')) {
+  //     setMounted(true);
+  //   }else {
+  //     router.push('/login');
+  //   }
+  // },[]);
   useEffect(() => {
     const hash = router.asPath.split('#')[1];
     if(hash == 'feedback') {
@@ -196,7 +197,7 @@ function TabPanel(props) {
     </Grid>
   ) : (
     <> 
-      {mounted && <Grid
+      <Grid
         container
         alignItems="flex-start"
         justifyContent="center"
@@ -603,8 +604,7 @@ function TabPanel(props) {
             </List>
           </Grid>
         </Grid>
-      </Grid>}
-      
+      </Grid>
     </>
   );
 }; 
