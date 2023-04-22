@@ -32,6 +32,7 @@ import { useRouter } from "next/router";
 import DialogMessage from "@/components/DialogMessage";
 import Announcement from "./announcement";
 import ProfileAnnouncement from "@/components/profilePage/profileannouncement";
+import Cookies from "js-cookie";
 const Profile = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
@@ -48,7 +49,13 @@ const Profile = () => {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-
+  useEffect(() => {
+    if(Cookies.get('token')) {
+      setMounted(true);
+    }else {
+      router.push('/login');
+    }
+  },[]);
   useEffect(() => {
     const hash = router.asPath.split('#')[1];
     if(hash == 'feedback') {
@@ -188,8 +195,8 @@ function TabPanel(props) {
      />
     </Grid>
   ) : (
-    <>
-      <Grid
+    <> 
+      {mounted && <Grid
         container
         alignItems="flex-start"
         justifyContent="center"
@@ -596,8 +603,9 @@ function TabPanel(props) {
             </List>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid>}
+      
     </>
   );
-};
+}; 
 export default Profile;

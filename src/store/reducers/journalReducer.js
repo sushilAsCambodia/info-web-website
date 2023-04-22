@@ -90,7 +90,7 @@ export default function (state = initialState, action) {
             return r['year'];
           });
           if(getField.length > 0) {
-            uniqueYear = getField.filter((value, index, array) =>  array.indexOf(value) === index);
+            uniqueYear = getField.sort().filter((value, index, array) =>  array.indexOf(value) === index);
           }
         }
       }

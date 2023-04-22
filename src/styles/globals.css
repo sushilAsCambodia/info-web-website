@@ -429,7 +429,7 @@ padding: 0px 0px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 12px;
+  font-size: 11px;
 }
 .calendraDrawer .mui-issue-custom{
   border-radius: 4px;
