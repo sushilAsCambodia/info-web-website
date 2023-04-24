@@ -113,7 +113,7 @@ const DrawerComponent = (props) => {
     const items = () => {
         const items = [];
         for (let index = 0; index < 12; index++) {
-           items.push(<ListItem key={index} className={activeIssue == index ? 'active-issue':''} style={{ width:'53px', justifyContent: "center", textAlign: "center !important" }}>
+           items.push(<ListItem key={index} className={activeIssue == index ? 'active-issue mui-issue-custom':'mui-issue-custom'} style={{ width:'53px', justifyContent: "center", textAlign: "center !important" }}>
            <Typography fontSize="10px">Issue  </Typography>
        </ListItem>)
             
@@ -125,7 +125,7 @@ const DrawerComponent = (props) => {
             <List sx={{  margin: "5px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
                 {
                     issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
-                        return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue':''} style={{ width:'53px', justifyContent: "center", textAlign: "center !important" }}>
+                        return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue mui-issue-custom':'mui-issue-custom'} style={{ width:'53px', justifyContent: "center", textAlign: "center !important" }}>
                             <Typography fontSize="10px">Issue {is.issue || ''}</Typography>
                         </ListItem>
                     })
@@ -148,7 +148,7 @@ const DrawerComponent = (props) => {
                 </svg>
             </Box>
             <List sx={{padding:'0px'}}>
-                <ListItem disablePadding>
+                <ListItem disablePadding className='mui-issue-custom'>
                     <Grid item xs={12} sm={12} width='100%'>
                         {years.length > 0 ? <Box sx={{ width: '100%' }}>
                             <Tabs
