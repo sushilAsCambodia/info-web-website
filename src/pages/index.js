@@ -24,6 +24,7 @@ import utils from "@/common/utils";
 export default function Index() {
   const matches = useMediaQuery("(max-width:768px)");
   const { i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return !matches ? (
     <>
@@ -60,7 +61,7 @@ export default function Index() {
             }}
           >
             <Typography fontWeight={700} fontSize="20px">
-              DOWNLOAD APP
+              {t("download_app")}
             </Typography>
           </Grid>
 
