@@ -17,7 +17,10 @@ export default function (state = initialState, action) {
       }
     case 'customers/login/fulfilled':
       const customer = action.payload.data?.customer || {};
-      window.localStorage.setItem('customer', JSON.stringify((customer)));
+      if([200,201,202,203,204].includes(action.payload.status_code)) {
+        Cookies.set(utils.tokenKey,action.payload?.data[utils.tokenKey] || '');
+        window.localStorage.setItem('customer', JSON.stringify((customer)));
+      }
       return {
         ...state,
         customer: customer,
@@ -44,11 +47,18 @@ export default function (state = initialState, action) {
     // end register block
 
     // logout block
+    case 'customers/logout/rejected':
+      window.localStorage.removeItem('customer');
+      Cookies.remove(utils.tokenKey);
+      return {
+        customer: {},
+        loading: false,
+        isLogin: false,
+        status: 'completed',
+      };
     case 'customers/logout/fulfilled':
-      if (typeof window !== 'undefined') {
-        window.localStorage.removeItem('customer');
-        Cookies.remove(utils.tokenKey);
-      }
+      window.localStorage.removeItem('customer');
+      Cookies.remove(utils.tokenKey);
       return {
         customer: {},
         loading: false,

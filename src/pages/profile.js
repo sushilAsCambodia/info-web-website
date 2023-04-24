@@ -32,6 +32,7 @@ import { useRouter } from "next/router";
 import DialogMessage from "@/components/DialogMessage";
 import Announcement from "./announcement";
 import ProfileAnnouncement from "@/components/profilePage/profileannouncement";
+import Cookies from "js-cookie";
 const Profile = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
@@ -48,7 +49,13 @@ const Profile = () => {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-
+  useEffect(() => {
+    if(Cookies.get('token')) {
+      setMounted(true);
+    }else {
+      router.push('/login');
+    }
+  },[]);
   useEffect(() => {
     const hash = router.asPath.split('#')[1];
     if(hash == 'feedback') {
@@ -149,89 +156,167 @@ function TabPanel(props) {
     };
   }
 
-  return !matches ? (
-    <Grid display="flex" justifyContent="center" pt={9} minHeight={750}>
-     <Grid sx={{ width: 700 }} className="profiletab">
-        <CusTabs
-          value={value}
-          onChange={handleChange}
-          variant="fullWidth"
-          sx={{color:"black"}}
-          indicatorColor="transparent"
-          >
-          <CusTab label={t("personal_information")} {...a11yProps(0)} onClick={() => router.push('/profile#profile')}/>
-          <CusTab label={t("system_announcement")} {...a11yProps(1)} onClick={() => router.push('/profile#system')}/>
-          <CusTab label={t("feedback")} {...a11yProps(2)} onClick={() => router.push('/profile#feedback')}/>
-        </CusTabs>
-      <SwipeableViews
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} >
-          <ProfileInfo setOpenDialog={setOpenDialog} openDialog={openDialog} setResponseMessage={setResponseMessage}/>
-        </TabPanel>
-        <TabPanel value={value} index={1} >
-        <ProfileAnnouncement />
-        </TabPanel>
-        <TabPanel value={value} index={2} >
-          <Card sx={{padding:"15px"}} elevation={5}>
-          <Feedback />
-          </Card>
-        </TabPanel>
-      </SwipeableViews>
-    </Grid>
-    <DialogMessage
-       open={openDialog} 
-       setOpen={setOpenDialog} 
-       message={responseMessage}
-      //  onClosed={()=>setOpenDialog(false)}
-     />
-    </Grid>
-  ) : (
-    <>
-      <Grid
-        container
-        alignItems="flex-start"
-        justifyContent="center"
-        padding="0px 16px"
-      >
-        <Grid
-          item
-          xs={12}
-          container
-          alignContent="flex-start"
-          alignItems="center"
-          overflow="auto"
-        >
-          <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-            <List sx={{ padding: "0px" }}>
-              <ListItem sx={{ padding: "0px 0px" }}>
-                <Grid
-                  item
-                  xs={12}
-                  sx={{ padding: "18px 0px", borderRadius: "5px" }}
-                  boxShadow="none"
-                  display="flex"
-                  alignItems="center"
+  return <>
+    {
+      mounted && (
+        !matches ? (
+          <Grid display="flex" justifyContent="center" pt={9} minHeight={750}>
+           <Grid sx={{ width: 700 }} className="profiletab">
+              <CusTabs
+                value={value}
+                onChange={handleChange}
+                variant="fullWidth"
+                sx={{color:"black"}}
+                indicatorColor="transparent"
                 >
-                  {isLogin ? (
-                    <>
-                      <Grid item xs={12} display="flex" alignItems="center">
-                        <img 
-                          src={customer.image?.path} 
-                          style={{ height:50,width:50,borderRadius:'50%'}}
-                          onError={(e) => e.target.src = '/assets/Profile/user-icon.png'}
-                        />
-                        &nbsp;{" "}
-                        <Typography fontWeight="600" fontSize="12px">
-                          {customer.user_name || "Profile Name"}
-                        </Typography>
-                      </Grid>
-                    </>
-                  ) : (
-                    <>
+                <CusTab label={t("personal_information")} {...a11yProps(0)} onClick={() => router.push('/profile#profile')}/>
+                <CusTab label={t("system_announcement")} {...a11yProps(1)} onClick={() => router.push('/profile#system')}/>
+                <CusTab label={t("feedback")} {...a11yProps(2)} onClick={() => router.push('/profile#feedback')}/>
+              </CusTabs>
+            <SwipeableViews
+              index={value}
+              onChangeIndex={handleChangeIndex}
+            >
+              <TabPanel value={value} index={0} >
+                <ProfileInfo setOpenDialog={setOpenDialog} openDialog={openDialog} setResponseMessage={setResponseMessage}/>
+              </TabPanel>
+              <TabPanel value={value} index={1} >
+              <ProfileAnnouncement />
+              </TabPanel>
+              <TabPanel value={value} index={2} >
+                <Card sx={{padding:"15px"}} elevation={5}>
+                <Feedback />
+                </Card>
+              </TabPanel>
+            </SwipeableViews>
+          </Grid>
+          <DialogMessage
+             open={openDialog} 
+             setOpen={setOpenDialog} 
+             message={responseMessage}
+            //  onClosed={()=>setOpenDialog(false)}
+           />
+          </Grid>
+        ) : ( 
+          <Grid
+            container
+            alignItems="flex-start"
+            justifyContent="center"
+            padding="0px 16px"
+          >
+            <Grid
+              item
+              xs={12}
+              container
+              alignContent="flex-start"
+              alignItems="center"
+              overflow="auto"
+            >
+              <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+                <List sx={{ padding: "0px" }}>
+                  <ListItem sx={{ padding: "0px 0px" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{ padding: "18px 0px", borderRadius: "5px" }}
+                      boxShadow="none"
+                      display="flex"
+                      alignItems="center"
+                    >
+                      {isLogin ? (
+                        <>
+                          <Grid item xs={12} display="flex" alignItems="center">
+                            <img 
+                              src={customer.image?.path || '/assets/Profile/user-icon.png'} 
+                              style={{ height:50,width:50,borderRadius:'50%'}}
+                              onError={(e) => e.target.src = '/assets/Profile/user-icon.png'}
+                            />
+                            &nbsp;{" "}
+                            <Typography fontWeight="600" fontSize="12px">
+                              {customer.user_name || "Profile Name"}
+                            </Typography>
+                          </Grid>
+                        </>
+                      ) : (
+                        <>
+                          <Grid item xs={2} display="flex" alignItems="center">
+                            <img src="/assets/Profile/user-icon.png" />
+                          </Grid>
+                          <Grid item xs={10}>
+                            <Grid
+                              item
+                              xs={12}
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="space-between"
+                            >
+                              <Grid item>
+                                <Typography fontWeight="600" fontSize="12px">
+                                  {t("login_to_enjoy")}
+                                </Typography>
+                                <Button
+                                  variant="contained"
+                                  onClick={goToLogin}
+                                  sx={{
+                                    fontSize: "12px",
+                                    marginTop: "6px",
+                                    color: "white",
+                                    background:
+                                      "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
+                                    textTransform: "capitalize",
+                                    borderRadius: "22px",
+                                    padding: "4px 10px",
+                                  }}
+                                >
+                                  {t("login")}/{t("register")}
+                                </Button>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </>
+                      )}
+                    </Grid>
+                  </ListItem>
+                </List>
+                <Divider />
+              </Grid>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              container
+              alignContent="flex-start"
+              alignItems="center"
+              overflow="auto"
+            >
+              <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+                <Grid item xs={12} paddingTop="15px">
+                  <Typography>{t("important_links")}</Typography>
+                </Grid>
+      
+                <List sx={{ padding: "0px" }}>
+                  <ListItem sx={{ padding: "0px 0px" }} onClick={goToProfileDetail}>
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                      boxShadow="none"
+                      display="flex"
+                      alignItems="center"
+                    >
                       <Grid item xs={2} display="flex" alignItems="center">
-                        <img src="/assets/Profile/user-icon.png" />
+                        <Box
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          textAlign="center"
+                          width="30px"
+                          height="30px"
+                          component="span"
+                          sx={{ border: "1px solid #FF6E31", borderRadius: "50%" }}
+                        >
+                          <UserProfileIcon color="#FF6E31" />
+                        </Box>
                       </Grid>
                       <Grid item xs={10}>
                         <Grid
@@ -242,362 +327,288 @@ function TabPanel(props) {
                           justifyContent="space-between"
                         >
                           <Grid item>
-                            <Typography fontWeight="600" fontSize="12px">
-                              {t("login_to_enjoy")}
+                            <Typography fontWeight="500" fontSize="16px">
+                              {t("profile")}
                             </Typography>
-                            <Button
-                              variant="contained"
-                              onClick={goToLogin}
-                              sx={{
-                                fontSize: "12px",
-                                marginTop: "6px",
-                                color: "white",
-                                background:
-                                  "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
-                                textTransform: "capitalize",
-                                borderRadius: "22px",
-                                padding: "4px 10px",
-                              }}
-                            >
-                              {t("login")}/{t("register")}
-                            </Button>
+                          </Grid>
+                          <Grid
+                            item
+                            display="flex"
+                            alignItems="center"
+                            color="#8C8C8C;"
+                          >
+                            <Icon
+                              icon="material-symbols:keyboard-arrow-right"
+                              fontSize="25px"
+                            />
                           </Grid>
                         </Grid>
                       </Grid>
-                    </>
-                  )}
-                </Grid>
-              </ListItem>
-            </List>
-            <Divider />
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          container
-          alignContent="flex-start"
-          alignItems="center"
-          overflow="auto"
-        >
-          <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-            <Grid item xs={12} paddingTop="15px">
-              <Typography>{t("important_links")}</Typography>
-            </Grid>
-
-            <List sx={{ padding: "0px" }}>
-              <ListItem sx={{ padding: "0px 0px" }} onClick={goToProfileDetail}>
-                <Grid
-                  item
-                  xs={12}
-                  sx={{ padding: "12px 0px", borderRadius: "5px" }}
-                  boxShadow="none"
-                  display="flex"
-                  alignItems="center"
-                >
-                  <Grid item xs={2} display="flex" alignItems="center">
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      textAlign="center"
-                      width="30px"
-                      height="30px"
-                      component="span"
-                      sx={{ border: "1px solid #FF6E31", borderRadius: "50%" }}
-                    >
-                      <UserProfileIcon color="#FF6E31" />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={10}>
+                    </Grid>
+                  </ListItem>
+                  <Divider />
+                  <ListItem sx={{ padding: "0px 0px" }} onClick={goToAnnouncement}>
                     <Grid
                       item
                       xs={12}
+                      sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                      boxShadow="none"
                       display="flex"
                       alignItems="center"
-                      justifyContent="space-between"
                     >
-                      <Grid item>
-                        <Typography fontWeight="500" fontSize="16px">
-                          {t("profile")}
-                        </Typography>
+                      <Grid item xs={2} display="flex" alignItems="center">
+                        <Box
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          textAlign="center"
+                          width="30px"
+                          height="30px"
+                          component="span"
+                          sx={{ border: "1px solid #FF6E31", borderRadius: "50%" }}
+                        >
+                          <AnnouncementIcon color="#FF6E31" />
+                        </Box>
                       </Grid>
-                      <Grid
-                        item
-                        display="flex"
-                        alignItems="center"
-                        color="#8C8C8C;"
-                      >
-                        <Icon
-                          icon="material-symbols:keyboard-arrow-right"
-                          fontSize="25px"
-                        />
+                      <Grid item xs={10}>
+                        <Grid
+                          item
+                          xs={12}
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="space-between"
+                        >
+                          <Grid item>
+                            <Typography fontWeight="500" fontSize="16px">
+                              {t("announcement")}
+                            </Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            display="flex"
+                            alignItems="center"
+                            color="#8C8C8C;"
+                          >
+                            <Icon
+                              icon="material-symbols:keyboard-arrow-right"
+                              fontSize="25px"
+                            />
+                          </Grid>
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <Divider />
-              <ListItem sx={{ padding: "0px 0px" }} onClick={goToAnnouncement}>
-                <Grid
-                  item
-                  xs={12}
-                  sx={{ padding: "12px 0px", borderRadius: "5px" }}
-                  boxShadow="none"
-                  display="flex"
-                  alignItems="center"
-                >
-                  <Grid item xs={2} display="flex" alignItems="center">
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      textAlign="center"
-                      width="30px"
-                      height="30px"
-                      component="span"
-                      sx={{ border: "1px solid #FF6E31", borderRadius: "50%" }}
-                    >
-                      <AnnouncementIcon color="#FF6E31" />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={10}>
+                  </ListItem>
+                  <Divider />
+                  <ListItem sx={{ padding: "0px 0px" }} onClick={goToFeedback}>
                     <Grid
                       item
                       xs={12}
+                      sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                      boxShadow="none"
                       display="flex"
                       alignItems="center"
-                      justifyContent="space-between"
                     >
-                      <Grid item>
-                        <Typography fontWeight="500" fontSize="16px">
-                          {t("announcement")}
-                        </Typography>
+                      <Grid item xs={2} display="flex" alignItems="center">
+                        <Box
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          textAlign="center"
+                          width="30px"
+                          height="30px"
+                          component="span"
+                          sx={{ border: "1px solid #FF6E31", borderRadius: "50%" }}
+                        >
+                          <FeedbackIcon size={20} color="#FF6E31" />
+                        </Box>
                       </Grid>
-                      <Grid
-                        item
-                        display="flex"
-                        alignItems="center"
-                        color="#8C8C8C;"
-                      >
-                        <Icon
-                          icon="material-symbols:keyboard-arrow-right"
-                          fontSize="25px"
-                        />
+                      <Grid item xs={10}>
+                        <Grid
+                          item
+                          xs={12}
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="space-between"
+                        >
+                          <Grid item>
+                            <Typography fontWeight="500" fontSize="16px">
+                              {t("feedback")}
+                            </Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            display="flex"
+                            alignItems="center"
+                            color="#8C8C8C;"
+                          >
+                            <Icon
+                              icon="material-symbols:keyboard-arrow-right"
+                              fontSize="25px"
+                            />
+                          </Grid>
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <Divider />
-              <ListItem sx={{ padding: "0px 0px" }} onClick={goToFeedback}>
-                <Grid
-                  item
-                  xs={12}
-                  sx={{ padding: "12px 0px", borderRadius: "5px" }}
-                  boxShadow="none"
-                  display="flex"
-                  alignItems="center"
-                >
-                  <Grid item xs={2} display="flex" alignItems="center">
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      textAlign="center"
-                      width="30px"
-                      height="30px"
-                      component="span"
-                      sx={{ border: "1px solid #FF6E31", borderRadius: "50%" }}
-                    >
-                      <FeedbackIcon size={20} color="#FF6E31" />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={10}>
-                    <Grid
-                      item
-                      xs={12}
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="space-between"
-                    >
-                      <Grid item>
-                        <Typography fontWeight="500" fontSize="16px">
-                          {t("feedback")}
-                        </Typography>
-                      </Grid>
-                      <Grid
-                        item
-                        display="flex"
-                        alignItems="center"
-                        color="#8C8C8C;"
-                      >
-                        <Icon
-                          icon="material-symbols:keyboard-arrow-right"
-                          fontSize="25px"
-                        />
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <Divider />
-              <ListItem
-                sx={{ padding: "0px 0px" }}
-                onClick={goToCustomerService}
-              >
-                <Grid
-                  item
-                  xs={12}
-                  sx={{ padding: "12px 0px", borderRadius: "5px" }}
-                  boxShadow="none"
-                  display="flex"
-                  alignItems="center"
-                >
-                  <Grid item xs={2} display="flex" alignItems="center">
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      textAlign="center"
-                      width="30px"
-                      height="30px"
-                      component="span"
-                      sx={{ border: "1px solid #FF6E31", borderRadius: "50%" }}
-                    >
-                      {/* <CustomerServiceIcon color="#FF6E31"/> */}
-                      <CustomerServiceIcon color="#FF6E31" />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={10}>
-                    <Grid
-                      item
-                      xs={12}
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="space-between"
-                    >
-                      <Grid item>
-                        <Typography fontWeight="500" fontSize="16px">
-                          {t("customerservice")}
-                        </Typography>
-                      </Grid>
-                      <Grid
-                        item
-                        display="flex"
-                        alignItems="center"
-                        color="#8C8C8C;"
-                      >
-                        <Icon
-                          icon="material-symbols:keyboard-arrow-right"
-                          fontSize="25px"
-                        />
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem sx={{ padding: "0px 0px" }} onClick={handleLogout}>
-                {isLogin ? (
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sx={{ padding: "12px 0px", borderRadius: "5px" }}
-                    boxShadow="none"
-                    display="flex"
-                    alignItems="center"
+                  </ListItem>
+                  <Divider />
+                  <ListItem
+                    sx={{ padding: "0px 0px" }}
+                    onClick={goToCustomerService}
                   >
-                    <Grid item xs={2} display="flex" alignItems="center">
-                      <Box
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                      boxShadow="none"
+                      display="flex"
+                      alignItems="center"
+                    >
+                      <Grid item xs={2} display="flex" alignItems="center">
+                        <Box
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          textAlign="center"
+                          width="30px"
+                          height="30px"
+                          component="span"
+                          sx={{ border: "1px solid #FF6E31", borderRadius: "50%" }}
+                        >
+                          {/* <CustomerServiceIcon color="#FF6E31"/> */}
+                          <CustomerServiceIcon color="#FF6E31" />
+                        </Box>
+                      </Grid>
+                      <Grid item xs={10}>
+                        <Grid
+                          item
+                          xs={12}
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="space-between"
+                        >
+                          <Grid item>
+                            <Typography fontWeight="500" fontSize="16px">
+                              {t("customerservice")}
+                            </Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            display="flex"
+                            alignItems="center"
+                            color="#8C8C8C;"
+                          >
+                            <Icon
+                              icon="material-symbols:keyboard-arrow-right"
+                              fontSize="25px"
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                  <ListItem sx={{ padding: "0px 0px" }} onClick={handleLogout}>
+                    {isLogin ? (
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                        sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                        boxShadow="none"
+                        display="flex"
+                        alignItems="center"
+                      >
+                        <Grid item xs={2} display="flex" alignItems="center">
+                          <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            textAlign="center"
+                            width="30px"
+                            height="30px"
+                            component="span"
+                            sx={{
+                              border: "1px solid #FF6E31",
+                              borderRadius: "50%",
+                            }}
+                          >
+                            <LogoutIcon size={17} color="#FF6E31" />
+                          </Box>
+                        </Grid>
+                        <Grid item xs={10}>
+                          <Grid
+                            item
+                            xs={12}
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="space-between"
+                          >
+                            <Grid item>
+                              <Typography fontWeight="500" fontSize="16px">
+                                {t("logout")}
+                              </Typography>
+                            </Grid>
+                            <Grid
+                              item
+                              display="flex"
+                              alignItems="center"
+                              color="#8C8C8C;"
+                            >
+                              <Icon
+                                icon="material-symbols:keyboard-arrow-right"
+                                fontSize="25px"
+                              />
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    ) : (
+                      ""
+                    )}
+                  </ListItem>
+                </List>
+                <Divider />
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+                <Grid item xs={12} paddingTop="20px" paddingBottom="20px">
+                  <Typography fontWeight="600">{t("download_app")}</Typography>
+                </Grid>
+                <List sx={{ padding: "0px" }}>
+                  <ListItem sx={{ padding: "0px 0px" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                      boxShadow="none"
+                    >
+                      <Grid
+                        container
+                        spacing={1}
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
-                        textAlign="center"
-                        width="30px"
-                        height="30px"
-                        component="span"
-                        sx={{
-                          border: "1px solid #FF6E31",
-                          borderRadius: "50%",
-                        }}
                       >
-                        <LogoutIcon size={17} color="#FF6E31" />
-                      </Box>
-                    </Grid>
-                    <Grid item xs={10}>
-                      <Grid
-                        item
-                        xs={12}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="space-between"
-                      >
-                        <Grid item>
-                          <Typography fontWeight="500" fontSize="16px">
-                            {t("logout")}
-                          </Typography>
+                        <Grid item xs={6} md={6}>
+                          <img
+                            src="/assets/Home/iosbtn.png"
+                            style={{ width: "100%" }}
+                          />
                         </Grid>
-                        <Grid
-                          item
-                          display="flex"
-                          alignItems="center"
-                          color="#8C8C8C;"
-                        >
-                          <Icon
-                            icon="material-symbols:keyboard-arrow-right"
-                            fontSize="25px"
+                        <Grid item xs={6} md={6}>
+                          <img
+                            src="/assets/Home/androidbtn.png"
+                            style={{ width: "100%" }}
                           />
                         </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                ) : (
-                  ""
-                )}
-              </ListItem>
-            </List>
-            <Divider />
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-            <Grid item xs={12} paddingTop="20px" paddingBottom="20px">
-              <Typography fontWeight="600">{t("download_app")}</Typography>
+                  </ListItem>
+                </List>
+              </Grid>
             </Grid>
-            <List sx={{ padding: "0px" }}>
-              <ListItem sx={{ padding: "0px 0px" }}>
-                <Grid
-                  item
-                  xs={12}
-                  sx={{ padding: "12px 0px", borderRadius: "5px" }}
-                  boxShadow="none"
-                >
-                  <Grid
-                    container
-                    spacing={1}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Grid item xs={6} md={6}>
-                      <img
-                        src="/assets/Home/iosbtn.png"
-                        style={{ width: "100%" }}
-                      />
-                    </Grid>
-                    <Grid item xs={6} md={6}>
-                      <img
-                        src="/assets/Home/androidbtn.png"
-                        style={{ width: "100%" }}
-                      />
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </ListItem>
-            </List>
           </Grid>
-        </Grid>
-      </Grid>
-    </>
-  );
-};
+        )
+      )
+    }
+  </>
+}; 
 export default Profile;
