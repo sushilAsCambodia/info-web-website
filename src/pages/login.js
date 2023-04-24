@@ -103,7 +103,7 @@ export default function Login() {
           if ([200, 201, 202, 203].includes(status_code)) {
             setTimeout(() => {
               //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
-              matches ? window.location.href = '/home' : Router.push("/");
+              matches ? window.location.href = window.location.origin+'/home' : Router.push("/");
             }, 1000);
           }
         },
