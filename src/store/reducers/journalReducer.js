@@ -113,6 +113,7 @@ export default function (state = initialState, action) {
       return {
         ...state, 
         loading:true,
+        loadingJournalDetail:true,
         journalDetail: [{
           album_slavs:   []
         }],
@@ -125,7 +126,8 @@ export default function (state = initialState, action) {
         journalDetail: [{
           album_slavs: action.payload?.data?.data || []
         }],
-        loading: false
+        loading: false,
+        loadingJournalDetail:false,
       };
     case 'journal/album/selected-issue/rejected':
       return {
