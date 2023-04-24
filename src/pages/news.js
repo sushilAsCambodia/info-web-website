@@ -39,8 +39,8 @@ const News = () => {
 
   const { query } = router;
   const category_id = query?.category || undefined;
+  console.log("newsall category_id:::", category_id);
 
-  const [categoryName, setCategoryName] = useState("");
 
   const handleCategoryChange = (event) => {
     // setCategoryName(event.target.value);
@@ -82,7 +82,7 @@ const News = () => {
         onChange={handleCategoryChange}
         defaultValue={category_id}
       >
-        <MenuItem value={"All"}>All</MenuItem>
+        <MenuItem value={"All"}>{t("all")}</MenuItem>
         {categories.map((item, index) => {
           return (
             <MenuItem key={index} value={item.id}>
@@ -95,6 +95,9 @@ const News = () => {
   ];
 
   useEffect(() => {
+    
+    console.log("useefect on langID useeffect:::", category_id);
+
     dispatch(
       getCategory({
         params: { lang_id: lang_id },
@@ -110,8 +113,9 @@ const News = () => {
   };
 
   useEffect(() => {
+    console.log("lang_id, currentPage, category_id useeffect:::", category_id);
+    
     setLoading(true);
-
     dispatch(
       getNewsAll({
         params: {
@@ -129,7 +133,7 @@ const News = () => {
         },
       })
     );
-  }, [lang_id, currentPage, category_id, categoryName]);
+  }, [lang_id, currentPage, category_id]);
   return (
     <>
       <Grid
