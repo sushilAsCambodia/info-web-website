@@ -33,7 +33,6 @@ export default function NewsSlider(props) {
   const theme = useTheme();
   const router = useRouter();
   const { catId = [], lang_id = [] } = props;
-
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
@@ -51,7 +50,7 @@ export default function NewsSlider(props) {
         },
       })
     );
-  }, [catId]);
+  }, [lang_id,catId]);
   return (
     <>
       <Grid overflow="auto" minHeight="300px" maxHeight="450px">

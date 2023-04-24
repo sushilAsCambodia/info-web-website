@@ -83,23 +83,13 @@ export default function DialogDesktop(props) {
             id: `simple-tab-${index}`,
             'aria-controls': `simple-tabpanel-${index}`,
         };
-    } 
-    const items = (length = 20) => {
-        const its = [];
-        for (let index = 0; index < length; index++) {
-            its.push(<ListItem key={index}  style={{ width: '53px', justifyContent: "center", textAlign: "center !important" }}>
-            <Typography fontSize="10px">Issue </Typography>
-        </ListItem>)
-            
-        }
-        return its;
-    }
+    }  
     const tabPanelElms = () => { 
         return <TabPanel value={value} index={value} padding="0px !important" >
         <List sx={{  margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto auto auto auto auto auto", gridGap: "4px", justifyContent: "flex-start", textAlign: "center !important" }}>
                 {
                     issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
-                        return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue':''} style={{ width: '53px', justifyContent: "center", textAlign: "center !important" }}>
+                        return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue mui-issue-custom':'mui-issue-custom'} style={{ width: '53px', justifyContent: "center", textAlign: "center !important",cursor:"pointer" }}>
                             <Typography fontSize="10px">Issue {is.issue || ''}</Typography>
                         </ListItem>
                     })

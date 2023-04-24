@@ -47,7 +47,9 @@ export default function MatchItem(props) {
           </Grid>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item xs={2} display="flex" justifyContent="space-between">
-              <img width="20px" src="./assets/Logo/team.png" />{" "}
+              <picture>
+                <img width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
+              </picture>
               <Typography>3</Typography>
             </Grid>
             <Grid item xs={8} container justifyContent="center">
@@ -59,7 +61,9 @@ export default function MatchItem(props) {
             </Grid>
             <Grid item xs={2} display="flex" justifyContent="space-between">
               <Typography>5</Typography>
-              <img width="20px" src="./assets/Logo/team.png" />{" "}
+              <picture>
+                <img width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
+              </picture>
             </Grid>
           </Grid>
         </Grid>

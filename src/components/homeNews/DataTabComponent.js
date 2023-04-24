@@ -84,7 +84,7 @@ const DataTabComponent = ({id,lang_id}) => {
     }
     return <Grid sx={{position:'relative', height:news && news.length > 2 ? 'auto' : 'auto', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
         {
-            loading ? <DataLoading/> :
+            loading ? <DataLoading size={30}/> :
             (
                 <Grid item xs={12} sm={12} md={12} xl={12}>
                     {news && news.length ? news.map((sport,index) => {

@@ -3,7 +3,7 @@ const initialState = {
   banners:[],
   loading: true
 }
-export default function (state = initialState, action) {
+const BannerReducer =  (state = initialState, action) => {
   switch (action.type) {
     case 'banner/list/pending':
       return {
@@ -28,3 +28,4 @@ export default function (state = initialState, action) {
   }
   return state;
 }
+export default BannerReducer;

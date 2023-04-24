@@ -1,14 +1,14 @@
 import axios from 'axios'
 import utils from '@/common/utils';
 import Cookies from 'js-cookie';
+
 const instance = axios.create({
     baseURL: utils.baseUrl || '',
     headers: {
         'content-type':'application/json'
     },
 });
-
-export default {
+const http = {
     get: (url, params = {}, auth = false) => {
         const header = { 
             'content-type':'application/json; charset=utf-8'
@@ -50,3 +50,4 @@ export default {
         });
     }
 }
+export default http;

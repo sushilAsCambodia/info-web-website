@@ -9,7 +9,7 @@ const initialState = {
     loading:false,
     loadingJournalDetail:false,
 }
-export default function (state = initialState, action) {
+const JournalReducer =  (state = initialState, action) => {
   switch (action.type) {
     case 'journal/list/pending':
       return {
@@ -139,3 +139,4 @@ export default function (state = initialState, action) {
   }
   return state;
 }
+export default JournalReducer;

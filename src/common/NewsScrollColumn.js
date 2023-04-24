@@ -32,11 +32,10 @@ export default function NewsScrollColumn(props) {
         params: { lang_id: lang_id, category_id: newsCategory.id, take: 10 },
         callback: (res) => {
           setNewsList(res.data);
-          console.log(newsCategory.id,"newsscrollcol:::",newsList)
         },
       })
     );
-  }, [newsCategory.id]);
+  }, [lang_id,newsCategory.id]);
   const bg = ["Mask.png", "Mask2.png", "Mask3.png"];
   return (
     <>

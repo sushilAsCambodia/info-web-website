@@ -55,8 +55,7 @@ export default function LandingPageBanner(props) {
           }
       }
   ));
-  }, [i18n.language]);
-
+  }, []);
   return (
     <>
       <Grid mt={2}>
@@ -93,18 +92,16 @@ export default function LandingPageBanner(props) {
               alignItems="center"
               justifyContent="space-around"
             >
-              <img
-                //   src="./assets/Logo/kk_exchange.png"
-                src={banner.image}
-                alt={banner.label}
-                style={{
-                  width: "100%",
-                  objectPosition:"0px -300px",
-                  // maxHeight: "80px",
-                //   objectFit: "fill",
-                //   width: "100%",
-                }}
-              />
+              <picture>
+                <img
+                  src={banner.image}
+                  alt={banner.label}
+                  style={{
+                    width: "100%",
+                    objectPosition:"0px -300px", 
+                  }}
+                />
+              </picture>
             </Grid>
           ))}
         </Carousel>

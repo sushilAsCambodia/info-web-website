@@ -7,15 +7,17 @@ export default function DataNotFound(props) {
   return (
     <Box sx={{ display: 'flex', alignItems:'center', justifyContent:'center',height:'100%' }}>
       <Grid textAlign="center">
-        <img
-          style={{
-            width,
-            height,
-            objectFit
-          }}
-          src="./assets/not-found.png" 
-          loading="lazy"
-        />
+        <picture>
+          <img
+            style={{
+              width,
+              height,
+              objectFit
+            }}
+            src="./assets/not-found.png" 
+            loading="lazy"
+          />
+        </picture>
         {content && <Typography fontSize={10}>{content}</Typography>}
       </Grid> 
     </Box>

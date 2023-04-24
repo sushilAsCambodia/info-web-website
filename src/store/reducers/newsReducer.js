@@ -5,7 +5,7 @@ const initialState = {
   newsAll:{},
   loading:false,
 }
-export default function (state = initialState, action) {
+const NewReducer = (state = initialState, action) => {
   switch (action.type) {
 
     // request get news by category
@@ -86,3 +86,4 @@ export default function (state = initialState, action) {
   }
   return state;
 }
+export default NewReducer;

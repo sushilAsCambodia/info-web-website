@@ -1,4 +1,4 @@
-export default {
+const utils = {
     formatDate: 'YYYY/MM/D',
     letterFormat: 'DD MMM YYYY',
     tokenKey: "token",
@@ -20,3 +20,4 @@ export default {
         return false;
     }
 }
+export default utils;
