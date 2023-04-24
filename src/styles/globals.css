@@ -124,12 +124,7 @@ a {
 
 /* tabs css */
 
-.css-1kocmnn-MuiButtonBase-root-MuiButton-root{
-
-}
-
-
-.tabclass .css-1vw5i9y-MuiButtonBase-root-MuiTab-root.Mui-selected{
+.mui-home-tab-wrapper .MuiButtonBase-root.Mui-selected{
   background: linear-gradient(90deg, #FF0000 0%, #FF6E31 100%);
   border-radius: 30px;
   color: #fff;
@@ -140,13 +135,13 @@ a {
   color: #000;
   box-shadow:none
 }
-.tabclass .css-1vw5i9y-MuiButtonBase-root-MuiTab-root{
+.mui-home-tab-wrapper .MuiButtonBase-root{
   background: linear-gradient(90deg, #D0D0D0 0%, #EBEBEB 100%);
-border-radius: 30px;
-margin: 0px 10px;
-min-height:40px
+  border-radius: 30px;
+  margin: 0px 10px;
+  min-height:40px
 }
-.tabclass .css-1jlhdwc-MuiTabs-indicator{
+.mui-home-tab-wrapper .MuiTabs-indicator{
   height: 0;
   background-color: transparent;
 }
@@ -252,18 +247,23 @@ justify-content: center;
   position: absolute;
   right: -6px;
 }
-#registerdialog .css-ahj2mt-MuiTypography-root{
+#registerdialog .MuiDialogContent-root > p{
 font-size: 14px;
 }
-#logindialog .css-hlj6pa-MuiDialogActions-root{
-display: block;
-text-align: center;
+#logindialog .MuiDialogActions-root{
+  display: block;
+  text-align: center;
+  padding: 0 !important;
 }
 #logindialog .css-1vb6ifl-MuiButtonBase-root-MuiButton-root{
 padding: 0px;
 }
-#logindialog .css-d3wcwz-MuiTypography-root{
+/* #logindialog .MuiDialogContent-root {
+  padding:16px;
+} */
+#logindialog .MuiDialogContent-root > p{
   text-align: center;
+  margin:0
 }
 
 
@@ -325,7 +325,7 @@ padding: 0px;
   height: 100%;
 }
 
-.css-9emuhu-MuiPaper-root-MuiDrawer-paper{
+.mui-profile-drawer-wrapper .MuiDrawer-paper, .custom-drawer-wrapper .MuiDrawer-paper{
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }
@@ -421,19 +421,20 @@ border-bottom: 1px solid #FF0000;
 padding: 0px 0px;
 }
 
-.calendraDrawer .css-b4a6b0-MuiListItem-root{
+.calendraDrawer .mui-issue-custom{
   padding:4px;
-  background: #FAFAFA;
-  color: #8C8C8C;
   border-radius: 4px;
-  border: 1px solid #DDDDDD;
 }
-.calendraDrawer .css-b4a6b0-MuiListItem-root > p{
+.calendraDrawer .mui-issue-custom > p{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 11px;
 }
-.calendraDrawer .css-b4a6b0-MuiListItem-root.active-issue {
+.calendraDrawer .mui-issue-custom{
+  border-radius: 4px;
+}
+.calendraDrawer .mui-issue-custom.active-issue {
   background: rgb(255, 111, 49);
   color: #fff;
   border: 1px solid transparent;

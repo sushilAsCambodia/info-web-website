@@ -9,12 +9,7 @@ export const login = createAsyncThunk(
       try {
         const response = await api.post('/auth/customers/login',body);
         const { data, status } = response;
-        data['status_code'] = status;
-        if(typeof window !='undefined') { 
-          if(data.data[utils.tokenKey]) {
-            Cookies.set(utils.tokenKey,data.data[utils.tokenKey] || '');
-          }
-        } 
+        data['status_code'] = status; 
         if(typeof callback == 'function') {
           callback(data);
         }

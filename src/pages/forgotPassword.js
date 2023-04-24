@@ -26,7 +26,7 @@ export default function ForgotPassword() {
         <Typography variant="h5">
           {t('forgot_password')}
         </Typography>
-        <img src="/assets/home/customersupport1.png" style={{ maxWidth: "200px", margin:"0 auto", display:"flex" }} />
+        <img src="/assets/Home/customersupport1.png" style={{ maxWidth: "200px", margin:"0 auto", display:"flex" }} />
         <Typography component="h6" fontSize={12} textAlign="center">
           Notify the following ways to contact customer service
         </Typography>
