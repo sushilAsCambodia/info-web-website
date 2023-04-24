@@ -32,7 +32,7 @@ export default function NewsScrollColumn(props) {
         params: { lang_id: lang_id, category_id: newsCategory.id, take: 10 },
         callback: (res) => {
           setNewsList(res.data);
-          console.log(newsCategory.id,"newsscrollcol:::",newsList)
+          console.log(newsCategory.id,"newsscrollcol:::",res.data)
         },
       })
     );
@@ -88,8 +88,14 @@ export default function NewsScrollColumn(props) {
                     : newsCategory.category_name || "N/A"}
                 </Typography>
                 <Button
+                disabled={newsList.length==0}
                   component={Link}
-                  href="/news"
+                  onClick={() =>
+                    Router.push({
+                      pathname: "/news",
+                      query: { category: newsCategory.id },
+                    })
+                  }
                   variant="contained"
                   sx={{
                     background: "#FFD233",
