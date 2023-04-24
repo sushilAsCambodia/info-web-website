@@ -37,8 +37,6 @@ export default function AnnouncementItem(props) {
   const { i18n } = useTranslation();
   const [newsList, setNewsList] = useState([]);
 
-  const lottos = [10, 10, 10, 10, 10, 11];
-
   return (
     <>
       <div style={{ paddingRight: "10px",cursor:"pointer" }}>

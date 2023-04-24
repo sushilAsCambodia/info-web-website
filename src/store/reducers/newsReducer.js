@@ -2,6 +2,7 @@ const initialState = {
   status: 'idle',
   news:[],
   newsDetail:{},
+  newsAll:{},
   loading:true,
 }
 export default function (state = initialState, action) {
@@ -31,6 +32,13 @@ export default function (state = initialState, action) {
         ...state,
         status:'failed',
         newsDetail: {},
+        loading: false
+      };
+    case 'news/All/fulfilled':
+      return {
+        ...state,
+        status:'completed',
+        newsAll: action.payload?.data || [],
         loading: false
       };
   }
