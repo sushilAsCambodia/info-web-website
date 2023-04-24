@@ -25,6 +25,7 @@ import NewsCardDetails from "./newsCardDetails";
 
 export default function NewsSingle() {
   const { i18n } = useTranslation();
+  const { t } = useTranslation();
   const lang_id = utils.convertLangCodeToID(i18n.language);
   const { categories = [] } = useSelector((state) => state.category);
   const [newsCat, setNewsCat] = useState(0);
@@ -71,7 +72,7 @@ export default function NewsSingle() {
     <Grid justifyContent="center">
       <Grid my={1}>
         <Typography fontWeight="bold" variant="h5">
-          News Details
+          {t("newscarddetails")}
         </Typography>
         <Grid container>
           <Grid xs={8} md={9} py={1}>
@@ -115,13 +116,13 @@ export default function NewsSingle() {
               <Grid xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id="category-select-label">
-                    Select Category
+                    {t("select_category")}
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="category-select"
                     value={newsCat}
-                    label="Select Category"
+                    label={t("select_category")}
                     onChange={handleChange}
                     defaultValue={categories[newsCat].id}
                   >

@@ -135,8 +135,8 @@ export default function NewsScrollColumn(props) {
                       }}
                     >
                       <Typography textAlign="left">{item.title}</Typography>
-                      <Typography textAlign="left">
-                        {moment(item.created_at).format(utils.formatDate)}
+                      <Typography textAlign="left" fontSize="12px">
+                        {moment(item.release_date).format(utils.formatDate)}
                       </Typography>
                     </Grid>
                   );

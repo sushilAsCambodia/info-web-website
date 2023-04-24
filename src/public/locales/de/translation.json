@@ -88,5 +88,7 @@
     "lottery_draw":"Lottery Draw",
     "data_chart":"Data Chart",
     "personal_information":"Personal Information",
-    "no_news":"No News"
+    "no_news":"No News",
+    "select_category":"Select Category"
+
 }
