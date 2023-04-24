@@ -86,15 +86,9 @@ export default function Login() {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [mounted, setMounted] = useState(false);
   const matches = useMediaQuery("(max-width:768px)");
-
   const [border, setBorder] = useState(false);
-
   useEffect(() => {
-    if(Cookies.get('token')) {
-      Router.reload();
-    }else {
       setMounted(true);
-    }
   }, []);
   const dispatch = useDispatch();
   const handleLogin = () => {
@@ -108,7 +102,8 @@ export default function Login() {
           setOpen(true);
           if ([200, 201, 202, 203].includes(status_code)) {
             setTimeout(() => {
-              matches ? Router.push("/home") : Router.push("/");
+              //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
+              matches ? window.location.href = '/home' : Router.push("/");
             }, 1000);
           }
         },

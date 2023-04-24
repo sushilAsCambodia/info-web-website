@@ -53,7 +53,7 @@ const Profile = () => {
     if(Cookies.get('token')) {
       setMounted(true);
     }else {
-      router.push('/login');
+      goToLogin();
     }
   },[]);
   useEffect(() => {
@@ -256,7 +256,7 @@ function TabPanel(props) {
                                 </Typography>
                                 <Button
                                   variant="contained"
-                                  onClick={goToLogin}
+                                  onClick={() => goToLogin()}
                                   sx={{
                                     fontSize: "12px",
                                     marginTop: "6px",
