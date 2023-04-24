@@ -2,7 +2,7 @@ export default {
     formatDate: 'YYYY/MM/D',
     letterFormat: 'DD MMM YYYY',
     tokenKey: "token",
-    baseUrl: "http://api-gateway-infoweb.kk-exchange.com:5000/api",
+    baseUrl: process.env.apiUrl,
     convertLangCodeToID: (languageCode) => {
         let lang_id = 1;
         if (languageCode === "en") lang_id = 1;
