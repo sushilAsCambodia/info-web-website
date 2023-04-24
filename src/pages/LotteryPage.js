@@ -14,9 +14,29 @@ import {
   Table,
   TableHead,
   TableBody,
+  IconButton,
+  Modal,
+  Backdrop,
+  Fade,
+  Box,
+  Divider,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
+
+import { Icon } from "@iconify/react";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 600,
+  bgcolor: "background.paper",
+  border: "1px solid #DDDDDD",
+  p: 2,
+};
+
 export default function LotteryPage() {
   const [select, setSelect] = useState(0);
   const [age, setAge] = useState("");
@@ -65,14 +85,14 @@ export default function LotteryPage() {
     {
       id: 1,
       lottoTitle: "Red Lotto",
-      logo: "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
+      logo: "https://media.istockphoto.com/id/457815375/photo/flame-icon.jpg?s=170667a&w=0&k=20&c=ApbZCTyyXaBjp7qVTPqXrb3Si_p6ehJERIztA_vfIPw=",
       items: [
         createData(
           "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
           "Frozen yoghurt",
-          159,
+          111,
           6.0,
-          {numbers:[12,32,4,5,12,34],winner:32},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
           1
         ),
         createData(
@@ -80,31 +100,31 @@ export default function LotteryPage() {
           "Ice cream sandwich",
           237,
           9.0,
-          {numbers:[12,32,4,5,12,34],winner:5},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
           2
         ),
         createData(
           "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
           "Eclair",
-          262,
+          222,
           16.0,
-          {numbers:[12,32,4,5,12,34],winner:32},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
           3
         ),
         createData(
           "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
           "Cupcake",
-          305,
+          5000,
           3.7,
-          {numbers:[12,32,4,5,12,34],winner:5},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
           4
         ),
         createData(
           "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
           "Gingerbread",
-          356,
+          272,
           16.0,
-          {numbers:[12,32,4,5,12,34],winner:10},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
           5
         ),
       ],
@@ -119,7 +139,7 @@ export default function LotteryPage() {
           "Frozen yoghurt",
           159,
           6.0,
-          {numbers:[12,32,4,5,12,34],winner:32},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
           1
         ),
         createData(
@@ -127,7 +147,7 @@ export default function LotteryPage() {
           "Ice cream sandwich",
           237,
           9.0,
-          {numbers:[12,32,4,5,12,34],winner:5},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
           2
         ),
         createData(
@@ -135,7 +155,7 @@ export default function LotteryPage() {
           "Eclair",
           262,
           16.0,
-          {numbers:[12,32,4,5,12,34],winner:32},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
           3
         ),
         createData(
@@ -143,7 +163,7 @@ export default function LotteryPage() {
           "Cupcake",
           305,
           3.7,
-          {numbers:[12,32,4,5,12,34],winner:5},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
           4
         ),
         createData(
@@ -151,17 +171,85 @@ export default function LotteryPage() {
           "Gingerbread",
           356,
           16.0,
-          {numbers:[12,32,4,5,12,34],winner:10},
+          { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
           5
         ),
       ],
     },
   ];
+  // past result modal controls
+  const [pastResultModalData, setPastResultModalData] = useState("");
+
+  const [pastResult, setPastResult] = useState(false);
+  const handleOpen = (data) => {
+    setPastResultModalData(data);
+    setPastResult(true);
+  };
+  // chart modal control
+  const [chartModalData, setChartModalData] = useState("");
+
+  const [chart, setChart] = useState(false);
+  const handleChartOpen = (data) => {
+    setChartModalData(data);
+    setChart(true);
+  };
+
+  const handleClose = () => {
+    setChart(false);
+    setPastResult(false);
+  };
   return (
     <>
       <Typography variant="h5" fontWeight="bold">
         Lottery
       </Typography>
+      {/* past result modal  */}
+      <Modal
+        open={pastResult}
+        onClose={handleClose}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={pastResult}>
+          <Box sx={style}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              Past Result Modal
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              has ID of {pastResultModalData}
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
+      {/* chart modal  */}
+      <Modal
+        open={chart}
+        onClose={handleClose}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={chart}>
+          <Grid sx={style}>
+            <Divider>
+            <Typography id="transition-modal-title" variant="h6">
+            Speed ​​color series
+            </Typography></Divider>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              has ID of {chartModalData}
+            </Typography>
+          </Grid>
+        </Fade>
+      </Modal>
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
         <Grid xs={"auto"} container border="1px solid grey" borderRadius="10px">
           <MenuItem
@@ -208,25 +296,25 @@ export default function LotteryPage() {
             <TableHead>
               <TableRow>
                 <StyledHeaderCell width="300px">
-                  Dessert (100g serving)
+                  Lottery
                 </StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="left">
-                  Calories
+                  Issue
                 </StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="left">
-                  Fat&nbsp;(g)
+                Draw Time
                 </StyledHeaderCell>
                 <StyledHeaderCell width="500px" align="center">
                   Results
                 </StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="right">
-                  Protein&nbsp;(g)
+                  Past Results
                 </StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="right">
-                  Protein&nbsp;(g)
+                  Chart
                 </StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="right">
-                  Protein&nbsp;(g)
+                  Favorite
                 </StyledHeaderCell>
               </TableRow>
             </TableHead>
@@ -235,30 +323,36 @@ export default function LotteryPage() {
                 return (
                   <>
                     <StyledTableRow key={index}>
-                      <StyledTableCell
-                        component="th"
-                        scope="row"
-                        colSpan={7}
-                      >
-                        <Grid display="flex" alignItems="center"> <img style={{marginRight:"10px",width:"30px", height:"30px",borderRadius:"20px"}} src={row.logo}  />
-                        {row.lottoTitle}</Grid>
-                       
+                      <StyledTableCell component="th" scope="row" colSpan={7}>
+                        <Grid display="flex" alignItems="center">
+                          {" "}
+                          <img
+                            style={{
+                              marginRight: "10px",
+                              width: "30px",
+                              height: "30px",
+                              borderRadius: "20px",
+                            }}
+                            src={row.logo}
+                          />
+                          {row.lottoTitle}
+                        </Grid>
                       </StyledTableCell>
                     </StyledTableRow>
                     {row.items.map((item, index) => {
                       return (
                         <StyledTableRow key={item.name}>
-                          <StyledTableCell
-                            sx={{ display: "flex", alignItems: "center" }}
-                            component="th"
-                            scope="row"
-                          >
-                            <img
-                              width="30px"
-                              src={item.img}
-                              style={{ marginRight: "10px" }}
-                            />{" "}
-                            <Typography>{item.name}</Typography>
+                          <StyledTableCell component="th" scope="row">
+                            <Grid
+                              sx={{ display: "flex", alignItems: "center" }}
+                            >
+                              <img
+                                width="30px"
+                                src={item.img}
+                                style={{ marginRight: "10px" }}
+                              />{" "}
+                              <Typography>{item.name}</Typography>
+                            </Grid>
                           </StyledTableCell>
                           <StyledTableCell align="right">
                             {item.calories}
@@ -267,17 +361,48 @@ export default function LotteryPage() {
                             {item.fat}
                           </StyledTableCell>
                           <StyledTableCell align="center">
-                            <div style={{display:'flex',alignItems:"center",justifyContent:"center"}}>{lottoTable(item.results)}</div>
-                            
+                            <Grid
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {lottoTable(item.results)}
+                            </Grid>
                           </StyledTableCell>
                           <StyledTableCell align="right">
-                            {item.fat}
+                            <IconButton
+                              sx={{
+                                background: "#F3F3F3",
+                                border: "1px solid #DDDDDD",
+                              }}
+                              onClick={() => handleOpen(row.id)}
+                            >
+                              <Icon icon="solar:clipboard-list-broken" />
+                            </IconButton>
                           </StyledTableCell>
                           <StyledTableCell align="right">
-                            {item.fat}
+                            <IconButton
+                              sx={{
+                                background: "#F3F3F3",
+                                border: "1px solid #DDDDDD",
+                              }}
+                              onClick={() => handleChartOpen(row.id)}
+                            >
+                              <Icon icon="material-symbols:add-chart-rounded" />
+                            </IconButton>
                           </StyledTableCell>
                           <StyledTableCell align="right">
-                            {item.calories}
+                            <IconButton
+                              sx={{
+                                background: "#F3F3F3",
+                                border: "1px solid #DDDDDD",
+                              }}
+                            >
+                              {item.calories % 2 == 0 ? <Icon color="#C9C9C9" icon="clarity:favorite-solid" />:<Icon color="#FF6F31" icon="clarity:favorite-solid" />}
+                              
+                            </IconButton>
                           </StyledTableCell>
                         </StyledTableRow>
                       );
@@ -308,7 +433,9 @@ export function lottoTable(lottos) {
             <Grid
               key={index}
               px={1}
-              className={`${lotto === lottos.winner ? "lotteryPageHit" : "lotteryPageMiss"}`}
+              className={`${
+                lotto === lottos.winner ? "lotteryPageHit" : "lotteryPageMiss"
+              }`}
             >
               {lotto}
             </Grid>
