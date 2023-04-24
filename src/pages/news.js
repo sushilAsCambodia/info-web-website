@@ -41,7 +41,6 @@ const News = () => {
   const category_id = query?.category || undefined;
   console.log("newsall category_id:::", category_id);
 
-
   const handleCategoryChange = (event) => {
     // setCategoryName(event.target.value);
     console.log("category newsAll:::", event.target.value);
@@ -70,32 +69,34 @@ const News = () => {
     <Typography key="2" color="#F24E1E">
       {t("news")}
     </Typography>,
-    <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-      <InputLabel id="demo-select-small-label">
-        {t("select_category")}
-      </InputLabel>
-      <Select
-        labelId="demo-simple-select-label"
-        id="category-select"
-        value={category_id}
-        label={t("select_category")}
-        onChange={handleCategoryChange}
-        defaultValue={category_id}
-      >
-        <MenuItem value={"All"}>{t("all")}</MenuItem>
-        {categories.map((item, index) => {
-          return (
-            <MenuItem key={index} value={item.id}>
-              {item.category_name}
-            </MenuItem>
-          );
-        })}
-      </Select>
-    </FormControl>,
+    category_id ? (
+      <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+        <InputLabel id="demo-select-small-label">
+          {t("select_category")}
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="category-select"
+          value={category_id}
+          label={t("select_category")}
+          onChange={handleCategoryChange}
+        >
+          <MenuItem value={"All"}>{t("all")}</MenuItem>
+          {categories.map((item, index) => {
+            return (
+              <MenuItem key={index} value={item.id}>
+                {item.category_name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
+    ) : (
+      "Loading"
+    ),
   ];
 
   useEffect(() => {
-    
     console.log("useefect on langID useeffect:::", category_id);
 
     dispatch(
@@ -114,7 +115,7 @@ const News = () => {
 
   useEffect(() => {
     console.log("lang_id, currentPage, category_id useeffect:::", category_id);
-    
+
     setLoading(true);
     dispatch(
       getNewsAll({
@@ -122,7 +123,7 @@ const News = () => {
           lang_id: lang_id,
           rowsPerPage: 10,
           shortTitle: "",
-          category_id: category_id == 'All' ? '': category_id,
+          category_id: category_id == "All" ? "" : category_id,
           page: currentPage,
         },
         callback: (res) => {
@@ -169,7 +170,9 @@ const News = () => {
                 textTransform="capitalize"
               >
                 {!loading && newsAll.data.length != 0
-                  ? category_id == "All" ? 'Every' : newsAll.data[0].category_name
+                  ? category_id == "All"
+                    ? "Every"
+                    : newsAll.data[0].category_name
                   : "No"}{" "}
                 {t("news")}
               </Typography>
@@ -211,7 +214,7 @@ const News = () => {
                         borderRadius: "11px",
                         border: "1px solid #FF6F31",
                         minHeight: "145px",
-                        cursor:"pointer"
+                        cursor: "pointer",
                       }}
                     >
                       <Typography title={item.title} className="twoLinesEllip">
