@@ -7,26 +7,10 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import { getNewsByCategory } from "@/store/actions/newsActions";
+import { getNewsByCategory, getNewsAll } from "@/store/actions/newsActions";
 import Slider from "react-slick";
 import moment from "moment/moment";
 import utils from "./utils";
-
-const settings = {
-  dots: false,
-  infinite: true,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-  vertical: true,
-  verticalSwiping: true,
-  swipeToSlide: true,
-  autoplay: true,
-  autoplaySpeed: 2000,
-  pauseOnFocus: true,
-  arrows: false,
-  lazyLoad: false,
-  centerMode: false,
-};
 
 export default function NewsSlider(props) {
   const { t } = useTranslation();
@@ -34,27 +18,49 @@ export default function NewsSlider(props) {
   const router = useRouter();
   const { catId = [], lang_id = [] } = props;
 
-  const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
-  const { i18n } = useTranslation();
   const [newsList, setNewsList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageLimit, setPageLimit] = useState(1);
 
   useEffect(() => {
     dispatch(
-      getNewsByCategory({
-        params: { lang_id: lang_id, category_id: catId, take: 10 },
+      getNewsAll({
+        params: {
+          lang_id: lang_id,
+          rowsPerPage: 10,
+          shortTitle: 7,
+          category_id: catId,
+          page: 1,
+        },
         callback: (res) => {
-          console.log(catId, "newsSlider:::", res);
-          setNewsList(res.data);
-          setLoading(false);
-          console.log(catId, "newsSlider:::", newsList);
+          setNewsList(res.data.data);
+          setPageLimit(res.data.last_page);
+          console.log(catId, "newsSlider3:::", res.data);
         },
       })
     );
   }, [catId]);
+
+  useEffect(() => {
+    dispatch(
+      getNewsAll({
+        params: {
+          lang_id: lang_id,
+          rowsPerPage: 10,
+          shortTitle: 7,
+          category_id: catId,
+          page: currentPage,
+        },
+        callback: (res) => {
+          setNewsList(newsList.concat(res.data.data));
+        },
+      })
+    );
+  }, [currentPage]);
   return (
     <>
-      <Grid overflow="auto" minHeight="300px" maxHeight="450px">
+      <Grid overflow="auto" minHeight="300px" maxHeight="450px" pb={1}>
         <Grid
           sx={{
             borderRadius: "0px 0px 10px 10px",
@@ -62,12 +68,10 @@ export default function NewsSlider(props) {
             maxHeight: 440,
             overflow: "auto",
           }}
-          className="newsColumn"
+          textAlign="center"
         >
-          {" "}
-          {/* <Slider {...settings}> */}
           {newsList &&
-            newsList.map((item,index) => {
+            newsList.map((item, index) => {
               return (
                 <Grid
                   key={index}
@@ -79,7 +83,11 @@ export default function NewsSlider(props) {
                     })
                   }
                   color="black"
-                  sx={{ textDecoration: "none" }}
+                  sx={{ textDecoration: "none",
+                  cursor:"pointer",
+                  "&:hover": {
+                    textDecoration: "underline"
+                  } }}
                 >
                   <Grid
                     key={item.id}
@@ -105,7 +113,31 @@ export default function NewsSlider(props) {
                 </Grid>
               );
             })}
-          {/* </Slider> */}
+          {pageLimit > currentPage ? (
+            <Button
+              size="small"
+              variant="contained"
+              sx={{
+                background:
+                  "linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%)",
+                border: "1px solid #DDDDDD",
+                "&:hover": {
+                  color: "white"
+                }
+              }}
+            >
+              <Typography
+                fontSize="13px"
+                onClick={() => {
+                  setCurrentPage(currentPage + 1);
+                }}
+              >
+                {t("load_more")}
+              </Typography>
+            </Button>
+          ) : (
+            ""
+          )}
         </Grid>
       </Grid>
     </>

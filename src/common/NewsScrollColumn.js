@@ -31,7 +31,7 @@ export default function NewsScrollColumn(props) {
   useEffect(() => {
     dispatch(
       getNewsAll({
-        params: { lang_id: lang_id, rowsPerPage: 1,shortTitle: "", category_id: newsCategory.id, page: currentPage },
+        params: { lang_id: lang_id, rowsPerPage: 10,shortTitle: "", category_id: newsCategory.id, page: currentPage },
         callback: (res) => {
           setNewsList(res.data.data);
           console.log(newsCategory.id,"newsscroll col:::",res.data)
@@ -45,7 +45,7 @@ export default function NewsScrollColumn(props) {
     // NEXT PAGE 
     dispatch(
       getNewsAll({
-        params: { lang_id: lang_id, rowsPerPage: 1,shortTitle: "", category_id: newsCategory.id, page: currentPage },
+        params: { lang_id: lang_id, rowsPerPage: 10,shortTitle: "", category_id: newsCategory.id, page: currentPage },
         callback: (res) => {
           console.log("next page Function")
           console.log("next page data :::",res.data.data)
