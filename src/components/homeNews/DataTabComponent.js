@@ -27,7 +27,7 @@ const DataTabComponent = ({id,lang_id}) => {
         setLoadingMore(true);
         dispatch(getNextNewsByCategory(
             {
-                params: { lang_id: lang_id, category_id: '', rowsPerPage: 2, page: p },
+                params: { lang_id: lang_id, category_id: id, rowsPerPage: 10, page: p },
                 callback:(res) => {
                     setLoading(false);
                     setLoadingMore(false);
@@ -56,7 +56,7 @@ const DataTabComponent = ({id,lang_id}) => {
     const getData = (p) => { 
         dispatch(getNewsByCategory(
             {
-                params: { lang_id: lang_id, category_id: '', rowsPerPage: 2, page: p },
+                params: { lang_id: lang_id, category_id: id, rowsPerPage: 10, page: p },
                 callback:(res) => {
                     setLoading(false);
                     const {status_code,data} = res;
