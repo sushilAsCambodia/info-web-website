@@ -600,3 +600,17 @@ border: 2px solid red;
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+
+/* news journal fixed css  */
+
+.tabclass .css-prpbtt-MuiTabs-root{
+  position: fixed;
+  background: #fff;
+  z-index: 9;
+  width: 100%;
+
+}
+.tabclass #full-width-tabpanel-0{
+  padding-top: 50px;
+}
