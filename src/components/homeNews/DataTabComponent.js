@@ -34,11 +34,11 @@ const DataTabComponent = ({id,lang_id}) => {
             loading ? <DataLoading/> :
             (
                 <Grid item xs={12} sm={12} md={12} xl={12}>
-                 <List  sx={{padding:'5px'}} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
+                 <List  sx={{padding:'5px'}} >
 
                     {news && news.length ? news.map((sport,index) => {
                         return (
-                                <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }}>
+                                <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
                                     <Grid
                                         container
                                         sx={{ borderRadius: "5px",paddingTop:'10px' ,paddingBottom:'10px' }}
