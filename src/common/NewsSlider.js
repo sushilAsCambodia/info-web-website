@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import { getNewsByCategory, getNewsAll } from "@/store/actions/newsActions";
+import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
 import moment from "moment/moment";
 import utils from "./utils";
@@ -24,7 +24,7 @@ export default function NewsSlider(props) {
 
   useEffect(() => {
     dispatch(
-      getNewsAll({
+      getNewsByCategory({
         params: {
           lang_id: lang_id,
           rowsPerPage: 10,
@@ -43,7 +43,7 @@ export default function NewsSlider(props) {
 
   useEffect(() => {
     dispatch(
-      getNewsAll({
+      getNewsByCategory({
         params: {
           lang_id: lang_id,
           rowsPerPage: 10,

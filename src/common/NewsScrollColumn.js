@@ -9,7 +9,7 @@ import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import { getNewsByCategory,getNewsAll } from "@/store/actions/newsActions";
+import { getNewsByCategory } from "@/store/actions/newsActions";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -30,7 +30,7 @@ export default function NewsScrollColumn(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
-      getNewsAll({
+      getNewsByCategory({
         params: { lang_id: lang_id, rowsPerPage: 10,shortTitle: "", category_id: newsCategory.id, page: currentPage },
         callback: (res) => {
           setNewsList(res.data.data);
@@ -44,7 +44,7 @@ export default function NewsScrollColumn(props) {
   useEffect(() => {
     // NEXT PAGE 
     dispatch(
-      getNewsAll({
+      getNewsByCategory({
         params: { lang_id: lang_id, rowsPerPage: 10,shortTitle: "", category_id: newsCategory.id, page: currentPage },
         callback: (res) => {
           console.log("next page Function")

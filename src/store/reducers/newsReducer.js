@@ -2,7 +2,6 @@ const initialState = {
   status: 'idle',
   news:[],
   newsDetail:{},
-  newsAll:{},
   loading:false,
 }
 const NewReducer = (state = initialState, action) => {
@@ -74,13 +73,6 @@ const NewReducer = (state = initialState, action) => {
         ...state,
         status:'failed',
         newsDetail: {},
-        loading: false
-      };
-    case 'news/All/fulfilled':
-      return {
-        ...state,
-        status:'completed',
-        newsAll: action.payload?.data || [],
         loading: false
       };
   }

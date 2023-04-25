@@ -19,7 +19,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTranslation } from "react-i18next";
 import utils from "@/common/utils";
 import moment from "moment/moment";
-import { getNewsByCategory, getNewsAll } from "@/store/actions/newsActions";
+import { getNewsByCategory } from "@/store/actions/newsActions";
 import { getCategory } from "@/store/actions/categoryActions";
 
 const News = () => {
@@ -28,7 +28,7 @@ const News = () => {
   const { i18n } = useTranslation();
   const lang_id = utils.convertLangCodeToID(i18n.language);
 
-  const { newsAll } = useSelector((state) => state.news);
+  const { news } = useSelector((state) => state.news);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -53,7 +53,7 @@ const News = () => {
   const { categories = [] } = useSelector((state) => state.category);
 
   console.log("news cate ID:::", category_id);
-  console.log("newsAll:::", newsAll);
+  console.log("news:::", news);
 
   const breadcrumbs = [
     <Link
@@ -118,7 +118,7 @@ const News = () => {
 
     setLoading(true);
     dispatch(
-      getNewsAll({
+      getNewsByCategory({
         params: {
           lang_id: lang_id,
           rowsPerPage: 10,
@@ -169,10 +169,10 @@ const News = () => {
                 fontWeight={600}
                 textTransform="capitalize"
               >
-                {!loading && newsAll.data.length != 0
+                {!loading && news.length != 0
                   ? category_id == "All"
                     ? "Every"
-                    : newsAll.data[0].category_name
+                    : news[0].category_name
                   : "No"}{" "}
                 {t("news")}
               </Typography>
@@ -190,7 +190,7 @@ const News = () => {
           </Grid>
           {!loading ? (
             <Grid container padding="0px">
-              {newsAll.data.map((item, index) => {
+              {news.map((item, index) => {
                 return (
                   <Grid
                     item
