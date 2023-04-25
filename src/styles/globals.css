@@ -737,3 +737,19 @@ visibility: visible;
   transition-duration: 0.4s;
 }
 /* END  */
+/* news journal fixed css  */
+
+.tabclass .css-prpbtt-MuiTabs-root{
+  position: fixed;
+  background: #fff;
+  z-index: 9;
+  width: 100%;
+
+}
+.tabclass #full-width-tabpanel-0{
+  padding-top: 50px;
+}
+.tabclass #full-width-tabpanel-1{
+  padding-top: 65px;
+}
+/* END  */
