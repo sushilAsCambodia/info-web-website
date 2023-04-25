@@ -25,7 +25,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 
 import { Icon } from "@iconify/react";
-
+import { useRouter } from "next/router";
 const style = {
   position: "absolute",
   top: "300px",
@@ -38,6 +38,7 @@ const style = {
 };
 
 export default function LotteryPage() {
+  const router = useRouter()
   const [select, setSelect] = useState(0);
   const [age, setAge] = useState("");
 
@@ -241,55 +242,129 @@ export default function LotteryPage() {
         <Fade in={chart}>
           <Grid sx={style}>
             <Divider>
-            <Typography id="transition-modal-title" variant="h6">
-            Speed ​​color series {chartModalData}
-            </Typography>
+              <Typography id="transition-modal-title" variant="h6">
+                Speed ​​color series {chartModalData}
+              </Typography>
             </Divider>
             <Grid container>
               <Grid item xs={4} p={1} position="relative">
-              <div class="ribbon ribbon-top-right"><span>New</span></div>
+                <div class="ribbon ribbon-top-right">
+                  <span>New</span>
+                </div>
 
-                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                <Grid
+                  sx={{
+                    background: "#F3F3F3",
+                    border: "1px solid #DDDDDD",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
                   <Typography>Speed Racing</Typography>
                 </Grid>
               </Grid>
               <Grid item xs={4} p={1}>
-                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                <Grid
+                  sx={{
+                    background: "#F3F3F3",
+                    border: "1px solid #DDDDDD",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
                   <Typography>Speed Racing</Typography>
                 </Grid>
               </Grid>
               <Grid item xs={4} p={1}>
-                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1} >
-                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                <Grid
+                  sx={{
+                    background: "#F3F3F3",
+                    border: "1px solid #DDDDDD",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
                   <Typography>Speed Racing</Typography>
                 </Grid>
               </Grid>
               <Grid item xs={4} p={1}>
-                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                <Grid
+                  sx={{
+                    background: "#F3F3F3",
+                    border: "1px solid #DDDDDD",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
                   <Typography>Speed Racing</Typography>
                 </Grid>
               </Grid>
               <Grid item xs={4} p={1}>
-                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                <Grid
+                  sx={{
+                    background: "#F3F3F3",
+                    border: "1px solid #DDDDDD",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
                   <Typography>Speed Racing</Typography>
                 </Grid>
               </Grid>
               <Grid item xs={4} p={1}>
-                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                <Grid
+                  sx={{
+                    background: "#F3F3F3",
+                    border: "1px solid #DDDDDD",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid
+                  sx={{
+                    background: "#F3F3F3",
+                    border: "1px solid #DDDDDD",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid
+                  sx={{
+                    background: "#F3F3F3",
+                    border: "1px solid #DDDDDD",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid
+                  sx={{
+                    background: "#F3F3F3",
+                    border: "1px solid #DDDDDD",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
                   <Typography>Speed Racing</Typography>
                 </Grid>
               </Grid>
@@ -342,14 +417,12 @@ export default function LotteryPage() {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledHeaderCell width="300px">
-                  Lottery
-                </StyledHeaderCell>
+                <StyledHeaderCell width="300px">Lottery</StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="left">
                   Issue
                 </StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="left">
-                Draw Time
+                  Draw Time
                 </StyledHeaderCell>
                 <StyledHeaderCell width="500px" align="center">
                   Results
@@ -424,7 +497,7 @@ export default function LotteryPage() {
                                 background: "#F3F3F3",
                                 border: "1px solid #DDDDDD",
                               }}
-                              onClick={() => handleOpen(row.id)}
+                              onClick={() => router.push('/lotteryPastResults')}
                             >
                               <Icon icon="solar:clipboard-list-broken" />
                             </IconButton>
@@ -447,8 +520,17 @@ export default function LotteryPage() {
                                 border: "1px solid #DDDDDD",
                               }}
                             >
-                              {item.calories % 2 == 0 ? <Icon color="#C9C9C9" icon="clarity:favorite-solid" />:<Icon color="#FF6F31" icon="clarity:favorite-solid" />}
-                              
+                              {item.calories % 2 == 0 ? (
+                                <Icon
+                                  color="#C9C9C9"
+                                  icon="clarity:favorite-solid"
+                                />
+                              ) : (
+                                <Icon
+                                  color="#FF6F31"
+                                  icon="clarity:favorite-solid"
+                                />
+                              )}
                             </IconButton>
                           </StyledTableCell>
                         </StyledTableRow>

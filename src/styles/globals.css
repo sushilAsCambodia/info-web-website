@@ -644,9 +644,8 @@ border: 2px solid red;
 
 /* STEPPER ON LOTTER PAST RESULTS  */
 .step {
-  
   padding: 10px;
-  
+  margin-left: 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -658,12 +657,10 @@ border: 2px solid red;
   position: relative;
 /*   visibility: visible; */
 }
-
-
 /* regular step */
 .step .circle {
   background-color: white;
-  border: 3px solid gray;
+  border: 3px solid #D9D9D9;
   border-radius: 100%;
   width: 10px;    /* +6 for border */
   height: 10px;
@@ -674,36 +671,35 @@ border: 2px solid red;
 }
 
 .step .line {
-    top: 23px;
-  left: 9px;
-/*   height: 120px; */
-  height: 100%;
+    top: 20px;
+    left: 9px;
+    height: 125%;
     position: absolute;
-    border-left: 3px solid gray;
+    border-left: 3px solid #D9D9D9;
 }
 
 .step.completed .circle {
   visibility: visible;
   background-color: rgb(6,150,215);
-  border-color: rgb(6,150,215);
+  border-color: rgb(38, 127, 228);
   width: 35px;   
   height: 35px;
   right: -28px;
-  top: 10px;
+  top: -4px;
 }
-.circleCompleted {
+.step.completed div div {
   content: "";
   background:var(--iconImg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: -5px center;
+  /* background-position: -5px center; */
   background-position-y: 0px;
 }
 .step.completed .line {
   /* border-left: 3px solid rgb(6,150,215); */
   position: absolute;
-  top: 50px;
-  height: 65%;
+  top: 32px;
+  height: 80%;
 }
 .step.active .circle {
 visibility: visible;
@@ -728,7 +724,16 @@ visibility: visible;
 }
 
 .content {
-  margin-left: 30px;
+  margin-left: 40px;
   display: inline-block;
   margin-top: 5px;
 }
+.rotate180{
+  transform: rotate(180deg);
+  transition-duration: 0.4s;
+}
+.rotate0{
+  transform: rotate(0deg);
+  transition-duration: 0.4s;
+}
+/* END  */
