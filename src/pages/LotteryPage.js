@@ -28,8 +28,8 @@ import { Icon } from "@iconify/react";
 
 const style = {
   position: "absolute",
-  top: "50%",
-  left: "50%",
+  top: "300px",
+  left: "75%",
   transform: "translate(-50%, -50%)",
   width: 600,
   bgcolor: "background.paper",
@@ -242,11 +242,58 @@ export default function LotteryPage() {
           <Grid sx={style}>
             <Divider>
             <Typography id="transition-modal-title" variant="h6">
-            Speed ​​color series
-            </Typography></Divider>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              has ID of {chartModalData}
+            Speed ​​color series {chartModalData}
             </Typography>
+            </Divider>
+            <Grid container>
+              <Grid item xs={4} p={1} position="relative">
+              <div class="ribbon ribbon-top-right"><span>New</span></div>
+
+                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1} >
+                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4} p={1}>
+                <Grid sx={{background:"#F3F3F3",border:"1px solid #DDDDDD",padding:"10px",borderRadius:"10px",textAlign:"center"}}>
+                  <Typography>Speed Racing</Typography>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
         </Fade>
       </Modal>

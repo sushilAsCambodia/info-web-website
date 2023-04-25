@@ -594,3 +594,137 @@ border: 2px solid red;
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+/* LOTTERY PAST RESULTS  */
+.ribbon {
+  width: 145px;
+  height: 45px;
+  overflow: hidden;
+  position: absolute;
+}
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  display: block;
+  border: 5px solid #FF8024;
+}
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  background-color: #FF8024;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+  color: #fff;
+  font: 200 13px/1 'Lato', sans-serif;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  text-transform: uppercase;
+  text-align: center;
+}
+/* top right*/
+.ribbon-top-right {
+  top: 8px;
+  right: 8px;
+}
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.ribbon-top-right span {
+  left: 15px;
+  top: 10px;
+  transform: rotate(40deg);
+}
+
+
+/* STEPPER ON LOTTER PAST RESULTS  */
+.step {
+  
+  padding: 10px;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  
+  background-color: cream;
+}
+
+.v-stepper {
+  position: relative;
+/*   visibility: visible; */
+}
+
+
+/* regular step */
+.step .circle {
+  background-color: white;
+  border: 3px solid gray;
+  border-radius: 100%;
+  width: 10px;    /* +6 for border */
+  height: 10px;
+  display: inline-block;
+  position: absolute;
+  right: -15px;
+    top: 8px;
+}
+
+.step .line {
+    top: 23px;
+  left: 9px;
+/*   height: 120px; */
+  height: 100%;
+    position: absolute;
+    border-left: 3px solid gray;
+}
+
+.step.completed .circle {
+  visibility: visible;
+  background-color: rgb(6,150,215);
+  border-color: rgb(6,150,215);
+  width: 35px;   
+  height: 35px;
+  right: -28px;
+  top: 10px;
+}
+.circleCompleted {
+  content: "";
+  background:var(--iconImg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: -5px center;
+  background-position-y: 0px;
+}
+.step.completed .line {
+  /* border-left: 3px solid rgb(6,150,215); */
+  position: absolute;
+  top: 50px;
+  height: 65%;
+}
+.step.active .circle {
+visibility: visible;
+  border-color: rgb(6,150,215);
+    right: -15px;
+    top: 5px;
+}
+
+.step.empty .circle {
+    visibility: hidden;
+}
+
+.step.empty .line {
+/*     visibility: hidden; */
+/*   height: 150%; */
+  top: 0;
+  height: 150%;
+}
+.step:last-child .line {
+  border-left: 3px solid white;
+  z-index: -1; /* behind the circle to completely hide */
+}
+
+.content {
+  margin-left: 30px;
+  display: inline-block;
+  margin-top: 5px;
+}
