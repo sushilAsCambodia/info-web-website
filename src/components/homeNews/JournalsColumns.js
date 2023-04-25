@@ -40,7 +40,6 @@ export default function JournalsColumns(props) {
   const {lang_id=''} = props; 
   const dispatch = useDispatch();
   const { journals = [], loading } = useSelector((state) => state.journal); 
-  console.log("journals:::",journals)
   useEffect(() => {
     dispatch(getJournal(
       {

@@ -3,7 +3,7 @@ const initialState = {
   categories:[],
   loading: true
 } 
-export default function (state = initialState, action) {
+const CategoryReducer = (state = initialState, action) => {
   switch (action.type) { 
     case 'category/list/fulfilled':
       return {
@@ -15,3 +15,4 @@ export default function (state = initialState, action) {
   }
   return state;
 }
+export default CategoryReducer;

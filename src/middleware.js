@@ -3,10 +3,14 @@ var routePreventToken = ['/profile','/profileDetail','/announcement','/feedback'
 export function middleware(req) {
     const { pathname } =  req.nextUrl;
     const absoluteUrl = new URL("/", req.url).toString();
-    if(routePreventToken.includes(pathname) && !req.cookies.has('token')) {
-        return NextResponse.redirect(absoluteUrl+'login')
+    if (routePreventToken.some((prefix) => pathname.startsWith(prefix))) {
+        if(!req.cookies.has('token')) {
+            return NextResponse.redirect(absoluteUrl+'login');
+        }
     }else if((pathname === '/login' || pathname === '/register' || pathname === '/forgotPassword') && req.cookies.has('token')) {
-        return NextResponse.redirect(absoluteUrl+'home')
+        if(req.cookies.has('token')) {
+            return NextResponse.redirect(absoluteUrl+'home');
+        }
     } 
     return NextResponse.next(); 
 }

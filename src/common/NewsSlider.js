@@ -17,7 +17,6 @@ export default function NewsSlider(props) {
   const theme = useTheme();
   const router = useRouter();
   const { catId = [], lang_id = [] } = props;
-
   const dispatch = useDispatch();
   const [newsList, setNewsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

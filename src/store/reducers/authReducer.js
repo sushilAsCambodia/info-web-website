@@ -6,7 +6,7 @@ const initialState = {
   isLogin: typeof window != 'undefined' && Cookies.get(utils.tokenKey) ? true : false,
   loading: false
 }
-export default function (state = initialState, action) {
+const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     // login block
     case 'customers/login/pending':
@@ -125,3 +125,4 @@ export default function (state = initialState, action) {
   }
   return state;
 } 
+export default AuthReducer;

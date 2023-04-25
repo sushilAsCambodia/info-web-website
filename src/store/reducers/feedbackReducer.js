@@ -2,7 +2,7 @@ const initialState = {
     status: 'idle',
     loading:false,
 }
-export default function (state = initialState, action) {
+const FeedbackReducer =  (state = initialState, action) => {
   switch (action.type) {
     case 'feedback/create/pending':
       return {
@@ -24,3 +24,4 @@ export default function (state = initialState, action) {
   }
   return state;
 }
+export default FeedbackReducer;

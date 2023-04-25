@@ -434,6 +434,10 @@ padding: 0px 0px;
 .calendraDrawer .mui-issue-custom{
   border-radius: 4px;
 }
+.calendraDrawer li.mui-issue-custom {
+  color: #8C8C8C;
+  border: 1px solid #DDDDDD;
+}
 .calendraDrawer .mui-issue-custom.active-issue {
   background: rgb(255, 111, 49);
   color: #fff;

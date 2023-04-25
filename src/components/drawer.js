@@ -63,9 +63,7 @@ const DrawerComponent = (props) => {
                         params:{
                             albumId: router.query?.album_id,
                         },
-                        callback:(res) => {
-                            console.log('callback year',res);
-                        }
+                        callback:(res) => {  }
                     }
                 )
             );
@@ -74,7 +72,6 @@ const DrawerComponent = (props) => {
     },[router.query]);
     useEffect(() => {
         if(years.length  > 0) {
-            console.log('fetching');
             fetchIssue(years[value]);
         }
     },[years]);
@@ -87,7 +84,11 @@ const DrawerComponent = (props) => {
                         issueDate
                     },
                     callback:(res) => {
-                        console.log(res,'callback issue')
+                        const {data = {}} = res;
+                        if(Object.keys(data).length > 0 && data.hasOwnProperty('data') && data.data.length > 0) {
+                            const firstIssue = data.data[0];
+                            openIssue(firstIssue.issue,0)
+                        }
                     }
                 }
             )
@@ -103,26 +104,14 @@ const DrawerComponent = (props) => {
                         issue:issue,
                         issueDate:years[value]
                     },
-                    callback:(res) => {
-                        console.log(res,'selected');
-                    },
+                    callback:(res) => { },
                 }
             )
         );
-    }
-    const items = () => {
-        const items = [];
-        for (let index = 0; index < 12; index++) {
-           items.push(<ListItem key={index} className={activeIssue == index ? 'active-issue mui-issue-custom':'mui-issue-custom'} style={{ width:'53px', justifyContent: "center", textAlign: "center !important" }}>
-           <Typography fontSize="10px">Issue  </Typography>
-       </ListItem>)
-            
-        }
-        return items;
-    }
+    } 
     const tabPanelElms = ( ) => { 
         return <TabPanel  value={value} index={value} padding="0px !important" >
-            <List sx={{  margin: "5px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"10px", justifyContent: "flex-start", textAlign: "center !important" }}>
+            <List sx={{  margin: "5px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"5px", justifyContent: "flex-start", textAlign: "center !important" }}>
                 {
                     issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
                         return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue mui-issue-custom':'mui-issue-custom'} style={{ width:'53px', justifyContent: "center", textAlign: "center !important" }}>
@@ -148,7 +137,7 @@ const DrawerComponent = (props) => {
                 </svg>
             </Box>
             <List sx={{padding:'0px'}}>
-                <ListItem disablePadding className='mui-issue-custom'>
+                <ListItem disablePadding>
                     <Grid item xs={12} sm={12} width='100%'>
                         {years.length > 0 ? <Box sx={{ width: '100%' }}>
                             <Tabs
