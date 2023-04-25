@@ -28,15 +28,17 @@ const DataTabComponent = ({id,lang_id}) => {
         ));
     },[id]);
     const [loading,setLoading] = React.useState(true);
-    return <Grid sx={{height:news && news.length > 2 ? '250px' : 'auto', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
+    // return <Grid sx={{height:news && news.length > 2 ? '250px' : 'auto', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
+       return <Grid sx={{ overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
         {
             loading ? <DataLoading/> :
             (
                 <Grid item xs={12} sm={12} md={12} xl={12}>
+                 <List  sx={{padding:'5px'}} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
+
                     {news && news.length ? news.map((sport,index) => {
                         return (
-                            <List key={index} sx={{padding:'5px'}} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
-                                <ListItem sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }}>
+                                <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }}>
                                     <Grid
                                         container
                                         sx={{ borderRadius: "5px",paddingTop:'10px' ,paddingBottom:'10px' }}
@@ -52,7 +54,7 @@ const DataTabComponent = ({id,lang_id}) => {
                                         </Grid> 
                                         <Grid item xs={9}>
                                             <Grid item sx={{paddingLeft:'5px'}}>
-                                                <Box fontWeight="600" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,140)}}></Box>
+                                                <Box fontWeight="400" fontFamily="sans-serif" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,140)}}></Box>
                                                 <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="10px !important" whiteSpace="nowrap">
                                                     {moment(sport.created_at).format(utils.formatDate)}
                                                 </Typography>
@@ -60,9 +62,9 @@ const DataTabComponent = ({id,lang_id}) => {
                                         </Grid>
                                     </Grid>
                                 </ListItem> 
-                            </List>
                         );
                     }) : <Empty/>}
+                     </List>
                 </Grid>
             )
         }
