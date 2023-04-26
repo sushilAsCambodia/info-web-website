@@ -91,8 +91,8 @@ export default function NewsJournalTabs(props) {
           className='mui-home-tab-wrapper'
           sx={{paddingTop:'10px',paddingBottom:'10px'}}
         >
-          <Tab className='mui-custom-home' label={t('news')} {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
-          <Tab className='mui-custom-journal' label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
+          <Tab className='mui-custom-home mui-custom-new' label={t('news')} {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
+          <Tab className='mui-custom-home mui-custom-journal' label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
         <TabPanel  value={value} index={0} >
           <FullSilder banners={banners}/>

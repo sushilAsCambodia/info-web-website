@@ -608,16 +608,16 @@ border: 2px solid red;
 
 /* news journal fixed css  */
 
-.tabclass .css-prpbtt-MuiTabs-root{
+.tabclass .mui-home-tab-wrapper{ 
   position: fixed;
+  top: 56px;
+  width: 100%;
   background: #fff;
   z-index: 9;
-  width: 100%;
-
 }
-.tabclass #full-width-tabpanel-0{
-  padding-top: 50px;
+.tabclass .MuiGrid-root[role="tabpanel"]{
+  padding-top: 62px;
 }
-.tabclass #full-width-tabpanel-1{
-  padding-top: 65px;
+.mainautoplayswipeable .MuiPaper-elevation {
+  z-index: 0;
 }

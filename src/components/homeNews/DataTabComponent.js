@@ -4,7 +4,8 @@ import {
     ListItem, 
     Typography, 
     List, 
-    Box
+    Box,
+    Button
   } from "@mui/material";
   import { useDispatch, useSelector } from 'react-redux';
 import {getNewsByCategory,getNextNewsByCategory} from '@/store/actions/newsActions'
@@ -13,6 +14,7 @@ import Router from "next/router";
 import Empty from '../Empty';
 import moment from 'moment/moment';
 import utils from '@/common/utils';
+const rowsPerPage = 10;
 const DataTabComponent = ({id,lang_id}) => {
     const {news} = useSelector((state) => state.news); 
     const [page, setPage] = React.useState(1);
@@ -23,11 +25,12 @@ const DataTabComponent = ({id,lang_id}) => {
     },[id]);
     const [loading, setLoading] = React.useState(true);
     const [loadingMore,setLoadingMore] = React.useState(false);
+    // get more news by category
     const loadMore = (p) => {
         setLoadingMore(true);
         dispatch(getNextNewsByCategory(
             {
-                params: { lang_id: lang_id, category_id: id, rowsPerPage: 10, page: p },
+                params: { lang_id: lang_id, category_id: id, rowsPerPage: rowsPerPage, page: p },
                 callback:(res) => {
                     setLoading(false);
                     setLoadingMore(false);
@@ -53,10 +56,11 @@ const DataTabComponent = ({id,lang_id}) => {
             }
         ));
     }
-    const getData = (p) => { 
+    // get news data
+    const getData = (p) => {
         dispatch(getNewsByCategory(
             {
-                params: { lang_id: lang_id, category_id: id, rowsPerPage: 10, page: p },
+                params: { lang_id: lang_id, category_id: id, rowsPerPage: rowsPerPage, page: p },
                 callback:(res) => {
                     setLoading(false);
                     const {status_code,data} = res;
@@ -121,7 +125,7 @@ const DataTabComponent = ({id,lang_id}) => {
                 </Grid>
             )
         }
-        {showLoadMore && <Typography component="span" sx={{position:'absolute',bottom:0}} onClick={() => loadMore(page)}>{loadingMore?<DataLoading size={20}/>:'More'}</Typography>}
+        {showLoadMore && <Typography component="span" sx={{position:'absolute',bottom:0}} onClick={() => loadMore(page)}>{loadingMore?<DataLoading size={20}/>:<Button style={{fontSize:9}}>More</Button>}</Typography>}
     </Grid>
 };
 export default DataTabComponent;
