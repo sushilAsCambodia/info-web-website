@@ -37,8 +37,8 @@ const style = {
   p: 2,
 };
 
-export default function LotteryPage() {
-  const router = useRouter()
+export default function basketBall() {
+  const router = useRouter();
   const [select, setSelect] = useState(0);
   const [age, setAge] = useState("");
 
@@ -83,100 +83,14 @@ export default function LotteryPage() {
   }
 
   const rows = [
-    {
-      id: 1,
-      lottoTitle: "Red Lotto",
-      logo: "https://media.istockphoto.com/id/457815375/photo/flame-icon.jpg?s=170667a&w=0&k=20&c=ApbZCTyyXaBjp7qVTPqXrb3Si_p6ehJERIztA_vfIPw=",
-      items: [
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-          "Frozen yoghurt",
-          111,
-          6.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          1
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-          "Ice cream sandwich",
-          237,
-          9.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          2
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Eclair",
-          222,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          3
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Cupcake",
-          5000,
-          3.7,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          4
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Gingerbread",
-          272,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
-          5
-        ),
-      ],
-    },
-    {
-      id: 2,
-      lottoTitle: "Blue Lotto",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP83gncuWce8kisGWt8JwftWJUK_dx_4WNjw&usqp=CAU",
-      items: [
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-          "Frozen yoghurt",
-          159,
-          6.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          1
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-          "Ice cream sandwich",
-          237,
-          9.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          2
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Eclair",
-          262,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          3
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Cupcake",
-          305,
-          3.7,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          4
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Gingerbread",
-          356,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
-          5
-        ),
-      ],
-    },
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
+      "Frozen yoghurt",
+      111,
+      6.0,
+      { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
+      1
+    ),
   ];
   // past result modal controls
   const [pastResultModalData, setPastResultModalData] = useState("");
@@ -373,24 +287,42 @@ export default function LotteryPage() {
         </Fade>
       </Modal>
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
-        <Grid xs={"auto"} container border="1px solid grey" borderRadius="10px">
+        <Grid xs={"auto"} container border="1px solid grey" borderRadius="5px">
           <MenuItem
-            sx={{ borderRadius: "10px 0px 0px 10px" }}
+            sx={{ borderRadius: "5px 0px 0px 5px" }}
             className={`${select === 0 ? "filterTabSelected" : ""}`}
             onClick={() => {
               setSelect(0);
             }}
           >
-            All
+            Follow
           </MenuItem>
           <MenuItem
-            sx={{ borderRadius: "0px 10px 10px 0px" }}
+            sx={{ borderRadius: "0px 0px 0px 0px" }}
             className={`${select === 1 ? "filterTabSelected" : ""}`}
             onClick={() => {
               setSelect(1);
             }}
           >
-            Favourite
+            Score
+          </MenuItem>
+          <MenuItem
+            sx={{ borderRadius: "0px 0px 0px 0px" }}
+            className={`${select === 2 ? "filterTabSelected" : ""}`}
+            onClick={() => {
+              setSelect(2);
+            }}
+          >
+            End
+          </MenuItem>
+          <MenuItem
+            sx={{ borderRadius: "0px 5px 5px 0px" }}
+            className={`${select === 3 ? "filterTabSelected" : ""}`}
+            onClick={() => {
+              setSelect(3);
+            }}
+          >
+            Schedule
           </MenuItem>
         </Grid>
         <Grid xs={2}>
@@ -417,125 +349,153 @@ export default function LotteryPage() {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledHeaderCell width="300px">Lottery</StyledHeaderCell>
-                <StyledHeaderCell width="100px" align="left">
-                  Issue
+                <StyledHeaderCell width="200px">
+                  Taiwan Basket Ball
+                </StyledHeaderCell>
+                <StyledHeaderCell width="200px" align="left">
+                  Chapter 2
                 </StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="left">
-                  Draw Time
+                  session 1
                 </StyledHeaderCell>
-                <StyledHeaderCell width="500px" align="center">
-                  Results
-                </StyledHeaderCell>
-                <StyledHeaderCell width="100px" align="right">
-                  Past Results
+                <StyledHeaderCell width="100px" align="center">
+                  Session 2
                 </StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="right">
-                  Chart
+                  Session 3
                 </StyledHeaderCell>
                 <StyledHeaderCell width="100px" align="right">
-                  Favorite
+                  Session 4
+                </StyledHeaderCell>
+                <StyledHeaderCell width="100px" align="right">
+                  Up and Down
+                </StyledHeaderCell>
+                <StyledHeaderCell width="100px" align="right">
+                  Audience
+                </StyledHeaderCell>
+                <StyledHeaderCell width="150px" align="right">
+                  Points difference
+                </StyledHeaderCell>
+                <StyledHeaderCell width="100px" align="right">
+                  Total score
                 </StyledHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, index) => {
+              {rows.map((item, index) => {
                 return (
                   <>
-                    <StyledTableRow key={index}>
-                      <StyledTableCell component="th" scope="row" colSpan={7}>
-                        <Grid display="flex" alignItems="center">
-                          {" "}
+                    <StyledTableRow key={item.name}>
+                      <StyledTableCell component="th" scope="row">
+                        <Grid sx={{ display: "flex", alignItems: "center" }}>
                           <img
-                            style={{
-                              marginRight: "10px",
-                              width: "30px",
-                              height: "30px",
-                              borderRadius: "20px",
-                            }}
-                            src={row.logo}
-                          />
-                          {row.lottoTitle}
+                            width="30px"
+                            src={item.img}
+                            style={{ marginRight: "10px" }}
+                          />{" "}
+                          <Typography>{item.name}</Typography>
                         </Grid>
                       </StyledTableCell>
+                      <StyledTableCell
+                        align="right"
+                        style={{ verticalAlign: "top" }}
+                      >
+                        <Typography >
+                        {item.calories}
+                        </Typography>
+                        <Typography >
+                        {item.calories}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="right"
+                        style={{ verticalAlign: "top" }}
+                      >
+                        <Typography >
+                        {item.fat}
+                        </Typography>
+                        <Typography >
+                        {item.fat}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="right"
+                        style={{ verticalAlign: "top" }}
+                      >
+                        <Typography >
+                        {item.fat}
+                        </Typography>
+                        <Typography >
+                        {item.fat}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="right"
+                        style={{ verticalAlign: "top" }}
+                      >
+                        <Typography >
+                        {item.fat}
+                        </Typography>
+                        <Typography >
+                        {item.id}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="right"
+                        style={{ verticalAlign: "top" }}
+                      >
+                        <Typography >
+                        {item.fat}
+                        </Typography>
+                        <Typography >
+                        {item.id}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="right"
+                        style={{ verticalAlign: "top" }}
+                      >
+                        <Typography >
+                        {item.fat}
+                        </Typography>
+                        <Typography >
+                        {item.id}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="right"
+                        style={{ verticalAlign: "top" }}
+                      >
+                        <Typography >
+                        {item.fat}
+                        </Typography>
+                        <Typography >
+                        {item.id}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="right"
+                        style={{ verticalAlign: "top" }}
+                      >
+                        <Typography >
+                        {item.fat}
+                        </Typography>
+                        <Typography >
+                        {item.id}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="right"
+                        style={{ verticalAlign: "top" }}
+                      >
+                        <Typography >
+                        Half: {item.fat}
+                        </Typography>
+                        <Typography >
+                        Half: {item.fat}
+                        </Typography>
+                      </StyledTableCell>
                     </StyledTableRow>
-                    {row.items.map((item, index) => {
-                      return (
-                        <StyledTableRow key={item.name}>
-                          <StyledTableCell component="th" scope="row">
-                            <Grid
-                              sx={{ display: "flex", alignItems: "center" }}
-                            >
-                              <img
-                                width="30px"
-                                src={item.img}
-                                style={{ marginRight: "10px" }}
-                              />{" "}
-                              <Typography>{item.name}</Typography>
-                            </Grid>
-                          </StyledTableCell>
-                          <StyledTableCell align="right">
-                            {item.calories}
-                          </StyledTableCell>
-                          <StyledTableCell align="right">
-                            {item.fat}
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
-                            <Grid
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              {lottoTable(item.results)}
-                            </Grid>
-                          </StyledTableCell>
-                          <StyledTableCell align="right">
-                            <IconButton
-                              sx={{
-                                background: "#F3F3F3",
-                                border: "1px solid #DDDDDD",
-                              }}
-                              onClick={() => router.push('/lotteryPastResults')}
-                            >
-                              <Icon icon="solar:clipboard-list-broken" />
-                            </IconButton>
-                          </StyledTableCell>
-                          <StyledTableCell align="right">
-                            <IconButton
-                              sx={{
-                                background: "#F3F3F3",
-                                border: "1px solid #DDDDDD",
-                              }}
-                              onClick={() => handleChartOpen(row.id)}
-                            >
-                              <Icon icon="material-symbols:add-chart-rounded" />
-                            </IconButton>
-                          </StyledTableCell>
-                          <StyledTableCell align="right">
-                            <IconButton
-                              sx={{
-                                background: "#F3F3F3",
-                                border: "1px solid #DDDDDD",
-                              }}
-                            >
-                              {item.calories % 2 == 0 ? (
-                                <Icon
-                                  color="#C9C9C9"
-                                  icon="clarity:favorite-solid"
-                                />
-                              ) : (
-                                <Icon
-                                  color="#FF6F31"
-                                  icon="clarity:favorite-solid"
-                                />
-                              )}
-                            </IconButton>
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      );
-                    })}
                   </>
                 );
               })}

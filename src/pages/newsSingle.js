@@ -124,7 +124,6 @@ export default function NewsSingle() {
                     value={newsCat}
                     label={t("select_category")}
                     onChange={handleChange}
-                    defaultValue={categories[newsCat].id}
                   >
                     {categories.map((item, index) => {
                       return (
