@@ -51,7 +51,7 @@ const Header = () => {
   const menuList = [
     { label: t("lottery_draw"), page: "LotteryPage" },
     { label: t("data_chart"), page: "DataChart" },
-    { label: "FootBall", page: "FootBall" },
+    { label: "FootBall", page: "footBallPage" },
     { label: "BasketBall", page: "basketBall" },
   ];
   return (
