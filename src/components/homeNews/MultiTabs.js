@@ -58,7 +58,11 @@ export default function MultiTabs(props) {
     if(el) {
       el.addEventListener('scroll', onScroll)
     }
-    return () => { el.removeEventListener('scroll',onScroll);};
+    return () => { 
+      if(el) {
+        el.removeEventListener('scroll',onScroll);
+      }
+    };
   },[])
 
   return (categories && categories.length > 0) && (
