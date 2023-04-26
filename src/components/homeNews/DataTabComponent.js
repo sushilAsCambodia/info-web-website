@@ -14,7 +14,7 @@ import Router from "next/router";
 import Empty from '../Empty';
 import moment from 'moment/moment';
 import utils from '@/common/utils';
-const rowsPerPage = 10;
+const rowsPerPage = 2;
 const DataTabComponent = ({id,lang_id}) => {
     const {news} = useSelector((state) => state.news); 
     const [page, setPage] = React.useState(1);
