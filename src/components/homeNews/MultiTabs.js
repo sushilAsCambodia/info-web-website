@@ -53,8 +53,10 @@ export default function MultiTabs(props) {
     }
   }
   useEffect(() => {
-      const el = document.getElementById('main-container-wrapper')
-      el.addEventListener('scroll', onScroll)
+      const el = document.getElementById('main-container-wrapper');
+      if(el) {
+        el.addEventListener('scroll', onScroll)
+      }
   },[])
   return (categories && categories.length > 0) && (
     <Grid
