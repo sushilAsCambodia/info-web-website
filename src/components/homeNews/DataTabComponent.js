@@ -85,11 +85,7 @@ const DataTabComponent = ({id,lang_id,isFetching}) => {
                     setLoading(false);
                     const {status_code,data} = res;
                     if([200,201,202,203,204].includes(status_code)) {
-                        manageDataPaginatioin(data);
-                        // setTimeout(() => {
-                        //     const elm = document.getElementById('main-container-wrapper');
-                        //     elm.scrollTo(0, elm.scrollHeight - 400)
-                        // }, 1);
+                        manageDataPaginatioin(data); 
                     } 
                 }
             }
