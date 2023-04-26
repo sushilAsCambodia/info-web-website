@@ -29,6 +29,7 @@ const DataTabComponent = ({id,lang_id,isFetching}) => {
         }
     },[isFetching])
     React.useEffect(() => { 
+        setNoMoreData(false);
         getData(1);
     },[id]);
     const manageDataPaginatioin = (data) => {
