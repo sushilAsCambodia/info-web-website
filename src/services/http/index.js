@@ -48,6 +48,37 @@ const http = {
             'data':body,
             'headers': header
         });
+    },
+    put: (url, body = {}, auth = false, formdata = false) => {
+        const header = { 
+            'content-type':'application/json; charset=utf-8'
+        }; // override instance defaults
+        if(auth) {
+            header['Authorization'] = 'Bearer '+ (Cookies.get(utils.tokenKey) || '');
+        }
+        if(formdata) {
+            header["Content-Type"] = "multipart/form-data";
+        }
+        return instance({
+            'method': 'PUT',
+            'url':url,
+            'data':body,
+            'headers': header
+        });
+    },
+    delete: (url, body = {}, auth = false) => {
+        const header = { 
+            'content-type':'application/json; charset=utf-8'
+        }; // override instance defaults
+        if(auth) {
+            header['Authorization'] = 'Bearer '+ (Cookies.get(utils.tokenKey) || '');
+        }
+        return instance({
+            'method': 'DELETE',
+            'url':url,
+            'data':body,
+            'headers': header
+        });
     }
 }
 export default http;
