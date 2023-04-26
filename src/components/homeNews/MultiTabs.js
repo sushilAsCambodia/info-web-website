@@ -48,7 +48,6 @@ export default function MultiTabs(props) {
   const onScroll = (el) => {
     const scrollableHeight = el.target.scrollHeight - el.target.clientHeight
     if (el.target.scrollTop >= scrollableHeight) {
-      console.log('drigger bottom')
       setIsFetching(new Date().getTime());
     }
   }
