@@ -45,18 +45,22 @@ export default function MultiTabs(props) {
   useEffect(() => {
     setValue(0);
   },[lang_id]);
+  // listiner on scroll behavior
   const onScroll = (el) => {
     const scrollableHeight = el.target.scrollHeight - el.target.clientHeight
     if (el.target.scrollTop >= scrollableHeight) {
       setIsFetching(new Date().getTime());
     }
   }
+  // add listiner on scroll behavior
   useEffect(() => {
-      const el = document.getElementById('main-container-wrapper');
-      if(el) {
-        el.addEventListener('scroll', onScroll)
-      }
+    const el = document.getElementById('main-container-wrapper');
+    if(el) {
+      el.addEventListener('scroll', onScroll)
+    }
+    return () => { el.removeEventListener('scroll',onScroll);};
   },[])
+
   return (categories && categories.length > 0) && (
     <Grid
       item
