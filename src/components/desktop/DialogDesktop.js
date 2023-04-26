@@ -26,7 +26,7 @@ export default function DialogDesktop(props) {
             }
         ));
     }
-}, [open]);
+}, [albumId,open,i18n.language]);
 const { journalDetail = [] } = useSelector(state => state.journal);
 React.useEffect(() => {
     setBanners([]);

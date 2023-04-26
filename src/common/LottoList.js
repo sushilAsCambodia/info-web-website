@@ -102,11 +102,14 @@ export default function LottoList(props) {
                 }}
                 textAlign="center"
               >
-                <img
-                  width="40px"
-                  height="40px"
-                  src="./assets/Logo/superlotto-logo.png"
-                />
+                <picture>
+                  <img
+                    width="40px"
+                    height="40px"
+                    alt="supper-logo"
+                    src="/assets/Logo/superlotto-logo.png"
+                  />
+                </picture>
               </Grid>
             }
             title={

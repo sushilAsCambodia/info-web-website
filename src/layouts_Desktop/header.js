@@ -52,7 +52,7 @@ const Header = () => {
     { label: t("lottery_draw"), page: "LotteryPage" },
     { label: t("data_chart"), page: "DataChart" },
     { label: "FootBall", page: "FootBall" },
-    { label: "BasketBall", page: "BasketBall" },
+    { label: "BasketBall", page: "basketBall" },
   ];
   return (
     <>

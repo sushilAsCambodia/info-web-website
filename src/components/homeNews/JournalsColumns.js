@@ -40,7 +40,6 @@ export default function JournalsColumns(props) {
   const {lang_id=''} = props; 
   const dispatch = useDispatch();
   const { journals = [], loading } = useSelector((state) => state.journal); 
-  console.log("journals:::",journals)
   useEffect(() => {
     dispatch(getJournal(
       {
@@ -90,7 +89,7 @@ export default function JournalsColumns(props) {
           >
             {journals.length > 0 ? journals.map((item,index)=>{
               return <JournalItem setOpen={setOpen} setAlbumId={setAlbumId} key={index} item={item}/>;
-            }):<Typography>No journal today</Typography>}
+            }):<Typography textAlign="center">No journal today</Typography>}
           </Carousel>
         <style>
           {

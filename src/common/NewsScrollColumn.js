@@ -23,20 +23,38 @@ export default function NewsScrollColumn(props) {
   const router = useRouter();
   const { newsCategory = [], lang_id = '' } = props;
   const [newsList, setNewsList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageLimit, setPageLimit] = useState('');
 
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
       getNewsByCategory({
-        params: { lang_id: lang_id, category_id: newsCategory.id, take: 10 },
+        params: { lang_id: lang_id, rowsPerPage: 10,shortTitle: "", category_id: newsCategory.id, page: currentPage },
         callback: (res) => {
-          setNewsList(res.data);
-          console.log(newsCategory.id,"newsscrollcol:::",newsList)
+          setNewsList(res.data.data);
+          console.log(newsCategory.id,"newsscroll col:::",res.data)
+          setPageLimit(res.data.last_page)
         },
       })
     );
   }, [newsCategory.id]);
+
+  useEffect(() => {
+    // NEXT PAGE 
+    dispatch(
+      getNewsByCategory({
+        params: { lang_id: lang_id, rowsPerPage: 10,shortTitle: "", category_id: newsCategory.id, page: currentPage },
+        callback: (res) => {
+          console.log("next page Function")
+          console.log("next page data :::",res.data.data)
+          console.log("next page newsList:::",newsList)
+          setNewsList(newsList.concat(res.data.data))
+        },
+      })
+    );
+  }, [currentPage]);
   const bg = ["Mask.png", "Mask2.png", "Mask3.png"];
   return (
     <>
@@ -82,22 +100,32 @@ export default function NewsScrollColumn(props) {
                   borderRadius: "10px 10px 0px 0px",
                 }}
               >
-                <Typography variant="h5" >
+                <Typography variant="h5" textTransform="capitalize">
                   {newsCategory.translation
                     ? newsCategory.translation?.category_name
                     : newsCategory.category_name || "N/A"}
                 </Typography>
                 <Button
+                disabled={newsList.length==0}
                   component={Link}
-                  href="/news"
+                  onClick={() =>
+                    Router.push({
+                      pathname: "/news",
+                      query: { category: newsCategory.id },
+                    })
+                  }
                   variant="contained"
                   sx={{
                     background: "#FFD233",
                     padding: "2px",
-                    fontSize: "13px",
+                    fontSize: "14px",
+                    "&:hover": {
+                      background: "#FF6F31",
+                      color:"white"
+                    }
                   }}
-                >
-                  {t("more")}
+                ><Typography> {t("more")}</Typography>
+                 
                 </Button>
               </Grid>
 
@@ -143,6 +171,9 @@ export default function NewsScrollColumn(props) {
                 }):
                 <Typography variant="h4" color="white">{t("no_news")}</Typography>
                 }
+                {pageLimit > currentPage ? 
+                <Button variant="contained" size="small">
+                <Typography onClick={()=>setCurrentPage(currentPage+1)} fontSize="12px" color="white">{t("load_more")}</Typography></Button>:""}
               </Grid>
             </Grid>
           </Grid>

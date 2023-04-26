@@ -7,6 +7,10 @@ import {
   Stack,
   Grid,
   Link,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { Router, useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,24 +19,42 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTranslation } from "react-i18next";
 import utils from "@/common/utils";
 import moment from "moment/moment";
-import { getNewsByCategory,getNewsAll } from "@/store/actions/newsActions";
+import { getNewsByCategory } from "@/store/actions/newsActions";
+import { getCategory } from "@/store/actions/categoryActions";
+
 const News = () => {
   const matches = useMediaQuery("(max-width:768px)");
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const { i18n } = useTranslation();
   const lang_id = utils.convertLangCodeToID(i18n.language);
 
-  const { newsAll } = useSelector((state) => state.news);
+  const { news } = useSelector((state) => state.news);
   const router = useRouter();
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPage, setTotalPage] = useState('');
+  const [totalPage, setTotalPage] = useState("");
 
-  const [allNews, setAllNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log("newsAll:::", newsAll);
+  const { query } = router;
+  const category_id = query?.category || undefined;
+  console.log("newsall category_id:::", category_id);
+
+  const handleCategoryChange = (event) => {
+    // setCategoryName(event.target.value);
+    console.log("category newsAll:::", event.target.value);
+    router.push({
+      pathname: "/news",
+      query: { category: event.target.value },
+    });
+  };
+
+  const { categories = [] } = useSelector((state) => state.category);
+
+  console.log("news cate ID:::", category_id);
+  console.log("news:::", news);
+
   const breadcrumbs = [
     <Link
       underline="hover"
@@ -42,32 +64,77 @@ const News = () => {
       sx={{ cursor: "pointer" }}
       onClick={() => router.push("/")}
     >
-      Home
+      {t("home")}
     </Link>,
     <Typography key="2" color="#F24E1E">
-      News
+      {t("news")}
     </Typography>,
+    category_id ? (
+      <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+        <InputLabel id="demo-select-small-label">
+          {t("select_category")}
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="category-select"
+          value={category_id}
+          label={t("select_category")}
+          onChange={handleCategoryChange}
+        >
+          <MenuItem value={"All"}>{t("all")}</MenuItem>
+          {categories.map((item, index) => {
+            return (
+              <MenuItem key={index} value={item.id}>
+                {item.category_name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
+    ) : (
+      "Loading"
+    ),
   ];
+
+  useEffect(() => {
+    console.log("useefect on langID useeffect:::", category_id);
+
+    dispatch(
+      getCategory({
+        params: { lang_id: lang_id },
+        callback: (res) => {
+          console.log("news page getCategorys:::", res);
+        },
+      })
+    );
+  }, [lang_id]);
 
   const handleChange = (event, value) => {
     setCurrentPage(value);
   };
 
   useEffect(() => {
-    setLoading(true);
+    console.log("lang_id, currentPage, category_id useeffect:::", category_id);
 
+    setLoading(true);
     dispatch(
-      getNewsAll({
-        params: { lang_id: lang_id,rowsPerPage:10,shortTitle:'',category_id:'',page:currentPage },
+      getNewsByCategory({
+        params: {
+          lang_id: lang_id,
+          rowsPerPage: 10,
+          shortTitle: "",
+          category_id: category_id == "All" ? "" : category_id,
+          page: currentPage,
+        },
         callback: (res) => {
           // console.log("News Page:::", res.data.data);
           // setAllNews(res.data.data);
-          setTotalPage(res.data.last_page)
+          setTotalPage(res.data.last_page);
           setLoading(false);
         },
       })
     );
-  }, [lang_id,currentPage]);
+  }, [lang_id, currentPage, category_id]);
   return (
     <>
       <Grid
@@ -97,7 +164,16 @@ const News = () => {
             paddingBottom={2}
           >
             <Grid>
-              <Typography variant="h5" fontWeight={600}>
+              <Typography
+                variant="h5"
+                fontWeight={600}
+                textTransform="capitalize"
+              >
+                {!loading && news.length != 0
+                  ? category_id == "All"
+                    ? "Every"
+                    : news[0].category_name
+                  : "No"}{" "}
                 {t("news")}
               </Typography>
             </Grid>
@@ -114,15 +190,22 @@ const News = () => {
           </Grid>
           {!loading ? (
             <Grid container padding="0px">
-              {newsAll.data.map((item, index) => {
+              {news.map((item, index) => {
                 return (
-                  <Grid item xs={12} sm={6} md={3} key={index} p={1} 
-                  onClick={() =>
-                    router.push({
-                      pathname: "/newsSingle",
-                      query: { news_id: item.id },
-                    })
-                  }>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={3}
+                    key={index}
+                    p={1}
+                    onClick={() =>
+                      router.push({
+                        pathname: "/newsSingle",
+                        query: { news_id: item.id },
+                      })
+                    }
+                  >
                     <Grid
                       item
                       p={2}
@@ -130,13 +213,14 @@ const News = () => {
                         backgroundColor: "#FFF5F0",
                         borderRadius: "11px",
                         border: "1px solid #FF6F31",
-                        minHeight:"145px"
+                        minHeight: "145px",
+                        cursor: "pointer",
                       }}
                     >
-                      <Typography title={item.title}  
-                      className="twoLinesEllip"
-                     >{item.title}</Typography>
-                      
+                      <Typography title={item.title} className="twoLinesEllip">
+                        {item.title}
+                      </Typography>
+
                       <Typography
                         paddingTop={1}
                         textAlign="left"
@@ -153,20 +237,27 @@ const News = () => {
           ) : (
             "loading"
           )}
-          {totalPage == 1 ? '':
-          <Grid
-            item
-            xs={12}
-            textAlign="center"
-            display="flex"
-            justifyContent="center"
-            paddingTop={3}
-          >
-            <Stack spacing={2} sx={{ textAlign: "center" }}>
-              <Pagination count={totalPage ? totalPage:1} variant="outlined" shape="rounded" onChange={handleChange}/>
-            </Stack>
-          </Grid>
-          }
+          {totalPage == 1 ? (
+            ""
+          ) : (
+            <Grid
+              item
+              xs={12}
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              paddingTop={3}
+            >
+              <Stack spacing={2} sx={{ textAlign: "center" }}>
+                <Pagination
+                  count={totalPage ? totalPage : 1}
+                  variant="outlined"
+                  shape="rounded"
+                  onChange={handleChange}
+                />
+              </Stack>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </>

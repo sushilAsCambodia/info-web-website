@@ -3,7 +3,7 @@ const initialState = {
     loading:false,
     data:[]
 }
-export default function (state = initialState, action) {
+const CustomerServiceReducer = (state = initialState, action)  => {
   switch (action.type) {
     case 'customer-service-settings/list/pending':
       return {
@@ -28,3 +28,4 @@ export default function (state = initialState, action) {
   }
   return state;
 }
+export default CustomerServiceReducer;

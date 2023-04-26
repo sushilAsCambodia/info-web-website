@@ -10,19 +10,19 @@ export default function JournalCardDetails() {
   const { loadingJournalDetail, journalDetail = [] } = useSelector(state => state.journal);
   const [images, setImages] = useState([]);
   const router = useRouter();
-  const { query } = router;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (query.album_id) {
-      dispatch(getJournalDetial(
-        {
-          id: query.album_id,
-          params: { lang_id: query.lang_id },
-          callback: (res) => { }
-        }
-      ));
-    }
-  }, [query])
+  // const { query } = router;
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (query.album_id) {
+  //     dispatch(getJournalDetial(
+  //       {
+  //         id: query.album_id,
+  //         params: { lang_id: query.lang_id },
+  //         callback: (res) => { }
+  //       }
+  //     ));
+  //   }
+  // }, [query])
   useEffect(() => {
     if (Array.isArray(journalDetail) && journalDetail.length > 0) {
       const item = journalDetail[0];

@@ -14,13 +14,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 const App = ({ Component, pageProps }) => {
   const { i18n } = useTranslation();
   const matches = useMediaQuery("(max-width:768px)");
-
   useEffect(() => {
     if (typeof window != "undefined") {
       const lang = window.localStorage.getItem("lang") || "en";
       i18n.changeLanguage(lang);
     }
-  }, []);
+  }, [i18n]);
   return (
     <>
       <Provider store={store}>

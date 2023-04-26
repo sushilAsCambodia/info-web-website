@@ -3,7 +3,7 @@ const initialState = {
   advertises:[],
   loading:false
 } 
-export default function (state = initialState, action) {
+const AdvertiseReducer =  (state = initialState, action) => {
   switch (action.type) {
     case 'advertise/list/pending':
       return {
@@ -28,3 +28,4 @@ export default function (state = initialState, action) {
   }
   return state;
 } 
+export default AdvertiseReducer;
