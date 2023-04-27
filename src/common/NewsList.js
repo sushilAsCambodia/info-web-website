@@ -12,54 +12,44 @@ import Slider from "react-slick";
 import moment from "moment/moment";
 import utils from "./utils";
 
-export default function NewsSlider(props) {
-  const { t } = useTranslation();
-  const theme = useTheme();
-  const router = useRouter();
-  const { catId = [], lang_id = [] } = props;
-  const dispatch = useDispatch();
-  const [newsList, setNewsList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageLimit, setPageLimit] = useState(1);
-
+export default function NewsList(props) { 
+  const {list = {},type,setIsFetching,setPage } = props;
+  // listiner on scroll behavior
+  const onScroll = (el,list) => {
+    const scrollableHeight = el.target.scrollHeight - el.target.clientHeight
+    if (el.target.scrollTop >= scrollableHeight) {
+      const {current_page,last_page,next_page_url} = list;
+      if(next_page_url) {
+        const url = new URL(next_page_url);
+        const params = url.searchParams;
+        const to = params.get('page');
+        if(current_page < last_page) {
+          console.log('fetch')
+          setPage(to)
+          setIsFetching(new Date().getTime());
+        }
+      }else {
+        console.log('last')
+      }
+    }
+  }
+  // add listiner on scroll behavior
   useEffect(() => {
-    dispatch(
-      getNewsByCategory({
-        params: {
-          lang_id: lang_id,
-          rowsPerPage: 10,
-          shortTitle: 7,
-          category_id: catId,
-          page: 1,
-        },
-        callback: (res) => {
-          setNewsList(res.data.data);
-          setPageLimit(res.data.last_page);
-          console.log(catId, "newsSlider3:::", res.data);
-        },
-      })
-    );
-  }, [catId]);
-
-  useEffect(() => {
-    dispatch(
-      getNewsByCategory({
-        params: {
-          lang_id: lang_id,
-          rowsPerPage: 10,
-          shortTitle: 7,
-          category_id: catId,
-          page: currentPage,
-        },
-        callback: (res) => {
-          setNewsList(newsList.concat(res.data.data));
-        },
-      })
-    );
-  }, [currentPage]);
+    if(Object.keys(list).length > 0) {
+      const el = document.querySelector(`#news-scroll-wrapper-${type} > .MuiGrid-root`);
+      if(el) {
+        el.addEventListener('scroll', (e) => onScroll(e,list))
+      }
+      return () => { 
+        if(el) {
+          el.removeEventListener('scroll',(e) => onScroll(e,list));
+        }
+      };
+    }
+  },[list])
   return (
     <>
-      <Grid overflow="auto" minHeight="300px" maxHeight="450px" pb={1}>
+      <Grid overflow="auto" minHeight="300px" maxHeight="450px" pb={1} id={`news-scroll-wrapper-${type}`}>
         <Grid
           sx={{
             borderRadius: "0px 0px 10px 10px",
@@ -67,10 +57,9 @@ export default function NewsSlider(props) {
             maxHeight: 440,
             overflow: "auto",
           }}
-          textAlign="center"
-        >
-          {newsList &&
-            newsList.map((item, index) => {
+          textAlign="center">
+          { Object.keys(list).length && list.hasOwnProperty('data') &&
+            list.data.length > 0 && list.data.map((item, index) => {
               return (
                 <Grid
                   key={index}
@@ -111,32 +100,8 @@ export default function NewsSlider(props) {
                   </Grid>
                 </Grid>
               );
-            })}
-          {pageLimit > currentPage ? (
-            <Button
-              size="small"
-              variant="contained"
-              sx={{
-                background:
-                  "linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%)",
-                border: "1px solid #DDDDDD",
-                "&:hover": {
-                  color: "white"
-                }
-              }}
-            >
-              <Typography
-                fontSize="13px"
-                onClick={() => {
-                  setCurrentPage(currentPage + 1);
-                }}
-              >
-                {t("load_more")}
-              </Typography>
-            </Button>
-          ) : (
-            ""
-          )}
+            })
+          } 
         </Grid>
       </Grid>
     </>

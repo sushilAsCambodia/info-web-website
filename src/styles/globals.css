@@ -752,3 +752,6 @@ visibility: visible;
 .mainautoplayswipeable .MuiPaper-elevation {
   z-index: 0;
 }
+.d-none {
+  display: none;
+}

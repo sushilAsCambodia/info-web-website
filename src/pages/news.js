@@ -21,40 +21,27 @@ import utils from "@/common/utils";
 import moment from "moment/moment";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import { getCategory } from "@/store/actions/categoryActions";
-
+import LoadingDialog from "@/components/Loading";
 const News = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const { t } = useTranslation();
   const { i18n } = useTranslation();
   const lang_id = utils.convertLangCodeToID(i18n.language);
-
   const { news } = useSelector((state) => state.news);
   const router = useRouter();
   const dispatch = useDispatch();
-
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState("");
-
   const [loading, setLoading] = useState(true);
-
   const { query } = router;
   const category_id = query?.category || undefined;
-  console.log("newsall category_id:::", category_id);
-
   const handleCategoryChange = (event) => {
-    // setCategoryName(event.target.value);
-    console.log("category newsAll:::", event.target.value);
     router.push({
       pathname: "/news",
       query: { category: event.target.value },
     });
   };
-
   const { categories = [] } = useSelector((state) => state.category);
-
-  console.log("news cate ID:::", category_id);
-  console.log("news:::", news);
-
   const breadcrumbs = [
     <Link
       underline="hover"
@@ -95,7 +82,6 @@ const News = () => {
       "Loading"
     ),
   ];
-
   useEffect(() => {
     console.log("useefect on langID useeffect:::", category_id);
 
@@ -108,14 +94,10 @@ const News = () => {
       })
     );
   }, [lang_id]);
-
   const handleChange = (event, value) => {
     setCurrentPage(value);
   };
-
   useEffect(() => {
-    console.log("lang_id, currentPage, category_id useeffect:::", category_id);
-
     setLoading(true);
     dispatch(
       getNewsByCategory({
@@ -127,8 +109,6 @@ const News = () => {
           page: currentPage,
         },
         callback: (res) => {
-          // console.log("News Page:::", res.data.data);
-          // setAllNews(res.data.data);
           setTotalPage(res.data.last_page);
           setLoading(false);
         },
@@ -137,12 +117,12 @@ const News = () => {
   }, [lang_id, currentPage, category_id]);
   return (
     <>
+      <LoadingDialog loading={loading} />
       <Grid
         container
         alignItems="flex-start"
         justifyContent="center"
-        padding="20px 16px"
-      >
+        padding="20px 16px">
         <Grid
           item
           xs={12}
@@ -188,55 +168,51 @@ const News = () => {
               </Stack>
             </Grid>
           </Grid>
-          {!loading ? (
-            <Grid container padding="0px">
-              {news.map((item, index) => {
-                return (
+          <Grid container padding="0px">
+            {news.map((item, index) => {
+              return (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={3}
+                  key={index}
+                  p={1}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/newsSingle",
+                      query: { news_id: item.id },
+                    })
+                  }
+                >
                   <Grid
                     item
-                    xs={12}
-                    sm={6}
-                    md={3}
-                    key={index}
-                    p={1}
-                    onClick={() =>
-                      router.push({
-                        pathname: "/newsSingle",
-                        query: { news_id: item.id },
-                      })
-                    }
+                    p={2}
+                    sx={{
+                      backgroundColor: "#FFF5F0",
+                      borderRadius: "11px",
+                      border: "1px solid #FF6F31",
+                      minHeight: "145px",
+                      cursor: "pointer",
+                    }}
                   >
-                    <Grid
-                      item
-                      p={2}
-                      sx={{
-                        backgroundColor: "#FFF5F0",
-                        borderRadius: "11px",
-                        border: "1px solid #FF6F31",
-                        minHeight: "145px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <Typography title={item.title} className="twoLinesEllip">
-                        {item.title}
-                      </Typography>
+                    <Typography title={item.title} className="twoLinesEllip">
+                      {item.title}
+                    </Typography>
 
-                      <Typography
-                        paddingTop={1}
-                        textAlign="left"
-                        fontSize="12px !important"
-                        color="#8C8C8C"
-                      >
-                        {moment(item.release_date).format(utils.letterFormat)}
-                      </Typography>
-                    </Grid>
+                    <Typography
+                      paddingTop={1}
+                      textAlign="left"
+                      fontSize="12px !important"
+                      color="#8C8C8C"
+                    >
+                      {moment(item.release_date).format(utils.letterFormat)}
+                    </Typography>
                   </Grid>
-                );
-              })}
-            </Grid>
-          ) : (
-            "loading"
-          )}
+                </Grid>
+              );
+            })}
+          </Grid>
           {totalPage == 1 ? (
             ""
           ) : (

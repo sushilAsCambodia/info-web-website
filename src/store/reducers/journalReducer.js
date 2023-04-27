@@ -7,6 +7,7 @@ const initialState = {
     issue:{},
     years:[],
     loading:false,
+    yearLoading:false,
     loadingJournalDetail:false,
 }
 const JournalReducer =  (state = initialState, action) => {
@@ -18,9 +19,13 @@ const JournalReducer =  (state = initialState, action) => {
         status:'pending'
       };
     case 'journal/list/fulfilled':
+      let journals = action.payload?.data;
+      if(journals.length > 0) {
+        journals= journals.filter(j => j.status === 1)
+      }
       return {
         ...state,
-        journals: action.payload?.data || [],
+        journals: journals || [],
         status:'completed',
         loading: false
       };
@@ -39,7 +44,7 @@ const JournalReducer =  (state = initialState, action) => {
         journalDetail: [],
         status:'failed'
       };
-    case 'journal/album-details/fulfilled':
+    case 'journal/album-details/fulfilled': 
       return {
         ...state,
         journalDetail: action.payload?.data || [],
@@ -74,13 +79,12 @@ const JournalReducer =  (state = initialState, action) => {
     case 'journal/album/year/pending':
       return {
         ...state, 
-        loading:true,
+        yearLoading:true,
         years:[],
         status:'pending'
       };
     case 'journal/album/year/fulfilled':
       const {data} = action.payload;
-      // let uniqueYear = [2020,2021,2022,2023,2024,2025];
       let uniqueYear = [];
       if(data && Object.keys(data).length) {
         const years = data?.data || [];
@@ -98,12 +102,12 @@ const JournalReducer =  (state = initialState, action) => {
         ...state,
         status:'completed',
         years: uniqueYear,
-        loading: false
+        yearLoading:false,
       };
     case 'journal/album/year/rejected':
       return {
         ...state, 
-        loading:false,
+        yearLoading:false,
         years:[],
         status:'failed'
       };

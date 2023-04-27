@@ -59,7 +59,7 @@ export default function NewsScrollColumn(props) {
   return (
     <>
       {
-        <Grid item xs={6} lg={4} textAlign="center" padding="5px">
+        <Grid item xs={6} lg={4} textAlign="center" padding="5px" className={newsList.length<=0?'d-none':''}>
           <Grid
             sx={{
               // border: "2px dashed red",
