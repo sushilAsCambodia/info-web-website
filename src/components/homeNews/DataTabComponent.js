@@ -14,17 +14,41 @@ import Router from "next/router";
 import Empty from '../Empty';
 import moment from 'moment/moment';
 import utils from '@/common/utils';
-const rowsPerPage = 2;
-const DataTabComponent = ({id,lang_id}) => {
+const rowsPerPage = 10;
+const DataTabComponent = ({id,lang_id,isFetching}) => {
+    const dispatch = useDispatch();
     const {news} = useSelector((state) => state.news); 
     const [page, setPage] = React.useState(1);
     const [showLoadMore, setShowLoadMore] = React.useState(false);
-    const dispatch = useDispatch();
-    React.useEffect(() => {
-        getData(1);
-    },[id]);
+    const [noMoreData, setNoMoreData] = React.useState(false);
     const [loading, setLoading] = React.useState(true);
     const [loadingMore,setLoadingMore] = React.useState(false);
+    React.useEffect(() => {
+        if(isFetching > 0 && showLoadMore) {
+            loadMore(page)
+        }
+    },[isFetching])
+    React.useEffect(() => { 
+        setNoMoreData(false);
+        getData(1);
+    },[id]);
+    const manageDataPaginatioin = (data) => {
+        const currentPage = data?.current_page;
+        const lastPage = data?.last_page;
+        if(data.next_page_url) {
+            const url = new URL(data.next_page_url);
+            const params = url.searchParams;
+            const to = params.get('page');
+            if(currentPage < lastPage) {
+                setPage(to);
+                setShowLoadMore(true);  
+            }else {
+                setShowLoadMore(false);
+            }
+        }else {
+            setShowLoadMore(false);
+        }
+    };
     // get more news by category
     const loadMore = (p) => {
         setLoadingMore(true);
@@ -36,21 +60,17 @@ const DataTabComponent = ({id,lang_id}) => {
                     setLoadingMore(false);
                     const {status_code,data} = res;
                     if([200,201,202,203,204].includes(status_code)) {
-                        const currentPage = data?.current_page;
-                        const lastPage = data?.last_page;
-                        if(data.next_page_url) {
-                            const url = new URL(data.next_page_url);
-                            const params = url.searchParams;
-                            const to = params.get('page');
-                            if(currentPage < lastPage) {
-                                setPage(to);
-                                setShowLoadMore(true);
-                            }else {
-                                setShowLoadMore(false);
-                            }
-                        }else {
-                            setShowLoadMore(false);
+                        if(data.next_page_url === null) {
+                            setNoMoreData(true);
                         }
+                        manageDataPaginatioin(data); 
+                        setTimeout(() => {
+                            const liLength = document.querySelectorAll('.multitabs div[role="tabpanel"]:not(:empty) ul.MuiList-root > li');
+                            const li = document.querySelector(`.multitabs div[role="tabpanel"]:not(:empty) ul.MuiList-root > li:nth-of-type(${liLength.length - 1})`);
+                            if(li) {
+                                li.scrollIntoView({ block: "end" });
+                            }
+                        }, 1); 
                     }
                 }
             }
@@ -65,23 +85,8 @@ const DataTabComponent = ({id,lang_id}) => {
                     setLoading(false);
                     const {status_code,data} = res;
                     if([200,201,202,203,204].includes(status_code)) {
-                        const currentPage = data?.current_page;
-                        const lastPage = data?.last_page;
-                        if(data.next_page_url) {
-                            const url = new URL(data.next_page_url);
-                            const params = url.searchParams;
-                            const to = params.get('page');
-                            if(currentPage < lastPage) {
-                                setPage(to);
-                                setShowLoadMore(true);
-                            }else {
-                                setShowLoadMore(false);
-                            }
-                        }else {
-                            setShowLoadMore(false);
-                        }
-                        
-                    }
+                        manageDataPaginatioin(data); 
+                    } 
                 }
             }
         )); 
@@ -91,41 +96,41 @@ const DataTabComponent = ({id,lang_id}) => {
             loading ? <DataLoading size={30}/> :
             (
                 <Grid item xs={12} sm={12} md={12} xl={12}>
-                 <List  sx={{padding:'5px'}} >
-
-                    {news && news.length ? news.map((sport,index) => {
-                        return (
-                                <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
-                                    <Grid
-                                        container
-                                        sx={{ borderRadius: "5px",paddingTop:'10px' ,paddingBottom:'10px' }}
-                                        boxShadow="none"
-                                        display="flex"
-                                        alignItems="start">
-                                        <Grid item xs={3}>
-                                            <img src={sport.image ? sport.image?.path :'./assets/no-image.png'}
-                                                onError={(e) => e.target.src = './assets/no-image.png'}
-                                                width="100%"
-                                                height="50px"
-                                                style={{objectFit:"cover",borderRadius:'6px'}}/>
-                                        </Grid> 
-                                        <Grid item xs={9}>
-                                            <Grid item sx={{paddingLeft:'5px'}}>
-                                                <Box fontWeight="400" fontFamily="sans-serif" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,140)}}></Box>
-                                                <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="10px !important" whiteSpace="nowrap">
-                                                    {moment(sport.created_at).format(utils.formatDate)}
-                                                </Typography>
+                    <List sx={{padding:'5px'}} >
+                        {news && news.length ? news.map((sport,index) => {
+                            return (
+                                    <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
+                                        <Grid
+                                            container
+                                            sx={{ borderRadius: "5px",paddingTop:'10px' ,paddingBottom:'10px' }}
+                                            boxShadow="none"
+                                            display="flex"
+                                            alignItems="start">
+                                            <Grid item xs={3}>
+                                                <img src={sport.image ? sport.image?.path :'./assets/no-image.png'}
+                                                    onError={(e) => e.target.src = './assets/no-image.png'}
+                                                    width="100%"
+                                                    height="50px"
+                                                    style={{objectFit:"cover",borderRadius:'6px'}}/>
+                                            </Grid> 
+                                            <Grid item xs={9}>
+                                                <Grid item sx={{paddingLeft:'5px'}}>
+                                                    <Box fontWeight="400" fontFamily="sans-serif" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,140)}}></Box>
+                                                    <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="10px !important" whiteSpace="nowrap">
+                                                        {moment(sport.created_at).format(utils.formatDate)}
+                                                    </Typography>
+                                                </Grid>
                                             </Grid>
                                         </Grid>
-                                    </Grid>
-                                </ListItem> 
-                        );
-                    }) : <Empty/>}
-                     </List>
+                                    </ListItem> 
+                            );
+                        }) : <Empty/>}
+                    </List>
                 </Grid>
             )
         }
-        {showLoadMore && <Typography component="span" sx={{position:'absolute',bottom:0}} onClick={() => loadMore(page)}>{loadingMore?<DataLoading size={20}/>:<Button style={{fontSize:9}}>More</Button>}</Typography>}
+        {showLoadMore && <Typography component="span" sx={{position:'absolute',bottom:0}}>{loadingMore?<DataLoading size={20}/>:''}</Typography>}
+        { noMoreData && <Typography component="span" sx={{position:'absolute',bottom:7,fontSize:10,color:'#8C8C8C'}}>No more data</Typography>}
     </Grid>
 };
 export default DataTabComponent;

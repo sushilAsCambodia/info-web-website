@@ -92,16 +92,14 @@ export default function LandingPageBanner(props) {
               alignItems="center"
               justifyContent="space-around"
             >
-              <picture>
-                <img
-                  src={banner.image}
-                  alt={banner.label}
-                  style={{
-                    width: "100%",
-                    objectPosition:"0px -300px", 
-                  }}
-                />
-              </picture>
+              <img
+                src={banner.image}
+                alt={banner.label}
+                style={{
+                  width: "100%",
+                  objectPosition:"0px -300px", 
+                }}
+              />
             </Grid>
           ))}
         </Carousel>

@@ -98,8 +98,12 @@ export default function Index() {
               bottom: "20px",
             }}
           >
-            <Grid item color="#1639e5" fontFamily="sans-serif">
-              <Link href="/home">Continue to home page</Link>
+            <Grid item>
+              <Link href="/home">
+                <Typography fontWeight={700} fontSize="15px" color="#1639e5">
+                  {t('continue_to_home')}
+                </Typography>
+              </Link>
             </Grid>
           </Grid>
         </Grid>

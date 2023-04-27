@@ -198,12 +198,7 @@ function TabPanel(props) {
            />
           </Grid>
         ) : ( 
-          <Grid
-            container
-            alignItems="flex-start"
-            justifyContent="center"
-            padding="0px 16px"
-          >
+          <Grid container sx={{padding:2}}>
             <Grid
               item
               xs={12}
@@ -299,7 +294,7 @@ function TabPanel(props) {
                     <Grid
                       item
                       xs={12}
-                      sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                      sx={{ padding: "8px 0px", borderRadius: "5px" }}
                       boxShadow="none"
                       display="flex"
                       alignItems="center"
@@ -351,7 +346,7 @@ function TabPanel(props) {
                     <Grid
                       item
                       xs={12}
-                      sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                      sx={{ padding: "8px 0px", borderRadius: "5px" }}
                       boxShadow="none"
                       display="flex"
                       alignItems="center"
@@ -403,7 +398,7 @@ function TabPanel(props) {
                     <Grid
                       item
                       xs={12}
-                      sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                      sx={{ padding: "8px 0px", borderRadius: "5px" }}
                       boxShadow="none"
                       display="flex"
                       alignItems="center"
@@ -458,7 +453,7 @@ function TabPanel(props) {
                     <Grid
                       item
                       xs={12}
-                      sx={{ padding: "12px 0px", borderRadius: "5px" }}
+                      sx={{ padding: "8px 0px", borderRadius: "5px" }}
                       boxShadow="none"
                       display="flex"
                       alignItems="center"
