@@ -44,20 +44,20 @@ const News = () => {
   const { categories = [] } = useSelector((state) => state.category);
   const breadcrumbs = [
     <Link
+      key="home-page"
       underline="hover"
       component={Link}
-      key="1"
       color="inherit"
       sx={{ cursor: "pointer" }}
       onClick={() => router.push("/")}
     >
       {t("home")}
     </Link>,
-    <Typography key="2" color="#F24E1E">
+    <Typography key="news-page" color="#F24E1E">
       {t("news")}
     </Typography>,
     category_id ? (
-      <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+      <FormControl key="category-news-dropdown" sx={{ m: 1, minWidth: 200 }} size="small">
         <InputLabel id="demo-select-small-label">
           {t("select_category")}
         </InputLabel>
@@ -68,13 +68,11 @@ const News = () => {
           label={t("select_category")}
           onChange={handleCategoryChange}
         >
-          <MenuItem value={"All"}>{t("all")}</MenuItem>
+          <MenuItem value="All">{t("all")}</MenuItem>
           {categories.map((item, index) => {
-            return (
-              <MenuItem key={index} value={item.id}>
+            return <MenuItem key={item.id} value={item.id}>
                 {item.category_name}
               </MenuItem>
-            );
           })}
         </Select>
       </FormControl>
