@@ -34,7 +34,6 @@ const JournalReducer =  (state = initialState, action) => {
       return {
         ...state, 
         loadingJournalDetail:true,
-        journalDetail: [],
         status:'pending'
       };
     case 'journal/album-details/rejected':
@@ -45,9 +44,10 @@ const JournalReducer =  (state = initialState, action) => {
         status:'failed'
       };
     case 'journal/album-details/fulfilled': 
+      const djournalDetials = action.payload?.data; 
       return {
         ...state,
-        journalDetail: action.payload?.data || [],
+        journalDetail: djournalDetials.map(r => { r.album_slavs = []; return r; }) || [],
         status:'completed',
         loadingJournalDetail: false
       };
