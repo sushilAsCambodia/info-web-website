@@ -19,8 +19,7 @@ export default function JournalItem(props) {
         onClick={() => {setOpen(true);setAlbumId(item.id)}}
         sx={{
           margin: "5px",
-          borderRadius: "10px",
-        //   paddingX:"5px"
+          borderRadius: "10px"
         }}
       >
         <Grid
@@ -60,23 +59,24 @@ export default function JournalItem(props) {
                   <Icon icon="ic:outline-calendar-today" color="grey" />
                   <Typography color="grey" fontSize="12px" ml={1}>
                     {" "}
-                    {moment(item.issue_date).format('yyyy')}
+                    {item?.album_slavs_latest?.issue_date ? moment(item?.album_slavs_latest?.issue_date).format('yyyy') : "N/A"}
                   </Typography>
                 </Grid>
-                <Button
-                  variant="contained"
-                  sx={{
-                    background: "linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)",
-                    paddingX: "10px",
-                    fontSize: "8px",
-                    color: "white",
-                    borderRadius: "50px",
-                    whiteSpace: "nowrap",
-                    marginTop:"10px"
-                  }}
-                >
-                  Latest Issue {item.issue||''}
-                </Button>
+                {
+                  item.album_slavs_latest !=null && <Button
+                    variant="contained"
+                    sx={{
+                      background: "linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)",
+                      paddingX: "10px",
+                      fontSize: "8px",
+                      color: "white",
+                      borderRadius: "50px",
+                      whiteSpace: "nowrap",
+                      marginTop:"10px"
+                    }}>
+                    Latest Issue {item?.album_slavs_latest?.issue || 'N/A'}
+                  </Button>
+                }
             </Grid>
           </Grid>
         </Grid>

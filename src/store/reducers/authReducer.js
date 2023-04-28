@@ -74,6 +74,13 @@ const AuthReducer = (state = initialState, action) => {
         loading: true,
         status: 'pending'
       };
+    // update profile block
+    case 'customers/update-nickname/rejected':
+      return {
+        ...state,
+        loading: false,
+        status: 'failed'
+      };
     case 'customers/update-nickname/fulfilled':
       const stateData = {
         ...state,

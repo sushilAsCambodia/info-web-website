@@ -104,7 +104,7 @@ export default function Login() {
             setTimeout(() => {
               //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
               matches ? window.location.href = window.location.origin+'/home' : Router.push("/");
-            }, 1000);
+            }, 1);
           }
         },
       })

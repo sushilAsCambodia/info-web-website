@@ -16,6 +16,7 @@ export default function DialogDesktop(props) {
   const handleClose = () => {
     setOpen(false);
   };   
+
   React.useEffect(() => {
     if (open) {
         dispatch(getJournalDetial(
@@ -26,25 +27,29 @@ export default function DialogDesktop(props) {
             }
         ));
     }
-}, [albumId,open,i18n.language]);
-const { journalDetail = [] } = useSelector(state => state.journal);
-React.useEffect(() => {
-    setBanners([]);
-    if(Array.isArray(journalDetail) && journalDetail.length > 0) {
-      const item = journalDetail[0];
-      const images = []; 
-      for (let i = 0; i < item.album_slavs.length; i++) {
-        images.push({
-          original:item.album_slavs[i].images,
-          thumbnail:item.album_slavs[i].images,
-          issue:item.album_slavs[i].issue,
-          issue_date:item.album_slavs[i].issue_date,
-          album_name:item.album_name,
-        })
+  }, [albumId,open,i18n.language]);
+
+  const { journalDetail = [] } = useSelector(state => state.journal);
+  
+  React.useEffect(() => {
+      setBanners([]);
+      if(Array.isArray(journalDetail) && journalDetail.length > 0) {
+        const item = journalDetail[0];
+        const images = []; 
+        for (let i = 0; i < item.album_slavs.length; i++) {
+          images.push({
+            original:item.album_slavs[i].images,
+            thumbnail:item.album_slavs[i].images,
+            issue:item.album_slavs[i].issue,
+            issue_date:item.album_slavs[i].issue_date,
+            album_name:item.album_name,
+          })
+        }
+        setBanners(images);
       }
-      setBanners(images);
-    }
-},[journalDetail])
+  },[journalDetail]);
+  
+  
   return (
     <Dialog
       open={open}

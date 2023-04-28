@@ -58,7 +58,7 @@ export default function NewsColumns(props) {
           return (
           <NewsScrollColumn key={index} newsCategory={item} lang_id={lang_id} />
           );
-        }):<Typography>{t("no_news")}</Typography>
+        }):<Typography component="div">{t("no_news")}</Typography>
       }
       </Grid>
     </Grid>

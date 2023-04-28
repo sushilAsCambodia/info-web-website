@@ -13,8 +13,9 @@ import DataLoading from '../DataLoading';
 import DataNotFound from '../DataNotFound';
 export default function DialogDesktop(props) {
     const dispatch = useDispatch();
-    const { albumId = undefined } = props;
+    const { albumId } = props;
     const [value, setValue] = React.useState(0);
+    const [firstFetch, setFirstFetch] = React.useState(true);
     const [activeIssue, setActiveIssue] = React.useState(0);
     const { loading, issue = {}, years = [] } = useSelector(state => state.journal);
     React.useEffect(() => {
@@ -25,7 +26,7 @@ export default function DialogDesktop(props) {
                         params:{
                             albumId: albumId,
                         },
-                        callback:(res) => { }
+                        callback:(res) => {}
                     }
                 )
             );
@@ -33,8 +34,11 @@ export default function DialogDesktop(props) {
         }
     },[albumId]);
     React.useEffect(() => {
-        if(years.length  > 0) {
-            fetchIssue(years[value]);
+        if(years.length > 0) {
+            if(firstFetch) { 
+                setFirstFetch(false);
+                fetchIssue(years[value]);
+            }
         }
     },[years]);
     const fetchIssue = (issueDate) => {
@@ -45,7 +49,14 @@ export default function DialogDesktop(props) {
                         albumId: albumId,
                         issueDate
                     },
-                    callback:(res) => {  }
+                    callback:(res) => { 
+                        setFirstFetch(true);
+                        const {data = {}} = res;
+                        if(Object.keys(data).length > 0 && data.hasOwnProperty('data') && data.data.length > 0) {
+                            const firstIssue = data.data[0];
+                            openIssue(firstIssue.issue,0)
+                        }
+                    }
                 }
             )
         )
