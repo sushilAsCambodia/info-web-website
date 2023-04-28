@@ -27,7 +27,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 
 import { Icon } from "@iconify/react";
-
+import { lottoTable } from "./LotteryPage";
 export default function LotteryPastReults() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
@@ -365,30 +365,4 @@ export default function LotteryPastReults() {
   );
 }
 
-export function lottoTable(lottos) {
-  return (
-    <>
-      <Grid
-        container
-        width="max-content"
-        border="1px solid grey"
-        // borderRadius="10px"
-        background="red"
-      >
-        {lottos.numbers.map((lotto, index) => {
-          return (
-            <Grid
-              key={index}
-              px={1}
-              className={`${
-                lotto === lottos.winner ? "lotteryPageHit" : "lotteryPageMiss"
-              }`}
-            >
-              {lotto}
-            </Grid>
-          );
-        })}
-      </Grid>
-    </>
-  );
-}
+
