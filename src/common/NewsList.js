@@ -1,19 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Typography, Divider, Button, Link } from "@mui/material";
+import { Typography, Link } from "@mui/material";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { useTheme } from "@mui/material/styles";
-import { getNewsByCategory } from "@/store/actions/newsActions";
-import Slider from "react-slick";
+import { useEffect } from "react"; 
 import moment from "moment/moment";
 import utils from "./utils";
-
+import DataLoading from "@/components/DataLoading";
 export default function NewsList(props) { 
-  const {list = {},type,setIsFetching,setPage } = props;
+  const {list = {}, type, setIsFetching, setPage, setType, loading } = props;
+  const router = useRouter();
   // listiner on scroll behavior
   const onScroll = (el,list) => {
     const scrollableHeight = el.target.scrollHeight - el.target.clientHeight
@@ -24,12 +19,10 @@ export default function NewsList(props) {
         const params = url.searchParams;
         const to = params.get('page');
         if(current_page < last_page) {
-          console.log('fetch')
+          setType(type);
           setPage(to)
           setIsFetching(new Date().getTime());
         }
-      }else {
-        console.log('last')
       }
     }
   }
@@ -48,7 +41,7 @@ export default function NewsList(props) {
     }
   },[list])
   return (
-    <>
+    <Grid container style={{position:'relative'}}>
       <Grid overflow="auto" minHeight="300px" maxHeight="450px" pb={1} id={`news-scroll-wrapper-${type}`}>
         <Grid
           sx={{
@@ -58,8 +51,8 @@ export default function NewsList(props) {
             overflow: "auto",
           }}
           textAlign="center">
-          { Object.keys(list).length && list.hasOwnProperty('data') &&
-            list.data.length > 0 && list.data.map((item, index) => {
+          { (Object.keys(list).length > 0 && list.hasOwnProperty('data') &&
+            list.data.length > 0) && list.data.map((item, index) => {
               return (
                 <Grid
                   key={index}
@@ -104,6 +97,7 @@ export default function NewsList(props) {
           } 
         </Grid>
       </Grid>
-    </>
+      {loading && <DataLoading inside={true} size={25}/>}
+    </Grid>
   );
 }

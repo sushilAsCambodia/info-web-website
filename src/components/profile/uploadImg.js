@@ -41,13 +41,12 @@ const UploadImg = () => {
   const { customer, loading } = useSelector((state) => state.auth);
   const [userName, setUsername] = useState((customer && customer.user_name ? customer.user_name : ''));
   const [nickName, setNickName] = useState((customer && customer.nick_name ? customer.nick_name : ''));
+  const [disabledNickName, setDisabledNickName] = useState((customer && customer.nick_name != '' ? true : false));
   const { t } = useTranslation();
   const [imagePreviewUrl, setImagePreviewUrl] = useState();
   const dispatch = useDispatch();
   const [errorNickName, setErrorNickName] = useState(false);
-  const [errorNickNameMessage, setErrorNickNameMessage] = useState('');
-  const [errorUserName, setErrorUserName] = useState(false);
-  const [errorUserNameMessage, setErrorUserNameMessage] = useState('');
+  const [errorNickNameMessage, setErrorNickNameMessage] = useState(''); 
   const [editUserName, setEditUserName] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const [password, setPassword] = useState('');
@@ -127,43 +126,7 @@ const UploadImg = () => {
     if (customer && customer.image) {
       setImagePreviewUrl(customer.image.path || '');
     }
-  }, [customer]);
-  const onChangeUserName = (e) => {
-    setUsername(e.target.value)
-    if (e.target.value == '') {
-      setErrorUserName(true);
-      setErrorUserNameMessage(t('user_name_required'));
-    } else {
-      if (e.target.value.length > 5) {
-        setErrorUserName(false);
-      } else {
-        setErrorUserName(true);
-        setErrorUserNameMessage(t('validate_user_name'));
-      }
-    }
-  }
-  const onUpdateUserName = () => {
-    if (!errorUserName) {
-      dispatch(
-        updateNickName(
-          {
-            body: {
-              user_name: userName
-            },
-            callback: (res) => {
-              let { message = '' } = res;
-              if (message === 'user_name_unique') {
-                message = 'update_user_name_unique';
-              }
-              setOpenDialog(true);
-              setResponseMessage(t(message));
-            },
-            auth: true
-          }
-        )
-      );
-    }
-  };
+  }, [customer]); 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     if (e.target.value == '') {
@@ -277,14 +240,14 @@ const UploadImg = () => {
               }}>
               <OutlinedInput
                 sx={{ paddingRight: "10px" }}
-                name="Username"
-                placeholder={t('user_name')}
+                name="nickname"
+                placeholder={t('nick_name')}
                 inputProps={{ maxLength: 16 }}
-                id="outlined-adornment-username"
+                id="outlined-adornment-nickname"
                 type="text"
-                value={userName}
-                onChange={onChangeUserName}
-                error={errorUserName}
+                value={nickName}
+                onChange={(e) => setNickName(e.target.value)}
+                error={errorNickName}
                 endAdornment={
                   <InputAdornment position="end">
                     <Button
@@ -295,13 +258,13 @@ const UploadImg = () => {
                         background: "#FF6E31",
                         textTransform: 'capitalize'
                       }}
-                      onClick={onUpdateUserName}>
+                      onClick={setUpdateNickName}>
                       {t('save')}
                     </Button>
                   </InputAdornment>
                 }
               />
-              {errorUserName && <FormHelperText error>{errorUserNameMessage}</FormHelperText>}
+              {errorNickName && <FormHelperText error>{errorNickNameMessage}</FormHelperText>}
             </FormControl>
           </Grid>
         </ListItem>}
@@ -419,14 +382,46 @@ const UploadImg = () => {
     setEditUserName(false);
     setState({ ...state, bottom: false });
   }
-  const onUpdateNickName = (e) => {
-    console.log(nickName,textAction);
+  const onUpdateNickName = () => {
+    setEditPassword(false);
+    setEditUserName(true);
+    if(nickName == '') {
+      if(textAction == 'edit') {
+        setEditUserName(true);
+        setState({ ...state, bottom: true });
+      }else {
+        setErrorNickName(true);
+        setErrorNickNameMessage(t('nick_name_required'));
+      }
+    }else {
+      if (nickName.length < 6) {
+        if(textAction == 'edit') {
+          setEditUserName(true);
+          setState({ ...state, bottom: true });
+        }else {
+          setErrorNickName(true);
+          setErrorNickNameMessage(t('validate_nick_name'));
+        }
+      }else {
+        setErrorNickName(false);
+        if(textAction == 'save') {
+          setUpdateNickName();
+        }else {
+          setEditUserName(true);
+          setState({ ...state, bottom: true });
+        }
+      }
+    }
+  }
+  const setUpdateNickName = () => {
     if(nickName == '') {
       setErrorNickName(true);
-      setErrorNickNameMessage('nickname_is_required');
+      setErrorNickNameMessage(t('nick_name_required'));
     }else {
-      setErrorNickName(false);
-      if(textAction == 'save') {
+      if (nickName.length < 6) {
+        setErrorNickName(true);
+        setErrorNickNameMessage(t('validate_nick_name'));
+      }else {
         dispatch(
           updateNickName(
             {
@@ -441,21 +436,17 @@ const UploadImg = () => {
                 }
                 setOpenDialog(true);
                 setResponseMessage(t(message));
-                if(![200,201,202,203,204].includes(status_code)) {
+                if([200,201,202,203,204].includes(status_code)) {
                   setTextAction('edit');
                 }else{
-                  setTextAction('edit');
+                  console.log('fail')
+                  // setTextAction('edit');
                 }
               },
               auth: true
             }
           )
         ); 
-      }else {
-        setEditUserName(true);
-        setState({ ...state, bottom: true });
-        console.log('On edit')
-        // setTextAction('save');
       }
     }
   }
@@ -505,6 +496,7 @@ const UploadImg = () => {
                 inputProps={{ maxLength: 16 }}
                 id="outlined-adornment-nickname"
                 type="text"
+                disabled={disabledNickName}
                 value={nickName}
                 onChange={(e) => setNickName(e.target.value)}
                 endAdornment={
@@ -517,7 +509,7 @@ const UploadImg = () => {
                         background: "#FF6E31",
                         textTransform: 'capitalize'
                       }}
-                      onClick={(e) => onUpdateNickName(e)}>
+                      onClick={onUpdateNickName}>
                       {textAction == 'edit' ? t('edit') : t('save')}
                     </Button>
                   </InputAdornment>

@@ -68,7 +68,7 @@ const DataTabComponent = ({id,lang_id,isFetching}) => {
                             const liLength = document.querySelectorAll('.multitabs div[role="tabpanel"]:not(:empty) ul.MuiList-root > li');
                             const li = document.querySelector(`.multitabs div[role="tabpanel"]:not(:empty) ul.MuiList-root > li:nth-of-type(${liLength.length - 1})`);
                             if(li) {
-                                li.scrollIntoView({ block: "end" });
+                                li.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
                             }
                         }, 1); 
                     }
