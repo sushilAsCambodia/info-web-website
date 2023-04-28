@@ -13,8 +13,10 @@ export default function DialogDesktop(props) {
   const { i18n } = useTranslation();
   const {open,setOpen,albumId} = props;
   const [banners,setBanners] = React.useState([]);
+  const [drawerOpen,setDrawerOpen] = React.useState(open);
   const handleClose = () => {
     setOpen(false);
+    setDrawerOpen(false);
   };   
 
   React.useEffect(() => {
@@ -23,7 +25,9 @@ export default function DialogDesktop(props) {
             {
               id: albumId,
               params: { lang_id: utils.convertLangCodeToID(i18n.language) },
-              callback: (res) => { }
+              callback: (res) => {
+                setDrawerOpen(true)
+              }
             }
         ));
     }
@@ -52,7 +56,7 @@ export default function DialogDesktop(props) {
   
   return (
     <Dialog
-      open={open}
+      open={drawerOpen}
       onClose={handleClose}
       maxWidth="sm"
       aria-labelledby="alert-dialog-title"
