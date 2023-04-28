@@ -6,8 +6,9 @@ import {
 import Router from "next/router";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
-export default function ForgotPassword() {
+export default function ForgotPassword(props) {
   const { t } = useTranslation();
+  const { title = t('forgot_password'), showTitle = true} = props;
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const goToLogin = () => {
@@ -23,9 +24,9 @@ export default function ForgotPassword() {
       sx={{padding:'5px'}}
       >
       <Grid item md={12}>
-        <Typography variant="h5">
-          {t('forgot_password')}
-        </Typography>
+        {showTitle && <Typography variant="h5">
+          {title||''}
+        </Typography>}
         <img src="/assets/Home/customersupport1.png" style={{ maxWidth: "200px", margin:"0 auto", display:"flex" }} />
         <Typography component="h6" fontSize={12} textAlign="center">
           Notify the following ways to contact customer service

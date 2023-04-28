@@ -18,58 +18,80 @@ import moment from "moment/moment";
 import utils from "@/common/utils";
 import { useTranslation } from "react-i18next";
 import { getCategory } from "@/store/actions/categoryActions";
-import { getNewsRecent,getNextNewsRecent, getNewsPopular } from "@/store/actions/newsActions";
+import { getNewsRecent,getNextNewsRecent, getNewsPopular,getNextNewsPopular } from "@/store/actions/newsActions";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import NewsCardDetails from "./newsCardDetails";
-import NewsList from "@/common/NewsList";
-import DataLoading from "@/components/DataLoading";
-
-
+import NewsList from "@/common/NewsList"; 
 export default function NewsSingle() {
   const { t, i18n } = useTranslation();
-  const [showLoadMore,setShowLoadMore] = useState(false);
+  const [noRecentNewsData,setNoRecentNewsData] = useState(false);
+  const [noPopularNewsData,setNoPopularNewsData] = useState(false);
   const [isFetching,setIsFetching] = useState(0);
   const lang_id = utils.convertLangCodeToID(i18n.language);
   const { categories = [] } = useSelector((state) => state.category);
   const [newsCat, setNewsCat] = useState(0);
   const [page, setPage] = useState(1);
+  const [type, setType] = useState('');
   const matches = useMediaQuery("(max-width:768px)");
-  const { loading, newsDetail = {}, recentNews = [], mostPopularNews = [] , newsRecentLoading } = useSelector((state) => state.news);
+  const { newsDetail = {}, recentNews = [], mostPopularNews = [] , newsRecentLoading, newsPopularLoading } = useSelector((state) => state.news);
   const { query } = router;
   const id = query?.news_id || undefined;
   const handleChange = (event) => {
     setNewsCat(event.target.value);
   };
+  const scrollDown = (type) => {
+    setTimeout(() => {
+      const aLength = document.querySelectorAll(`#news-scroll-wrapper-${type} > .MuiGrid-root > a`); 
+      let elm = document.querySelector(`#news-scroll-wrapper-${type} > .MuiGrid-root > a:nth-of-type(${aLength.length - 1})`);
+      if(type === 'popular') {
+        elm = document.querySelector(`#list-news-by-category-wrapper`);
+      }
+      if(elm) {
+        elm.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+      }
+    }, 1); 
+  }
   useEffect(() => {
-    if(isFetching > 0 && !newsRecentLoading) {
-      console.log(recentNews)
-      dispatch(
-        getNextNewsRecent({
-          params: { type: 'recent', page: page},
-          callback: (res) => { 
-            setTimeout(() => {
-              const aLength = document.querySelectorAll('#news-scroll-wrapper-recent> .MuiGrid-root > a');
-              const li = document.querySelector(`#news-scroll-wrapper-recent> .MuiGrid-root > a:nth-of-type(${aLength.length - 1})`);
-              if(li) {
-                  li.scrollIntoView({ block: "end" });
-              }
-            }, 1); 
-          },
-        })
-      );
+    if(isFetching > 0 && (!newsRecentLoading || !newsPopularLoading)) {
+      if(type == 'recent') {
+        if(recentNews.last_page != parseInt(page)) {
+          dispatch(
+            getNextNewsRecent({
+              params: { type: 'recent', page: page},
+              callback: (res) => { 
+                scrollDown('recent');
+              },
+            })
+          );
+        }else {
+          setNoRecentNewsData(true);
+        }
+      }
+      if(type == 'popular') {
+        if(mostPopularNews.last_page != parseInt(page)) {
+          dispatch(
+            getNextNewsPopular({
+              params: { type: 'popular', page: page},
+              callback: (res) => { 
+                scrollDown('popular');
+              },
+            })
+          );
+        }else {
+          setNoPopularNewsData(true);
+        }
+      }
     }
   },[isFetching])
   useEffect(() => {
     dispatch(
       getNewsRecent({
-        params: { type: 'recent'},
-        callback: (res) => { },
+        params: { type: 'recent'}
       })
     );
     dispatch(
       getNewsPopular({
-        params: { type: 'popular'},
-        callback: (res) => { },
+        params: { type: 'popular'}
       })
     );
   }, []);
@@ -93,12 +115,7 @@ export default function NewsSingle() {
         callback: (res) => {  },
       })
     );
-  }, [lang_id]);
-
-  const getCatId = (id) => {
-    let index = categories.findIndex((i) => i.id === id);
-    return categories[index].id;
-  }; 
+  }, [lang_id]); 
   return !matches ? (
     <Grid justifyContent="center">
       <Grid my={1}>
@@ -134,17 +151,18 @@ export default function NewsSingle() {
          
           <Grid item xs={4} md={3} p={1}>
             <Grid container border="1px solid grey" borderRadius="10px" p={2}>
-              <Grid item xs={12} style={{position:'relative'}}>
-                <Typography fontWeight="bold">Recent News</Typography>
-                {newsRecentLoading && <DataLoading inside={true} size={25}/>}
-                <NewsList list={recentNews} type="recent" setIsFetching={setIsFetching} setPage={setPage}/>
+              <Grid item xs={12}>
+                <Typography fontWeight="bold">Recent News</Typography> 
+                <NewsList list={recentNews} type="recent" setIsFetching={setIsFetching} setPage={setPage} setType={setType} loading={newsRecentLoading}/>
+                {noRecentNewsData && <Typography style={{fontSize:12,textAlign:'center'}}>No more data</Typography>}
               </Grid>
               <Grid item xs={12}>
                 <Typography fontWeight="bold">Most Popular</Typography>
-                <NewsList list={mostPopularNews} type="popular"/>
+                <NewsList list={mostPopularNews} type="popular" setIsFetching={setIsFetching} setPage={setPage} setType={setType} loading={newsPopularLoading}/>
+                {noPopularNewsData && <Typography style={{fontSize:12,textAlign:'center'}}>No more data</Typography>}
               </Grid>
               {categories.length > 0 ?
-                <Grid item xs={12}>
+                <Grid item xs={12} id="list-news-by-category-wrapper">
                   <FormControl fullWidth> 
                     <Select
                       labelId="demo-simple-select-label"

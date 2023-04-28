@@ -99,7 +99,7 @@ const NewReducer = (state = initialState, action) => {
         newsRecentLoading: false
       };
 
-    // request get next news
+    // request get next recent news
     case 'news/list/next-recent/pending':
       return {
         ...state,
@@ -123,7 +123,7 @@ const NewReducer = (state = initialState, action) => {
       };
 
       
-    // request get news
+    // request get popular news
     case 'news/list/popular/pending':
       return {
         ...state,
@@ -140,6 +140,28 @@ const NewReducer = (state = initialState, action) => {
       return {
         ...state,
         mostPopularNews: action.payload?.data || {},
+        status:'completed',
+        newsPopularLoading: false
+      };
+    // request get next popular news
+    case 'news/list/next-popular/pending':
+      return {
+        ...state,
+        status:'pending',
+        newsPopularLoading: true
+      };
+    case 'news/list/next-popular/rejected':
+      return {
+        ...state,
+        status:'failed',
+        newsPopularLoading: false
+      };
+    case 'news/list/next-popular/fulfilled':
+      const popularNews = action.payload?.data;
+      popularNews['data'] = [...state.mostPopularNews.data,...action.payload?.data?.data||[]];
+      return {
+        ...state,
+        mostPopularNews: popularNews || {},
         status:'completed',
         newsPopularLoading: false
       };

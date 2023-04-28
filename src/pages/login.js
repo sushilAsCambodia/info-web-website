@@ -34,6 +34,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 // import LangSwitcher from "@/components/LangSwitcher";
 import FieldLanguageSwitcher from "@/components/fieldLangSwitcher";
 import Cookies from "js-cookie";
+import ForgotPassword from "@/components/desktop/forgotPassword";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -77,6 +78,7 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 export default function Login() {
   const { t } = useTranslation();
   const [responseMessage, setResponseMessage] = useState("");
+  const [isComponent, setIsComponent] = useState("login");
   const [loading, setLoading] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
@@ -114,7 +116,8 @@ export default function Login() {
     Router.push("/register");
   };
   const goToForgotPassword = () => {
-    Router.push("/forgotPassword");
+    setIsComponent('forgotpassword');
+    // Router.push("/forgotPassword");
   };
   // Login Dialog
   const [open, setOpen] = React.useState(false);
@@ -223,6 +226,7 @@ export default function Login() {
                         )}
                       </FormControl>
                     </Grid>
+
                     <Grid item xs={12} sm={12} mb={4}>
                       <Typography fontWeight="bold" pb={1}>
                         {t("password")}
@@ -267,6 +271,7 @@ export default function Login() {
                         )}
                       </FormControl>
                     </Grid>
+
                     <Grid item container spacing={2} mb={1}>
                       <Grid item xs={12}>
                         <Button
@@ -286,7 +291,8 @@ export default function Login() {
                         </Button>
                       </Grid>
                     </Grid>
-      
+                    
+
                     <Grid
                       item
                       sm={12}
@@ -308,6 +314,7 @@ export default function Login() {
                         {t("forgot_password")}
                       </Link>
                     </Grid>
+                    
                     <Grid item container spacing={2} mt={1}>
                       <Grid
                         item
@@ -318,6 +325,7 @@ export default function Login() {
                         <Typography>{t("login_via")}</Typography>
                       </Grid>
                     </Grid>
+                    
                     <Grid
                       item
                       sm={12}
@@ -352,6 +360,7 @@ export default function Login() {
                       </Link>
                       {/* <Link underline="none" style={{ cursor: "pointer", color: "#0898D6", padding: "10px" }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link> */}
                     </Grid>
+                    
                     <Grid
                       item
                       sm={12}
@@ -517,11 +526,12 @@ export default function Login() {
                         }}
                       >
                         <Typography variant="h5" fontWeight="bold">
-                          {t("login")}
+                          {isComponent == 'forgotpassword' ? t('forgotpassword') : t("login")}
                         </Typography>
                       </Divider>
                     </Grid>
-                    <form
+                    {isComponent == 'forgotpassword' ?   <ForgotPassword setIsComponent={setIsComponent}/> : (
+                      <form
                       className="lnr"
                       style={{
                         boxSizing: "borderBox",
@@ -723,7 +733,8 @@ export default function Login() {
                           </Link>
                         </Grid>
                       </Grid>
-                    </form>
+                      </form>
+                    )}
                   </Grid>
                   <Grid
                     item

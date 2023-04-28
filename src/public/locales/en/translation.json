@@ -4,6 +4,8 @@
     "match":"Match",
     "profile":"Profile",
     "user_name_required":"User name is required",
+    "nick_name_required":"Nick name is required",
+    "validate_nick_name":"Nick name is 6-16 letters or numbers",
     "user_name_unique":"This account already exists, Please Log In",
     "user_not_registered":"User not register",
     "incorrect_username_or_password":"Please enter the correct username or Password",

@@ -131,3 +131,24 @@ export const getNewsPopular = createAsyncThunk(
     }
   },
 );
+export const getNextNewsPopular = createAsyncThunk(
+  "news/list/next-popular",
+  async ({ params = {}, callback }, { getState, dispatch }) => {
+    try {
+      const response = await api.get('/news/news-popularRecent',params);
+      const {data,status} = response;
+      data['status_code'] = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      return data;
+    } catch (error) {
+      const {status, data} = error.response;
+      data['status_code']  = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      return data;
+    }
+  },
+);
