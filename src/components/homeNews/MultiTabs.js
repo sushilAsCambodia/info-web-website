@@ -31,40 +31,16 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-
-
 export default function MultiTabs(props) {
   const { categories,lang_id } = props;
-  const [value, setValue] = useState(0);
-  const [isFetching, setIsFetching] = useState(0);
+  const [value, setValue] = useState(0); 
   const handleChange = (event, newValue) => {
-    setIsFetching(0)
     setValue(newValue);
   }; 
   // reset tab if lang changed
   useEffect(() => {
     setValue(0);
-  },[lang_id]);
-  // listiner on scroll behavior
-  const onScroll = (el) => {
-    const scrollableHeight = el.target.scrollHeight - el.target.clientHeight
-    if (el.target.scrollTop >= scrollableHeight) {
-      setIsFetching(new Date().getTime());
-    }
-  }
-  // add listiner on scroll behavior
-  useEffect(() => {
-    const el = document.getElementById('main-container-wrapper');
-    if(el) {
-      el.addEventListener('scroll', onScroll)
-    }
-    return () => { 
-      if(el) {
-        el.removeEventListener('scroll',onScroll);
-      }
-    };
-  },[])
-
+  },[lang_id]); 
   return (categories && categories.length > 0) && (
     <Grid
       item
@@ -98,7 +74,7 @@ export default function MultiTabs(props) {
             { categories.map((category,index) => {
                 return (
                   <TabPanel key={index} value={value} index={index}>
-                    <DataTabComponent id={category?.id} lang_id={lang_id} isFetching={isFetching}/>
+                    <DataTabComponent id={category?.id} lang_id={lang_id}/>
                   </TabPanel>
                 );
               })

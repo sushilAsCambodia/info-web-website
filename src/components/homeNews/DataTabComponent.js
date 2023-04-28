@@ -15,16 +15,18 @@ import Empty from '../Empty';
 import moment from 'moment/moment';
 import utils from '@/common/utils';
 const rowsPerPage = 10;
-const DataTabComponent = ({id,lang_id,isFetching}) => {
+const DataTabComponent = ({id,lang_id}) => {
     const dispatch = useDispatch();
     const {news} = useSelector((state) => state.news); 
     const [page, setPage] = React.useState(1);
+    const [isFetching, setIsFetching] = React.useState(0);
     const [showLoadMore, setShowLoadMore] = React.useState(false);
     const [noMoreData, setNoMoreData] = React.useState(false);
+    const [isLastPage, setIsLastPage] = React.useState(false);
     const [loading, setLoading] = React.useState(true);
     const [loadingMore,setLoadingMore] = React.useState(false);
     React.useEffect(() => {
-        if(isFetching > 0 && showLoadMore) {
+        if(isFetching > 0 && !loadingMore) {
             loadMore(page)
         }
     },[isFetching])
@@ -35,7 +37,7 @@ const DataTabComponent = ({id,lang_id,isFetching}) => {
     const manageDataPaginatioin = (data) => {
         const currentPage = data?.current_page;
         const lastPage = data?.last_page;
-        if(data.next_page_url) {
+        if(lastPage != page) {
             const url = new URL(data.next_page_url);
             const params = url.searchParams;
             const to = params.get('page');
@@ -46,35 +48,38 @@ const DataTabComponent = ({id,lang_id,isFetching}) => {
                 setShowLoadMore(false);
             }
         }else {
+            setIsLastPage(true)
             setShowLoadMore(false);
         }
     };
     // get more news by category
     const loadMore = (p) => {
-        setLoadingMore(true);
-        dispatch(getNextNewsByCategory(
-            {
-                params: { lang_id: lang_id, category_id: id, rowsPerPage: rowsPerPage, page: p },
-                callback:(res) => {
-                    setLoading(false);
-                    setLoadingMore(false);
-                    const {status_code,data} = res;
-                    if([200,201,202,203,204].includes(status_code)) {
-                        if(data.next_page_url === null) {
-                            setNoMoreData(true);
-                        }
-                        manageDataPaginatioin(data); 
-                        setTimeout(() => {
-                            const liLength = document.querySelectorAll('.multitabs div[role="tabpanel"]:not(:empty) ul.MuiList-root > li');
-                            const li = document.querySelector(`.multitabs div[role="tabpanel"]:not(:empty) ul.MuiList-root > li:nth-of-type(${liLength.length - 1})`);
-                            if(li) {
-                                li.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        if(!isLastPage) {
+            setLoadingMore(true);
+            dispatch(getNextNewsByCategory(
+                {
+                    params: { lang_id: lang_id, category_id: id, rowsPerPage: rowsPerPage, page: p },
+                    callback:(res) => {
+                        setLoading(false);
+                        setLoadingMore(false);
+                        const {status_code,data} = res;
+                        if([200,201,202,203,204].includes(status_code)) {
+                            if(data.next_page_url === null) {
+                                setNoMoreData(true);
                             }
-                        }, 1); 
+                            manageDataPaginatioin(data); 
+                            setTimeout(() => {
+                                const liLength = document.querySelectorAll('.multitabs div[role="tabpanel"]:not(:empty) ul.MuiList-root > li');
+                                const li = document.querySelector(`.multitabs div[role="tabpanel"]:not(:empty) ul.MuiList-root > li:nth-of-type(${liLength.length - 1})`);
+                                if(li) {
+                                    li.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+                                }
+                            }, 1); 
+                        }
                     }
                 }
-            }
-        ));
+            ));
+        }
     }
     // get news data
     const getData = (p) => {
@@ -91,7 +96,26 @@ const DataTabComponent = ({id,lang_id,isFetching}) => {
             }
         )); 
     }
-    return <Grid sx={{position:'relative', height:news && news.length > 2 ? 'auto' : 'auto', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}}>
+    const onScroll = (el) => {
+        const scrollableHeight = el.target.scrollHeight - el.target.clientHeight
+        if (el.target.scrollTop >= scrollableHeight) {
+          setIsFetching(new Date().getTime());
+        }
+      }
+      // add listiner on scroll behavior
+      React.useEffect(() => {
+        const el = document.querySelector('.tab-scroll');
+        if(el) {
+          el.addEventListener('scroll', onScroll)
+        }
+        return () => { 
+          if(el) {
+            el.removeEventListener('scroll',onScroll);
+          }
+        };
+      },[])
+    return <Grid sx={{position:'relative', height:news && news.length > 2 ? '300px' : 'auto', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}} className='tab-scroll'>
+        {showLoadMore && <Typography component="span" style={{position:'fixed',bottom:'56px'}}>{loadingMore?<DataLoading size={20}/>:''}</Typography>}
         {
             loading ? <DataLoading size={30}/> :
             (
@@ -126,11 +150,10 @@ const DataTabComponent = ({id,lang_id,isFetching}) => {
                             );
                         }) : <Empty/>}
                     </List>
+                    { noMoreData && <Typography component="div" sx={{fontSize:10,color:'#8C8C8C',textAlign:'center',width:'100%'}}>No more data</Typography>}
                 </Grid>
             )
         }
-        {showLoadMore && <Typography component="span" sx={{position:'absolute',bottom:0}}>{loadingMore?<DataLoading size={20}/>:''}</Typography>}
-        { noMoreData && <Typography component="span" sx={{position:'absolute',bottom:7,fontSize:10,color:'#8C8C8C'}}>No more data</Typography>}
     </Grid>
 };
 export default DataTabComponent;

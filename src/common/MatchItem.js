@@ -10,7 +10,8 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
-
+import StarIcon from "@/components/svg/star";
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 export default function MatchItem(props) {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -27,9 +28,9 @@ export default function MatchItem(props) {
 
   return (
     <Grid p={1}>
-      <Grid textAlign="center" border="1px solid grey" borderRadius="10px">
+      <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px">
         <Grid
-          borderBottom="1px solid grey"
+          borderBottom="1px solid #ddd"
           item
           xs={12}
           px={1}
@@ -37,8 +38,8 @@ export default function MatchItem(props) {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography>Denmark</Typography>
-          <Icon icon="ic:round-star" width={20} />
+          <Typography color="#8C8C8C" fontSize={12}>Denmark</Typography>
+          <StarIcon/>
         </Grid>
         <Grid item xs={12} px={1} py={1}>
           <Grid container justifyContent="space-between">
@@ -46,34 +47,36 @@ export default function MatchItem(props) {
             <Typography>chelsea</Typography>
           </Grid>
           <Grid container justifyContent="space-between" alignItems="center">
-            <Grid item xs={2} display="flex" justifyContent="space-between">
-              <picture>
+            <Grid item xs={2}>
+              <Typography component="div" display="flex" justifyContent="space-between" marginTop={1}>
                 <img width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
-              </picture>
-              <Typography>3</Typography>
+                <Typography>3</Typography>
+              </Typography>
             </Grid>
             <Grid item xs={8} container justifyContent="center">
-              <Grid container justifyContent="center" alignItems="center" position="relative">
-              <Icon icon="bi:dot" width="40px" color="red" style={{position:"absolute",left:"20px"}}/>
-                <Typography color="red">Live</Typography>
+              <Grid container>
+                <Grid item md={12}>
+                  <Typography component="div" display="flex" justifyContent="center" alignItems="center" color="#00C2FF" fontSize={10}>
+                    <FiberManualRecordIcon style={{fontSize:9}}/>&nbsp;LIVE
+                  </Typography>
+                  <Typography fontSize={8}>First Half 30:22</Typography>
+                </Grid>
               </Grid>
-              <Typography>First Half 30:22</Typography>
             </Grid>
-            <Grid item xs={2} display="flex" justifyContent="space-between">
-              <Typography>5</Typography>
-              <picture>
+            <Grid item xs={2}>
+              <Typography component="div" display="flex" justifyContent="space-between" marginTop={1}>
+                <Typography>5</Typography>
                 <img width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
-              </picture>
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
         <Grid
-          borderTop="1px solid grey"
+          borderTop="1px solid #ddd"
           borderRadius="0px 0px 10px 10px"
-          sx={{ background: "#DDDDDD" }}
+          sx={{ background: "#DDDDDD",padding:'8px', color:'#8C8C8C'}}
           textAlign="left"
-          fontSize="13px"
-          px={1}
+          fontSize="10px"
         >
           29 Mar 2023, Wednesday, 03:30 PM
         </Grid>
