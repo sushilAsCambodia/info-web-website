@@ -44,7 +44,7 @@ export default function NewsSingle() {
       const aLength = document.querySelectorAll(`#news-scroll-wrapper-${type} > .MuiGrid-root > a`); 
       let elm = document.querySelector(`#news-scroll-wrapper-${type} > .MuiGrid-root > a:nth-of-type(${aLength.length - 1})`);
       if(type === 'popular') {
-        elm = document.querySelector(`#list-news-by-category-wrapper`);
+        elm = document.querySelector(`#list-news-by-category-wrapper`).scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
       }
       if(elm) {
         elm.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
