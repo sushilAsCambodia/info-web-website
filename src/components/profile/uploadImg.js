@@ -61,8 +61,7 @@ const UploadImg = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [file, setFile] = useState(undefined);
   useEffect(() => {
-    console.log(customer.nick_name)
-    if(customer && (customer.nick_name != null)) {
+    if(customer && (customer.nick_name != null | customer.nick_name != '')) {
       setDisabledNickName(true)
     }else {
       setDisabledNickName(false)
@@ -446,9 +445,6 @@ const UploadImg = () => {
                 setResponseMessage(t(message));
                 if([200,201,202,203,204].includes(status_code)) {
                   setTextAction('edit');
-                }else{
-                  console.log('fail')
-                  // setTextAction('edit');
                 }
               },
               auth: true
