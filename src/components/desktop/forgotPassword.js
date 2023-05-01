@@ -1,7 +1,9 @@
 import { Grid, Typography, Link } from "@mui/material";
 import ForgotPasswordPage from "@/pages/forgotPassword";
+import { useTranslation } from "react-i18next";
 
 const forgotPassword = (props) => {
+    const {t} = useTranslation();
     const {setIsComponent} = props;
     return <>
         <Grid container display="flex" alignItems="center" height="100%">
