@@ -116,8 +116,11 @@ export default function Login() {
     Router.push("/register");
   };
   const goToForgotPassword = () => {
-    setIsComponent('forgotpassword');
-    // Router.push("/forgotPassword");
+    if(matches) {
+      Router.push("/forgotPassword");
+    }else {
+      setIsComponent('forgotpassword');
+    }
   };
   // Login Dialog
   const [open, setOpen] = React.useState(false);
@@ -530,7 +533,7 @@ export default function Login() {
                         </Typography>
                       </Divider>
                     </Grid>
-                    {isComponent == 'forgotpassword' ?   <ForgotPassword setIsComponent={setIsComponent}/> : (
+                    {isComponent == 'forgotpassword' ? <ForgotPassword setIsComponent={setIsComponent}/> : (
                       <form
                       className="lnr"
                       style={{
