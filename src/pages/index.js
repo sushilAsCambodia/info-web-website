@@ -28,7 +28,7 @@ export default function Index() {
 
   return !matches ? (
     <>
-      <Grid>
+      <Grid mt={2}>
         <ResultsBanner lang_id={utils.convertLangCodeToID(i18n.language)}/>
         {/* <LinkBanner /> */}
         <LandingPageBanner />

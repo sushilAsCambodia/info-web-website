@@ -50,7 +50,7 @@ const Header = () => {
   const openScore = Boolean(anchorScore);
   const id = openScore ? "simple-popover" : undefined;
 
-  const [selectSport, setSelectSport] = useState("");
+  const [selectSport, setSelectSport] = useState("football");
 
   const menuList = [
     { label: t("lottery_draw"), page: "LotteryPage" },

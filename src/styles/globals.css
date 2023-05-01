@@ -728,8 +728,8 @@ visibility: visible;
   display: inline-block;
   margin-top: 5px;
 }
-.rotate180{
-  transform: rotate(180deg);
+.rotate90{
+  transform: rotate(90deg);
   transition-duration: 0.4s;
 }
 .rotate0{
