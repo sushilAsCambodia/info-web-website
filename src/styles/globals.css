@@ -755,3 +755,13 @@ visibility: visible;
 .d-none {
   display: none;
 }
+/* HEADER  */
+.sportChipSelect{
+   background: white !important;
+  color: black !important;
+}
+.sportChip{
+ 
+  background: #373737 !important;
+  color: white !important;
+}
