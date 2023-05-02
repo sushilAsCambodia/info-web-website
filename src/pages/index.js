@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Grid,
   List,
@@ -7,6 +8,7 @@ import {
   Container,
   Button,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import NewsColumns from "@/components/homeNews/NewsColumns";
@@ -14,6 +16,7 @@ import JournalsColumns from "@/components/homeNews/JournalsColumns";
 import PartnersColumns from "@/components/homeNews/PartnersColumns";
 import LandingPageBanner from "@/common/LandingPageBanner";
 import ResultsBanner from "@/components/homeNews/ResultsBanner";
+import {getLanguage} from '../store/actions/languageActions'
 import LinkBanner from "@/components/homeNews/LinkBanner";
 import Header from "@/layouts_Desktop/header";
 import Footer from "@/layouts_Desktop/footer";
@@ -22,10 +25,25 @@ import { useTranslation } from "react-i18next";
 import utils from "@/common/utils";
 
 export default function Index() {
+  const dispatch = useDispatch();
   const matches = useMediaQuery("(max-width:768px)");
   const { i18n } = useTranslation();
   const { t } = useTranslation();
+  useEffect(() => { 
+    dispatch(getLanguage(
+        {
+            params: {
+                lang_id: utils.convertLangCodeToID(i18n.language),platform:'desktop'
+            },
+            callback:(res) => {
+// console.log("resres",res)
+localStorage.setItem('languageKey', JSON.stringify(res))
 
+             }
+        }
+    ));
+  
+},[i18n.language]); 
   return !matches ? (
     <>
       <Grid>

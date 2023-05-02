@@ -3,8 +3,11 @@ import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import {getLanguage} from '../store/actions/languageActions'
+import { useDispatch, useSelector } from "react-redux";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useTranslation } from 'react-i18next';
+import utils from "../common/utils";
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -48,6 +51,7 @@ const StyledMenu = styled((props) => (
 
 export default function LangSwitcher() {
   const {i18n} =  useTranslation();
+  const dispatch = useDispatch();
   const [lang, setLang] = React.useState('')
   React.useEffect(() => {
     if(typeof window !='undefined') {
@@ -67,7 +71,19 @@ export default function LangSwitcher() {
   };
   const changeLanguage = (l) => {
     window.localStorage.setItem('lang',l);
-    i18n.changeLanguage(l);
+    i18n.changeLanguage(l); 
+    dispatch(getLanguage(
+      {
+          params: {
+              lang_id: utils.convertLangCodeToID(l),platform:'desktop'
+          },
+          callback:(res) => {
+console.log("resres",res)
+localStorage.setItem('languageKey', JSON.stringify(res))
+
+           }
+      }
+  ));
     handleClose();
   }
   const labelLanguage = (l) => {
