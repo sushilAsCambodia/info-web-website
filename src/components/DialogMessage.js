@@ -8,6 +8,7 @@ import {
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import { useSelector } from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
@@ -40,6 +41,8 @@ const DialogMessage = (props) => {
             onClosed(true)
         }
     };
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
     return <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -52,7 +55,7 @@ const DialogMessage = (props) => {
         </DialogContent>
         <DialogActions>
             <Button autoFocus onClick={handleClose}>
-                {t('ok')}
+            {langKey && langKey.ok}
             </Button>
         </DialogActions>
     </BootstrapDialog>;

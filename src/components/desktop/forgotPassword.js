@@ -5,6 +5,11 @@ import { useTranslation } from "react-i18next";
 const forgotPassword = (props) => {
     const {t} = useTranslation();
     const {setIsComponent} = props;
+
+
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
     return <>
         <Grid container display="flex" alignItems="center" height="100%">
             <Grid item md={12}>
@@ -20,7 +25,7 @@ const forgotPassword = (props) => {
                         display: "flex",
                         alignItems: "center",
                     }}>
-                    <Typography>{t("no_account")}</Typography>
+                    <Typography> {langKey && langKey.no_account} </Typography>
                     <Typography
                         style={{
                             cursor: "pointer",

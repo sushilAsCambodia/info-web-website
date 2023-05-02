@@ -47,6 +47,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 function BootstrapDialogTitle(props) {
   const { children, onClose, ...other } = props;
 
+
+  
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
@@ -161,6 +163,9 @@ export default function Login() {
     }
     setPassword(e.target.value);
   };
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
   return <>
     {
       mounted && (
@@ -176,7 +181,7 @@ export default function Login() {
                 <Grid item container xs={12} sm={12} padding={2}>
                   <Grid container alignItems="flex-end" alignContent="center" mb={4}>
                     <Typography variant="h5" sx={{ position: "relative" }}>
-                      {t("login")}
+                      {langKey && langKey.login}
                     </Typography>
                   </Grid>
                   <form
@@ -192,7 +197,7 @@ export default function Login() {
                   >
                     <Grid item xs={12} sm={12} mb={3}>
                       <Typography fontWeight="bold" pb={1}>
-                        {t("user_name")}
+                {langKey && langKey.user_name}
                       </Typography>
                       <FormControl
                         variant="outlined"
@@ -204,7 +209,7 @@ export default function Login() {
                       >
                         <OutlinedInput
                           name="Username"
-                          placeholder={t("user_name")}
+                          placeholder= {langKey && langKey.user_name}
                           inputProps={{ maxLength: 16 }}
                           id="outlined-adornment-username"
                           type="text"
@@ -224,7 +229,7 @@ export default function Login() {
                         />
                         {errorUserName && (
                           <FormHelperText error>
-                            {t("validate_user_name")}
+                           {langKey && langKey.validate_user_name}
                           </FormHelperText>
                         )}
                       </FormControl>
@@ -232,7 +237,7 @@ export default function Login() {
 
                     <Grid item xs={12} sm={12} mb={4}>
                       <Typography fontWeight="bold" pb={1}>
-                        {t("password")}
+               {langKey && langKey.password}
                       </Typography>
                       <FormControl
                         variant="outlined"
@@ -244,7 +249,7 @@ export default function Login() {
                       >
                         <OutlinedInput
                           name="password"
-                          placeholder={t("password")}
+                          placeholder= {langKey && langKey.password}
                           inputProps={{ maxLength: 16 }}
                           id="outlined-adornment-password"
                           type={showPassword ? "text" : "password"}
@@ -269,7 +274,7 @@ export default function Login() {
                         />
                         {errorPassword && (
                           <FormHelperText error>
-                            {t("validate_password")}
+                     {langKey && langKey.validate_password}
                           </FormHelperText>
                         )}
                       </FormControl>
@@ -290,7 +295,7 @@ export default function Login() {
                           }}
                           onClick={onSubmit}
                         >
-                          {t("login")}
+                         {langKey && langKey.login}
                         </Button>
                       </Grid>
                     </Grid>
@@ -314,7 +319,7 @@ export default function Login() {
                         onClick={goToForgotPassword}
                       >
                         {" "}
-                        {t("forgot_password")}
+                      {langKey && langKey.forgot_password}
                       </Link>
                     </Grid>
                     
@@ -325,7 +330,7 @@ export default function Login() {
                         textAlign="center"
                         textTransform="capitalize"
                       >
-                        <Typography>{t("login_via")}</Typography>
+                        <Typography>{langKey && langKey.login_via}</Typography>
                       </Grid>
                     </Grid>
                     
@@ -387,7 +392,7 @@ export default function Login() {
                         }}
                         onClick={goToRegister}
                       >
-                        {t("no_account")}
+                     {langKey && langKey.no_account}
                         <Typography
                           style={{
                             fontSize: "12px",
@@ -395,7 +400,7 @@ export default function Login() {
                             color: "#F26522",
                           }}
                         >
-                          {t("register")}
+                        {langKey && langKey.register}
                         </Typography>
                       </Link>
                     </Grid>
@@ -416,7 +421,7 @@ export default function Login() {
               </DialogContent>
               <DialogActions>
                 <Button autoFocus onClick={handleClose}>
-                  {t("ok")}
+                   {langKey && langKey.ok}
                 </Button>
               </DialogActions>
             </BootstrapDialog>
@@ -463,7 +468,7 @@ export default function Login() {
                         }}
                       >
                         <Typography fontWeight={700} fontSize="20px">
-                        {t("download_app")}
+                         {langKey && langKey.download_app}
                         </Typography>
                       </Grid>
       
@@ -529,7 +534,7 @@ export default function Login() {
                         }}
                       >
                         <Typography variant="h5" fontWeight="bold">
-                          {isComponent == 'forgotpassword' ? t('forgotpassword') : t("login")}
+                          {isComponent == 'forgotpassword' ? (langKey && langKey.forgotpassword) : (langKey && langKey.login)}
                         </Typography>
                       </Divider>
                     </Grid>
@@ -558,13 +563,13 @@ export default function Login() {
                           }}
                         >
                           <InputLabel htmlFor="component-outlined">
-                            {t("user_name")}
+                        {langKey && langKey.user_name}
                           </InputLabel>
       
                           <OutlinedInput
                             name="Username"
-                            placeholder={t("user_name")}
-                            label={t("user_name")}
+                            placeholder= {langKey && langKey.user_name}
+                            label={langKey && langKey.user_name}
                             inputProps={{ maxLength: 16 }}
                             id="outlined-adornment-username"
                             type="text"
@@ -584,7 +589,7 @@ export default function Login() {
                           />
                           {errorUserName && (
                             <FormHelperText error>
-                              {t("validate_user_name")}
+                         {langKey && langKey.validate_user_name}
                             </FormHelperText>
                           )}
                         </FormControl>
@@ -599,12 +604,12 @@ export default function Login() {
                           }}
                         >
                           <InputLabel htmlFor="component-outlined">
-                          {t("password")}
+                       {langKey && langKey.password}
                           </InputLabel>
                           <OutlinedInput
                             name="password"
-                            placeholder={t("password")}
-                            label={t("password")}
+                            placeholder= {langKey && langKey.password}
+                            label= {langKey && langKey.password}
                             inputProps={{ maxLength: 16 }}
                             id="outlined-adornment-password"
                             type={showPassword ? "text" : "password"}
@@ -629,7 +634,7 @@ export default function Login() {
                           />
                           {errorPassword && (
                             <FormHelperText error>
-                              {t("validate_password")}
+                            {langKey && langKey.validate_password}
                             </FormHelperText>
                           )}
                         </FormControl>
@@ -649,7 +654,7 @@ export default function Login() {
                           style={{ cursor: "pointer", color: "#F26522" }}
                           onClick={goToForgotPassword}
                         >
-                          <Typography>{t("forgot_password")}</Typography>
+                          <Typography>{langKey && langKey.forgot_password}</Typography>
                         </Link>
                       </Grid>
                       <Grid item container spacing={2} mb={1}>
@@ -665,7 +670,7 @@ export default function Login() {
                             }}
                             onClick={() => Router.push("/")}
                           >
-                            {t("cancel")}
+                      {langKey && langKey.cancel}
                           </Button>
                         </Grid>
                         <Grid item xs={6}>
@@ -682,7 +687,7 @@ export default function Login() {
                             }}
                             onClick={onSubmit}
                           >
-                            {t("login")}
+                    {langKey && langKey.login}
                           </Button>
                         </Grid>
                       </Grid>
@@ -767,7 +772,7 @@ export default function Login() {
                         }}
                         onClick={goToRegister}
                       >
-                        <Typography>{t("no_account")}</Typography>
+                        <Typography>{langKey && langKey.no_account}</Typography>
                         <Typography
                           style={{
                             cursor: "pointer",
@@ -780,7 +785,7 @@ export default function Login() {
                       </Link>
                       <Grid display="flex" sx={{ cursor: "pointer" }}>
                         <Icon icon="bi:chat-square-dots-fill" width={25} />
-                        <Typography mx={1}>{t("contact")}</Typography>
+                        <Typography mx={1}>{langKey && langKey.contact}</Typography>
                       </Grid>
                     </Grid> 
                   </Grid>
@@ -800,7 +805,7 @@ export default function Login() {
               </DialogContent>
               <DialogActions>
                 <Button autoFocus onClick={handleClose}>
-                  {t("ok")}
+               {langKey && langKey.ok}
                 </Button>
               </DialogActions>
             </BootstrapDialog>

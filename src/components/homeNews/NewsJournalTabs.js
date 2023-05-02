@@ -57,7 +57,7 @@ export default function NewsJournalTabs(props) {
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
-  let langKey
+
   useEffect(() => {
     const hash = router.asPath.split('#')[1];
     if(hash == 'journal') {
@@ -80,10 +80,10 @@ export default function NewsJournalTabs(props) {
     }
   },[lang_id,value])
   
-  if(typeof window !='undefined') {
-      langKey = JSON.parse(window.localStorage.getItem('languageKey'));
-  }
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
   
+  console.log("langKey",langKey)
  
   return (
     <Grid item className='tabclass' sx={{height:'100%'}}>

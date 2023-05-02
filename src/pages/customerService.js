@@ -26,6 +26,11 @@ const CustomerService = () => {
             }
           }))
     },[i18n.language])
+
+
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
     return (
         <>
             <Grid
@@ -49,7 +54,7 @@ const CustomerService = () => {
                         </Grid>
                         <Grid item xs={12} >
                             <Typography paddingBottom="20px" textAlign="center">
-                                {t('contact_customer_service_via')}
+                                {langKey && langKey.contact_customer_service_via}
                             </Typography>
                            <List sx={{ display:"flex", justifyContent:"center"  }}>
                             {

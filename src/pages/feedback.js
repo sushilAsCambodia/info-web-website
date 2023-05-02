@@ -87,6 +87,11 @@ const Feedback = () => {
       setProfilePage(true);
     }
    }, [ router.asPath ]);
+
+
+   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   return loading ? <LoadingDialog loading={loading}/> : ( 
     <>
       <Grid
@@ -105,29 +110,29 @@ const Feedback = () => {
           <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
             <Grid item xs={12} paddingTop="15px">
               <Typography fontSize="18px">
-                {t('send_your_feedback_here')}
+                {langKey && langKey.send_your_feedback_here}
               </Typography>
             </Grid>
             <Grid item display="flex" flexDirection={`${profilePage? "column-reverse":"column" }`}>
             <Grid item xs={12} paddingTop="10px">
               <Typography paddingBottom="20px" fontSize="12px">
-                {t('feedback_content')} <Typography component="span" sx={{color:'red'}}>*</Typography>
+              {langKey && langKey.feedback_content} <Typography component="span" sx={{color:'red'}}>*</Typography>
               </Typography>
               <TextField
                 fullWidth
                 id="outlined-multiline-static"
                 multiline
                 rows={6}
-                placeholder={t('do_not_exceed_characters')}
+                placeholder={langKey && langKey.do_not_exceed_characters}
                 value={content}
                 onChange={onChangeContent}
                 error={errorContent}
-                helperText={errorContent ? t('feedback_content_required') : ''}/>
+                helperText={errorContent ? (langKey && langKey.feedback_content_required) : ''}/>
             </Grid>
 
             <Grid item xs={12} paddingTop="10px">
               <Typography paddingBottom="20px" fontSize="12px">
-                {t('contact')}
+                {langKey && langKey.contact}
               </Typography> 
               <FormControl
                 variant="outlined"
@@ -139,7 +144,7 @@ const Feedback = () => {
               >
                 <OutlinedInput
                   name="email"
-                  placeholder={t('email')}
+                  placeholder={langKey && langKey.email}
                   id="outlined-adornment-email"
                   type="text"
                   value={contact}
@@ -154,7 +159,7 @@ const Feedback = () => {
                     </InputAdornment>
                   }
                 />
-                {errorEmail && <FormHelperText error>{t(errorEmailMessage)}</FormHelperText>}
+                {errorEmail && <FormHelperText error>{langKey && langKey.errorEmailMessage}</FormHelperText>}
               </FormControl>
             </Grid>
             </Grid>
@@ -171,7 +176,7 @@ const Feedback = () => {
                   textTransform: 'capitalize'
                 }}
                 onClick={onSubmit}>
-                {t('submit')}
+                {langKey && langKey.submit}
               </Button>
             </Grid>
           </Grid>
