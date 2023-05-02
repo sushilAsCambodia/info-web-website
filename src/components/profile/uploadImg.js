@@ -61,7 +61,7 @@ const UploadImg = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [file, setFile] = useState(undefined);
   useEffect(() => {
-    if(customer && (customer.nick_name != null | customer.nick_name != '')) {
+    if(customer && (customer.nick_name != null || customer.nick_name != '')) {
       setDisabledNickName(true)
     }else {
       setDisabledNickName(false)
@@ -500,7 +500,7 @@ const UploadImg = () => {
                 inputProps={{ maxLength: 16 }}
                 id="outlined-adornment-nickname"
                 type="text"
-                disabled={disabledNickName}
+                // disabled={disabledNickName}
                 value={nickName}
                 onChange={(e) => setNickName(e.target.value)}
                 endAdornment={

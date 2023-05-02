@@ -30,8 +30,7 @@ export default function AnnouncementItem(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { announcement } = props;
-  console.log("announcement:::", announcement);
+  const { announcement } = props; 
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
