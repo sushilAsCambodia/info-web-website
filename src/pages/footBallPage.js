@@ -133,7 +133,7 @@ export default function FootBallPage() {
       </Grid>
 
       <TabPanel value={value} index={"Follow"}>
-        Item One
+      <ScoreTable />
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
         <ScoreTable />

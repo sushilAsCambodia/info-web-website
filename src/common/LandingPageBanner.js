@@ -94,6 +94,7 @@ export default function LandingPageBanner(props) {
               justifyContent="space-around"
             >
               <Image  
+              draggable="false"
                 src={banner.image}
                 alt={banner.label}
                 style={{
