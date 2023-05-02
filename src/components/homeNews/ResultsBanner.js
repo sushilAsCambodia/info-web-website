@@ -44,11 +44,12 @@ const {t} = useTranslation();
       <Grid
         item
         container
+        md={12}
         className="middle-grid"
         justifyContent="center"
         marginTop="10px"
       >
-        <Grid item xs={12} lg={3} xl={2.5} border="1px solid grey" borderRadius="10px">
+        <Grid item xs={12} lg={3} xl={2.5} border="1px solid #ddd" borderRadius="2px">
           <Typography px={1.5} mb={1}>{t("latest_results")}</Typography>
           {/* <NewsSlider news={rows} /> */}
           {/* <Grid overflow="auto" height="430px"> */}
@@ -62,19 +63,19 @@ const {t} = useTranslation();
             <LottoList />
             {/* </Slider> */}
           </Grid>
-        </Grid>
-        <Grid item xs={12} lg={7} xl={7.5} py={{xs:1,lg:0}} px={{xs:0,lg:1}}>
+        </Grid> 
+        <Grid item xs={12} lg={7} xl={7.5} py={{xs:1,lg:0}} px={{xs:0,lg:1}} >
           <Grid
             item
             xs={12}
-            border="1px solid grey"
-            borderRadius="10px"
+            border="1px solid #ddd"
+            borderRadius="2px"
             height="100%"
           >
             <MiddleShow />
           </Grid>
         </Grid>
-        <Grid item xs={12} lg={2} border="1px solid grey" borderRadius="10px">
+        <Grid item xs={12} lg={2} border="1px solid #ddd" borderRadius="2px">
           <Grid px={1.5} mb={1} container justifyContent="space-between" width="100%">
             <Typography>{t("announcement")}</Typography>
             <Grid
@@ -84,13 +85,12 @@ const {t} = useTranslation();
             </Grid>
           </Grid>
           <Grid overflow="auto" className={matches ? 'verticleLotto': 'horizontalLotto'} px={1}>
-          <AnnouncementItem announcement={announcement}/>          
-          <AnnouncementItem announcement={announcement}/>
-          <AnnouncementItem announcement={announcement}/>
-          <AnnouncementItem announcement={announcement}/>
-          <AnnouncementItem announcement={announcement}/>
-          <AnnouncementItem announcement={announcement}/>
-          
+            <AnnouncementItem announcement={announcement}/>          
+            <AnnouncementItem announcement={announcement}/>
+            <AnnouncementItem announcement={announcement}/>
+            <AnnouncementItem announcement={announcement}/>
+            <AnnouncementItem announcement={announcement}/>
+            <AnnouncementItem announcement={announcement}/>
           </Grid>
         </Grid>
       </Grid>

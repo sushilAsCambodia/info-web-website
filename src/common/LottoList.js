@@ -35,7 +35,7 @@ export function lottoGrid(lottos) {
       <Grid
         container
         width="max-content"
-        border="1px solid grey"
+        border="1px solid #ddd"
         borderRadius="10px"
         className="lottoGrid"
       >
@@ -78,14 +78,14 @@ export default function LottoList(props) {
       >
         <Card
           sx={{
-            border: "1px solid grey",
+            border: "1px solid #ddd",
             marginY: "5px",
             width: "max-content",
             overflow: "auto",
           }}
         >
           <Grid
-            sx={{ fontSize: "15px", borderBottom: "1px solid grey" }}
+            sx={{ fontSize: "15px", borderBottom: "1px solid #ddd" }}
             px={1}
           >
             29 Mar 2023, Monday
@@ -97,15 +97,15 @@ export default function LottoList(props) {
                 sx={{
                   background: "#FFE0E0",
                   borderRadius: "50%",
-                  width: "45px",
-                  height: "45px",
+                  width: "38px",
+                  height: "38px",
                 }}
                 textAlign="center"
               >
                 <picture>
                   <img
-                    width="40px"
-                    height="40px"
+                    width="100%"
+                    height="100%"
                     alt="supper-logo"
                     src="/assets/Logo/superlotto-logo.png"
                   />

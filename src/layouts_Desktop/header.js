@@ -1,7 +1,7 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import { logout } from "@/store/actions/authActions";
-import { Grid, Menu, Fade } from "@mui/material";
+import { Grid, Menu, Fade, Popover, Chip } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
@@ -41,13 +41,17 @@ const Header = () => {
     );
   };
   const [anchorScore, setAnchorScore] = useState(null);
-  const openScore = Boolean(anchorScore);
   const handleScoreClick = (event) => {
     setAnchorScore(event.currentTarget);
   };
   const handleScoreClose = () => {
     setAnchorScore(null);
   };
+  const openScore = Boolean(anchorScore);
+  const id = openScore ? "simple-popover" : undefined;
+
+  const [selectSport, setSelectSport] = useState("football");
+
   const menuList = [
     { label: t("lottery_draw"), page: "LotteryPage" },
     { label: t("data_chart"), page: "DataChart" },
@@ -162,7 +166,6 @@ const Header = () => {
                       },
                       paddingLeft: "0px",
                     }}
-                    
                   >
                     <Typography color="white">Live Score</Typography>
                     {openScore ? (
@@ -177,7 +180,7 @@ const Header = () => {
                       />
                     )}
                   </MenuItem>
-                  <Menu
+                  {/* <Menu
                     id="fade-menu"
                     MenuListProps={{
                       "aria-labelledby": "fade-button",
@@ -190,7 +193,99 @@ const Header = () => {
                     <MenuItem onClick={handleScoreClose}>score 1</MenuItem>
                     <MenuItem onClick={handleScoreClose}>score 2</MenuItem>
                     <MenuItem onClick={handleScoreClose}>score 3</MenuItem>
-                  </Menu>
+                  </Menu> */}
+                  <Popover
+                    id={id}
+                    open={openScore}
+                    anchorEl={anchorScore}
+                    onClose={handleScoreClose}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                  >
+                    <Grid
+                      container
+                      sx={{
+                        background: "#494949",
+                        color: "white",
+                        width: "80vw",
+                      }}
+                    >
+                      <Grid
+                        item
+                        xs={12}
+                        container
+                        p={1}
+                        borderBottom="1px solid #373737"
+                      >
+                        <Grid item p={1}>
+                          <Chip
+                            onClick={() => {
+                              setSelectSport("football");
+                            }}
+                            className={`${
+                              selectSport == "football"
+                                ? "sportChipSelect"
+                                : "sportChip"
+                            }`}
+                            label={<Typography p={1}>FootBall</Typography>}
+                          />
+                        </Grid>
+                        <Grid item p={1}>
+                          <Chip
+                           onClick={() => {
+                            setSelectSport("basketBall");
+                          }}
+                            className={`${
+                              selectSport == "basketBall"
+                                ? "sportChipSelect"
+                                : "sportChip"
+                            }`}
+                            label={<Typography p={1}>BasketBall</Typography>}
+                          />
+                        </Grid>
+                        <Grid item p={1}>
+                          <Chip
+                           onClick={() => {
+                            setSelectSport("lottery");
+                          }}
+                            className={`${
+                              selectSport == "lottery"
+                                ? "sportChipSelect"
+                                : "sportChip"
+                            }`}
+                            label={<Typography p={1}>Lottery</Typography>}
+                          />
+                        </Grid>
+                      </Grid>
+                      <Grid item container xs={12} p={2}>
+                        {["Argintina", "England", "France", "Germany"].map(
+                          (item, key) => {
+                            return (
+                              <Grid item xs={4}>
+                                <Typography
+                                  my={1}
+                                  sx={{ fontSize: "14px", fontWeight: "bold" }}
+                                >
+                                  {item}
+                                </Typography>
+                                <Typography my={1} sx={{ fontSize: "14px" }}>
+                                  Division 1-Round 9
+                                </Typography>
+                                <Typography my={1} sx={{ fontSize: "14px" }}>
+                                  Estudiantes La Plata vs Newells Old Boys
+                                </Typography>
+                              </Grid>
+                            );
+                          }
+                        )}
+                      </Grid>
+                    </Grid>
+                    {/* <Typography sx={{ p: 2 }}>
+                      The content of the Popover.
+                    </Typography> */}
+                  </Popover>
                 </Grid>
                 <Grid item xs={6} md={6} lg={8} container color="black">
                   <Grid>
@@ -199,19 +294,26 @@ const Header = () => {
                         router.push("/");
                       }}
                     >
-                      <Typography textAlign="center">{t('home')}</Typography>
+                      <Typography textAlign="center">{t("home")}</Typography>
                     </MenuItem>
                   </Grid>
-                  {!matches2 ? menuList.map((item,index) => {
-                    return (
-                      <Grid key={index}>
-                        <MenuItem sx={{paddingX:{xs:"5px",lg:"15px"}}} onClick={() => router.push(`/${item.page}`)}>
-                          <Typography  textAlign="center">{item.label}</Typography>
-                        </MenuItem>
-                      </Grid>
-                    );
-                  }) : ''}
-                 
+                  {!matches2
+                    ? menuList.map((item, index) => {
+                        return (
+                          <Grid key={index}>
+                            <MenuItem
+                              sx={{ paddingX: { xs: "5px", lg: "15px" } }}
+                              onClick={() => router.push(`/${item.page}`)}
+                            >
+                              <Typography textAlign="center">
+                                {item.label}
+                              </Typography>
+                            </MenuItem>
+                          </Grid>
+                        );
+                      })
+                    : ""}
+
                   <Grid>
                     <MenuItem
                       id="basic-button"
@@ -240,13 +342,20 @@ const Header = () => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
-                      {matches2 ? menuList.map((item,index) => {
-                    return (
-                        <MenuItem key={index} onClick={() => router.push(`/${item.page}`)}>
-                          <Typography textAlign="center">{item.label}</Typography>
-                        </MenuItem>
-                    );
-                  }) : ''}
+                      {matches2
+                        ? menuList.map((item, index) => {
+                            return (
+                              <MenuItem
+                                key={index}
+                                onClick={() => router.push(`/${item.page}`)}
+                              >
+                                <Typography textAlign="center">
+                                  {item.label}
+                                </Typography>
+                              </MenuItem>
+                            );
+                          })
+                        : ""}
                       <MenuItem onClick={handleClose}>Profile</MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
                       <MenuItem onClick={handleClose}>Logout</MenuItem>
@@ -274,7 +383,7 @@ const Header = () => {
                     onClick={() => router.push("/download")}
                   >
                     <Icon icon="material-symbols:app-shortcut" width={20} />
-                    {t('download_app')}
+                    {t("download_app")}
                   </Button>
 
                   <Button
@@ -287,7 +396,7 @@ const Header = () => {
                     }}
                   >
                     <Icon icon="ic:round-star-border" width={20} />
-                    {t('favorites')}
+                    {t("favorites")}
                   </Button>
                 </Grid>
               </Grid>

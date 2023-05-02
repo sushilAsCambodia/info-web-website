@@ -728,8 +728,8 @@ visibility: visible;
   display: inline-block;
   margin-top: 5px;
 }
-.rotate180{
-  transform: rotate(180deg);
+.rotate90{
+  transform: rotate(90deg);
   transition-duration: 0.4s;
 }
 .rotate0{
@@ -754,4 +754,14 @@ visibility: visible;
 }
 .d-none {
   display: none;
+}
+/* HEADER  */
+.sportChipSelect{
+   background: white !important;
+  color: black !important;
+}
+.sportChip{
+ 
+  background: #373737 !important;
+  color: white !important;
 }

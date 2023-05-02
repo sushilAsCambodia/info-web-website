@@ -22,6 +22,7 @@ import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 
 import ScoreTable from "@/components/football/ScoreTable";
+import Schedule from "@/components/football/schedule";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -140,7 +141,7 @@ export default function FootBallPage() {
         Item Three
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
-        Item 4
+        <Schedule />
       </TabPanel>
     </>
   );

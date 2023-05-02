@@ -98,7 +98,8 @@ export default function LandingPageBanner(props) {
                 alt={banner.label}
                 style={{
                   width: "100%",
-                  objectPosition:"0px -300px", 
+                  height:'100%',
+                  objectFit:"cover", 
                 }}
               />
             </Grid>

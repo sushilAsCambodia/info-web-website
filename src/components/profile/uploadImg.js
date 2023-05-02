@@ -41,7 +41,7 @@ const UploadImg = () => {
   const { customer, loading } = useSelector((state) => state.auth);
   const [userName, setUsername] = useState((customer && customer.user_name ? customer.user_name : ''));
   const [nickName, setNickName] = useState((customer && customer.nick_name ? customer.nick_name : ''));
-  const [disabledNickName, setDisabledNickName] = useState((customer && customer.nick_name != '' ? true : false));
+  const [disabledNickName, setDisabledNickName] = useState(true);
   const { t } = useTranslation();
   const [imagePreviewUrl, setImagePreviewUrl] = useState();
   const dispatch = useDispatch();
@@ -60,6 +60,13 @@ const UploadImg = () => {
   const [textAction, setTextAction] = useState('save');
   const [openDialog, setOpenDialog] = useState(false);
   const [file, setFile] = useState(undefined);
+  useEffect(() => {
+    if(customer && (customer.nick_name != null | customer.nick_name != '')) {
+      setDisabledNickName(true)
+    }else {
+      setDisabledNickName(false)
+    }
+  },[customer])
   const photoUpload = (e) => {
     e.preventDefault();
     const reader = new FileReader();
@@ -438,9 +445,6 @@ const UploadImg = () => {
                 setResponseMessage(t(message));
                 if([200,201,202,203,204].includes(status_code)) {
                   setTextAction('edit');
-                }else{
-                  console.log('fail')
-                  // setTextAction('edit');
                 }
               },
               auth: true
