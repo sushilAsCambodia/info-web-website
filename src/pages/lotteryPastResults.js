@@ -80,46 +80,46 @@ export default function LotteryPastReults() {
   }
 
   const rows = [
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-          "Frozen yoghurt",
-          159,
-          '09-03-2023',
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          1
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-          "Ice cream sandwich",
-          237,
-          '21-09-2022',
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          2
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Eclair",
-          262,
-          '05-11-2022',
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          3
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Cupcake",
-          305,
-          '23-01-2023',
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          4
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Gingerbread",
-          356,
-          '11-11-2022',
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
-          5
-        ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
+      "Frozen yoghurt",
+      159,
+      "09-03-2023",
+      { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
+      1
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
+      "Ice cream sandwich",
+      237,
+      "21-09-2022",
+      { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
+      2
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Eclair",
+      262,
+      "05-11-2022",
+      { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
+      3
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Cupcake",
+      305,
+      "23-01-2023",
+      { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
+      4
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Gingerbread",
+      356,
+      "11-11-2022",
+      { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
+      5
+    ),
   ];
 
   return (
@@ -172,6 +172,9 @@ export default function LotteryPastReults() {
                 >
                   <div class="v-stepper">
                     <div
+                    onClick={() => {
+                      setFilter("China National");
+                    }}
                       class="circle"
                       style={{
                         "--iconImg": `url("https://thumbs.dreamstime.com/b/modern-creative-color-triangle-arrow-shape-logo-design-creative-color-triangle-arrow-shape-logo-design-142723014.jpg")`,
@@ -199,6 +202,9 @@ export default function LotteryPastReults() {
                   >
                     <div class="v-stepper">
                       <div
+                      onClick={() => {
+                        setFilter("Double color");
+                      }}
                         class="circle"
                         style={{
                           "--iconImg": `url("https://c8.alamy.com/comp/2A8GB3A/red-star-in-circle-icon-on-white-background-flat-style-red-star-in-circle-icon-for-your-web-site-design-logo-app-ui-set-of-star-circle-symbol-r-2A8GB3A.jpg")`,
@@ -224,6 +230,9 @@ export default function LotteryPastReults() {
                   >
                     <div class="v-stepper">
                       <div
+                      onClick={() => {
+                        setFilter("Welfare 3D");
+                      }}
                         class="circle"
                         style={{
                           "--iconImg": `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqy_oXQU85RpvKBMoJwuj22hHTActWhqArVA&usqp=CAU")`,
@@ -250,6 +259,9 @@ export default function LotteryPastReults() {
                   >
                     <div class="v-stepper">
                       <div
+                      onClick={() => {
+                        setFilter("Colorful lottery");
+                      }}
                         class="circle"
                         style={{
                           "--iconImg": `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLYFhTpGv_NCmwQ48A7jvD3hQrQvd_6JLGTQ&usqp=CAU")`,
@@ -275,11 +287,12 @@ export default function LotteryPastReults() {
                   onClick={handleExpandClick}
                   aria-expanded={expanded}
                   className="rotate"
-                  sx={{ paddingTop: "10px" }}
+                  sx={{ paddingTop: "15px" }}
                 >
                   <Icon
-                    className={`${expanded ? "rotate180" : "rotate0"}`}
-                    icon="material-symbols:keyboard-arrow-down-rounded"
+                    width="15px"
+                    className={`${expanded ? "rotate90" : "rotate0"}`}
+                    icon="material-symbols:arrow-forward-ios-rounded"
                   />
                 </IconButton>
               </Grid>
@@ -287,7 +300,7 @@ export default function LotteryPastReults() {
           </Grid>
         </Grid>
         <Grid item xs={8} p={1}>
-          <Grid border="1px solid #DDDDDD" container p={1} >
+          <Grid border="1px solid #DDDDDD" container p={1}>
             <Grid container xs={6} alignItems="center">
               <img
                 width="40px"
@@ -297,7 +310,12 @@ export default function LotteryPastReults() {
               />
               <Typography ml={1}>Welfare lottery lottery</Typography>{" "}
             </Grid>
-            <Grid xs={6} display="flex" alignItems="center" justifyContent="flex-end">
+            <Grid
+              xs={6}
+              display="flex"
+              alignItems="center"
+              justifyContent="flex-end"
+            >
               <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
                 <Select
                   value={age}
@@ -314,7 +332,17 @@ export default function LotteryPastReults() {
                 </Select>
                 {/* <FormHelperText>Without label</FormHelperText> */}
               </FormControl>
-              <Button variant="contained" sx={{background:"#FF6F31",paddingTop:"5px",paddingBottom:"5px",color:"white"}}>Search</Button>
+              <Button
+                variant="contained"
+                sx={{
+                  background: "#FF6F31",
+                  paddingTop: "5px",
+                  paddingBottom: "5px",
+                  color: "white",
+                }}
+              >
+                Search
+              </Button>
             </Grid>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -333,25 +361,25 @@ export default function LotteryPastReults() {
                   {rows.map((item, index) => {
                     return (
                       <>
-                            <StyledTableRow key={item.name}>
-                              <StyledTableCell align="left">
-                                {item.calories}
-                              </StyledTableCell>
-                              <StyledTableCell align="left">
-                                {item.fat}
-                              </StyledTableCell>
-                              <StyledTableCell align="center">
-                                <Grid
-                                  sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  {lottoTable(item.results)}
-                                </Grid>
-                              </StyledTableCell>
-                            </StyledTableRow>
+                        <StyledTableRow key={item.name}>
+                          <StyledTableCell align="left">
+                            {item.calories}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {item.fat}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <Grid
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {lottoTable(item.results)}
+                            </Grid>
+                          </StyledTableCell>
+                        </StyledTableRow>
                       </>
                     );
                   })}
@@ -364,5 +392,3 @@ export default function LotteryPastReults() {
     </>
   );
 }
-
-

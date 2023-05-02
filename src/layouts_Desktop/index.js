@@ -40,7 +40,7 @@ const Layout = (props) => {
             </Head>
             <Header />
             <Container maxWidth="false" sx={{ bgcolor: '#fff', height: "100%", padding: "0px !important", overflowY: 'auto' }}>
-            <main style={{minHeight:'90vh',width:width,margin:"auto",paddingBottom:"20px",paddingTop:"20px"}}>
+            <main style={{minHeight:'90vh',width:width,margin:"auto",paddingBottom:"20px",paddingTop:"0px"}}>
                 {children}
                 </main>
             </Container>
