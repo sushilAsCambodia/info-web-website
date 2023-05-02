@@ -6,6 +6,8 @@ import {
 import Router from "next/router";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+
 export default function ForgotPassword(props) {
 
 
