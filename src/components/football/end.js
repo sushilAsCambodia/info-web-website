@@ -31,18 +31,27 @@ import moment from "moment/moment";
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
+import ActionModal from "./ActionModal";
 export default function End() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
 
-  const [dateFilter, setDateFilter] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
   const [age, setAge] = useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleCloseModal = (event) => {
+    setOpenModal(false);
   };
-
+  const style = {
+    position: "absolute",
+    top: "300px",
+    left: "70%",
+    transform: "translate(-50%, -50%)",
+    width: 750,
+    bgcolor: "background.paper",
+    border: "1px solid #DDDDDD",
+  };
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: "#DDDDDD",
@@ -78,19 +87,6 @@ export default function End() {
   }));
   function createData(img, name, calories, fat, data, id, analyze, favourite) {
     return { img, name, calories, fat, data, id, analyze, favourite };
-  }
-  function Last7Days() {
-    var result = [];
-    for (var i = 0; i < 7; i++) {
-      var d = new Date();
-      d.setDate(d.getDate() - i);
-      result.push({
-        day: moment(d).format(utils.dateLetter),
-        monthyear: moment(d).format(utils.MonthYearFormat),
-      });
-    }
-    console.log("::: 7 days ", result);
-    return result;
   }
   const rows = [
     createData(
@@ -147,6 +143,24 @@ export default function End() {
 
   return (
     <>
+      {/* chart modal  */}
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={openModal}>
+          <Grid sx={style}>
+           <ActionModal />
+          </Grid>
+        </Fade>
+      </Modal>
       <Grid container>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
@@ -209,8 +223,8 @@ export default function End() {
                           {item.fat}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          <IconButton>
-                            <Icon icon="ic:baseline-live-tv" color="#03C12D"/>
+                          <IconButton onClick={() => setOpenModal(true)}>
+                            <Icon icon="ic:baseline-live-tv" color="#03C12D" />
                           </IconButton>
                         </StyledTableCell>
                         <StyledTableCell align="center">

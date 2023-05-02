@@ -19,6 +19,7 @@ export default function CardSlice(props) {
                             component="img"
                             sx={{ width: 106.88, height: 77.82 }}
                             image={image.original}
+                            draggable="false"
                         />
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <CardContent sx={{ flex: '1 auto', textAlign: 'start', padding: '8px 0px 0 8px' }}>

@@ -93,7 +93,7 @@ export default function MiddleShow(props) {
           renderDotsOutside={false}
         >
           <Grid textAlign="center" mt={0.5}>
-            <img src="./assets/News/banner-web.png" width="98%" />
+            <img draggable="false" src="./assets/News/banner-web.png" width="98%" />
           </Grid>
         </Carousel>
       </Grid>
