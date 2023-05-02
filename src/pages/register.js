@@ -78,6 +78,10 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const goToLogin = () => {
     Router.push("/login");
@@ -182,7 +186,7 @@ export default function Register() {
           <Grid item container xs={12} sm={12} padding={2}>
             <Grid container alignItems="flex-end" alignContent="center" mb={4}>
               <Typography variant="h5" sx={{ position: "relative" }}>
-                {t("register")}
+                {langKey && langKey.register}
               </Typography>
             </Grid>
             <form
@@ -198,7 +202,7 @@ export default function Register() {
             >
               <Grid item xs={12} sm={12} mb={3}>
                 <Typography fontWeight="bold" pb={1}>
-                  {t("user_name")}
+               {langKey && langKey.user_name}
                 </Typography>
 
                 <FormControl
@@ -211,7 +215,7 @@ export default function Register() {
                 >
                   <OutlinedInput
                     name="Username"
-                    placeholder={t("user_name")}
+                    placeholder={langKey && langKey.user_name}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-username"
                     value={username}
@@ -230,14 +234,14 @@ export default function Register() {
                   />
                   {errorUserName && (
                     <FormHelperText error>
-                      {t("validate_user_name")}
+                      {langKey && langKey.validate_user_name}
                     </FormHelperText>
                   )}
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={12} mb={4}>
                 <Typography fontWeight="bold" pb={1}>
-                  {t("password")}
+                  {langKey && langKey.password}
                 </Typography>
                 <FormControl
                   variant="outlined"
@@ -249,7 +253,7 @@ export default function Register() {
                 >
                   <OutlinedInput
                     name="password"
-                    placeholder={t("password")}
+                    placeholder={langKey && langKey.password}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-password"
                     type={showPassword ? "text" : "password"}
@@ -274,7 +278,7 @@ export default function Register() {
                   />
                   {errorPassword && (
                     <FormHelperText error>
-                      {t("validate_password")}
+                      {langKey && langKey.validate_password}
                     </FormHelperText>
                   )}
                 </FormControl>
@@ -292,7 +296,7 @@ export default function Register() {
                     }}
                     onClick={onSubmit}
                   >
-                    {t("signup_for_now")}
+                    {langKey && langKey.signup_for_now}
                   </Button>
                 </Grid>
               </Grid>
@@ -304,7 +308,7 @@ export default function Register() {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  <Typography>{t("signup_via")}</Typography>
+                  <Typography>{langKey && langKey.signup_via}</Typography>
                 </Grid>
               </Grid>
               <Grid
@@ -363,7 +367,7 @@ export default function Register() {
                   }}
                   onClick={goToLogin}
                 >
-                  {t("already_have_an_account")}
+                  {langKey && langKey.already_have_an_account}
                   <Typography
                     style={{
                       fontSize: "12px",
@@ -371,7 +375,7 @@ export default function Register() {
                       color: "#F26522",
                     }}
                   >
-                    {t("login")}
+                    {langKey && langKey.login}
                   </Typography>
                 </Link>
               </Grid>
@@ -401,7 +405,7 @@ export default function Register() {
                 padding="5px"
                 onClick={handleClose}
               >
-                {t("cancel")}
+                {langKey && langKey.cancel}
               </Grid>
               <Grid
                 item
@@ -411,7 +415,7 @@ export default function Register() {
                 onClick={() => Router.push("/login")}
                 sx={{ color: "#0898D6" }}
               >
-                {t("login")}
+                {langKey && langKey.login}
               </Grid>
             </Grid>
           </DialogActions>
@@ -460,7 +464,7 @@ export default function Register() {
                   }}
                 >
                   <Typography fontWeight={700} fontSize="20px">
-                  {t("download_app")}
+                  {langKey && langKey.download_app}
                   </Typography>
                 </Grid>
 
@@ -526,7 +530,7 @@ export default function Register() {
                   }}
                 >
                   <Typography variant="h5" fontWeight="bold">
-                    {t("register")}
+                    {langKey && langKey.register}
                   </Typography>
                 </Divider>
               </Grid>
@@ -554,12 +558,12 @@ export default function Register() {
                     }}
                   >
                     <InputLabel htmlFor="component-outlined">
-                      {t("user_name")}
+                      {langKey && langKey.user_name}
                     </InputLabel>
                     <OutlinedInput
                       name="Username"
-                      placeholder={t("user_name")}
-                      label={t("user_name")}
+                      placeholder={langKey && langKey.user_name}
+                      label={langKey && langKey.user_name}
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-username"
                       type="text"
@@ -579,7 +583,7 @@ export default function Register() {
                     />
                     {errorUserName && (
                       <FormHelperText error>
-                        {t("validate_user_name")}
+                        {langKey && langKey.validate_user_name}
                       </FormHelperText>
                     )}
                   </FormControl>
@@ -594,13 +598,13 @@ export default function Register() {
                     }}
                   >
                     <InputLabel htmlFor="component-outlined">
-                      {t("password")}
+                      {langKey && langKey.password}
                     </InputLabel>
 
                     <OutlinedInput
                       name="password"
-                      placeholder={t("password")}
-                      label={t("password")}
+                      placeholder={langKey && langKey.password}
+                      label={langKey && langKey.password}
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
@@ -625,7 +629,7 @@ export default function Register() {
                     />
                     {errorPassword && (
                       <FormHelperText error>
-                        {t("validate_password")}
+                        {langKey && langKey.validate_password}
                       </FormHelperText>
                     )}
                   </FormControl>
@@ -640,13 +644,13 @@ export default function Register() {
                     }}
                   >
                     <InputLabel htmlFor="component-outlined">
-                      {t("confirm_password")}
+                      {langKey && langKey.confirm_password}
                     </InputLabel>
 
                     <OutlinedInput
                       name="password"
-                      placeholder={t("confirm_password")}
-                      label={t("confirm_password")}
+                      placeholder={langKey && langKey.confirm_password}
+                      label={langKey && langKey.confirm_password}
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
@@ -689,7 +693,7 @@ export default function Register() {
                       }}
                       onClick={() => Router.push("/")}
                     >
-                      {t("cancel")}
+                      {langKey && langKey.cancel}
                     </Button>
                   </Grid>
                   <Grid item xs={6}>
@@ -706,7 +710,7 @@ export default function Register() {
                       }}
                       onClick={onSubmit}
                     >
-                      {t("signup_for_now")}
+                      {langKey && langKey.signup_for_now}
                     </Button>
                   </Grid>
                 </Grid>
@@ -792,7 +796,7 @@ export default function Register() {
                     Router.push("/login");
                   }}
                 >
-                  <Typography>{t("already_have_an_account")}</Typography>
+                  <Typography>{langKey && langKey.already_have_an_account}</Typography>
                   <Typography
                     style={{
                       cursor: "pointer",
@@ -805,7 +809,7 @@ export default function Register() {
                 </Link>
                 <Grid display="flex" sx={{ cursor: "pointer" }}>
                   <Icon icon="bi:chat-square-dots-fill" width={25} />
-                  <Typography mx={1}>{t("contact")}</Typography>
+                  <Typography mx={1}>{langKey && langKey.contact}</Typography>
                 </Grid>
               </Grid>
             </Grid>
@@ -825,7 +829,7 @@ export default function Register() {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            {t("ok")}
+            {langKey && langKey.ok}
           </Button>
         </DialogActions>
       </BootstrapDialog>

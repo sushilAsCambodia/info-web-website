@@ -57,6 +57,10 @@ export default function NewsSlider(props) {
       })
     );
   }, [currentPage]);
+
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
   return (
     <>
       <Grid overflow="auto" minHeight="300px" maxHeight="450px" pb={1}>
@@ -131,7 +135,7 @@ export default function NewsSlider(props) {
                   setCurrentPage(currentPage + 1);
                 }}
               >
-                {t("load_more")}
+               {langKey && langKey.load_more}
               </Typography>
             </Button>
           ) : (

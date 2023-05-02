@@ -42,6 +42,9 @@ const Profile = () => {
   const [openDialog,setOpenDialog]=useState(false)
   const [responseMessage,setResponseMessage]  = useState('');
 
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -169,9 +172,9 @@ function TabPanel(props) {
                 sx={{color:"black"}}
                 indicatorColor="transparent"
                 >
-                <CusTab label={t("personal_information")} {...a11yProps(0)} onClick={() => router.push('/profile#profile')}/>
-                <CusTab label={t("system_announcement")} {...a11yProps(1)} onClick={() => router.push('/profile#system')}/>
-                <CusTab label={t("feedback")} {...a11yProps(2)} onClick={() => router.push('/profile#feedback')}/>
+                <CusTab label={langKey && langKey.personal_information}  {...a11yProps(0)} onClick={() => router.push('/profile#profile')}/>
+                <CusTab label={langKey && langKey.system_announcement} {...a11yProps(1)} onClick={() => router.push('/profile#system')}/>
+                <CusTab label={langKey && langKey.feedback} {...a11yProps(2)} onClick={() => router.push('/profile#feedback')}/>
               </CusTabs>
             <SwipeableViews
               index={value}
@@ -247,7 +250,7 @@ function TabPanel(props) {
                             >
                               <Grid item>
                                 <Typography fontWeight="600" fontSize="12px">
-                                  {t("login_to_enjoy")}
+                                  {langKey && langKey.login_to_enjoy}
                                 </Typography>
                                 <Button
                                   variant="contained"
@@ -263,7 +266,7 @@ function TabPanel(props) {
                                     padding: "4px 10px",
                                   }}
                                 >
-                                  {t("login")}/{t("register")}
+                                  {langKey && langKey.login}/{langKey && langKey.register}
                                 </Button>
                               </Grid>
                             </Grid>
@@ -286,7 +289,7 @@ function TabPanel(props) {
             >
               <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                 <Grid item xs={12} paddingTop="15px">
-                  <Typography>{t("important_links")}</Typography>
+                  <Typography>{langKey && langKey.important_links}</Typography>
                 </Grid>
       
                 <List sx={{ padding: "0px" }}>
@@ -323,7 +326,7 @@ function TabPanel(props) {
                         >
                           <Grid item>
                             <Typography fontWeight="500" fontSize="16px">
-                              {t("profile")}
+                              {langKey && langKey.profile}
                             </Typography>
                           </Grid>
                           <Grid
@@ -375,7 +378,7 @@ function TabPanel(props) {
                         >
                           <Grid item>
                             <Typography fontWeight="500" fontSize="16px">
-                              {t("announcement")}
+                              {langKey && langKey.announcement}
                             </Typography>
                           </Grid>
                           <Grid
@@ -427,7 +430,7 @@ function TabPanel(props) {
                         >
                           <Grid item>
                             <Typography fontWeight="500" fontSize="16px">
-                              {t("feedback")}
+                              {langKey && langKey.feedback}
                             </Typography>
                           </Grid>
                           <Grid
@@ -483,7 +486,7 @@ function TabPanel(props) {
                         >
                           <Grid item>
                             <Typography fontWeight="500" fontSize="16px">
-                              {t("customerservice")}
+                              {langKey && langKey.customerservice}
                             </Typography>
                           </Grid>
                           <Grid
@@ -539,7 +542,7 @@ function TabPanel(props) {
                           >
                             <Grid item>
                               <Typography fontWeight="500" fontSize="16px">
-                                {t("logout")}
+                                {langKey && langKey.logout}
                               </Typography>
                             </Grid>
                             <Grid
@@ -565,7 +568,7 @@ function TabPanel(props) {
               </Grid>
               <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                 <Grid item xs={12} paddingTop="20px" paddingBottom="20px">
-                  <Typography fontWeight="600">{t("download_app")}</Typography>
+                  <Typography fontWeight="600">{langKey && langKey.download_app}</Typography>
                 </Grid>
                 <List sx={{ padding: "0px" }}>
                   <ListItem sx={{ padding: "0px 0px" }}>

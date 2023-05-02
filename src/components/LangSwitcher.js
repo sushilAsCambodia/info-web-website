@@ -77,6 +77,20 @@ localStorage.setItem('languageKey', JSON.stringify(res))
     }
 
   },[i18n.language])
+  if(Object.keys(langKey).length===0){
+    dispatch(getLanguage(
+      {
+          params: {
+              lang_id: utils.convertLangCodeToID(i18n.language),platform:'desktop'
+          },
+          callback:(res) => {
+console.log("resres",res)
+localStorage.setItem('languageKey', JSON.stringify(res))
+
+           }
+      }
+  ));
+    }
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

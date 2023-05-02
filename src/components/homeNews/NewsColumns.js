@@ -35,6 +35,12 @@ export default function NewsColumns(props) {
     );
   }, [lang_id]);
 
+  
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
+
+
   return (
     <Grid container justifyContent="center" my={3}>
       <Grid item xs={4} marginY="15px">
@@ -49,7 +55,7 @@ export default function NewsColumns(props) {
           }}
         >
           <Typography variant="h5" paddingX="10px" fontWeight="bold">
-            {t('news')}
+          {langKey && langKey.news}
           </Typography>
         </Divider>
       </Grid>
@@ -58,7 +64,7 @@ export default function NewsColumns(props) {
           return (
           <NewsScrollColumn key={index} newsCategory={item} lang_id={lang_id} />
           );
-        }):<Typography component="div">{t("no_news")}</Typography>
+        }):<Typography component="div"> {langKey && langKey.no_news}</Typography>
       }
       </Grid>
     </Grid>

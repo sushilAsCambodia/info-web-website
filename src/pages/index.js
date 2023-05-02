@@ -46,6 +46,8 @@ localStorage.setItem('languageKey', JSON.stringify(res))
 },[i18n.language]); 
 
 const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   return !matches ? (
     <>
       <Grid mt={2}>
@@ -81,7 +83,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
             }}
           >
             <Typography fontWeight={700} fontSize="20px">
-              {t("download_app")}
+              {langKey && langKey.download_app}
             </Typography>
           </Grid>
 
@@ -121,7 +123,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
             <Grid item>
               <Link href="/home">
                 <Typography fontWeight={700} fontSize="15px" color="#1639e5">
-                  {langKey && langKey.continue_to_home}
+              {langKey && langKey.continue_to_home}
                 </Typography>
               </Link>
             </Grid>

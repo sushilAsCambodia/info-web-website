@@ -10,7 +10,6 @@ export const getLanguage = createAsyncThunk(
       if(typeof callback == 'function') {
         callback(data);
       }
-    
       dispatch({
         type: 'loadLanguage',
         payload: data,

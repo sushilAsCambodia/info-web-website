@@ -60,6 +60,10 @@ const UploadImg = () => {
   const [textAction, setTextAction] = useState('save');
   const [openDialog, setOpenDialog] = useState(false);
   const [file, setFile] = useState(undefined);
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   useEffect(() => {
     if(customer && (customer.nick_name != null || customer.nick_name != '')) {
       setDisabledNickName(true)
@@ -137,56 +141,56 @@ const UploadImg = () => {
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     if (e.target.value == '') {
-      setErrorPasswordMessage(t('password_required'));
+      setErrorPasswordMessage(langKey && langKey.password_required);
       setErrorPassword(true);
     } else {
       setErrorPassword(false);
     }
     if (confirmpassword != '') {
       if (confirmpassword != e.target.value) {
-        setConfirmErrorPasswordMessage(t('password_is_not_match'));
+        setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
         setErrorConfirmPassword(true);
       } else {
         setErrorConfirmPassword(false);
       }
     }
     if (e.target.value.length < 6) {
-      setErrorPasswordMessage(t('validate_password'));
+      setErrorPasswordMessage(langKey && langKey.validate_password);
       setErrorPassword(true);
     }
   };
   const onChangeConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
     if (e.target.value == '') {
-      setErrorPasswordMessage(t('confirm_password_required'));
+      setErrorPasswordMessage(langKey && langKey.confirm_password_required);
       setErrorConfirmPassword(true);
     } else {
       setErrorConfirmPassword(false);
     }
     if (password != e.target.value) {
-      setConfirmErrorPasswordMessage(t('password_is_not_match'));
+      setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
       setErrorConfirmPassword(true);
     } else {
       setErrorConfirmPassword(false);
     }
     if (e.target.value.length < 6) {
-      setConfirmErrorPasswordMessage(t('validate_password'));
+      setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
       setErrorConfirmPassword(true);
     }
   };
   const onSubmit = () => {
     if (password == '' && confirmpassword == '') {
-      setErrorPasswordMessage(t('password_required'));
-      setConfirmErrorPasswordMessage(t('confirm_password_required'));
+      setErrorPasswordMessage(langKey && langKey.password_required);
+      setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
       setErrorPassword(true);
       setErrorConfirmPassword(true);
       return;
     } else if (password === '') {
-      setErrorPasswordMessage(t('password_required'));
+      setErrorPasswordMessage(langKey && langKey.password_required);
       setErrorPassword(true);
       return;
     } else if (confirmpassword === '') {
-      setConfirmErrorPasswordMessage(t('confirm_password_required'));
+      setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
       setErrorConfirmPassword(true);
       return;
     }
@@ -236,7 +240,7 @@ const UploadImg = () => {
         {editUserName && <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
           <Grid item xs={12} sm={12} >
             <Typography fontWeight="bold" pb={1} textAlign="left">
-              {t('nick_name')} <Typography component="span" sx={{ color: 'red' }}>*</Typography>
+            {langKey && langKey.nick_name} <Typography component="span" sx={{ color: 'red' }}>*</Typography>
             </Typography>
             <FormControl
               variant="outlined"
@@ -248,7 +252,7 @@ const UploadImg = () => {
               <OutlinedInput
                 sx={{ paddingRight: "10px" }}
                 name="nickname"
-                placeholder={t('nick_name')}
+                placeholder= {langKey && langKey.nick_name}
                 inputProps={{ maxLength: 16 }}
                 id="outlined-adornment-nickname"
                 type="text"
@@ -266,7 +270,7 @@ const UploadImg = () => {
                         textTransform: 'capitalize'
                       }}
                       onClick={setUpdateNickName}>
-                      {t('save')}
+                     {langKey && langKey.save}
                     </Button>
                   </InputAdornment>
                 }
@@ -280,7 +284,7 @@ const UploadImg = () => {
             <ListItem disablePadding>
               <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                  {t('password')}
+                {langKey && langKey.password}
                 </Typography>
                 <FormControl
                   variant="outlined"
@@ -292,7 +296,7 @@ const UploadImg = () => {
                 >
                   <OutlinedInput
                     name="password"
-                    placeholder={t('password')}
+                    placeholder={langKey && langKey.password}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-password"
                     type={showPassword ? 'text' : 'password'}
@@ -319,7 +323,7 @@ const UploadImg = () => {
             <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
               <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                  {t('confirm_password')}
+                {langKey && langKey.confirm_password}
                 </Typography>
                 <FormControl
                   variant="outlined"
@@ -331,7 +335,7 @@ const UploadImg = () => {
                   <OutlinedInput
                     sx={{ paddingRight: "10px" }}
                     name="confirm_password"
-                    placeholder={t('confirm_password')}
+                    placeholder={langKey && langKey.confirm_password}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-confirmpassword"
                     type={showConfirmPassword ? 'text' : 'password'}
@@ -370,7 +374,7 @@ const UploadImg = () => {
                   }}
                   onClick={onSubmit}
                 >
-                  {t('submit')}
+                {langKey && langKey.submit}
                 </Button>
               </Grid>
             </ListItem>
@@ -398,7 +402,7 @@ const UploadImg = () => {
         setState({ ...state, bottom: true });
       }else {
         setErrorNickName(true);
-        setErrorNickNameMessage(t('nick_name_required'));
+        setErrorNickNameMessage(langKey && langKey.nick_name_required);
       }
     }else {
       if (nickName.length < 6) {
@@ -407,7 +411,7 @@ const UploadImg = () => {
           setState({ ...state, bottom: true });
         }else {
           setErrorNickName(true);
-          setErrorNickNameMessage(t('validate_nick_name'));
+          setErrorNickNameMessage(langKey && langKey.validate_nick_name);
         }
       }else {
         setErrorNickName(false);
@@ -423,11 +427,11 @@ const UploadImg = () => {
   const setUpdateNickName = () => {
     if(nickName == '') {
       setErrorNickName(true);
-      setErrorNickNameMessage(t('nick_name_required'));
+      setErrorNickNameMessage(langKey && langKey.nick_name_required);
     }else {
       if (nickName.length < 6) {
         setErrorNickName(true);
-        setErrorNickNameMessage(t('validate_nick_name'));
+        setErrorNickNameMessage(langKey && langKey.validate_nick_name);
       }else {
         dispatch(
           updateNickName(
@@ -454,6 +458,9 @@ const UploadImg = () => {
       }
     }
   }
+
+
+
   return (
     <>
       <Grid item xs={12} textAlign="center">
@@ -461,7 +468,7 @@ const UploadImg = () => {
           <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
           <Grid item xs={12} sm={12} >
             <Typography fontWeight="bold" pb={1} textAlign="left">
-              {t('user_name')}
+            {langKey && langKey.user_name}
             </Typography>
             <FormControl
               variant="outlined"
@@ -473,7 +480,7 @@ const UploadImg = () => {
               <OutlinedInput
                 sx={{ paddingRight: "10px" }}
                 name="user_name"
-                placeholder={t('user_name')}
+                placeholder={langKey && langKey.user_name}
                 inputProps={{ maxLength: 16 }}
                 id="outlined-adornment-user-name"
                 type="text"
@@ -484,7 +491,7 @@ const UploadImg = () => {
           </Grid>
           <Grid item xs={12} sm={12} >
             <Typography fontWeight="bold" pb={1} textAlign="left">
-              {t('nick_name')}
+            {langKey && langKey.nick_name}
             </Typography>
             <FormControl
               variant="outlined"
@@ -496,7 +503,7 @@ const UploadImg = () => {
               <OutlinedInput
                 sx={{ paddingRight: "10px" }}
                 name="nickname"
-                placeholder={t('nick_name')}
+                placeholder={langKey && langKey.nick_name}
                 inputProps={{ maxLength: 16 }}
                 id="outlined-adornment-nickname"
                 type="text"
@@ -514,7 +521,7 @@ const UploadImg = () => {
                         textTransform: 'capitalize'
                       }}
                       onClick={onUpdateNickName}>
-                      {textAction == 'edit' ? t('edit') : t('save')}
+                      {textAction == 'edit' ? (langKey && langKey.edit) : (langKey && langKey.save)}
                     </Button>
                   </InputAdornment>
                 }
@@ -537,7 +544,7 @@ const UploadImg = () => {
                 textTransform: 'capitalize'
               }}
               onClick={toggleDrawer('bottom', true, 'editPassword')}>
-              {t('change_password')}
+       {langKey && langKey.change_password}
             </Button>
           </Grid>
         </form>
