@@ -761,7 +761,11 @@ visibility: visible;
   color: black !important;
 }
 .sportChip{
- 
   background: #373737 !important;
   color: white !important;
+}
+/* END  */
+/* FOOTBALL */
+.dateSelected{
+  color: orange !important;;
 }

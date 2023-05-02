@@ -31,7 +31,7 @@ import moment from "moment/moment";
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
-export default function Schedule() {
+export default function End() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
 
@@ -149,68 +149,6 @@ export default function Schedule() {
     <>
       <Grid container>
         <Grid item xs={12}>
-          <Grid
-            container
-            sx={{
-              background: "#FAFAFA",
-              border: "1px solid #DDDDDD",
-              borderRadius: "10px",
-            }}
-          >
-            <Grid container xs={10} alignItems="center">
-              {Last7Days().map((item, index) => {
-                return (
-                  <Grid
-                    key={index}
-                    item
-                    xs={"auto"}
-                    mx={1}
-                    container
-                    className={`${
-                      item.day === dateFilter ? "dateSelected" : ""
-                    }`}
-                    onClick={() => {
-                      setDateFilter(item.day);
-                    }}
-                  >
-                    <Typography sx={{ fontWeight: "bold" }} mr={1}>
-                      {item.day}
-                    </Typography>
-                    <Typography mr={1}>{item.monthyear}</Typography>
-                    <Divider orientation="vertical" flexItem />
-                  </Grid>
-                );
-              })}
-            </Grid>
-            <Grid
-              xs={2}
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-end"
-            >
-              <FormControl sx={{ m: 1 }} size="small">
-                <Select
-                  value={age}
-                  onChange={handleChange}
-                  displayEmpty
-                  inputProps={{ "aria-label": "Without label" }}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <Icon icon="material-symbols:calendar-today" width={25} />
-                    </InputAdornment>
-                  }
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-                {/* <FormHelperText>Without label</FormHelperText> */}
-              </FormControl>
-            </Grid>
-          </Grid>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
@@ -236,7 +174,7 @@ export default function Schedule() {
                     Data
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                    Analysis
+                    Stream
                   </StyledHeaderCell>
                   <StyledHeaderCell width="30px" align="center">
                     Favourite
@@ -271,15 +209,9 @@ export default function Schedule() {
                           {item.fat}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          <Grid
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {item.analyze}
-                          </Grid>
+                          <IconButton>
+                            <Icon icon="ic:baseline-live-tv" color="#03C12D"/>
+                          </IconButton>
                         </StyledTableCell>
                         <StyledTableCell align="center">
                           {item.favourite ? (
