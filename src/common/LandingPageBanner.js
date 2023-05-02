@@ -13,6 +13,7 @@ import {getBanner} from '@/store/actions/bannerActions'
 import { useTheme } from "@mui/material/styles";
 import { Icon } from "@iconify/react";
 import Carousel from "react-multi-carousel";
+import Image from "mui-image";
 
 const responsive = {
   largeDesktop: {
@@ -55,7 +56,7 @@ export default function LandingPageBanner(props) {
           }
       }
   ));
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <Grid mt={2}>
@@ -92,7 +93,7 @@ export default function LandingPageBanner(props) {
               alignItems="center"
               justifyContent="space-around"
             >
-              <img
+              <Image  
                 src={banner.image}
                 alt={banner.label}
                 style={{

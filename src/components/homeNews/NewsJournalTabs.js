@@ -57,6 +57,7 @@ export default function NewsJournalTabs(props) {
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
+  let langKey
   useEffect(() => {
     const hash = router.asPath.split('#')[1];
     if(hash == 'journal') {
@@ -78,6 +79,12 @@ export default function NewsJournalTabs(props) {
       ));
     }
   },[lang_id,value])
+  
+  if(typeof window !='undefined') {
+      langKey = JSON.parse(window.localStorage.getItem('languageKey'));
+  }
+  
+ 
   return (
     <Grid item className='tabclass' sx={{height:'100%'}}>
       <Grid sx={{ height:'100%' }} >
@@ -91,8 +98,8 @@ export default function NewsJournalTabs(props) {
           className='mui-home-tab-wrapper'
           sx={{paddingTop:'10px',paddingBottom:'10px'}}
         >
-          <Tab className='mui-custom-home mui-custom-new' label={t('news')} {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
-          <Tab className='mui-custom-home mui-custom-journal' label={t('journal')} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
+          <Tab className='mui-custom-home mui-custom-new' label={langKey && langKey.news} {...a11yProps(0)} onClick={() => router.push('/home#newsfeed')} />
+          <Tab className='mui-custom-home mui-custom-journal' label={langKey && langKey.journal} {...a11yProps(1)} onClick={() => router.push('/home#journal')}/>
         </Tabs>
         <TabPanel  value={value} index={0} >
           <FullSilder banners={banners}/>
