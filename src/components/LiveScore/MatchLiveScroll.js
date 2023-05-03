@@ -39,33 +39,40 @@ export default function MatchLiveScroll(props) {
 
   return (
     <>
-      <div style={{ paddingRight: "10px", cursor: "pointer" }}>
+      <Grid style={{  cursor: "pointer" }}>
         <Grid
           sx={{
-            borderBottom: "2px solid grey",
+            borderBottom: "1px solid grey",
             marginY: "10px",
             paddingBottom: "10px",
             minWidth: "200px",
-          }}
-        >
-          <Typography
-            title="hshs"
-            className="twoLinesEllip"
-            sx={{
-              fontSize: "14px",
+          
+              fontSize: "16px",
               "&:hover": {
                 textDecoration: "underline",
               },
             }}
+        >
+          <Typography
+            className="twoLinesEllip"
+            
             px={1}
           >
-            isjs vs jhsjf
+            Russian Basketball Super League
           </Typography>
-          <Typography sx={{ fontSize: "12px", color: "#8C8C8C" }} px={1}>
-            04/03/23
+          <Typography
+            className="twoLinesEllip"
+            sx={{ fontSize: "13px" }}
+            px={1}
+            color="#F24E1E"
+          >
+            Tambov vs Novosibirsk
+          </Typography>
+          <Typography sx={{ fontSize: "12px"  }} px={1}>
+            19:22
           </Typography>
         </Grid>
-      </div>
+      </Grid>
     </>
   );
 }

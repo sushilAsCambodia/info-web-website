@@ -268,14 +268,18 @@ export default function MatchLiveFeed(props) {
                     >
                       <Chip
                         label={
-                          <Typography p={1} fontWeight="bold">Pause 0</Typography>
+                          <Typography p={1} fontWeight="bold">
+                            Pause 0
+                          </Typography>
                         }
                         className="scoreChip"
                         variant="outlined"
                       />
                       <Chip
                         label={
-                          <Typography p={1} fontWeight="bold">Foul 0</Typography>
+                          <Typography p={1} fontWeight="bold">
+                            Foul 0
+                          </Typography>
                         }
                         className="scoreChip"
                         variant="outlined"
@@ -372,14 +376,18 @@ export default function MatchLiveFeed(props) {
                     >
                       <Chip
                         label={
-                          <Typography p={1} fontWeight="bold">Pause 0</Typography>
+                          <Typography p={1} fontWeight="bold">
+                            Pause 0
+                          </Typography>
                         }
                         className="scoreChip"
                         variant="outlined"
                       />
                       <Chip
                         label={
-                          <Typography p={1} fontWeight="bold">Foul 0</Typography>
+                          <Typography p={1} fontWeight="bold">
+                            Foul 0
+                          </Typography>
                         }
                         className="scoreChip"
                         variant="outlined"
@@ -401,7 +409,42 @@ export default function MatchLiveFeed(props) {
         </SwipeableViews>
       </Grid>
       <Grid item xs={3} px={1}>
-        <MatchLiveScroll />
+        <Grid border="1px solid #ddd">
+          <Grid component={Card} container p={1} elevation={3} height="50px">
+            <Grid
+              item
+              xs={8}
+              container
+              flexWrap="nowrap"
+              justifyContent="space-between"
+              overflow="scroll"
+              className="chipScroll"
+            >
+              <Chip label="success" color="success" variant="outlined" />
+              <Chip label="success" color="success" variant="outlined" />
+              <Chip label="success" color="success" variant="outlined" />
+              <Chip label="success" color="success" variant="outlined" />
+            </Grid>
+            <Grid
+              container
+              item
+              xs={4}
+              pt={1}
+              justifyContent="flex-end"
+              alignContent="flex-start"
+            >
+              <Icon icon="ph:user" />
+              <Typography>8383737</Typography>
+            </Grid>
+          </Grid>
+          {[1, 2, 3, 4, 5, 6, 7].map((item, index) => {
+            return (
+              <>
+                <MatchLiveScroll />
+              </>
+            );
+          })}
+        </Grid>
       </Grid>
     </Grid>
   );
