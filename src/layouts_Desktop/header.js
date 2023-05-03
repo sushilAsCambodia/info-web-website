@@ -29,8 +29,6 @@ const Header = () => {
 
 
 
-
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -62,11 +60,11 @@ const Header = () => {
   const menuList = [
     { label: (langKey && langKey.lottery_draw), page: "LotteryPage" },
     { label: (langKey && langKey.data_chart), page: "DataChart" },
-    { label: "FootBall", page: "footBallPage" },
-    { label: "BasketBall", page: "basketBall" },
+    { label: (langKey && langKey.foot_ball), page: "footBallPage" },
+    { label: (langKey && langKey.basket_ball), page: "basketBall" },
   ];
 
-  
+
 
   return (
     <>
@@ -177,7 +175,7 @@ const Header = () => {
                       paddingLeft: "0px",
                     }}
                   >
-                    <Typography color="white">Live Score</Typography>
+                    <Typography color="white">{langKey && langKey.live_score}</Typography>
                     {openScore ? (
                       <Icon
                         color="white"
@@ -366,9 +364,9 @@ const Header = () => {
                             );
                           })
                         : ""}
-                      <MenuItem onClick={handleClose}>Profile</MenuItem>
-                      <MenuItem onClick={handleClose}>My account</MenuItem>
-                      <MenuItem onClick={handleClose}>Logout</MenuItem>
+                      <MenuItem onClick={handleClose}>{langKey && langKey.profile}</MenuItem>
+                      <MenuItem onClick={handleClose}>{langKey && langKey.my_account}</MenuItem>
+                      <MenuItem onClick={handleClose}>{langKey && langKey.logout}</MenuItem>
                     </Menu>
                   </Grid>
                 </Grid>

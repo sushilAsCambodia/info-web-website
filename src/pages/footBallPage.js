@@ -20,7 +20,7 @@ import { useState, useEffect } from "react";
 
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
-
+import { useSelector } from "react-redux";
 import ScoreTable from "@/components/football/ScoreTable";
 import Schedule from "@/components/football/schedule";
 
@@ -50,7 +50,11 @@ export default function FootBallPage() {
   const [age, setAge] = useState("");
 
   const [value, setValue] = useState("");
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
+
+
+  
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -70,7 +74,7 @@ export default function FootBallPage() {
   return (
     <>
       <Typography variant="h5" fontWeight="bold">
-        FootBall
+      {langKey && langKey.foot_ball}
       </Typography>
 
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
@@ -82,7 +86,7 @@ export default function FootBallPage() {
               router.push("/footBallPage#Follow");
             }}
           >
-            Follow
+                  {langKey && langKey.follow}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 0px 0px 0px" }}
@@ -91,7 +95,7 @@ export default function FootBallPage() {
               router.push("/footBallPage#Score");
             }}
           >
-            Score
+               {langKey && langKey.score}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 0px 0px 0px" }}
@@ -99,8 +103,8 @@ export default function FootBallPage() {
             onClick={() => {
               router.push("/footBallPage#End");
             }}
-          >
-            End
+          > 
+               {langKey && langKey.end}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 5px 5px 0px" }}
@@ -109,8 +113,8 @@ export default function FootBallPage() {
               router.push("/footBallPage#Schedule");
             }}
           >
-            Schedule
-          </MenuItem>
+               {langKey && langKey.schedule}
+          </MenuItem> 
         </Grid>
         <Grid xs={2}>
           <FormControl fullWidth>
@@ -132,7 +136,7 @@ export default function FootBallPage() {
       </Grid>
 
       <TabPanel value={value} index={"Follow"}>
-        Item One
+        Item One 
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
         <ScoreTable />

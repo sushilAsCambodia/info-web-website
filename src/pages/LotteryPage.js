@@ -23,7 +23,7 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
-
+import { useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 const style = {
@@ -41,6 +41,8 @@ export default function LotteryPage() {
   const router = useRouter()
   const [select, setSelect] = useState(0);
   const [age, setAge] = useState("");
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -202,7 +204,7 @@ export default function LotteryPage() {
   return (
     <>
       <Typography variant="h5" fontWeight="bold">
-        Lottery
+              {langKey && langKey.lottery}
       </Typography>
       {/* past result modal  */}
       <Modal
@@ -381,7 +383,7 @@ export default function LotteryPage() {
               setSelect(0);
             }}
           >
-            All
+             {langKey && langKey.all}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 10px 10px 0px" }}
@@ -390,7 +392,7 @@ export default function LotteryPage() {
               setSelect(1);
             }}
           >
-            Favourite
+             {langKey && langKey.favorites}
           </MenuItem>
         </Grid>
         <Grid xs={2}>

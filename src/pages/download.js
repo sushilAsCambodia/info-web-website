@@ -10,6 +10,7 @@ import {
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 export default function Index() {
   const matches = useMediaQuery("(max-width:393px)");
   const {t} = useTranslation()
@@ -47,7 +48,7 @@ export default function Index() {
           </Grid>
           <Grid item textAlign="center" mt={2}>
             <Typography fontWeight={700} fontSize="20px">
-              DOWNLOAD APP
+             {langKey && langKey.download_app}
             </Typography>
           </Grid>
 
