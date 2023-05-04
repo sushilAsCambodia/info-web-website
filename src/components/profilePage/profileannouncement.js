@@ -62,6 +62,10 @@ const rows = [
 
 export default function ProfileAnnouncement() {
   const { t } = useTranslation();
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   return (
 
     <Grid

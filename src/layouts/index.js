@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './header';
 import Footer from './footer';
 import Container from '@mui/material/Container';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Navigate from '@/components/navigate';
 import { Grid, IconButton } from '@mui/material';
@@ -16,6 +17,9 @@ const Layout = (props) => {
         anchor:'bottom'
     }); 
     const { t,i18n } = useTranslation();
+
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
     useEffect(() => {
         setMounted(true);
     }, []);
@@ -75,9 +79,11 @@ const Layout = (props) => {
                         </Grid>
                     } />
             } else if (innerpages.includes(router.pathname)) {
-                let title = router.pathname.replace('/', '').toLowerCase();
+                //let title = router.pathname.replace('/', '').toLowerCase();
+                let title = langKey && langKey[router.pathname.replace('/', '').toLowerCase()];
+                
                 return <Navigate
-                    title={t(title)}
+                    title={title}
                     lead={<IconButton
                         onClick={() => router.back()}
                         size="large"
@@ -112,47 +118,52 @@ const Layout = (props) => {
 
     switch (router.pathname.toLocaleLowerCase()) {
         case '/home':
-            title = t('home_info_web')
+            title = (langKey && langKey.home_info_web)
             break;
         case '/lottery':
-            title = t('lottery_info_web')
+            title = (langKey && langKey.lottery_info_web)
             break;
         case '/match':
-            title = t('match_info_web')
+            title = (langKey && langKey.match_info_web)
             break;
         case '/profile':
-            title = t('profile_info_web')
+            title = (langKey && langKey.profile_info_web)
             break;
         case '/profiledetail':
-            title = t('profile_detail_info_web')
+            title = (langKey && langKey.profile_detail_info_web)
             break;
         case '/announcement':
-            title = t('announcement_info_web')
+            title = (langKey && langKey.announcement_info_web)
             break;
         case '/feedback':
-            title = t('feedback_info_web')
+            title = (langKey && langKey.feedback_info_web)
             break;
         case '/customerservice':
-            title = t('customer_service_info_web')
+            title = (langKey && langKey.customer_service_info_web)
             break;
         case '/journalcarddetails':
-            title = t('journal_card_details_info_web')
+            title = (langKey && langKey.journal_card_details_info_web)
             break;
         case '/newscarddetails':
-            title = t('news_card_details_info_web')
+            title = (langKey && langKey.news_card_details_info_web)
             break;
         case '/login':
-            title = t('login_info_web')
+            title = (langKey && langKey.login_info_web)
             break;
         case '/register':
-            title = t('register_info_web')
+            title = (langKey && langKey.register_info_web)
             break;
         case '/forgotpassword':
-            title = t('forgot_password_info_web')
+            title = (langKey && langKey.forgot_password_info_web)
             break;
         default:
             break;
     }
+
+
+   
+
+
     return mounted && (
         <>
             <Head>

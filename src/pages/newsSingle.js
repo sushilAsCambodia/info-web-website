@@ -30,6 +30,10 @@ export default function NewsSingle() {
   const lang_id = utils.convertLangCodeToID(i18n.language);
   const { categories = [] } = useSelector((state) => state.category);
   const [newsCat, setNewsCat] = useState(0);
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   const [page, setPage] = useState(1);
   const [type, setType] = useState('');
   const matches = useMediaQuery("(max-width:768px)");
@@ -120,7 +124,7 @@ export default function NewsSingle() {
     <Grid justifyContent="center">
       <Grid my={1}>
         <Typography fontWeight="bold" variant="h5">
-          {t("newscarddetails")}
+      {langKey && langKey.newscarddetails}
         </Typography>
         <Grid container>
           <Grid item xs={8} md={9} py={1}>

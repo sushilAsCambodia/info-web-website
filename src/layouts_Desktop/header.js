@@ -25,6 +25,13 @@ const Header = () => {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
+
+
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -53,11 +60,14 @@ const Header = () => {
 
 
   const menuList = [
-    { label: t("lottery_draw"), page: "LotteryPage" },
-    { label: t("data_chart"), page: "DataChart" },
+    { label: (langKey && langKey.lottery_draw), page: "LotteryPage" },
+    { label: (langKey && langKey.data_chart), page: "DataChart" },
     { label: "FootBall", page: "footBallPage" },
     { label: "BasketBall", page: "basketBall" },
   ];
+
+  
+
   return (
     <>
       {router.pathname == "/login" || router.pathname == "/register" ? (
@@ -119,7 +129,7 @@ const Header = () => {
                         },
                       }}
                     >
-                      {t("login")}/{t("register")}
+                    {langKey && langKey.login}/{langKey && langKey.register}
                     </Button>
                   ) : (
                     <ProfileDropDown
@@ -223,7 +233,7 @@ const Header = () => {
                         router.push("/");
                       }}
                     >
-                      <Typography textAlign="center">{t("home")}</Typography>
+                      <Typography textAlign="center">{langKey && langKey.home} </Typography>
                     </MenuItem>
                   </Grid>
                   {!matches2
@@ -312,7 +322,7 @@ const Header = () => {
                     onClick={() => router.push("/download")}
                   >
                     <Icon icon="material-symbols:app-shortcut" width={20} />
-                    {t("download_app")}
+                    {langKey && langKey.download_app}
                   </Button>
 
                   <Button
@@ -325,7 +335,7 @@ const Header = () => {
                     }}
                   >
                     <Icon icon="ic:round-star-border" width={20} />
-                    {t("favorites")}
+                    {langKey && langKey.favorites}
                   </Button>
                 </Grid>
               </Grid>

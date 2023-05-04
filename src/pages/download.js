@@ -13,6 +13,10 @@ import { useTranslation } from "react-i18next";
 export default function Index() {
   const matches = useMediaQuery("(max-width:393px)");
   const {t} = useTranslation()
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   return (
     <Grid
       sx={{
@@ -79,7 +83,7 @@ export default function Index() {
         </Grid>
         <Grid item textAlign="center" mt={2}>
           <Typography fontWeight={700} fontSize="20px">
-            {t("download_app")}
+       {langKey && langKey.download_app}
           </Typography>
         </Grid>
 

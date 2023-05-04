@@ -10,7 +10,12 @@ export const getLanguage = createAsyncThunk(
       if(typeof callback == 'function') {
         callback(data);
       }
+      dispatch({
+        type: 'loadLanguage',
+        payload: data,
+      });
       return data;
+      
     } catch (error) {
       const {status, data} = error.response;
       data['status_code']  = status;

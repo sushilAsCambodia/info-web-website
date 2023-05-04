@@ -61,6 +61,8 @@ export default function ProfileInfo(props) {
 
   const router = useRouter();
 
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
 
   const ImgUpload = ({ onChange, src }) => {
     return (
@@ -138,7 +140,7 @@ export default function ProfileInfo(props) {
       }
     }
     if (e.target.value.length < 6) {
-      setErrorPasswordMessage(t("validate_password"));
+      setErrorPasswordMessage(langKey && langKey.validate_password);
       setErrorPassword(true);
     }
   };
@@ -157,7 +159,7 @@ export default function ProfileInfo(props) {
       setErrorConfirmPassword(false);
     }
     if (e.target.value.length < 6) {
-      setConfirmErrorPasswordMessage(t("validate_password"));
+      setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
       setErrorConfirmPassword(true);
     }
   };
@@ -213,13 +215,13 @@ export default function ProfileInfo(props) {
     setUsername(e.target.value)
     if (e.target.value == "") {
       setErrorUserName(true);
-      setErrorUserNameMessage(t("user_name_required"));
+      setErrorUserNameMessage(langKey && langKey.user_name_required);
     } else {
       if (e.target.value.length > 5) {
         setErrorUserName(false);
       } else {
         setErrorUserName(true);
-        setErrorUserNameMessage(t("validate_user_name"));
+        setErrorUserNameMessage(langKey && langKey.validate_user_name);
       }
     }
   };
@@ -257,6 +259,7 @@ export default function ProfileInfo(props) {
 
   };
 
+
   return (
     <>
     <Paper sx={{ padding: "40px" }} elevation={5} component={Grid} container>
@@ -274,11 +277,11 @@ export default function ProfileInfo(props) {
         <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
 
         <FormControl fullWidth id="nickNameFormControl">
-          <InputLabel>{t("user_name")}</InputLabel>
+          <InputLabel>{langKey && langKey.user_name}</InputLabel>
           <FilledInput
             disabled={editUsername}
             name="nickname"
-            placeholder={t("user_name")}
+            placeholder={langKey && langKey.user_name}
             inputProps={{ maxLength: 16 }}
             id="nicknameInputField"
             type="text"
@@ -306,7 +309,7 @@ export default function ProfileInfo(props) {
                       width={20}
                       style={{ marginRight: "5px" }}
                     />
-                    {t("edit")}
+                   {langKey && langKey.edit}
                   </Button>
                 ) : (
                   <Button
@@ -325,7 +328,7 @@ export default function ProfileInfo(props) {
                     }}
                     onClick={onUpdateUserName}
                   >
-                    {t("submit")}
+                  {langKey && langKey.submit}
                   </Button>
                 )}
               </InputAdornment>
@@ -347,7 +350,7 @@ export default function ProfileInfo(props) {
           }}
           textAlign="left"
         >
-          <Typography variant="h5">{t("change_password")}</Typography>
+          <Typography variant="h5">{langKey && langKey.change_password}</Typography>
         </Divider>
       </Grid>
 
@@ -360,10 +363,10 @@ export default function ProfileInfo(props) {
             marginBottom: "5px",
           }}
         >
-          <InputLabel>{t("password")}</InputLabel>
+          <InputLabel> {langKey && langKey.password}</InputLabel>
           <OutlinedInput
             fullWidth
-            label={t("password")}
+            label={langKey && langKey.password}
             name="password"
             // placeholder={t("password")}
             inputProps={{ maxLength: 16 }}
@@ -399,13 +402,13 @@ export default function ProfileInfo(props) {
             marginBottom: "5px",
           }}
         >
-          <InputLabel>{t("confirm_password")}</InputLabel>
+          <InputLabel>{langKey && langKey.confirm_password}</InputLabel>
 
           <OutlinedInput
             sx={{ paddingRight: "10px" }}
             name="confirm_password"
             // placeholder={t("confirm_password")}
-            label={t("confirm_password")}
+            label={langKey && langKey.confirm_password}
             inputProps={{ maxLength: 16 }}
             id="outlined-adornment-confirmpassword"
             type={showConfirmPassword ? "text" : "password"}
@@ -446,7 +449,7 @@ export default function ProfileInfo(props) {
           }}
           onClick={()=>router.push('/')}
         >
-          {t("cancel")}
+          {langKey && langKey.cancel}
         </Button>
       </Grid>
       <Grid item xs={6} pl={1}>
@@ -462,7 +465,7 @@ export default function ProfileInfo(props) {
           }}
           onClick={onSubmit}
         >
-          {t("submit")}
+     {langKey && langKey.submit}
         </Button>
       </Grid>
     </Paper>
