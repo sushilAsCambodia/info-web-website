@@ -30,8 +30,7 @@ export default function MatchLiveScroll(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { announcement } = props;
-  console.log("announcement:::", announcement);
+  const { item } = props;
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
@@ -39,26 +38,21 @@ export default function MatchLiveScroll(props) {
 
   return (
     <>
-      <Grid style={{  cursor: "pointer" }}>
+      <Grid style={{ cursor: "pointer" }}>
         <Grid
           sx={{
             borderBottom: "1px solid grey",
             marginY: "10px",
             paddingBottom: "10px",
             minWidth: "200px",
-          
-              fontSize: "16px",
-              "&:hover": {
-                textDecoration: "underline",
-              },
-            }}
+            fontSize: "16px",
+            "&:hover": {
+              textDecoration: "underline",
+            },
+          }}
         >
-          <Typography
-            className="twoLinesEllip"
-            
-            px={1}
-          >
-            Russian Basketball Super League
+          <Typography className="twoLinesEllip" px={1}>
+            {item.title}
           </Typography>
           <Typography
             className="twoLinesEllip"
@@ -68,10 +62,75 @@ export default function MatchLiveScroll(props) {
           >
             Tambov vs Novosibirsk
           </Typography>
-          <Typography sx={{ fontSize: "12px"  }} px={1}>
+          <Typography sx={{ fontSize: "12px" }} px={1}>
             19:22
           </Typography>
         </Grid>
+        {item.card ? (
+          <Grid px={1}>
+            <Grid
+              container
+              item
+              xs={12}
+              p={1}
+              justifyContent="center"
+              component={Card}
+              className="LiveScoreBg liveScrollCard"
+              style={{ "--liveBg": `url(${item.card.img})` }}
+            >
+              <Grid item xs={12} textAlign="center" py={1}>
+                <Typography fontWeight="bold">
+                  Russian Basketball Super League
+                </Typography>
+                <Typography variant="body2">18 Mar2023 00:00</Typography>
+              </Grid>
+
+              <Grid item xs={5} textAlign="center">
+                <img
+                  width={50}
+                  src={
+                    "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
+                  }
+                />
+                <Typography fontWeight="bold" fontSize="13px">Dynamo Vladivostok</Typography>
+                <Typography fontWeight="bold" variant="body2" >GUEST</Typography>
+              </Grid>
+              <Grid
+                item
+                xs={2}
+                container
+                alignItems="center"
+                justifyContent="center"
+              >
+                  <Grid
+                    width={35}
+                    height={35}
+                    container
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{ background: "#F24E1E", borderRadius: "50px" }}
+                  >
+                    <Typography sx={{ color: "white", fontWeight: "bold" }}>
+                      VS
+                    </Typography>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={5} textAlign="center">
+                <img
+                  width={50}
+                  src={
+                    "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
+                  }
+                />
+                <Typography fontWeight="bold" fontSize="13px">Dynamo Vladivostok</Typography>
+                <Typography fontWeight="bold" variant="body2">GUEST</Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        ) : (
+          ""
+        )}
       </Grid>
     </>
   );

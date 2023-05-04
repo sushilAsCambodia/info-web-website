@@ -276,7 +276,7 @@ const Header = () => {
                             return (
                               <MenuItem
                                 key={index}
-                                onClick={() => router.push(`/${item.page}`)}
+                                onClick={() => {router.push(`/${item.page}`),handleClose()}}
                               >
                                 <Typography textAlign="center">
                                   {item.label}
@@ -285,7 +285,7 @@ const Header = () => {
                             );
                           })
                         : ""}
-                      <MenuItem onClick={handleClose}>Profile</MenuItem>
+                      <MenuItem onClick={()=>{router.push("/profile"),handleClose()}}>Profile</MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
                       <MenuItem onClick={handleClose}>Logout</MenuItem>
                     </Menu>

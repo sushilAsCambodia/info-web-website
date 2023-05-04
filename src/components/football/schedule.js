@@ -155,6 +155,7 @@ export default function Schedule() {
               background: "#FAFAFA",
               border: "1px solid #DDDDDD",
               borderRadius: "10px",
+              marginBottom:"10px"
             }}
           >
             <Grid container xs={10} alignItems="center">

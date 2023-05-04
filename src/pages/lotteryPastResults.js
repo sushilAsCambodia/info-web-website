@@ -25,6 +25,7 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
+import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "./LotteryPage";
@@ -124,9 +125,7 @@ export default function LotteryPastReults() {
 
   return (
     <>
-      <Typography variant="h5" fontWeight="bold">
-        Past Result
-      </Typography>
+      <TitleBreadCrumbs title={"Past Result"} />
       <Grid container>
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
