@@ -39,6 +39,9 @@ const {t} = useTranslation();
   const [loading, setLoading] = useState(false);
   const matches = useMediaQuery("(max-width:1199px)");
 
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+  
   return (
     <>
       <Grid
@@ -50,7 +53,7 @@ const {t} = useTranslation();
         marginTop="10px"
       >
         <Grid item xs={12} lg={3} xl={2.5} border="1px solid #ddd" borderRadius="2px">
-          <Typography px={1.5} mb={1}>{t("latest_results")}</Typography>
+          <Typography px={1.5} mb={1}> {langKey && langKey.latest_results}</Typography>
           {/* <NewsSlider news={rows} /> */}
           {/* <Grid overflow="auto" height="430px"> */}
           <Grid overflow="auto" className={matches ? 'verticleLotto': 'horizontalLotto'} px={1}>
@@ -77,11 +80,11 @@ const {t} = useTranslation();
         </Grid>
         <Grid item xs={12} lg={2} border="1px solid #ddd" borderRadius="2px">
           <Grid px={1.5} mb={1} container justifyContent="space-between" width="100%">
-            <Typography>{t("announcement")}</Typography>
+            <Typography> {langKey && langKey.announcement}</Typography>
             <Grid
               component={Link} href="/announcement"
               style={{ color: "#037DED", textDecoration: "none" }}
-            ><Typography>{t("view_all")}</Typography>
+            ><Typography> {langKey && langKey.view_all}</Typography>
             </Grid>
           </Grid>
           <Grid overflow="auto" className={matches ? 'verticleLotto': 'horizontalLotto'} px={1}>

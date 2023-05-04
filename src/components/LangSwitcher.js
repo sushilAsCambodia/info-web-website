@@ -49,10 +49,11 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function LangSwitcher() {
+export default function LangSwitcher() { 
   const {i18n} =  useTranslation();
   const dispatch = useDispatch();
   const [lang, setLang] = React.useState('')
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   React.useEffect(() => {
     if(typeof window !='undefined') {
       const lang = window.localStorage.getItem('lang') || 'en';
@@ -60,7 +61,36 @@ export default function LangSwitcher() {
     }else {
       setLang(i18n.language);
     }
+   if(Object.keys(langKey).length===0){
+    dispatch(getLanguage(
+      {
+          params: {
+              lang_id: utils.convertLangCodeToID(i18n.language),platform:'desktop'
+          },
+          callback:(res) => {
+
+localStorage.setItem('languageKey', JSON.stringify(res))
+
+           }
+      }
+  ));
+    }
+
   },[i18n.language])
+  if(Object.keys(langKey).length===0){
+    dispatch(getLanguage(
+      {
+          params: {
+              lang_id: utils.convertLangCodeToID(i18n.language),platform:'desktop'
+          },
+          callback:(res) => {
+console.log("resres",res)
+localStorage.setItem('languageKey', JSON.stringify(res))
+
+           }
+      }
+  ));
+    }
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

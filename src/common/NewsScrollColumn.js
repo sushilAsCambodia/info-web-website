@@ -56,6 +56,10 @@ export default function NewsScrollColumn(props) {
     );
   }, [currentPage]);
   const bg = ["Mask.png", "Mask2.png", "Mask3.png"];
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   return (
     <>
       {
@@ -124,7 +128,7 @@ export default function NewsScrollColumn(props) {
                       color:"white"
                     }
                   }}
-                ><Typography> {t("more")}</Typography>
+                ><Typography> {langKey && langKey.more}</Typography>
                  
                 </Button>
               </Grid>
@@ -169,11 +173,11 @@ export default function NewsScrollColumn(props) {
                     </Grid>
                   );
                 }):
-                <Typography variant="h4" color="white">{t("no_news")}</Typography>
+                <Typography variant="h4" color="white">{langKey && langKey.no_news}</Typography>
                 }
                 {pageLimit > currentPage ? 
                 <Button variant="contained" size="small">
-                <Typography onClick={()=>setCurrentPage(currentPage+1)} fontSize="12px" color="white">{t("load_more")}</Typography></Button>:""}
+                <Typography onClick={()=>setCurrentPage(currentPage+1)} fontSize="12px" color="white">{langKey && langKey.load_more}</Typography></Button>:""}
               </Grid>
             </Grid>
           </Grid>

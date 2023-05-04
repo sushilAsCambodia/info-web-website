@@ -7,6 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SportsBaseballIcon from '@mui/icons-material/SportsBaseball';
 import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
 import { useRouter } from 'next/router';
+import { useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import LotterIcon from '@/components/svg/lottery';
 import ProfileIcon from '@/components/svg/user';
@@ -32,6 +33,11 @@ const Footer = () => {
             break;
     }
     const [value, setValue] = React.useState(selectedTab);
+
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
+
     return <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0,}}>
             <BottomNavigation
                 showLabels
@@ -40,10 +46,10 @@ const Footer = () => {
                 onChange={(event, newValue) => {
                     setValue(newValue);
                 }}>
-                <BottomNavigationAction onClick={() => router.push('/home')} label={t('home')} icon={<HomeIcon color={value == 0 ? '#FF0000':'#8C8C8C'} />} />
-                <BottomNavigationAction onClick={() => router.push('/lottery')} label={t('lottery')} icon={<LotterIcon  color={value == 1?'#FF0000':'#8C8C8C'} />} />
-                <BottomNavigationAction onClick={() => router.push('/match')} label={t('match')} icon={<MatchIcon color={value == 2?'#FF0000':'#8C8C8C'}/>} />
-                <BottomNavigationAction onClick={() => router.push('/profile')} label={t('profile')} icon={<ProfileIcon color={value == 3?'#FF0000':'#8C8C8C'} />} />
+                <BottomNavigationAction onClick={() => router.push('/home')} label={langKey && langKey.home} icon={<HomeIcon color={value == 0 ? '#FF0000':'#8C8C8C'} />} />
+                <BottomNavigationAction onClick={() => router.push('/lottery')} label={langKey && langKey.lottery} icon={<LotterIcon  color={value == 1?'#FF0000':'#8C8C8C'} />} />
+                <BottomNavigationAction onClick={() => router.push('/match')} label={langKey && langKey.match} icon={<MatchIcon color={value == 2?'#FF0000':'#8C8C8C'}/>} />
+                <BottomNavigationAction onClick={() => router.push('/profile')} label={langKey && langKey.profile} icon={<ProfileIcon color={value == 3?'#FF0000':'#8C8C8C'} />} />
             </BottomNavigation>
         </Paper>
 };

@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useSelector } from "react-redux";
 import {
   Select,
   FormControl,
@@ -53,6 +54,9 @@ export default function ProfileDropDown(props) {
     },
   }));
 
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   return (
     <div>
       <Button
@@ -94,7 +98,7 @@ export default function ProfileDropDown(props) {
           disableRipple
           sx={{ justifyContent: "flex-end" }}
         >
-          {t("profile")}
+        {langKey && langKey.profile}
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem
@@ -102,7 +106,7 @@ export default function ProfileDropDown(props) {
           disableRipple
           sx={{ justifyContent: "flex-end" }}
         >
-           {t("logout")}
+         {langKey && langKey.logout}
         </MenuItem>
       </StyledMenu>
     </div>

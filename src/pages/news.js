@@ -33,6 +33,10 @@ const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   const { query } = router;
   const category_id = query?.category || undefined;
   const handleCategoryChange = (event) => {
@@ -51,21 +55,22 @@ const News = () => {
       sx={{ cursor: "pointer" }}
       onClick={() => router.push("/")}
     >
-      {t("home")}
+      {langKey && langKey.home}
+
     </Link>,
     <Typography key="news-page" color="#F24E1E">
-      {t("news")}
+      {langKey && langKey.news}
     </Typography>,
     category_id ? (
       <FormControl key="category-news-dropdown" sx={{ m: 1, minWidth: 200 }} size="small">
         <InputLabel id="demo-select-small-label">
-          {t("select_category")}
+          {langKey && langKey.select_category}
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="category-select"
           value={category_id}
-          label={t("select_category")}
+          label=  {langKey && langKey.select_category}
           onChange={handleCategoryChange}
         >
           <MenuItem value="All">{t("all")}</MenuItem>
@@ -152,7 +157,7 @@ const News = () => {
                     ? "Every"
                     : news[0].category_name
                   : "No"}{" "}
-                {t("news")}
+         {langKey && langKey.news}
               </Typography>
             </Grid>
             <Grid>
