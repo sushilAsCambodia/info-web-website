@@ -44,6 +44,7 @@ export default function NewsList(props) {
     <Grid container style={{position:'relative'}}>
       <Grid overflow="auto" minHeight="300px" maxHeight="450px" pb={1} id={`news-scroll-wrapper-${type}`}>
         <Grid
+        container
           sx={{
             borderRadius: "0px 0px 10px 10px",
             minHeight: 300,
@@ -55,6 +56,7 @@ export default function NewsList(props) {
             list.data.length > 0) && list.data.map((item, index) => {
               return (
                 <Grid
+                xs={12}
                   key={index}
                   component={Link}
                   onClick={() =>

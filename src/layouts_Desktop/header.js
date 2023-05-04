@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 
 import ProfileDropDown from "@/components/header/ProfileDropDown";
+import HeaderLiveScore from "@/components/header/headerLiveScore";
 import Link from "next/link";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
@@ -57,7 +58,6 @@ const Header = () => {
   const openScore = Boolean(anchorScore);
   const id = openScore ? "simple-popover" : undefined;
 
-  const [selectSport, setSelectSport] = useState("football");
 
   const menuList = [
     { label: (langKey && langKey.lottery_draw), page: "LotteryPage" },
@@ -219,82 +219,11 @@ const Header = () => {
                       sx={{
                         background: "#494949",
                         color: "white",
-                        width: "80vw",
+                        width: {xs:"95vw",xl:"80vw"}
                       }}
                     >
-                      <Grid
-                        item
-                        xs={12}
-                        container
-                        p={1}
-                        borderBottom="1px solid #373737"
-                      >
-                        <Grid item p={1}>
-                          <Chip
-                            onClick={() => {
-                              setSelectSport("football");
-                            }}
-                            className={`${
-                              selectSport == "football"
-                                ? "sportChipSelect"
-                                : "sportChip"
-                            }`}
-                            label={<Typography p={1}>FootBall</Typography>}
-                          />
-                        </Grid>
-                        <Grid item p={1}>
-                          <Chip
-                           onClick={() => {
-                            setSelectSport("basketBall");
-                          }}
-                            className={`${
-                              selectSport == "basketBall"
-                                ? "sportChipSelect"
-                                : "sportChip"
-                            }`}
-                            label={<Typography p={1}>BasketBall</Typography>}
-                          />
-                        </Grid>
-                        <Grid item p={1}>
-                          <Chip
-                           onClick={() => {
-                            setSelectSport("lottery");
-                          }}
-                            className={`${
-                              selectSport == "lottery"
-                                ? "sportChipSelect"
-                                : "sportChip"
-                            }`}
-                            label={<Typography p={1}>Lottery</Typography>}
-                          />
-                        </Grid>
-                      </Grid>
-                      <Grid item container xs={12} p={2}>
-                        {["Argintina", "England", "France", "Germany"].map(
-                          (item, key) => {
-                            return (
-                              <Grid item xs={4}>
-                                <Typography
-                                  my={1}
-                                  sx={{ fontSize: "14px", fontWeight: "bold" }}
-                                >
-                                  {item}
-                                </Typography>
-                                <Typography my={1} sx={{ fontSize: "14px" }}>
-                                  Division 1-Round 9
-                                </Typography>
-                                <Typography my={1} sx={{ fontSize: "14px" }}>
-                                  Estudiantes La Plata vs Newells Old Boys
-                                </Typography>
-                              </Grid>
-                            );
-                          }
-                        )}
-                      </Grid>
+                      <HeaderLiveScore />
                     </Grid>
-                    {/* <Typography sx={{ p: 2 }}>
-                      The content of the Popover.
-                    </Typography> */}
                   </Popover>
                 </Grid>
                 <Grid item xs={6} md={6} lg={8} container color="black">
@@ -336,7 +265,7 @@ const Header = () => {
                         fontWeight: "bold",
                       }}
                     >
-                      More{" "}
+                      {t("more")}
                       {open ? (
                         <Icon icon="material-symbols:keyboard-arrow-up-rounded" />
                       ) : (

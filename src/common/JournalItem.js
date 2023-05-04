@@ -40,6 +40,7 @@ export default function JournalItem(props) {
             <img
               src={item.cover_img}
               alt="image"
+              draggable="false"
               style={{
                 width: "100%",
                 maxHeight: "80px",
