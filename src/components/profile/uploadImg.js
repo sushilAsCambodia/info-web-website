@@ -65,7 +65,7 @@ const UploadImg = () => {
 
 
   useEffect(() => {
-    if(customer && (customer.nick_name != null | customer.nick_name != '')) {
+    if(customer && (customer.nick_name != null || customer.nick_name != '')) {
       setDisabledNickName(true)
     }else {
       setDisabledNickName(false)

@@ -15,6 +15,7 @@ export const getLanguage = createAsyncThunk(
         payload: data,
       });
       return data;
+      
     } catch (error) {
       const {status, data} = error.response;
       data['status_code']  = status;

@@ -5,6 +5,7 @@ import AppBar from "@mui/material/AppBar";
 import { Grid, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import MatchItem from "@/common/MatchItem";
 import { useSelector } from "react-redux";
@@ -97,7 +98,7 @@ export default function MiddleShow(props) {
           renderDotsOutside={false}
         >
           <Grid textAlign="center" mt={0.5}>
-            <img src="./assets/News/banner-web.png" width="98%" />
+            <img draggable="false" src="./assets/News/banner-web.png" width="98%" />
           </Grid>
         </Carousel>
       </Grid>

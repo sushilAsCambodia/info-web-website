@@ -14,14 +14,24 @@ import {
   Table,
   TableHead,
   TableBody,
+  Divider,
+  InputAdornment
 } from "@mui/material";
 import { useState } from "react";
-
+import utils from "@/common/utils";
+import moment from "moment/moment";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 
 export default function ScoreTable() {
   const router = useRouter();
+
+  const [dateFilter, setDateFilter] = useState("");
+  const [age, setAge] = useState("");
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -94,12 +104,89 @@ export default function ScoreTable() {
     }
     return color;
   };
+
+  function Last7Days() {
+    var result = [];
+    for (var i = 0; i < 7; i++) {
+      var d = new Date();
+      d.setDate(d.getDate() - i);
+      result.push({
+        day: moment(d).format(utils.dateLetter),
+        monthyear: moment(d).format(utils.MonthYearFormat),
+      });
+    }
+    console.log("::: 7 days ", result);
+    return result;
+  }
   return (
     <>
       {rows.map((item, index) => {
         let bgColor = getRandomColor();
         return (
           <>
+          <Grid
+            container
+            sx={{
+              background: "#FAFAFA",
+              border: "1px solid #DDDDDD",
+              borderRadius: "10px",
+              marginBottom:"10px"
+            }}
+          >
+            <Grid container xs={10} alignItems="center">
+              {Last7Days().map((item, index) => {
+                return (
+                  <Grid
+                    key={index}
+                    item
+                    xs={"auto"}
+                    mx={1}
+                    container
+                    className={`${
+                      item.day === dateFilter ? "dateSelected" : ""
+                    }`}
+                    onClick={() => {
+                      setDateFilter(item.day);
+                    }}
+                  >
+                    <Typography sx={{ fontWeight: "bold" }} mr={1}>
+                      {item.day}
+                    </Typography>
+                    <Typography mr={1}>{item.monthyear}</Typography>
+                    <Divider orientation="vertical" flexItem />
+                  </Grid>
+                );
+              })}
+            </Grid>
+            <Grid
+              xs={2}
+              display="flex"
+              alignItems="center"
+              justifyContent="flex-end"
+            >
+              <FormControl sx={{ m: 1 }} size="small">
+                <Select
+                  value={age}
+                  onChange={handleChange}
+                  displayEmpty
+                  inputProps={{ "aria-label": "Without label" }}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Icon icon="material-symbols:calendar-today" width={25} />
+                    </InputAdornment>
+                  }
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+                {/* <FormHelperText>Without label</FormHelperText> */}
+              </FormControl>
+            </Grid>
+          </Grid>
             <TableContainer component={Paper} style={{ marginBottom: "15px" }}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>

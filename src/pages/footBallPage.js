@@ -23,6 +23,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import ScoreTable from "@/components/football/ScoreTable";
 import Schedule from "@/components/football/schedule";
+import End from "@/components/football/end";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -136,13 +137,13 @@ export default function FootBallPage() {
       </Grid>
 
       <TabPanel value={value} index={"Follow"}>
-        Item One 
+      <ScoreTable />
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
         <ScoreTable />
       </TabPanel>
       <TabPanel value={value} index={"End"}>
-        Item Three
+      <End />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
         <Schedule />

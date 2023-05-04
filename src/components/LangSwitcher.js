@@ -49,7 +49,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function LangSwitcher() {
+export default function LangSwitcher() { 
   const {i18n} =  useTranslation();
   const dispatch = useDispatch();
   const [lang, setLang] = React.useState('')
@@ -68,7 +68,7 @@ export default function LangSwitcher() {
                 lang_id: utils.convertLangCodeToID(i18n.language),platform:'desktop'
             },
             callback:(res) => {
-  console.log("resres",res)
+  
   localStorage.setItem('languageKey', JSON.stringify(res))
   
              }

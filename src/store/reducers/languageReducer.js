@@ -3,7 +3,7 @@ const initialState = {
   language:[]
   
 } 
-const LanguageReducer =  (state = initialState, action) => {
+const LanguageReducer =  (state = initialState, action) => {  
   switch (action.type) {   
     case 'loadLanguage':
       return {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './header';
 import Footer from './footer';
 import Container from '@mui/material/Container';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Navigate from '@/components/navigate';
 import { Grid, IconButton } from '@mui/material';
@@ -17,10 +18,7 @@ const Layout = (props) => {
     }); 
     const { t,i18n } = useTranslation();
 
-    let langKey
-    if(typeof window !='undefined') {
-      langKey = JSON.parse(window.localStorage.getItem('languageKey'));
-  }
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
     useEffect(() => {
         setMounted(true);
@@ -81,7 +79,9 @@ const Layout = (props) => {
                         </Grid>
                     } />
             } else if (innerpages.includes(router.pathname)) {
-                let title = router.pathname.replace('/', '').toLowerCase();
+                //let title = router.pathname.replace('/', '').toLowerCase();
+                let title = langKey && langKey[router.pathname.replace('/', '').toLowerCase()];
+                
                 return <Navigate
                     title={title}
                     lead={<IconButton

@@ -26,11 +26,12 @@ const settings = {
   centerMode: false,
 };
 
-export default function AnnouncementItem(props) {
+export default function MatchLiveScroll(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { announcement } = props; 
+  const { announcement } = props;
+  console.log("announcement:::", announcement);
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
@@ -38,32 +39,40 @@ export default function AnnouncementItem(props) {
 
   return (
     <>
-      <div style={{ paddingRight: "10px",cursor:"pointer" }}>
+      <Grid style={{  cursor: "pointer" }}>
         <Grid
           sx={{
-            borderBottom: "2px solid grey",
+            borderBottom: "1px solid grey",
             marginY: "10px",
             paddingBottom: "10px",
             minWidth: "200px",
-          }}
+          
+              fontSize: "16px",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
         >
           <Typography
-            title={announcement[0].title}
             className="twoLinesEllip"
-            sx={{ fontSize: "14px",  
-            "&:hover": {
-              textDecoration:"underline"
-            },
-   }}
+            
             px={1}
           >
-            {announcement[0].title}
+            Russian Basketball Super League
           </Typography>
-          <Typography sx={{ fontSize: "12px", color: "#8C8C8C" }} px={1}>
-            {announcement[0].date}
+          <Typography
+            className="twoLinesEllip"
+            sx={{ fontSize: "13px" }}
+            px={1}
+            color="#F24E1E"
+          >
+            Tambov vs Novosibirsk
+          </Typography>
+          <Typography sx={{ fontSize: "12px"  }} px={1}>
+            19:22
           </Typography>
         </Grid>
-      </div>
+      </Grid>
     </>
   );
 }
