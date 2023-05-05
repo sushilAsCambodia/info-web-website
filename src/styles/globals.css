@@ -500,8 +500,12 @@ text-overflow: ellipsis;
 }
 #customCarouselBtn .react-multi-carousel-list {
   position: unset !important;
+  justify-content: center;
 }
-
+ .react-multi-carousel-list {
+ 
+  justify-content: center;
+}
 #customCarouselBtn .react-multiple-carousel__arrow::before{
     color: #000 !important;
     font-weight: bold;

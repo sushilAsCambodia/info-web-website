@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import MatchItem from "@/common/MatchItem";
-import { useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
