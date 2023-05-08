@@ -249,14 +249,14 @@ export default function Schedule() {
                   return (
                     <>
                       <StyledTableRow key={item.id}>
-                        <StyledTableCell align="left">
+                        <StyledTableCell align="center">
                           <img width={30} src={item.img} />
                           <Typography>{item.name}</Typography>
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell align="center">
                           {item.fat}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell align="center">
                           {item.fat}
                         </StyledTableCell>
                         <StyledTableCell align="center">
@@ -265,10 +265,10 @@ export default function Schedule() {
                         <StyledTableCell align="center">
                           {item.data}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell align="center">
                           {item.fat}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell align="center">
                           {item.fat}
                         </StyledTableCell>
                         <StyledTableCell align="center">

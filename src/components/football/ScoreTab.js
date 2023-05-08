@@ -32,7 +32,7 @@ import moment from "moment/moment";
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
-export default function End() {
+export default function ScoreTab() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
 

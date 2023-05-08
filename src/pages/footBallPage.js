@@ -14,9 +14,10 @@ import { useRouter } from "next/router";
 
 import ScoreTable from "@/components/football/ScoreTable";
 import Schedule from "@/components/football/schedule";
-import End from "@/components/football/end";
 
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
+import ScoreTab from "@/components/football/ScoreTab";
+import EndTab from "@/components/football/EndTab";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -126,10 +127,10 @@ export default function FootBallPage() {
         <ScoreTable />
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
-        <End />
+        <ScoreTab />
       </TabPanel>
       <TabPanel value={value} index={"End"}>
-      <Schedule />
+      <EndTab />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
         <Schedule />
