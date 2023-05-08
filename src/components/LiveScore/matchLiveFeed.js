@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import MatchLiveScroll from "./MatchLiveScroll";
 import ChipDataFilter from "./ChipDataFilter";
 import LiveScoreCardTab from "./LiveScoreCardTab";
-import ChatScroll from "./ChipDataFilter";
+import ChatScroll from "./ChatScroll";
 
 const HeaderTabs = styled(Tabs)({
   backgroundColor: "black",

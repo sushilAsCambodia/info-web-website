@@ -8,10 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 
-import { Icon } from "@iconify/react";
-import MatchLiveScroll from "./MatchLiveScroll";
 
-export default function ChatScroll(props) {
+
+export default function ChipDataFilter(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
@@ -21,82 +20,28 @@ export default function ChatScroll(props) {
 
   return (
     <>
-      <Grid border="1px solid #ddd">
-          <Grid component={Card} container p={1} elevation={3} height="60px">
-            <Grid
-              item
-              xs={8}
-              container
-              flexWrap="nowrap"
-              justifyContent="space-between"
-              overflow="scroll"
-              className="chipScroll customScroller"
-            >
-              <Chip
-                sx={{ marginRight: "5px" }}
-                label="success"
-                color="success"
-                variant="outlined"
-              />
-              <Chip
-                sx={{ marginRight: "5px" }}
-                label="success"
-                color="success"
-                variant="outlined"
-              />
-              <Chip
-                sx={{ marginRight: "5px" }}
-                label="success"
-                color="success"
-                variant="outlined"
-              />
-              <Chip
-                sx={{ marginRight: "5px" }}
-                label="success"
-                color="success"
-                variant="outlined"
-              />
+      <Grid container border="1px solid #ddd" mt={1}>
+          <Grid
+            item
+            container
+            xs={12}
+            // pb={1}
+            borderBottom="1px solid #ddd"
+          >
+            <Grid item p={1} >
+              <Chip className={`${selectedChip == 'comm' ? "filterTabSelected":"" }`} label="commentary" onClick={()=>{setSelectedChip('comm')}} />
             </Grid>
-            <Grid
-              container
-              item
-              xs={4}
-              pt={1}
-              justifyContent="flex-end"
-              alignContent="flex-start"
-            >
-              <Icon icon="ph:user" />
-              <Typography marginLeft="5px">8383737</Typography>
+            <Grid item p={1}>
+            <Chip className={`${selectedChip == 'data' ? "filterTabSelected":"" }`} label="Data Analysis" onClick={()=>{setSelectedChip('data')}} />
             </Grid>
           </Grid>
-          <Grid height="500px" overflow="auto">
-            {[
-              {
-                id: 1,
-                title: "Russian Basketball Super League",
-                card: { img: "./assets/LiveScore/basketballcard.png" },
-              },
-              {
-                id: 2,
-                title: "Russian Basketball Super League 20:00",
-                card: null,
-              },
-              { id: 3, title: "Latin Basketball Super League", card: null },
-              {
-                id: 4,
-                title: "Asia Basketball Super League",
-                card: { img: "./assets/LiveScore/basketballcard.png" },
-              },
-              { id: 5, title: "Eroupean Basketball Super League", card: null },
-            ].map((item, index) => {
-              return (
-                <Grid key={index}>
-                  <MatchLiveScroll item={item} />
-                </Grid>
-              );
-            })}
+          <Grid item xs={12} textAlign="center" position="relative">
+            <img style={{ width: "60%" }} src="./assets/not-found_2.png" />
+            <Grid position="absolute" bottom="20%" left="45%">
+              <Typography>No Data Found</Typography>
+            </Grid>
           </Grid>
-        </Grid>
+       </Grid>
     </>
   );
 }
