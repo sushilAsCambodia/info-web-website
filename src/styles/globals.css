@@ -768,6 +768,11 @@ visibility: visible;
   color: #FF0000;
   font-weight: bold !important;
 }
+.sticky-header{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 /* END  */
 /* FOOTBALL */
 .dateSelected{

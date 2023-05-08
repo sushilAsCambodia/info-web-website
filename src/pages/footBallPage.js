@@ -126,10 +126,10 @@ export default function FootBallPage() {
         <ScoreTable />
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
-        <ScoreTable />
+        <End />
       </TabPanel>
       <TabPanel value={value} index={"End"}>
-        <End />
+      <Schedule />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
         <Schedule />

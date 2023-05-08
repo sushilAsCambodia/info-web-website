@@ -7,6 +7,7 @@ import {
   Container,
   Button,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -33,21 +34,21 @@ export default function Index() {
         <Grid
           borderRadius="30px"
           width="80vw"
-          height="560px"
+          height="600px"
           border="12px solid white"
           margin="50px auto"
           
         >
           <Grid textAlign="center" mt={5}>
-            <Typography fontSize="20px" fontWeight="bold" color="white">Wonderful information in the palm of</Typography>
-            <Typography variant="h4" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>YOUR HAND</Typography>
+            <Typography fontSize="20px" fontWeight="bold" color="white">{t("half_slogan")}</Typography>
+            <Typography variant="h4" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>{t("your_hand")}</Typography>
           </Grid>
           <Grid textAlign="center" pl={5}>
             <img height="300px" src="./assets/Download/football.png"/>
           </Grid>
           <Grid item textAlign="center" mt={2}>
-            <Typography fontWeight={700} fontSize="20px">
-              DOWNLOAD APP
+            <Typography fontWeight={700} fontSize="20px" textTransform="uppercase">
+              {t("download_app")}
             </Typography>
           </Grid>
 
@@ -69,7 +70,7 @@ export default function Index() {
       <Grid
         borderRadius="30px"
         width={{xs:"80vw",sm:"400px"}}
-        height="650px"
+        height="670px"
         border="12px solid white"
         margin="50px auto"
         
@@ -82,7 +83,7 @@ export default function Index() {
           <img src="./assets/Download/football.png"/>
         </Grid>
         <Grid item textAlign="center" mt={2}>
-          <Typography fontWeight={700} fontSize="20px">
+          <Typography fontWeight={700} fontSize="20px" textTransform="uppercase">
        {langKey && langKey.download_app}
           </Typography>
         </Grid>
