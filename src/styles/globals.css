@@ -764,6 +764,10 @@ visibility: visible;
   background: #373737 !important;
   color: white !important;
 }
+.selectedTab{
+  color: #FF0000;
+  font-weight: bold !important;
+}
 /* END  */
 /* FOOTBALL */
 .dateSelected{

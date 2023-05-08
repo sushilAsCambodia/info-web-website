@@ -6,7 +6,7 @@ import {
   Tabs,
   Chip,
   Divider,
-  Collapse
+  Collapse,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
@@ -17,6 +17,9 @@ import SwipeableViews from "react-swipeable-views";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import MatchLiveScroll from "./MatchLiveScroll";
+import ChipDataFilter from "./ChipDataFilter";
+import LiveScoreCardTab from "./LiveScoreCardTab";
+import ChatScroll from "./ChipDataFilter";
 
 const HeaderTabs = styled(Tabs)({
   backgroundColor: "black",
@@ -70,13 +73,6 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
 export default function MatchLiveFeed(props) {
   const router = useRouter();
   const theme = useTheme();
@@ -99,466 +95,72 @@ export default function MatchLiveFeed(props) {
 
   return (
     <Grid alignItems="baseline" container>
-     <Grid item xs={9}>
-       <Grid
-         item
-         container
-         textAlign="center"
-         justifyContent="center"
-         alignContent="flex-start"
-         sx={{
-           color: "white",
-           borderRadius: "5px",
-         }}
-         className="LiveScoreBg"
-         style={{ "--liveBg": `url(${"./assets/LiveScore/basketBall.png"})` }}
-       >
-         <Grid item xs={12}>
-           <HeaderTabs variant="fullWidth" value={value} onChange={handleChange}>
-             <HeaderTab
-               label={
-                 <Typography style={{ fontWeight: "bold" }}>
-                   Score Card
-                 </Typography>
-               }
-             />
-             <HeaderTab
-               label={
-                 <Typography style={{ fontWeight: "bold" }}>
-                   Live Video
-                 </Typography>
-               }
-             />
-           </HeaderTabs>
-         </Grid>
-         <SwipeableViews
-           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-           index={value}
-           onChangeIndex={handleChangeIndex}
-           style={{ width: "100%", paddingTop: "10px", paddingBottom: "10px" }}
-         >
-           <TabPanel
-             value={value}
-             index={0}
-             dir={theme.direction}
-             minHeight="400px"
-           >
-             <>
-               <Grid color="white" container justifyContent="center" my={2}>
-                 <Grid
-                   container
-                   item
-                   xs={8}
-                   justifyContent="center"
-                   component={Card}
-                 >
-                   <Grid
-                     item
-                     xs={12}
-                     p={2}
-                     sx={{
-                       background:
-                         "linear-gradient(90.03deg, #FF0000 0.03%, #F24E1E 99.99%)",
-                     }}
-                   >
-                     <Typography color="white" fontWeight="bold">
-                       Russian Basketball Super League
-                     </Typography>
-                   </Grid>
-                   <Grid item xs={12}>
-                     <Typography>Did Not Start</Typography>
-                   </Grid>
-                   <Grid item xs={4.5}>
-                     <img
-                       width={60}
-                       src={
-                         "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
-                       }
-                     />
-                     <Typography fontWeight="bold">
-                       Dynamo Vladivostok
-                     </Typography>
-                     <Typography>GUEST</Typography>
-                   </Grid>
-                   <Grid
-                     item
-                     xs={3}
-                     container
-                     alignItems="center"
-                     justifyContent="center"
-                   >
-                     <Grid item xs={8} container justifyContent="center">
-                       <Grid
-                         width={50}
-                         height={50}
-                         container
-                         alignItems="center"
-                         justifyContent="center"
-                         sx={{ background: "#F24E1E", borderRadius: "50px" }}
-                       >
-                         <Typography sx={{ color: "white", fontWeight: "bold" }}>
-                           VS
-                         </Typography>
-                       </Grid>
-                     </Grid>
-                   </Grid>
-      
-                   <Grid item xs={4.5}>
-                     <img
-                       width={60}
-                       src={
-                         "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
-                       }
-                     />
-                     <Typography fontWeight="bold">
-                       Dynamo Vladivostok
-                     </Typography>
-                     <Typography>GUEST</Typography>
-                   </Grid>
-                 </Grid>
-               </Grid>
-               <Grid px={5}>
-                 <Grid component={Card} container>
-                   <Grid container px={1} borderBottom="1px solid #DDDDDD">
-                     <Grid item xs={4} container alignItems="center">
-                       <img
-                         width={40}
-                         src={
-                           "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
-                         }
-                       />
-                       <Grid textAlign="left">
-                         <Typography fontWeight="bold">
-                           Dynamo Vladivostok
-                         </Typography>
-                         <Typography>GUEST</Typography>
-                       </Grid>
-                     </Grid>
-                     <Grid item xs={4}>
-                       <Grid p={2}>
-                         <Typography>Did not start</Typography>
-                         <Typography variant="h5" fontWeight="bold">
-                           0:0
-                         </Typography>
-                       </Grid>
-                     </Grid>
-                     <Grid
-                       item
-                       xs={4}
-                       container
-                       alignItems="center"
-                       justifyContent="flex-end"
-                     >
-                       <Grid textAlign="right">
-                         <Typography fontWeight="bold">
-                           Dynamo Vladivostok
-                         </Typography>
-                         <Typography>GUEST</Typography>
-                       </Grid>
-                       <img
-                         width={40}
-                         src={
-                           "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
-                         }
-                       />
-                     </Grid>
-                   </Grid>
-                   <Grid container height="150px">
-                     <Grid
-                       item
-                       xs={3}
-                       p={2}
-                       container
-                       flexDirection="column"
-                       alignItems="flex-start"
-                       justifyContent="space-between"
-                     >
-                       <Chip
-                         label={
-                           <Typography p={1} fontWeight="bold">
-                             Pause 0
-                           </Typography>
-                         }
-                         className="scoreChip"
-                         variant="outlined"
-                       />
-                       <Chip
-                         label={
-                           <Typography p={1} fontWeight="bold">
-                             Foul 0
-                           </Typography>
-                         }
-                         className="scoreChip"
-                         variant="outlined"
-                       />
-                     </Grid>
-                     <Grid item xs={6} container alignItems="center">
-                       <Grid item xs={12} container justifyContent="center">
-                         <Typography mx={1} variant="h5">
-                           0
-                         </Typography>
-                         <Grid item xs={8}>
-                           <Divider
-                             sx={{
-                               "&::before, &::after": {
-                                 borderTop: "2px dotted black",
-                               },
-                             }}
-                           >
-                             <Grid
-                               container
-                               alignItems="center"
-                               justifyContent="center"
-                               px={3}
-                             >
-                               <Typography>3 Point Shot</Typography>
-                             </Grid>
-                           </Divider>
-                         </Grid>
-                         <Typography mx={1} variant="h5">
-                           0
-                         </Typography>
-                       </Grid>
-                       <Grid item xs={12} container justifyContent="center">
-                         <Typography mx={1} variant="h5">
-                           0
-                         </Typography>
-                         <Grid item xs={8}>
-                           <Divider
-                             sx={{
-                               "&::before, &::after": {
-                                 borderTop: "2px dotted black",
-                               },
-                             }}
-                           >
-                             <Grid
-                               container
-                               alignItems="center"
-                               justifyContent="center"
-                               px={3}
-                             >
-                               <Typography>3 Point Shot</Typography>
-                             </Grid>
-                           </Divider>
-                         </Grid>
-                         <Typography mx={1} variant="h5">
-                           0
-                         </Typography>
-                       </Grid>
-                       <Grid item xs={12} container justifyContent="center">
-                         <Typography mx={1} variant="h5">
-                           0
-                         </Typography>
-                         <Grid item xs={8}>
-                           <Divider
-                             sx={{
-                               "&::before, &::after": {
-                                 borderTop: "2px dotted black",
-                               },
-                             }}
-                           >
-                             <Grid
-                               container
-                               alignItems="center"
-                               justifyContent="center"
-                               px={3}
-                             >
-                               <Typography>3 Point Shot</Typography>
-                             </Grid>
-                           </Divider>
-                         </Grid>
-                         <Typography mx={1} variant="h5">
-                           0
-                         </Typography>
-                       </Grid>
-                     </Grid>
-                     <Grid
-                       item
-                       xs={3}
-                       p={2}
-                       container
-                       flexDirection="column"
-                       alignItems="flex-end"
-                       justifyContent="space-between"
-                     >
-                       <Chip
-                         label={
-                           <Typography p={1} fontWeight="bold">
-                             Pause 0
-                           </Typography>
-                         }
-                         className="scoreChip"
-                         variant="outlined"
-                       />
-                       <Chip
-                         label={
-                           <Typography p={1} fontWeight="bold">
-                             Foul 0
-                           </Typography>
-                         }
-                         className="scoreChip"
-                         variant="outlined"
-                       />
-                     </Grid>
-                   </Grid>
-                 </Grid>
-               </Grid>
-             </>
-           </TabPanel>
-           <TabPanel
-             value={value}
-             index={1}
-             dir={theme.direction}
-             minHeight="400px"
-           >
-             Item Two
-           </TabPanel>
-         </SwipeableViews>
-        
-       </Grid>
-       <Grid container border="1px solid #ddd" mt={1}>
-          <Grid
-            item
-            container
-            xs={12}
-            // pb={1}
-            borderBottom="1px solid #ddd"
-          >
-            <Grid item p={1}>
-              <Chip label="commentary" />
-            </Grid>
-            <Grid item p={1}>
-              <Chip label="commentary" />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} textAlign="center" position="relative">
-            <img style={{ width: "60%" }} src="./assets/not-found_2.png" />
-            <Grid position="absolute" bottom="20%" left="45%">
-              <Typography>No Data Found</Typography>
-            </Grid>
-          </Grid>
-       </Grid>
-     </Grid>
+      <Grid item xs={9}>
+        <LiveScoreCardTab />
+
+        <ChipDataFilter />
+      </Grid>
+
       <Grid item xs={3} px={1}>
-        <Grid border="1px solid #ddd">
-          <Grid component={Card} container p={1} elevation={3} height="60px">
-            <Grid
-              item
-              xs={8}
-              container
-              flexWrap="nowrap"
-              justifyContent="space-between"
-              overflow="scroll"
-              className="chipScroll customScroller"
-            >
-              <Chip
-                sx={{ marginRight: "5px" }}
-                label="success"
-                color="success"
-                variant="outlined"
-              />
-              <Chip
-                sx={{ marginRight: "5px" }}
-                label="success"
-                color="success"
-                variant="outlined"
-              />
-              <Chip
-                sx={{ marginRight: "5px" }}
-                label="success"
-                color="success"
-                variant="outlined"
-              />
-              <Chip
-                sx={{ marginRight: "5px" }}
-                label="success"
-                color="success"
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              container
-              item
-              xs={4}
-              pt={1}
-              justifyContent="flex-end"
-              alignContent="flex-start"
-            >
-              <Icon icon="ph:user" />
-              <Typography marginLeft="5px">8383737</Typography>
-            </Grid>
-          </Grid>
-          <Grid height="500px" overflow="auto">
-            {[
-              {
-                id: 1,
-                title: "Russian Basketball Super League",
-                card: { img: "./assets/LiveScore/basketballcard.png" },
-              },
-              {
-                id: 2,
-                title: "Russian Basketball Super League 20:00",
-                card: null,
-              },
-              { id: 3, title: "Latin Basketball Super League", card: null },
-              {
-                id: 4,
-                title: "Asia Basketball Super League",
-                card: { img: "./assets/LiveScore/basketballcard.png" },
-              },
-              { id: 5, title: "Eroupean Basketball Super League", card: null },
-            ].map((item, index) => {
-              return (
-                <Grid key={index}>
-                  <MatchLiveScroll item={item} />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Grid>
+        
+        <ChatScroll />
 
         <Grid border="1px solid #ddd" mt={1}>
           <Grid component={Card} container p={1} elevation={3}>
             <Grid container alignItems="center">
-              {expanded ? 
-            <Icon icon="mdi:horizontal-line" color="#F24E1E" height="30px" onClick={handleExpandClick}/>
-            :
-            <Icon icon="ic:baseline-plus" color="#F24E1E" height="30px" onClick={handleExpandClick}/>
-            }
+              {expanded ? (
+                <Icon
+                  icon="mdi:horizontal-line"
+                  color="#F24E1E"
+                  height="30px"
+                  onClick={handleExpandClick}
+                />
+              ) : (
+                <Icon
+                  icon="ic:baseline-plus"
+                  color="#F24E1E"
+                  height="30px"
+                  onClick={handleExpandClick}
+                />
+              )}
               <Typography>Dynamic</Typography>
             </Grid>
           </Grid>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <Grid height="500px" overflow="auto">
-            {[
-              {
-                id: 1,
-                title: "Russian Basketball Super League",
-                card: { img: "./assets/LiveScore/basketballcard.png" },
-              },
-              {
-                id: 2,
-                title: "Russian Basketball Super League 20:00",
-                card: null,
-              },
-              { id: 3, title: "Latin Basketball Super League", card: null },
-              {
-                id: 4,
-                title: "Asia Basketball Super League",
-                card: { img: "./assets/LiveScore/basketballcard.png" },
-              },
-              { id: 5, title: "Eroupean Basketball Super League", card: null },
-            ].map((item, index) => {
-              return (
-                <Grid key={index}>
-                  <MatchLiveScroll item={item} />
-                </Grid>
-              );
-            })}
-          </Grid>
+            <Grid height="500px" overflow="auto">
+              {[
+                {
+                  id: 1,
+                  title: "Russian Basketball Super League",
+                  card: { img: "./assets/LiveScore/basketballcard.png" },
+                },
+                {
+                  id: 2,
+                  title: "Russian Basketball Super League 20:00",
+                  card: null,
+                },
+                { id: 3, title: "Latin Basketball Super League", card: null },
+                {
+                  id: 4,
+                  title: "Asia Basketball Super League",
+                  card: { img: "./assets/LiveScore/basketballcard.png" },
+                },
+                {
+                  id: 5,
+                  title: "Eroupean Basketball Super League",
+                  card: null,
+                },
+              ].map((item, index) => {
+                return (
+                  <Grid key={index}>
+                    <MatchLiveScroll item={item} />
+                  </Grid>
+                );
+              })}
+            </Grid>
           </Collapse>
         </Grid>
-
+        
       </Grid>
     </Grid>
   );

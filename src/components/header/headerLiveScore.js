@@ -6,10 +6,12 @@ import {
   import { useState } from "react";
   import utils from "@/common/utils";
   import moment from "moment/moment";
-  
+  import { useRouter } from "next/router";
+
   import { Icon } from "@iconify/react";
   export default function headerLiveScore() {
-  
+    const router = useRouter();
+
     const [selectSport, setSelectSport] = useState("football");
 
     return (
@@ -25,6 +27,7 @@ import {
             <Chip
               onClick={() => {
                 setSelectSport("football");
+                router.push('/liveScorePage')
               }}
               className={`${
                 selectSport == "football"
@@ -38,6 +41,7 @@ import {
             <Chip
              onClick={() => {
               setSelectSport("basketBall");
+              router.push('/liveScorePage')
             }}
               className={`${
                 selectSport == "basketBall"
@@ -51,6 +55,7 @@ import {
             <Chip
              onClick={() => {
               setSelectSport("lottery");
+              router.push('/liveScorePage')
             }}
               className={`${
                 selectSport == "lottery"

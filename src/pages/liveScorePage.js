@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 
 import MatchTitleBanner from "@/components/LiveScore/matchTitleBanner";
 import MatchLiveFeed from "@/components/LiveScore/matchLiveFeed";
+import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 
 export default function LiveScorePage() {
   const router = useRouter();
@@ -36,15 +37,11 @@ export default function LiveScorePage() {
     createData(3, "Brazil", 3, 4, 1, 2, 2, 27, 9.0, 37, 4.3),
   ];
 
-  useEffect(() => {
-  
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
-      <Typography variant="h5" fontWeight="bold">
-        Live Score
-      </Typography>
+      <TitleBreadCrumbs title={"Live Score"} />
 
       <Grid height="fit-content">
         <Grid container mb={2} alignItems="center">
@@ -62,8 +59,8 @@ export default function LiveScorePage() {
             }
           />
         </Grid>
-            <MatchTitleBanner matchData={rows}/>
-        <MatchLiveFeed matchData={rows}/>
+        <MatchTitleBanner matchData={rows} />
+        <MatchLiveFeed matchData={rows} />
       </Grid>
     </>
   );
