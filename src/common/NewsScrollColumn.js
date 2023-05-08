@@ -63,8 +63,8 @@ export default function NewsScrollColumn(props) {
         },
         callback: (res) => {
           setTimeout(() => {
-            setNewsList(res.data.data);
-            setPageLimit(res.data.last_page);
+            setNewsList(res?.data?.data);
+            setPageLimit(res?.data?.last_page);
             setLoading(false);
           }, 3000);
         },
@@ -84,10 +84,6 @@ export default function NewsScrollColumn(props) {
           page: currentPage,
         },
         callback: (res) => {
-          console.log("next page Function");
-          console.log("next page data :::", res.data.data);
-          console.log("next page newsList:::", newsList);
-
           setInfiniteLoad(true);
           setTimeout(() => {
             setNewsList(newsList.concat(res.data.data));
