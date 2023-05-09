@@ -65,15 +65,15 @@ export default function ScoreTable() {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
-  function createData(img, name, calories, fat, results, id) {
-    return { img, name, calories, fat, results, id };
+  function createData(img, name, chapter, session1, session2, id) {
+    return { img, name, chapter, session1, session2, id };
   }
 
   const rows = [
     createData(
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
       "Frozen yoghurt",
-      111,
+      'Guest Changhua Bailili[4]',
       6.0,
       { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
       1
@@ -81,7 +81,7 @@ export default function ScoreTable() {
     createData(
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
       "Frozen ice cream",
-      111,
+      'Lord Check Major[11]',
       6.0,
       { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
       2
@@ -89,7 +89,7 @@ export default function ScoreTable() {
     createData(
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
       "cake",
-      111,
+      'Lord Check Major[11]',
       6.0,
       { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
       3
@@ -120,11 +120,7 @@ export default function ScoreTable() {
   }
   return (
     <>
-      {rows.map((item, index) => {
-        let bgColor = getRandomColor();
-        return (
-          <>
-          <Grid
+     <Grid
             container
             sx={{
               background: "#FAFAFA",
@@ -187,6 +183,12 @@ export default function ScoreTable() {
               </FormControl>
             </Grid>
           </Grid>
+
+      {rows.map((item, index) => {
+        let bgColor = getRandomColor();
+        return (
+          <>
+         
             <TableContainer component={Paper} style={{ marginBottom: "15px" }}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
@@ -210,7 +212,7 @@ export default function ScoreTable() {
                       align="left"
                       sx={{ background: `${bgColor}` }}
                     >
-                      Chapter 2
+                      chapter 1
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="left">
                       session 1
@@ -249,64 +251,64 @@ export default function ScoreTable() {
                       align="left"
                       style={{ verticalAlign: "top" }}
                     >
-                      <Typography>{item.calories}</Typography>
-                      <Typography>{item.calories}</Typography>
+                      <Typography>{item.chapter}</Typography>
+                      <Typography>{item.chapter}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
                       align="left"
                       style={{ verticalAlign: "top" }}
                     >
-                      <Typography>{item.fat}</Typography>
-                      <Typography>{item.fat}</Typography>
+                      <Typography>{item.session1}</Typography>
+                      <Typography>{item.session1}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
                       align="right"
                       style={{ verticalAlign: "top" }}
                     >
-                      <Typography>{item.fat}</Typography>
-                      <Typography>{item.fat}</Typography>
+                      <Typography>{item.session1}</Typography>
+                      <Typography>{item.session1}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
                       align="right"
                       style={{ verticalAlign: "top" }}
                     >
-                      <Typography>{item.fat}</Typography>
+                      <Typography>{item.session1}</Typography>
                       <Typography>{item.id}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
                       align="right"
                       style={{ verticalAlign: "top" }}
                     >
-                      <Typography>{item.fat}</Typography>
+                      <Typography>{item.session1}</Typography>
                       <Typography>{item.id}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
                       align="right"
                       style={{ verticalAlign: "top" }}
                     >
-                      <Typography>{item.fat}</Typography>
+                      <Typography>{item.session1}</Typography>
                       <Typography>{item.id}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
                       align="right"
                       style={{ verticalAlign: "top" }}
                     >
-                      <Typography>{item.fat}</Typography>
+                      <Typography>{item.session1}</Typography>
                       <Typography>{item.id}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
                       align="right"
                       style={{ verticalAlign: "top" }}
                     >
-                      <Typography>{item.fat}</Typography>
+                      <Typography>{item.session1}</Typography>
                       <Typography>{item.id}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
                       align="right"
                       style={{ verticalAlign: "top" }}
                     >
-                      <Typography>Half: {item.fat}</Typography>
-                      <Typography>Half: {item.fat}</Typography>
+                      <Typography>Half: {item.session1}</Typography>
+                      <Typography>Half: {item.session1}</Typography>
                     </StyledTableCell>
                   </StyledTableRow>
                 </TableBody>
