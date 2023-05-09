@@ -26,6 +26,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
+import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 const style = {
   position: "absolute",
   top: "300px",
@@ -201,11 +202,12 @@ export default function LotteryPage() {
     setChart(false);
     setPastResult(false);
   };
-  return (
+  return ( 
     <>
       <Typography variant="h5" fontWeight="bold">
               {langKey && langKey.lottery}
       </Typography>
+        <TitleBreadCrumbs title={'Lottery'}/>
       {/* past result modal  */}
       <Modal
         open={pastResult}

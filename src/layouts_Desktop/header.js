@@ -24,6 +24,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [path, setPath] = useState("");
+  const [hash, setHash] = useState("");
   const open = Boolean(anchorEl);
 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
@@ -56,7 +58,6 @@ const Header = () => {
   const openScore = Boolean(anchorScore);
   const id = openScore ? "simple-popover" : undefined;
 
-
   const menuList = [
     { label: (langKey && langKey.lottery_draw), page: "LotteryPage" },
     { label: (langKey && langKey.data_chart), page: "DataChart" },
@@ -65,6 +66,19 @@ const Header = () => {
   ];
 
 
+   
+
+  useEffect(() => {
+    const path = router.asPath;
+    const hash = router.asPath.split("#")[0];
+    console.log("header hash:::", hash, path);
+
+    setPath(path);
+    setHash(hash);
+
+    handleScoreClose()
+
+  }, [router.asPath]);
 
   return (
     <>
@@ -127,7 +141,7 @@ const Header = () => {
                         },
                       }}
                     >
-                    {langKey && langKey.login}/{langKey && langKey.register}
+                      {langKey && langKey.login}/{langKey && langKey.register}
                     </Button>
                   ) : (
                     <ProfileDropDown
@@ -217,7 +231,7 @@ const Header = () => {
                       sx={{
                         background: "#494949",
                         color: "white",
-                        width: {xs:"95vw",xl:"80vw"}
+                        width: { xs: "95vw", xl: "80vw" },
                       }}
                     >
                       <HeaderLiveScore />
@@ -231,7 +245,14 @@ const Header = () => {
                         router.push("/");
                       }}
                     >
-                      <Typography textAlign="center">{langKey && langKey.home} </Typography>
+                      <Typography
+                        textAlign="center"
+                        className={`${
+                          hash == "/" || path == "/" ? "selectedTab" : ""
+                        }`}
+                      >
+                        {langKey && langKey.home}{" "}
+                      </Typography>
                     </MenuItem>
                   </Grid>
                   {!matches2
@@ -240,9 +261,16 @@ const Header = () => {
                           <Grid key={index}>
                             <MenuItem
                               sx={{ paddingX: { xs: "5px", lg: "15px" } }}
-                              onClick={() => router.push(`/${item.page}`)}
+                              onClick={() => router.push(`${item.page}`)}
                             >
-                              <Typography textAlign="center">
+                              <Typography
+                                textAlign="center"
+                                className={`${
+                                  hash == item.page || path == item.page
+                                    ? "selectedTab"
+                                    : ""
+                                }`}
+                              >
                                 {item.label}
                               </Typography>
                             </MenuItem>
@@ -284,17 +312,53 @@ const Header = () => {
                             return (
                               <MenuItem
                                 key={index}
-                                onClick={() => router.push(`/${item.page}`)}
+                                onClick={() => {
+                                  router.push(`${item.page}`), handleClose();
+                                }}
                               >
-                                <Typography textAlign="center">
+                                <Typography
+                                  textAlign="center"
+                                  className={`${
+                                    hash == item.page || path == item.page
+                                      ? "selectedTab"
+                                      : ""
+                                  }`}
+                                >
                                   {item.label}
                                 </Typography>
                               </MenuItem>
                             );
                           })
                         : ""}
-                      <MenuItem onClick={handleClose}>{langKey && langKey.profile}</MenuItem>
-                      <MenuItem onClick={handleClose}>{langKey && langKey.my_account}</MenuItem>
+                  
+                      <MenuItem
+                        onClick={() => {
+                          router.push("/profile"), handleClose();
+                        }}
+                      >
+                        <Typography
+                          textAlign="center"
+                          className={`${
+                            hash == "/profile" || path == "/profile"
+                              ? "selectedTab"
+                              : ""
+                          }`}
+                        >
+                        {langKey && langKey.profile}
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <Typography
+                          textAlign="center"
+                          className={`${
+                            hash == "/myAccount" || path == "/myAccount"
+                              ? "selectedTab"
+                              : ""
+                          }`}
+                        >
+                         {langKey && langKey.my_account}
+                        </Typography>
+                      </MenuItem>
                       <MenuItem onClick={handleClose}>{langKey && langKey.logout}</MenuItem>
                     </Menu>
                   </Grid>

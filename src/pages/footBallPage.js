@@ -5,15 +5,6 @@ import {
   FormControl,
   InputLabel,
   Select,
-  styled,
-  TableCell,
-  TableRow,
-  tableCellClasses,
-  TableContainer,
-  Paper,
-  Table,
-  TableHead,
-  TableBody,
   Box,
 } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -23,8 +14,10 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import ScoreTable from "@/components/football/ScoreTable";
 import Schedule from "@/components/football/schedule";
-import End from "@/components/football/end";
 
+import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
+import ScoreTab from "@/components/football/ScoreTab";
+import EndTab from "@/components/football/EndTab";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -37,7 +30,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -77,6 +70,7 @@ export default function FootBallPage() {
       <Typography variant="h5" fontWeight="bold">
       {langKey && langKey.foot_ball}
       </Typography>
+      <TitleBreadCrumbs title={"Foot Ball"} />
 
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
         <Grid xs={"auto"} container border="1px solid grey" borderRadius="5px">
@@ -137,13 +131,13 @@ export default function FootBallPage() {
       </Grid>
 
       <TabPanel value={value} index={"Follow"}>
-      <ScoreTable />
-      </TabPanel>
-      <TabPanel value={value} index={"Score"}>
         <ScoreTable />
       </TabPanel>
+      <TabPanel value={value} index={"Score"}>
+        <ScoreTab />
+      </TabPanel>
       <TabPanel value={value} index={"End"}>
-      <End />
+      <EndTab />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
         <Schedule />
