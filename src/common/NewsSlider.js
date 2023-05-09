@@ -35,6 +35,7 @@ export default function NewsSlider(props) {
         callback: (res) => {
           setNewsList(res.data.data);
           setPageLimit(res.data.last_page);
+          setCurrentPage(1);
           console.log(catId, "newsSlider3:::", res.data);
         },
       })
@@ -52,19 +53,44 @@ export default function NewsSlider(props) {
           page: currentPage,
         },
         callback: (res) => {
-          setNewsList(newsList.concat(res.data.data));
+          setTimeout(() => {
+            setNewsList(newsList.concat(res.data.data));
+
+            // setLoading(false);
+          }, 3000);
+
         },
       })
     );
   }, [currentPage]);
 
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const handleScroll = (event) => {
+    console.log("scroll clientheight:::", event.currentTarget.clientHeight);
+    console.log("scroll scrolltop:::", event.currentTarget.scrollTop);
+    console.log(
+      "scroll test:::",
+      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+        event.currentTarget.clientHeight
+    );
 
+    if (
+      pageLimit !== currentPage &&
+      pageLimit > currentPage &&
+      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+        event.currentTarget.clientHeight
+    ) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
   return (
     <>
       <Grid overflow="auto" minHeight="300px" maxHeight="450px" pb={1}>
         <Grid
+          onScroll={handleScroll}
           sx={{
             borderRadius: "0px 0px 10px 10px",
             minHeight: 300,
@@ -86,11 +112,13 @@ export default function NewsSlider(props) {
                     })
                   }
                   color="black"
-                  sx={{ textDecoration: "none",
-                  cursor:"pointer",
-                  "&:hover": {
-                    textDecoration: "underline"
-                  } }}
+                  sx={{
+                    textDecoration: "none",
+                    cursor: "pointer",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
                 >
                   <Grid
                     key={item.id}
@@ -104,7 +132,9 @@ export default function NewsSlider(props) {
                       margin: "10px",
                     }}
                   >
-                    <Typography textAlign="left" fontSize={14}>{item.title}</Typography>
+                    <Typography textAlign="left" fontSize={14}>
+                      {item.title}
+                    </Typography>
                     <Typography
                       textAlign="left"
                       fontSize="12px"
@@ -125,8 +155,8 @@ export default function NewsSlider(props) {
                   "linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%)",
                 border: "1px solid #DDDDDD",
                 "&:hover": {
-                  color: "white"
-                }
+                  color: "white",
+                },
               }}
             >
               <Typography
@@ -135,7 +165,7 @@ export default function NewsSlider(props) {
                   setCurrentPage(currentPage + 1);
                 }}
               >
-               {langKey && langKey.load_more}
+                {langKey && langKey.load_more}
               </Typography>
             </Button>
           ) : (
