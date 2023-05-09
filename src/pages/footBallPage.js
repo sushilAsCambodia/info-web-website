@@ -67,10 +67,10 @@ export default function FootBallPage() {
 
   return (
     <>
-      <Typography variant="h5" fontWeight="bold">
-      {langKey && langKey.foot_ball}
-      </Typography>
-      <TitleBreadCrumbs title={"Foot Ball"} />
+      {/* <Typography variant="h5" fontWeight="bold">
+      {langKey && langKey.foot_ball} 
+      </Typography> */}
+      <TitleBreadCrumbs title={langKey && langKey.foot_ball}  />
 
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
         <Grid xs={"auto"} container border="1px solid grey" borderRadius="5px">

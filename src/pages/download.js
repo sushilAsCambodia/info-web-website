@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 export default function Index() {
   const matches = useMediaQuery("(max-width:393px)");
   const {t} = useTranslation()

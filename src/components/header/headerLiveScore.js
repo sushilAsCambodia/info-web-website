@@ -7,10 +7,13 @@ import {
   import utils from "@/common/utils";
   import moment from "moment/moment";
   import { useRouter } from "next/router";
+  import { useDispatch, useSelector } from "react-redux";
 
   import { Icon } from "@iconify/react";
   export default function headerLiveScore() {
     const router = useRouter();
+
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
     const [selectSport, setSelectSport] = useState("football");
 
@@ -34,7 +37,7 @@ import {
                   ? "sportChipSelect"
                   : "sportChip"
               }`}
-              label={<Typography p={1}>FootBall</Typography>}
+              label={<Typography p={1}>{langKey && langKey.foot_ball}</Typography>}
             />
           </Grid>
           <Grid item p={1}>
@@ -48,7 +51,7 @@ import {
                   ? "sportChipSelect"
                   : "sportChip"
               }`}
-              label={<Typography p={1}>BasketBall</Typography>}
+              label={<Typography p={1}>{langKey && langKey.basket_ball}</Typography>}
             />
           </Grid>
           <Grid item p={1}>
@@ -62,7 +65,7 @@ import {
                   ? "sportChipSelect"
                   : "sportChip"
               }`}
-              label={<Typography p={1}>Lottery</Typography>}
+              label={<Typography p={1}>{langKey && langKey.lottery}</Typography>}
             />
           </Grid>
         </Grid>

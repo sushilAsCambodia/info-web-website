@@ -103,7 +103,7 @@ export default function Login() {
         dispatch(getLanguage(
           {
               params: {
-                  lang_id: utils.convertLangCodeToID(i18n.language),platform:'desktop'
+                  lang_id: utils.convertLangCodeToID(i18n.language)
               },
               callback:(res) => {
     console.log("resres",res)

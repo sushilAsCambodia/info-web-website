@@ -65,7 +65,7 @@ export default function LangSwitcher() {
       dispatch(getLanguage(
         {
             params: {
-                lang_id: utils.convertLangCodeToID(i18n.language),platform:'desktop'
+                lang_id: utils.convertLangCodeToID(i18n.language)
             },
             callback:(res) => {
   
@@ -90,9 +90,9 @@ export default function LangSwitcher() {
     i18n.changeLanguage(l); 
     dispatch(getLanguage(
       {
-          params: {
-              lang_id: utils.convertLangCodeToID(l),platform:'desktop'
-          },
+        params: {
+          lang_id: utils.convertLangCodeToID(i18n.language)
+      },
           callback:(res) => {
 console.log("resres",res)
 localStorage.setItem('languageKey', JSON.stringify(res))

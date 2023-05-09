@@ -204,10 +204,10 @@ export default function LotteryPage() {
   };
   return ( 
     <>
-      <Typography variant="h5" fontWeight="bold">
+      {/* <Typography variant="h5" fontWeight="bold">
               {langKey && langKey.lottery}
-      </Typography>
-        <TitleBreadCrumbs title={'Lottery'}/>
+      </Typography> */}
+        <TitleBreadCrumbs title= {langKey && langKey.lottery} />
       {/* past result modal  */}
       <Modal
         open={pastResult}
