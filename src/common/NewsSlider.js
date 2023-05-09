@@ -11,6 +11,7 @@ import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
 import moment from "moment/moment";
 import utils from "./utils";
+import { Icon } from "@iconify/react";
 
 export default function NewsSlider(props) {
   const { t } = useTranslation();
@@ -21,6 +22,8 @@ export default function NewsSlider(props) {
   const [newsList, setNewsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setPageLimit] = useState(1);
+  const [toBottom, setToBottom] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     dispatch(
@@ -53,16 +56,15 @@ export default function NewsSlider(props) {
           page: currentPage,
         },
         callback: (res) => {
-          setTimeout(() => {
-            setNewsList(newsList.concat(res.data.data));
-
-            // setLoading(false);
-          }, 3000);
-
+          setLoading(true);
+            setTimeout(() => {
+              setLoading(false);    
+              setNewsList(newsList.concat(res.data.data));     
+            }, 3000);
         },
       })
     );
-  }, [currentPage]);
+  }, [toBottom]);
 
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
@@ -83,6 +85,7 @@ export default function NewsSlider(props) {
       event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
         event.currentTarget.clientHeight
     ) {
+      setToBottom(!toBottom)
       setCurrentPage(currentPage + 1);
     }
   };
@@ -146,28 +149,14 @@ export default function NewsSlider(props) {
                 </Grid>
               );
             })}
-          {pageLimit > currentPage ? (
-            <Button
-              size="small"
-              variant="contained"
-              sx={{
-                background:
-                  "linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%)",
-                border: "1px solid #DDDDDD",
-                "&:hover": {
-                  color: "white",
-                },
-              }}
-            >
-              <Typography
-                fontSize="13px"
-                onClick={() => {
-                  setCurrentPage(currentPage + 1);
-                }}
-              >
-                {langKey && langKey.load_more}
-              </Typography>
-            </Button>
+          
+          {loading ? (
+             <Icon
+             color="black"
+             width={40}
+             paddingBottom="5px"
+             icon="line-md:loading-alt-loop"
+           />
           ) : (
             ""
           )}
