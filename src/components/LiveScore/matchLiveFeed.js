@@ -84,13 +84,13 @@ export default function MatchLiveFeed(props) {
 
   return (
     <Grid alignItems="baseline" container>
-      <Grid item xs={9}>
+      <Grid item xs={8} lg={9}>
         <LiveScoreCardTab />
 
         <ChipDataFilter />
       </Grid>
 
-      <Grid item xs={3} px={1}>
+      <Grid item xs={4} lg={3} px={1}>
         
         <ChatScroll />
 

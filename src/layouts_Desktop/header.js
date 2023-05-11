@@ -27,6 +27,7 @@ const Header = () => {
   const [path, setPath] = useState("");
   const [hash, setHash] = useState("");
   const open = Boolean(anchorEl);
+  const [scroll, setScroll] = useState(false);
 
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
@@ -73,18 +74,28 @@ const Header = () => {
     setPath(path);
     setHash(hash);
 
-    handleScoreClose()
-
+    handleScoreClose();
   }, [router.asPath]);
 
+  window.addEventListener("scroll", () => {
+    setScroll(window.pageYOffset > 56);
+    console.log("scroll:::", window.pageYOffset > 56);
+  });
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     window.addEventListener("scroll", () =>
+  //       setScroll(window.pageYOffset > 50)
+  //     );
+  //   }
+
+  // }, []);
   return (
     <>
       {router.pathname == "/login" || router.pathname == "/register" ? (
         ""
       ) : (
-        <>
+        <Grid className="sticky-header">
           <AppBar
-            position="static"
             style={{
               background:
                 "linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)",
@@ -92,6 +103,7 @@ const Header = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              // position:`${scroll ? "static":"" }`
             }}
           >
             <Grid
@@ -154,15 +166,14 @@ const Header = () => {
             </Grid>
           </AppBar>
           <AppBar
-            position="static"
+            // position="static"
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
-            }}
-            sx={{
               background: "linear-gradient(to right, #373737 50%, white 0%)",
+              top: 55,
             }}
           >
             <Grid width={{ xs: "95%", xl: "80%" }} sx={{ background: "white" }}>
@@ -399,7 +410,7 @@ const Header = () => {
               </Grid>
             </Grid>
           </AppBar>
-        </>
+        </Grid>
       )}
     </>
   );
