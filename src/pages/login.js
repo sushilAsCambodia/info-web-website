@@ -32,9 +32,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
 // import LangSwitcher from "@/components/LangSwitcher";
+import {getLanguage} from '../store/actions/languageActions'
 import FieldLanguageSwitcher from "@/components/fieldLangSwitcher";
 import Cookies from "js-cookie";
 import ForgotPassword from "@/components/desktop/forgotPassword";
+import utils from "../common/utils";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -79,6 +81,8 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function Login() {
   const { t } = useTranslation();
+  const {i18n} =  useTranslation();
+  const [lang, setLang] = React.useState('')
   const [responseMessage, setResponseMessage] = useState("");
   const [isComponent, setIsComponent] = useState("login");
   const [loading, setLoading] = useState(false);
@@ -91,8 +95,25 @@ export default function Login() {
   const [mounted, setMounted] = useState(false);
   const matches = useMediaQuery("(max-width:768px)");
   const [border, setBorder] = useState(false);
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   useEffect(() => {
       setMounted(true);
+
+      if(Object.keys(langKey).length===0){
+        dispatch(getLanguage(
+          {
+              params: {
+                  lang_id: utils.convertLangCodeToID(i18n.language)
+              },
+              callback:(res) => {
+    console.log("resres",res)
+    localStorage.setItem('languageKey', JSON.stringify(res))
+    
+               }
+          }
+      ));
+        }
+
   }, []);
   const dispatch = useDispatch();
   const handleLogin = () => {
@@ -164,8 +185,7 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
+ 
   return <>
     {
       mounted && (

@@ -16,7 +16,7 @@ export default function JournalItem(props) {
   return (
     <>
       <Grid
-        onClick={() => {setOpen(true);setAlbumId(item.id)}}
+      
         sx={{
           margin: "5px",
           borderRadius: "10px"
@@ -35,7 +35,7 @@ export default function JournalItem(props) {
           alignItems="center"
           justifyContent="space-around"
         >
-          <Grid item xs={7} padding="5px" textAlign="center">
+          <Grid item xs={7} padding="5px" textAlign="center"   onClick={() => {setOpen(true);setAlbumId(item.id)}}>
           <picture>
             <img
               src={item.cover_img}
@@ -46,7 +46,8 @@ export default function JournalItem(props) {
                 maxHeight: "80px",
                 border: "5px solid #FFE0E0",
                 borderRadius: "5px",
-                objectFit:'contain'
+                objectFit:'contain',
+                cursor:"pointer"
               }}
             />
           </picture>
@@ -74,7 +75,9 @@ export default function JournalItem(props) {
                       borderRadius: "50px",
                       whiteSpace: "nowrap",
                       marginTop:"10px"
-                    }}>
+                    }}
+                    onClick={() => {setOpen(true);setAlbumId(item.id)}}
+                    >
                     Latest Issue {item?.album_slavs_latest?.issue || 'N/A'}
                   </Button>
                 }

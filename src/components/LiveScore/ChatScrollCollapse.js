@@ -17,6 +17,7 @@ export default function ChatScrollCollapse(props) {
   const router = useRouter();
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   const [expanded, setExpanded] = useState(false);
 
@@ -43,7 +44,7 @@ export default function ChatScrollCollapse(props) {
                   onClick={handleExpandClick}
                 />
               )}
-              <Typography>Dynamic</Typography>
+              <Typography>{ langKey && langKey.dynamic}</Typography>
             </Grid>
           </Grid>
           <Collapse in={expanded} timeout="auto" unmountOnExit>

@@ -47,8 +47,9 @@ export default function Index() {
             <img height="300px" src="./assets/Download/football.png"/>
           </Grid>
           <Grid item textAlign="center" mt={2}>
+        
             <Typography fontWeight={700} fontSize="20px" textTransform="uppercase">
-              {t("download_app")}
+            {langKey && langKey.download_app}
             </Typography>
           </Grid>
 

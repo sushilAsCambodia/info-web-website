@@ -29,9 +29,9 @@ const Header = () => {
   const open = Boolean(anchorEl);
   const [scroll, setScroll] = useState(false);
 
-  const langKey = useSelector(
-    (state) => state && state.load_language && state.load_language.language
-  );
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -60,11 +60,14 @@ const Header = () => {
   const id = openScore ? "simple-popover" : undefined;
 
   const menuList = [
-    { label: langKey && langKey.lottery_draw, page: "/LotteryPage" },
-    { label: langKey && langKey.data_chart, page: "/DataChart" },
-    { label: "FootBall", page: "/footBallPage" },
-    { label: "BasketBall", page: "/basketBall" },
+    { label: (langKey && langKey.lottery_draw), page: "LotteryPage" },
+    { label: (langKey && langKey.data_chart), page: "DataChart" },
+    { label: (langKey && langKey.foot_ball), page: "footBallPage" },
+    { label: (langKey && langKey.basket_ball), page: "basketBall" },
   ];
+
+
+   
 
   useEffect(() => {
     const path = router.asPath;
@@ -197,7 +200,7 @@ const Header = () => {
                       paddingLeft: "0px",
                     }}
                   >
-                    <Typography color="white">Live Score</Typography>
+                    <Typography color="white">{langKey && langKey.live_score}</Typography>
                     {openScore ? (
                       <Icon
                         color="white"
@@ -338,6 +341,7 @@ const Header = () => {
                             );
                           })
                         : ""}
+                  
                       <MenuItem
                         onClick={() => {
                           router.push("/profile"), handleClose();
@@ -351,7 +355,7 @@ const Header = () => {
                               : ""
                           }`}
                         >
-                          Profile
+                        {langKey && langKey.profile}
                         </Typography>
                       </MenuItem>
                       <MenuItem onClick={handleClose}>
@@ -363,10 +367,10 @@ const Header = () => {
                               : ""
                           }`}
                         >
-                          My Account
+                         {langKey && langKey.my_account}
                         </Typography>
                       </MenuItem>
-                      <MenuItem onClick={handleClose}>Logout</MenuItem>
+                      <MenuItem onClick={handleClose}>{langKey && langKey.logout}</MenuItem>
                     </Menu>
                   </Grid>
                 </Grid>
