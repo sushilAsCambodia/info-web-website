@@ -7,14 +7,15 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useTranslation } from 'react-i18next';
 import { Select,FormControl,InputLabel,InputAdornment,IconButton } from '@mui/material';
 import { Icon } from '@iconify/react';
-
+import { useSelector } from 'react-redux';
 
 export default function FieldLanguageSwitcher() {
   const {i18n} =  useTranslation();
   const [lang, setLang] = React.useState('')
 
   const [langLabel,setLangLabel] = React.useState(i18n ? i18n.language:'en')
-  
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -54,12 +55,12 @@ export default function FieldLanguageSwitcher() {
     // size="small"
     fullWidth
     >
-      <InputLabel id="demo-select-small">Language</InputLabel>
+      <InputLabel id="demo-select-small">{langKey && langKey.language}</InputLabel>
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
         value={langLabel}
-        label="Language"
+        label={langKey && langKey.language}
         onChange={handleClick}
         style={{paddingRight:"30px"}}
         endAdornment={
