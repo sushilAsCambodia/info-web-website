@@ -33,6 +33,8 @@ const Feedback = () => {
   const [errorEmail,setErrorEmail]  = useState(false);
   const [errorEmailMessage,setErrorEmailMessage]  = useState('');
   const [responseMessage,setResponseMessage]  = useState('');
+  console.log('responseMessage',responseMessage)
+  console.log('openDialog',openDialog)
   const onChangeContent = (e) => {
     if(e.target.value.length <= 500) {
       setContent(e.target.value)
@@ -74,8 +76,20 @@ const Feedback = () => {
           },
           callback:(res) => {
             const {message = '' } = res;
-            setResponseMessage(t(message));
-            setOpenDialog(true);
+            console.log('res',res)
+            if(res.status_code===201){
+              setOpenDialog(true)
+            
+              setResponseMessage(t(message));
+              setTimeout(()=> {setOpenDialog(false)
+              setContent('')
+              setContact('')
+            },1000)
+              
+            
+             
+            }
+           
           }
         }))
       }

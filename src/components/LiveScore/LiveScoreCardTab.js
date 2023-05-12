@@ -240,8 +240,8 @@ export default function LiveScoreCardTab(props) {
                       item
                       xs={4}
                       container
-                      alignItems="center"
                       justifyContent="flex-end"
+                      sx={{alignItems:{xs:"flex-end",lg:"center"},flexDirection: {xs:"column-reverse",lg:"row"}}}
                     >
                       <Grid textAlign="right">
                         <Typography fontWeight="bold">

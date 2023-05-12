@@ -11,6 +11,7 @@ import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
 import moment from "moment/moment";
 import utils from "./utils";
+import { Icon } from "@iconify/react";
 
 export default function NewsSlider(props) {
   const { t } = useTranslation();
@@ -21,6 +22,8 @@ export default function NewsSlider(props) {
   const [newsList, setNewsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setPageLimit] = useState(1);
+  const [toBottom, setToBottom] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     dispatch(
@@ -35,6 +38,7 @@ export default function NewsSlider(props) {
         callback: (res) => {
           setNewsList(res.data.data);
           setPageLimit(res.data.last_page);
+          setCurrentPage(1);
           console.log(catId, "newsSlider3:::", res.data);
         },
       })
@@ -52,19 +56,44 @@ export default function NewsSlider(props) {
           page: currentPage,
         },
         callback: (res) => {
-          setNewsList(newsList.concat(res.data.data));
+          setLoading(true);
+            setTimeout(() => {
+              setLoading(false);    
+              setNewsList(newsList.concat(res.data.data));     
+            }, 3000);
         },
       })
     );
-  }, [currentPage]);
+  }, [toBottom]);
 
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const handleScroll = (event) => {
+    console.log("scroll clientheight:::", event.currentTarget.clientHeight);
+    console.log("scroll scrolltop:::", event.currentTarget.scrollTop);
+    console.log(
+      "scroll test:::",
+      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+        event.currentTarget.clientHeight
+    );
 
+    if (
+      pageLimit !== currentPage &&
+      pageLimit > currentPage &&
+      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+        event.currentTarget.clientHeight
+    ) {
+      setToBottom(!toBottom)
+      setCurrentPage(currentPage + 1);
+    }
+  };
   return (
     <>
       <Grid overflow="auto" minHeight="300px" maxHeight="450px" pb={1}>
         <Grid
+          onScroll={handleScroll}
           sx={{
             borderRadius: "0px 0px 10px 10px",
             minHeight: 300,
@@ -86,11 +115,13 @@ export default function NewsSlider(props) {
                     })
                   }
                   color="black"
-                  sx={{ textDecoration: "none",
-                  cursor:"pointer",
-                  "&:hover": {
-                    textDecoration: "underline"
-                  } }}
+                  sx={{
+                    textDecoration: "none",
+                    cursor: "pointer",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
                 >
                   <Grid
                     key={item.id}
@@ -104,7 +135,9 @@ export default function NewsSlider(props) {
                       margin: "10px",
                     }}
                   >
-                    <Typography textAlign="left" fontSize={14}>{item.title}</Typography>
+                    <Typography textAlign="left" fontSize={14}>
+                      {item.title}
+                    </Typography>
                     <Typography
                       textAlign="left"
                       fontSize="12px"
@@ -116,28 +149,14 @@ export default function NewsSlider(props) {
                 </Grid>
               );
             })}
-          {pageLimit > currentPage ? (
-            <Button
-              size="small"
-              variant="contained"
-              sx={{
-                background:
-                  "linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%)",
-                border: "1px solid #DDDDDD",
-                "&:hover": {
-                  color: "white"
-                }
-              }}
-            >
-              <Typography
-                fontSize="13px"
-                onClick={() => {
-                  setCurrentPage(currentPage + 1);
-                }}
-              >
-               {langKey && langKey.load_more}
-              </Typography>
-            </Button>
+          
+          {loading ? (
+             <Icon
+             color="black"
+             width={40}
+             paddingBottom="5px"
+             icon="line-md:loading-alt-loop"
+           />
           ) : (
             ""
           )}
