@@ -98,7 +98,7 @@ export default function JournalsColumns(props) {
           >
             {journals.length > 0 ? journals.map((item,index)=>{
               return <JournalItem setOpen={setOpen} setAlbumId={setAlbumId} key={index} item={item}/>;
-            }):<Typography textAlign="center">No journal today</Typography>}
+            }):<Typography textAlign="center">{langKey && langKey.no_journal_data}</Typography>}
           </Carousel>
         <style>
           {
