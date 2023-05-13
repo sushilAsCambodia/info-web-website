@@ -743,12 +743,15 @@ visibility: visible;
 /* END  */
 /* news journal fixed css  */
 
+@media (max-width: 768px) {
+
 .tabclass .mui-home-tab-wrapper{ 
   position: fixed;
   top: 56px;
   width: 100%;
   background: #fff;
   z-index: 9;
+}
 }
 .tabclass .MuiGrid-root[role="tabpanel"]{
   padding-top: 62px;
