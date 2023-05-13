@@ -14,7 +14,7 @@ const Footer = () => {
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   return (
-    <Grid container alignItems="center" flexDirection="column" py={2} sx={{background:"#FAFAFA"}}>
+    <Grid container alignItems="center" flexDirection="column" py={2} sx={{background:"#FAFAFA"}} >
       <Grid item xs={4} textAlign="center">
         <img src="./assets/Logo/footer_logo.png"/>
         <Typography my={2}>
