@@ -42,6 +42,7 @@ export default function LinkBanner(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
@@ -78,7 +79,7 @@ export default function LinkBanner(props) {
             >
             <Grid xs={3}>
             <Typography fontWeight="bold" variant="h4">实时比分</Typography>
-            <Typography fontWeight="bold" variant="h4">Faster Than TV</Typography>
+            <Typography fontWeight="bold" variant="h4">  {langKey && langKey.faster_than_tv}</Typography>
             </Grid>
             <Grid xs={3} textAlign="center"><img height="100px" src="./assets/News/football_2.png" /></Grid>
             <Grid xs={3} p={1} border="2px solid white" borderRadius="20px">
@@ -88,7 +89,7 @@ export default function LinkBanner(props) {
             </Grid>
             <Grid xs={3} textAlign="center"><img height="100px" src="./assets/News/football_1.png" /></Grid>
             <Grid xs={3} textAlign="right">
-                <Button variant="container" sx={{background:"#FF8024",color:"white",borderRadius:"20px"}}>Download App</Button>
+                <Button variant="container" sx={{background:"#FF8024",color:"white",borderRadius:"20px"}}> {langKey && langKey.download_app}</Button>
             </Grid>
             </Grid>
       </Grid>

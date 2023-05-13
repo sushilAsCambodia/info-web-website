@@ -103,7 +103,7 @@ export default function DialogDesktop(props) {
                 {
                     issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
                         return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue mui-issue-custom':'mui-issue-custom'} style={{ width: '53px', justifyContent: "center", textAlign: "center !important",cursor:"pointer" }}>
-                            <Typography fontSize="10px">Issue {is.issue || ''}</Typography>
+                            <Typography fontSize="10px">{langKey && langKey.issue} {is.issue || ''}</Typography>
                         </ListItem>
                     })
                 } 
