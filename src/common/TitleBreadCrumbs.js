@@ -22,6 +22,7 @@ export default function TitleBreadCrumbs(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   // example of paths paths={[{name:'Lottery',link:'/footballPage'},{name:'End',link:'/footBallPage#End'}]}
   const { title, paths = [] } = props;
@@ -51,7 +52,7 @@ export default function TitleBreadCrumbs(props) {
       onClick={() => handleClick("/")}
       style={{ cursor: "pointer" }}
     >
-      Home
+        {langKey && langKey.home}
     </Link>,
 
     <Typography key="2" color="#F24E1E">

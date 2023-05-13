@@ -33,7 +33,7 @@ const forgotPassword = (props) => {
                             color: "#F26522",
                         }}
                         mx={1}>
-                        Login
+                         {langKey && langKey.login} 
                     </Typography>
                 </Link>
             </Grid>

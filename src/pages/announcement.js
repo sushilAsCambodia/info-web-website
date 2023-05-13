@@ -23,7 +23,7 @@ import {
 import { useRouter } from "next/router";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-
+import { useSelector } from "react-redux";
 
 
 const rows = [
@@ -72,14 +72,19 @@ const rows = [
 const Announcement = () => {
     const matches = useMediaQuery("(max-width:768px)");
     const router = useRouter();
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
     const breadcrumbs = [
         <Link underline="hover" component={Link} key="1" color="inherit"  sx={{cursor:"pointer"}}   onClick={()=>router.push('/')}>
-            Home
+             {langKey && langKey.home}
         </Link>,
         <Typography key="2" color="#F24E1E">
-            Announcement
+             {langKey && langKey.announcement}
         </Typography>,
     ];
+
+
+  
+
     return !matches ? (
         <>
             <Grid
@@ -98,7 +103,7 @@ const Announcement = () => {
                 >
                     <Grid item xs={12} sm={12} md={12} xl={12} padding="0px" display="flex" justifyContent="space-between" alignItems="center" paddingBottom={2}>
                         <Grid>
-                            <Typography variant="h5" fontWeight={600}>Announcement</Typography>
+                            <Typography variant="h5" fontWeight={600}>{langKey && langKey.announcement}</Typography>
                         </Grid>
                         <Grid>
                             <Stack spacing={2}>
@@ -144,7 +149,6 @@ const Announcement = () => {
                 justifyContent="center"
                 padding="0px 16px"
             >
-
                 <Grid
                     item
                     xs={12}

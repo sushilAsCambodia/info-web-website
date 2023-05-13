@@ -8,6 +8,9 @@ import Navigate from '@/components/navigate';
 import { Grid, IconButton } from '@mui/material';
 import Head from 'next/head'
 import { useTranslation } from 'react-i18next'; 
+import {getLanguage} from '../store/actions/languageActions'
+import utils from "@/common/utils";
+
 import DrawerComponent from '@/components/drawer'; 
 const Layout = (props) => {
     const router = useRouter();
@@ -18,8 +21,12 @@ const Layout = (props) => {
     }); 
     const { t,i18n } = useTranslation();
 
-    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+    const dispatch = useDispatch();
 
+
+
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+console.log("langKey", useSelector((state) => state))
     useEffect(() => {
         setMounted(true);
     }, []);
@@ -29,6 +36,18 @@ const Layout = (props) => {
                 document.documentElement.setAttribute('lang',i18n.language);
             }
         }
+        dispatch(getLanguage(
+            {
+                params: {
+                    lang_id: utils.convertLangCodeToID(i18n.language)
+                },
+                callback:(res) => {
+    // console.log("resres",res)
+    localStorage.setItem('languageKey', JSON.stringify(res))
+    
+                 }
+            }
+        ));
     },[i18n.language])
     let { children } = props;  
     let title = '';
@@ -55,11 +74,20 @@ const Layout = (props) => {
     } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
         height = 'calc(100vh - 56px)';
     }
-    const switchHeader = () => {
+    const switchHeader = () => { 
         if (router.pathname != '/') {
             if (pages.includes(router.pathname)) {
-                
+                const {query} = router;
+                let title = '';
+                console.log(query)
+                if(Object.keys(query).length > 0) {
+                    console.log(query?.title,langKey)
+                    // title = langKey && langKey[(query?.title || '').toLowerCase()];
+                    title = ( query?.title || '').toLowerCase();
+                }
+                console.log("title", langKey)
                 return <Navigate
+                    title={title}
                     lead={<IconButton
                         onClick={() => router.back()}
                         size="large" 

@@ -4,20 +4,21 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import HomeIcon from "@/components/svg/home";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
 const Footer = () => {
   const { t } = useTranslation();
   let selectedTab = 0;
   const router = useRouter();
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   return (
     <Grid container alignItems="center" flexDirection="column" py={2} sx={{background:"#FAFAFA"}}>
       <Grid item xs={4} textAlign="center">
         <img src="./assets/Logo/footer_logo.png"/>
         <Typography my={2}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    {langKey && langKey.footer_content}
         </Typography>
       </Grid>
       <Grid container item xs={6} spacing={2} justifyContent="center">

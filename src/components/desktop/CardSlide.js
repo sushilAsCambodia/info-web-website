@@ -7,8 +7,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import moment from 'moment/moment';
+import { useSelector } from 'react-redux';
 export default function CardSlice(props) {
     const { image = {} } = props;
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
     return (
         <>
             {
@@ -44,7 +47,7 @@ export default function CardSlice(props) {
                                         padding: '5px',
                                         width: '77px'
                                     }}>
-                                    Latest Issue {image.issue}
+                                      {langKey && langKey.lates_issue} {image.issue}
                                 </Grid>
                             </CardContent>
                         </Box>

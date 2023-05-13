@@ -11,8 +11,14 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
 import moment from "moment/moment";
+import { useSelector } from "react-redux";
 export default function JournalItem(props) {
   const {item={}, setOpen, setAlbumId} = props;  
+
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   return (
     <>
       <Grid
@@ -78,7 +84,7 @@ export default function JournalItem(props) {
                     }}
                     onClick={() => {setOpen(true);setAlbumId(item.id)}}
                     >
-                    Latest Issue {item?.album_slavs_latest?.issue || 'N/A'}
+                    {langKey && langKey.lates_issue} {item?.album_slavs_latest?.issue || 'N/A'}
                   </Button>
                 }
             </Grid>
