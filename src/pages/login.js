@@ -95,26 +95,22 @@ export default function Login() {
   const [mounted, setMounted] = useState(false);
   const matches = useMediaQuery("(max-width:768px)");
   const [border, setBorder] = useState(false);
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   useEffect(() => {
+    if(i18n.language) {
       setMounted(true);
-
-      if(Object.keys(langKey).length===0){
         dispatch(getLanguage(
-          {
-              params: {
-                  lang_id: utils.convertLangCodeToID(i18n.language)
-              },
-              callback:(res) => {
-    console.log("resres",res)
-    localStorage.setItem('languageKey', JSON.stringify(res))
-    
-               }
+        {
+          params: {
+            lang_id: utils.convertLangCodeToID(i18n.language)
+          },
+          callback:(res) => {
+            localStorage.setItem('languageKey', JSON.stringify(res))
           }
-      ));
         }
-
-  }, []);
+      ));
+    }
+  },[i18n.language])
   const dispatch = useDispatch();
   const handleLogin = () => {
     dispatch(

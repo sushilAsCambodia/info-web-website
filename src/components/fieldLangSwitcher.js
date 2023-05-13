@@ -28,6 +28,7 @@ export default function FieldLanguageSwitcher() {
 
   const changeLanguage = (l) => {
     window.localStorage.setItem('lang',l);
+    
     setLangLabel(labelLanguage(l))
   }
   const labelLanguage = (l) => {
