@@ -43,7 +43,7 @@ const Header = () => {
     dispatch(
       logout({
         callback: (res) => {
-          router.push("/");
+          router.push("/login");
         },
         auth: true,
       })
@@ -370,7 +370,7 @@ const Header = () => {
                          {langKey && langKey.my_account}
                         </Typography>
                       </MenuItem>
-                      <MenuItem onClick={handleClose}>{langKey && langKey.logout}</MenuItem>
+                      <MenuItem onClick={handleLogout}>{langKey && langKey.logout}</MenuItem>
                     </Menu>
                   </Grid>
                 </Grid>

@@ -95,26 +95,22 @@ export default function Login() {
   const [mounted, setMounted] = useState(false);
   const matches = useMediaQuery("(max-width:768px)");
   const [border, setBorder] = useState(false);
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   useEffect(() => {
+    if(i18n.language) {
       setMounted(true);
-
-      if(Object.keys(langKey).length===0){
         dispatch(getLanguage(
-          {
-              params: {
-                  lang_id: utils.convertLangCodeToID(i18n.language)
-              },
-              callback:(res) => {
-    console.log("resres",res)
-    localStorage.setItem('languageKey', JSON.stringify(res))
-    
-               }
+        {
+          params: {
+            lang_id: utils.convertLangCodeToID(i18n.language)
+          },
+          callback:(res) => {
+            localStorage.setItem('languageKey', JSON.stringify(res))
           }
-      ));
         }
-
-  }, []);
+      ));
+    }
+  },[i18n.language])
   const dispatch = useDispatch();
   const handleLogin = () => {
     dispatch(
@@ -257,7 +253,7 @@ export default function Login() {
 
                     <Grid item xs={12} sm={12} mb={4}>
                       <Typography fontWeight="bold" pb={1}>
-               {langKey && langKey.password}
+                       {langKey && langKey.password}
                       </Typography>
                       <FormControl
                         variant="outlined"
@@ -474,7 +470,7 @@ export default function Login() {
                     color="white"
                     textAlign="center"
                   >
-                    Anytime anywhere Wonderful information in the palm of your hand
+                    {langKey && langKey.anytime_anywhere}
                   </Typography>
                   <Grid container justifyContent="center">
                     <Grid item xs={12} sm={12} md={12} xl={12}>
@@ -667,7 +663,7 @@ export default function Login() {
                       >
                         <FormControlLabel
                           control={<Checkbox defaultChecked />}
-                          label="Remember Me"
+                          label={langKey && langKey.remember_me}
                         />
                         <Link
                           underline="none"
@@ -724,7 +720,7 @@ export default function Login() {
                         underline="none"
                         alignItems="center"
                       >
-                        <Typography>Or you can sign up with</Typography>
+                        <Typography>{langKey && langKey.sign_up_with}</Typography>
                         <Grid>
                           <Link
                             underline="none"
@@ -800,7 +796,7 @@ export default function Login() {
                           }}
                           mx={1}
                         >
-                          Sign Up Here
+                          {langKey && langKey.sign_up_here}
                         </Typography>
                       </Link>
                       <Grid display="flex" sx={{ cursor: "pointer" }}>
