@@ -517,8 +517,8 @@ export default function Register() {
             alignContent="space-between"
             height={600}
           >
-            <Grid item container xs={12} sm={12} paddingX={2}>
-              <Grid my={2} container justifyContent="center">
+            <Grid item container xs={12} sm={12} paddingX={2} mt={2}>
+              <Grid my={2} container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
                 <img src="./assets/Logo/footer_logo.png" />
               </Grid>
               <Grid xs={12}>
