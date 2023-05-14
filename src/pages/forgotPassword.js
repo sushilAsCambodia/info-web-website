@@ -36,7 +36,7 @@ export default function ForgotPassword(props) {
         </Typography>}
         <img src="/assets/Home/customersupport1.png" style={{ maxWidth: "200px", margin:"0 auto", display:"flex" }} />
         <Typography component="h6" fontSize={12} textAlign="center">
-          Notify the following ways to contact customer service
+          {langKey && langKey.notify_following}
         </Typography>
         <Typography component="div" sx={{display:'flex', justifyContent:'center', margin:'5px'}}>
           <Link href="https://t.me/+855762055536" target="_blank">

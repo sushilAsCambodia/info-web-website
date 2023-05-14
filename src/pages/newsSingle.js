@@ -37,9 +37,8 @@ export default function NewsSingle() {
   const { categories = [] } = useSelector((state) => state.category);
   const [newsCat, setNewsCat] = useState(0);
 
-  const langKey = useSelector(
-    (state) => state && state.load_language && state.load_language.language
-  );
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
 
   const [page, setPage] = useState(1);
   const [type, setType] = useState("");
@@ -189,7 +188,7 @@ export default function NewsSingle() {
           <Grid item xs={4} md={3} p={1}>
             <Grid container border="1px solid grey" borderRadius="10px" p={2}>
               <Grid item xs={12}>
-                <Typography fontWeight="bold">Recent News</Typography>
+                <Typography fontWeight="bold">{langKey && langKey.recent_news}</Typography>
                 <NewsList
                   list={recentNews}
                   type="recent"
@@ -200,7 +199,7 @@ export default function NewsSingle() {
                 />
                 {noRecentNewsData && (
                   <Typography style={{ fontSize: 12, textAlign: "center" }}>
-                    No more data
+                  {langKey && langKey.no_more_data}
                   </Typography>
                 )}
               </Grid>
@@ -216,7 +215,7 @@ export default function NewsSingle() {
                 />
                 {noPopularNewsData && (
                   <Typography style={{ fontSize: 12, textAlign: "center" }}>
-                    No more data
+                     {langKey && langKey.no_more_data}
                   </Typography>
                 )}
               </Grid>

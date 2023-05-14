@@ -113,7 +113,7 @@ export default function FootBallPage() {
         </Grid>
         <Grid xs={2}>
           <FormControl fullWidth>
-            <InputLabel id="category-select-label">Select Category</InputLabel>
+            <InputLabel id="category-select-label">{langKey && langKey.select_category}</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="category-select"
