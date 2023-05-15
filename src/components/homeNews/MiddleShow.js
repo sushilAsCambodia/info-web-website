@@ -88,7 +88,7 @@ export default function MiddleShow(props) {
 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   return (
-    <Grid container  >
+    <Grid container>
       <Grid item xs={12}>
         <Carousel
           responsive={responsive}
