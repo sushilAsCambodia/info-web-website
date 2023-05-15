@@ -740,7 +740,7 @@ visibility: visible;
 /* news journal fixed css  */
 
 .tabclass .mui-home-tab-wrapper{ 
-  position: fixed;
+  /* position: fixed; */
   top: 56px;
   width: 100%;
   background: #fff;
