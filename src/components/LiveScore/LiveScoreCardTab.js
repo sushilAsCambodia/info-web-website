@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import SwipeableViews from "react-swipeable-views";
-
+import { useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 
@@ -75,6 +75,9 @@ export default function LiveScoreCardTab(props) {
   const [value, setValue] = useState(0);
   const { matchData } = props;
 
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -109,14 +112,14 @@ export default function LiveScoreCardTab(props) {
             <HeaderTab
               label={
                 <Typography style={{ fontWeight: "bold" }}>
-                  Score Card
+                 { langKey && langKey.score_card} 
                 </Typography>
               }
             />
             <HeaderTab
               label={
                 <Typography style={{ fontWeight: "bold" }}>
-                  Live Video
+                  { langKey && langKey.live_video} 
                 </Typography>
               }
             />
@@ -267,7 +270,7 @@ export default function LiveScoreCardTab(props) {
                       <Chip
                         label={
                           <Typography p={1} fontWeight="bold">
-                            Pause 0
+                          { langKey && langKey.pause} 
                           </Typography>
                         }
                         className="scoreChip"
@@ -276,7 +279,7 @@ export default function LiveScoreCardTab(props) {
                       <Chip
                         label={
                           <Typography p={1} fontWeight="bold">
-                            Foul 0
+                       { langKey && langKey.foul} 
                           </Typography>
                         }
                         className="scoreChip"
@@ -375,7 +378,7 @@ export default function LiveScoreCardTab(props) {
                       <Chip
                         label={
                           <Typography p={1} fontWeight="bold">
-                            Pause 0
+                            { langKey && langKey.pause} 
                           </Typography>
                         }
                         className="scoreChip"
@@ -384,7 +387,7 @@ export default function LiveScoreCardTab(props) {
                       <Chip
                         label={
                           <Typography p={1} fontWeight="bold">
-                            Foul 0
+                           { langKey && langKey.foul} 
                           </Typography>
                         }
                         className="scoreChip"

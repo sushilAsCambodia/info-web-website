@@ -16,6 +16,8 @@ export default function DialogDesktop(props) {
     const { albumId } = props;
     const [value, setValue] = React.useState(0);
     const [firstFetch, setFirstFetch] = React.useState(true);
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
     const [activeIssue, setActiveIssue] = React.useState(0);
     const { loading, issue = {}, years = [] } = useSelector(state => state.journal);
     React.useEffect(() => {
@@ -101,7 +103,7 @@ export default function DialogDesktop(props) {
                 {
                     issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
                         return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue mui-issue-custom':'mui-issue-custom'} style={{ width: '53px', justifyContent: "center", textAlign: "center !important",cursor:"pointer" }}>
-                            <Typography fontSize="10px">Issue {is.issue || ''}</Typography>
+                            <Typography fontSize="10px">{langKey && langKey.issue} {is.issue || ''}</Typography>
                         </ListItem>
                     })
                 } 
@@ -128,8 +130,8 @@ export default function DialogDesktop(props) {
             {years.length > 0 ? <Box
                 role="presentation"
                 className="calendraDrawer">
-                <Typography textAlign="left" fontSize="16px" color="#000" fontWeight="bold">Choose the number of periods</Typography>
-                <Typography padding="5px 0 0 0" textAlign="left" fontSize="11px" className='yearheadline'>Year</Typography>
+                <Typography textAlign="left" fontSize="16px" color="#000" fontWeight="bold">  {langKey && langKey.choose_the_number_of_periods}</Typography>
+                <Typography padding="5px 0 0 0" textAlign="left" fontSize="11px" className='yearheadline'>{langKey && langKey.year}</Typography>
                 <List sx={{ padding: '0px' }}>
                     <ListItem disablePadding>
                         <Grid item xs={12} sm={12} width='100%'>

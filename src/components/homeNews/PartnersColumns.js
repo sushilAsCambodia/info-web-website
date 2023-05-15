@@ -9,7 +9,7 @@ import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -42,6 +42,8 @@ export default function PartnersColumns(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
   const [value, setValue] = React.useState(0);
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
@@ -66,7 +68,7 @@ export default function PartnersColumns(props) {
           }}
         >
           <Typography variant="h5" paddingX="10px" fontWeight="bold">
-            {t("partners")}
+          {langKey && langKey.partners}
           </Typography>
         </Divider>
       </Grid>

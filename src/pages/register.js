@@ -450,7 +450,7 @@ export default function Register() {
               color="white"
               textAlign="center"
             >
-              Anytime anywhere Wonderful information in the palm of your hand
+      {langKey && langKey.anytime_anywhere}
             </Typography>
             <Grid container justifyContent="center">
               <Grid item xs={12} sm={12} md={12} xl={12}>
@@ -675,7 +675,7 @@ export default function Register() {
                     />
                     {errorConfirmPassword && (
                       <FormHelperText error>
-                        Password Must Be Matching
+                         {langKey && langKey.password_mustbe_match}
                       </FormHelperText>
                     )}
                   </FormControl>
@@ -727,7 +727,7 @@ export default function Register() {
                   underline="none"
                   alignItems="center"
                 >
-                  <Typography>Or you can sign up with</Typography>
+                  <Typography>{langKey && langKey.sign_up_with}</Typography>
                   <Grid>
                     <Link
                       underline="none"
@@ -804,7 +804,7 @@ export default function Register() {
                     }}
                     mx={1}
                   >
-                    Sign In Here
+                      {langKey && langKey.sign_in_here}
                   </Typography>
                 </Link>
                 <Grid display="flex" sx={{ cursor: "pointer" }}>

@@ -1,6 +1,7 @@
 import { Grid, Typography, Link } from "@mui/material";
 import ForgotPasswordPage from "@/pages/forgotPassword";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const forgotPassword = (props) => {
     const {t} = useTranslation();
@@ -32,7 +33,7 @@ const forgotPassword = (props) => {
                             color: "#F26522",
                         }}
                         mx={1}>
-                        Login
+                         {langKey && langKey.login} 
                     </Typography>
                 </Link>
             </Grid>

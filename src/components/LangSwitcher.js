@@ -61,36 +61,22 @@ export default function LangSwitcher() {
     }else {
       setLang(i18n.language);
     }
-   if(Object.keys(langKey).length===0){
-    dispatch(getLanguage(
-      {
-          params: {
-              lang_id: utils.convertLangCodeToID(i18n.language),platform:'desktop'
-          },
-          callback:(res) => {
-
-localStorage.setItem('languageKey', JSON.stringify(res))
-
-           }
+    if(Object.keys(langKey).length===0){
+      dispatch(getLanguage(
+        {
+            params: {
+                lang_id: utils.convertLangCodeToID(i18n.language)
+            },
+            callback:(res) => {
+  
+  localStorage.setItem('languageKey', JSON.stringify(res))
+  
+             }
+        }
+    ));
       }
-  ));
-    }
-
   },[i18n.language])
-  if(Object.keys(langKey).length===0){
-    dispatch(getLanguage(
-      {
-          params: {
-              lang_id: utils.convertLangCodeToID(i18n.language),platform:'desktop'
-          },
-          callback:(res) => {
-console.log("resres",res)
-localStorage.setItem('languageKey', JSON.stringify(res))
-
-           }
-      }
-  ));
-    }
+ 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -104,9 +90,9 @@ localStorage.setItem('languageKey', JSON.stringify(res))
     i18n.changeLanguage(l); 
     dispatch(getLanguage(
       {
-          params: {
-              lang_id: utils.convertLangCodeToID(l),platform:'desktop'
-          },
+        params: {
+          lang_id: utils.convertLangCodeToID(i18n.language)
+      },
           callback:(res) => {
 console.log("resres",res)
 localStorage.setItem('languageKey', JSON.stringify(res))

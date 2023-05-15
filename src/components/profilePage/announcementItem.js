@@ -17,9 +17,10 @@ import {
   Divider,
 } from "@mui/material";
 import Router from "next/router";
-
+import { useSelector } from "react-redux";
 export default function AnnouncementItem(props) {
     const {read} = props
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   return (
     <>
@@ -58,7 +59,7 @@ export default function AnnouncementItem(props) {
               </Grid>
               <ListItemText
                 primary={
-                  <Typography fontWeight="bold">System Announcement</Typography>
+                  <Typography fontWeight="bold">{langKey && langKey.system_announcement}</Typography>
                 }
                 secondary={
                   <Typography

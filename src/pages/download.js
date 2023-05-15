@@ -40,15 +40,16 @@ export default function Index() {
           
         >
           <Grid textAlign="center" mt={5}>
-            <Typography fontSize="20px" fontWeight="bold" color="white">{t("half_slogan")}</Typography>
-            <Typography variant="h4" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>{t("your_hand")}</Typography>
+            <Typography fontSize="20px" fontWeight="bold" color="white">{langKey && langKey.half_slogan}</Typography>
+            <Typography variant="h4" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>{langKey && langKey.your_hand}</Typography>
           </Grid>
           <Grid textAlign="center" pl={5}>
             <img height="300px" src="./assets/Download/football.png"/>
           </Grid>
           <Grid item textAlign="center" mt={2}>
+        
             <Typography fontWeight={700} fontSize="20px" textTransform="uppercase">
-              {t("download_app")}
+            {langKey && langKey.download_app}
             </Typography>
           </Grid>
 
@@ -76,8 +77,8 @@ export default function Index() {
         
       >
         <Grid textAlign="center" mt={5}>
-          <Typography variant="h5" fontWeight="bold" color="white">{t("half_slogan")}</Typography>
-          <Typography variant="h3" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>{t("your_hand")}</Typography>
+          <Typography variant="h5" fontWeight="bold" color="white">{langKey && langKey.half_slogan}</Typography>
+          <Typography variant="h3" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>{langKey && langKey.your_hand}</Typography>
         </Grid>
         <Grid textAlign="center" pl={10}>
           <img src="./assets/Download/football.png"/>

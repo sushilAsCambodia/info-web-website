@@ -7,14 +7,15 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useTranslation } from 'react-i18next';
 import { Select,FormControl,InputLabel,InputAdornment,IconButton } from '@mui/material';
 import { Icon } from '@iconify/react';
-
+import { useSelector } from 'react-redux';
 
 export default function FieldLanguageSwitcher() {
   const {i18n} =  useTranslation();
   const [lang, setLang] = React.useState('')
 
   const [langLabel,setLangLabel] = React.useState(i18n ? i18n.language:'en')
-  
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -27,6 +28,7 @@ export default function FieldLanguageSwitcher() {
 
   const changeLanguage = (l) => {
     window.localStorage.setItem('lang',l);
+    
     setLangLabel(labelLanguage(l))
   }
   const labelLanguage = (l) => {
@@ -54,23 +56,26 @@ export default function FieldLanguageSwitcher() {
     // size="small"
     fullWidth
     >
-      <InputLabel id="demo-select-small">Language</InputLabel>
+      <InputLabel id="demo-select-small">{langKey && langKey.language}</InputLabel>
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
         value={langLabel}
-        label="Language"
+        label={langKey && langKey.language}
         onChange={handleClick}
         style={{paddingRight:"30px"}}
+        renderValue={() => {
+          return <em>{langKey && langKey.language}</em>;
+        }}
         endAdornment={
-            <InputAdornment position="end" paddingRight="10px">
-              <Icon width={40} icon="fa-solid:language" />
-            </InputAdornment>
-          }
+          <InputAdornment position="end" paddingRight="10px">
+            <Icon width={40} icon="fa-solid:language" />
+          </InputAdornment>
+        }
       >
         {['en','kh','de'].map(
             (l) => {
-                if(l!==lang) {
+                if(l !== langLabel) {
                   return (<MenuItem key={l} value={l} onClick={() => changeLanguage(l)} disableRipple> { labelLanguage(l)  } </MenuItem>);
                 }
             },

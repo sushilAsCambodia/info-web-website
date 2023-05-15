@@ -20,12 +20,17 @@ import MatchTitleBanner from "@/components/LiveScore/matchTitleBanner";
 import MatchLiveFeed from "@/components/LiveScore/matchLiveFeed";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 
+import { useSelector } from "react-redux";
+
 export default function LiveScorePage() {
   const router = useRouter();
   const [select, setSelect] = useState(0);
   const [age, setAge] = useState("");
 
   const [value, setValue] = useState("");
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
 
   function createData(id, team, r1, r2, r3, r4, audience, handicap, wl, total) {
     return { id, team, r1, r2, r3, r4, audience, handicap, wl, total };
@@ -39,9 +44,10 @@ export default function LiveScorePage() {
 
   useEffect(() => {}, []);
 
+
   return (
     <>
-      <TitleBreadCrumbs title={"Live Score"} />
+      <TitleBreadCrumbs title={langKey &&  langKey.live_score} />
 
       <Grid height="fit-content">
         <Grid container mb={2} alignItems="center">

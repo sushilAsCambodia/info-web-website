@@ -25,6 +25,8 @@ const DataTabComponent = ({id,lang_id}) => {
     const [isLastPage, setIsLastPage] = React.useState(false);
     const [loading, setLoading] = React.useState(true);
     const [loadingMore,setLoadingMore] = React.useState(false);
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
     React.useEffect(() => {
         if(isFetching > 0 && !loadingMore) {
             loadMore(page)
@@ -150,7 +152,7 @@ const DataTabComponent = ({id,lang_id}) => {
                             );
                         }) : <Empty/>}
                     </List>
-                    { noMoreData && <Typography component="div" sx={{fontSize:10,color:'#8C8C8C',textAlign:'center',width:'100%'}}>No more data</Typography>}
+                    { noMoreData && <Typography component="div" sx={{fontSize:10,color:'#8C8C8C',textAlign:'center',width:'100%'}}>{langKey && langKey.no_more_data} </Typography>}
                 </Grid>
             )
         }

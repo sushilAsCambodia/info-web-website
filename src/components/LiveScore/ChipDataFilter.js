@@ -18,6 +18,10 @@ export default function ChipDataFilter(props) {
   const { i18n } = useTranslation();
   const [selectedChip, setSelectedChip] = useState('comm');
 
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+console.log(langKey.no_data_found , "xxxxxxxxxxxxxxxx")
+
   return (
     <>
       <Grid container border="1px solid #ddd" mt={1}>
@@ -29,16 +33,16 @@ export default function ChipDataFilter(props) {
             borderBottom="1px solid #ddd"
           >
             <Grid item p={1} >
-              <Chip className={`${selectedChip == 'comm' ? "filterTabSelected":"" }`} label="commentary" onClick={()=>{setSelectedChip('comm')}} />
+              <Chip className={`${selectedChip == 'comm' ? "filterTabSelected":"" }`} label={langKey && langKey.commentary} onClick={()=>{setSelectedChip('comm')}} />
             </Grid>
             <Grid item p={1}>
-            <Chip className={`${selectedChip == 'data' ? "filterTabSelected":"" }`} label="Data Analysis" onClick={()=>{setSelectedChip('data')}} />
+            <Chip className={`${selectedChip == 'data' ? "filterTabSelected":"" }`} label={langKey && langKey.data_analysis}  onClick={()=>{setSelectedChip('data')}} />
             </Grid>
           </Grid>
           <Grid item xs={12} textAlign="center" position="relative">
             <img style={{ width: "60%" }} src="./assets/not-found_2.png" />
             <Grid position="absolute" bottom="20%" left="45%">
-              <Typography>No Data Found</Typography>
+              <Typography>{langKey && langKey.no_data_found}</Typography>
             </Grid>
           </Grid>
        </Grid>

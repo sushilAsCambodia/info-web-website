@@ -500,8 +500,12 @@ text-overflow: ellipsis;
 }
 #customCarouselBtn .react-multi-carousel-list {
   position: unset !important;
+  justify-content: center;
 }
-
+ .react-multi-carousel-list {
+ 
+  justify-content: center;
+}
 #customCarouselBtn .react-multiple-carousel__arrow::before{
     color: #000 !important;
     font-weight: bold;
@@ -739,12 +743,15 @@ visibility: visible;
 /* END  */
 /* news journal fixed css  */
 
+@media (max-width: 768px) {
+
 .tabclass .mui-home-tab-wrapper{ 
   /* position: fixed; */
   top: 56px;
   width: 100%;
   background: #fff;
   z-index: 9;
+}
 }
 .tabclass .MuiGrid-root[role="tabpanel"]{
   padding-top: 62px;

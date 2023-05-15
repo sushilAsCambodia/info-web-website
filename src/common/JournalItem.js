@@ -11,12 +11,18 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
 import moment from "moment/moment";
+import { useSelector } from "react-redux";
 export default function JournalItem(props) {
   const {item={}, setOpen, setAlbumId} = props;  
+
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+
+
   return (
     <>
       <Grid
-        onClick={() => {setOpen(true);setAlbumId(item.id)}}
+      
         sx={{
           margin: "5px",
           borderRadius: "10px"
@@ -35,7 +41,7 @@ export default function JournalItem(props) {
           alignItems="center"
           justifyContent="space-around"
         >
-          <Grid item xs={7} padding="5px" textAlign="center">
+          <Grid item xs={7} padding="5px" textAlign="center"   onClick={() => {setOpen(true);setAlbumId(item.id)}}>
           <picture>
             <img
               src={item.cover_img}
@@ -46,7 +52,8 @@ export default function JournalItem(props) {
                 maxHeight: "80px",
                 border: "5px solid #FFE0E0",
                 borderRadius: "5px",
-                objectFit:'contain'
+                objectFit:'contain',
+                cursor:"pointer"
               }}
             />
           </picture>
@@ -74,8 +81,10 @@ export default function JournalItem(props) {
                       borderRadius: "50px",
                       whiteSpace: "nowrap",
                       marginTop:"10px"
-                    }}>
-                    Latest Issue {item?.album_slavs_latest?.issue || 'N/A'}
+                    }}
+                    onClick={() => {setOpen(true);setAlbumId(item.id)}}
+                    >
+                    {langKey && langKey.lates_issue} {item?.album_slavs_latest?.issue || 'N/A'}
                   </Button>
                 }
             </Grid>
