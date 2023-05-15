@@ -50,7 +50,7 @@ const {t} = useTranslation();
         md={12}
         className="middle-grid"
         justifyContent="center"
-        marginTop={{xs:"20px",md:"10px"}}
+        marginTop={{xs:"30px",sm:"20px",md:"10px"}}
         // px={{xs:1,md:0}}
       >
         <Grid item xs={12} lg={3} xl={2.5} border={{xs:"0px solid #ddd",md:"1px solid #ddd"}} borderRadius="2px">
