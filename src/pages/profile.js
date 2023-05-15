@@ -504,6 +504,8 @@ function TabPanel(props) {
                       </Grid>
                     </Grid>
                   </ListItem>
+                  <Divider />
+
                   <ListItem sx={{ padding: "0px 0px" }} onClick={handleLogout}>
                     {isLogin ? (
                       <Grid

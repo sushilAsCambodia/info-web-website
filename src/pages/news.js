@@ -73,7 +73,7 @@ const News = () => {
           label=  {langKey && langKey.select_category}
           onChange={handleCategoryChange}
         >
-          <MenuItem value="All">{t("all")}</MenuItem>
+          <MenuItem value="All">{langKey && langKey.all}</MenuItem>
           {categories.map((item, index) => {
             return <MenuItem key={item.id} value={item.id}>
                 {item.category_name}
