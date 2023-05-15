@@ -51,7 +51,7 @@ export default function MultiTabs(props) {
       overflow="auto"
       className="multitabs">
       <Grid item xs={12} paddingTop="0px">
-        <Grid container >
+        <Grid container>
           <Grid item xs={12} justifyContent="center" >
             <Tabs
               value={value}
@@ -65,15 +65,16 @@ export default function MultiTabs(props) {
                 },
                 '& .MuiTabs-indicator':{
                   background: 'linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)'
-                }
+                },
+                position:"sticky"
               }}>
               { categories.map((category, index) => <Tab key={index} label={category.translation ? category.translation?.category_name : (category.category_name||'N/A')} />)}
             </Tabs>
           </Grid>
-          <Grid xs={12} item>
+          <Grid xs={12} item >
             { categories.map((category,index) => {
                 return (
-                  <TabPanel key={index} value={value} index={index}>
+                  <TabPanel key={index} value={value} index={index} >
                     <DataTabComponent id={category?.id} lang_id={lang_id}/>
                   </TabPanel>
                 );

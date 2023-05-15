@@ -116,12 +116,14 @@ const DataTabComponent = ({id,lang_id}) => {
           }
         };
       },[])
-    return <Grid sx={{position:'relative', height:news && news.length > 2 ? '300px' : 'auto', overflowY:'auto', display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}} className='tab-scroll'>
+    return <Grid sx={{position:'relative',
+    //  height:news && news.length > 2 ? '900px' : 'auto',overflowY:'auto',
+      display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}} className='tab-scroll'>
         {showLoadMore && <Typography component="span" style={{position:'fixed',bottom:'56px'}}>{loadingMore?<DataLoading size={20}/>:''}</Typography>}
         {
             loading ? <DataLoading size={30}/> :
             (
-                <Grid item xs={12} sm={12} md={12} xl={12}>
+                <Grid item xs={12} sm={12} md={12} xl={12} overflow="auto" height="70vh">
                     <List sx={{padding:'5px'}} >
                         {news && news.length ? news.map((sport,index) => {
                             return (
