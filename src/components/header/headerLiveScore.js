@@ -8,9 +8,12 @@ import utils from "@/common/utils";
 import moment from "moment/moment";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
+import Router from "next/router";
 const HeaderLiveScore = () => {
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
     const [selectSport, setSelectSport] = useState("football");
+const router  = Router;
+
     return (
         <>
         <Grid
