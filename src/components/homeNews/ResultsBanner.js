@@ -106,7 +106,7 @@ export default function ResultsBanner(props) {
             container
             justifyContent="space-between"
             height="40px"
-            mx={1}
+            px={1}
           >
             <Typography>{langKey && langKey.live_score}</Typography>
           </Grid>
