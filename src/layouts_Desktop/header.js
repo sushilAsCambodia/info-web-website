@@ -82,7 +82,6 @@ const Header = () => {
 
   window.addEventListener("scroll", () => {
     setScroll(window.pageYOffset > 56);
-    console.log("scroll:::", window.pageYOffset > 56);
   });
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
