@@ -51,8 +51,9 @@ const {t} = useTranslation();
         className="middle-grid"
         justifyContent="center"
         marginTop="10px"
+        // px={{xs:1,md:0}}
       >
-        <Grid item xs={12} lg={3} xl={2.5} border="1px solid #ddd" borderRadius="2px">
+        <Grid item xs={12} lg={3} xl={2.5} border={{xs:"0px solid #ddd",md:"1px solid #ddd"}} borderRadius="2px">
           <Typography px={1.5} mb={1}> {langKey && langKey.latest_results}</Typography>
           {/* <NewsSlider news={rows} /> */}
           {/* <Grid overflow="auto" height="430px"> */}
@@ -71,14 +72,14 @@ const {t} = useTranslation();
           <Grid
             item
             xs={12}
-            border="1px solid #ddd"
+            border={{xs:"0px solid #ddd",md:"1px solid #ddd"}}
             borderRadius="2px"
             height="100%"
           >
             <MiddleShow />
           </Grid>
         </Grid>
-        <Grid item xs={12} lg={2} border="1px solid #ddd" borderRadius="2px">
+        <Grid item xs={12} lg={2} border={{xs:"0px solid #ddd",md:"1px solid #ddd"}} borderRadius="2px">
           <Grid px={1.5} mb={1} container justifyContent="space-between" width="100%">
             <Typography> {langKey && langKey.announcement}</Typography>
             <Grid

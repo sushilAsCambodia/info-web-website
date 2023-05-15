@@ -97,7 +97,7 @@ const Header = () => {
       {router.pathname == "/login" || router.pathname == "/register" ? (
         ""
       ) : (
-        <Grid className="sticky-header">
+        <Grid className="sticky-header" paddingBottom="90px">
           <AppBar
             style={{
               background:

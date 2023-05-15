@@ -746,15 +746,15 @@ visibility: visible;
 @media (max-width: 768px) {
 
 .tabclass .mui-home-tab-wrapper{ 
-  position: fixed;
+  /* position: fixed;
   top: 56px;
   width: 100%;
   background: #fff;
-  z-index: 9;
+  z-index: 9; */
 }
 }
 .tabclass .MuiGrid-root[role="tabpanel"]{
-  padding-top: 62px;
+  /* padding-top: 62px; */
 }
 .mainautoplayswipeable .MuiPaper-elevation {
   z-index: 0;
@@ -776,7 +776,7 @@ visibility: visible;
   font-weight: bold !important;
 }
 .sticky-header{
-  position: sticky;
+  position:sticky;
   top: 0;
   z-index: 1001;
 }
