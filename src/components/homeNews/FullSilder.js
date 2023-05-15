@@ -14,6 +14,7 @@ import { Grid, Tabs, Tab } from "@mui/material";
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function FullSilder(props) {
   const { banners = [], isWeb = false } = props;
+  
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const [tabValue, setTabValue] = React.useState(0);
@@ -74,7 +75,7 @@ export default function FullSilder(props) {
               '& .MuiMobileStepper-dots': { display: 'none' },
             },
           ]}
-          nextButton={
+          nextButton={ banners.length > 1 &&
             <Button
               size="small"
               onClick={handleNext}
@@ -89,6 +90,7 @@ export default function FullSilder(props) {
             </Button>
           }
           backButton={
+            banners.length > 1 && 
             <Button
               size="small"
               onClick={handleBack}
