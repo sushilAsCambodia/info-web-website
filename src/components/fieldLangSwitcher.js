@@ -64,15 +64,18 @@ export default function FieldLanguageSwitcher() {
         label={langKey && langKey.language}
         onChange={handleClick}
         style={{paddingRight:"30px"}}
+        renderValue={() => {
+          return <em>{langKey && langKey.language}</em>;
+        }}
         endAdornment={
-            <InputAdornment position="end" paddingRight="10px">
-              <Icon width={40} icon="fa-solid:language" />
-            </InputAdornment>
-          }
+          <InputAdornment position="end" paddingRight="10px">
+            <Icon width={40} icon="fa-solid:language" />
+          </InputAdornment>
+        }
       >
         {['en','kh','de'].map(
             (l) => {
-                if(l!==lang) {
+                if(l !== langLabel) {
                   return (<MenuItem key={l} value={l} onClick={() => changeLanguage(l)} disableRipple> { labelLanguage(l)  } </MenuItem>);
                 }
             },
