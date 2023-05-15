@@ -502,21 +502,27 @@ text-overflow: ellipsis;
   position: unset !important;
   justify-content: center;
 }
- .react-multi-carousel-list {
+.react-multi-carousel-list {
  
   justify-content: center;
 }
+#customCarouselBtn .react-multiple-carousel__arrow{
+  min-width: 24px ;
+  min-height: 24px ;
+}
+ 
 #customCarouselBtn .react-multiple-carousel__arrow::before{
     color: #000 !important;
     font-weight: bold;
+    font-size: 10px;
 }
 #customCarouselBtn .react-multiple-carousel__arrow--right {
-  top: -50px;
+  top: -40px;
   background-color: #dddddd !important;
   right: calc(4% + -15px);
 }
 #customCarouselBtn .react-multiple-carousel__arrow--left {
-  top: -50px;
+  top: -40px;
   left: calc(100% + -100px) !important;
   background-color: #dddddd !important;
 }

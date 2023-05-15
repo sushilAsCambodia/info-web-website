@@ -11,8 +11,7 @@ import {
   CardActions,
 } from "@mui/material";
 import MiddleShow from "./MiddleShow";
-import NewsSlider from "@/common/NewsSlider";
-import Slider from "react-slick";
+import FullSilder from "./FullSilder";
 import LottoList from "@/common/LottoList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import AnnouncementItem from "@/common/AnnouncementItem";
@@ -34,7 +33,7 @@ const settings = {
 
 const announcement =[{title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',date:"03 Apr 2023"}]
 export default function ResultsBanner(props) {
-  const {lang_id=[]} = props; 
+  const {lang_id=[],banners={}} = props; 
 const {t} = useTranslation();
   const [loading, setLoading] = useState(false);
   const matches = useMediaQuery("(max-width:1199px)");
@@ -76,7 +75,7 @@ const {t} = useTranslation();
             borderRadius="2px"
             height="100%"
           >
-            <MiddleShow />
+            <MiddleShow banners={banners}/>
           </Grid>
         </Grid>
         <Grid item xs={12} lg={2} border={{xs:"0px solid #ddd",md:"1px solid #ddd"}} borderRadius="2px">

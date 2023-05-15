@@ -11,29 +11,10 @@ import MatchItem from "@/common/MatchItem";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const responsive = {
-  largeDesktop: {
-    breakpoint: { max: 4000, min: 1321 },
-    items: 1,
-  },
-  desktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 1320, min: 1025 },
-    items: 1,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 685 },
-    items: 1,
-  },
-  mobile: {
-    breakpoint: { max: 686, min: 321 },
-    items: 1,
-  },
-  smallMobile: {
-    breakpoint: { max: 320, min: 0 },
-    items: 1,
-  },
-};
+import FullSilder from "./FullSilder";
+import { getBanner } from "@/store/actions/bannerActions";
+import utils from '@/common/utils';
+
 const responsive2 = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -59,9 +40,16 @@ const responsive2 = {
 };
 export default function MiddleShow(props) {
   const { t } = useTranslation();
+  // const {banners={}} = props; 
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
+  const dispatch = useDispatch();
+
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const {banners} = useSelector((state) => state.banner);
+  const {i18n} = useTranslation();
+
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
@@ -71,13 +59,24 @@ export default function MiddleShow(props) {
     }
   }, [router.asPath]);
 
+  useEffect(() => { 
+    dispatch(getBanner(
+        {
+            params: {
+                lang_id: utils.convertLangCodeToID(i18n.language)
+            },
+            callback:(res) => { }
+        }
+    ));
+},[i18n.language]); 
 
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   return (
     <Grid container justifyContent="center">
       <Grid item xs={12}>
-        <Carousel
+      <FullSilder banners={banners} />
+
+        {/* <Carousel
           responsive={responsive}
           additionalTransfrom={0}
           arrows
@@ -99,7 +98,7 @@ export default function MiddleShow(props) {
           <Grid textAlign="center" mt={0.5}>
             <img draggable="false" src="./assets/News/banner-web.png" width="98%" />
           </Grid>
-        </Carousel>
+        </Carousel> */}
       </Grid>
       <Grid container mt={2}>
         <Grid item xs={12} mx={1} container justifyContent="space-between" height="40px">
