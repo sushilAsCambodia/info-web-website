@@ -93,7 +93,7 @@ export default function MiddleShow(props) {
         <Carousel
           responsive={responsive}
           additionalTransfrom={0}
-          arrows
+          arrows={banners.length>1?true:false}
           autoPlaySpeed={3000}
           containerClass="container-with-dots"
           dotListClass=""
