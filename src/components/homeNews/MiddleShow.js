@@ -9,11 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import MatchItem from "@/common/MatchItem";
 import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import {getBanner} from '@/store/actions/bannerActions'
 import utils from "@/common/utils";
 import Image from "mui-image";
 import FullSilder from "./FullSilder";
-import "react-multi-carousel/lib/styles.css";
 
 const responsive2 = {
   largeDesktop: {
@@ -114,7 +114,9 @@ export default function MiddleShow(props) {
       </Grid>
       <Grid container mt={2}>
         <Grid item xs={12} mx={1} container justifyContent="space-between" height="40px">
-          <Typography> {langKey && langKey.match_reccomendation}</Typography>
+          <Typography> 
+            {langKey && langKey.live_score}
+          </Typography>
         </Grid>
         <Grid item xs={12} id="customCarouselBtn">
           <Carousel
