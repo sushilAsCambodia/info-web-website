@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import {getJournal} from '@/store/actions/journalActions'
 import { useDispatch, useSelector } from 'react-redux';
 import AdvertiseSlide from './AdvertiseSlide';
+import ResultsBanner from './ResultsBanner';
 function TabPanel(props) {
   const { children, value, index, ...other } = props; 
   return (
@@ -83,6 +84,8 @@ export default function NewsJournalTabs(props) {
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   return (
     <Grid item className='tabclass' sx={{height:'100%'}}>
+              <ResultsBanner lang_id={lang_id}/>
+
       <Grid sx={{ height:'100%' }} >
         <Tabs
           value={value}
@@ -102,7 +105,7 @@ export default function NewsJournalTabs(props) {
           <AdvertiseSlide advertises={advertises}/>
           <MultiTabs categories={categories} lang_id={lang_id}/>
         </TabPanel>
-        <TabPanel value={value} index={1} >
+        <TabPanel value={value} index={1}>
           <JournalCard lang_id={lang_id}/>
         </TabPanel>
       </Grid>

@@ -746,7 +746,7 @@ visibility: visible;
 @media (max-width: 768px) {
 
 .tabclass .mui-home-tab-wrapper{ 
-  position: fixed;
+  /* position: fixed; */
   top: 56px;
   width: 100%;
   background: #fff;

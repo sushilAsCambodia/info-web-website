@@ -538,7 +538,7 @@ export default function Login() {
                   height={600}
                 >
                   <Grid item container xs={12} sm={12} padding={2}>
-                    <Grid my={2} container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
+                    <Grid my={2} container justifyContent="center">
                       <img src="./assets/Logo/footer_logo.png" />
                     </Grid>
                     <Grid xs={12} mb={2}>
