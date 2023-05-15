@@ -50,13 +50,13 @@ export default function LandingPageBanner(props) {
   useEffect(() => {
     dispatch(getBanner(
       {
-          params: { fake:true },
-          callback:(res) => {
-              console.log(res,'callback')
-          }
+          params: {
+              lang_id: utils.convertLangCodeToID(i18n.language)
+          },
+          callback:(res) => { }
       }
-  ));
-  }, [dispatch]);
+    ));
+  }, []);
   return (
     <>
       <Grid mt={2}>
@@ -77,25 +77,21 @@ export default function LandingPageBanner(props) {
           pauseOnHover
           renderArrowsWhenDisabled={false}
           renderButtonGroupOutside={false}
-          renderDotsOutside={false}
-        >
+          renderDotsOutside={false} >
           {banners.map((banner, index) => (
             <Grid
+            data-name={banner.slug}
               key={index}
               style={{
                 color: "white",
                 textAlign: "left",
-                height: "200px",
+                height: "302.33px",
                 // border: "1px solid grey",
                 borderRadius: "5px",
-              }}
-              container
-              alignItems="center"
-              justifyContent="space-around"
+              }} 
             >
               <Image  
-              draggable="false"
-                src={banner.image}
+                src={banner.file}
                 alt={banner.label}
                 style={{
                   width: "100%",

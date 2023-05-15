@@ -12,23 +12,14 @@ import {
     Paper,
   } from "@mui/material";
   import { useState, useEffect } from "react";
-  
   import { Icon } from "@iconify/react";
-  import { useRouter } from "next/router";
- 
-  
-  export default function matchTitleBanner(props) {
-    const router = useRouter();
+const MatchTitleBanner = (props) => {
     const [select, setSelect] = useState(0);
     const [age, setAge] = useState("");
-  
-  
     const {matchData} = props
-   
-  
     return (
       <>
-      <Grid
+        <Grid
           container
           textAlign="center"
           justifyContent="center"
@@ -156,5 +147,5 @@ import {
         </Grid>
       </>
     );
-  }
-  
+}
+export default  MatchTitleBanner;

@@ -187,7 +187,7 @@ export default function NewsScrollColumn(props) {
                 sx={{
                   borderRadius: "0px 0px 10px 10px",
                   height: 440,
-                  paddingBottom: "10px",
+                  paddingbottom: "10px",
                   overflow: "auto",
                   "--bgImg": `url("../assets/News/${
                     bg[Math.floor(Math.random() * bg.length)]
@@ -199,7 +199,7 @@ export default function NewsScrollColumn(props) {
                   <Icon
                     color="white"
                     width={40}
-                    paddingBottom="5px"
+                    paddingbottom="5px"
                     icon="line-md:loading-alt-loop"
                   />
                 ) : newsList.length > 0 ? (
@@ -218,7 +218,7 @@ export default function NewsScrollColumn(props) {
                           display: "flex",
                           flexDirection: "column",
                           borderBottom: "2px solid white",
-                          paddingBottom: "10px",
+                          paddingbottom: "10px",
                           marginBottom: "10px",
                           margin: "10px",
                           cursor: "pointer",
@@ -241,7 +241,7 @@ export default function NewsScrollColumn(props) {
                   <Icon
                     color="white"
                     width={40}
-                    paddingBottom="5px"
+                    paddingbottom="5px"
                     icon="line-md:loading-alt-loop"
                   />
                 ) : (

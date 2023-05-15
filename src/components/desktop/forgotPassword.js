@@ -1,16 +1,9 @@
 import { Grid, Typography, Link } from "@mui/material";
 import ForgotPasswordPage from "@/pages/forgotPassword";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-
-const forgotPassword = (props) => {
-    const {t} = useTranslation();
+const ForgotPassword = (props) => {
     const {setIsComponent} = props;
-
-
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
-
     return <>
         <Grid container display="flex" alignItems="center" height="100%">
             <Grid item md={12}>
@@ -41,4 +34,4 @@ const forgotPassword = (props) => {
     </>
 }
 
-export default forgotPassword;
+export default ForgotPassword;

@@ -9,7 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import MatchItem from "@/common/MatchItem";
 import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import {getBanner} from '@/store/actions/bannerActions'
+import utils from "@/common/utils";
+import Image from "mui-image";
 
 const responsive = {
   largeDesktop: {
@@ -58,10 +60,13 @@ const responsive2 = {
   },
 };
 export default function MiddleShow(props) {
+  const dispatch  = useDispatch();
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
+  const { banners = [] } = useSelector((state) => state.banner);
+  const { i18n } = useTranslation();
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
@@ -70,19 +75,26 @@ export default function MiddleShow(props) {
       setValue(0);
     }
   }, [router.asPath]);
+  useEffect(() => {
+    dispatch(getBanner(
+      {
+          params: {
+              lang_id: utils.convertLangCodeToID(i18n.language)
+          },
+          callback:(res) => { }
+      }
+    ));
+  }, []);
 
-
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   return (
-    <Grid container justifyContent="center">
+    <Grid container  >
       <Grid item xs={12}>
         <Carousel
           responsive={responsive}
           additionalTransfrom={0}
           arrows
           autoPlaySpeed={3000}
-          centerMode={false}
           containerClass="container-with-dots"
           dotListClass=""
           draggable
@@ -96,9 +108,27 @@ export default function MiddleShow(props) {
           renderButtonGroupOutside={false}
           renderDotsOutside={false}
         >
-          <Grid textAlign="center" mt={0.5}>
-            <img draggable="false" src="./assets/News/banner-web.png" width="98%" />
-          </Grid>
+          {banners.map((banner, index) => (
+            <Grid
+              key={index}
+              style={{
+                color: "white",
+                textAlign: "left",
+                height: "302.33px",
+                // border: "1px solid grey",
+                borderRadius: "5px",
+              }}>
+              <Image  
+                src={banner.file}
+                alt={banner.label}
+                style={{
+                  width: "100%",
+                  height:'100%',
+                  objectFit:"cover", 
+                }}
+              />
+            </Grid>
+          ))} 
         </Carousel>
       </Grid>
       <Grid container mt={2}>

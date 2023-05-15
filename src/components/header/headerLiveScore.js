@@ -3,20 +3,14 @@ import {
     Grid,
     Chip
   } from "@mui/material";
-  import { useState } from "react";
-  import utils from "@/common/utils";
-  import moment from "moment/moment";
-  import { useRouter } from "next/router";
-  import { useDispatch, useSelector } from "react-redux";
-
-  import { Icon } from "@iconify/react";
-  export default function headerLiveScore() {
-    const router = useRouter();
-
+import { useState } from "react";
+import utils from "@/common/utils";
+import moment from "moment/moment";
+import { useDispatch, useSelector } from "react-redux";
+import { Icon } from "@iconify/react";
+const HeaderLiveScore = () => {
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
     const [selectSport, setSelectSport] = useState("football");
-
     return (
         <>
         <Grid
@@ -73,7 +67,7 @@ import {
           {["Argintina", "England", "France", "Germany"].map(
             (item, key) => {
               return (
-                <Grid item xs={4}>
+                <Grid key={key} item xs={4}>
                   <Typography
                     my={1}
                     sx={{ fontSize: "14px", fontWeight: "bold" }}
@@ -93,5 +87,5 @@ import {
         </Grid>
       </>
     );
-  }
-  
+}
+export default HeaderLiveScore;  

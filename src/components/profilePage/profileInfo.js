@@ -27,6 +27,7 @@ import { useTranslation } from "react-i18next";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useRouter } from "next/router";
+import Image from "mui-image";
 
 
 
@@ -38,8 +39,11 @@ export default function ProfileInfo(props) {
   // const [openDialog,setOpenDialog]  = useState(false);
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState();
-  const [userName, setUsername] = useState(
+  const [userName, setUserName] = useState(
     customer && customer.user_name ? customer.user_name : ""
+  );
+  const [nickName, setNickName] = useState(
+    customer && customer.nick_name ? customer.nick_name : ""
   );
 
   const [editUsername, setEditUsername] = useState(true);
@@ -71,14 +75,14 @@ export default function ProfileInfo(props) {
         className="desktop-file-upload fas"
         style={{ "--uploadImg": `${imagePreviewUrl ? "" : "url('/assets/Profile/profile_upload.png')"}` }}
       >
-          <img htmlFor="photo-upload" width={50} src={src} style={{borderRadius:"50px"}}/>
+        {src &&  <Image htmlFor="photo-upload" width={50} height={50} src={src} style={{borderRadius:"50px"}}/>} 
         <input id="photo-upload" type="file" onChange={onChange} />
       </label>
     );
   };
   
   useEffect(() => {
-    setUsername((customer && customer.user_name ? customer.user_name : ''));
+    setNickName((customer && customer.nick_name ? customer.nick_name : ''));
     if(customer && customer.image) {
       setImagePreviewUrl( customer.image.path || '');
     }
@@ -212,7 +216,7 @@ export default function ProfileInfo(props) {
     event.preventDefault();
   };
   const onChangeUserName = (e) => {
-    setUsername(e.target.value)
+    setNickName(e.target.value)
     if (e.target.value == "") {
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && langKey.user_name_required);
@@ -232,16 +236,14 @@ export default function ProfileInfo(props) {
         dispatch(
           updateNickName({
             body: {
-              user_name: userName,
+              nick_name: nickName,
             },
             callback:(res)=> {
              
               let {status_code, message} = res; 
               if (message === "user_name_unique") {
                 message = "update_user_name_unique";
-              }
-                console.log("try:::",message)
-                console.log(openDialog, typeof setOpenDialog)
+              } 
                 setResponseMessage(t(message));
                 setEditUsername(!editUsername);
            
@@ -277,15 +279,15 @@ export default function ProfileInfo(props) {
         <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
 
         <FormControl fullWidth id="nickNameFormControl">
-          <InputLabel>{langKey && langKey.user_name}</InputLabel>
+          <InputLabel>{langKey && langKey.nick_name}</InputLabel>
           <FilledInput
             disabled={editUsername}
             name="nickname"
-            placeholder={langKey && langKey.user_name}
+            placeholder={langKey && langKey.nick_name}
             inputProps={{ maxLength: 16 }}
             id="nicknameInputField"
             type="text"
-            value={userName}
+            value={nickName}
             onChange={onChangeUserName}
             sx={{ background: "#fff" }}
             endAdornment={
@@ -334,12 +336,12 @@ export default function ProfileInfo(props) {
               </InputAdornment>
             }
           />
-                        {errorUserName && <FormHelperText error>{errorUserNameMessage}</FormHelperText>}
-
+          <FormHelperText style={{margin:0,padding:'0 10px'}}>{userName}</FormHelperText>
+          {errorUserName && <FormHelperText error>{errorUserNameMessage}</FormHelperText>}
         </FormControl>
       </Grid>
 
-      <Grid xs={12} my={5}>
+      <Grid item xs={12} my={5}>
         <Divider
           id="changePasswordDivider"
           sx={{

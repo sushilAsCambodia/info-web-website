@@ -4,7 +4,6 @@ import {
   Grid, 
 } from "@mui/material";
 import Router from "next/router";
-import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
@@ -14,7 +13,6 @@ export default function ForgotPassword(props) {
   
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
-  const { t } = useTranslation();
   const { title = (langKey && langKey.forgot_password), showTitle = true} = props;
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);

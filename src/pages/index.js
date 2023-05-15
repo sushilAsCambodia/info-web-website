@@ -53,7 +53,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
       <Grid mt={2}>
         <ResultsBanner lang_id={utils.convertLangCodeToID(i18n.language)}/>
         {/* <LinkBanner /> */}
-        <LandingPageBanner />
+        {/* <LandingPageBanner /> */}
         <NewsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <JournalsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <PartnersColumns />

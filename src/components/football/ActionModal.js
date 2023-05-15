@@ -36,7 +36,7 @@ export default function ActionModal(props) {
             "Bao Chao",
           ].map((item, index) => {
             return (
-              <Grid item xs={4} p={1} position="relative">
+              <Grid key={index} item xs={4} p={1} position="relative">
                 <Grid
                   sx={{
                     background: "#F3F3F3",
