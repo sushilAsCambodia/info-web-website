@@ -500,7 +500,7 @@ text-overflow: ellipsis;
 }
 #customCarouselBtn .react-multi-carousel-list {
   position: unset !important;
-  justify-content: center;
+  /* justify-content: center; */
 }
 /* .react-multi-carousel-list {
  
