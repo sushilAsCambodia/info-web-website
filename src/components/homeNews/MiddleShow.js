@@ -72,8 +72,8 @@ export default function MiddleShow(props) {
 
 
   return (
-    <Grid container justifyContent="center">
-      <Grid item xs={12}>
+    < >
+      <Grid item xs={12}  >
       <FullSilder banners={banners} />
 
         {/* <Carousel
@@ -130,6 +130,6 @@ export default function MiddleShow(props) {
           </Carousel>
         </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }

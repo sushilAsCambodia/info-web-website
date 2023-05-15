@@ -74,8 +74,10 @@ const {t} = useTranslation();
             border={{xs:"0px solid #ddd",md:"1px solid #ddd"}}
             borderRadius="2px"
             height="100%"
+            container
+            alignItems="space-between"
           >
-            <MiddleShow banners={banners}/>
+            <MiddleShow/>
           </Grid>
         </Grid>
         <Grid item xs={12} lg={2} border={{xs:"0px solid #ddd",md:"1px solid #ddd"}} borderRadius="2px">

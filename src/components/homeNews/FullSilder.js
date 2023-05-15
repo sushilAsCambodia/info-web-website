@@ -38,10 +38,10 @@ export default function FullSilder(props) {
         >
           {
             banners.map((banner, index) => (
-              <div key={index}>
+              <div key={index} >
                 {Math.abs(activeStep - index) <= 2 ? (
                   <Grid item component="div" sx={{
-                    height: isWeb ? 560 :  160,
+                    height: {xs:160,md:300}
                   }}>
                     <img
                       style={{
