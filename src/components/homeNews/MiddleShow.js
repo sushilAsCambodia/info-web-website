@@ -12,30 +12,9 @@ import Carousel from "react-multi-carousel";
 import {getBanner} from '@/store/actions/bannerActions'
 import utils from "@/common/utils";
 import Image from "mui-image";
+import FullSilder from "./FullSilder";
+import "react-multi-carousel/lib/styles.css";
 
-const responsive = {
-  largeDesktop: {
-    breakpoint: { max: 4000, min: 1321 },
-    items: 1,
-  },
-  desktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 1320, min: 1025 },
-    items: 1,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 685 },
-    items: 1,
-  },
-  mobile: {
-    breakpoint: { max: 686, min: 321 },
-    items: 1,
-  },
-  smallMobile: {
-    breakpoint: { max: 320, min: 0 },
-    items: 1,
-  },
-};
 const responsive2 = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -62,6 +41,7 @@ const responsive2 = {
 export default function MiddleShow(props) {
   const dispatch  = useDispatch();
   const { t } = useTranslation();
+  // const {banners={}} = props; 
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
@@ -90,7 +70,8 @@ export default function MiddleShow(props) {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Carousel
+        <FullSilder banners={banners} />
+        {/* <Carousel
           responsive={responsive}
           additionalTransfrom={0}
           arrows={banners.length>1?true:false}
@@ -129,13 +110,13 @@ export default function MiddleShow(props) {
               />
             </Grid>
           ))} 
-        </Carousel>
+        </Carousel> */}
       </Grid>
       <Grid container mt={2}>
         <Grid item xs={12} mx={1} container justifyContent="space-between" height="40px">
           <Typography> {langKey && langKey.match_reccomendation}</Typography>
         </Grid>
-        <Grid item xs={12} id="customCarouselBtn">
+        <Grid item xs={12} id="">
           <Carousel
             responsive={responsive2}
             additionalTransfrom={0}
