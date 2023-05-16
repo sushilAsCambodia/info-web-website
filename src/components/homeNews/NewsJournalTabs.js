@@ -53,7 +53,6 @@ export default function NewsJournalTabs(props) {
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
-
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
