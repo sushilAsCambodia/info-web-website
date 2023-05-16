@@ -38,7 +38,7 @@ const responsive = {
     items: 2,
   },
   smallMobile: {
-    breakpoint: { max: 374, min: 0 },
+    breakpoint: { max: 389, min: 0 },
     items: 1,
   },
 };
