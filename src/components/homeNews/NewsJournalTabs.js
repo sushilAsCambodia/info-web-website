@@ -53,7 +53,6 @@ export default function NewsJournalTabs(props) {
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
-
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
@@ -109,7 +108,7 @@ export default function NewsJournalTabs(props) {
         </Tabs>
         <TabPanel value={value} index={0}>
           {/* <FullSilder banners={banners} /> */}
-          {/* <AdvertiseSlide advertises={advertises} /> */}
+          <AdvertiseSlide advertises={advertises} />
           <MultiTabs categories={categories} lang_id={lang_id} />
         </TabPanel>
         <TabPanel value={value} index={1}>
