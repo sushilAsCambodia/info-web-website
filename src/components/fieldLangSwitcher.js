@@ -65,7 +65,7 @@ export default function FieldLanguageSwitcher() {
         onChange={handleClick}
         style={{paddingRight:"30px"}}
         renderValue={() => {
-          return <em>{langKey && langKey.language}</em>;
+          return <em>{langKey && langKey.lang}</em>;
         }}
         endAdornment={
           <InputAdornment position="end" paddingRight="10px">
