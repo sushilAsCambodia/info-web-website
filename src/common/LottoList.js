@@ -9,9 +9,27 @@ import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
+const settings = {
+  dots: false,
+  infinite: true,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  vertical: true,
+  verticalSwiping: true,
+  swipeToSlide: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  pauseOnFocus: true,
+  arrows: false,
+  lazyLoad: false,
+  centerMode: false,
+};
 export function lottoGrid(lottos) {
+  const bgColor = (index, length, lotto) => {
+    if (lotto == 11) return "red";
+  };
+
   return (
     <>
       <Grid
@@ -20,8 +38,6 @@ export function lottoGrid(lottos) {
         border="1px solid #ddd"
         borderRadius="10px"
         className="lottoGrid"
-        marginBottom="10px"
-        
       >
         {lottos.numbers.map((lotto, index) => {
           return (
@@ -30,8 +46,7 @@ export function lottoGrid(lottos) {
               px={1}
               className={`${lotto === lottos.winner ? "hitLotto" : ""}`}
             >
-              <Typography fontSize="12px"> {lotto}</Typography>
-             
+              {lotto}
             </Grid>
           );
         })}
@@ -50,9 +65,7 @@ export default function LottoList(props) {
   const { i18n } = useTranslation();
   const [newsList, setNewsList] = useState([]);
 
-  const lottos = { numbers: [12, 32, 5,14, 12, 34], winner: 34 };
-  const matches = useMediaQuery("(max-width:1200px)");
-  const matches2 = useMediaQuery("(max-width:768px)");
+  const lottos = { numbers: [12, 32, 4, 5, 12, 34], winner: 34 };
 
   return (
     <>
@@ -67,9 +80,8 @@ export default function LottoList(props) {
           sx={{
             border: "1px solid #ddd",
             marginY: "5px",
-            width: `${!matches2 ? "max-content":"600px" }`
-            // overflow: "auto",
-            // width: ,
+            width: "max-content",
+            overflow: "auto",
           }}
         >
           <Grid
@@ -105,9 +117,8 @@ export default function LottoList(props) {
                 Super Lotto
               </Typography>
             }
-            subheader={!matches ?lottoGrid(lottos):'' }
+            subheader={lottoGrid(lottos)}
           />
-          {matches ? lottoGrid(lottos): '' }
         </Card>
       </div>
     </>

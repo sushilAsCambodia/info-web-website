@@ -72,7 +72,6 @@ export default function ResultsBanner(props) {
         marginTop="10px"
         // px={{xs:1,md:0}}
       >
-        {!matches2 ?
         <Grid
           item
           xs={12}
@@ -98,46 +97,7 @@ export default function ResultsBanner(props) {
             <LottoList />
           </Grid>
         </Grid>
-:
-        <Grid item xs={12} px={0.5}>
-          <Grid
-            item
-            xs={12}
-            container
-            justifyContent="space-between"
-            height="40px"
-            px={1}
-          >
-            <Typography>{langKey && langKey.live_score}</Typography>
-          </Grid>
-          <Grid item xs={12} id="customCarouselBtn" >
-            <Carousel
-              responsive={responsive}
-              additionalTransfrom={0}
-              arrows
-              autoPlaySpeed={3000}
-              centerMode={false}
-              containerClass="container-with-dots"
-              dotListClass=""
-              draggable
-              focusOnSelect={false}
-              infinite
-              itemClass=""
-              keyBoardControl
-              minimumTouchDrag={80}
-              pauseOnHover
-              renderArrowsWhenDisabled={false}
-              renderButtonGroupOutside={false}
-              renderDotsOutside={false}
-            >
-              <LottoList />
-              <LottoList />
-              <LottoList />
-              <LottoList />
-            </Carousel>
-          </Grid>
-        </Grid>
-        }
+
         <Grid
           item
           xs={12}
