@@ -30,7 +30,8 @@ export function lottoGrid(lottos) {
               px={1}
               className={`${lotto === lottos.winner ? "hitLotto" : ""}`}
             >
-              {lotto}
+              <Typography fontSize="12px"> {lotto}</Typography>
+             
             </Grid>
           );
         })}
