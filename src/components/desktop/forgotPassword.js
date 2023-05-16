@@ -2,7 +2,7 @@ import { Grid, Typography, Link } from "@mui/material";
 import ForgotPasswordPage from "@/pages/forgotPassword";
 import { useSelector } from "react-redux";
 const ForgotPassword = (props) => {
-    const {setIsComponent} = props;
+    const {setIsComponent,t} = props;
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
     return <>
         <Grid container display="flex" alignItems="center" height="100%">
@@ -19,14 +19,14 @@ const ForgotPassword = (props) => {
                         display: "flex",
                         alignItems: "center",
                     }}>
-                    <Typography> {langKey && langKey.no_account} </Typography>
+                    <Typography> {langKey && (langKey.no_account || t('no_account'))} </Typography>
                     <Typography
                         style={{
                             cursor: "pointer",
                             color: "#F26522",
                         }}
                         mx={1}>
-                         {langKey && langKey.login} 
+                         {langKey && (langKey.login || t('login'))} 
                     </Typography>
                 </Link>
             </Grid>

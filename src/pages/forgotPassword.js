@@ -13,7 +13,7 @@ export default function ForgotPassword(props) {
   
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
-  const { title = (langKey && langKey.forgot_password), showTitle = true} = props;
+  const { title = (langKey && (langKey.forgot_password)), showTitle = true} = props;
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const goToLogin = () => {
