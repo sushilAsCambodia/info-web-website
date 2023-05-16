@@ -79,6 +79,7 @@ export default function ResultsBanner(props) {
           xl={2.5}
           border={{ xs: "0px solid #ddd", md: "1px solid #ddd" }}
           borderRadius="2px"
+          height={`${matches2 ? "100px":"" }`}
         >
           <Typography px={1.5} mb={1}>
             {" "}
