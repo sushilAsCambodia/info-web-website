@@ -109,7 +109,7 @@ export default function NewsJournalTabs(props) {
         </Tabs>
         <TabPanel value={value} index={0}>
           {/* <FullSilder banners={banners} /> */}
-          {/* <AdvertiseSlide advertises={advertises} /> */}
+          <AdvertiseSlide advertises={advertises} />
           <MultiTabs categories={categories} lang_id={lang_id} />
         </TabPanel>
         <TabPanel value={value} index={1}>
