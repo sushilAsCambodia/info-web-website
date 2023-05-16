@@ -41,6 +41,8 @@ export default function MultiTabs(props) {
   useEffect(() => {
     setValue(0);
   },[lang_id]); 
+
+
   return (categories && categories.length > 0) && (
     <Grid
       item
@@ -49,10 +51,11 @@ export default function MultiTabs(props) {
       alignContent="flex-start"
       alignItems="center"
       overflow="auto"
-      className="multitabs">
-      <Grid item xs={12} paddingTop="0px">
-        <Grid container>
-          <Grid item xs={12} justifyContent="center" >
+      className="multitabs" 
+      >
+      <Grid item xs={12} paddingTop="0px" >
+        <Grid container >
+          <Grid item xs={12} justifyContent="center" className="sticky-header" sx={{background:"white"}} >
             <Tabs
               value={value}
               onChange={handleChange}
@@ -66,7 +69,7 @@ export default function MultiTabs(props) {
                 '& .MuiTabs-indicator':{
                   background: 'linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)'
                 },
-                position:"sticky"
+                
               }}>
               { categories.map((category, index) => <Tab key={index} label={category.translation ? category.translation?.category_name : (category.category_name||'N/A')} />)}
             </Tabs>
