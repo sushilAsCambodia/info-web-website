@@ -526,6 +526,23 @@ text-overflow: ellipsis;
   left: calc(100% + -100px) !important;
   background-color: #dddddd !important;
 }
+
+@media (max-width: 768px) {
+  #customCarouselBtn .react-multiple-carousel__arrow--right {
+    top: -40px;
+    background-color: #dddddd !important;
+    right: calc(4% + -5px);
+  }
+  #customCarouselBtn .react-multiple-carousel__arrow--left {
+    top: -40px;
+    left: calc(100% + -70px) !important;
+    background-color: #dddddd !important;
+  }
+  }
+
+
+
+
 .lottoGrid div:first-child{
   border-radius:10px 0px 0px 10px
 }
