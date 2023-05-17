@@ -97,20 +97,8 @@ export default function Login() {
   const [border, setBorder] = useState(false);
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   useEffect(() => {
-    if(i18n.language) {
-      setMounted(true);
-        dispatch(getLanguage(
-        {
-          params: {
-            lang_id: utils.convertLangCodeToID(i18n.language)
-          },
-          callback:(res) => {
-            localStorage.setItem('languageKey', JSON.stringify(res))
-          }
-        }
-      ));
-    }
-  },[i18n.language])
+    setMounted(true);
+  },[])
   const dispatch = useDispatch();
   const handleLogin = () => {
     dispatch(
@@ -463,7 +451,7 @@ export default function Login() {
                 }}
                 borderRadius="20px 0px 0px 20px"
               >
-                <Grid xs={10} container alignContent="space-around">
+                <Grid item xs={10} container alignContent="space-around">
                   <Typography
                     variant="h4"
                     fontWeight="bold"
@@ -541,7 +529,7 @@ export default function Login() {
                     <Grid my={2} container justifyContent="center">
                       <img src="./assets/Logo/footer_logo.png" />
                     </Grid>
-                    <Grid xs={12} mb={2}>
+                    <Grid item xs={12} mb={2}>
                       <Divider
                         sx={{
                           "&::before, &::after": {

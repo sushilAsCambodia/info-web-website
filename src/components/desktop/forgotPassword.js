@@ -9,7 +9,7 @@ const ForgotPassword = (props) => {
             <Grid item md={12}>
                 <ForgotPasswordPage showTitle={false} />
             </Grid>
-            <Grid px={1} py={1} underline="none" md={12} display="flex" justifyContent="end">
+            <Grid px={1} py={1} underline="none" item md={12} display="flex" justifyContent="end">
                 <Link
                     onClick={() => setIsComponent('login')}
                     underline="none"

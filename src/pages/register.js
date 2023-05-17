@@ -443,7 +443,7 @@ export default function Register() {
           }}
           borderRadius="20px 0px 0px 20px"
         >
-          <Grid xs={10} container alignContent="space-around">
+          <Grid item xs={10} container alignContent="space-around">
             <Typography
               variant="h4"
               fontWeight="bold"
@@ -521,7 +521,7 @@ export default function Register() {
               <Grid my={2} container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
                 <img src="./assets/Logo/footer_logo.png" />
               </Grid>
-              <Grid xs={12}>
+              <Grid item xs={12}>
                 <Divider
                   sx={{
                     "&::before, &::after": {
@@ -652,7 +652,7 @@ export default function Register() {
                       placeholder={langKey && (langKey.confirm_password || t('confirm_password'))}
                       label={langKey && (langKey.confirm_password || t('confirm_password'))}
                       inputProps={{ maxLength: 16 }}
-                      id="outlined-adornment-password"
+                      id="outlined-adornment-confirmpassword"
                       type={showPassword ? "text" : "password"}
                       value={confirmPassword}
                       onChange={(e) => onChangeConfirmPassword(e)}
