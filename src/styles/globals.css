@@ -207,9 +207,18 @@ padding: 0px;
   .multitabs .css-hpgf8j{
     padding: 0px;
   }
+.news-multiTabs {
+font-size: 12px !important;
+}
+#news-multiTabs .MuiTabs-scroller  {
+  /* padding-top: 0px !important;
+  padding-bottom: 0px !important; */
+height: 45px;
+  }
+  #news-multiTabs .MuiTabs-scroller div button {
+    font-size: 12px !important;
 
-
-
+  }
   /* main auto play swipeable css */
 
   .mainautoplayswipeable .css-1kocmnn-MuiButtonBase-root-MuiButton-root{
@@ -502,10 +511,10 @@ text-overflow: ellipsis;
   position: unset !important;
   /* justify-content: center; */
 }
-/* .react-multi-carousel-list {
- 
-  justify-content: center;
-} */
+  /* .react-multi-carousel-list {
+  
+    justify-content: center;
+  } */
 #customCarouselBtn .react-multiple-carousel__arrow{
   min-width: 24px ;
   min-height: 24px ;
@@ -535,7 +544,7 @@ text-overflow: ellipsis;
   }
   #customCarouselBtn .react-multiple-carousel__arrow--left {
     top: -40px;
-    left: calc(100% + -70px) !important;
+    left: calc(100% + -90px) !important;
     background-color: #dddddd !important;
   }
   }
@@ -777,7 +786,7 @@ visibility: visible;
 }
 }
 .tabclass .MuiGrid-root[role="tabpanel"]{
-  /* padding-top: 62px; */
+  padding-top: 10px;
 }
 .mainautoplayswipeable .MuiPaper-elevation {
   z-index: 0;
@@ -860,3 +869,12 @@ visibility: visible;
 .customScroller::-webkit-scrollbar-thumb:hover {
   background: #414040; 
 }
+
+.makecenterforjournal .react-multi-carousel-track{
+margin: 0 auto;
+}
+
+.makecenterforpartner .react-multi-carousel-track{
+  margin: 0 auto;
+  }
+  

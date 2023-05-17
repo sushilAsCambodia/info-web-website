@@ -129,9 +129,9 @@ const Header = () => {
               justifyContent="space-between"
             >
               <Grid item xs={4}>
-                <Link href="/">
+                {/* <Link href="/">
                   <img src="./assets/Logo/logowhite.png" />
-                </Link>
+                </Link> */}
               </Grid>
               <Grid
                 item

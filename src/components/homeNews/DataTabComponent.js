@@ -54,6 +54,9 @@ const DataTabComponent = ({id,lang_id}) => {
             setShowLoadMore(false);
         }
     };
+    const viewport_height= window.innerHeight;
+    console.log("windowheight:::",viewport_height)
+    console.log("height overflow:::",(viewport_height/13 ))
     // get more news by category
     const loadMore = (p) => {
         if(!isLastPage) {
@@ -116,17 +119,15 @@ const DataTabComponent = ({id,lang_id}) => {
           }
         };
       },[])
-    return <Grid sx={{position:'relative',
+    return <Grid sx={{
     //  height:news && news.length > 2 ? '900px' : 'auto',overflowY:'auto',
       display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}} className='tab-scroll'>
         {showLoadMore && <Typography component="span" style={{position:'fixed',bottom:'56px'}}>{loadingMore?<DataLoading size={20}/>:''}</Typography>}
         {
             loading ? <DataLoading size={30}/> :
             (
-                <Grid item xs={12} sm={12} md={12} xl={12} 
-                
-                >
-                    <List sx={{padding:'5px',overflow:"auto", height:"80vh"}} >
+                <Grid item xs={12} sm={12} md={12} xl={12} >
+                    <List sx={{padding:'5px',overflow:"auto", height:`${viewport_height/13.5}vh`}} >
                         {news && news.length ? news.map((sport,index) => {
                             return (
                                     <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
@@ -155,7 +156,6 @@ const DataTabComponent = ({id,lang_id}) => {
                                     </ListItem> 
                             );
                         }) : <Empty/>}
-                        
                     </List>
                     { noMoreData && <Typography component="div" sx={{fontSize:10,color:'#8C8C8C',textAlign:'center',width:'100%'}}>{langKey && langKey.no_more_data} </Typography>}
                 </Grid>

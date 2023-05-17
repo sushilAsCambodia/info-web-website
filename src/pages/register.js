@@ -79,8 +79,9 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const goToLogin = () => {
@@ -177,12 +178,7 @@ export default function Register() {
   return matches ? (
     <>
       <Grid container alignItems="center" justifyContent="center" height="100%">
-        <Grid
-          item
-          container
-          maxWidth="500px" 
-          sx={{ minHeight: "500px" }}
-        >
+        <Grid item container maxWidth="500px" sx={{ minHeight: "500px" }}>
           <Grid item container xs={12} sm={12} padding={2}>
             <Grid container alignItems="flex-end" alignContent="center" mb={4}>
               <Typography variant="h5" sx={{ position: "relative" }}>
@@ -424,12 +420,18 @@ export default function Register() {
     </>
   ) : (
     <Grid
-    p={{xs:2, md:10}}
-    display="flex"
+      p={{ xs: 2, md: 10 }}
+      display="flex"
       justifyContent="center"
-      sx={{ backgroundImage: "url('./assets/login/login_bg.png')" }}
+      sx={{ backgroundImage: "url('./assets/login/login_bg.png')",height:"100vh" }}
     >
-      <Grid container justifyContent="center" alignItems="stretch" width={{xs:"1000px", lg:"90%",xl:"65%"}}>
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="stretch"
+        width={{ xs: "1000px", lg: "90%", xl: "65%" }}
+        height="fit-content"
+      >
         <Grid
           container
           justifyContent="center"
@@ -518,7 +520,15 @@ export default function Register() {
             height={600}
           >
             <Grid item container xs={12} sm={12} paddingX={2} mt={2}>
-              <Grid my={2} container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
+              <Grid
+                my={2}
+                container
+                justifyContent="center"
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  Router.push("/");
+                }}
+              >
                 <img src="./assets/Logo/footer_logo.png" />
               </Grid>
               <Grid item xs={12}>
