@@ -511,10 +511,10 @@ text-overflow: ellipsis;
   position: unset !important;
   /* justify-content: center; */
 }
-/* .react-multi-carousel-list {
- 
-  justify-content: center;
-} */
+  /* .react-multi-carousel-list {
+  
+    justify-content: center;
+  } */
 #customCarouselBtn .react-multiple-carousel__arrow{
   min-width: 24px ;
   min-height: 24px ;
@@ -786,7 +786,7 @@ visibility: visible;
 }
 }
 .tabclass .MuiGrid-root[role="tabpanel"]{
-  /* padding-top: 62px; */
+  padding-top: 10px;
 }
 .mainautoplayswipeable .MuiPaper-elevation {
   z-index: 0;
@@ -869,3 +869,12 @@ visibility: visible;
 .customScroller::-webkit-scrollbar-thumb:hover {
   background: #414040; 
 }
+
+.makecenterforjournal .react-multi-carousel-track{
+margin: 0 auto;
+}
+
+.makecenterforpartner .react-multi-carousel-track{
+  margin: 0 auto;
+  }
+  
