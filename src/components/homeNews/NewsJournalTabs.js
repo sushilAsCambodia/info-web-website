@@ -79,7 +79,7 @@ export default function NewsJournalTabs(props) {
     (state) => state && state.load_language && state.load_language.language
   );
   return (
-    <Grid item className="tabclass" sx={{ height: "fit-content" }}>
+    <Grid item className="tabclass" sx={{ height: "100%" }}>
       <ResultsBanner banners={banners} />
 
       <Grid sx={{ height: "100%" }} >
@@ -91,7 +91,7 @@ export default function NewsJournalTabs(props) {
           variant="fullWidth"
           aria-label="full width tabs example"
           className="mui-home-tab-wrapper "
-          sx={{ paddingTop: "10px", paddingBottom: "10px",background:"white" }}
+          sx={{ background:"white",paddingTop:"10px" }}
         >
           <Tab
             className="mui-custom-home mui-custom-new"

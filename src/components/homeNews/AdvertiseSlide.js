@@ -8,7 +8,9 @@ const AdvertiseSlide = (props) => {
     const [tabValue, setTabValue] = React.useState(0);
     return <>
     {
-        advertises && advertises.length > 0 && <Grid item   sx={{marginTop:'5px',marginBottom:'5px'}}>
+        advertises && advertises.length > 0 && <Grid item   
+        // sx={{marginTop:'5px',marginBottom:'5px'}}
+        >
         <Tabs
           value={tabValue}
           onChange={(e) => setTabValue(e.target.value)}
@@ -24,7 +26,7 @@ const AdvertiseSlide = (props) => {
               background:'#FF6F31',
               borderRadius:'50%',
               color:'white'
-            }
+            },
           }}
           >
           {
@@ -36,7 +38,7 @@ const AdvertiseSlide = (props) => {
                   label={<Link href={card.ads_link} target='_blank'><Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
                   <Grid 
                     sx={{backgroundImage:`url(${card.icon})`, backgroundSize:'cover'}} 
-                    alt="机率" width="80px" height="80px" className="card-custom"
+                    alt="机率" width="70px" height="70px" className="card-custom"
                   >
                     <span></span>
                   </Grid>

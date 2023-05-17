@@ -51,13 +51,14 @@ export default function MultiTabs(props) {
       alignContent="flex-start"
       alignItems="center"
       // overflow="auto"
-      className="multitabs " 
+      className="multitabs" 
      
       >
       <Grid item xs={12}>
         <Grid container >
           <Grid item xs={12} justifyContent="center" sx={{background:"white", }}  >
-            <Tabs
+            <Tabs 
+            id="news-multiTabs"
               value={value}
               onChange={handleChange}
               variant="scrollable"
@@ -70,9 +71,8 @@ export default function MultiTabs(props) {
                 '& .MuiTabs-indicator':{
                   background: 'linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)'
                 },
-                
               }}>
-              { categories.map((category, index) => <Tab key={index} label={category.translation ? category.translation?.category_name : (category.category_name||'N/A')} />)}
+              { categories.map((category, index) => <Tab  key={index} label={category.translation ? category.translation?.category_name : (category.category_name||'N/A')} />)}
             </Tabs>
           
             { categories.map((category,index) => {
