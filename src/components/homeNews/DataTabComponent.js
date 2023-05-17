@@ -155,34 +155,7 @@ const DataTabComponent = ({id,lang_id}) => {
                                     </ListItem> 
                             );
                         }) : <Empty/>}
-                        {news && news.length ? news.map((sport,index) => {
-                            return (
-                                    <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
-                                        <Grid
-                                            container
-                                            sx={{ borderRadius: "5px",paddingTop:'10px' ,paddingBottom:'10px' }}
-                                            boxShadow="none"
-                                            display="flex"
-                                            alignItems="start">
-                                            <Grid item xs={3}>
-                                                <img src={sport.image ? sport.image?.path :'./assets/no-image.png'}
-                                                    onError={(e) => e.target.src = './assets/no-image.png'}
-                                                    width="100%"
-                                                    height="50px"
-                                                    style={{objectFit:"cover",borderRadius:'6px'}}/>
-                                            </Grid> 
-                                            <Grid item xs={9}>
-                                                <Grid item sx={{paddingLeft:'5px'}}>
-                                                    <Box fontWeight="400" fontFamily="sans-serif" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,140)}}></Box>
-                                                    <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="10px !important" whiteSpace="nowrap">
-                                                        {moment(sport.created_at).format(utils.formatDate)}
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </ListItem> 
-                            );
-                        }) : <Empty/>}
+                       
                     </List>
                     { noMoreData && <Typography component="div" sx={{fontSize:10,color:'#8C8C8C',textAlign:'center',width:'100%'}}>{langKey && langKey.no_more_data} </Typography>}
                 </Grid>
