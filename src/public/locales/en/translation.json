@@ -97,5 +97,11 @@
     "select_category":"Select Category",
     "load_more":"Load More",
     "all":"All",
-    "continue_to_home":"Continue to home page"
+    "continue_to_home":"Continue to home page",
+    "football_page_info_web":"Football Page | InfoWeb",
+    "lottery_past_results_info_web":"Lottery Past Result | InfoWeb",
+    "basketball_info_web":"Basketball | InfoWeb",
+    "news_info_web":"News | InfoWeb",
+    "news_single_page_info_web":"News Single Page | InfoWeb",
+    "data_chart_info_web":"Data Chart | InfoWeb"
 }

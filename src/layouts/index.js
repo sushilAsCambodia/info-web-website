@@ -25,8 +25,7 @@ const Layout = (props) => {
 
 
 
-    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-console.log("langKey", useSelector((state) => state))
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
     useEffect(() => {
         setMounted(true);
     }, []);
