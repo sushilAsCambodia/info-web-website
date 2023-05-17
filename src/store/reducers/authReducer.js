@@ -17,15 +17,17 @@ const AuthReducer = (state = initialState, action) => {
       }
     case 'customers/login/fulfilled':
       const customer = action.payload.data?.customer || {};
+      let isLogin = false;
       if([200,201,202,203,204].includes(action.payload.status_code)) {
         Cookies.set(utils.tokenKey,action.payload?.data[utils.tokenKey] || '');
         window.localStorage.setItem('customer', JSON.stringify((customer)));
+        isLogin = true;
       }
       return {
         ...state,
         customer: customer,
         loading: false,
-        isLogin: true,
+        isLogin: isLogin,
         status: 'completed',
       };
     // end login block
