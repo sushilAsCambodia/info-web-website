@@ -56,7 +56,7 @@ const DataTabComponent = ({id,lang_id}) => {
     };
     const viewport_height= window.innerHeight;
     console.log("windowheight:::",viewport_height)
-    console.log("height overflow:::",viewport_height / 11)
+    console.log("height overflow:::",(viewport_height/13 ))
     // get more news by category
     const loadMore = (p) => {
         if(!isLastPage) {
@@ -127,7 +127,7 @@ const DataTabComponent = ({id,lang_id}) => {
             loading ? <DataLoading size={30}/> :
             (
                 <Grid item xs={12} sm={12} md={12} xl={12} >
-                    <List sx={{padding:'5px',overflow:"auto", height:`54vh`}} >
+                    <List sx={{padding:'5px',overflow:"auto", height:`${viewport_height/13.5}vh`}} >
                         {news && news.length ? news.map((sport,index) => {
                             return (
                                     <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
