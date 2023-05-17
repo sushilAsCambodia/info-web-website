@@ -50,12 +50,13 @@ export default function MultiTabs(props) {
       container
       alignContent="flex-start"
       alignItems="center"
-      overflow="auto"
-      className="multitabs" 
+      // overflow="auto"
+      className="multitabs " 
+     
       >
-      <Grid item xs={12} paddingTop="0px" >
+      <Grid item xs={12}>
         <Grid container >
-          <Grid item xs={12} justifyContent="center" className="sticky-header" sx={{background:"white"}} >
+          <Grid item xs={12} justifyContent="center" sx={{background:"white", }}  >
             <Tabs
               value={value}
               onChange={handleChange}
@@ -73,8 +74,7 @@ export default function MultiTabs(props) {
               }}>
               { categories.map((category, index) => <Tab key={index} label={category.translation ? category.translation?.category_name : (category.category_name||'N/A')} />)}
             </Tabs>
-          </Grid>
-          <Grid xs={12} item >
+          
             { categories.map((category,index) => {
                 return (
                   <TabPanel key={index} value={value} index={index} >

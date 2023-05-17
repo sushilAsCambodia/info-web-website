@@ -79,7 +79,7 @@ export default function NewsJournalTabs(props) {
     (state) => state && state.load_language && state.load_language.language
   );
   return (
-    <Grid item className="tabclass" sx={{ height: "100%" }}>
+    <Grid item className="tabclass" sx={{ height: "fit-content" }}>
       <ResultsBanner banners={banners} />
 
       <Grid sx={{ height: "100%" }} >
@@ -90,7 +90,7 @@ export default function NewsJournalTabs(props) {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
-          className="mui-home-tab-wrapper sticky-header"
+          className="mui-home-tab-wrapper "
           sx={{ paddingTop: "10px", paddingBottom: "10px",background:"white" }}
         >
           <Tab
@@ -106,7 +106,7 @@ export default function NewsJournalTabs(props) {
             onClick={() => router.push("/home#journal")}
           />
         </Tabs>
-        <TabPanel value={value} index={0}>
+        <TabPanel value={value} index={0} position="relative">
           {/* <FullSilder banners={banners} /> */}
           <AdvertiseSlide advertises={advertises} />
           <MultiTabs categories={categories} lang_id={lang_id} />

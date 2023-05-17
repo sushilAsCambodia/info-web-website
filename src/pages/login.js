@@ -447,9 +447,9 @@ export default function Login() {
             p={{xs:2, md:10}}
             display="flex"
             justifyContent="center"
-            sx={{ backgroundImage: "url('./assets/login/login_bg.png')" }}
+            sx={{ backgroundImage: "url('./assets/login/login_bg.png')",height:"100vh" }}
           >
-            <Grid container justifyContent="center" alignItems="stretch" width={{xs:"1000px", lg:"90%",xl:"65%"}}>
+            <Grid container justifyContent="center" alignItems="stretch" width={{xs:"1000px", lg:"90%",xl:"65%",}} height="fit-content" >
               <Grid
                 container
                 justifyContent="center"
@@ -538,9 +538,9 @@ export default function Login() {
                   height={600}
                 >
                   <Grid item container xs={12} sm={12} padding={2}>
-                    <Grid my={2} container justifyContent="center">
-                      <img src="./assets/Logo/footer_logo.png" />
-                    </Grid>
+                  <Grid my={2} container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
+                <img src="./assets/Logo/footer_logo.png" />
+              </Grid>
                     <Grid xs={12} mb={2}>
                       <Divider
                         sx={{
