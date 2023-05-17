@@ -129,7 +129,7 @@ export default function NewsSlider(props) {
                       display: "flex",
                       flexDirection: "column",
                       borderBottom: "1px solid #dddddd",
-                      paddingBottom: "10px",
+                      paddingbottom: "10px",
                       marginBottom: "10px",
                       // color: "white",
                       margin: "10px",
@@ -154,7 +154,7 @@ export default function NewsSlider(props) {
              <Icon
              color="black"
              width={40}
-             paddingBottom="5px"
+             b="5px"
              icon="line-md:loading-alt-loop"
            />
           ) : (
