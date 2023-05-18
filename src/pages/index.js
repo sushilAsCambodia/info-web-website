@@ -100,12 +100,12 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
             <Grid item xs={12} display="flex" justifyContent="space-between">
               <Grid item xs={6}>
                 <Typography textAlign="center">
-                  <Image alt="iosbtn" src="./assets/Home/iosbtn.png" />
+                  <Image alt="iosbtn" style={{maxWidth:144}} src="./assets/Home/iosbtn.png" />
                 </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography textAlign="center">
-                  <Image alt="androidbtn" src="./assets/Home/androidbtn.png" />
+                  <Image alt="androidbtn" style={{maxWidth:144}} src="./assets/Home/androidbtn.png" />
                 </Typography>
               </Grid>
             </Grid>

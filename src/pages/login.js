@@ -493,12 +493,12 @@ export default function Login() {
                         >
                           <Grid item xs={6}>
                             <Typography textAlign="center">
-                              <Image alt="iosbtn" src="./assets/Home/iosbtn.png" />
+                              <Image alt="iosbtn" style={{maxWidth: 144}} src="./assets/Home/iosbtn.png" />
                             </Typography>
                           </Grid>
                           <Grid item xs={6}>
                             <Typography textAlign="center">
-                              <Image alt="androidbtn" src="./assets/Home/androidbtn.png" />
+                              <Image alt="androidbtn" style={{maxWidth: 144}} src="./assets/Home/androidbtn.png" />
                             </Typography>
                           </Grid>
                         </Grid>
@@ -528,7 +528,7 @@ export default function Login() {
                 >
                   <Grid item container xs={12} sm={12} padding={2}>
                   <Grid my={2} container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
-                <Image alt="footer_logo" src="./assets/Logo/footer_logo.png" />
+                <Image style={{width:139}} alt="footer_logo" src="./assets/Logo/footer_logo.png" />
               </Grid>
                     <Grid xs={12} mb={2}>
                       <Divider

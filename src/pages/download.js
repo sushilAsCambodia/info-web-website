@@ -45,7 +45,7 @@ export default function Index() {
             <Typography variant="h4" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>{langKey && langKey.your_hand}</Typography>
           </Grid>
           <Grid textAlign="center" pl={5}>
-            <Image alt="football" height="300px" src="./assets/Download/football.png"/>
+            <Image alt="football" style={{maxHeight:300}} src="./assets/Download/football.png"/>
           </Grid>
           <Grid item textAlign="center" mt={2}>
         
@@ -57,12 +57,12 @@ export default function Index() {
           <Grid item xs={12} display="flex" justifyContent="space-between">
             <Grid item xs={6}>
               <Typography textAlign="center">
-                <Image alt="iosbtn" width="100px" src="./assets/Home/iosbtn.png" />
+                <Image alt="iosbtn" style={{maxWidth:144}} src="./assets/Home/iosbtn.png" />
               </Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography textAlign="center">
-                <Image alt="androidbtn" width="100px" src="./assets/Home/androidbtn.png" />
+                <Image alt="androidbtn" style={{maxWidth:144}} src="./assets/Home/androidbtn.png" />
               </Typography>
             </Grid>
           </Grid>
@@ -82,7 +82,7 @@ export default function Index() {
           <Typography variant="h3" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>{langKey && langKey.your_hand}</Typography>
         </Grid>
         <Grid textAlign="center" pl={10}>
-          <Image alt="football" src="./assets/Download/football.png"/>
+          <img alt="football" src="./assets/Download/football.png"/>
         </Grid>
         <Grid item textAlign="center" mt={2}>
           <Typography fontWeight={700} fontSize="20px" textTransform="uppercase">
@@ -93,12 +93,12 @@ export default function Index() {
         <Grid item xs={12} display="flex" justifyContent="space-between">
           <Grid item xs={6}>
             <Typography textAlign="center">
-              <Image alt="iosbtn" src="./assets/Home/iosbtn.png" />
+              <Image alt="iosbtn" style={{maxWidth:144}} src="./assets/Home/iosbtn.png" />
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography textAlign="center">
-              <Image alt="androidbtn" src="./assets/Home/androidbtn.png" />
+              <Image alt="androidbtn" style={{maxWidth:144}} src="./assets/Home/androidbtn.png" />
             </Typography>
           </Grid>
         </Grid>
