@@ -56,7 +56,8 @@ export default function NewsList(props) {
             list.data.length > 0) && list.data.map((item, index) => {
               return (
                 <Grid
-                xs={12}
+                  item
+                  xs={12}
                   key={index}
                   component={Link}
                   onClick={() =>
@@ -78,7 +79,7 @@ export default function NewsList(props) {
                       display: "flex",
                       flexDirection: "column",
                       borderBottom: "1px solid #dddddd",
-                      paddingBottom: "10px",
+                      paddingbottom: "10px",
                       marginBottom: "10px",
                       // color: "white",
                       margin: "10px",

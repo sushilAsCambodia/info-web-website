@@ -78,6 +78,7 @@ export default function JournalsColumns(props) {
         </Grid>
         <Grid item xs={12} className="home-carousel-wrapper">
           <Carousel
+          className="makecenterforjournal"
             responsive={responsive}
             additionalTransfrom={0}
             arrows
