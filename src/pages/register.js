@@ -487,12 +487,12 @@ export default function Register() {
                   >
                     <Grid item xs={6}>
                       <Typography textAlign="center">
-                        <Image alt="iosbtn" src="./assets/Home/iosbtn.png" />
+                        <Image alt="iosbtn" style={{maxWidth:144}} src="./assets/Home/iosbtn.png" />
                       </Typography>
                     </Grid>
                     <Grid item xs={6}>
                       <Typography textAlign="center">
-                        <Image alt="androidbtn" src="./assets/Home/androidbtn.png" />
+                        <Image alt="androidbtn" style={{maxWidth:144}} src="./assets/Home/androidbtn.png" />
                       </Typography>
                     </Grid>
                   </Grid>
@@ -530,7 +530,7 @@ export default function Register() {
                   Router.push("/");
                 }}
               >
-                <Image alt="footer_logo" src="./assets/Logo/footer_logo.png" />
+                <Image alt="footer_logo" style={{maxWidth:144}} src="./assets/Logo/footer_logo.png" />
               </Grid>
               <Grid item xs={12}>
                 <Divider
