@@ -82,7 +82,7 @@ export default function Index() {
           <Typography variant="h3" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E' }}>{langKey && langKey.your_hand}</Typography>
         </Grid>
         <Grid textAlign="center" pl={10}>
-          <img alt="football" src="./assets/Download/football.png"/>
+          <Image alt="football" style={{height:'auto',width:'auto',maxHeight:355}} src="./assets/Download/football.png"/>
         </Grid>
         <Grid item textAlign="center" mt={2}>
           <Typography fontWeight={700} fontSize="20px" textTransform="uppercase">
