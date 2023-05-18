@@ -74,6 +74,7 @@ export default function PartnersColumns(props) {
       </Grid>
       <Grid item xs={12}>
         <Carousel
+        className="makecenterforpartner"
           responsive={responsive}
           additionalTransfrom={0}
           arrows

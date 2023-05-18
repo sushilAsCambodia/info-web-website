@@ -12,14 +12,15 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
-
+import {getLanguage} from '../store/actions/languageActions'
 import ProfileDropDown from "@/components/header/ProfileDropDown";
 import HeaderLiveScore from "@/components/header/headerLiveScore";
 import Link from "next/link";
+import utils from "@/common/utils";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const matches2 = useMediaQuery("(max-width:1074px)");
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const { customer, isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -83,6 +84,20 @@ const Header = () => {
   window.addEventListener("scroll", () => {
     setScroll(window.pageYOffset > 56);
   });
+  useEffect(() => {
+    if(i18n.language) {
+        dispatch(getLanguage(
+        {
+          params: {
+            lang_id: utils.convertLangCodeToID(i18n.language)
+          },
+          callback:(res) => {
+            localStorage.setItem('languageKey', JSON.stringify(res))
+          }
+        }
+      ));
+    }
+  },[i18n.language])
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
   //     window.addEventListener("scroll", () =>
@@ -114,9 +129,9 @@ const Header = () => {
               justifyContent="space-between"
             >
               <Grid item xs={4}>
-                <Link href="/">
+                {/* <Link href="/">
                   <img src="./assets/Logo/logowhite.png" />
-                </Link>
+                </Link> */}
               </Grid>
               <Grid
                 item

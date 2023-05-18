@@ -13,7 +13,7 @@ export default function FieldLanguageSwitcher() {
   const {i18n} =  useTranslation();
   const [lang, setLang] = React.useState('')
 
-  const [langLabel,setLangLabel] = React.useState(i18n ? i18n.language:'en')
+  const [langLabel,setLangLabel] = React.useState(i18n && i18n.language ? i18n.language :'en')
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,22 +63,20 @@ export default function FieldLanguageSwitcher() {
         value={langLabel}
         label={langKey && langKey.language}
         onChange={handleClick}
-        style={{paddingRight:"30px"}}
+        style={{paddingright:"30px"}}
         renderValue={() => {
           return <em>{langKey && langKey.lang}</em>;
         }}
         endAdornment={
-          <InputAdornment position="end" paddingRight="10px">
+          <InputAdornment position="end" paddingright="10px">
             <Icon width={40} icon="fa-solid:language" />
           </InputAdornment>
         }
       >
         {['en','kh','de'].map(
-            (l) => {
-                if(l !== langLabel) {
-                  return (<MenuItem key={l} value={l} onClick={() => changeLanguage(l)} disableRipple> { labelLanguage(l)  } </MenuItem>);
-                }
-            },
+          (l) => { 
+            return (<MenuItem style={{display:l !== langLabel?'':'none'}} key={l} value={l} onClick={() => changeLanguage(l)} disableRipple> { labelLanguage(l)  } </MenuItem>);
+          },
         )} 
       </Select>
     </FormControl>

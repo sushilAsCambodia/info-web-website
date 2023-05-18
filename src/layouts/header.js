@@ -26,7 +26,7 @@ const Header = () => {
               color: 'inherit',
               textDecoration: 'none',
             }}>
-            <img src="./assets/Logo/logowhite.png" />
+            {/* <img src="./assets/Logo/logowhite.png" /> */}
           </Typography> 
           <Box sx={{ alignItems:'center' }}>
             <LangSwitcher/>
