@@ -69,7 +69,7 @@
     "update_user_name_unique":"This account already exists",
     "password_required":"Password is required",
     "confirm_password_required":"Confirm Password is required",
-    "password_is_not_match":"Password is not match",
+    "password_is_not_match":"Password is not match-ch",
     "system_announcement":"系统公告",
     "announcement_paragrap":"恭喜，你的等级已经达到4级，升级到下一级需要290经验，可以通过任务中心的日常任务和新手任务获得。",
 

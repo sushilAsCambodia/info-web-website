@@ -8,6 +8,7 @@ import {
   uploadProfile,
 } from "@/store/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import utils from "@/common/utils";
 import {
   Grid,
   Paper,
@@ -129,56 +130,57 @@ export default function ProfileInfo(props) {
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     if (e.target.value == "") {
-      setErrorPasswordMessage("Password is required");
+      setErrorPasswordMessage(langKey && langKey.password_required);
       setErrorPassword(true);
     } else {
-      setErrorPassword(false);
+      if(utils.checkPassword(e.target.value) != null) {
+        setErrorPasswordMessage(utils.checkPassword(e.target.value));
+        setErrorPassword(true);
+      }else {
+        setErrorPassword(false);
+      }
     }
     if (confirmpassword != "") {
       if (confirmpassword != e.target.value) {
-        setConfirmErrorPasswordMessage("Password is not match");
+        setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
         setErrorConfirmPassword(true);
       } else {
         setErrorConfirmPassword(false);
       }
     }
-    if (e.target.value.length < 6) {
-      setErrorPasswordMessage(langKey && langKey.validate_password);
-      setErrorPassword(true);
-    }
   };
   const onChangeConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value);
+    setConfirmPassword(e.target.value); 
     if (e.target.value == "") {
-      setErrorPasswordMessage("Confirm Password is required");
+      setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
       setErrorConfirmPassword(true);
     } else {
-      setErrorConfirmPassword(false);
-    }
-    if (password != e.target.value) {
-      setConfirmErrorPasswordMessage("Password is not match");
-      setErrorConfirmPassword(true);
-    } else {
-      setErrorConfirmPassword(false);
-    }
-    if (e.target.value.length < 6) {
-      setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
-      setErrorConfirmPassword(true);
+      if(utils.checkPassword(e.target.value) != null) {
+        setConfirmErrorPasswordMessage(utils.checkPassword(e.target.value));
+        setErrorConfirmPassword(true);
+      }else {
+        if (password != e.target.value) {
+          setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
+          setErrorConfirmPassword(true);
+        } else {
+          setErrorConfirmPassword(false);
+        } 
+      } 
     }
   };
   const onSubmit = () => {
     if (password == "" && confirmpassword == "") {
-      setErrorPasswordMessage("Password is required");
-      setConfirmErrorPasswordMessage("Confirm Password is required");
+      setErrorPasswordMessage(langKey && langKey.password_required);
+      setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
       setErrorPassword(true);
       setErrorConfirmPassword(true);
       return;
     } else if (password === "") {
-      setErrorPasswordMessage("Password is required");
+      setErrorPasswordMessage(langKey && langKey.password_required);
       setErrorPassword(true);
       return;
     } else if (confirmpassword === "") {
-      setConfirmErrorPasswordMessage("Confirm Password is required");
+      setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
       setErrorConfirmPassword(true);
       return;
     }
@@ -428,10 +430,8 @@ export default function ProfileInfo(props) {
                 </IconButton>
               </InputAdornment>
             }
-          />
-          {errorConfirmPassword && (
-            <FormHelperText error>{errorConfirmPasswordMessage}</FormHelperText>
-          )}
+          /> 
+          {errorConfirmPassword && <FormHelperText error>{errorConfirmPasswordMessage}</FormHelperText> }
         </FormControl>
       </Grid>
 

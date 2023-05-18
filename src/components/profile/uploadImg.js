@@ -22,6 +22,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoadingDialog from "../Loading";
 import DialogMessage from "../DialogMessage";
 import { Image } from "mui-image";
+const minLength = 6;
 const ImgUpload = ({
   onChange,
   src
@@ -35,9 +36,6 @@ const ImgUpload = ({
     </label>
   );
 }
-
-
-
 const UploadImg = () => {
   const { customer, loading } = useSelector((state) => state.auth);
   const [userName, setUsername] = useState((customer && customer.user_name ? customer.user_name : ''));
@@ -62,9 +60,7 @@ const UploadImg = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [file, setFile] = useState(undefined);
 
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
-
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   useEffect(() => {
     if(customer && (customer.nick_name != null || customer.nick_name != '')) {
       setDisabledNickName(true)
@@ -154,7 +150,7 @@ const UploadImg = () => {
         setErrorConfirmPassword(false);
       }
     }
-    if (e.target.value.length < 6) {
+    if (e.target.value.length < minLength) {
       setErrorPasswordMessage(langKey && langKey.validate_password);
       setErrorPassword(true);
     }
@@ -173,7 +169,7 @@ const UploadImg = () => {
     } else {
       setErrorConfirmPassword(false);
     }
-    if (e.target.value.length < 6) {
+    if (e.target.value.length < minLength) {
       setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
       setErrorConfirmPassword(true);
     }

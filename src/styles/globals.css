@@ -325,6 +325,7 @@ padding: 0px;
   bottom: -20px;
   right: 50%;
   border: 0.5px solid #DDDDDD;
+  z-index: 1;
 }
 .uploadimg_main .img-upload:hover:before{
  opacity: 1;

@@ -448,11 +448,11 @@ export default function Login() {
                   // background: "black",
                   backgroundImage: 'url("./assets/login/login.png")',
                   backgroundRepeat: "no-repeat",
-                  backgroundSize: "100% 100%",
+                  backgroundSize: "cover",
                 }}
                 borderRadius="20px 0px 0px 20px"
               >
-                <Grid item xs={10} container alignContent="space-around">
+                <Grid item xs={10} container alignContent="space-between" style={{margin:30}}>
                   <Typography
                     variant="h4"
                     fontWeight="bold"
@@ -472,7 +472,7 @@ export default function Login() {
                           bottom: "150px",
                         }}
                       >
-                        <Typography fontWeight={700} fontSize="20px">
+                        <Typography fontWeight={700} fontSize="20px" margin={2}>
                          {langKey && (langKey.download_app || t('download_app'))}
                         </Typography>
                       </Grid>
@@ -513,32 +513,32 @@ export default function Login() {
                 container
                 alignItems="flex-start"
                 justifyContent="center"
-                // py={5}
                 sx={{ background: "white" }}
                 borderRadius="0px 20px 20px 0px"
+               
               >
                 <Grid
                   item
                   container
-                  justifyContent="center"
-                  xs={12}
+                  alignContent="center"
                   // sx={{ minHeight: "500px" }}
-                  alignContent="space-between"
                   height={600}
                 >
                   <Grid item container xs={12} sm={12} padding={2}>
                   <Grid my={2} container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
                 <Image style={{width:139}} alt="footer_logo" src="./assets/Logo/footer_logo.png" />
               </Grid>
-                    <Grid xs={12} mb={2}>
+                    <Grid item xs={12} mb={2}>
                       <Divider
                         sx={{
                           "&::before, &::after": {
                             borderColor: "#FF6F31",
+                            borderTop:'solid #FF6F31',
+                            borderWidth:'2px'
                           },
                         }}
                       >
-                        <Typography variant="h5" fontWeight="bold">
+                        <Typography variant="h6" fontWeight="bold" textTransform="uppercase">
                           {isComponent == 'forgotpassword' ? (langKey && (langKey.forgotpassword || t('forgotpassword'))) : (langKey && (langKey.login || t('login')))}
                         </Typography>
                       </Divider>

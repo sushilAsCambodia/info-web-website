@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import FieldLanguageSwitcher from "@/components/fieldLangSwitcher";
 import { Image } from "mui-image";
+import utils from "@/common/utils";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -66,20 +67,22 @@ BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
-
+const minLength = 6;
 export default function Register() {
   const { t } = useTranslation();
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
+  const [errorUserNameMessage, setErrorUserNameMessage] = useState('');
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
+  const [confirmErrorPasswordMessage, setConfirmErrorPasswordMessage] = useState('');
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
@@ -123,18 +126,47 @@ export default function Register() {
       })
     );
   };
+  const onSubmitMobile = () => {
+    if (username == "" && password == "") {
+      setErrorUserName(true);
+      setErrorPassword(true);
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorPasswordMessage(langKey && langKey.password_required);
+      return;
+    } else if (password == "") {
+      setErrorPasswordMessage(langKey && (langKey.password_required || t('password_required')));
+      setErrorPassword(true);
+      return;
+    } else if (username == "") {
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorUserName(true);
+      return;
+    }
+    if (!errorPassword && !errorUserName) {
+      setLoading(true);
+      handleSignup();
+    }
+  };
   const onSubmit = () => {
     if (username == "" && password == "" && confirmPassword == "") {
       setErrorUserName(true);
       setErrorPassword(true);
       setErrorConfirmPassword(true);
-      return false;
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorPasswordMessage(langKey && langKey.password_required);
+      setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
+      return;
     } else if (password == "") {
       setErrorPassword(true);
-      return false;
+      return;
     } else if (username == "") {
       setErrorUserName(true);
-      return false;
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      return;
+    }else if (confirmPassword === '') {
+      setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
+      setErrorConfirmPassword(true);
+      return;
     }
     if (!errorPassword && !errorUserName && !errorConfirmPassword) {
       setLoading(true);
@@ -142,29 +174,60 @@ export default function Register() {
     }
   };
   const onChangeUserName = (e) => {
-    if (e.target.value != "" && e.target.value.length < 6) {
+    if (e.target.value != "" && e.target.value.length < minLength) {
       setErrorUserName(true);
+      setErrorUserNameMessage(langKey && (langKey.validate_user_name || t('validate_user_name')));
     } else {
       setErrorUserName(false);
     }
     setUserName(e.target.value);
   };
   const onChangePassword = (e) => {
-    if (e.target.value != "" && e.target.value.length < 6) {
+    setPassword(e.target.value);
+    if (e.target.value == '') {
+      setErrorPasswordMessage(langKey && langKey.password_required);
       setErrorPassword(true);
     } else {
-      setErrorPassword(false);
+      if(utils.checkPassword(e.target.value) != null) {
+        setErrorPasswordMessage(utils.checkPassword(e.target.value));
+        setErrorPassword(true);
+      }else {
+        setErrorPassword(false);
+      }
     }
-    setPassword(e.target.value);
+    if (confirmPassword != '') { 
+      if (confirmPassword != e.target.value) {
+        setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
+        setErrorConfirmPassword(true);
+      } else {
+        setErrorConfirmPassword(false);
+      }
+    }
   };
 
   const onChangeConfirmPassword = (e) => {
-    if (!password || e.target.value != password) {
+    setConfirmPassword(e.target.value);
+    if (e.target.value == '') {
+      setErrorPasswordMessage(langKey && langKey.confirm_password_required);
+      setErrorConfirmPassword(true);
+    } else {
+      if(utils.checkPassword(e.target.value) != null) {
+        setErrorPasswordMessage(utils.checkPassword(e.target.value));
+        setErrorConfirmPassword(true);
+      }else {
+        setErrorConfirmPassword(false);
+      }
+    }
+    if (password != e.target.value) {
+      setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
       setErrorConfirmPassword(true);
     } else {
       setErrorConfirmPassword(false);
     }
-    setConfirmPassword(e.target.value);
+    if (e.target.value.length < minLength) {
+      setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
+      setErrorConfirmPassword(true);
+    }
   };
   // Register Dialog
   const [open, setOpen] = React.useState(false);
@@ -231,7 +294,7 @@ export default function Register() {
                   />
                   {errorUserName && (
                     <FormHelperText error>
-                      {langKey && (langKey.validate_user_name || t('validate_user_name'))}
+                      {errorUserNameMessage}
                     </FormHelperText>
                   )}
                 </FormControl>
@@ -275,7 +338,7 @@ export default function Register() {
                   />
                   {errorPassword && (
                     <FormHelperText error>
-                      {langKey && (langKey.validate_password || t('validate_password'))}
+                      {errorPasswordMessage}
                     </FormHelperText>
                   )}
                 </FormControl>
@@ -291,7 +354,7 @@ export default function Register() {
                         "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
                       textTransform: "capitalize",
                     }}
-                    onClick={onSubmit}
+                    onClick={onSubmitMobile}
                   >
                     {langKey && (langKey.signup_for_now || t('signup_for_now'))}
                   </Button>
@@ -442,11 +505,11 @@ export default function Register() {
             // background: "black",
             backgroundImage: 'url("./assets/login/login.png")',
             backgroundRepeat: "no-repeat",
-            backgroundSize: "100% 100%",
+            backgroundSize: "cover",
           }}
           borderRadius="20px 0px 0px 20px"
         >
-          <Grid item xs={10} container alignContent="space-around">
+          <Grid item xs={10} container alignContent="space-between" style={{margin:30}}>
             <Typography
               variant="h4"
               fontWeight="bold"
@@ -466,7 +529,7 @@ export default function Register() {
                     bottom: "150px",
                   }}
                 >
-                  <Typography fontWeight={700} fontSize="20px">
+                  <Typography fontWeight={700} fontSize="20px" margin={2}>
                   {langKey && (langKey.download_app || t('download_app'))}
                   </Typography>
                 </Grid>
@@ -640,7 +703,7 @@ export default function Register() {
                     />
                     {errorPassword && (
                       <FormHelperText error>
-                        {langKey && (langKey.validate_password || t('validate_password'))}
+                        {errorPasswordMessage}
                       </FormHelperText>
                     )}
                   </FormControl>
@@ -686,7 +749,7 @@ export default function Register() {
                     />
                     {errorConfirmPassword && (
                       <FormHelperText error>
-                         {langKey && (langKey.password_mustbe_match || t('password_mustbe_match'))}
+                         {confirmErrorPasswordMessage}
                       </FormHelperText>
                     )}
                   </FormControl>
