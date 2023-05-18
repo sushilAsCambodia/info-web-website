@@ -448,6 +448,7 @@ export default function Login() {
             display="flex"
             justifyContent="center"
             sx={{ backgroundImage: "url('./assets/login/login_bg.png')",height:"100vh" }}
+            alignItems="center"
           >
             <Grid container justifyContent="center" alignItems="stretch" width={{xs:"1000px", lg:"90%",xl:"65%",}} height="fit-content" >
               <Grid
@@ -566,10 +567,10 @@ export default function Login() {
                         width: "100%",
                       }}
                     >
-                      <Grid item xs={12} sm={12} mb={3}>
+                      <Grid item xs={12} sm={12} mb={1}>
                         <FieldLanguageSwitcher />
                       </Grid>
-                      <Grid item xs={12} sm={12} mb={3}>
+                      <Grid item xs={12} sm={12} mb={1}>
                         <FormControl
                           variant="outlined"
                           fullWidth

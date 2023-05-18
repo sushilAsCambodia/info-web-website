@@ -424,6 +424,7 @@ export default function Register() {
       display="flex"
       justifyContent="center"
       sx={{ backgroundImage: "url('./assets/login/login_bg.png')",height:"100vh" }}
+      alignItems="center"
     >
       <Grid
         container
@@ -531,7 +532,7 @@ export default function Register() {
               >
                 <img src="./assets/Logo/footer_logo.png" />
               </Grid>
-              <Grid xs={12}>
+              <Grid xs={12} mb={2}>
                 <Divider
                   sx={{
                     "&::before, &::after": {

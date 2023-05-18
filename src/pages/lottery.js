@@ -63,6 +63,7 @@ export default function Lottery() {
                             }
                         }}
                         sx={{
+                            width:"80%",
                             position: 'relative',
                             '& .Mui-selected': {
                                 color: '#000 !important',
@@ -73,7 +74,6 @@ export default function Lottery() {
                         <Tab label="Quánbù" {...a11yProps(1)} />
                         <Tab label="Shíshí Cǎi" {...a11yProps(2)} />
                         <Tab label="xxx Cǎixxx" {...a11yProps(3)} />
-
                     </Tabs>
                     <Button variant="contained"
                         sx={{
@@ -107,7 +107,7 @@ export default function Lottery() {
                     <Grid item xs={12}
                         style={{
                             backgroundImage: "url('/assets/stadium.png')",
-                            height: 105,
+                            height: 150,
                             position: 'relative'
                         }}>
                         <span style={{ background: 'rgba(0, 0, 0, 0.7)', position: 'absolute', height: '100%', width: '100%' }}></span>

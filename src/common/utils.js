@@ -3,6 +3,7 @@ const utils = {
     letterFormat: 'DD MMM YYYY',
     dateLetter: 'ddd',
     MonthYearFormat: 'MMM YYYY',
+    DateMonthFormat: 'DD MMM',
     tokenKey: "token",
     baseUrl: process.env.apiUrl,
     convertLangCodeToID: (languageCode) => {
