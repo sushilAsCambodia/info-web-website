@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import LoadingDialog from "../Loading";
 import DialogMessage from "../DialogMessage";
@@ -75,7 +75,7 @@ export default function ProfileInfo(props) {
         className="desktop-file-upload fas"
         style={{ "--uploadImg": `${imagePreviewUrl ? "" : "url('/assets/Profile/profile_upload.png')"}` }}
       >
-        {src &&  <Image htmlFor="photo-upload" width={50} height={50} src={src} style={{borderRadius:"50px"}}/>} 
+        {src &&  <Image alt="photo_upload" htmlFor="photo-upload" width={50} height={50} src={src} style={{borderRadius:"50px"}}/>} 
         <input id="photo-upload" type="file" onChange={onChange} />
       </label>
     );
@@ -87,7 +87,7 @@ export default function ProfileInfo(props) {
       setImagePreviewUrl( customer.image.path || '');
     }
   }, [customer]);
-  const updateProfilePhoto = (file) => {
+  const updateProfilePhoto = useCallback(file => {
     dispatch(
       uploadProfile(
         {
@@ -105,13 +105,12 @@ export default function ProfileInfo(props) {
         }
       )
     )
-  }
+  },[dispatch,t,setOpenDialog,setResponseMessage]);
   useEffect(()=> {
     if(file) {
-      console.log( file,'file');
       updateProfilePhoto(file);
     }
-  } ,[file])
+  } ,[updateProfilePhoto,file])
 
 
   const photoUpload = (e) => {

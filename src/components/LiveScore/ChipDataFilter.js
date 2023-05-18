@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
+import { Image } from "mui-image";
 
 
 
@@ -40,7 +41,7 @@ console.log(langKey.no_data_found , "xxxxxxxxxxxxxxxx")
             </Grid>
           </Grid>
           <Grid item xs={12} textAlign="center" position="relative">
-            <img style={{ width: "60%" }} src="./assets/not-found_2.png" />
+            <Image alt="not_found_2" style={{ width: "60%" }} src="./assets/not-found_2.png" />
             <Grid position="absolute" bottom="20%" left="45%">
               <Typography>{langKey && langKey.no_data_found}</Typography>
             </Grid>

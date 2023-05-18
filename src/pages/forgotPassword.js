@@ -6,6 +6,7 @@ import {
 import Router from "next/router";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { Image } from "mui-image";
 
 export default function ForgotPassword(props) {
 
@@ -32,16 +33,16 @@ export default function ForgotPassword(props) {
         {showTitle && <Typography variant="h5">
           {title||''}
         </Typography>}
-        <img src="/assets/Home/customersupport1.png" style={{ maxWidth: "200px", margin:"0 auto", display:"flex" }} />
+        <Image alt="customersupport1" src="/assets/Home/customersupport1.png" style={{ maxWidth: "200px", margin:"0 auto", display:"flex" }} />
         <Typography component="h6" fontSize={12} textAlign="center">
           {langKey && langKey.notify_following}
         </Typography>
         <Typography component="div" sx={{display:'flex', justifyContent:'center', margin:'5px'}}>
           <Link href="https://t.me/+855762055536" target="_blank">
-            <img src="/assets/socials/telegram.png" style={{ width: "40px", height:"40px", objectFit:'cover' }} />
+            <Image alt="telegram" src="/assets/socials/telegram.png" style={{ width: "40px", height:"40px", objectFit:'cover' }} />
           </Link>
           <Link href="https://wa.me/+855762055536" target="_blank">
-            <img src="/assets/socials/whatapp.png" style={{ width: "40px", height:"40px", objectFit:'cover', padding:'3px' }} />
+            <Image alt="whatapp" src="/assets/socials/whatapp.png" style={{ width: "40px", height:"40px", objectFit:'cover', padding:'3px' }} />
           </Link>
         </Typography>
       </Grid>

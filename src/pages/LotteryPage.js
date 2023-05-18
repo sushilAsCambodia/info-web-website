@@ -27,6 +27,7 @@ import { useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
+import { Image } from "mui-image";
 const style = {
   position: "absolute",
   top: "300px",
@@ -450,7 +451,8 @@ export default function LotteryPage() {
                       <StyledTableCell component="th" scope="row" colSpan={7}>
                         <Grid display="flex" alignItems="center">
                           {" "}
-                          <img
+                          <Image
+                            alt={row.lottoTitle}
                             style={{
                               marginRight: "10px",
                               width: "30px",
@@ -470,7 +472,8 @@ export default function LotteryPage() {
                             <Grid
                               sx={{ display: "flex", alignItems: "center" }}
                             >
-                              <img
+                              <Image
+                                alt={item.name}
                                 width="30px"
                                 src={item.img}
                                 style={{ marginRight: "10px" }}

@@ -34,7 +34,7 @@ export default function DialogDesktop(props) {
             );
             
         }
-    },[albumId]);
+    },[dispatch,albumId]);
     React.useEffect(() => {
         if(years.length > 0) {
             if(firstFetch) { 
@@ -42,6 +42,7 @@ export default function DialogDesktop(props) {
                 fetchIssue(years[value]);
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[years]);
     const fetchIssue = (issueDate) => {
         dispatch(

@@ -16,6 +16,7 @@ import SwipeableViews from "react-swipeable-views";
 import { useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
+import { Image } from "mui-image";
 
 const HeaderTabs = styled(Tabs)({
   backgroundColor: "black",
@@ -163,8 +164,9 @@ export default function LiveScoreCardTab(props) {
                     <Typography>Did Not Start</Typography>
                   </Grid>
                   <Grid item xs={4.5}>
-                    <img
+                    <Image
                       width={60}
+                      alt="dynamo_vladivostok"
                       src={
                         "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
                       }
@@ -198,8 +200,9 @@ export default function LiveScoreCardTab(props) {
                   </Grid>
 
                   <Grid item xs={4.5}>
-                    <img
+                    <Image
                       width={60}
+                      alt="dynamo_vladivostok"
                       src={
                         "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
                       }
@@ -215,7 +218,8 @@ export default function LiveScoreCardTab(props) {
                 <Grid component={Card} container>
                   <Grid container px={1} borderBottom="1px solid #DDDDDD">
                     <Grid item xs={4} container alignItems="center">
-                      <img
+                      <Image
+                        alt="dynamo_vladivostok"
                         width={40}
                         src={
                           "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
@@ -249,8 +253,9 @@ export default function LiveScoreCardTab(props) {
                         </Typography>
                         <Typography>GUEST</Typography>
                       </Grid>
-                      <img
+                      <Image
                         width={40}
+                        alt="dynamo_vladivostok"
                         src={
                           "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
                         }

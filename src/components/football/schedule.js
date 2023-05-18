@@ -31,6 +31,7 @@ import moment from "moment/moment";
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
+import { Image } from "mui-image";
 export default function Schedule() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
@@ -250,7 +251,7 @@ export default function Schedule() {
                     <>
                       <StyledTableRow key={item.id}>
                         <StyledTableCell align="center">
-                          <img width={30} src={item.img} />
+                          <Image width={30} src={item.img} alt="football_schedule"/>
                           <Typography>{item.name}</Typography>
                         </StyledTableCell>
                         <StyledTableCell align="center">

@@ -28,7 +28,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import NewsCardDetails from "./newsCardDetails";
 import NewsList from "@/common/NewsList";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
+import { Image } from "mui-image";
 export default function NewsSingle() {
+  const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
   const [noRecentNewsData, setNoRecentNewsData] = useState(false);
   const [noPopularNewsData, setNoPopularNewsData] = useState(false);
@@ -115,6 +117,7 @@ export default function NewsSingle() {
         }
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFetching]);
   useEffect(() => {
     dispatch(
@@ -127,8 +130,7 @@ export default function NewsSingle() {
         params: { type: "popular" },
       })
     );
-  }, []);
-  const dispatch = useDispatch();
+  }, [dispatch]);
   useEffect(() => {
     if (id) {
       dispatch(
@@ -139,7 +141,7 @@ export default function NewsSingle() {
         })
       );
     }
-  }, [id]);
+  }, [dispatch,id]);
 
   useEffect(() => {
     dispatch(
@@ -148,7 +150,7 @@ export default function NewsSingle() {
         callback: (res) => {},
       })
     );
-  }, [lang_id]);
+  }, [dispatch,lang_id]);
   return !matches ? (
     <Grid justifyContent="center">
       <TitleBreadCrumbs title={langKey && langKey.newscarddetails}/>
@@ -163,7 +165,7 @@ export default function NewsSingle() {
                 {moment(newsDetail.created_at).format(utils.formatDate)}
               </Typography>
               <Grid>
-                <img
+                <Image
                   src={newsDetail.image?.path}
                   onError={(e) => (e.target.src = "/assets/no-image.png")}
                   alt={newsDetail.title || ""}

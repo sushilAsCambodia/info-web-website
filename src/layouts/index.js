@@ -47,7 +47,7 @@ const Layout = (props) => {
                  }
             }
         ));
-    },[i18n.language])
+    },[dispatch,i18n.language])
     let { children } = props;  
     let title = '';
     const pages = [

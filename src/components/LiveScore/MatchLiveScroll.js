@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
+import { Image } from "mui-image";
 
 const settings = {
   dots: false,
@@ -86,8 +87,9 @@ export default function MatchLiveScroll(props) {
               </Grid>
 
               <Grid item xs={5} textAlign="center">
-                <img
+                <Image
                   width={50}
+                  alt="Dynamo Vladivostok"
                   src={
                     "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
                   }
@@ -117,8 +119,9 @@ export default function MatchLiveScroll(props) {
               </Grid>
 
               <Grid item xs={5} textAlign="center">
-                <img
+                <Image
                   width={50}
+                  alt="Dynamo Vladivostok"
                   src={
                     "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
                   }

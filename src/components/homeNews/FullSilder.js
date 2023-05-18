@@ -10,6 +10,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { Grid, Tabs, Tab } from "@mui/material";
+import { Image } from "mui-image";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function FullSilder(props) {
@@ -44,12 +45,13 @@ export default function FullSilder(props) {
                   <Grid item component="div" sx={{
                     height: {xs:160,md:300}
                   }}>
-                    <img
+                    <Image
                       style={{
                         height: '100%',
                         width: "100%",
                         objectFit:'cover'
                       }}
+                      alt="banner"
                       src={banner.file || '/assets/no-image.png'}
                       onError={(e) => e.target.src = '/assets/no-image.png'}
                     />

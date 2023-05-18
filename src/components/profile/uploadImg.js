@@ -21,6 +21,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoadingDialog from "../Loading";
 import DialogMessage from "../DialogMessage";
+import { Image } from "mui-image";
 const ImgUpload = ({
   onChange,
   src
@@ -28,7 +29,7 @@ const ImgUpload = ({
   return (
     <label htmlFor="photo-upload" className="custom-file-upload fas">
       <div className="img-wrap img-upload" >
-        <img htmlFor="photo-upload" src={src} />
+        {src && <Image alt="photo_upload" htmlFor="photo-upload" src={src} />} 
       </div>
       <input id="photo-upload" type="file" onChange={onChange} />
     </label>
@@ -83,7 +84,7 @@ const UploadImg = () => {
       reader.readAsDataURL(file);
     }
   }
-  const updateProfilePhoto = (file) => {
+  const updateProfilePhoto = useCallback(file => {
     dispatch(
       uploadProfile(
         {
@@ -100,18 +101,17 @@ const UploadImg = () => {
         }
       )
     )
-  }
+  },[dispatch,t]);
   useEffect(() => {
     if(nickName!='') {
       setTextAction('edit');
     }
-  },[])
+  },[nickName])
   useEffect(() => {
-    if (file) {
-      console.log(file, 'file');
+    if (file) { 
       updateProfilePhoto(file);
     }
-  }, [file])
+  }, [updateProfilePhoto,file])
   // drawer start 
   const [state, setState] = useState({ bottom: false });
   const toggleDrawer = (anchor, open, edit = '') => (event) => {
@@ -387,7 +387,7 @@ const UploadImg = () => {
     if (data) {
       setState({ ...state, bottom: false });
     }
-  }, []);
+  }, [state]);
   const onCloseDrawer = () => {
     setEditPassword(false);
     setEditUserName(false);

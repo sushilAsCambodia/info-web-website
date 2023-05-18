@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
+import { Image } from "mui-image";
 const Footer = () => {
   const { t } = useTranslation();
   let selectedTab = 0;
@@ -17,7 +18,7 @@ const Footer = () => {
     <>
       <Grid container alignItems="center" flexDirection="column" pt={2} sx={{background:"#FAFAFA"}} >
         <Grid item xs={4} textAlign="center">
-          <img src="./assets/Logo/footer_logo.png"/>
+          <Image alt="footer_logo" src="./assets/Logo/footer_logo.png"/>
           <Typography> {langKey && langKey.footer_content} </Typography>
         </Grid>
         <Grid container item xs={6} py={1} justifyContent="center">

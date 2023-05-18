@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Link } from "@mui/material";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
-import { useEffect } from "react"; 
+import { useEffect,useCallback } from "react"; 
 import moment from "moment/moment";
 import utils from "./utils";
 import DataLoading from "@/components/DataLoading";
@@ -10,7 +10,7 @@ export default function NewsList(props) {
   const {list = {}, type, setIsFetching, setPage, setType, loading } = props;
   const router = useRouter();
   // listiner on scroll behavior
-  const onScroll = (el,list) => {
+  const onScroll = useCallback((el,list) => {
     const scrollableHeight = el.target.scrollHeight - el.target.clientHeight
     if (el.target.scrollTop >= scrollableHeight) {
       const {current_page,last_page,next_page_url} = list;
@@ -25,7 +25,7 @@ export default function NewsList(props) {
         }
       }
     }
-  }
+  },[setType,setPage,setIsFetching,type]);
   // add listiner on scroll behavior
   useEffect(() => {
     if(Object.keys(list).length > 0) {
@@ -39,7 +39,7 @@ export default function NewsList(props) {
         }
       };
     }
-  },[list])
+  },[list,onScroll,type])
   return (
     <Grid container style={{position:'relative'}}>
       <Grid overflow="auto" minHeight="300px" maxHeight="450px" pb={1} id={`news-scroll-wrapper-${type}`}>

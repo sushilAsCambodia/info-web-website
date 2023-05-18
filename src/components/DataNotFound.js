@@ -15,6 +15,7 @@ export default function DataNotFound(props) {
               objectFit
             }}
             src="./assets/not-found.png" 
+            alt='not-found'
             loading="lazy"
           />
         </picture>

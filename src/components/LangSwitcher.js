@@ -75,7 +75,9 @@ export default function LangSwitcher() {
         }
     ));
       }
-  },[i18n.language])
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[dispatch,i18n.language])
  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

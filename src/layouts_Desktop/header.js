@@ -97,7 +97,7 @@ const Header = () => {
         }
       ));
     }
-  },[i18n.language])
+  },[dispatch,i18n.language])
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
   //     window.addEventListener("scroll", () =>

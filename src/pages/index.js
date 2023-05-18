@@ -23,6 +23,7 @@ import Footer from "@/layouts_Desktop/footer";
 import { useTranslation } from "react-i18next";
 
 import utils from "@/common/utils";
+import { Image } from "mui-image";
 
 export default function Index() {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ localStorage.setItem('languageKey', JSON.stringify(res))
         }
     ));
   
-},[i18n.language]); 
+},[dispatch,i18n.language]); 
 
 const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
@@ -99,12 +100,12 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
             <Grid item xs={12} display="flex" justifyContent="space-between">
               <Grid item xs={6}>
                 <Typography textAlign="center">
-                  <img src="./assets/Home/iosbtn.png" />
+                  <Image alt="iosbtn" src="./assets/Home/iosbtn.png" />
                 </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography textAlign="center">
-                  <img src="./assets/Home/androidbtn.png" />
+                  <Image alt="androidbtn" src="./assets/Home/androidbtn.png" />
                 </Typography>
               </Grid>
             </Grid>

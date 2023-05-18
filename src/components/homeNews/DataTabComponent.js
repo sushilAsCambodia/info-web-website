@@ -14,6 +14,7 @@ import Router from "next/router";
 import Empty from '../Empty';
 import moment from 'moment/moment';
 import utils from '@/common/utils';
+import { Image } from 'mui-image';
 const rowsPerPage = 10;
 const DataTabComponent = ({id,lang_id}) => {
     const dispatch = useDispatch();
@@ -31,10 +32,12 @@ const DataTabComponent = ({id,lang_id}) => {
         if(isFetching > 0 && !loadingMore) {
             loadMore(page)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isFetching])
     React.useEffect(() => { 
         setNoMoreData(false);
         getData(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[id]);
     const manageDataPaginatioin = (data) => {
         const currentPage = data?.current_page;
@@ -138,10 +141,11 @@ const DataTabComponent = ({id,lang_id}) => {
                                             display="flex"
                                             alignItems="start">
                                             <Grid item xs={3}>
-                                                <img src={sport.image ? sport.image?.path :'./assets/no-image.png'}
+                                                <Image src={sport.image ? sport.image?.path :'./assets/no-image.png'}
                                                     onError={(e) => e.target.src = './assets/no-image.png'}
                                                     width="100%"
                                                     height="50px"
+                                                    alt="no_image"
                                                     style={{objectFit:"cover",borderRadius:'6px'}}/>
                                             </Grid> 
                                             <Grid item xs={9}>

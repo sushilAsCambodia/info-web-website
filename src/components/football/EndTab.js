@@ -31,6 +31,7 @@ import {
   
   import { Icon } from "@iconify/react";
   import { lottoTable } from "@/pages/LotteryPage";
+import { Image } from "mui-image";
   export default function EndTab() {
     const [select, setSelect] = useState(0);
     const [filter, setFilter] = useState("China National");
@@ -250,7 +251,7 @@ import {
                       <>
                         <StyledTableRow key={item.id}>
                           <StyledTableCell align="center">
-                            <img width={30} src={item.img} />
+                            <Image width={30} src={item.img} alt="football" />
                             <Typography>{item.name}</Typography>
                           </StyledTableCell>
                           <StyledTableCell align="center">

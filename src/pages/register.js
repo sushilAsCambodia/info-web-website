@@ -29,6 +29,7 @@ import { register, login } from "@/store/actions/authActions";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import FieldLanguageSwitcher from "@/components/fieldLangSwitcher";
+import { Image } from "mui-image";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -486,12 +487,12 @@ export default function Register() {
                   >
                     <Grid item xs={6}>
                       <Typography textAlign="center">
-                        <img src="./assets/Home/iosbtn.png" />
+                        <Image alt="iosbtn" src="./assets/Home/iosbtn.png" />
                       </Typography>
                     </Grid>
                     <Grid item xs={6}>
                       <Typography textAlign="center">
-                        <img src="./assets/Home/androidbtn.png" />
+                        <Image alt="androidbtn" src="./assets/Home/androidbtn.png" />
                       </Typography>
                     </Grid>
                   </Grid>
@@ -529,7 +530,7 @@ export default function Register() {
                   Router.push("/");
                 }}
               >
-                <img src="./assets/Logo/footer_logo.png" />
+                <Image alt="footer_logo" src="./assets/Logo/footer_logo.png" />
               </Grid>
               <Grid item xs={12}>
                 <Divider

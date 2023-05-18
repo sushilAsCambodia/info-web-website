@@ -13,6 +13,7 @@ import {getBanner} from '@/store/actions/bannerActions'
 import { useTheme } from "@mui/material/styles";
 import { Icon } from "@iconify/react";
 import Carousel from "react-multi-carousel";
+import { Image } from "mui-image";
 
 const responsive = {
   largeDesktop: {
@@ -56,7 +57,7 @@ export default function LinkBanner(props) {
           }
       }
   ));
-  }, [i18n.language]);
+  }, [dispatch,i18n.language]);
 
   return (
     <>
@@ -81,13 +82,13 @@ export default function LinkBanner(props) {
             <Typography fontWeight="bold" variant="h4">实时比分</Typography>
             <Typography fontWeight="bold" variant="h4">  {langKey && langKey.faster_than_tv}</Typography>
             </Grid>
-            <Grid xs={3} textAlign="center"><img height="100px" src="./assets/News/football_2.png" /></Grid>
+            <Grid xs={3} textAlign="center"><Image alt="football_2" height="100px" src="./assets/News/football_2.png" /></Grid>
             <Grid xs={3} p={1} border="2px solid white" borderRadius="20px">
                 <Grid display="flex" alignItems="center" justifyContent="center" sx={{height:"60px",background:"white",borderRadius:"20px"}}>
                     <Typography color="black">More than  2000 matches</Typography>
                 </Grid>
             </Grid>
-            <Grid xs={3} textAlign="center"><img height="100px" src="./assets/News/football_1.png" /></Grid>
+            <Grid xs={3} textAlign="center"><Image alt="football_1" height="100px" src="./assets/News/football_1.png" /></Grid>
             <Grid xs={3} textAlign="right">
                 <Button variant="container" sx={{background:"#FF8024",color:"white",borderRadius:"20px"}}> {langKey && langKey.download_app}</Button>
             </Grid>

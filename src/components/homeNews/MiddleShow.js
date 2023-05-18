@@ -64,7 +64,7 @@ export default function MiddleShow(props) {
           callback:(res) => { }
       }
     ));
-  }, []);
+  }, [dispatch,i18n.language]);
 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   return (

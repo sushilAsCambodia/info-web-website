@@ -22,6 +22,7 @@ import utils from "@/common/utils";
 import moment from "moment/moment";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
+import { Image } from "mui-image";
 
 export default function ScoreTable() {
   const router = useRouter();
@@ -199,9 +200,10 @@ export default function ScoreTable() {
                     >
                       <Grid container alignItems="center">
                         {" "}
-                        <img
+                        <Image
                           width="30px"
                           src={item.img}
+                          alt="football_score"
                           style={{ marginRight: "10px" }}
                         />{" "}
                         Taiwan Basket Ball
