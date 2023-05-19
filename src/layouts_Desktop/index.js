@@ -99,7 +99,7 @@ const Layout = (props) => {
             // overflowY: 'auto',height: "100%",
           }}
         >
-          <main style={{ minHeight: "80vh", width: width, margin: "auto" }}>
+          <main style={{width: width, margin: "auto" }}>
             {" "}
             {children}
           </main>

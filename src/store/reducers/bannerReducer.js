@@ -19,9 +19,16 @@ const BannerReducer =  (state = initialState, action) => {
         loading: false
       };
     case 'banner/list/fulfilled':
+      let banners = action.payload?.data || [];
+      if(banners.length > 0) {
+        // sort DESC
+        banners.sort(function(a, b) {
+          return  parseInt(b.sorting) - parseInt(a.sorting);
+        });
+      }
       return {
         ...state,
-        banners: action.payload?.data || [],
+        banners: banners,
         status:'completed',
         loading: false
       };

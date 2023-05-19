@@ -81,6 +81,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
   const [confirmErrorPasswordMessage, setConfirmErrorPasswordMessage] = useState('');
   const langKey = useSelector(
@@ -487,13 +488,13 @@ export default function Register() {
       p={{ xs: 2, md: 10 }}
       display="flex"
       justifyContent="center"
-      sx={{ backgroundImage: "url('./assets/login/login_bg.png')",height:"100vh" }}
+      sx={{ backgroundImage: "url('./assets/login/login_bg.png')", backgroundPosition:'center', backgroundSize:'cover' }}
     >
       <Grid
         container
         justifyContent="center"
         alignItems="stretch"
-        width={{ xs: "1000px", lg: "90%", xl: "65%" }}
+        width={{ xs: "90%", lg: "90%", xl: "65%" }}
         height="fit-content"
       >
         <Grid
@@ -506,6 +507,7 @@ export default function Register() {
             backgroundImage: 'url("./assets/login/login.png")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
+            
           }}
           borderRadius="20px 0px 0px 20px"
         >
@@ -515,6 +517,9 @@ export default function Register() {
               fontWeight="bold"
               color="white"
               textAlign="center"
+              marginTop={'18px'}
+              fontSize={'36px'}
+              lineHeight={'54px'}
             >
       {langKey && (langKey.anytime_anywhere || t('anytime_anywhere'))}
             </Typography>
@@ -529,7 +534,7 @@ export default function Register() {
                     bottom: "150px",
                   }}
                 >
-                  <Typography fontWeight={700} fontSize="20px" margin={2}>
+                  <Typography fontWeight={700} fontSize="20px" margin={2} textTransform="uppercase">
                   {langKey && (langKey.download_app || t('download_app'))}
                   </Typography>
                 </Grid>
@@ -543,18 +548,20 @@ export default function Register() {
                   }}
                 >
                   <Grid
+                    container
                     item
                     xs={12}
+                    spacing={2}
                     display="flex"
                     justifyContent="space-between"
                   >
-                    <Grid item xs={6}>
-                      <Typography textAlign="center">
+                    <Grid item xs={6} className="mui-iosbtn-wrapper">
+                      <Typography component="div" textAlign="center">
                         <Image alt="iosbtn" style={{maxWidth:144}} src="./assets/Home/iosbtn.png" />
                       </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                      <Typography textAlign="center">
+                      <Typography component="div" textAlign="center" className="mui-androidbtn-wrapper">
                         <Image alt="androidbtn" style={{maxWidth:144}} src="./assets/Home/androidbtn.png" />
                       </Typography>
                     </Grid>
@@ -578,14 +585,11 @@ export default function Register() {
             item
             container
             justifyContent="center"
-            xs={12}
-            // sx={{ minHeight: "500px" }}
-            alignContent="space-between"
-            height={600}
+            alignContent="center"
+            xs={12} 
           >
-            <Grid item container xs={12} sm={12} paddingX={2} mt={2}>
+            <Grid item container xs={12} sm={12} padding={'40px 20px'}>
               <Grid
-                my={2}
                 container
                 justifyContent="center"
                 style={{ cursor: "pointer" }}
@@ -595,11 +599,12 @@ export default function Register() {
               >
                 <Image alt="footer_logo" style={{maxWidth:144}} src="./assets/Logo/footer_logo.png" />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} my={2}>
                 <Divider
                   sx={{
                     "&::before, &::after": {
                       borderColor: "#FF6F31",
+                      borderWidth: '2px'
                     },
                   }}
                 >
@@ -619,10 +624,10 @@ export default function Register() {
                   width: "100%",
                 }}
               >
-                <Grid item xs={12} sm={12} mb={1}>
+                <Grid item xs={12} sm={12} mb={3}>
                   <FieldLanguageSwitcher />
                 </Grid>
-                <Grid item xs={12} sm={12} mb={1}>
+                <Grid item xs={12} sm={12} mb={3}>
                   <FormControl
                     // variant="outlined"
                     fullWidth
@@ -662,7 +667,7 @@ export default function Register() {
                     )}
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={12} mb={1}>
+                <Grid item xs={12} sm={12} mb={3}>
                   <FormControl
                     variant="outlined"
                     fullWidth
@@ -708,7 +713,7 @@ export default function Register() {
                     )}
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={12} mb={1}>
+                <Grid item xs={12} sm={12} mb={3}>
                   <FormControl
                     variant="outlined"
                     fullWidth
@@ -727,7 +732,7 @@ export default function Register() {
                       label={langKey && (langKey.confirm_password || t('confirm_password'))}
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-confirmpassword"
-                      type={showPassword ? "text" : "password"}
+                      type={showConfirmPassword ? "text" : "password"}
                       value={confirmPassword}
                       onChange={(e) => onChangeConfirmPassword(e)}
                       error={errorConfirmPassword}
@@ -735,10 +740,10 @@ export default function Register() {
                         <InputAdornment position="end">
                           <IconButton
                             aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                             edge="end"
                           >
-                            {showPassword ? (
+                            {showConfirmPassword ? (
                               <Icon icon="ri:eye-close-fill" color="#F26522" />
                             ) : (
                               <Icon icon="ph:eye-bold" color="#F26522" />
@@ -754,7 +759,7 @@ export default function Register() {
                     )}
                   </FormControl>
                 </Grid>
-                <Grid item container spacing={2} mb={1}>
+                <Grid item container spacing={2} mb={3}>
                   <Grid item xs={6}>
                     <Button
                       fullWidth
@@ -776,6 +781,7 @@ export default function Register() {
                       variant="contained"
                       disabled={loading ? true : false}
                       sx={{
+                        whiteSpace:'nowrap',
                         color: "white",
                         background: loading
                           ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);"
@@ -808,7 +814,7 @@ export default function Register() {
                       style={{
                         cursor: "pointer",
                         color: "#013B91",
-                        padding: "10px",
+                        margin:'2px'
                       }}
                     >
                       <Icon icon="ic:baseline-facebook" fontSize="35px" />
@@ -818,7 +824,7 @@ export default function Register() {
                       style={{
                         cursor: "pointer",
                         color: "#00C2FF",
-                        padding: "10px",
+                        margin:'2px'
                       }}
                     >
                       <Icon icon="flat-color-icons:google" fontSize="35px" />
@@ -828,7 +834,7 @@ export default function Register() {
                       style={{
                         cursor: "pointer",
                         color: "#0898D6",
-                        padding: "10px",
+                        margin:'2px'
                       }}
                     >
                       <Icon
@@ -844,7 +850,7 @@ export default function Register() {
               item
               xs={12}
               sx={{
-                borderTop: "1px solid grey",
+                borderTop: "1px solid #F3F3F3",
               }}
             >
               <Grid

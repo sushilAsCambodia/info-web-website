@@ -96,15 +96,21 @@ export default function Login() {
   const [mounted, setMounted] = useState(false);
   const matches = useMediaQuery("(max-width:768px)");
   const [border, setBorder] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   useEffect(() => {
     setMounted(true);
-  },[])
+    if(localStorage.getItem('remember_me') ==  'true') {
+      setUserName(Cookies.get('user_name'));
+      setPassword(Cookies.get('user_pwd'));
+      setRememberMe(true);
+    }
+  },[]);
   const dispatch = useDispatch();
   const handleLogin = () => {
     dispatch(
       login({
-        body: { user_name: username, password: password },
+        body: { user_name: username, password: password, remember_me: rememberMe },
         callback: (res) => {
           setLoading(false);
           const { status, status_code, message = "" } = res;
@@ -436,9 +442,10 @@ export default function Login() {
             p={{xs:2, md:10}}
             display="flex"
             justifyContent="center"
-            sx={{ backgroundImage: "url('./assets/login/login_bg.png')",height:"100vh" }}
+            alignItems="center"
+            sx={{ backgroundImage: "url('./assets/login/login_bg.png')",backgroundPosition:'center',backgroundSize:'cover' }}
           >
-            <Grid container justifyContent="center" alignItems="stretch" width={{xs:"1000px", lg:"90%",xl:"65%",}} height="fit-content" >
+            <Grid container justifyContent="center" alignItems="stretch" width={{xs:"90%", lg:"90%",xl:"65%",}} height="fit-content" >
               <Grid
                 container
                 justifyContent="center"
@@ -458,6 +465,9 @@ export default function Login() {
                     fontWeight="bold"
                     color="white"
                     textAlign="center"
+                    marginTop={'18px'}
+                    fontSize={'36px'}
+                    lineHeight={'54px'}
                   >
                     {langKey && (langKey.anytime_anywhere || t('anytime_anywhere'))}
                   </Typography>
@@ -472,7 +482,7 @@ export default function Login() {
                           bottom: "150px",
                         }}
                       >
-                        <Typography fontWeight={700} fontSize="20px" margin={2}>
+                        <Typography fontWeight={700} fontSize="20px" margin={2} textTransform="uppercase">
                          {langKey && (langKey.download_app || t('download_app'))}
                         </Typography>
                       </Grid>
@@ -486,19 +496,18 @@ export default function Login() {
                         }}
                       >
                         <Grid
+                          container
+                          spacing={2}
                           item
-                          xs={12}
-                          display="flex"
-                          justifyContent="space-between"
-                        >
-                          <Grid item xs={6}>
-                            <Typography textAlign="center">
+                          xs={12}>
+                          <Grid item xs={6} className="mui-iosbtn-wrapper">
+                            <Typography component="div" textAlign="center">
                               <Image alt="iosbtn" style={{maxWidth: 144}} src="./assets/Home/iosbtn.png" />
                             </Typography>
                           </Grid>
-                          <Grid item xs={6}>
-                            <Typography textAlign="center">
-                              <Image alt="androidbtn" style={{maxWidth: 144}} src="./assets/Home/androidbtn.png" />
+                          <Grid item xs={6} className="mui-androidbtn-wrapper">
+                            <Typography component="div" textAlign="center">
+                              <Image alt="androidbtn" style={{maxWidth: 144}} src="./assets/Home/androidbtn.png"  />
                             </Typography>
                           </Grid>
                         </Grid>
@@ -520,15 +529,13 @@ export default function Login() {
                 <Grid
                   item
                   container
-                  alignContent="center"
-                  // sx={{ minHeight: "500px" }}
-                  height={600}
+                  alignContent="center" 
                 >
-                  <Grid item container xs={12} sm={12} padding={2}>
-                  <Grid my={2} container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
+                  <Grid item container xs={12} sm={12} padding={'40px 20px'}>
+                  <Grid   container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
                 <Image style={{width:139}} alt="footer_logo" src="./assets/Logo/footer_logo.png" />
               </Grid>
-                    <Grid item xs={12} mb={2}>
+                    <Grid item xs={12} my={2}>
                       <Divider
                         sx={{
                           "&::before, &::after": {
@@ -599,7 +606,7 @@ export default function Login() {
                           )}
                         </FormControl>
                       </Grid>
-                      <Grid item xs={12} sm={12} mb={4}>
+                      <Grid item xs={12} sm={12} mb={3}>
                         <FormControl
                           variant="outlined"
                           fullWidth
@@ -651,7 +658,7 @@ export default function Login() {
                         alignItems="center"
                       >
                         <FormControlLabel
-                          control={<Checkbox defaultChecked />}
+                          control={<Checkbox checked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>}
                           label={langKey && (langKey.remember_me || t('remember_me'))}
                         />
                         <Link
@@ -662,7 +669,7 @@ export default function Login() {
                           <Typography>{langKey && (langKey.forgot_password || t('forgot_password'))}</Typography>
                         </Link>
                       </Grid>
-                      <Grid item container spacing={2} mb={1}>
+                      <Grid item container spacing={2} mb={3}>
                         <Grid item xs={6}>
                           <Button
                             fullWidth
@@ -752,7 +759,7 @@ export default function Login() {
                     item
                     xs={12}
                     sx={{
-                      borderTop: "1px solid grey",
+                      borderTop: "1px solid #F3F3F3",
                     }}
                   >
                     <Grid

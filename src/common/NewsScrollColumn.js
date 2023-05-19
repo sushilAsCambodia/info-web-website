@@ -117,7 +117,7 @@ export default function NewsScrollColumn(props) {
           lg={4}
           textAlign="center"
           padding="5px"
-          className={newsList.length <= 0 ? "d-none" : ""}
+          className={newsList && newsList.length <= 0 ? "d-none" : ""}
         >
           <Grid
             sx={{

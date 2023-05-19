@@ -877,5 +877,13 @@ margin: 0 auto;
 
 .makecenterforpartner .react-multi-carousel-track{
   margin: 0 auto;
-  }
-  
+}
+label.MuiFormLabel-root.Mui-focused {
+  color:#F24E1E
+}
+.mui-androidbtn-wrapper .mui-image-wrapper{
+  justify-content: start !important;
+}
+.mui-iosbtn-wrapper .mui-image-wrapper{
+  justify-content: end !important;
+}
