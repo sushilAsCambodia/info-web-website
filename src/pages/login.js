@@ -439,13 +439,14 @@ export default function Login() {
           </>
         ) : (
           <Grid
-            p={{xs:2, md:10}}
             display="flex"
             justifyContent="center"
             alignItems="center"
+            height="100%"
+            overflow="auto"
             sx={{ backgroundImage: "url('./assets/login/login_bg.png')",backgroundPosition:'center',backgroundSize:'cover' }}
           >
-            <Grid container justifyContent="center" alignItems="stretch" width={{xs:"90%", lg:"90%",xl:"65%",}} height="fit-content" >
+            <Grid container justifyContent="center" alignItems="stretch" width={{xs:"90%", lg:"90%", xl:"1000px",}} height="fit-content" >
               <Grid
                 container
                 justifyContent="center"

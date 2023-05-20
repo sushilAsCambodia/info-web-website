@@ -26,6 +26,8 @@ const Layout = (props) => {
   let { children } = props;
   let title = "";
   let width = "";
+  let vh = "auto";
+  let height = "auto";
   if (router.pathname != "") {
     width = matches ? "95%" : "80%";
   }
@@ -35,8 +37,16 @@ const Layout = (props) => {
     router.pathname == "/forgotPassword" ||
     router.pathname == "/download"
   ) {
+    let substrackHeight = '147px';
     width = "100%";
+    vh = '100vh';
+    if(router.pathname == "/download") {
+      // substrackHeight = '237px';
+    }
+    height = `calc(${vh} - ${substrackHeight})`;
   }
+
+  
   switch (router.pathname.toLocaleLowerCase()) {
     case '/':
       title = (langKey && langKey.home_info_web)
@@ -90,38 +100,26 @@ const Layout = (props) => {
           <title>{title}</title>
           <meta property="og:title" content={title} key="title" />
         </Head>
-        <Header />
-        <Container
+        <Container 
           maxWidth="false"
           sx={{
             bgcolor: "#fff",
             padding: "0px !important",
+            height: vh
             // overflowY: 'auto',height: "100%",
-          }}
-        >
-          <main style={{width: width, margin: "auto" }}>
-            {" "}
+          }}>
+            <Header />
+          <main style={{width: width, margin: "auto", height: height}}>
             {children}
           </main>
+            <Footer />
         </Container>
-        <Footer />
-
         <style jsx global>
           {`
             html,
             body {
               // background: #f9f9f9;
               // font-size: 14px;
-            }
-            #__next {
-              // min-height: 100vh;
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-            }
-            main {
-              flex: 1;
-              min-height: 60vh;
             }
             p,
             a {

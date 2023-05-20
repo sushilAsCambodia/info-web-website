@@ -89,7 +89,7 @@ export default function NewsScrollColumn(props) {
         callback: (res) => {
           setInfiniteLoad(true);
           setTimeout(() => { 
-            setNewsList(newsList.concat(res.data.data));
+            setNewsList(newsList.concat(res?.data?.data||[]));
             setInfiniteLoad(false);
           }, 2000);
         },
