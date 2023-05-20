@@ -102,5 +102,11 @@
     "basketball_info_web":"Basketball | InfoWeb",
     "news_info_web":"News | InfoWeb",
     "news_single_page_info_web":"News Single Page | InfoWeb",
-    "data_chart_info_web":"Data Chart | InfoWeb"
+    "data_chart_info_web":"Data Chart | InfoWeb",
+    "password_must_not_contain_whitespaces":"Password must not contain Whitespaces.ch",
+    "password_must_have_at_least_one_uppercase_character":"Password must have at least one Uppercase Character.Ch",
+    "password_must_have_at_least_one_lowercase_character.":"Password must have at least one Lowercase Character.Ch",
+    "password_must_contain_at_least_one_digit":"Password must contain at least one Digit.Ch",
+    "password_must_contain_at_least_one_special_symbol.": "Password must contain at least one Special Symbol.Ch",
+    "account_deleted": "Account deleted ch"
 }

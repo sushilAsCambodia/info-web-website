@@ -59,8 +59,7 @@ export default function ResultsBanner(props) {
 
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
-  );
-
+  ); 
   return (
     <>
       <Grid
@@ -115,7 +114,7 @@ export default function ResultsBanner(props) {
             height="100%"
             container
             alignItems="space-between"
-          >
+          > 
             <MiddleShow />
           </Grid>
         </Grid>

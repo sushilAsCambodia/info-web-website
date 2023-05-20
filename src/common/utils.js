@@ -21,36 +21,37 @@ const utils = {
         }
         return false;
     },
-    checkPassword:(value, min = 6, max = 12) => {
+    checkPassword:(value, min = 6, max = 16) => {
         
         const isWhitespace = /^(?=.*\s)/;
         if (isWhitespace.test(value)) {
-          return "Password must not contain Whitespaces.";
+          return "password_must_not_contain_whitespaces";
         }
     
         const isContainsUppercase = /^(?=.*[A-Z])/;
         if (!isContainsUppercase.test(value)) {
-          return "Password must have at least one Uppercase Character.";
+          return "password_must_have_at_least_one_uppercase_character";
         }
     
         const isContainsLowercase = /^(?=.*[a-z])/;
         if (!isContainsLowercase.test(value)) {
-          return "Password must have at least one Lowercase Character.";
+          return "password_must_have_at_least_one_lowercase_character";
         }
     
         const isContainsNumber = /^(?=.*[0-9])/;
         if (!isContainsNumber.test(value)) {
-          return "Password must contain at least one Digit.";
+          return "password_must_contain_at_least_one_digit";
         }
     
         const isContainsSymbol =
           /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])/;
         if (!isContainsSymbol.test(value)) {
-          return "Password must contain at least one Special Symbol.";
+          return "password_must_contain_at_least_one_special_symbol";
         }
         const isValidLength = RegExp(`^.{${min},${max}}$`);
         if (!isValidLength.test(value)) {
-          return `The password format is a combination of ${min}-${max} letters and numbers`;
+          // return `The password format is a combination of ${min}-${max} letters and numbers`;
+          return 'validate_password';
         }
         
         return null;

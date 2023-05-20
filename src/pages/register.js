@@ -190,7 +190,7 @@ export default function Register() {
       setErrorPassword(true);
     } else {
       if(utils.checkPassword(e.target.value) != null) {
-        setErrorPasswordMessage(utils.checkPassword(e.target.value));
+        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
         setErrorPassword(true);
       }else {
         setErrorPassword(false);
@@ -213,7 +213,7 @@ export default function Register() {
       setErrorConfirmPassword(true);
     } else {
       if(utils.checkPassword(e.target.value) != null) {
-        setErrorPasswordMessage(utils.checkPassword(e.target.value));
+        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
         setErrorConfirmPassword(true);
       }else {
         setErrorConfirmPassword(false);

@@ -80,7 +80,7 @@ export default function NewsJournalTabs(props) {
   );
   return (
     <Grid item className="tabclass" sx={{ height: "100%" }}>
-      <ResultsBanner banners={banners} />
+      <ResultsBanner banners={banners}/>
 
       <Grid sx={{ height: "100%" }} >
         <Tabs
