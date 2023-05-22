@@ -493,10 +493,9 @@ export default function Register() {
     </>
   ) : (
     <Grid
-      p={{ xs: 2, md: 10 }}
       display="flex"
       justifyContent="center"
-      sx={{ backgroundImage: "url('./assets/login/login_bg.png')", backgroundPosition:'center', backgroundSize:'cover' }}
+      sx={{ backgroundImage: "url('./assets/login/login_bg.png')", backgroundPosition:'center', backgroundSize:'cover',height:'100%',alignItems:'center' }}
     >
       <Grid
         container

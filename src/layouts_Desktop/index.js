@@ -109,7 +109,7 @@ const Layout = (props) => {
             // overflowY: 'auto',height: "100%",
           }}>
             <Header />
-          <main style={{width: width, margin: "auto", height: height}}>
+          <main style={{width: width, margin: "auto", height: height,overflowY:'auto'}}>
             {children}
           </main>
             <Footer />
