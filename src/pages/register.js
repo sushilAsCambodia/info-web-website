@@ -495,6 +495,7 @@ export default function Register() {
     <Grid
       display="flex"
       justifyContent="center"
+      overflow="auto"
       sx={{ backgroundImage: "url('./assets/login/login_bg.png')", backgroundPosition:'center', backgroundSize:'cover',height:'100%',alignItems:'center' }}
     >
       <Grid
