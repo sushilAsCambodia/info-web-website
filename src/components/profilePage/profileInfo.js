@@ -8,6 +8,7 @@ import {
   uploadProfile,
 } from "@/store/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/store/actions/authActions";
 import utils from "@/common/utils";
 import {
   Grid,
@@ -22,7 +23,7 @@ import {
   FormHelperText,
   Divider,
   InputLabel,
-  Drawer
+  Drawer,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import Visibility from "@mui/icons-material/Visibility";
@@ -256,221 +257,235 @@ export default function ProfileInfo(props) {
       } catch (error) {
         console.log(error)
       }
-      setOpenDialog(true);
-      console.log("status:::",status)
+      setOpenDialog(true); 
     }
 
   };
-
+  const handleLogout = () => {
+    dispatch(
+      logout({
+        callback: (res) => {
+          router.push("/login");
+        },
+        auth: true,
+      })
+    );
+  };
 
   return (
     <>
-    <Paper sx={{ padding: "40px" }} elevation={5} component={Grid} container>
-      <Grid
-        item
-        xs={12}
-        container
-        alignItems="center"
-        flexWrap="nowrap"
-        border="1px solid grey"
-        p={2}
-        borderRadius="10px"
-        className="uploadimg_main"
-      >
-        <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
-
-        <FormControl fullWidth id="nickNameFormControl">
-          <InputLabel>{langKey && langKey.nick_name}</InputLabel>
-          <FilledInput
-            disabled={editUsername}
-            name="nickname"
-            placeholder={langKey && langKey.nick_name}
-            inputProps={{ maxLength: 16 }}
-            id="nicknameInputField"
-            type="text"
-            value={nickName}
-            onChange={onChangeUserName}
-            sx={{ background: "#fff" }}
-            endAdornment={
-              <InputAdornment position="end" background="#fff">
-                {editUsername ? (
-                  <Button
-                    disableElevation
-                    variant="contained"
-                    sx={{
-                      color: "black",
-                      background: "#EFEEEE",
-                      textTransform: "capitalize",
-                      border: "1px solid grey",
-                    }}
-                    onClick={() => {
-                      setEditUsername(!editUsername);
-                    }}
-                  >
-                    <Icon
-                      icon="mdi:circle-edit-outline"
-                      width={20}
-                      style={{ marginRight: "5px" }}
-                    />
-                   {langKey && langKey.edit}
-                  </Button>
-                ) : (
-                  <Button
-                  disabled={errorUserName}
-                    // disableElevation
-                    variant="contained"
-                    sx={{
-                      color: "white",
-                      background: "#FF6F31",
-                      textTransform: "capitalize",
-                      // border: "1px solid grey",
-                      "&:hover": {
-                        background: "#ff1b1b"
-                      },
-            
-                    }}
-                    onClick={onUpdateUserName}
-                  >
-                  {langKey && langKey.submit}
-                  </Button>
-                )}
-              </InputAdornment>
-            }
-          />
-          <FormHelperText style={{margin:0,padding:'0 10px'}}>{userName}</FormHelperText>
-          {errorUserName && <FormHelperText error>{errorUserNameMessage}</FormHelperText>}
-        </FormControl>
-      </Grid>
-
-      <Grid item xs={12} my={5}>
-        <Divider
-          id="changePasswordDivider"
-          sx={{
-            "&:before": {
-              width: "0px",
-              //   background: 'orange'
-            },
-          }}
-          textAlign="left"
+      <Paper sx={{ padding: "40px" }} elevation={3} component={Grid} container>
+        <Grid
+          item
+          xs={12}
+          container
+          alignItems="center"
+          flexWrap="nowrap"
+          border="1px solid grey"
+          p={2}
+          borderRadius="10px"
+          className="uploadimg_main"
         >
-          <Typography variant="h5">{langKey && langKey.change_password}</Typography>
-        </Divider>
-      </Grid>
+          <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
 
-      <Grid item xs={12}>
-        <FormControl
-          variant="outlined"
-          fullWidth
-          sx={{
-            borderRadius: "15px",
-            marginBottom: "5px",
-          }}
-        >
-          <InputLabel> {langKey && langKey.password}</InputLabel>
-          <OutlinedInput
+          <FormControl fullWidth id="nickNameFormControl">
+            <InputLabel>{langKey && langKey.nick_name}</InputLabel>
+            <FilledInput
+              disabled={editUsername}
+              name="nickname"
+              placeholder={langKey && langKey.nick_name}
+              inputProps={{ maxLength: 16 }}
+              id="nicknameInputField"
+              type="text"
+              value={nickName}
+              onChange={onChangeUserName}
+              sx={{ background: "#fff" }}
+              endAdornment={
+                <InputAdornment position="end" background="#fff">
+                  {editUsername ? (
+                    <Button
+                      disableElevation
+                      variant="contained"
+                      sx={{
+                        color: "black",
+                        background: "#EFEEEE",
+                        textTransform: "capitalize",
+                        border: "1px solid grey",
+                      }}
+                      onClick={() => {
+                        setEditUsername(!editUsername);
+                      }}
+                    >
+                      <Icon
+                        icon="mdi:circle-edit-outline"
+                        width={20}
+                        style={{ marginRight: "5px" }}
+                      />
+                    {langKey && langKey.edit}
+                    </Button>
+                  ) : (
+                    <Button
+                    disabled={errorUserName}
+                      // disableElevation
+                      variant="contained"
+                      sx={{
+                        color: "white",
+                        background: "#FF6F31",
+                        textTransform: "capitalize",
+                        // border: "1px solid grey",
+                        "&:hover": {
+                          background: "#ff1b1b"
+                        },
+              
+                      }}
+                      onClick={onUpdateUserName}
+                    >
+                    {langKey && langKey.submit}
+                    </Button>
+                  )}
+                </InputAdornment>
+              }
+            />
+            <FormHelperText style={{margin:0,padding:'0 10px'}}>{userName}</FormHelperText>
+            {errorUserName && <FormHelperText error>{errorUserNameMessage}</FormHelperText>}
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12} my={5}>
+          <Divider
+            id="changePasswordDivider"
+            sx={{
+              "&:before": {
+                width: "0px",
+                //   background: 'orange'
+              },
+            }}
+            textAlign="left"
+          >
+            <Typography variant="h5">{langKey && langKey.change_password}</Typography>
+          </Divider>
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormControl
+            variant="outlined"
             fullWidth
-            label={langKey && langKey.password}
-            name="password"
-            // placeholder={t("password")}
-            inputProps={{ maxLength: 16 }}
-            id="outlined-adornment-password"
-            type={showPassword ? "text" : "password"}
-            error={errorPassword}
-            value={password}
-            onChange={onChangePassword}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-          {errorPassword && (
-            <FormHelperText error>{errorPasswordMessage}</FormHelperText>
-          )}
-        </FormControl>
-      </Grid>
-      <Grid item xs={12} my={1}>
-        <FormControl
-          variant="outlined"
-          fullWidth
-          sx={{
-            borderRadius: "15px",
-            marginBottom: "5px",
-          }}
-        >
-          <InputLabel>{langKey && langKey.confirm_password}</InputLabel>
+            sx={{
+              borderRadius: "15px",
+              marginBottom: "5px",
+            }}
+          >
+            <InputLabel> {langKey && langKey.password}</InputLabel>
+            <OutlinedInput
+              fullWidth
+              label={langKey && langKey.password}
+              name="password"
+              // placeholder={t("password")}
+              inputProps={{ maxLength: 16 }}
+              id="outlined-adornment-password"
+              type={showPassword ? "text" : "password"}
+              error={errorPassword}
+              value={password}
+              onChange={onChangePassword}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+            {errorPassword && (
+              <FormHelperText error>{errorPasswordMessage}</FormHelperText>
+            )}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} my={1}>
+          <FormControl
+            variant="outlined"
+            fullWidth
+            sx={{
+              borderRadius: "15px",
+              marginBottom: "5px",
+            }}
+          >
+            <InputLabel>{langKey && langKey.confirm_password}</InputLabel>
 
-          <OutlinedInput
-            sx={{ paddingRight: "10px" }}
-            name="confirm_password"
-            // placeholder={t("confirm_password")}
-            label={langKey && langKey.confirm_password}
-            inputProps={{ maxLength: 16 }}
-            id="outlined-adornment-confirmpassword"
-            type={showConfirmPassword ? "text" : "password"}
-            error={errorConfirmPassword}
-            value={confirmpassword}
-            onChange={onChangeConfirmPassword}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowConfirmPassword}
-                  onMouseDown={handleMouseDownConfirmPassword}
-                  edge="end"
-                >
-                  {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          /> 
-          {errorConfirmPassword && <FormHelperText error>{errorConfirmPasswordMessage}</FormHelperText> }
-        </FormControl>
-      </Grid>
+            <OutlinedInput
+              sx={{ paddingRight: "10px" }}
+              name="confirm_password"
+              // placeholder={t("confirm_password")}
+              label={langKey && langKey.confirm_password}
+              inputProps={{ maxLength: 16 }}
+              id="outlined-adornment-confirmpassword"
+              type={showConfirmPassword ? "text" : "password"}
+              error={errorConfirmPassword}
+              value={confirmpassword}
+              onChange={onChangeConfirmPassword}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowConfirmPassword}
+                    onMouseDown={handleMouseDownConfirmPassword}
+                    edge="end"
+                  >
+                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            /> 
+            {errorConfirmPassword && <FormHelperText error>{errorConfirmPasswordMessage}</FormHelperText> }
+          </FormControl>
+        </Grid>
 
-      <Grid item xs={6} pr={1}>
-        <Button
-          disableElevation
-          fullWidth
-          variant="contained"
-          sx={{
-            color: "#6F6F6F",
-            background: "#D4D4D4",
-            textTransform: "capitalize",
-            "&:hover": {
-              color: "white"
-            },
-          }}
-          onClick={()=>router.push('/')}
-        >
-          {langKey && langKey.cancel}
-        </Button>
+        <Grid item xs={6} pr={1}>
+          <Button
+            disableElevation
+            fullWidth
+            variant="contained"
+            sx={{
+              color: "#6F6F6F",
+              background: "#D4D4D4",
+              textTransform: "capitalize",
+              "&:hover": {
+                color: "white"
+              },
+            }}
+            onClick={()=>router.push('/')}
+          >
+            {langKey && langKey.cancel}
+          </Button>
+        </Grid>
+        <Grid item xs={6} pl={1}>
+          <Button
+            disableElevation
+            fullWidth
+            variant="contained"
+            sx={{
+              color: "white",
+              background:
+                "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
+              textTransform: "capitalize",
+            }}
+            onClick={onSubmit}
+          >
+      {langKey && langKey.submit}
+          </Button>
+        </Grid>
+        
+      </Paper>
+      <Grid container justifyContent="center" py={5}>
+        <Grid item>
+          <Button  style={{background:'#FAFAFA',border:'1px solid #DDDDDD',fontSize:'14px',padding:'5px 25px'}} onClick={handleLogout}>Logout</Button>
+        </Grid>
       </Grid>
-      <Grid item xs={6} pl={1}>
-        <Button
-          disableElevation
-          fullWidth
-          variant="contained"
-          sx={{
-            color: "white",
-            background:
-              "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
-            textTransform: "capitalize",
-          }}
-          onClick={onSubmit}
-        >
-     {langKey && langKey.submit}
-        </Button>
-      </Grid>
-    </Paper>
-     <LoadingDialog loading={loading}/>
+      <LoadingDialog loading={loading}/>
      </>
   );
 }
