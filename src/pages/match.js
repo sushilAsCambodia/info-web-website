@@ -22,6 +22,7 @@ import { Icon } from "@iconify/react";
 
 import utils from "@/common/utils";
 import moment from "moment/moment";
+import Events from "./events";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -117,7 +118,7 @@ export default function match() {
             }}
           >
             <Tab label="All" {...a11yProps(0)} />
-            <Tab label="Category 1" {...a11yProps(1)} />
+            <Tab label="Events" {...a11yProps(1)} />
             <Tab label="Category 2" {...a11yProps(2)} />
             <Tab label="Category 3" {...a11yProps(3)} />
           </Tabs>
@@ -245,7 +246,8 @@ export default function match() {
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Quánbù
+          <Grid sx={{minHeight:"50px"}}></Grid>
+          <Events />
         </TabPanel>
         <TabPanel value={value} index={2}>
           Shíshí Cǎi

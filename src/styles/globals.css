@@ -877,4 +877,20 @@ margin: 0 auto;
 .makecenterforpartner .react-multi-carousel-track{
   margin: 0 auto;
   }
-  
+/* EVENTS PAGE  */
+.filterBtn{
+  white-space: nowrap;
+  color: #999999 !important;
+  background: #FAFAFA;
+  text-transform:capitalize !important;
+  border-radius: 10px !important;
+}
+.filterBtnSelected{
+  white-space: nowrap;
+  background: #FF6F31 !important;
+  color: white !important;
+  font-weight: bold;
+  border: 1px solid #DDDDDD !important;
+  text-transform: capitalize !important;
+  border-radius: 10px !important;
+}
