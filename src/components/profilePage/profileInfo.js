@@ -135,7 +135,7 @@ export default function ProfileInfo(props) {
       setErrorPassword(true);
     } else {
       if(utils.checkPassword(e.target.value) != null) {
-        setErrorPasswordMessage(utils.checkPassword(e.target.value));
+        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
         setErrorPassword(true);
       }else {
         setErrorPassword(false);
@@ -157,7 +157,7 @@ export default function ProfileInfo(props) {
       setErrorConfirmPassword(true);
     } else {
       if(utils.checkPassword(e.target.value) != null) {
-        setConfirmErrorPasswordMessage(utils.checkPassword(e.target.value));
+        setConfirmErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
         setErrorConfirmPassword(true);
       }else {
         if (password != e.target.value) {

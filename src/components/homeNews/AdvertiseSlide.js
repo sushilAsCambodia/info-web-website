@@ -30,7 +30,7 @@ const AdvertiseSlide = (props) => {
           }}
           >
           {
-            advertises.map((card,index) => {
+            advertises.filter(ad => ad.platform == 1).map((card,index) => {
               return <Tab 
                   key={index} 
                   onClick={()=> setTabValue(0)} 

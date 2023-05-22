@@ -24,6 +24,7 @@ import { useTranslation } from "react-i18next";
 
 import utils from "@/common/utils";
 import { Image } from "mui-image";
+import Advertisement from "@/common/Advertisement";
 
 export default function Index() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
         <ResultsBanner lang_id={utils.convertLangCodeToID(i18n.language)}/>
         {/* <LinkBanner /> */}
         {/* <LandingPageBanner /> */}
+        <Advertisement />
         <NewsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <JournalsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <PartnersColumns />

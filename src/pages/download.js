@@ -15,6 +15,7 @@ import { Image } from "mui-image";
 export default function Index() {
   const matches = useMediaQuery("(max-width:414px)");
   const xs = useMediaQuery("(max-width:375px)");
+  const lowHeight = useMediaQuery("(max-height:455px)");
   const {t} = useTranslation()
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   return (
@@ -93,8 +94,8 @@ export default function Index() {
             <Typography variant="h3" fontWeight="bold" sx={{color: 'white','-webkit-text-stroke':' 2px #F24E1E',fontSize:48 }}>
               {langKey && langKey.your_hand}
             </Typography>
-          </Grid>
-          <Grid textAlign="center" pl={10} style={{width:300,height:350,position: 'absolute',bottom: 110}}>
+          </Grid> 
+          <Grid  textAlign="center" pl={10} style={{width:300,height:'55%',position: 'absolute',bottom: 110,display:lowHeight?'none':''}}>
             <Image alt="football" style={{width:'100%',height:'100%',objectFit:'contain'}} src="./assets/Download/football.png"/>
           </Grid> 
           <Grid item xs={12} style={{position: 'absolute',bottom:10,width:'100%'}}>
