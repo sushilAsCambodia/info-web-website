@@ -287,7 +287,7 @@ export default function Register() {
                     placeholder={langKey && (langKey.user_name || t('user_name'))}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-username"
-                    value={username||null}
+                    value={username}
                     onChange={(e) => onChangeUserName(e)}
                     error={errorUserName}
                     endAdornment={
@@ -326,7 +326,7 @@ export default function Register() {
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-password"
                     type={showPassword ? "text" : "password"}
-                    value={password||null}
+                    value={password}
                     onChange={(e) => onChangePassword(e)}
                     error={errorPassword}
                     endAdornment={
@@ -645,7 +645,7 @@ export default function Register() {
                         marginBottom: "5px",
                       }}
                     >
-                      <InputLabel htmlFor="component-outlined">
+                      <InputLabel htmlFor="component-outlined" shrink>
                         {langKey && (langKey.user_name || t('user_name'))}
                       </InputLabel>
                       <OutlinedInput
@@ -655,7 +655,8 @@ export default function Register() {
                         inputProps={{ maxLength: 16 }}
                         id="outlined-adornment-username"
                         type="text"
-                        value={username||null}
+                        notched
+                        value={username}
                         onChange={(e) => onChangeUserName(e)}
                         error={errorUserName}
                         endAdornment={
@@ -685,7 +686,7 @@ export default function Register() {
                         marginBottom: "5px",
                       }}
                     >
-                      <InputLabel htmlFor="component-outlined">
+                      <InputLabel htmlFor="component-outlined" shrink>
                         {langKey && (langKey.password || t('password'))}
                       </InputLabel>
 
@@ -696,7 +697,8 @@ export default function Register() {
                         inputProps={{ maxLength: 16 }}
                         id="outlined-adornment-password"
                         type={showPassword ? "text" : "password"}
-                        value={password||null}
+                        value={password}
+                        notched
                         onChange={(e) => onChangePassword(e)}
                         error={errorPassword}
                         endAdornment={
@@ -731,7 +733,7 @@ export default function Register() {
                         marginBottom: "5px",
                       }}
                     >
-                      <InputLabel htmlFor="component-outlined">
+                      <InputLabel htmlFor="component-outlined" shrink>
                         {langKey && (langKey.confirm_password || t('confirm_password'))}
                       </InputLabel>
 
@@ -743,6 +745,7 @@ export default function Register() {
                         id="outlined-adornment-confirmpassword"
                         type={showConfirmPassword ? "text" : "password"}
                         value={confirmPassword}
+                        notched
                         onChange={(e) => onChangeConfirmPassword(e)}
                         error={errorConfirmPassword}
                         endAdornment={

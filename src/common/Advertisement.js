@@ -48,51 +48,55 @@ export default function Advertisement(props) {
   }, [i18n.language,dispatch]); 
   return (
     <>
-      <Grid mt={5}>
-        <Carousel
-          responsive={responsive}
-          additionalTransfrom={0}
-          swipeable={advertises.filter(ad => ad.platform == 2).length>1?true:false}
-          draggable={advertises.filter(ad => ad.platform == 2).length>1?true:false}
-          arrows={advertises.filter(ad => ad.platform == 2).length>1?true:false}
-          autoPlaySpeed={3000}
-          centerMode={false}
-          containerClass="container-with-dots"
-          dotListClass=""
-          focusOnSelect={false}
-          infinite
-          itemClass=""
-          keyBoardControl
-          minimumTouchDrag={80}
-          pauseOnHover
-          renderArrowsWhenDisabled={false}
-          renderButtonGroupOutside={false}
-          renderDotsOutside={false} >
-          {advertises.filter(ad => ad.platform == 2).map((ad, index) => (
-            <Link href={ad.ads_link} target='_blank' key={index}>
-              <Grid 
-                style={{
-                  color: "white",
-                  textAlign: "left",
-                  height: "302.33px",
-                  // border: "1px solid grey",
-                  borderRadius: "5px",
-                }} 
-              >
-                <Image  
-                  src={ad.icon}
-                  alt={ad.title}
+    { 
+      advertises && advertises.filter(ad => ad.platform == 2).length > 0 && (
+        <Grid mt={5}>
+          <Carousel
+            responsive={responsive}
+            additionalTransfrom={0}
+            swipeable={advertises.filter(ad => ad.platform == 2).length>1?true:false}
+            draggable={advertises.filter(ad => ad.platform == 2).length>1?true:false}
+            arrows={advertises.filter(ad => ad.platform == 2).length>1?true:false}
+            autoPlaySpeed={3000}
+            centerMode={false}
+            containerClass="container-with-dots"
+            dotListClass=""
+            focusOnSelect={false}
+            infinite
+            itemClass=""
+            keyBoardControl
+            minimumTouchDrag={80}
+            pauseOnHover
+            renderArrowsWhenDisabled={false}
+            renderButtonGroupOutside={false}
+            renderDotsOutside={false} >
+            {advertises.filter(ad => ad.platform == 2).map((ad, index) => (
+              <Link href={ad.ads_link} target='_blank' key={index}>
+                <Grid 
                   style={{
-                    width: "100%",
-                    height:'100%',
-                    objectFit:"cover", 
-                  }}
-                />
-              </Grid>
-            </Link>
-          ))}
-        </Carousel>
-      </Grid>
+                    color: "white",
+                    textAlign: "left",
+                    height: "302.33px",
+                    // border: "1px solid grey",
+                    borderRadius: "5px",
+                  }} 
+                >
+                  <Image  
+                    src={ad.icon}
+                    alt={ad.title}
+                    style={{
+                      width: "100%",
+                      height:'100%',
+                      objectFit:"cover", 
+                    }}
+                  />
+                </Grid>
+              </Link>
+            ))}
+          </Carousel>
+        </Grid>
+      )
+    }
     </>
   );
 }

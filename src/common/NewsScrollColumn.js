@@ -165,7 +165,7 @@ export default function NewsScrollColumn(props) {
                     : newsCategory.category_name || "N/A"}
                 </Typography>
                 <Button
-                  disabled={newsList.length == 0}
+                  disabled={newsList && newsList.length == 0}
                   component={Link}
                   onClick={() =>
                     Router.push({

@@ -224,7 +224,7 @@ export default function Login() {
                           inputProps={{ maxLength: 16 }}
                           id="outlined-adornment-username"
                           type="text"
-                          value={username||null}
+                          value={username}
                           onChange={(e) => onChangeUserName(e)}
                           error={errorUserName}
                           endAdornment={
@@ -264,7 +264,7 @@ export default function Login() {
                           inputProps={{ maxLength: 16 }}
                           id="outlined-adornment-password"
                           type={showPassword ? "text" : "password"}
-                          value={password||null}
+                          value={password}
                           onChange={(e) => onChangePassword(e)}
                           error={errorPassword}
                           endAdornment={
@@ -576,7 +576,7 @@ export default function Login() {
                             marginBottom: "5px",
                           }}
                         >
-                          <InputLabel htmlFor="component-outlined">
+                          <InputLabel htmlFor="component-outlined" shrink>
                         {langKey && (langKey.user_name || t('user_name'))}
                           </InputLabel>
       
@@ -584,12 +584,16 @@ export default function Login() {
                             name="Username" 
                             placeholder= {langKey && (langKey.user_name || t('user_name'))}
                             label={langKey && (langKey.user_name || t('user_name'))}
-                            inputProps={{ maxLength: 16}}
+                            inputProps={{
+                               maxLength: 16,
+                            }}
+                            
                             id="outlined-adornment-username"
                             type="text"
-                            value={username||null}
+                            value={username || ''}
                             onChange={(e) => onChangeUserName(e)}
                             error={errorUserName}
+                            notched
                             endAdornment={
                               <InputAdornment position="end">
                                 <IconButton
@@ -617,7 +621,7 @@ export default function Login() {
                             marginBottom: "5px",
                           }}
                         >
-                          <InputLabel htmlFor="component-outlined">
+                          <InputLabel htmlFor="component-outlined" shrink>
                        {langKey && (langKey.password || t('password'))}
                           </InputLabel>
                           <OutlinedInput
@@ -625,9 +629,10 @@ export default function Login() {
                             placeholder= {langKey && (langKey.password || t('password'))}
                             label= {langKey && (langKey.password || t('password'))}
                             inputProps={{ maxLength: 16 }}
+                            notched
                             id="outlined-adornment-password"
                             type={showPassword ? "text" : "password"}
-                            value={password||null} 
+                            value={password || ''}
                             onChange={(e) => onChangePassword(e)}
                             error={errorPassword}
                             endAdornment={
