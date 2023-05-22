@@ -21,6 +21,7 @@ import MatchLiveFeed from "@/components/LiveScore/matchLiveFeed";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 
 import { useSelector } from "react-redux";
+import { Image } from "mui-image";
 
 export default function LiveScorePage() {
   const router = useRouter();
@@ -51,7 +52,8 @@ export default function LiveScorePage() {
 
       <Grid height="fit-content">
         <Grid container mb={2} alignItems="center">
-          <img
+          <Image
+            alt="football-lion-team-logo_441059-63"
             width={60}
             src={
               "https://img.freepik.com/premium-vector/football-lion-team-logo_441059-63.jpg"

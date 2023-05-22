@@ -77,6 +77,7 @@ export default function ProfileDropDown(props) {
           "&:hover": {
             background: "#efefef",
           },
+          textTransform:'initial'
         }}
       >
         <Icon icon="mdi:user" width={25} />

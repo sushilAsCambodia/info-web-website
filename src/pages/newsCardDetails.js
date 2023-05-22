@@ -10,6 +10,7 @@ import DataLoading from "@/components/DataLoading";
 import DataNotFound from "@/components/DataNotFound";
 import utils from "@/common/utils";
 import moment from "moment/moment";
+import { Image } from "mui-image";
 const NewsCardDetails = () => {
     const {loading, newsDetail = {}} = useSelector((state) => state.news);
     const router = Router;
@@ -28,7 +29,7 @@ const NewsCardDetails = () => {
                 })
             )
         }
-    },[id]);
+    },[dispatch,id]);
     return (
         <>
             {
@@ -55,7 +56,7 @@ const NewsCardDetails = () => {
                                         <Typography color="#8C8C8C" pt={1} fontSize="12px">{moment(newsDetail.created_at).format(utils.formatDate)}</Typography>
                                     </Grid>
                                     <Grid item xs={12} paddingTop="10px">
-                                        <img 
+                                        <Image 
                                             src={newsDetail.image?.path}
                                             onError={(e) => e.target.src = '/assets/no-image.png'}
                                             alt={newsDetail.title || ''}

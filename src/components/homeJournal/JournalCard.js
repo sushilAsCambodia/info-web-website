@@ -4,6 +4,7 @@ import Router from "next/router";
 import DataLoading from '../DataLoading';
 import { useSelector } from 'react-redux';
 import Empty from '../Empty';
+import { Image } from 'mui-image';
 export default function JournalCard(props) {
   const { lang_id } = props;
   const { journals = [], loading } = useSelector((state) => state.journal);
@@ -15,7 +16,7 @@ export default function JournalCard(props) {
       {journals && journals.length > 0 ?
         journals.map((journal, index) => {
           return <Grid key={index} item xs={4} sm={4} md={4} lg={4} xl={4} onClick={() => cardDetail(journal.id,journal.album_name)}>
-            <img
+            <Image
               src={journal.cover_img ? journal.cover_img : null}
               alt={journal.album_name || ''}
               width="100%"

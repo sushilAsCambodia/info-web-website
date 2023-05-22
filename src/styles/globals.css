@@ -204,9 +204,9 @@ padding: 0px;
   .multitabs .css-145v6pe-MuiButtonBase-root-MuiTabScrollButton-root{
     width: auto;
   }
-  .multitabs .css-hpgf8j{
+  /* .multitabs .css-hpgf8j{
     padding: 0px;
-  }
+  } */
 .news-multiTabs {
 font-size: 12px !important;
 }
@@ -325,6 +325,7 @@ padding: 0px;
   bottom: -20px;
   right: 50%;
   border: 0.5px solid #DDDDDD;
+  z-index: 1;
 }
 .uploadimg_main .img-upload:hover:before{
  opacity: 1;
@@ -876,7 +877,16 @@ margin: 0 auto;
 
 .makecenterforpartner .react-multi-carousel-track{
   margin: 0 auto;
-  }
+}
+label.MuiFormLabel-root.Mui-focused {
+  color:#F24E1E
+}
+.mui-androidbtn-wrapper .mui-image-wrapper{
+  justify-content: start !important;
+}
+.mui-iosbtn-wrapper .mui-image-wrapper{
+  justify-content: end !important;
+} 
 /* EVENTS PAGE  */
 .filterBtn{
   white-space: nowrap;

@@ -19,16 +19,12 @@ export default function FieldLanguageSwitcher() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    console.log("lang:::",event.target.value)
     setLangLabel(event.target.value)
-
     i18n.changeLanguage(event.target.value);
-
   };
 
   const changeLanguage = (l) => {
     window.localStorage.setItem('lang',l);
-    
     setLangLabel(labelLanguage(l))
   }
   const labelLanguage = (l) => {
@@ -47,12 +43,10 @@ export default function FieldLanguageSwitcher() {
         break;
     }
     return language;
-  }
-  console.log("lang:::",langLabel)
-  console.log("il8n:::",i18n)
+  } 
   return (
     <>
-    <FormControl sx={{ minWidth: 120 }} 
+    <FormControl sx={{ minWidth: 120 }} className="switch-lang-dropdown-wrapper"
     // size="small"
     fullWidth
     >
@@ -68,7 +62,7 @@ export default function FieldLanguageSwitcher() {
           return <em>{langKey && langKey.lang}</em>;
         }}
         endAdornment={
-          <InputAdornment position="end" paddingright="10px">
+          <InputAdornment position="end" style={{marginRight:'20px'}}>
             <Icon width={40} icon="fa-solid:language" />
           </InputAdornment>
         }

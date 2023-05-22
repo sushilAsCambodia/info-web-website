@@ -1,5 +1,6 @@
 import React from 'react'
 import { Grid, Typography } from '@mui/material'
+import { Image } from 'mui-image';
 export default function NewsDetails() {
   const bigcard = "/assets/NewsJourney/bigcarddetail.png";
   const card1 = "/assets/NewsJourney/Journalcard1.png";
@@ -18,30 +19,30 @@ export default function NewsDetails() {
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Grid item >
             <Grid item>
-              <img src={bigcard} alt="一般" width="100%" height="auto" />
+              <Image src={bigcard} alt="一般" width="100%" height="auto" />
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Grid item display="grid" sx={{ gridTemplateColumns: "auto auto auto auto auto", gridGap: "10px" }} >
             <Grid item>
-              <img src={card1} alt="一般" width="100%" height="auto" />
+              <Image src={card1} alt="一般" width="100%" height="auto" />
           
             </Grid>
             <Grid item>
-              <img src={card2} alt="一般" width="100%" height="auto" />
+              <Image src={card2} alt="一般" width="100%" height="auto" />
        
             </Grid>
             <Grid item>
-              <img src={card3} alt="一般" width="100%" height="auto" />
+              <Image src={card3} alt="一般" width="100%" height="auto" />
              
             </Grid>
             <Grid item>
-              <img src={card4} alt="一般" width="100%" height="auto" />
+              <Image src={card4} alt="一般" width="100%" height="auto" />
             
             </Grid>
             <Grid item>
-              <img src={card5} alt="一般" width="100%" height="auto" />
+              <Image src={card5} alt="一般" width="100%" height="auto" />
            
             </Grid>
             

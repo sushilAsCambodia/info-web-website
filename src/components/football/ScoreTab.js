@@ -32,6 +32,7 @@ import moment from "moment/moment";
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
+import { Image } from "mui-image";
 export default function ScoreTab() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
@@ -201,7 +202,7 @@ export default function ScoreTab() {
                     <>
                       <StyledTableRow key={item.id}>
                         <StyledTableCell align="left">
-                          <img width={30} src={item.img} />
+                          <Image width={30} src={item.img} alt="football_endtab"/>
                           <Typography>{item.name}</Typography>
                         </StyledTableCell>
                         <StyledTableCell align="left">

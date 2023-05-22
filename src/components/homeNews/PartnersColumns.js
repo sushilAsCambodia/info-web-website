@@ -14,6 +14,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import { Icon } from "@iconify/react";
+import { Image } from "mui-image";
 const responsive = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -112,8 +113,9 @@ export default function PartnersColumns(props) {
               justifyContent="center"
             >
               <Grid item padding="5px">
-                <img
+                <Image
                   src="./assets/Logo/clts-logo.png"
+                  alt="clts_logo"
                   style={{
                     minWidth: "100px",
                     maxHeight: "80px",
@@ -142,8 +144,9 @@ export default function PartnersColumns(props) {
               justifyContent="center"
             >
               <Grid item padding="5px">
-                <img
+                <Image
                   src="./assets/Logo/kk_exchange.png"
+                  alt="kk_exchange"
                   style={{
                     minWidth: "100px",
                     maxHeight: "80px",

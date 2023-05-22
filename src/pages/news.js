@@ -85,18 +85,14 @@ const News = () => {
       "Loading"
     ),
   ];
-  useEffect(() => {
-    console.log("useefect on langID useeffect:::", category_id);
-
+  useEffect(() => { 
     dispatch(
       getCategory({
         params: { lang_id: lang_id },
-        callback: (res) => {
-          console.log("news page getCategorys:::", res);
-        },
+        callback: (res) => {  },
       })
     );
-  }, [lang_id]);
+  }, [dispatch,lang_id]);
   const handleChange = (event, value) => {
     setCurrentPage(value);
   };
@@ -117,7 +113,7 @@ const News = () => {
         },
       })
     );
-  }, [lang_id, currentPage, category_id]);
+  }, [dispatch,lang_id, currentPage, category_id]);
   return (
     <>
       <LoadingDialog loading={loading} />

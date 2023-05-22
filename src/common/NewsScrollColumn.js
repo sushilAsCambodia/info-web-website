@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
@@ -28,8 +28,7 @@ export default function NewsScrollColumn(props) {
   const [pageLimit, setPageLimit] = useState("");
 
   const [infiniteLoad, setInfiniteLoad] = useState(false);
-  const [loading, setLoading] = useState(false);
-
+  const [loading, setLoading] = useState(false); 
   const handleScroll = (event) => {
     console.log("scroll clientheight:::", event.currentTarget.clientHeight);
     console.log("scroll scrolltop:::", event.currentTarget.scrollTop);
@@ -50,16 +49,16 @@ export default function NewsScrollColumn(props) {
   };
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    setLoading(true);
+  
+  const fetchNewsByCategory = useCallback((categoryId) => {
     dispatch(
       getNewsByCategory({
         params: {
           lang_id: lang_id,
           rowsPerPage: 10,
           shortTitle: "",
-          category_id: newsCategory.id,
-          page: currentPage,
+          category_id: categoryId,
+          page: 1,
         },
         callback: (res) => {
           setTimeout(() => {
@@ -70,10 +69,14 @@ export default function NewsScrollColumn(props) {
         },
       })
     );
-  }, [newsCategory.id]);
-
+  },[dispatch,lang_id]);
+  
   useEffect(() => {
-    // NEXT PAGE
+    setLoading(true);
+    fetchNewsByCategory(newsCategory.id);
+  }, [fetchNewsByCategory,newsCategory.id]);
+
+  const fetchNewsByCategoryNextPage = useCallback((currentPage) => {
     dispatch(
       getNewsByCategory({
         params: {
@@ -85,14 +88,20 @@ export default function NewsScrollColumn(props) {
         },
         callback: (res) => {
           setInfiniteLoad(true);
-          setTimeout(() => {
-            setNewsList(newsList.concat(res.data.data));
+          setTimeout(() => { 
+            setNewsList(newsList.concat(res?.data?.data||[]));
             setInfiniteLoad(false);
           }, 2000);
         },
       })
     );
-  }, [currentPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[dispatch,lang_id,newsCategory.id]);
+  useEffect(() => {
+    // NEXT PAGE 
+    fetchNewsByCategoryNextPage(currentPage)
+  }, [fetchNewsByCategoryNextPage,currentPage]);
+  
   const bg = ["Mask.png", "Mask2.png", "Mask3.png"];
 
   const langKey = useSelector(
@@ -108,7 +117,7 @@ export default function NewsScrollColumn(props) {
           lg={4}
           textAlign="center"
           padding="5px"
-          className={newsList.length <= 0 ? "d-none" : ""}
+          className={newsList && newsList.length <= 0 ? "d-none" : ""}
         >
           <Grid
             sx={{
@@ -156,7 +165,7 @@ export default function NewsScrollColumn(props) {
                     : newsCategory.category_name || "N/A"}
                 </Typography>
                 <Button
-                  disabled={newsList.length == 0}
+                  disabled={newsList && newsList.length == 0}
                   component={Link}
                   onClick={() =>
                     Router.push({

@@ -97,7 +97,7 @@ const Header = () => {
         }
       ));
     }
-  },[i18n.language])
+  },[dispatch,i18n.language])
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
   //     window.addEventListener("scroll", () =>
@@ -285,7 +285,7 @@ const Header = () => {
                         return (
                           <Grid key={index}>
                             <MenuItem
-                              sx={{ paddingX: { xs: "5px", lg: "15px" } }}
+                              sx={{ paddingX: { xs: "3px", lg: "15px" } }}
                               onClick={() => router.push(`${item.page}`)}
                             >
                               <Typography
@@ -394,11 +394,13 @@ const Header = () => {
                   lg={2.5}
                   container
                   alignItems="center"
+                  flexWrap="nowrap"
                   justifyContent="flex-end"
                 >
                   <Button
                     variant="contain"
                     sx={{
+                      whiteSpace:'nowrap',
                       padding: "4px 8px",
                       marginRight: "5px",
                       fontSize: "12px",

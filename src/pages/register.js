@@ -29,6 +29,9 @@ import { register, login } from "@/store/actions/authActions";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import FieldLanguageSwitcher from "@/components/fieldLangSwitcher";
+import { Image } from "mui-image";
+import utils from "@/common/utils";
+import ForgotPassword from "@/components/desktop/forgotPassword";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -65,20 +68,24 @@ BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
-
+const minLength = 6;
 export default function Register() {
   const { t } = useTranslation();
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
+  const [errorUserNameMessage, setErrorUserNameMessage] = useState('');
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
+  const [confirmErrorPasswordMessage, setConfirmErrorPasswordMessage] = useState('');
+  const [isComponent, setIsComponent] = useState("login");
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
@@ -122,18 +129,47 @@ export default function Register() {
       })
     );
   };
+  const onSubmitMobile = () => {
+    if (username == "" && password == "") {
+      setErrorUserName(true);
+      setErrorPassword(true);
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorPasswordMessage(langKey && langKey.password_required);
+      return;
+    } else if (password == "") {
+      setErrorPasswordMessage(langKey && (langKey.password_required || t('password_required')));
+      setErrorPassword(true);
+      return;
+    } else if (username == "") {
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorUserName(true);
+      return;
+    }
+    if (!errorPassword && !errorUserName) {
+      setLoading(true);
+      handleSignup();
+    }
+  };
   const onSubmit = () => {
     if (username == "" && password == "" && confirmPassword == "") {
       setErrorUserName(true);
       setErrorPassword(true);
       setErrorConfirmPassword(true);
-      return false;
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorPasswordMessage(langKey && langKey.password_required);
+      setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
+      return;
     } else if (password == "") {
       setErrorPassword(true);
-      return false;
+      return;
     } else if (username == "") {
       setErrorUserName(true);
-      return false;
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      return;
+    }else if (confirmPassword === '') {
+      setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
+      setErrorConfirmPassword(true);
+      return;
     }
     if (!errorPassword && !errorUserName && !errorConfirmPassword) {
       setLoading(true);
@@ -141,29 +177,60 @@ export default function Register() {
     }
   };
   const onChangeUserName = (e) => {
-    if (e.target.value != "" && e.target.value.length < 6) {
+    if (e.target.value != "" && e.target.value.length < minLength) {
       setErrorUserName(true);
+      setErrorUserNameMessage(langKey && (langKey.validate_user_name || t('validate_user_name')));
     } else {
       setErrorUserName(false);
     }
     setUserName(e.target.value);
   };
   const onChangePassword = (e) => {
-    if (e.target.value != "" && e.target.value.length < 6) {
+    setPassword(e.target.value);
+    if (e.target.value == '') {
+      setErrorPasswordMessage(langKey && langKey.password_required);
       setErrorPassword(true);
     } else {
-      setErrorPassword(false);
+      if(utils.checkPassword(e.target.value) != null) {
+        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
+        setErrorPassword(true);
+      }else {
+        setErrorPassword(false);
+      }
     }
-    setPassword(e.target.value);
+    if (confirmPassword != '') { 
+      if (confirmPassword != e.target.value) {
+        setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
+        setErrorConfirmPassword(true);
+      } else {
+        setErrorConfirmPassword(false);
+      }
+    }
   };
 
   const onChangeConfirmPassword = (e) => {
-    if (!password || e.target.value != password) {
+    setConfirmPassword(e.target.value);
+    if (e.target.value == '') {
+      setErrorPasswordMessage(langKey && langKey.confirm_password_required);
+      setErrorConfirmPassword(true);
+    } else {
+      if(utils.checkPassword(e.target.value) != null) {
+        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
+        setErrorConfirmPassword(true);
+      }else {
+        setErrorConfirmPassword(false);
+      }
+    }
+    if (password != e.target.value) {
+      setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
       setErrorConfirmPassword(true);
     } else {
       setErrorConfirmPassword(false);
     }
-    setConfirmPassword(e.target.value);
+    if (e.target.value.length < minLength) {
+      setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
+      setErrorConfirmPassword(true);
+    }
   };
   // Register Dialog
   const [open, setOpen] = React.useState(false);
@@ -174,7 +241,13 @@ export default function Register() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const goToForgotPassword = () => {
+    if(matches) {
+      Router.push("/forgotPassword");
+    }else {
+      setIsComponent('forgotpassword');
+    }
+  };
   return matches ? (
     <>
       <Grid container alignItems="center" justifyContent="center" height="100%">
@@ -230,7 +303,7 @@ export default function Register() {
                   />
                   {errorUserName && (
                     <FormHelperText error>
-                      {langKey && (langKey.validate_user_name || t('validate_user_name'))}
+                      {errorUserNameMessage}
                     </FormHelperText>
                   )}
                 </FormControl>
@@ -274,7 +347,7 @@ export default function Register() {
                   />
                   {errorPassword && (
                     <FormHelperText error>
-                      {langKey && (langKey.validate_password || t('validate_password'))}
+                      {errorPasswordMessage}
                     </FormHelperText>
                   )}
                 </FormControl>
@@ -290,7 +363,7 @@ export default function Register() {
                         "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
                       textTransform: "capitalize",
                     }}
-                    onClick={onSubmit}
+                    onClick={onSubmitMobile}
                   >
                     {langKey && (langKey.signup_for_now || t('signup_for_now'))}
                   </Button>
@@ -420,17 +493,16 @@ export default function Register() {
     </>
   ) : (
     <Grid
-      p={{ xs: 2, md: 10 }}
       display="flex"
       justifyContent="center"
-      sx={{ backgroundImage: "url('./assets/login/login_bg.png')",height:"100vh" }}
-      alignItems="center"
+      overflow="auto"
+      sx={{ backgroundImage: "url('./assets/login/login_bg.png')", backgroundPosition:'center', backgroundSize:'cover',height:'100%',alignItems:'center' }}
     >
       <Grid
         container
         justifyContent="center"
         alignItems="stretch"
-        width={{ xs: "1000px", lg: "90%", xl: "65%" }}
+        width={{ xs: "90%", lg: "90%", xl: "65%" }}
         height="fit-content"
       >
         <Grid
@@ -442,16 +514,20 @@ export default function Register() {
             // background: "black",
             backgroundImage: 'url("./assets/login/login.png")',
             backgroundRepeat: "no-repeat",
-            backgroundSize: "100% 100%",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
           borderRadius="20px 0px 0px 20px"
         >
-          <Grid item xs={10} container alignContent="space-around">
+          <Grid item xs={10} container alignContent="space-between" style={{margin:30}}>
             <Typography
               variant="h4"
               fontWeight="bold"
               color="white"
               textAlign="center"
+              marginTop={'18px'}
+              fontSize={'36px'}
+              lineHeight={'54px'}
             >
       {langKey && (langKey.anytime_anywhere || t('anytime_anywhere'))}
             </Typography>
@@ -466,7 +542,7 @@ export default function Register() {
                     bottom: "150px",
                   }}
                 >
-                  <Typography fontWeight={700} fontSize="20px">
+                  <Typography fontWeight={700} fontSize="20px" margin={2} textTransform="uppercase">
                   {langKey && (langKey.download_app || t('download_app'))}
                   </Typography>
                 </Grid>
@@ -480,19 +556,21 @@ export default function Register() {
                   }}
                 >
                   <Grid
+                    container
                     item
                     xs={12}
+                    spacing={2}
                     display="flex"
                     justifyContent="space-between"
                   >
-                    <Grid item xs={6}>
-                      <Typography textAlign="center">
-                        <img src="./assets/Home/iosbtn.png" />
+                    <Grid item xs={6} className="mui-iosbtn-wrapper">
+                      <Typography component="div" textAlign="center">
+                        <Image alt="iosbtn" style={{maxWidth:144}} src="./assets/Home/iosbtn.png" />
                       </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                      <Typography textAlign="center">
-                        <img src="./assets/Home/androidbtn.png" />
+                      <Typography component="div" textAlign="center" className="mui-androidbtn-wrapper">
+                        <Image alt="androidbtn" style={{maxWidth:144}} src="./assets/Home/androidbtn.png" />
                       </Typography>
                     </Grid>
                   </Grid>
@@ -515,14 +593,11 @@ export default function Register() {
             item
             container
             justifyContent="center"
-            xs={12}
-            // sx={{ minHeight: "500px" }}
-            alignContent="space-between"
-            height={600}
+            alignContent="center"
+            xs={12} 
           >
-            <Grid item container xs={12} sm={12} paddingX={2} mt={2}>
+            <Grid item container xs={12} sm={12} padding={'40px 20px'}>
               <Grid
-                my={2}
                 container
                 justifyContent="center"
                 style={{ cursor: "pointer" }}
@@ -530,13 +605,14 @@ export default function Register() {
                   Router.push("/");
                 }}
               >
-                <img src="./assets/Logo/footer_logo.png" />
+                <Image alt="footer_logo" style={{maxWidth:144}} src="./assets/Logo/footer_logo.png" />
               </Grid>
-              <Grid item xs={12} mb={2}>
+              <Grid item xs={12} my={2}>
                 <Divider
                   sx={{
                     "&::before, &::after": {
                       borderColor: "#FF6F31",
+                      borderWidth: '2px'
                     },
                   }}
                 >
@@ -545,243 +621,249 @@ export default function Register() {
                   </Typography>
                 </Divider>
               </Grid>
-              <form
-                className="lnr"
-                style={{
-                  boxSizing: "borderBox",
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                  alignItems: "flex-end",
-                  marginBottom: "16px",
-                  width: "100%",
-                }}
-              >
-                <Grid item xs={12} sm={12} mb={1}>
-                  <FieldLanguageSwitcher />
-                </Grid>
-                <Grid item xs={12} sm={12} mb={1}>
-                  <FormControl
-                    // variant="outlined"
-                    fullWidth
-                    sx={{
-                      borderRadius: "15px",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    <InputLabel htmlFor="component-outlined">
-                      {langKey && (langKey.user_name || t('user_name'))}
-                    </InputLabel>
-                    <OutlinedInput
-                      name="Username"
-                      placeholder={langKey && (langKey.user_name || t('user_name'))}
-                      label={langKey && (langKey.user_name || t('user_name'))}
-                      inputProps={{ maxLength: 16 }}
-                      id="outlined-adornment-username"
-                      type="text"
-                      value={username}
-                      onChange={(e) => onChangeUserName(e)}
-                      error={errorUserName}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle username visibility"
-                            edge="end"
-                          >
-                            <Icon icon="mdi:user" width={20} color="#F26522" />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                    {errorUserName && (
-                      <FormHelperText error>
-                        {langKey && (langKey.validate_user_name || t('validate_user_name'))}
-                      </FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={12} mb={1}>
-                  <FormControl
-                    variant="outlined"
-                    fullWidth
-                    sx={{
-                      borderRadius: "15px",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    <InputLabel htmlFor="component-outlined">
-                      {langKey && (langKey.password || t('password'))}
-                    </InputLabel>
-
-                    <OutlinedInput
-                      name="password"
-                      placeholder={langKey && (langKey.password || t('password'))}
-                      label={langKey && (langKey.password || t('password'))}
-                      inputProps={{ maxLength: 16 }}
-                      id="outlined-adornment-password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => onChangePassword(e)}
-                      error={errorPassword}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            edge="end"
-                          >
-                            {showPassword ? (
-                              <Icon icon="ri:eye-close-fill" color="#F26522" />
-                            ) : (
-                              <Icon icon="ph:eye-bold" color="#F26522" />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                    {errorPassword && (
-                      <FormHelperText error>
-                        {langKey && (langKey.validate_password || t('validate_password'))}
-                      </FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={12} mb={1}>
-                  <FormControl
-                    variant="outlined"
-                    fullWidth
-                    sx={{
-                      borderRadius: "15px",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    <InputLabel htmlFor="component-outlined">
-                      {langKey && (langKey.confirm_password || t('confirm_password'))}
-                    </InputLabel>
-
-                    <OutlinedInput
-                      name="password"
-                      placeholder={langKey && (langKey.confirm_password || t('confirm_password'))}
-                      label={langKey && (langKey.confirm_password || t('confirm_password'))}
-                      inputProps={{ maxLength: 16 }}
-                      id="outlined-adornment-confirmpassword"
-                      type={showPassword ? "text" : "password"}
-                      value={confirmPassword}
-                      onChange={(e) => onChangeConfirmPassword(e)}
-                      error={errorConfirmPassword}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            edge="end"
-                          >
-                            {showPassword ? (
-                              <Icon icon="ri:eye-close-fill" color="#F26522" />
-                            ) : (
-                              <Icon icon="ph:eye-bold" color="#F26522" />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                    {errorConfirmPassword && (
-                      <FormHelperText error>
-                         {langKey && (langKey.password_mustbe_match || t('password_mustbe_match'))}
-                      </FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
-                <Grid item container spacing={2} mb={1}>
-                  <Grid item xs={6}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      disabled={loading ? true : false}
-                      sx={{
-                        color: "black",
-                        background: "#D4D4D4",
-                        textTransform: "capitalize",
-                      }}
-                      onClick={() => Router.push("/")}
-                    >
-                      {langKey && (langKey.cancel || t('cancel'))}
-                    </Button>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      disabled={loading ? true : false}
-                      sx={{
-                        color: "white",
-                        background: loading
-                          ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);"
-                          : "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
-                        textTransform: "capitalize",
-                      }}
-                      onClick={onSubmit}
-                    >
-                      {langKey && (langKey.signup_for_now || t('signup_for_now'))}
-                    </Button>
-                  </Grid>
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                  container
-                  sx={{
-                    cursor: "pointer",
-                    fontSize: { xs: "13px", sm: "inerited" },
+              {isComponent == 'forgotpassword' ? <ForgotPassword t={t} setIsComponent={setIsComponent}/> : (
+                <form
+                  className="lnr"
+                  style={{
+                    boxSizing: "borderBox",
+                    flexWrap: "wrap",
+                    flexDirection: "row",
+                    alignItems: "flex-end",
+                    marginBottom: "16px",
+                    width: "100%",
                   }}
-                  justifyContent="space-between"
-                  underline="none"
-                  alignItems="center"
                 >
-                  <Typography>{langKey && (langKey.sign_up_with || t('sign_up_with'))}</Typography>
-                  <Grid>
-                    <Link
-                      underline="none"
-                      style={{
-                        cursor: "pointer",
-                        color: "#013B91",
-                        padding: "10px",
-                      }}
-                    >
-                      <Icon icon="ic:baseline-facebook" fontSize="35px" />
-                    </Link>
-                    <Link
-                      underline="none"
-                      style={{
-                        cursor: "pointer",
-                        color: "#00C2FF",
-                        padding: "10px",
-                      }}
-                    >
-                      <Icon icon="flat-color-icons:google" fontSize="35px" />
-                    </Link>
-                    <Link
-                      underline="none"
-                      style={{
-                        cursor: "pointer",
-                        color: "#0898D6",
-                        padding: "10px",
-                      }}
-                    >
-                      <Icon
-                        icon="entypo-social:twitter-with-circle"
-                        fontSize="35px"
-                      />
-                    </Link>
+                  <Grid item xs={12} sm={12} mb={3}>
+                    <FieldLanguageSwitcher />
                   </Grid>
-                </Grid>
-              </form>
+                  <Grid item xs={12} sm={12} mb={3}>
+                    <FormControl
+                      // variant="outlined"
+                      fullWidth
+                      sx={{
+                        borderRadius: "15px",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      <InputLabel htmlFor="component-outlined" shrink>
+                        {langKey && (langKey.user_name || t('user_name'))}
+                      </InputLabel>
+                      <OutlinedInput
+                        name="Username"
+                        placeholder={langKey && (langKey.user_name || t('user_name'))}
+                        label={langKey && (langKey.user_name || t('user_name'))}
+                        inputProps={{ maxLength: 16 }}
+                        id="outlined-adornment-username"
+                        type="text"
+                        notched
+                        value={username}
+                        onChange={(e) => onChangeUserName(e)}
+                        error={errorUserName}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle username visibility"
+                              edge="end"
+                            >
+                              <Icon icon="mdi:user" width={20} color="#F26522" />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                      {errorUserName && (
+                        <FormHelperText error>
+                          {langKey && (langKey.validate_user_name || t('validate_user_name'))}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={12} mb={3}>
+                    <FormControl
+                      variant="outlined"
+                      fullWidth
+                      sx={{
+                        borderRadius: "15px",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      <InputLabel htmlFor="component-outlined" shrink>
+                        {langKey && (langKey.password || t('password'))}
+                      </InputLabel>
+
+                      <OutlinedInput
+                        name="password"
+                        placeholder={langKey && (langKey.password || t('password'))}
+                        label={langKey && (langKey.password || t('password'))}
+                        inputProps={{ maxLength: 16 }}
+                        id="outlined-adornment-password"
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        notched
+                        onChange={(e) => onChangePassword(e)}
+                        error={errorPassword}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <Icon icon="ri:eye-close-fill" color="#F26522" />
+                              ) : (
+                                <Icon icon="ph:eye-bold" color="#F26522" />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                      {errorPassword && (
+                        <FormHelperText error>
+                          {errorPasswordMessage}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={12} mb={3}>
+                    <FormControl
+                      variant="outlined"
+                      fullWidth
+                      sx={{
+                        borderRadius: "15px",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      <InputLabel htmlFor="component-outlined" shrink>
+                        {langKey && (langKey.confirm_password || t('confirm_password'))}
+                      </InputLabel>
+
+                      <OutlinedInput
+                        name="password"
+                        placeholder={langKey && (langKey.confirm_password || t('confirm_password'))}
+                        label={langKey && (langKey.confirm_password || t('confirm_password'))}
+                        inputProps={{ maxLength: 16 }}
+                        id="outlined-adornment-confirmpassword"
+                        type={showConfirmPassword ? "text" : "password"}
+                        value={confirmPassword}
+                        notched
+                        onChange={(e) => onChangeConfirmPassword(e)}
+                        error={errorConfirmPassword}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                              edge="end"
+                            >
+                              {showConfirmPassword ? (
+                                <Icon icon="ri:eye-close-fill" color="#F26522" />
+                              ) : (
+                                <Icon icon="ph:eye-bold" color="#F26522" />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                      {errorConfirmPassword && (
+                        <FormHelperText error>
+                          {confirmErrorPasswordMessage}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item container spacing={2} mb={3}>
+                    <Grid item xs={6}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        disabled={loading ? true : false}
+                        sx={{
+                          color: "black",
+                          background: "#D4D4D4",
+                          textTransform: "capitalize",
+                        }}
+                        onClick={() => Router.push("/")}
+                      >
+                        {langKey && (langKey.cancel || t('cancel'))}
+                      </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        disabled={loading ? true : false}
+                        sx={{
+                          whiteSpace:'nowrap',
+                          color: "white",
+                          background: loading
+                            ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);"
+                            : "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
+                          textTransform: "capitalize",
+                        }}
+                        onClick={onSubmit}
+                      >
+                        {langKey && (langKey.signup_for_now || t('signup_for_now'))}
+                      </Button>
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    item
+                    xs={12}
+                    container
+                    sx={{
+                      cursor: "pointer",
+                      fontSize: { xs: "13px", sm: "inerited" },
+                    }}
+                    justifyContent="space-between"
+                    underline="none"
+                    alignItems="center"
+                  >
+                    <Typography>{langKey && (langKey.sign_up_with || t('sign_up_with'))}</Typography>
+                    <Grid>
+                      <Link
+                        underline="none"
+                        style={{
+                          cursor: "pointer",
+                          color: "#013B91",
+                          margin:'2px'
+                        }}
+                      >
+                        <Icon icon="ic:baseline-facebook" fontSize="35px" />
+                      </Link>
+                      <Link
+                        underline="none"
+                        style={{
+                          cursor: "pointer",
+                          color: "#00C2FF",
+                          margin:'2px'
+                        }}
+                      >
+                        <Icon icon="flat-color-icons:google" fontSize="35px" />
+                      </Link>
+                      <Link
+                        underline="none"
+                        style={{
+                          cursor: "pointer",
+                          color: "#0898D6",
+                          margin:'2px'
+                        }}
+                      >
+                        <Icon
+                          icon="entypo-social:twitter-with-circle"
+                          fontSize="35px"
+                        />
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </form>
+              )}
             </Grid>
             <Grid
               item
               xs={12}
               sx={{
-                borderTop: "1px solid grey",
+                borderTop: "1px solid #F3F3F3",
               }}
             >
               <Grid
@@ -818,9 +900,9 @@ export default function Register() {
                       {langKey && (langKey.sign_in_here || t('sign_in_here'))}
                   </Typography>
                 </Link>
-                <Grid display="flex" sx={{ cursor: "pointer" }}>
+                <Grid display="flex" sx={{ cursor: "pointer" }} onClick={goToForgotPassword}>
                   <Icon icon="bi:chat-square-dots-fill" width={25} />
-                  <Typography mx={1}>{langKey && (langKey.contact || t('contact'))}</Typography>
+                  <Typography mx={1}>{langKey && (langKey.customer_service || t('customer_service'))}</Typography>
                 </Grid>
               </Grid>
             </Grid>

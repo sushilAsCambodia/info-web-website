@@ -13,6 +13,17 @@ export const login = createAsyncThunk(
         if(typeof callback == 'function') {
           callback(data);
         }
+        if(typeof window !='undefined') {
+          if(body?.remember_me === true) {
+            window.localStorage.setItem('remember_me', true);
+            Cookies.set('user_name',body?.user_name);
+            Cookies.set('user_pwd',body?.password);
+          }else {
+            Cookies.remove('user_name');
+            Cookies.remove('user_pwd');
+            window.localStorage.removeItem('remember_me');
+          }
+        }
         return data;
       } catch (error) {
         const {status, data} = error.response;

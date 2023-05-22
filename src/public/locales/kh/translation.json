@@ -58,7 +58,7 @@
     "signup_via":"ចុះឈ្មោះតាមរយៈ",
     "already_have_an_account":"មានគណនីរួចហើយ?",
     "feedback_info_web":"មតិកែលម្អ | InfoWeb",
-    "customer_service_info_web":"សេវាកម្ម​អតិថិជន | InfoWeb",
+    "customer_service_info_web":"ផ្នែកបំរើរអតិធិជន | InfoWeb",
     "journal_card_details_info_web":"ព័ត៌មានអំពីកាតទិនានុប្បវត្តិ | InfoWeb",
     "input_your_feedback":"សូមបញ្ចូលមតិកែលម្អរបស់អ្នក កុំលើសពី 500 តួអក្សរ",
     "feedback_content_required": "សូមបញ្ចូលមតិកែលម្អ",
@@ -102,5 +102,13 @@
     "basketball_info_web":"បាល់បោះ | InfoWeb",
     "news_info_web":"ព័រមាន | InfoWeb",
     "news_single_page_info_web":"ព័រមានលំអិត | InfoWeb",
-    "data_chart_info_web":"តារាងទិន្នន័យ | InfoWeb"
+    "data_chart_info_web":"តារាងទិន្នន័យ | InfoWeb",
+    "password_must_not_contain_whitespaces":"ពាក្យសម្ងាត់មិនត្រូវមានចន្លោះទេ។",
+    "password_must_have_at_least_one_uppercase_character":"ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់តួអក្សរធំមួយ។",
+    "password_must_have_at_least_one_lowercase_character.":"ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់តួអក្សរតូចមួយ។",
+    "password_must_contain_at_least_one_digit":"ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់មួយខ្ទង់។",
+    "password_must_contain_at_least_one_special_symbol.": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់និមិត្តសញ្ញាពិសេសមួយ។",
+    "account_deleted": "គណនីត្រូវបានលុប",
+    "account_deactivated": "គណនីបិទដំណើរការ",
+    "customer_service":"ផ្នែកបំរើរអតិធិជន"
 }

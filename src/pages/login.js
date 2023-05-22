@@ -37,6 +37,7 @@ import FieldLanguageSwitcher from "@/components/fieldLangSwitcher";
 import Cookies from "js-cookie";
 import ForgotPassword from "@/components/desktop/forgotPassword";
 import utils from "../common/utils";
+import { Image } from "mui-image";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -95,15 +96,21 @@ export default function Login() {
   const [mounted, setMounted] = useState(false);
   const matches = useMediaQuery("(max-width:768px)");
   const [border, setBorder] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   useEffect(() => {
     setMounted(true);
-  },[])
+    if(localStorage.getItem('remember_me') ==  'true') {
+      setUserName(Cookies.get('user_name'));
+      setPassword(Cookies.get('user_pwd'));
+      setRememberMe(true);
+    }
+  },[]);
   const dispatch = useDispatch();
   const handleLogin = () => {
     dispatch(
       login({
-        body: { user_name: username, password: password },
+        body: { user_name: username, password: password, remember_me: rememberMe },
         callback: (res) => {
           setLoading(false);
           const { status, status_code, message = "" } = res;
@@ -432,13 +439,14 @@ export default function Login() {
           </>
         ) : (
           <Grid
-            p={{xs:2, md:10}}
             display="flex"
             justifyContent="center"
-            sx={{ backgroundImage: "url('./assets/login/login_bg.png')",height:"100vh" }}
             alignItems="center"
+            height="100%"
+            overflow="auto"
+            sx={{ backgroundImage: "url('./assets/login/login_bg.png')", backgroundPosition:'center', backgroundSize:'cover' }}
           >
-            <Grid container justifyContent="center" alignItems="stretch" width={{xs:"1000px", lg:"90%",xl:"65%",}} height="fit-content" >
+            <Grid container justifyContent="center" alignItems="stretch" width={{xs:"90%", lg:"90%", xl:"1000px",}} height="fit-content" >
               <Grid
                 container
                 justifyContent="center"
@@ -448,16 +456,20 @@ export default function Login() {
                   // background: "black",
                   backgroundImage: 'url("./assets/login/login.png")',
                   backgroundRepeat: "no-repeat",
-                  backgroundSize: "100% 100%",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
                 borderRadius="20px 0px 0px 20px"
               >
-                <Grid item xs={10} container alignContent="space-around">
+                <Grid item xs={10} container alignContent="space-between" style={{margin:30}}>
                   <Typography
                     variant="h4"
                     fontWeight="bold"
                     color="white"
                     textAlign="center"
+                    marginTop={'18px'}
+                    fontSize={'36px'}
+                    lineHeight={'54px'}
                   >
                     {langKey && (langKey.anytime_anywhere || t('anytime_anywhere'))}
                   </Typography>
@@ -472,7 +484,7 @@ export default function Login() {
                           bottom: "150px",
                         }}
                       >
-                        <Typography fontWeight={700} fontSize="20px">
+                        <Typography fontWeight={700} fontSize="20px" margin={2} textTransform="uppercase">
                          {langKey && (langKey.download_app || t('download_app'))}
                         </Typography>
                       </Grid>
@@ -486,19 +498,18 @@ export default function Login() {
                         }}
                       >
                         <Grid
+                          container
+                          spacing={2}
                           item
-                          xs={12}
-                          display="flex"
-                          justifyContent="space-between"
-                        >
-                          <Grid item xs={6}>
-                            <Typography textAlign="center">
-                              <img src="./assets/Home/iosbtn.png" />
+                          xs={12}>
+                          <Grid item xs={6} className="mui-iosbtn-wrapper">
+                            <Typography component="div" textAlign="center">
+                              <Image alt="iosbtn" style={{maxWidth: 144}} src="./assets/Home/iosbtn.png" />
                             </Typography>
                           </Grid>
-                          <Grid item xs={6}>
-                            <Typography textAlign="center">
-                              <img src="./assets/Home/androidbtn.png" />
+                          <Grid item xs={6} className="mui-androidbtn-wrapper">
+                            <Typography component="div" textAlign="center">
+                              <Image alt="androidbtn" style={{maxWidth: 144}} src="./assets/Home/androidbtn.png"  />
                             </Typography>
                           </Grid>
                         </Grid>
@@ -513,32 +524,30 @@ export default function Login() {
                 container
                 alignItems="flex-start"
                 justifyContent="center"
-                // py={5}
                 sx={{ background: "white" }}
                 borderRadius="0px 20px 20px 0px"
+               
               >
                 <Grid
                   item
                   container
-                  justifyContent="center"
-                  xs={12}
-                  // sx={{ minHeight: "500px" }}
-                  alignContent="space-between"
-                  height={600}
+                  alignContent="center" 
                 >
-                  <Grid item container xs={12} sm={12} padding={2}>
-                  <Grid my={2} container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
-                <img src="./assets/Logo/footer_logo.png" />
+                  <Grid item container xs={12} sm={12} padding={'40px 20px'}>
+                  <Grid   container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
+                <Image style={{width:139}} alt="footer_logo" src="./assets/Logo/footer_logo.png" />
               </Grid>
-                    <Grid xs={12} mb={2}>
+                    <Grid item xs={12} my={2}>
                       <Divider
                         sx={{
                           "&::before, &::after": {
                             borderColor: "#FF6F31",
+                            borderTop:'solid #FF6F31',
+                            borderWidth:'2px'
                           },
                         }}
                       >
-                        <Typography variant="h5" fontWeight="bold">
+                        <Typography variant="h6" fontWeight="bold" textTransform="uppercase">
                           {isComponent == 'forgotpassword' ? (langKey && (langKey.forgotpassword || t('forgotpassword'))) : (langKey && (langKey.login || t('login')))}
                         </Typography>
                       </Divider>
@@ -567,20 +576,24 @@ export default function Login() {
                             marginBottom: "5px",
                           }}
                         >
-                          <InputLabel htmlFor="component-outlined">
+                          <InputLabel htmlFor="component-outlined" shrink>
                         {langKey && (langKey.user_name || t('user_name'))}
                           </InputLabel>
       
                           <OutlinedInput
-                            name="Username"
+                            name="Username" 
                             placeholder= {langKey && (langKey.user_name || t('user_name'))}
                             label={langKey && (langKey.user_name || t('user_name'))}
-                            inputProps={{ maxLength: 16 }}
+                            inputProps={{
+                               maxLength: 16,
+                            }}
+                            
                             id="outlined-adornment-username"
                             type="text"
-                            value={username}
+                            value={username || ''}
                             onChange={(e) => onChangeUserName(e)}
                             error={errorUserName}
+                            notched
                             endAdornment={
                               <InputAdornment position="end">
                                 <IconButton
@@ -599,7 +612,7 @@ export default function Login() {
                           )}
                         </FormControl>
                       </Grid>
-                      <Grid item xs={12} sm={12} mb={4}>
+                      <Grid item xs={12} sm={12} mb={3}>
                         <FormControl
                           variant="outlined"
                           fullWidth
@@ -608,7 +621,7 @@ export default function Login() {
                             marginBottom: "5px",
                           }}
                         >
-                          <InputLabel htmlFor="component-outlined">
+                          <InputLabel htmlFor="component-outlined" shrink>
                        {langKey && (langKey.password || t('password'))}
                           </InputLabel>
                           <OutlinedInput
@@ -616,9 +629,10 @@ export default function Login() {
                             placeholder= {langKey && (langKey.password || t('password'))}
                             label= {langKey && (langKey.password || t('password'))}
                             inputProps={{ maxLength: 16 }}
+                            notched
                             id="outlined-adornment-password"
                             type={showPassword ? "text" : "password"}
-                            value={password}
+                            value={password || ''}
                             onChange={(e) => onChangePassword(e)}
                             error={errorPassword}
                             endAdornment={
@@ -651,7 +665,7 @@ export default function Login() {
                         alignItems="center"
                       >
                         <FormControlLabel
-                          control={<Checkbox defaultChecked />}
+                          control={<Checkbox checked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>}
                           label={langKey && (langKey.remember_me || t('remember_me'))}
                         />
                         <Link
@@ -662,7 +676,7 @@ export default function Login() {
                           <Typography>{langKey && (langKey.forgot_password || t('forgot_password'))}</Typography>
                         </Link>
                       </Grid>
-                      <Grid item container spacing={2} mb={1}>
+                      <Grid item container spacing={2} mb={3}>
                         <Grid item xs={6}>
                           <Button
                             fullWidth
@@ -752,7 +766,7 @@ export default function Login() {
                     item
                     xs={12}
                     sx={{
-                      borderTop: "1px solid grey",
+                      borderTop: "1px solid #F3F3F3",
                     }}
                   >
                     <Grid
@@ -787,9 +801,9 @@ export default function Login() {
                           {langKey && (langKey.sign_up_here || t('sign_up_here'))}
                         </Typography>
                       </Link>
-                      <Grid display="flex" sx={{ cursor: "pointer" }}>
+                      <Grid display="flex" sx={{ cursor: "pointer" }} onClick={goToForgotPassword}>
                         <Icon icon="bi:chat-square-dots-fill" width={25} />
-                        <Typography mx={1}>{langKey && (langKey.contact ||  t('contact'))}</Typography>
+                        <Typography mx={1}>{langKey && (langKey.customer_service ||  t('customer_service'))}</Typography>
                       </Grid>
                     </Grid> 
                   </Grid>

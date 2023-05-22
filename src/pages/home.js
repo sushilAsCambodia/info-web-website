@@ -35,7 +35,7 @@ const Home = () => {
                 callback:(res) => { }
             }
         ));
-    },[i18n.language]); 
+    },[dispatch,i18n.language]); 
     return <>
         <NewsJournalTabs banners={banners} categories={categories} advertises={advertises} lang_id={utils.convertLangCodeToID(i18n.language)}/>
     </>

@@ -38,12 +38,11 @@ export default function NewsSlider(props) {
         callback: (res) => {
           setNewsList(res.data.data);
           setPageLimit(res.data.last_page);
-          setCurrentPage(1);
-          console.log(catId, "newsSlider3:::", res.data);
+          setCurrentPage(1); 
         },
       })
     );
-  }, [catId]);
+  }, [dispatch,catId,lang_id]);
 
   useEffect(() => {
     dispatch(
@@ -64,6 +63,7 @@ export default function NewsSlider(props) {
         },
       })
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toBottom]);
 
   const langKey = useSelector(

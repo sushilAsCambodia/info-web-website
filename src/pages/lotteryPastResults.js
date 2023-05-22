@@ -29,6 +29,7 @@ import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "./LotteryPage";
+import { Image } from "mui-image";
 export default function LotteryPastReults() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
@@ -301,7 +302,8 @@ export default function LotteryPastReults() {
         <Grid item xs={8} p={1}>
           <Grid border="1px solid #DDDDDD" container p={1}>
             <Grid container xs={6} alignItems="center">
-              <img
+              <Image
+                alt="Welfare lottery lottery"
                 width="40px"
                 height="40px"
                 style={{ borderRadius: "30px" }}
