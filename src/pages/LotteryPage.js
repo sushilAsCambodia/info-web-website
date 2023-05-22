@@ -453,6 +453,7 @@ export default function LotteryPage() {
                           {" "}
                           <Image
                             alt={row.lottoTitle}
+                            width={30}
                             style={{
                               marginRight: "10px",
                               width: "30px",
