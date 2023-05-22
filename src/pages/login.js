@@ -224,7 +224,7 @@ export default function Login() {
                           inputProps={{ maxLength: 16 }}
                           id="outlined-adornment-username"
                           type="text"
-                          value={username}
+                          value={username||null}
                           onChange={(e) => onChangeUserName(e)}
                           error={errorUserName}
                           endAdornment={
@@ -264,7 +264,7 @@ export default function Login() {
                           inputProps={{ maxLength: 16 }}
                           id="outlined-adornment-password"
                           type={showPassword ? "text" : "password"}
-                          value={password}
+                          value={password||null}
                           onChange={(e) => onChangePassword(e)}
                           error={errorPassword}
                           endAdornment={
@@ -444,7 +444,7 @@ export default function Login() {
             alignItems="center"
             height="100%"
             overflow="auto"
-            sx={{ backgroundImage: "url('./assets/login/login_bg.png')",backgroundPosition:'center',backgroundSize:'cover' }}
+            sx={{ backgroundImage: "url('./assets/login/login_bg.png')", backgroundPosition:'center', backgroundSize:'cover' }}
           >
             <Grid container justifyContent="center" alignItems="stretch" width={{xs:"90%", lg:"90%", xl:"1000px",}} height="fit-content" >
               <Grid
@@ -457,6 +457,7 @@ export default function Login() {
                   backgroundImage: 'url("./assets/login/login.png")',
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
                 borderRadius="20px 0px 0px 20px"
               >
@@ -580,13 +581,13 @@ export default function Login() {
                           </InputLabel>
       
                           <OutlinedInput
-                            name="Username"
+                            name="Username" 
                             placeholder= {langKey && (langKey.user_name || t('user_name'))}
                             label={langKey && (langKey.user_name || t('user_name'))}
-                            inputProps={{ maxLength: 16 }}
+                            inputProps={{ maxLength: 16}}
                             id="outlined-adornment-username"
                             type="text"
-                            value={username}
+                            value={username||null}
                             onChange={(e) => onChangeUserName(e)}
                             error={errorUserName}
                             endAdornment={
@@ -626,7 +627,7 @@ export default function Login() {
                             inputProps={{ maxLength: 16 }}
                             id="outlined-adornment-password"
                             type={showPassword ? "text" : "password"}
-                            value={password}
+                            value={password||null} 
                             onChange={(e) => onChangePassword(e)}
                             error={errorPassword}
                             endAdornment={
@@ -795,9 +796,9 @@ export default function Login() {
                           {langKey && (langKey.sign_up_here || t('sign_up_here'))}
                         </Typography>
                       </Link>
-                      <Grid display="flex" sx={{ cursor: "pointer" }}>
+                      <Grid display="flex" sx={{ cursor: "pointer" }} onClick={goToForgotPassword}>
                         <Icon icon="bi:chat-square-dots-fill" width={25} />
-                        <Typography mx={1}>{langKey && (langKey.contact ||  t('contact'))}</Typography>
+                        <Typography mx={1}>{langKey && (langKey.customer_service ||  t('customer_service'))}</Typography>
                       </Grid>
                     </Grid> 
                   </Grid>

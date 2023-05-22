@@ -31,6 +31,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import FieldLanguageSwitcher from "@/components/fieldLangSwitcher";
 import { Image } from "mui-image";
 import utils from "@/common/utils";
+import ForgotPassword from "@/components/desktop/forgotPassword";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -84,6 +85,7 @@ export default function Register() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
   const [confirmErrorPasswordMessage, setConfirmErrorPasswordMessage] = useState('');
+  const [isComponent, setIsComponent] = useState("login");
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
@@ -239,7 +241,13 @@ export default function Register() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const goToForgotPassword = () => {
+    if(matches) {
+      Router.push("/forgotPassword");
+    }else {
+      setIsComponent('forgotpassword');
+    }
+  };
   return matches ? (
     <>
       <Grid container alignItems="center" justifyContent="center" height="100%">
@@ -279,7 +287,7 @@ export default function Register() {
                     placeholder={langKey && (langKey.user_name || t('user_name'))}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-username"
-                    value={username}
+                    value={username||null}
                     onChange={(e) => onChangeUserName(e)}
                     error={errorUserName}
                     endAdornment={
@@ -318,7 +326,7 @@ export default function Register() {
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-password"
                     type={showPassword ? "text" : "password"}
-                    value={password}
+                    value={password||null}
                     onChange={(e) => onChangePassword(e)}
                     error={errorPassword}
                     endAdornment={
@@ -507,7 +515,7 @@ export default function Register() {
             backgroundImage: 'url("./assets/login/login.png")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            
+            backgroundPosition: "center",
           }}
           borderRadius="20px 0px 0px 20px"
         >
@@ -613,238 +621,240 @@ export default function Register() {
                   </Typography>
                 </Divider>
               </Grid>
-              <form
-                className="lnr"
-                style={{
-                  boxSizing: "borderBox",
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                  alignItems: "flex-end",
-                  marginBottom: "16px",
-                  width: "100%",
-                }}
-              >
-                <Grid item xs={12} sm={12} mb={3}>
-                  <FieldLanguageSwitcher />
-                </Grid>
-                <Grid item xs={12} sm={12} mb={3}>
-                  <FormControl
-                    // variant="outlined"
-                    fullWidth
-                    sx={{
-                      borderRadius: "15px",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    <InputLabel htmlFor="component-outlined">
-                      {langKey && (langKey.user_name || t('user_name'))}
-                    </InputLabel>
-                    <OutlinedInput
-                      name="Username"
-                      placeholder={langKey && (langKey.user_name || t('user_name'))}
-                      label={langKey && (langKey.user_name || t('user_name'))}
-                      inputProps={{ maxLength: 16 }}
-                      id="outlined-adornment-username"
-                      type="text"
-                      value={username}
-                      onChange={(e) => onChangeUserName(e)}
-                      error={errorUserName}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle username visibility"
-                            edge="end"
-                          >
-                            <Icon icon="mdi:user" width={20} color="#F26522" />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                    {errorUserName && (
-                      <FormHelperText error>
-                        {langKey && (langKey.validate_user_name || t('validate_user_name'))}
-                      </FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={12} mb={3}>
-                  <FormControl
-                    variant="outlined"
-                    fullWidth
-                    sx={{
-                      borderRadius: "15px",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    <InputLabel htmlFor="component-outlined">
-                      {langKey && (langKey.password || t('password'))}
-                    </InputLabel>
-
-                    <OutlinedInput
-                      name="password"
-                      placeholder={langKey && (langKey.password || t('password'))}
-                      label={langKey && (langKey.password || t('password'))}
-                      inputProps={{ maxLength: 16 }}
-                      id="outlined-adornment-password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => onChangePassword(e)}
-                      error={errorPassword}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            edge="end"
-                          >
-                            {showPassword ? (
-                              <Icon icon="ri:eye-close-fill" color="#F26522" />
-                            ) : (
-                              <Icon icon="ph:eye-bold" color="#F26522" />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                    {errorPassword && (
-                      <FormHelperText error>
-                        {errorPasswordMessage}
-                      </FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={12} mb={3}>
-                  <FormControl
-                    variant="outlined"
-                    fullWidth
-                    sx={{
-                      borderRadius: "15px",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    <InputLabel htmlFor="component-outlined">
-                      {langKey && (langKey.confirm_password || t('confirm_password'))}
-                    </InputLabel>
-
-                    <OutlinedInput
-                      name="password"
-                      placeholder={langKey && (langKey.confirm_password || t('confirm_password'))}
-                      label={langKey && (langKey.confirm_password || t('confirm_password'))}
-                      inputProps={{ maxLength: 16 }}
-                      id="outlined-adornment-confirmpassword"
-                      type={showConfirmPassword ? "text" : "password"}
-                      value={confirmPassword}
-                      onChange={(e) => onChangeConfirmPassword(e)}
-                      error={errorConfirmPassword}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            edge="end"
-                          >
-                            {showConfirmPassword ? (
-                              <Icon icon="ri:eye-close-fill" color="#F26522" />
-                            ) : (
-                              <Icon icon="ph:eye-bold" color="#F26522" />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                    {errorConfirmPassword && (
-                      <FormHelperText error>
-                         {confirmErrorPasswordMessage}
-                      </FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
-                <Grid item container spacing={2} mb={3}>
-                  <Grid item xs={6}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      disabled={loading ? true : false}
-                      sx={{
-                        color: "black",
-                        background: "#D4D4D4",
-                        textTransform: "capitalize",
-                      }}
-                      onClick={() => Router.push("/")}
-                    >
-                      {langKey && (langKey.cancel || t('cancel'))}
-                    </Button>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      disabled={loading ? true : false}
-                      sx={{
-                        whiteSpace:'nowrap',
-                        color: "white",
-                        background: loading
-                          ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);"
-                          : "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
-                        textTransform: "capitalize",
-                      }}
-                      onClick={onSubmit}
-                    >
-                      {langKey && (langKey.signup_for_now || t('signup_for_now'))}
-                    </Button>
-                  </Grid>
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                  container
-                  sx={{
-                    cursor: "pointer",
-                    fontSize: { xs: "13px", sm: "inerited" },
+              {isComponent == 'forgotpassword' ? <ForgotPassword t={t} setIsComponent={setIsComponent}/> : (
+                <form
+                  className="lnr"
+                  style={{
+                    boxSizing: "borderBox",
+                    flexWrap: "wrap",
+                    flexDirection: "row",
+                    alignItems: "flex-end",
+                    marginBottom: "16px",
+                    width: "100%",
                   }}
-                  justifyContent="space-between"
-                  underline="none"
-                  alignItems="center"
                 >
-                  <Typography>{langKey && (langKey.sign_up_with || t('sign_up_with'))}</Typography>
-                  <Grid>
-                    <Link
-                      underline="none"
-                      style={{
-                        cursor: "pointer",
-                        color: "#013B91",
-                        margin:'2px'
-                      }}
-                    >
-                      <Icon icon="ic:baseline-facebook" fontSize="35px" />
-                    </Link>
-                    <Link
-                      underline="none"
-                      style={{
-                        cursor: "pointer",
-                        color: "#00C2FF",
-                        margin:'2px'
-                      }}
-                    >
-                      <Icon icon="flat-color-icons:google" fontSize="35px" />
-                    </Link>
-                    <Link
-                      underline="none"
-                      style={{
-                        cursor: "pointer",
-                        color: "#0898D6",
-                        margin:'2px'
-                      }}
-                    >
-                      <Icon
-                        icon="entypo-social:twitter-with-circle"
-                        fontSize="35px"
-                      />
-                    </Link>
+                  <Grid item xs={12} sm={12} mb={3}>
+                    <FieldLanguageSwitcher />
                   </Grid>
-                </Grid>
-              </form>
+                  <Grid item xs={12} sm={12} mb={3}>
+                    <FormControl
+                      // variant="outlined"
+                      fullWidth
+                      sx={{
+                        borderRadius: "15px",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      <InputLabel htmlFor="component-outlined">
+                        {langKey && (langKey.user_name || t('user_name'))}
+                      </InputLabel>
+                      <OutlinedInput
+                        name="Username"
+                        placeholder={langKey && (langKey.user_name || t('user_name'))}
+                        label={langKey && (langKey.user_name || t('user_name'))}
+                        inputProps={{ maxLength: 16 }}
+                        id="outlined-adornment-username"
+                        type="text"
+                        value={username||null}
+                        onChange={(e) => onChangeUserName(e)}
+                        error={errorUserName}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle username visibility"
+                              edge="end"
+                            >
+                              <Icon icon="mdi:user" width={20} color="#F26522" />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                      {errorUserName && (
+                        <FormHelperText error>
+                          {langKey && (langKey.validate_user_name || t('validate_user_name'))}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={12} mb={3}>
+                    <FormControl
+                      variant="outlined"
+                      fullWidth
+                      sx={{
+                        borderRadius: "15px",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      <InputLabel htmlFor="component-outlined">
+                        {langKey && (langKey.password || t('password'))}
+                      </InputLabel>
+
+                      <OutlinedInput
+                        name="password"
+                        placeholder={langKey && (langKey.password || t('password'))}
+                        label={langKey && (langKey.password || t('password'))}
+                        inputProps={{ maxLength: 16 }}
+                        id="outlined-adornment-password"
+                        type={showPassword ? "text" : "password"}
+                        value={password||null}
+                        onChange={(e) => onChangePassword(e)}
+                        error={errorPassword}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <Icon icon="ri:eye-close-fill" color="#F26522" />
+                              ) : (
+                                <Icon icon="ph:eye-bold" color="#F26522" />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                      {errorPassword && (
+                        <FormHelperText error>
+                          {errorPasswordMessage}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={12} mb={3}>
+                    <FormControl
+                      variant="outlined"
+                      fullWidth
+                      sx={{
+                        borderRadius: "15px",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      <InputLabel htmlFor="component-outlined">
+                        {langKey && (langKey.confirm_password || t('confirm_password'))}
+                      </InputLabel>
+
+                      <OutlinedInput
+                        name="password"
+                        placeholder={langKey && (langKey.confirm_password || t('confirm_password'))}
+                        label={langKey && (langKey.confirm_password || t('confirm_password'))}
+                        inputProps={{ maxLength: 16 }}
+                        id="outlined-adornment-confirmpassword"
+                        type={showConfirmPassword ? "text" : "password"}
+                        value={confirmPassword}
+                        onChange={(e) => onChangeConfirmPassword(e)}
+                        error={errorConfirmPassword}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                              edge="end"
+                            >
+                              {showConfirmPassword ? (
+                                <Icon icon="ri:eye-close-fill" color="#F26522" />
+                              ) : (
+                                <Icon icon="ph:eye-bold" color="#F26522" />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                      {errorConfirmPassword && (
+                        <FormHelperText error>
+                          {confirmErrorPasswordMessage}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item container spacing={2} mb={3}>
+                    <Grid item xs={6}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        disabled={loading ? true : false}
+                        sx={{
+                          color: "black",
+                          background: "#D4D4D4",
+                          textTransform: "capitalize",
+                        }}
+                        onClick={() => Router.push("/")}
+                      >
+                        {langKey && (langKey.cancel || t('cancel'))}
+                      </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        disabled={loading ? true : false}
+                        sx={{
+                          whiteSpace:'nowrap',
+                          color: "white",
+                          background: loading
+                            ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);"
+                            : "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
+                          textTransform: "capitalize",
+                        }}
+                        onClick={onSubmit}
+                      >
+                        {langKey && (langKey.signup_for_now || t('signup_for_now'))}
+                      </Button>
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    item
+                    xs={12}
+                    container
+                    sx={{
+                      cursor: "pointer",
+                      fontSize: { xs: "13px", sm: "inerited" },
+                    }}
+                    justifyContent="space-between"
+                    underline="none"
+                    alignItems="center"
+                  >
+                    <Typography>{langKey && (langKey.sign_up_with || t('sign_up_with'))}</Typography>
+                    <Grid>
+                      <Link
+                        underline="none"
+                        style={{
+                          cursor: "pointer",
+                          color: "#013B91",
+                          margin:'2px'
+                        }}
+                      >
+                        <Icon icon="ic:baseline-facebook" fontSize="35px" />
+                      </Link>
+                      <Link
+                        underline="none"
+                        style={{
+                          cursor: "pointer",
+                          color: "#00C2FF",
+                          margin:'2px'
+                        }}
+                      >
+                        <Icon icon="flat-color-icons:google" fontSize="35px" />
+                      </Link>
+                      <Link
+                        underline="none"
+                        style={{
+                          cursor: "pointer",
+                          color: "#0898D6",
+                          margin:'2px'
+                        }}
+                      >
+                        <Icon
+                          icon="entypo-social:twitter-with-circle"
+                          fontSize="35px"
+                        />
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </form>
+              )}
             </Grid>
             <Grid
               item
@@ -887,9 +897,9 @@ export default function Register() {
                       {langKey && (langKey.sign_in_here || t('sign_in_here'))}
                   </Typography>
                 </Link>
-                <Grid display="flex" sx={{ cursor: "pointer" }}>
+                <Grid display="flex" sx={{ cursor: "pointer" }} onClick={goToForgotPassword}>
                   <Icon icon="bi:chat-square-dots-fill" width={25} />
-                  <Typography mx={1}>{langKey && (langKey.contact || t('contact'))}</Typography>
+                  <Typography mx={1}>{langKey && (langKey.customer_service || t('customer_service'))}</Typography>
                 </Grid>
               </Grid>
             </Grid>

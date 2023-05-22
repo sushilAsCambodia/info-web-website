@@ -48,6 +48,7 @@ const utils = {
         if (!isContainsSymbol.test(value)) {
           return "password_must_contain_at_least_one_special_symbol";
         }
+        
         const isValidLength = RegExp(`^.{${min},${max}}$`);
         if (!isValidLength.test(value)) {
           // return `The password format is a combination of ${min}-${max} letters and numbers`;
