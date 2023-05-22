@@ -71,11 +71,12 @@ const DrawerComponent = (props) => {
             );
             
         }
-    },[router.query]);
+    },[dispatch,router.query]);
     useEffect(() => {
         if(years.length  > 0) {
             fetchIssue(years[value]);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[years]);
     const fetchIssue = (issueDate) => {
         dispatch(

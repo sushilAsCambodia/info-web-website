@@ -13,6 +13,7 @@ import {
   } from "@mui/material";
   import { useState, useEffect } from "react";
   import { Icon } from "@iconify/react";
+import { Image } from "mui-image";
 const MatchTitleBanner = (props) => {
     const [select, setSelect] = useState(0);
     const [age, setAge] = useState("");
@@ -42,8 +43,9 @@ const MatchTitleBanner = (props) => {
             </Grid>
             <Grid container item xs={12}>
               <Grid item xs={3}>
-                <img
+                <Image
                   width={60}
+                  alt="Dynamo Vladivostok"
                   src={
                     "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
                   }
@@ -88,8 +90,9 @@ const MatchTitleBanner = (props) => {
               </Grid>
 
               <Grid item xs={3}>
-                <img
+                <Image
                   width={60}
+                  alt="Dynamo Vladivostok"
                   src={
                     "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
                   }

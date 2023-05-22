@@ -24,6 +24,7 @@ import { useRouter } from "next/router";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { useSelector } from "react-redux";
+import { Image } from "mui-image";
 
 
 const rows = [
@@ -169,7 +170,7 @@ const Announcement = () => {
                                     alignItems="self-start"
                                 >
                                     <Grid item xs={1} display="flex" alignItems="center" marginRight="5px">
-                                        <img src="./assets/Profile/announcement.png" />
+                                        <Image alt="announcement" src="./assets/Profile/announcement.png" />
                                     </Grid>
                                     <Grid item xs={11}>
                                         <Grid
@@ -207,7 +208,7 @@ const Announcement = () => {
                                     alignItems="self-start"
                                 >
                                     <Grid item xs={1} display="flex" alignItems="center" marginRight="5px">
-                                        <img src="./assets/Profile/announcement.png" />
+                                        <Image alt="announcement" src="./assets/Profile/announcement.png" />
                                     </Grid>
                                     <Grid item xs={11}>
                                         <Grid
@@ -245,7 +246,7 @@ const Announcement = () => {
                                     alignItems="self-start"
                                 >
                                     <Grid item xs={1} display="flex" alignItems="center" marginRight="5px">
-                                        <img src="./assets/Profile/announcement.png" />
+                                        <Image alt="announcement" src="./assets/Profile/announcement.png" />
                                     </Grid>
                                     <Grid item xs={11}>
                                         <Grid
@@ -283,7 +284,7 @@ const Announcement = () => {
                                     alignItems="self-start"
                                 >
                                     <Grid item xs={1} display="flex" alignItems="center" marginRight="5px">
-                                        <img src="./assets/Profile/announcement.png" />
+                                        <Image alt="announcement" src="./assets/Profile/announcement.png" />
                                     </Grid>
                                     <Grid item xs={11}>
                                         <Grid
@@ -321,7 +322,7 @@ const Announcement = () => {
                                     alignItems="self-start"
                                 >
                                     <Grid item xs={1} display="flex" alignItems="center" marginRight="5px">
-                                        <img src="./assets/Profile/announcement.png" />
+                                        <Image alt="announcement" src="./assets/Profile/announcement.png" />
                                     </Grid>
                                     <Grid item xs={11}>
                                         <Grid

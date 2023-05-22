@@ -33,6 +33,7 @@ import DialogMessage from "@/components/DialogMessage";
 import Announcement from "./announcement";
 import ProfileAnnouncement from "@/components/profilePage/profileannouncement";
 import Cookies from "js-cookie";
+import { Image } from "mui-image";
 const Profile = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
@@ -223,8 +224,9 @@ function TabPanel(props) {
                     >
                       {isLogin ? (
                         <>
-                          <Grid item xs={12} display="flex" alignItems="center">
-                            <img 
+                          <Grid item display="flex" alignItems="center">
+                            <Image
+                              alt={customer.user_name || "Profile Name"}
                               src={customer.image?.path || '/assets/Profile/user-icon.png'} 
                               style={{ height:50,width:50,borderRadius:'50%'}}
                               onError={(e) => e.target.src = '/assets/Profile/user-icon.png'}
@@ -238,7 +240,7 @@ function TabPanel(props) {
                       ) : (
                         <>
                           <Grid item xs={2} display="flex" alignItems="center">
-                            <img src="/assets/Profile/user-icon.png" />
+                            <Image alt="user_icon" src="/assets/Profile/user-icon.png" />
                           </Grid>
                           <Grid item xs={10}>
                             <Grid
@@ -588,13 +590,15 @@ function TabPanel(props) {
                         justifyContent="center"
                       >
                         <Grid item xs={6} md={6}>
-                          <img
+                          <Image
+                            alt="iosbtn"
                             src="/assets/Home/iosbtn.png"
                             style={{ width: "100%" }}
                           />
                         </Grid>
                         <Grid item xs={6} md={6}>
-                          <img
+                          <Image
+                            alt="androidbtn"
                             src="/assets/Home/androidbtn.png"
                             style={{ width: "100%" }}
                           />

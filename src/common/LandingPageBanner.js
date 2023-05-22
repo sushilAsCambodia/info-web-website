@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useCallback } from "react";
 import utils from "@/common/utils";
 import {getBanner} from '@/store/actions/bannerActions'
 import { useTheme } from "@mui/material/styles";
@@ -46,17 +46,17 @@ export default function LandingPageBanner(props) {
 
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation(); 
   useEffect(() => {
     dispatch(getBanner(
       {
           params: {
-              lang_id: utils.convertLangCodeToID(i18n.language)
+            lang_id: utils.convertLangCodeToID(i18n.language)
           },
           callback:(res) => { }
       }
     ));
-  }, []);
+  }, [i18n.language,dispatch]);
   return (
     <>
       <Grid mt={2}>

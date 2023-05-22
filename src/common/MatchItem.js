@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { Icon } from "@iconify/react";
 import StarIcon from "@/components/svg/star";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { Image } from "mui-image";
 export default function MatchItem(props) {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -49,7 +50,7 @@ export default function MatchItem(props) {
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item xs={2}>
               <Typography component="div" display="flex" justifyContent="space-between" marginTop={1}>
-                <img width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
+                <Image width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
                 <Typography>3</Typography>
               </Typography>
             </Grid>
@@ -66,7 +67,7 @@ export default function MatchItem(props) {
             <Grid item xs={2}>
               <Typography component="div" display="flex" justifyContent="space-between" marginTop={1}>
                 <Typography>5</Typography>
-                <img width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
+                <Image width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
               </Typography>
             </Grid>
           </Grid>

@@ -13,6 +13,7 @@ import { getCustomerService } from "@/store/actions/customerServiceActions";
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link'
 import utils from "@/common/utils";
+import { Image } from "mui-image";
 
 const CustomerService = () => { 
     const {loading, data} = useSelector((state) => state.customer_service);
@@ -25,7 +26,7 @@ const CustomerService = () => {
                 console.log(res,'abc')
             }
           }))
-    },[i18n.language])
+    },[dispatch,i18n.language])
 
 
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
@@ -50,7 +51,7 @@ const CustomerService = () => {
                 >
                     <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                         <Grid item xs={12} paddingTop="15px" textAlign="center">
-                            <img src="./assets/Profile/servicebigimg.png" />
+                            <Image alt="servicebigimg" src="./assets/Profile/servicebigimg.png" />
                         </Grid>
                         <Grid item xs={12} >
                             <Typography paddingBottom="20px" textAlign="center">
@@ -61,7 +62,7 @@ const CustomerService = () => {
                                 data && data.length > 0 && data.map((social,key) => {
                                     return <ListItem key={key} sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}>
                                         <Link href={social.account || ''} target="_blank">
-                                            <img src={social.icon || ''} height={28} width={29} style={{objectFit: 'contain'}}></img>
+                                            <Image alt="social" src={social.icon || ''} height={28} width={29} style={{objectFit: 'contain'}}/>
                                         </Link>
                                     </ListItem>;
                                 })

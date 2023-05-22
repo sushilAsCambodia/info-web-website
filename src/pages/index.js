@@ -23,6 +23,8 @@ import Footer from "@/layouts_Desktop/footer";
 import { useTranslation } from "react-i18next";
 
 import utils from "@/common/utils";
+import { Image } from "mui-image";
+import Advertisement from "@/common/Advertisement";
 
 export default function Index() {
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ localStorage.setItem('languageKey', JSON.stringify(res))
         }
     ));
   
-},[i18n.language]); 
+},[dispatch,i18n.language]); 
 
 const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
@@ -54,6 +56,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
         <ResultsBanner lang_id={utils.convertLangCodeToID(i18n.language)}/>
         {/* <LinkBanner /> */}
         {/* <LandingPageBanner /> */}
+        <Advertisement />
         <NewsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <JournalsColumns lang_id={utils.convertLangCodeToID(i18n.language)}/>
         <PartnersColumns />
@@ -87,7 +90,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
             </Typography>
           </Grid>
 
-          <Grid
+          <Grid 
             item
             sx={{
               position: "absolute",
@@ -96,15 +99,15 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
               bottom: "90px",
             }}
           >
-            <Grid item xs={12} display="flex" justifyContent="space-between">
-              <Grid item xs={6}>
-                <Typography textAlign="center">
-                  <img src="./assets/Home/iosbtn.png" />
+            <Grid item xs={12} display="flex" container spacing={2}>
+              <Grid item xs={6} className="mui-iosbtn-wrapper">
+                <Typography component="div" textAlign="center">
+                  <Image alt="iosbtn" style={{maxWidth:144}} src="./assets/Home/iosbtn.png" />
                 </Typography>
               </Grid>
-              <Grid item xs={6}>
-                <Typography textAlign="center">
-                  <img src="./assets/Home/androidbtn.png" />
+              <Grid item xs={6} className="mui-androidbtn-wrapper">
+                <Typography component="div" textAlign="center">
+                  <Image alt="androidbtn" style={{maxWidth:144}} src="./assets/Home/androidbtn.png" />
                 </Typography>
               </Grid>
             </Grid>

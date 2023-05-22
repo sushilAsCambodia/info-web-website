@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -10,27 +10,39 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { Grid, Tabs, Tab } from "@mui/material";
+import { Image } from "mui-image";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function FullSilder(props) {
   const { banners = [], isWeb = false } = props;
-  
+  const isH5 = useMediaQuery("(max-width:768px)");
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const [tabValue, setTabValue] = React.useState(0);
+  const [newBanners, setNewBanners] = React.useState([]);
   const maxSteps = banners.length;
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
+  
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
   const handleStepChange = (step) => {
     setActiveStep(step);
-  }; 
+  };  
+
+  useEffect(() => {
+    let type = 'web';
+    if(isH5) type = 'h5';
+    setNewBanners(banners.filter(b => b.type.toLowerCase() == type));
+  },[banners,isH5])
+  
   return (
     <> 
-    { (banners && banners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
+    { (newBanners && newBanners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={activeStep}
@@ -38,18 +50,19 @@ export default function FullSilder(props) {
           enableMouseEvents
         >
           {
-            banners.map((banner, index) => (
+            newBanners.map((banner, index) => (
               <div key={index} >
                 {Math.abs(activeStep - index) <= 2 ? (
                   <Grid item component="div" sx={{
                     height: {xs:160,md:300}
                   }}>
-                    <img
+                    <Image
                       style={{
                         height: '100%',
                         width: "100%",
                         objectFit:'cover'
                       }}
+                      alt="banner"
                       src={banner.file || '/assets/no-image.png'}
                       onError={(e) => e.target.src = '/assets/no-image.png'}
                     />
@@ -75,7 +88,7 @@ export default function FullSilder(props) {
               '& .MuiMobileStepper-dots': { display: 'none' },
             },
           ]}
-          nextButton={ banners.length > 1 &&
+          nextButton={ newBanners.length > 1 &&
             <Button
               size="small"
               onClick={handleNext}
@@ -90,7 +103,7 @@ export default function FullSilder(props) {
             </Button>
           }
           backButton={
-            banners.length > 1 && 
+            newBanners.length > 1 && 
             <Button
               size="small"
               onClick={handleBack}

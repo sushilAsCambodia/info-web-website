@@ -31,7 +31,7 @@ export default function DialogDesktop(props) {
             }
         ));
     }
-  }, [albumId,open,i18n.language]);
+  }, [dispatch,albumId,open,i18n.language]);
 
   const { journalDetail = [] } = useSelector(state => state.journal);
   

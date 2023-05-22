@@ -21,6 +21,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoadingDialog from "../Loading";
 import DialogMessage from "../DialogMessage";
+import { Image } from "mui-image";
+const minLength = 6;
 const ImgUpload = ({
   onChange,
   src
@@ -28,15 +30,12 @@ const ImgUpload = ({
   return (
     <label htmlFor="photo-upload" className="custom-file-upload fas">
       <div className="img-wrap img-upload" >
-        <img htmlFor="photo-upload" src={src} />
+        {src && <Image alt="photo_upload" htmlFor="photo-upload" src={src} />} 
       </div>
       <input id="photo-upload" type="file" onChange={onChange} />
     </label>
   );
 }
-
-
-
 const UploadImg = () => {
   const { customer, loading } = useSelector((state) => state.auth);
   const [userName, setUsername] = useState((customer && customer.user_name ? customer.user_name : ''));
@@ -61,9 +60,7 @@ const UploadImg = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [file, setFile] = useState(undefined);
 
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
-
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   useEffect(() => {
     if(customer && (customer.nick_name != null || customer.nick_name != '')) {
       setDisabledNickName(true)
@@ -83,7 +80,7 @@ const UploadImg = () => {
       reader.readAsDataURL(file);
     }
   }
-  const updateProfilePhoto = (file) => {
+  const updateProfilePhoto = useCallback(file => {
     dispatch(
       uploadProfile(
         {
@@ -100,18 +97,17 @@ const UploadImg = () => {
         }
       )
     )
-  }
+  },[dispatch,t]);
   useEffect(() => {
     if(nickName!='') {
       setTextAction('edit');
     }
-  },[])
+  },[nickName])
   useEffect(() => {
-    if (file) {
-      console.log(file, 'file');
+    if (file) { 
       updateProfilePhoto(file);
     }
-  }, [file])
+  }, [updateProfilePhoto,file])
   // drawer start 
   const [state, setState] = useState({ bottom: false });
   const toggleDrawer = (anchor, open, edit = '') => (event) => {
@@ -154,7 +150,7 @@ const UploadImg = () => {
         setErrorConfirmPassword(false);
       }
     }
-    if (e.target.value.length < 6) {
+    if (e.target.value.length < minLength) {
       setErrorPasswordMessage(langKey && langKey.validate_password);
       setErrorPassword(true);
     }
@@ -173,7 +169,7 @@ const UploadImg = () => {
     } else {
       setErrorConfirmPassword(false);
     }
-    if (e.target.value.length < 6) {
+    if (e.target.value.length < minLength) {
       setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
       setErrorConfirmPassword(true);
     }
@@ -387,7 +383,7 @@ const UploadImg = () => {
     if (data) {
       setState({ ...state, bottom: false });
     }
-  }, []);
+  }, [state]);
   const onCloseDrawer = () => {
     setEditPassword(false);
     setEditUserName(false);

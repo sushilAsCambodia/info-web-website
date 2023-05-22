@@ -12,9 +12,16 @@ const AdvertiseReducer =  (state = initialState, action) => {
         loading: true
       };
     case 'advertise/list/fulfilled':
+      let ads = action.payload?.data || [];
+      if(ads.length > 0) {
+        // sort DESC
+        ads.sort(function(a, b) {
+          return  parseInt(b.sorting) - parseInt(a.sorting);
+        });
+      }
       return {
         ...state,
-        advertises: action.payload?.data || [],
+        advertises: ads,
         status:'completed',
         loading: false
       };

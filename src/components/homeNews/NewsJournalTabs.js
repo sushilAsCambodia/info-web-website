@@ -73,14 +73,14 @@ export default function NewsJournalTabs(props) {
         })
       );
     }
-  }, [lang_id, value]);
+  }, [dispatch,lang_id, value]);
 
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
   return (
     <Grid item className="tabclass" sx={{ height: "100%" }}>
-      <ResultsBanner banners={banners} />
+      <ResultsBanner banners={banners}/>
 
       <Grid sx={{ height: "100%" }} >
         <Tabs

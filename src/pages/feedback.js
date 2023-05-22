@@ -24,24 +24,27 @@ const Feedback = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const router = useRouter();
-
   const [profilePage,setProfilePage]  = useState(false);
   const [content,setContent]  = useState('');
   const [contact,setContact]  = useState('');
   const [openDialog,setOpenDialog]  = useState(false);
   const [errorContent,setErrorContent]  = useState(false);
   const [errorEmail,setErrorEmail]  = useState(false);
+  const [disabled,setDisabled]  = useState(true);
   const [errorEmailMessage,setErrorEmailMessage]  = useState('');
-  const [responseMessage,setResponseMessage]  = useState('');
-  console.log('responseMessage',responseMessage)
-  console.log('openDialog',openDialog)
+  const [responseMessage,setResponseMessage]  = useState(''); 
+
   const onChangeContent = (e) => {
     if(e.target.value.length <= 500) {
       setContent(e.target.value)
       if(e.target.value != '') {
         setErrorContent(false);
+        if(!errorEmail) {
+          setDisabled(false)
+        }
       }else {
         setErrorContent(true);
+        setDisabled(true);
       }
     }
   }
@@ -50,13 +53,17 @@ const Feedback = () => {
     if(e.target.value!='') {
       const isValidEmail = utils.validateEmail(e.target.value);
       if(isValidEmail) {
-        setErrorEmail(false)
+        setErrorEmail(false);
+        if(!errorContent) {
+          setDisabled(false)
+        }
       }else {
         setErrorEmailMessage('invalid_email');
         setErrorEmail(true);
+        setDisabled(true);
       }
-    }
-  }
+    } 
+  } 
   const onSubmit = () => {
     if(content == '' && contact == '') {
       setErrorContent(true);
@@ -68,7 +75,7 @@ const Feedback = () => {
       setErrorEmailMessage('contact_required');
       setErrorEmail(true);
     }else {
-      if(!errorContent && !errorEmail) { 
+      if(!errorContent && !errorEmail && !disabled) { 
         dispatch(createFeedback({
           body: {
             feedback_content: content,
@@ -76,20 +83,15 @@ const Feedback = () => {
           },
           callback:(res) => {
             const {message = '' } = res;
-            console.log('res',res)
-            if(res.status_code===201){
+            if(res.status_code === 201){
               setOpenDialog(true)
-            
               setResponseMessage(t(message));
               setTimeout(()=> {setOpenDialog(false)
-              setContent('')
-              setContact('')
+              setContent('');
+              setContact('');
+              setDisabled(true);
             },1000)
-              
-            
-             
             }
-           
           }
         }))
       }
@@ -100,13 +102,9 @@ const Feedback = () => {
     if(hash == '/profile#feedback') {
       setProfilePage(true);
     }
-   }, [ router.asPath ]);
-
-
-   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
-
-  return loading ? <LoadingDialog loading={loading}/> : ( 
+  }, [ router.asPath ]);
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  return   ( 
     <>
       <Grid
         container
@@ -173,7 +171,7 @@ const Feedback = () => {
                     </InputAdornment>
                   }
                 />
-                {errorEmail && <FormHelperText error>{langKey && langKey.errorEmailMessage}</FormHelperText>}
+                {errorEmail && <FormHelperText error>{langKey && (langKey.errorEmailMessage || t('invalid_email'))}</FormHelperText>}
               </FormControl>
             </Grid>
             </Grid>
@@ -182,7 +180,7 @@ const Feedback = () => {
               <Button
                 fullWidth
                 variant="contained"
-                disabled={loading}
+                disabled={disabled}
                 sx={{
                   color:"white",
                   background:
@@ -204,6 +202,5 @@ const Feedback = () => {
       />
     </>
   )
-
 };
 export default Feedback;
