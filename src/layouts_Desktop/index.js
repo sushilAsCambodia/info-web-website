@@ -40,13 +40,8 @@ const Layout = (props) => {
     let substrackHeight = '147px';
     width = "100%";
     vh = '100vh';
-    if(router.pathname == "/download") {
-      // substrackHeight = '237px';
-    }
     height = `calc(${vh} - ${substrackHeight})`;
-  }
-
-  
+  } 
   switch (router.pathname.toLocaleLowerCase()) {
     case '/':
       title = (langKey && langKey.home_info_web)
