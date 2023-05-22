@@ -887,3 +887,20 @@ label.MuiFormLabel-root.Mui-focused {
 .mui-iosbtn-wrapper .mui-image-wrapper{
   justify-content: end !important;
 } 
+/* EVENTS PAGE  */
+.filterBtn{
+  white-space: nowrap;
+  color: #999999 !important;
+  background: #FAFAFA;
+  text-transform:capitalize !important;
+  border-radius: 10px !important;
+}
+.filterBtnSelected{
+  white-space: nowrap;
+  background: #FF6F31 !important;
+  color: white !important;
+  font-weight: bold;
+  border: 1px solid #DDDDDD !important;
+  text-transform: capitalize !important;
+  border-radius: 10px !important;
+}

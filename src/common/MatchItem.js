@@ -55,7 +55,7 @@ export default function MatchItem(props) {
               </Typography>
             </Grid>
             <Grid item xs={8} container justifyContent="center">
-              <Grid container>
+              <Grid container justifyContent="center">
                 <Grid item md={12}>
                   <Typography component="div" display="flex" justifyContent="center" alignItems="center" color="#00C2FF" fontSize={10}>
                     <FiberManualRecordIcon style={{fontSize:9}}/>&nbsp;LIVE

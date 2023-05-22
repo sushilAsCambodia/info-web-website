@@ -3,14 +3,9 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import { Box, Button } from "@mui/material";
-import { Grid } from "@material-ui/core";
-import LotteryCard from "@/components/lottery/LoteryCard";
+import { Box, Button, Grid } from "@mui/material";
+import GamesInfo from "@/components/gamesMobilePage/gamesInfo";
 import NoSsr from "@mui/base/NoSsr";
-import { Icon } from "@iconify/react";
-
-import router from "next/router";
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -40,7 +35,7 @@ function a11yProps(index) {
   };
 }
 
-export default function Lottery() {
+export default function Games() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -49,8 +44,8 @@ export default function Lottery() {
 
   return (
     <NoSsr>
-      <Box sx={{ width: "100%" }}>
-        <Box
+      <Grid>
+        <Grid
           sx={{
             borderBottom: 1,
             borderColor: "divider",
@@ -81,11 +76,10 @@ export default function Lottery() {
               },
             }}
           >
-            <Tab label="Guānzhù" {...a11yProps(0)} />
-            <Tab label="History" {...a11yProps(1)} />
-            <Tab label="Quánbù" {...a11yProps(2)} />
-            <Tab label="Shíshí Cǎi" {...a11yProps(3)} />
-            <Tab label="xxx Cǎixxx" {...a11yProps(4)} />
+            <Tab label="All" {...a11yProps(0)} />
+            <Tab label="Category 1" {...a11yProps(1)} />
+            <Tab label="Category 2" {...a11yProps(2)} />
+            <Tab label="Category 3" {...a11yProps(3)} />
           </Tabs>
           <Button
             variant="contained"
@@ -126,26 +120,8 @@ export default function Lottery() {
               &nbsp; Filter
             </Typography>
           </Button>
-        </Box>
+        </Grid>
         <TabPanel value={value} index={0} style={{ position: "relative" }}>
-          <Grid
-            item
-            xs={12}
-            style={{
-              backgroundImage: "url('/assets/stadium.png')",
-              height: 150,
-              position: "relative",
-            }}
-          >
-            <span
-              style={{
-                background: "rgba(0, 0, 0, 0.7)",
-                position: "absolute",
-                height: "100%",
-                width: "100%",
-              }}
-            ></span>
-          </Grid>
           <Grid
             item
             xs={12}
@@ -156,53 +132,13 @@ export default function Lottery() {
               width: "100%",
             }}
           >
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
+            <GamesInfo name={"Something"} favourite={true}/>
+            <GamesInfo name={"Redfall owls"} favourite={false}/>
+            <GamesInfo name={"Red Wacky League Antlez Broke the Stereo Neon Tide Bring Back Honesty"} favourite={true}/>
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Grid
-            item
-            xs={12}
-            container
-            justifyContent="space-between"
-            alignItems="center"
-            style={{ marginTop: "50px", padding: 10 }}
-          >
-            <Typography>Super Loto 2390</Typography>
-            <Grid >
-              <Button
-                variant="outlined"
-                sx={{ border: "1px solid #ddd", color: "#8C8C8C" }}
-                onClick={()=>{router.push('/games')}}
-              >
-                <Icon width={23} icon="icon-park-solid:game-ps" />
-                <Typography>Games</Typography>
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} style={{ padding: 10 }}>
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
-            <Box height={12}></Box>
-            <LotteryCard />
-          </Grid>
+          Quánbù
         </TabPanel>
         <TabPanel value={value} index={2}>
           Shíshí Cǎi
@@ -210,10 +146,7 @@ export default function Lottery() {
         <TabPanel value={value} index={3}>
           Shíshí Cǎi
         </TabPanel>
-        <TabPanel value={value} index={4}>
-          Shíshí Cǎi
-        </TabPanel>
-      </Box>
+      </Grid>
     </NoSsr>
   );
 }

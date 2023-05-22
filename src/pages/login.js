@@ -564,10 +564,10 @@ export default function Login() {
                         width: "100%",
                       }}
                     >
-                      <Grid item xs={12} sm={12} mb={3}>
+                      <Grid item xs={12} sm={12} mb={1}>
                         <FieldLanguageSwitcher />
                       </Grid>
-                      <Grid item xs={12} sm={12} mb={3}>
+                      <Grid item xs={12} sm={12} mb={1}>
                         <FormControl
                           variant="outlined"
                           fullWidth
