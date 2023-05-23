@@ -7,6 +7,7 @@
     "build": "next build",
     "export": "next build && next export",
     "start": "next start",
+    "livestart": "next start -p 4001",
     "lint": "next lint"
   },
   "dependencies": {
