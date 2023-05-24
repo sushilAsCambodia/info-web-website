@@ -105,7 +105,7 @@ export default function Register() {
   const handleSignup = () => {
     dispatch(
       register({
-        body: { user_name: username, password: password },
+        body: { user_name: username, password: password,nick_name:username },
         callback: (res) => {
           setLoading(false);
           const { status_code, message = "" } = res;
