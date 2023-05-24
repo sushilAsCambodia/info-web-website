@@ -12,7 +12,7 @@ const AdvertiseSlide = (props) => {
 
     useEffect(() => {
      
-      setNewAds(advertises.filter(b =>b.position == 'central_carousel'));
+      setNewAds(advertises.filter(b =>b.position == 'brand_ad_space'));
       // setNewBanners(banners.filter(b => b.platform.toLowerCase() == type && b.position == 'top_carousel'));
     },[advertises])
     return <>

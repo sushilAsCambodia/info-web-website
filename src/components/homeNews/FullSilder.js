@@ -40,8 +40,8 @@ export default function FullSilder(props) {
     // let type = 'web';
     // if(isH5) type = 'h5';
     
-    let position = 'carousel_image';
-    if(isH5) position = 'top_carousel';
+    let position = 'top_carousel';
+    if(isH5) position = 'carousel_image';
     setNewBanners(banners.filter(b =>b.position == position));
     // setNewBanners(banners.filter(b => b.platform.toLowerCase() == type && b.position == 'top_carousel'));
   },[banners,isH5])
@@ -151,7 +151,7 @@ export default function FullSilder(props) {
             // rtl={true}
             >
             {newBanners.map((ad, index) => (
-              <Link href={ad.ads_link} target='_blank' key={index}>
+              <Link href={ad.ads_link} target='_blank' key={index} >
                 <Grid 
                   style={{
                     color: "white",
@@ -174,6 +174,27 @@ export default function FullSilder(props) {
               </Link>
             ))}
           </Carousel>
+          <style>
+          {
+            ` .react-multiple-carousel__arrow {
+                min-width: 24px;
+                min-height: 24px;
+                background: linear-gradient(0deg, #EFEFEF, #EFEFEF),
+                linear-gradient(0deg, #FFFFFF, #FFFFFF);
+              }
+              .home-carousel-wrapper .react-multiple-carousel__arrow--left {
+                left:20px;
+              }
+              .home-carousel-wrapper .react-multiple-carousel__arrow--right {
+                right:20px; 
+              }
+              .react-multiple-carousel__arrow::before {
+                font-size: 10px;
+                color: #444444;
+              }
+            `
+          }
+        </style>
       </Grid>} 
     </>
   );
