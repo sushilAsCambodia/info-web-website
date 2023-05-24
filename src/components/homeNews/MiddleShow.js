@@ -134,7 +134,7 @@ export default function MiddleShow(props) {
             responsive={responsive2}
             additionalTransfrom={0}
             arrows
-            autoPlaySpeed={3000}
+            autoPlaySpeed={2000}
             centerMode={false}
             containerClass="container-with-dots"
             dotListClass=""
@@ -148,7 +148,9 @@ export default function MiddleShow(props) {
             renderArrowsWhenDisabled={false}
             renderButtonGroupOutside={false}
             renderDotsOutside={false}
+            autoPlay
           >
+            <MatchItem />
             <MatchItem />
             <MatchItem />
             <MatchItem />

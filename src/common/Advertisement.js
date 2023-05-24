@@ -56,8 +56,8 @@ export default function Advertisement(props) {
     if(isH5) type = 'h5';
     setNewAdverts(advertises.filter(b => b.platform.toLowerCase() == type && b.position == 'brand_ad_space'));
   },[advertises,isH5])
-  console.log("advertises:::",advertises)
-  console.log("newadverts:::",newAdverts)
+  // console.log("advertises:::",advertises)
+  // console.log("newadverts:::",newAdverts)
   return (
     <>
     { 
@@ -70,6 +70,7 @@ export default function Advertisement(props) {
             draggable={newAdverts.length>1?true:false}
             arrows={newAdverts.length>1?true:false}
             autoPlaySpeed={3000}
+            autoPlay={newAdverts.length !== 1}
             centerMode={false}
             containerClass="container-with-dots"
             dotListClass=""
@@ -81,7 +82,9 @@ export default function Advertisement(props) {
             pauseOnHover
             renderArrowsWhenDisabled={false}
             renderButtonGroupOutside={false}
-            renderDotsOutside={false} >
+            renderDotsOutside={false} 
+            // rtl={true}
+            >
             {newAdverts.map((ad, index) => (
               <Link href={ad.ads_link} target='_blank' key={index}>
                 <Grid 
@@ -99,7 +102,7 @@ export default function Advertisement(props) {
                     style={{
                       width: "100%",
                       height:'100%',
-                      objectFit:"cover", 
+                      objectFit:"fill", 
                     }}
                   />
                 </Grid>
