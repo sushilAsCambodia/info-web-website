@@ -14,7 +14,7 @@ import {getBanner} from '@/store/actions/bannerActions'
 import utils from "@/common/utils";
 import Image from "mui-image";
 import FullSilder from "./FullSilder";
-
+import { getAdvertise } from "@/store/actions/advertiseActions";
 const responsive2 = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -46,6 +46,8 @@ export default function MiddleShow(props) {
   const router = useRouter();
   const [value, setValue] = React.useState(0);
   const { banners = [] } = useSelector((state) => state.banner);
+  const { advertises = []} = useSelector((state) => state.advertise);
+  console.log("advertises:::",advertises)
   const { i18n } = useTranslation();
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
@@ -65,12 +67,21 @@ export default function MiddleShow(props) {
       }
     ));
   }, [dispatch,i18n.language]);
-
+  useEffect(() => {
+    dispatch(getAdvertise(
+      {
+          params: {
+            lang_id: utils.convertLangCodeToID(i18n.language)
+          },
+          callback:(res) => { }
+      }
+    ));
+  }, [i18n.language,dispatch]); 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
   return (
     <Grid container>
       <Grid item xs={12}>
-        <FullSilder banners={banners} />
+        <FullSilder banners={advertises} />
         {/* <Carousel
           responsive={responsive}
           additionalTransfrom={0}

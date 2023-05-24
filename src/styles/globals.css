@@ -958,16 +958,16 @@ height: 50px !important;
   content: '';
   position: absolute;
   /* width: 6px; */
-  border-left: 6px dashed black;
+  border-left: 3px dashed grey;
   top: 0;
   bottom: 0;
   left: 50%;
-  margin-left: -3px;
+  margin-left: -1px;
 }
 
 /* Container around content */
 .container {
-  padding: 10px 40px;
+  padding: 10px 20px;
   position: relative;
   background-color: inherit;
   width: 50%;
@@ -995,34 +995,6 @@ height: 50px !important;
 /* Place the container to the right */
 .right {
   left: 50%;
-}
-
-/* Add arrows to the left container (pointing right) */
-.left::before {
-  content: " ";
-  height: 0;
-  position: absolute;
-  top: 22px;
-  width: 0;
-  z-index: 1;
-  right: 30px;
-  border: medium solid white;
-  border-width: 10px 0 10px 10px;
-  border-color: transparent transparent transparent white;
-}
-
-/* Add arrows to the right container (pointing left) */
-.right::before {
-  content: " ";
-  height: 0;
-  position: absolute;
-  top: 22px;
-  width: 0;
-  z-index: 1;
-  left: 30px;
-  border: medium solid white;
-  border-width: 10px 10px 10px 0;
-  border-color: transparent white transparent transparent;
 }
 
 /* Fix the circle for containers on the right side */

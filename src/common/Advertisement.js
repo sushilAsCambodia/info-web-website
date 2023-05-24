@@ -2,11 +2,12 @@ import React from "react";
 import { Grid,Link } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import utils from "@/common/utils";
 import {getAdvertise} from '@/store/actions/advertiseActions'
 import Carousel from "react-multi-carousel";
 import Image from "mui-image";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const responsive = {
   largeDesktop: {
@@ -34,8 +35,12 @@ const responsive = {
 
 export default function Advertisement(props) {
   const { advertises = []} = useSelector((state) => state.advertise);
+  const [newAdverts, setNewAdverts] = useState([]);
+
   const dispatch = useDispatch();
   const { i18n } = useTranslation(); 
+  const isH5 = useMediaQuery("(max-width:768px)");
+
   useEffect(() => {
     dispatch(getAdvertise(
       {
@@ -46,17 +51,24 @@ export default function Advertisement(props) {
       }
     ));
   }, [i18n.language,dispatch]); 
+  useEffect(() => {
+    let type = 'web';
+    if(isH5) type = 'h5';
+    setNewAdverts(advertises.filter(b => b.platform.toLowerCase() == type && b.position == 'brand_ad_space'));
+  },[advertises,isH5])
+  console.log("advertises:::",advertises)
+  console.log("newadverts:::",newAdverts)
   return (
     <>
     { 
-      advertises && advertises.filter(ad => ad.platform == 2).length > 0 && (
+      newAdverts && newAdverts.length > 0 && (
         <Grid mt={5}>
           <Carousel
             responsive={responsive}
             additionalTransfrom={0}
-            swipeable={advertises.filter(ad => ad.platform == 2).length>1?true:false}
-            draggable={advertises.filter(ad => ad.platform == 2).length>1?true:false}
-            arrows={advertises.filter(ad => ad.platform == 2).length>1?true:false}
+            swipeable={newAdverts.length>1?true:false}
+            draggable={newAdverts.length>1?true:false}
+            arrows={newAdverts.length>1?true:false}
             autoPlaySpeed={3000}
             centerMode={false}
             containerClass="container-with-dots"
@@ -70,7 +82,7 @@ export default function Advertisement(props) {
             renderArrowsWhenDisabled={false}
             renderButtonGroupOutside={false}
             renderDotsOutside={false} >
-            {advertises.filter(ad => ad.platform == 2).map((ad, index) => (
+            {newAdverts.map((ad, index) => (
               <Link href={ad.ads_link} target='_blank' key={index}>
                 <Grid 
                   style={{

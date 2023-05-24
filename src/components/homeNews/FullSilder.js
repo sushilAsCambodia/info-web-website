@@ -12,6 +12,8 @@ import { autoPlay } from "react-swipeable-views-utils";
 import { Grid, Tabs, Tab } from "@mui/material";
 import { Image } from "mui-image";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { Route } from "@mui/icons-material";
+import router from "next/router";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function FullSilder(props) {
@@ -21,7 +23,7 @@ export default function FullSilder(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [tabValue, setTabValue] = React.useState(0);
   const [newBanners, setNewBanners] = React.useState([]);
-  const maxSteps = banners.length;
+  const maxSteps = newBanners?.length;
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -37,9 +39,9 @@ export default function FullSilder(props) {
   useEffect(() => {
     let type = 'web';
     if(isH5) type = 'h5';
-    setNewBanners(banners.filter(b => b.type.toLowerCase() == type));
+    setNewBanners(banners.filter(b => b.platform.toLowerCase() == type && b.position == 'carousel_image'));
   },[banners,isH5])
-  
+  console.log("NewBanners:::",newBanners)
   return (
     <> 
     { (newBanners && newBanners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
@@ -51,11 +53,14 @@ export default function FullSilder(props) {
         >
           {
             newBanners.map((banner, index) => (
-              <div key={index} >
+              <div key={index}>
                 {Math.abs(activeStep - index) <= 2 ? (
                   <Grid item component="div" sx={{
-                    height: {xs:160,md:300}
-                  }}>
+                    height: {xs:160,md:300},
+                    cursor:'pointer',
+                  }}
+                  onClick={()=>router.push(banner.ads_link)} 
+                  >
                     <Image
                       style={{
                         height: '100%',
@@ -63,7 +68,7 @@ export default function FullSilder(props) {
                         objectFit:'cover'
                       }}
                       alt="banner"
-                      src={banner.file || '/assets/no-image.png'}
+                      src={banner.icon || '/assets/no-image.png'}
                       onError={(e) => e.target.src = '/assets/no-image.png'}
                     />
                   </Grid>
