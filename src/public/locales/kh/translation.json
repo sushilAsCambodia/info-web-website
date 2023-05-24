@@ -105,9 +105,9 @@
     "data_chart_info_web":"តារាងទិន្នន័យ | InfoWeb",
     "password_must_not_contain_whitespaces":"ពាក្យសម្ងាត់មិនត្រូវមានចន្លោះទេ។",
     "password_must_have_at_least_one_uppercase_character":"ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់តួអក្សរធំមួយ។",
-    "password_must_have_at_least_one_lowercase_character.":"ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់តួអក្សរតូចមួយ។",
+    "password_must_have_at_least_one_lowercase_character":"ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់តួអក្សរតូចមួយ។",
     "password_must_contain_at_least_one_digit":"ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់មួយខ្ទង់។",
-    "password_must_contain_at_least_one_special_symbol.": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់និមិត្តសញ្ញាពិសេសមួយ។",
+    "password_must_contain_at_least_one_special_symbol": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់និមិត្តសញ្ញាពិសេសមួយ។",
     "account_deleted": "គណនីត្រូវបានលុប",
     "account_deactivated": "គណនីបិទដំណើរការ",
     "customer_service":"ផ្នែកបំរើរអតិធិជន"
