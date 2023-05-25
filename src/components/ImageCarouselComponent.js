@@ -4,7 +4,7 @@ import DataNotFound from './DataNotFound';
 import { Grid } from '@mui/material'
 import CardSlice from './desktop/CardSlide';
 const ImageCarouselComponent = (props) => {
-    const {images = [], isWeb = false} = props;
+    const {images = [], isWeb = false,year} = props;
     return <>
         { images.length > 0 ? <Grid item className='carouselcard'>
         <ImageGallery
@@ -26,7 +26,7 @@ const ImageCarouselComponent = (props) => {
             lazyLoad={true}
             thumbnailClass={isWeb?"custom-thumnail-wrapper":""}
             renderThumbInner = {isWeb ? (e) => {
-                return <CardSlice image={e}/>
+                return <CardSlice image={e} year={year}/>
             } : null}
             thumbnailPosition="bottom"
             additionalClass={isWeb?"custom-original-wrapper image-gallery-bottom-left":"image-gallery-bottom-left"} 

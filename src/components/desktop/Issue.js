@@ -13,7 +13,7 @@ import DataLoading from '../DataLoading';
 import DataNotFound from '../DataNotFound';
 export default function DialogDesktop(props) {
     const dispatch = useDispatch();
-    const { albumId } = props;
+    const { albumId,setYear } = props;
     const [value, setValue] = React.useState(0);
     const [firstFetch, setFirstFetch] = React.useState(true);
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
@@ -40,10 +40,11 @@ export default function DialogDesktop(props) {
             if(firstFetch) { 
                 setFirstFetch(false);
                 fetchIssue(years[value]);
+                setYear(years[value]);
             }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[years]);
+    },[years,value]);
     const fetchIssue = (issueDate) => {
         dispatch(
             getIssue(
@@ -112,6 +113,7 @@ export default function DialogDesktop(props) {
     </TabPanel>
     };
     const openIssue = (issue,index) => {
+        console.log('work');
         setActiveIssue(index);
         dispatch(
             getSelectedIssue(

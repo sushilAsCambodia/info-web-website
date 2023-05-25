@@ -13,6 +13,7 @@ export default function DialogDesktop(props) {
   const { i18n } = useTranslation();
   const {open,setOpen,albumId} = props;
   const [banners,setBanners] = React.useState([]);
+  const [year,setYear] = React.useState('');
   const [drawerOpen,setDrawerOpen] = React.useState(open);
   const handleClose = () => {
     setOpen(false);
@@ -39,21 +40,26 @@ export default function DialogDesktop(props) {
       setBanners([]);
       if(Array.isArray(journalDetail) && journalDetail.length > 0) {
         const item = journalDetail[0];
+        console.log("item",item)
         const images = []; 
-        for (let i = 0; i < item.album_slavs.length; i++) {
-          images.push({
-            original:item.album_slavs[i].images,
-            thumbnail:item.album_slavs[i].images,
-            issue:item.album_slavs[i].issue,
-            issue_date:item.album_slavs[i].issue_date,
-            album_name:item.album_name,
-          })
+        for (let j = 0; j < item.album_slavs.length; j++) {
+          const issue = item.album_slavs[j].issue;
+
+          for (let i = 0; i < item.album_slavs[j].album_slav_images.length; i++) {
+            const itm = item.album_slavs[j].album_slav_images[i];
+            images.push({
+              original:itm.images,
+              thumbnail:itm.images,
+              issue:issue,
+              issue_date:itm.issue_date,
+            })
         }
+      }
         setBanners(images);
       }
   },[journalDetail]);
   
-  
+  console.log("banner",banners)
   return (
     <Dialog
       open={drawerOpen}
@@ -87,8 +93,8 @@ export default function DialogDesktop(props) {
         </svg>
       </Typography>
       <DialogContent sx={{ padding: 2 }}>
-        <ImageCarouselComponent images={banners} isWeb={true}/> 
-        <Issue albumId={albumId}/>
+        <ImageCarouselComponent images={banners} isWeb={true} year={year}/> 
+        <Issue albumId={albumId} setYear={setYear}/>
       </DialogContent>
     </Dialog>
   );
