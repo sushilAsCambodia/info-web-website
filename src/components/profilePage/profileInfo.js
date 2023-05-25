@@ -227,7 +227,7 @@ export default function ProfileInfo(props) {
         setErrorUserName(false);
       } else {
         setErrorUserName(true);
-        setErrorUserNameMessage(langKey && langKey.validate_user_name);
+        setErrorUserNameMessage(langKey && langKey.validate_nick_name);
       }
     }
   };
