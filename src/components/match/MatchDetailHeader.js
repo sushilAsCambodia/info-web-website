@@ -33,7 +33,7 @@ export default function MatchDetailHeader(props) {
         }}
       >
         <Grid color="white" container justifyContent="center">
-          <Grid>
+          <Grid pt={3}>
             <Typography>English Premier League</Typography>
           </Grid>
           <Grid container item xs={12} justifyContent="center">
@@ -44,11 +44,10 @@ export default function MatchDetailHeader(props) {
               justifyContent="center"
               alignItems="center"
             >
-              <img
-                width={60}
+              <Image
                 alt="Dynamo Vladivostok"
                 src={"https://image.pngaaa.com/459/686459-middle.png"}
-                style={{ borderRadius: "50px" }}
+                style={{ borderRadius: "50px",height:'80px',width:'80px' }}
               />
               <Typography fontWeight="bold">Manchester</Typography>
             </Grid>
@@ -99,13 +98,12 @@ export default function MatchDetailHeader(props) {
               justifyContent="center"
               alignItems="center"
             >
-              <img
-                width={60}
+              <Image
                 alt="Dynamo Vladivostok"
                 src={
                   "https://yt3.googleusercontent.com/1sL3o7HlNEOn4jV74w7WN-p7ABIbBop9c09QcwKTGcapN3eMvGt-tCDYoA3ErYbtVCHcpVtlcgM=s900-c-k-c0x00ffffff-no-rj"
                 }
-                style={{ borderRadius: "50px" }}
+                style={{ borderRadius: "50px",height:'80px',width:'80px' }}
               />
               <Typography fontWeight="bold">Chelsea</Typography>
             </Grid>

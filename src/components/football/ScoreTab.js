@@ -82,7 +82,7 @@ export default function ScoreTab() {
     },
     color: "white",
     // hide last border
-    "&:first-child": {
+    "&:first-of-type": {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
@@ -199,7 +199,6 @@ export default function ScoreTab() {
               <TableBody>
                 {rows.map((item, index) => {
                   return (
-                    <>
                       <StyledTableRow key={item.id}>
                         <StyledTableCell align="left">
                           <Image width={30} src={item.img} alt="football_endtab"/>
@@ -246,7 +245,6 @@ export default function ScoreTab() {
                           )}
                         </StyledTableCell>
                       </StyledTableRow>
-                    </>
                   );
                 })}
               </TableBody>

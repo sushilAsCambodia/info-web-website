@@ -78,7 +78,7 @@ export default function LotteryPage() {
       backgroundColor: theme.palette.action.grey,
     },
     // hide last border
-    "&:first-child": {
+    "&:first-of-type": {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
@@ -253,7 +253,7 @@ export default function LotteryPage() {
             </Divider>
             <Grid container>
               <Grid item xs={4} p={1} position="relative">
-                <div class="ribbon ribbon-top-right">
+                <div className="ribbon ribbon-top-right">
                   <span>New</span>
                 </div>
 
@@ -377,8 +377,8 @@ export default function LotteryPage() {
           </Grid>
         </Fade>
       </Modal>
-      <Grid container mb={2} alignItems="center" justifyContent="space-between">
-        <Grid xs={"auto"} container border="1px solid grey" borderRadius="10px">
+      <Grid container mb={2} alignItems="center" justifyContent="space-between" >
+        <Grid item xs={"auto"} container border="1px solid grey" borderRadius="10px">
           <MenuItem
             sx={{ borderRadius: "10px 0px 0px 10px" }}
             className={`${select === 0 ? "filterTabSelected" : ""}`}
@@ -398,7 +398,7 @@ export default function LotteryPage() {
              {langKey && langKey.favorites}
           </MenuItem>
         </Grid>
-        <Grid xs={2}>
+        <Grid item xs={2}>
           <FormControl fullWidth>
             <InputLabel id="category-select-label">Select Category</InputLabel>
             <Select
@@ -447,7 +447,7 @@ export default function LotteryPage() {
               {rows.map((row, index) => {
                 return (
                   <>
-                    <StyledTableRow key={index}>
+                  <StyledTableRow key={index}>
                       <StyledTableCell component="th" scope="row" colSpan={7}>
                         <Grid display="flex" alignItems="center">
                           {" "}

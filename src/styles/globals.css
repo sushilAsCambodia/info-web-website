@@ -760,8 +760,8 @@ visibility: visible;
   z-index: -1; /* behind the circle to completely hide */
 }
 
-.content {
-  /* margin-left: 40px; */
+.contents {
+  margin-left: 40px;
   display: inline-block;
   margin-top: 5px;
 }
@@ -987,18 +987,34 @@ height: 50px !important;
   border-radius: 50%;
   z-index: 1;
   text-align: center;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 
 /* Place the container to the left */
 .left {
   left: 0;
 }
-
+.left .content .match-icon{
+  position: absolute;
+  right: 0;
+  top: 5px;
+}
+.left .content{
+  padding-right: 25px;
+}
 /* Place the container to the right */
 .right {
   left: 50%;
 }
-
+.right .content .match-icon{
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+.right .content{
+  padding-left: 25px;
+}
 /* Fix the circle for containers on the right side */
 .right::after {
   left: -16px;
@@ -1010,9 +1026,12 @@ height: 50px !important;
   background-color: white;
   position: relative;
   border-radius: 6px;
-  /* min-width: 50%; */
 }
 
 /*  END  */
-
+/* MATCH WITH ROUND  */
+.roundChart div p{
+font-size: 12px;
+padding: 5px;
+}
 

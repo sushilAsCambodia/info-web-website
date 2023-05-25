@@ -73,7 +73,7 @@ import { Image } from "mui-image";
       },
       color: "white",
       // hide last border
-      "&:first-child": {
+      "&:first-of-type": {
         borderLeft: "1px solid #DDDDDD",
       },
     }));
@@ -159,7 +159,7 @@ import { Image } from "mui-image";
                 marginBottom:"10px"
               }}
             >
-              <Grid container xs={10} alignItems="center">
+              <Grid container item xs={10} alignItems="center">
                 {Last7Days().map((item, index) => {
                   return (
                     <Grid
@@ -185,6 +185,7 @@ import { Image } from "mui-image";
                 })}
               </Grid>
               <Grid
+              item
                 xs={2}
                 display="flex"
                 alignItems="center"
@@ -248,7 +249,6 @@ import { Image } from "mui-image";
                 <TableBody>
                   {rows.map((item, index) => {
                     return (
-                      <>
                         <StyledTableRow key={item.id}>
                           <StyledTableCell align="center">
                             <Image width={30} src={item.img} alt="football" />
@@ -287,7 +287,6 @@ import { Image } from "mui-image";
                            {item.score.team1} - {item.score.team2}
                           </StyledTableCell>
                         </StyledTableRow>
-                      </>
                     );
                   })}
                 </TableBody>

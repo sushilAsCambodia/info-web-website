@@ -73,26 +73,14 @@ export default function Schedule() {
     },
     color: "white",
     // hide last border
-    "&:first-child": {
+    "&:first-of-type": {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
   function createData(img, name, calories, fat, data, id, analyze, favourite) {
     return { img, name, calories, fat, data, id, analyze, favourite };
   }
-  function Last7Days() {
-    var result = [];
-    for (var i = 0; i < 7; i++) {
-      var d = new Date();
-      d.setDate(d.getDate() - i);
-      result.push({
-        day: moment(d).format(utils.dateLetter),
-        monthyear: moment(d).format(utils.MonthYearFormat),
-      });
-    }
-    console.log("::: 7 days ", result);
-    return result;
-  }
+  
   const rows = [
     createData(
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
@@ -159,8 +147,8 @@ export default function Schedule() {
               marginBottom:"10px"
             }}
           >
-            <Grid container xs={10} alignItems="center">
-              {Last7Days().map((item, index) => {
+            <Grid container item xs={10} alignItems="center">
+              {utils.LastXDays(7).map((item, index) => {
                 return (
                   <Grid
                     key={index}
@@ -185,6 +173,7 @@ export default function Schedule() {
               })}
             </Grid>
             <Grid
+            item
               xs={2}
               display="flex"
               alignItems="center"
@@ -248,7 +237,7 @@ export default function Schedule() {
               <TableBody>
                 {rows.map((item, index) => {
                   return (
-                    <>
+                    
                       <StyledTableRow key={item.id}>
                         <StyledTableCell align="center">
                           <Image width={30} src={item.img} alt="football_schedule"/>
@@ -301,7 +290,6 @@ export default function Schedule() {
                           )}
                         </StyledTableCell>
                       </StyledTableRow>
-                    </>
                   );
                 })}
               </TableBody>

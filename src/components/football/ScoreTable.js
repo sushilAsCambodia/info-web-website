@@ -62,7 +62,7 @@ export default function ScoreTable() {
       backgroundColor: theme.palette.action.grey,
     },
     // hide last border
-    "&:first-child": {
+    "&:first-of-type": {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
@@ -130,7 +130,7 @@ export default function ScoreTable() {
               marginBottom:"10px"
             }}
           >
-            <Grid container xs={10} alignItems="center">
+            <Grid container item xs={10} alignItems="center">
               {Last7Days().map((item, index) => {
                 return (
                   <Grid
@@ -156,6 +156,7 @@ export default function ScoreTable() {
               })}
             </Grid>
             <Grid
+            item
               xs={2}
               display="flex"
               alignItems="center"
@@ -188,9 +189,7 @@ export default function ScoreTable() {
       {rows.map((item, index) => {
         let bgColor = getRandomColor();
         return (
-          <>
-         
-            <TableContainer component={Paper} style={{ marginBottom: "15px" }}>
+            <TableContainer key={index} component={Paper} style={{ marginBottom: "15px" }}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
@@ -316,7 +315,6 @@ export default function ScoreTable() {
                 </TableBody>
               </Table>
             </TableContainer>
-          </>
         );
       })}
     </>
