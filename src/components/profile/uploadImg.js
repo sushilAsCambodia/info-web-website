@@ -22,6 +22,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoadingDialog from "../Loading";
 import DialogMessage from "../DialogMessage";
 import { Image } from "mui-image";
+
 const minLength = 6;
 const ImgUpload = ({
   onChange,
@@ -140,7 +141,12 @@ const UploadImg = () => {
       setErrorPasswordMessage(langKey && langKey.password_required);
       setErrorPassword(true);
     } else {
-      setErrorPassword(false);
+      if(utils.checkPassword(e.target.value) != null) {
+        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
+        setErrorPassword(true);
+      }else {
+        setErrorPassword(false);
+      }
     }
     if (confirmpassword != '') {
       if (confirmpassword != e.target.value) {
@@ -150,10 +156,10 @@ const UploadImg = () => {
         setErrorConfirmPassword(false);
       }
     }
-    if (e.target.value.length < minLength) {
-      setErrorPasswordMessage(langKey && langKey.validate_password);
-      setErrorPassword(true);
-    }
+    // if (e.target.value.length < minLength) {
+    //   setErrorPasswordMessage(langKey && langKey.validate_password);
+    //   setErrorPassword(true);
+    // }
   };
   const onChangeConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
@@ -161,7 +167,12 @@ const UploadImg = () => {
       setErrorPasswordMessage(langKey && langKey.confirm_password_required);
       setErrorConfirmPassword(true);
     } else {
-      setErrorConfirmPassword(false);
+      if(utils.checkPassword(e.target.value) != null) {
+        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
+        setErrorConfirmPassword(true);
+      }else {
+        setErrorConfirmPassword(false);
+      }
     }
     if (password != e.target.value) {
       setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
@@ -169,10 +180,10 @@ const UploadImg = () => {
     } else {
       setErrorConfirmPassword(false);
     }
-    if (e.target.value.length < minLength) {
-      setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
-      setErrorConfirmPassword(true);
-    }
+    // if (e.target.value.length < minLength) {
+    //   setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
+    //   setErrorConfirmPassword(true);
+    // }
   };
   const onSubmit = () => {
     if (password == '' && confirmpassword == '') {

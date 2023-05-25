@@ -1,14 +1,23 @@
-import React from 'react';
+import {useEffect,useState} from 'react';
 import { Grid, Typography } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Link from 'next/link';
 const AdvertiseSlide = (props) => {
     const {advertises = []} = props;
-    const [tabValue, setTabValue] = React.useState(0);
+    const [tabValue, setTabValue] = useState(0);
+    const [newAds, setNewAds] = useState([]);
+
+    console.log("advertisessliders:::",advertises)
+
+    useEffect(() => {
+     
+      setNewAds(advertises.filter(b =>b.position == 'brand_ad_space'));
+      // setNewBanners(banners.filter(b => b.platform.toLowerCase() == type && b.position == 'top_carousel'));
+    },[advertises])
     return <>
     {
-        advertises && advertises.length > 0 && <Grid item   
+        newAds && newAds.length > 0 && <Grid item   
         // sx={{marginTop:'5px',marginBottom:'5px'}}
         >
         <Tabs
@@ -30,7 +39,7 @@ const AdvertiseSlide = (props) => {
           }}
           >
           {
-            advertises.filter(ad => ad.platform == 1).map((card,index) => {
+            newAds.map((card,index) => {
               return <Tab 
                   key={index} 
                   onClick={()=> setTabValue(0)} 
