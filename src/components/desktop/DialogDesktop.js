@@ -13,6 +13,7 @@ export default function DialogDesktop(props) {
   const { i18n } = useTranslation();
   const {open,setOpen,albumId} = props;
   const [banners,setBanners] = React.useState([]);
+  const [year,setYear] = React.useState('');
   const [drawerOpen,setDrawerOpen] = React.useState(open);
   const handleClose = () => {
     setOpen(false);
@@ -39,21 +40,26 @@ export default function DialogDesktop(props) {
       setBanners([]);
       if(Array.isArray(journalDetail) && journalDetail.length > 0) {
         const item = journalDetail[0];
+        console.log("item",item)
         const images = []; 
-        for (let i = 0; i < item.album_slavs.length; i++) {
-          images.push({
-            original:item.album_slavs[i].images,
-            thumbnail:item.album_slavs[i].images,
-            issue:item.album_slavs[i].issue,
-            issue_date:item.album_slavs[i].issue_date,
-            album_name:item.album_name,
-          })
+        for (let j = 0; j < item.album_slavs.length; j++) {
+          const issue = item.album_slavs[j].issue;
+
+          for (let i = 0; i < item.album_slavs[j].album_slav_images.length; i++) {
+            const itm = item.album_slavs[j].album_slav_images[i];
+            images.push({
+              original:itm.images,
+              thumbnail:itm.images,
+              issue:issue,
+              issue_date:itm.issue_date,
+            })
         }
+      }
         setBanners(images);
       }
   },[journalDetail]);
   
-  
+  console.log("banner",banners)
   return (
     <Dialog
       open={drawerOpen}
@@ -80,15 +86,17 @@ export default function DialogDesktop(props) {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: '50%',
-        backgroundColor:'#FF6F31'
+        backgroundColor:'#FF6F31',
+        cursor:"pointer"
+      
       }} onClick={handleClose}>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M7.00021 5.586L11.9502 0.636002L13.3652 2.051L8.41521 7.001L13.3652 11.951L11.9502 13.365L7.00021 8.415L2.05021 13.365L0.637207 11.95L5.58721 7L0.637207 2.05L2.05021 0.638001L7.00021 5.588V5.586Z" fill="white"/>
         </svg>
       </Typography>
       <DialogContent sx={{ padding: 2 }}>
-        <ImageCarouselComponent images={banners} isWeb={true}/> 
-        <Issue albumId={albumId}/>
+        <ImageCarouselComponent images={banners} isWeb={true} year={year}/> 
+        <Issue albumId={albumId} setYear={setYear}/>
       </DialogContent>
     </Dialog>
   );

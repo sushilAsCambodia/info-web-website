@@ -10,6 +10,7 @@ import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
+import Image from "mui-image";
 
 const events = [
   {
@@ -170,11 +171,12 @@ useEffect(() => {
                     }
                   />
 
-                  <img
+                  <Image
                     src={item.icon}
                     width={40}
                     height={40}
                     style={{ borderRadius: "50px" }}
+                    alt="Image"
                   />
                   <Typography fontWeight="bold" mx={1}>
                     {" "}

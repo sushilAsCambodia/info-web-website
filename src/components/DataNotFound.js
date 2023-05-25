@@ -12,7 +12,8 @@ export default function DataNotFound(props) {
             style={{
               width,
               height,
-              objectFit
+              objectFit,
+              cursor:"pointer"
             }}
             src="./assets/not-found.png" 
             alt='not-found'

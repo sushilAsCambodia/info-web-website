@@ -77,7 +77,7 @@ const DrawerComponent = (props) => {
             fetchIssue(years[value]);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[years]);
+    },[years,value]);
     const fetchIssue = (issueDate) => {
         dispatch(
             getIssue(

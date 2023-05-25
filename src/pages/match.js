@@ -53,7 +53,7 @@ function a11yProps(index) {
   };
 }
 
-export default function match() {
+export default function Match() {
 
   const [mounted,setMounted] = useState(false);
   useEffect(() => {
