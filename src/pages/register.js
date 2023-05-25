@@ -105,7 +105,7 @@ export default function Register() {
   const handleSignup = () => {
     dispatch(
       register({
-        body: { user_name: username, password: password },
+        body: { user_name: username, password: password},
         callback: (res) => {
           setLoading(false);
           const { status_code, message = "" } = res;
@@ -502,7 +502,7 @@ export default function Register() {
         container
         justifyContent="center"
         alignItems="stretch"
-        width={{ xs: "90%", lg: "90%", xl: "65%" }}
+        width={{xs:"90%", lg:"90%", xl:"1000px",}}
         height="fit-content"
       >
         <Grid

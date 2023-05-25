@@ -4,7 +4,7 @@ import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
-import { Typography, Divider, Button, Checkbox } from "@mui/material";
+import { Typography, Divider, Button, Checkbox, IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
@@ -42,20 +42,45 @@ export default function Events(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
+  const [eventList, setEventList] = useState(events);
   const [filterValue, setFilterValue] = useState("all");
   const [selected, setSelected] = useState([]);
-
 
   const handleSelectFilter = (value) => {
     setFilterValue(value);
   };
 
-  const handleGameSelected = (value) => {
-    setSelected(selected => [...selected,value] );
+  const handleGameSelected = (value, checked) => {
+    const temp = [...selected];
+    if (checked) setSelected((selected) => [...selected, value]);
+    else {
+      const index = temp.indexOf(value);
+      if (index > -1) {
+        // only splice array when item is found
+        temp.splice(index, 1); // 2nd parameter means remove one item only
+      }
+      setSelected([...temp])
+    }
   };
 
-  console.log("selected array :::",selected)
-
+  const handleFavouriteUpdate= (index,favourited)=>{
+    const nextstate = eventList.map((item, i) => {
+        if (i === index) {
+          // Increment the clicked counter
+          return {...item,favourite:favourited};
+        } else {
+          // The rest haven't changed
+          return item;
+        }
+      });
+      setEventList(nextstate);
+  }
+  useEffect(() => {
+    console.log("new eventList:::",eventList)
+},[eventList]);
+useEffect(() => {
+    console.log("new selectedList:::",selected)
+},[selected]);
   return (
     <Grid container>
       <Grid p={1} item xs={12} container overflow="auto" flexWrap="nowrap">
@@ -112,11 +137,9 @@ export default function Events(props) {
           </Button>
         </Grid>
       </Grid>
-      {selected && selected.map((item)=>{
-        return(<>{item}</>)
-      })}
+      
       <Grid px={2} item xs={12} container>
-        {events.map((item, index) => {
+        {eventList.map((item, index) => {
           return (
             <Grid key={index} item xs={12} mb={1}>
               <Grid
@@ -128,8 +151,10 @@ export default function Events(props) {
               >
                 <Grid container alignItems="center" item xs={11}>
                   <Checkbox
-                  onClick={()=>handleGameSelected(item.id)}
-                //   checked={selected.includes(item.id)}
+                    onClick={(e) =>
+                      handleGameSelected(item.id, e.target.checked)
+                    }
+                      checked={selected.includes(item.id)}
                     icon={
                       <Icon
                         icon="system-uicons:radio-on"
@@ -159,11 +184,13 @@ export default function Events(props) {
                   </Typography>
                 </Grid>
                 <Grid container item xs={1}>
+                  <IconButton onClick={()=>handleFavouriteUpdate(index,!item.favourite)}>
                   <Icon
                     icon="iconamoon:star-fill"
                     width={25}
                     color={`${item.favourite ? "#F2DA00" : "#DDDDDD"}`}
                   />
+                  </IconButton>
                 </Grid>
               </Grid>
             </Grid>

@@ -1,20 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
+import {useState,useEffect} from "react";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import { Typography, Divider, Button } from "@mui/material";
-import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
+import { getAdvertise } from "@/store/actions/advertiseActions";
 import { Icon } from "@iconify/react";
 import { Image } from "mui-image";
+import utils from "@/common/utils";
+
 const responsive = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -44,8 +42,11 @@ export default function PartnersColumns(props) {
   const theme = useTheme();
   const router = useRouter();
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const { advertises = []} = useSelector((state) => state.advertise);
+  const dispatch  = useDispatch();
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [partners, setPartners] = useState([]);
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
@@ -54,8 +55,25 @@ export default function PartnersColumns(props) {
       setValue(0);
     }
   }, [router.asPath]);
+  useEffect(() => {
+    dispatch(getAdvertise(
+      {
+          params: {
+            lang_id: utils.convertLangCodeToID(t.language)
+          },
+          callback:(res) => { }
+      }
+    ));
+  }, [t.language,dispatch]); 
 
+  useEffect(() => {
+    setPartners(advertises.filter(b =>b.position == 'partners'));
+  },[advertises])
+  console.log("partenrs:::",advertises)
+  console.log("partenrs:::",partners)
+  
   return (
+    partners && partners.length > 0 && 
     <Grid container justifyContent="center">
       <Grid item xs={4} marginY="15px">
         <Divider
@@ -94,12 +112,15 @@ export default function PartnersColumns(props) {
           renderButtonGroupOutside={false}
           renderDotsOutside={false}
         >
-          <Grid
+          {partners && partners.length > 0 && partners.map((item,index)=>{
+            return(
+              <Grid
             sx={{
               margin: "5px",
               borderRadius: "10px",
               //   paddingX:"5px"
             }}
+            key={index}
           >
             <Grid
               style={{
@@ -114,7 +135,7 @@ export default function PartnersColumns(props) {
             >
               <Grid item padding="5px">
                 <Image
-                  src="./assets/Logo/clts-logo.png"
+                  src={item.icon}
                   alt="clts_logo"
                   style={{
                     minWidth: "100px",
@@ -125,37 +146,10 @@ export default function PartnersColumns(props) {
               </Grid>
             </Grid>
           </Grid>
-          <Grid
-            sx={{
-              margin: "5px",
-              borderRadius: "10px",
-              //   paddingX:"5px"
-            }}
-          >
-            <Grid
-              style={{
-                height: "120px",
-                paddingX: "5px",
-                border: "1px solid grey",
-                borderRadius: "5px",
-              }}
-              container
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Grid item padding="5px">
-                <Image
-                  src="./assets/Logo/kk_exchange.png"
-                  alt="kk_exchange"
-                  style={{
-                    minWidth: "100px",
-                    maxHeight: "80px",
-                    maxWidth:"200px"
-                  }}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
+            )
+          })}
+        
+         
         </Carousel>
       </Grid>
     </Grid>

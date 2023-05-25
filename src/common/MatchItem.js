@@ -28,7 +28,7 @@ export default function MatchItem(props) {
   }, [router.asPath]);
 
   return (
-    <Grid p={1}>
+    <Grid p={1} onClick={()=>router.push('/MatchDetails')}>
       <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px">
         <Grid
           borderBottom="1px solid #ddd"
