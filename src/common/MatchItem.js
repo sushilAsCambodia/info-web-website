@@ -13,11 +13,14 @@ import { Icon } from "@iconify/react";
 import StarIcon from "@/components/svg/star";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Image } from "mui-image";
+import useMediaQuery from "@mui/material/useMediaQuery";
 export default function MatchItem(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
+  const matches = useMediaQuery("(max-width:768px)");
+
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
@@ -28,9 +31,9 @@ export default function MatchItem(props) {
   }, [router.asPath]);
 
   return (
-    <Grid p={1} onClick={()=>router.push('/MatchDetails')}>
+    <Grid p={1} onClick={()=>{matches ?router.push('/MatchDetails') : router.push('/liveScorePage')}}>
       <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px">
-        <Grid
+      <Grid
           borderBottom="1px solid #ddd"
           item
           xs={12}
@@ -39,20 +42,25 @@ export default function MatchItem(props) {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography color="#8C8C8C" fontSize={12}>Denmark</Typography>
-          <StarIcon/>
+          <Typography color="#8C8C8C" >
+            Denmark
+          </Typography>
+          <Icon icon="clarity:star-solid" color="#ddd" width="20"/>
         </Grid>
         <Grid item xs={12} px={1} py={1}>
-          <Grid container justifyContent="space-between">
+        <Grid container justifyContent="space-between">
             <Typography>Liverpool</Typography>
             <Typography>chelsea</Typography>
           </Grid>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item xs={2}>
-              <Typography component="div" display="flex" justifyContent="space-between" marginTop={1}>
+              <Grid display="flex" justifyContent="space-between" marginTop={1}>
+                <Grid position="relative" container>
+                <Grid sx={{background:"#FFE0D2",color:"#FFE0D2", minWidth:"20px",position:"absolute",left:'-8px'}}>f</Grid>
                 <Image width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
+                </Grid>
                 <Typography>3</Typography>
-              </Typography>
+              </Grid>
             </Grid>
             <Grid item xs={8} container justifyContent="center">
               <Grid container justifyContent="center">
@@ -65,10 +73,13 @@ export default function MatchItem(props) {
               </Grid>
             </Grid>
             <Grid item xs={2}>
-              <Typography component="div" display="flex" justifyContent="space-between" marginTop={1}>
+              <Grid display="flex" justifyContent="space-between" marginTop={1}>
                 <Typography>5</Typography>
-                <Image width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
-              </Typography>
+                <Grid position="relative" container justifyContent="flex-end">
+                  <Image width="20px" alt="team" src="./assets/Logo/team.png" style={{zIndex:'1'}}/>{" "}
+                  <Grid sx={{background:"#FFE0D2",color:"#FFE0D2", minWidth:"20px",position:"absolute",right:'-8px'}}>f</Grid>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

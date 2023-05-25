@@ -73,7 +73,7 @@ export default function LotteryPastReults() {
       backgroundColor: theme.palette.action.grey,
     },
     // hide last border
-    "&:first-child": {
+    "&:first-of-type": {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
@@ -127,7 +127,7 @@ export default function LotteryPastReults() {
   return (
     <>
       <TitleBreadCrumbs title={"Past Result"} />
-      <Grid container>
+      <Grid container height='100vh'>
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
             <Grid container justifyContent="center" borderRadius="10px">
@@ -163,28 +163,28 @@ export default function LotteryPastReults() {
             </Grid>
 
             <Grid container>
-              <Grid class="container" item xs={10}>
+              <Grid className="container" item xs={10}>
                 {/* <!-- completed --> */}
                 <div
                   className={`step ${
                     filter == "China National" ? "completed" : ""
                   }`}
                 >
-                  <div class="v-stepper">
+                  <div className="v-stepper">
                     <div
                     onClick={() => {
                       setFilter("China National");
                     }}
-                      class="circle"
+                      className="circle"
                       style={{
                         "--iconImg": `url("https://thumbs.dreamstime.com/b/modern-creative-color-triangle-arrow-shape-logo-design-creative-color-triangle-arrow-shape-logo-design-142723014.jpg")`,
                       }}
                     ></div>
-                    <div class="line"></div>
+                    <div className="line"></div>
                   </div>
 
                   <div
-                    class="content"
+                    className="contents"
                     onClick={() => {
                       setFilter("China National");
                     }}
@@ -200,20 +200,20 @@ export default function LotteryPastReults() {
                       filter == "Double color" ? "completed" : ""
                     }`}
                   >
-                    <div class="v-stepper">
+                    <div className="v-stepper">
                       <div
                       onClick={() => {
                         setFilter("Double color");
                       }}
-                        class="circle"
+                        className="circle"
                         style={{
                           "--iconImg": `url("https://c8.alamy.com/comp/2A8GB3A/red-star-in-circle-icon-on-white-background-flat-style-red-star-in-circle-icon-for-your-web-site-design-logo-app-ui-set-of-star-circle-symbol-r-2A8GB3A.jpg")`,
                         }}
                       ></div>
-                      <div class="line"></div>
+                      <div className="line"></div>
                     </div>
                     <div
-                      class="content"
+                      className="contents"
                       onClick={() => {
                         setFilter("Double color");
                       }}
@@ -228,21 +228,21 @@ export default function LotteryPastReults() {
                       filter == "Welfare 3D" ? "completed" : ""
                     }`}
                   >
-                    <div class="v-stepper">
+                    <div className="v-stepper">
                       <div
                       onClick={() => {
                         setFilter("Welfare 3D");
                       }}
-                        class="circle"
+                        className="circle"
                         style={{
                           "--iconImg": `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqy_oXQU85RpvKBMoJwuj22hHTActWhqArVA&usqp=CAU")`,
                         }}
                       ></div>
-                      <div class="line"></div>
+                      <div className="line"></div>
                     </div>
 
                     <div
-                      class="content"
+                      className="contents"
                       onClick={() => {
                         setFilter("Welfare 3D");
                       }}
@@ -257,21 +257,21 @@ export default function LotteryPastReults() {
                       filter == "Colorful lottery" ? "completed" : ""
                     }`}
                   >
-                    <div class="v-stepper">
+                    <div className="v-stepper">
                       <div
                       onClick={() => {
                         setFilter("Colorful lottery");
                       }}
-                        class="circle"
+                        className="circle"
                         style={{
                           "--iconImg": `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLYFhTpGv_NCmwQ48A7jvD3hQrQvd_6JLGTQ&usqp=CAU")`,
                         }}
                       ></div>
-                      <div class="line"></div>
+                      <div className="line"></div>
                     </div>
 
                     <div
-                      class="content"
+                      className="contents"
                       onClick={() => {
                         setFilter("Colorful lottery");
                       }}
@@ -283,9 +283,7 @@ export default function LotteryPastReults() {
               </Grid>
               <Grid item xs={2} textAlign="right">
                 <IconButton
-                  expand={expanded}
                   onClick={handleExpandClick}
-                  aria-expanded={expanded}
                   className="rotate"
                   sx={{ paddingTop: "15px" }}
                 >
@@ -301,7 +299,7 @@ export default function LotteryPastReults() {
         </Grid>
         <Grid item xs={8} p={1}>
           <Grid border="1px solid #DDDDDD" container p={1}>
-            <Grid container xs={6} alignItems="center">
+            <Grid container item xs={6} alignItems="center">
               <Image
                 alt="Welfare lottery lottery"
                 width="40px"
@@ -312,6 +310,7 @@ export default function LotteryPastReults() {
               <Typography ml={1}>Welfare lottery lottery</Typography>{" "}
             </Grid>
             <Grid
+            item
               xs={6}
               display="flex"
               alignItems="center"
@@ -361,7 +360,7 @@ export default function LotteryPastReults() {
                 <TableBody>
                   {rows.map((item, index) => {
                     return (
-                      <>
+                      
                         <StyledTableRow key={item.name}>
                           <StyledTableCell align="left">
                             {item.calories}
@@ -381,7 +380,7 @@ export default function LotteryPastReults() {
                             </Grid>
                           </StyledTableCell>
                         </StyledTableRow>
-                      </>
+                      
                     );
                   })}
                 </TableBody>

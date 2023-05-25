@@ -1,3 +1,5 @@
+import moment from "moment/moment";
+
 const utils = {
     formatDate: 'YYYY/MM/D',
     letterFormat: 'DD MMM YYYY',
@@ -57,6 +59,19 @@ const utils = {
         }
         
         return null;
+    },
+    LastXDays:(days)=> {
+      var result = [];
+      for (var i = 0; i < days; i++) {
+        var d = new Date();
+        d.setDate(d.getDate() - i);
+        result.push({
+          day: moment(d).format(utils.dateLetter),
+          DateMonth: moment(d).format(utils.DateMonthFormat),
+        });
+      }
+      console.log("::: LastXDays", result);
+      return result;
     }
 }
 export default utils;

@@ -91,7 +91,7 @@ export default function Advertisement(props) {
                   style={{
                     color: "white",
                     textAlign: "left",
-                    height: "302.33px",
+                    height: "300px",
                     // border: "1px solid grey",
                     borderRadius: "5px",
                   }} 
@@ -101,7 +101,7 @@ export default function Advertisement(props) {
                     alt={ad.title}
                     style={{
                       width: "100%",
-                      height:'100%',
+                      // height:'100%',
                       objectFit:"fill", 
                     }}
                   />

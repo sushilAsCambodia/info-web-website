@@ -760,8 +760,8 @@ visibility: visible;
   z-index: -1; /* behind the circle to completely hide */
 }
 
-.content {
-  /* margin-left: 40px; */
+.contents {
+  margin-left: 40px;
   display: inline-block;
   margin-top: 5px;
 }
@@ -1029,5 +1029,9 @@ height: 50px !important;
 }
 
 /*  END  */
-
+/* MATCH WITH ROUND  */
+.roundChart div p{
+font-size: 12px;
+padding: 5px;
+}
 

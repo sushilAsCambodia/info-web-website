@@ -42,6 +42,7 @@ export default function NewsColumns(props) {
 
 
   return (
+    categories && categories.length > 0 &&
     <Grid container justifyContent="center" my={3}>
       <Grid item xs={4} marginY="15px">
         <Divider

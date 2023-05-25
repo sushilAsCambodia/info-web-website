@@ -47,7 +47,7 @@ const matchInfo = [
   {
     id: 4,
     title: "42`",
-    icon: <Icon width={25} icon="tabler:rectangle-vertical-filled" />,
+    icon: <Icon color="#ffe94b" width={25} icon="tabler:rectangle-vertical-filled" />,
     playerName: "Rodrigo Moreno",
     summary: "assist: crysencio",
   },
@@ -60,10 +60,10 @@ export default function MatchVerticleChart(props) {
 
   return matchInfo.map((item, index) => {
     return (
-      <div style={{width:'100vw'}}>
-         <div class="timeline">
-          <div style={{"--title":`'${item.title}'`}} class={`${index%2 == 0 ? "left":"right" } container`}>
-            <div class="content">
+      <div style={{width:'100vw'}} key={index}>
+         <div className="timeline">
+          <div style={{"--title":`'${item.title}'`}} className={`${index%2 == 0 ? "left":"right" } container`}>
+            <div className="content">
               <div className="match-icon">{item.icon}</div>
               <h4>{item.playerName}</h4>
               <p>

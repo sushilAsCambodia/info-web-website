@@ -31,7 +31,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -73,7 +73,7 @@ export default function FootBallPage() {
       <TitleBreadCrumbs title={langKey && langKey.foot_ball}  />
 
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
-        <Grid xs={"auto"} container border="1px solid grey" borderRadius="5px">
+        <Grid item xs={"auto"} container border="1px solid grey" borderRadius="5px">
           <MenuItem
             sx={{ borderRadius: "5px 0px 0px 5px" }}
             className={`${select === "Follow" ? "filterTabSelected" : ""}`}
@@ -111,7 +111,7 @@ export default function FootBallPage() {
                {langKey && langKey.schedule}
           </MenuItem> 
         </Grid>
-        <Grid xs={2}>
+        <Grid item xs={2}>
           <FormControl fullWidth>
             <InputLabel id="category-select-label">{langKey && langKey.select_category}</InputLabel>
             <Select

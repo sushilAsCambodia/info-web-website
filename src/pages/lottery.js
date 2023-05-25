@@ -10,6 +10,8 @@ import NoSsr from "@mui/base/NoSsr";
 import { Icon } from "@iconify/react";
 
 import router from "next/router";
+import MatchWithDates from "@/components/match/MatchWithDates";
+import MatchWithRounds from "@/components/match/MatchWithRounds";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,8 +85,8 @@ export default function Lottery() {
           >
             <Tab label="Guānzhù" {...a11yProps(0)} />
             <Tab label="History" {...a11yProps(1)} />
-            <Tab label="Quánbù" {...a11yProps(2)} />
-            <Tab label="Shíshí Cǎi" {...a11yProps(3)} />
+            <Tab label="Soccer" {...a11yProps(2)} />
+            <Tab label="Basket Ball" {...a11yProps(3)} />
             <Tab label="xxx Cǎixxx" {...a11yProps(4)} />
           </Tabs>
           <Button
@@ -127,7 +129,7 @@ export default function Lottery() {
             </Typography>
           </Button>
         </Box>
-        <TabPanel value={value} index={0} style={{ position: "relative" }}>
+        <TabPanel value={value} index={0}>
           <Grid
             item
             xs={12}
@@ -145,8 +147,7 @@ export default function Lottery() {
                 width: "100%",
               }}
             ></span>
-          </Grid>
-          <Grid
+              <Grid
             item
             xs={12}
             style={{
@@ -158,7 +159,7 @@ export default function Lottery() {
           >
             <LotteryCard />
             <Box height={12}></Box>
-            <LotteryCard />
+            <LotteryCard /> 
             <Box height={12}></Box>
             <LotteryCard />
             <Box height={12}></Box>
@@ -168,6 +169,8 @@ export default function Lottery() {
             <Box height={12}></Box>
             <LotteryCard />
           </Grid>
+          </Grid>
+        
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Grid
@@ -205,10 +208,10 @@ export default function Lottery() {
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Shíshí Cǎi
+          <MatchWithDates />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Shíshí Cǎi
+        <MatchWithRounds />
         </TabPanel>
         <TabPanel value={value} index={4}>
           Shíshí Cǎi
