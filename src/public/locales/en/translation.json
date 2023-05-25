@@ -106,9 +106,9 @@
     "data_chart_info_web":"Data Chart | InfoWeb",
     "password_must_not_contain_whitespaces":"Password must not contain Whitespaces.",
     "password_must_have_at_least_one_uppercase_character":"Password must have at least one Uppercase Character.",
-    "password_must_have_at_least_one_lowercase_character.":"Password must have at least one Lowercase Character",
+    "password_must_have_at_least_one_lowercase_character":"Password must have at least one Lowercase Character",
     "password_must_contain_at_least_one_digit":"Password must contain at least one digit",
-    "password_must_contain_at_least_one_special_symbol.": "Password must contain at least one Special Symbol",
+    "password_must_contain_at_least_one_special_symbol": "Password must contain at least one Special Symbol",
     "account_deleted": "Account deleted",
     "account_deactivated": "Account deactivated",
     "customer_service":"Customer service"

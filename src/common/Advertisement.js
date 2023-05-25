@@ -54,7 +54,7 @@ export default function Advertisement(props) {
   useEffect(() => {
     let type = 'web';
     if(isH5) type = 'h5';
-    setNewAdverts(advertises.filter(b => b.position == 'brand_ad_space'));
+    setNewAdverts(advertises.filter(b => b.position == 'central_carousel'));
   },[advertises,isH5])
   // console.log("advertises:::",advertises)
   // console.log("newadverts:::",newAdverts)
