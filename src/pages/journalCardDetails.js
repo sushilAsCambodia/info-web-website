@@ -27,11 +27,14 @@ export default function JournalCardDetails() {
     if (Array.isArray(journalDetail) && journalDetail.length > 0) {
       const item = journalDetail[0];
       const images = []; 
-      for (let i = 0; i < item.album_slavs.length; i++) {
-        images.push({
-          original: item.album_slavs[i].images,
-          thumbnail: item.album_slavs[i].images,
-        })
+      for (let j = 0; j < item.album_slavs.length; j++) {
+        for (let i = 0; i < item.album_slavs[j].album_slav_images.length; i++) {
+          const itm = item.album_slavs[j].album_slav_images[i];
+          images.push({
+            original: itm.images,
+            thumbnail: itm.images,
+          })
+        }
       }
       setImages(images);
     }
