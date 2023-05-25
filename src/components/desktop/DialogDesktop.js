@@ -86,7 +86,9 @@ export default function DialogDesktop(props) {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: '50%',
-        backgroundColor:'#FF6F31'
+        backgroundColor:'#FF6F31',
+        cursor:"pointer"
+      
       }} onClick={handleClose}>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M7.00021 5.586L11.9502 0.636002L13.3652 2.051L8.41521 7.001L13.3652 11.951L11.9502 13.365L7.00021 8.415L2.05021 13.365L0.637207 11.95L5.58721 7L0.637207 2.05L2.05021 0.638001L7.00021 5.588V5.586Z" fill="white"/>

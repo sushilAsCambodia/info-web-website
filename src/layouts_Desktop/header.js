@@ -62,9 +62,9 @@ const Header = () => {
 
   const menuList = [
     { label: (langKey && langKey.lottery_draw), page: "LotteryPage" },
-    { label: (langKey && langKey.data_chart), page: "DataChart" },
+    // { label: (langKey && langKey.data_chart), page: "DataChart" },
     { label: (langKey && langKey.foot_ball), page: "footBallPage" },
-    { label: (langKey && langKey.basket_ball), page: "basketBall" },
+    // { label: (langKey && langKey.basket_ball), page: "basketBall" },
   ];
 
 
@@ -304,7 +304,7 @@ const Header = () => {
                       })
                     : ""}
 
-                  <Grid>
+                  {/* <Grid>
                     <MenuItem
                       id="basic-button"
                       aria-controls={open ? "basic-menu" : undefined}
@@ -386,7 +386,7 @@ const Header = () => {
                       </MenuItem>
                       <MenuItem onClick={handleLogout}>{langKey && langKey.logout}</MenuItem>
                     </Menu>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
                 <Grid
                   item
