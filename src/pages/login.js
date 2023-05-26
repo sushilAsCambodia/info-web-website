@@ -160,7 +160,7 @@ export default function Login() {
     setOpen(false);
   };
   const onChangeUserName = (e) => {
-    if (e.target.value != "" && e.target.value.length < 6) {
+    if (e.target.value != "" && e.target.value.length < 4) {
       setErrorUserName(true);
     } else {
       setErrorUserName(false);
