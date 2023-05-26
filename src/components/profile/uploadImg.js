@@ -89,6 +89,7 @@ const UploadImg = () => {
             image: file
           },
           callback: (res) => {
+            console.log('xxxxx',res)
             let { message = '' } = res;
             setOpenDialog(true);
             setResponseMessage(t(message));
@@ -97,7 +98,9 @@ const UploadImg = () => {
           formdata: true
         }
       )
-    )
+    ).then(e => {
+      console.log(e,'abss');
+    })
   },[dispatch,t]);
   useEffect(() => {
     if(nickName!='') {

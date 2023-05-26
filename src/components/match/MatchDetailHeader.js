@@ -116,25 +116,25 @@ export default function MatchDetailHeader(props) {
           <Grid container alignItems="center" justifyContent="space-between">
             <Typography color="grey">jack Harrison</Typography>
             <ul>
-              <li>6'</li>
+              <li>6</li>
             </ul>
           </Grid>
           <Grid container alignItems="center" justifyContent="space-between">
             <Typography color="grey">jack Harrison</Typography>
             <ul>
-              <li>11'</li>
+              <li>11</li>
             </ul>
           </Grid>
           <Grid container alignItems="center" justifyContent="space-between">
             <Typography color="grey">jack Harrison</Typography>
             <ul>
-              <li>26'</li>
+              <li>26</li>
             </ul>
           </Grid>
           <Grid container alignItems="center" justifyContent="space-between">
             <Typography color="grey">jack Harrison</Typography>
             <ul>
-              <li>45'</li>
+              <li>45</li>
             </ul>
           </Grid>
         </Grid>
@@ -164,13 +164,13 @@ export default function MatchDetailHeader(props) {
           <Grid container alignItems="center" justifyContent="space-between">
             <Typography color="grey">jack Harrison</Typography>
             <ul>
-              <li>65'</li>
+              <li>65</li>
             </ul>
           </Grid>
           <Grid container alignItems="center" justifyContent="space-between">
             <Typography color="grey">jack Harrison</Typography>
             <ul>
-              <li>35'</li>
+              <li>35</li>
             </ul>
           </Grid>
         </Grid>
