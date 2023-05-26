@@ -97,7 +97,6 @@ const Feedback = () => {
               Cookies.remove('token')
               setOpenDialog(true)
               setResponseMessage(t(message));
-          
             }
           }
         }))
