@@ -153,7 +153,7 @@ const Feedback = () => {
 
             <Grid item xs={12} paddingTop="10px">
               <Typography paddingBottom="20px" fontSize="12px">
-                {langKey && langKey.contact}
+                {langKey && (langKey.contact || t('contact'))}
               </Typography> 
               <FormControl
                 variant="outlined"
@@ -197,7 +197,7 @@ const Feedback = () => {
                   textTransform: 'capitalize'
                 }}
                 onClick={onSubmit}>
-                {langKey && langKey.submit}
+                {langKey && (langKey.submit || t('submit'))}
               </Button>
             </Grid>
           </Grid>

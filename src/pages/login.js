@@ -38,6 +38,7 @@ import Cookies from "js-cookie";
 import ForgotPassword from "@/components/desktop/forgotPassword";
 import utils from "../common/utils";
 import { Image } from "mui-image";
+import { useSession, signIn, signOut } from "next-auth/react"
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -81,6 +82,8 @@ BootstrapDialogTitle.propTypes = {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function Login() {
+  const { data: session } = useSession()
+  console.log(session,'xxx')
   const { t } = useTranslation();
   const {i18n} =  useTranslation();
   const [lang, setLang] = React.useState('')
@@ -731,6 +734,7 @@ export default function Login() {
                               color: "#013B91",
                               padding: "10px",
                             }}
+                            onClick={() => signIn("facebook",{})}
                           >
                             <Icon icon="ic:baseline-facebook" fontSize="35px" />
                           </Link>
@@ -741,21 +745,9 @@ export default function Login() {
                               color: "#00C2FF",
                               padding: "10px",
                             }}
+                            onClick={() => signIn("google")}
                           >
                             <Icon icon="flat-color-icons:google" fontSize="35px" />
-                          </Link>
-                          <Link
-                            underline="none"
-                            style={{
-                              cursor: "pointer",
-                              color: "#0898D6",
-                              padding: "10px",
-                            }}
-                          >
-                            <Icon
-                              icon="entypo-social:twitter-with-circle"
-                              fontSize="35px"
-                            />
                           </Link>
                         </Grid>
                       </Grid>
