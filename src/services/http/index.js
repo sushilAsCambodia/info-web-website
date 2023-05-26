@@ -8,6 +8,22 @@ const instance = axios.create({
         'content-type':'application/json'
     },
 });
+// Add a response interceptor
+instance.interceptors.response.use(function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+}, function (error) {
+    if(error && error.response && error.response.status === 401) {
+        Cookies.remove('token');
+        setTimeout(() => {
+            window.location = '/login';
+        }, 1);
+    }
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error);
+});
 const http = {
     get: (url, params = {}, auth = false) => {
         const header = { 
@@ -15,7 +31,7 @@ const http = {
         }; 
         let fakeUrl = undefined;
         if(Object.keys(params).length > 0 && params?.fake === true) {
-            fakeUrl  = 'http://localhost:3000/api';
+            fakeUrl  = process.env.fronEndShareUrl
         }
         if(auth) {
             header['Authorization'] = 'Bearer '+ (Cookies.get(utils.tokenKey) || '');
@@ -30,7 +46,7 @@ const http = {
                 data = json
                 return data;
             }],
-        });
+        })
     },
     post: (url, body = {}, auth = false, formdata = false) => {
         const header = { 
