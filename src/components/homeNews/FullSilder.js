@@ -98,6 +98,7 @@ export default function FullSilder(props) {
                         height:'100%',
                         objectFit:"fill", 
                       }}
+                      draggable={false}
                     />
                   </Grid>
                 </Link>

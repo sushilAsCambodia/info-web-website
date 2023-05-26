@@ -841,19 +841,6 @@ export default function Register() {
                       >
                         <Icon icon="flat-color-icons:google" fontSize="35px" />
                       </Link>
-                      <Link
-                        underline="none"
-                        style={{
-                          cursor: "pointer",
-                          color: "#0898D6",
-                          margin:'2px'
-                        }}
-                      >
-                        <Icon
-                          icon="entypo-social:twitter-with-circle"
-                          fontSize="35px"
-                        />
-                      </Link>
                     </Grid>
                   </Grid>
                 </form>

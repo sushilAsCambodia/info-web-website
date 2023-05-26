@@ -498,7 +498,7 @@ const UploadImg = () => {
           </Grid>
           <Grid item xs={12} sm={12} >
             <Typography fontWeight="bold" pb={1} textAlign="left">
-            {langKey && langKey.nick_name}
+            {langKey && (langKey.nick_name || t('nick_name'))}
             </Typography>
             <FormControl
               variant="outlined"
@@ -528,7 +528,7 @@ const UploadImg = () => {
                         textTransform: 'capitalize'
                       }}
                       onClick={onUpdateNickName}>
-                      {textAction == 'edit' ? (langKey && langKey.edit) : (langKey && langKey.save)}
+                      {textAction == 'edit' ? (langKey && (langKey.edit || t('edit'))) : (langKey && (langKey.save || t('save')))}
                     </Button>
                   </InputAdornment>
                 }
