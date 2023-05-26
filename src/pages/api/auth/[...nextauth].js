@@ -14,6 +14,7 @@ export const authOptions = {
       })
     // ...add more providers here
   ],
+  
   callbacks: {
     async jwt({  token, account }) {
         // Persist the OAuth access_token to the token right after signin
