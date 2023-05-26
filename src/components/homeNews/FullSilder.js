@@ -128,6 +128,7 @@ export default function FullSilder(props) {
             </Button>
           }
         /> */}
+        <Grid item xs={12} id="AddCarouselBtn">
          <Carousel
             responsive={responsive}
             additionalTransfrom={0}
@@ -156,7 +157,7 @@ export default function FullSilder(props) {
                   style={{
                     color: "white",
                     textAlign: "left",
-                    height: "302.33px",
+                    height: "150px",
                     // border: "1px solid grey",
                     borderRadius: "5px",
                   }} 
@@ -174,6 +175,7 @@ export default function FullSilder(props) {
               </Link>
             ))}
           </Carousel>
+          </Grid>
           <style>
           {
             ` .react-multiple-carousel__arrow {
