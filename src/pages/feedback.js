@@ -18,6 +18,8 @@ import utils from '@/common/utils';
 import LoadingDialog from "@/components/Loading";
 import DialogMessage from "@/components/DialogMessage";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import { Token } from "@mui/icons-material";
 
 const Feedback = () => {
   const {loading} = useSelector((state) => state.feedback);
@@ -91,6 +93,11 @@ const Feedback = () => {
               setContact('');
               setDisabled(true);
             },1000)
+            }else if(res.status_code === 401){
+              Cookies.remove('token')
+              setOpenDialog(true)
+              setResponseMessage(t(message));
+          
             }
           }
         }))
@@ -106,6 +113,9 @@ const Feedback = () => {
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   return   ( 
     <>
+
+
+    
       <Grid
         container
         alignItems="flex-start"
@@ -198,7 +208,7 @@ const Feedback = () => {
         open={openDialog} 
         setOpen={setOpenDialog} 
         message={responseMessage} 
-        // redirect={{pathname:'/profile'}}
+        redirect={{pathname:'/login'}}
       />
     </>
   )

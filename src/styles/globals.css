@@ -551,6 +551,16 @@ text-overflow: ellipsis;
   }
 
 
+  /* advertisment banner css  */
+
+  #AddCarouselBtn .react-multiple-carousel__arrow{
+    background: rgba(255, 255, 255, 0.36) !important;
+border: 0.5px solid #FFFFFF !important;
+  } 
+  #AddCarouselBtn .react-multiple-carousel__arrow::before {
+  
+    color: #fff;
+}
 
 
 .lottoGrid div:first-child{
