@@ -86,7 +86,7 @@ export default function FullSilder(props) {
                     // border: "1px solid grey",
                     borderRadius: "5px",
                   }} 
-                  sx={{height:{xs:'160px',md:'350px'}}}
+                  sx={{height:{xs:'160px',md:'300px'}}}
                 >
                   <Image  
                     src={ad.icon}
