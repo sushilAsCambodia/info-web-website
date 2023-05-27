@@ -115,6 +115,7 @@ export default function MatchStats(props) {
               objectFit: "fill",
               borderRadius: "50px",
             }}
+            alt="encrypted"
           />
           <Typography color="black" mx={1}>
             4
@@ -144,6 +145,7 @@ export default function MatchStats(props) {
               objectFit: "fill",
               borderRadius: "50px",
             }}
+            alt="encrypted"
           />
         </Grid>
       </Grid>

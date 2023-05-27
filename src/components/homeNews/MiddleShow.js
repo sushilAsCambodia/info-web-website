@@ -82,46 +82,6 @@ export default function MiddleShow(props) {
     <Grid container>
       <Grid item xs={12}>
         <FullSilder banners={advertises} />
-        {/* <Carousel
-          responsive={responsive}
-          additionalTransfrom={0}
-          arrows={banners.length>1?true:false}
-          autoPlaySpeed={3000}
-          containerClass="container-with-dots"
-          dotListClass=""
-          draggable
-          focusOnSelect={false}
-          infinite
-          itemClass=""
-          keyBoardControl
-          minimumTouchDrag={80}
-          pauseOnHover
-          renderArrowsWhenDisabled={false}
-          renderButtonGroupOutside={false}
-          renderDotsOutside={false}
-        >
-          {banners.map((banner, index) => (
-            <Grid
-              key={index}
-              style={{
-                color: "white",
-                textAlign: "left",
-                height: "302.33px",
-                // border: "1px solid grey",
-                borderRadius: "5px",
-              }}>
-              <Image  
-                src={banner.file}
-                alt={banner.label}
-                style={{
-                  width: "100%",
-                  height:'100%',
-                  objectFit:"cover", 
-                }}
-              />
-            </Grid>
-          ))} 
-        </Carousel> */}
       </Grid>
       <Grid container mt={2}>
         <Grid item xs={12} mx={1} container justifyContent="space-between" height="40px">

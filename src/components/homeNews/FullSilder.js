@@ -36,71 +36,75 @@ export default function FullSilder(props) {
     setActiveStep(step);
   };  
 
-  useEffect(() => {
-    // let type = 'web';
-    // if(isH5) type = 'h5';
-    
+  useEffect(() => { 
     let position = 'top_carousel';
     if(isH5) position = 'carousel_image';
-    setNewBanners(banners.filter(b =>b.position == position));
+    let filterBanners = banners.filter(b =>b.position == position);
+    if(filterBanners.length<=0) {
+      setNewBanners([
+        {
+          icon:'/assets/no-image.png',
+          title:'no_image'
+        }
+      ]);
+    }else {
+      setNewBanners(banners.filter(b =>b.position == position)); 
+    }
     // setNewBanners(banners.filter(b => b.platform.toLowerCase() == type && b.position == 'top_carousel'));
   },[banners,isH5])
-  console.log("banners:::",banners)
-  console.log("NewBanners:::",newBanners)
-
-  const matches = useMediaQuery("(max-width:768px)");
-
   return (
     <> 
     { (newBanners && newBanners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
-        <Grid item xs={12} id="AddCarouselBtn">
-         <Carousel
-            responsive={responsive}
-            additionalTransfrom={0}
-            swipeable={newBanners.length>1?true:false}
-            draggable={newBanners.length>1?true:false}
-            arrows={newBanners.length>1?true:false}
-            autoPlaySpeed={3000}
-            autoPlay={newBanners.length !== 1}
-            centerMode={false}
-            containerClass="container-with-dots"
-            dotListClass=""
-            focusOnSelect={false}
-            infinite
-            itemClass=""
-            keyBoardControl
-            minimumTouchDrag={80}
-            pauseOnHover
-            renderArrowsWhenDisabled={false}
-            renderButtonGroupOutside={false}
-            renderDotsOutside={false} 
-            // rtl={true}
-            >
-            {newBanners.map((ad, index) => (
-              <Link href={ad.ads_link} target='_blank' key={index} >
-                <Grid 
-                  style={{
-                    color: "white",
-                    textAlign: "left",
-                  
-                    // border: "1px solid grey",
-                    borderRadius: "5px",
-                  }} 
-                  sx={{height:{xs:'160px',md:'300px'}}}
-                >
-                  <Image  
-                    src={ad.icon}
-                    alt={ad.title}
+         
+          <Grid item xs={12} id="AddCarouselBtn">
+            <Carousel
+              responsive={responsive}
+              additionalTransfrom={0}
+              swipeable={newBanners.length>1?true:false}
+              draggable={newBanners.length>1?true:false}
+              arrows={newBanners.length>1?true:false}
+              autoPlaySpeed={3000}
+              autoPlay={newBanners.length !== 1}
+              centerMode={false}
+              containerClass="container-with-dots"
+              dotListClass=""
+              focusOnSelect={false}
+              infinite
+              itemClass=""
+              keyBoardControl
+              minimumTouchDrag={80}
+              pauseOnHover
+              renderArrowsWhenDisabled={false}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={false} 
+              // rtl={true}
+              >
+              {newBanners.map((ad, index) => (
+                <Link href={ad.ads_link} target='_blank' key={index}>
+                  <Grid 
                     style={{
-                      width: "100%",
-                      height:'100%',
-                      objectFit:"fill", 
-                    }}
-                  />
-                </Grid>
-              </Link>
-            ))}
-          </Carousel>
+                      color: "white",
+                      textAlign: "left",
+                      height: isH5 ? "160px" : "300px",
+                      // border: "1px solid grey",
+                      borderRadius: "5px",
+                    }} 
+                    sx={{height:{xs:'160px',md:'300px'}}}
+                  >
+                    <Image  
+                      src={ad.icon}
+                      alt={ad.title}
+                      style={{
+                        width: "100%",
+                        height:'100%',
+                        objectFit:"fill", 
+                      }}
+                      draggable={false}
+                    />
+                  </Grid>
+                </Link>
+              ))}
+            </Carousel>
           </Grid>
           <style>
           {
@@ -122,8 +126,8 @@ export default function FullSilder(props) {
               }
             `
           }
-        </style>
-      </Grid>} 
+          </style>
+        </Grid>} 
     </>
   );
 }

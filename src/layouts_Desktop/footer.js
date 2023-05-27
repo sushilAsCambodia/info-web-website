@@ -25,9 +25,9 @@ const Footer = () => {
           <Grid className="footerIcon" mx={1} container justifyContent="center" alignItems="center" >
             <Icon width={30} icon="ri:facebook-fill" />
           </Grid>
-          <Grid className="footerIcon" mx={1} container justifyContent="center" alignItems="center" >
+          {/* <Grid className="footerIcon" mx={1} container justifyContent="center" alignItems="center" >
             <Icon width={30} icon="mdi:twitter" />
-          </Grid>
+          </Grid> */}
           <Grid className="footerIcon" mx={1} container justifyContent="center" alignItems="center" >
             <Icon width={30} icon="mdi:youtube" />
           </Grid>

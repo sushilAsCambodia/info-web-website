@@ -64,6 +64,7 @@ export default function MatchRounds(props) {
                 <Image
                   width="40px"
                   height="40px"
+                  alt="vecteezy"
                   src="https://static.vecteezy.com/system/resources/thumbnails/003/686/552/small/soccer-logo-america-logo-classic-logo-free-vector.jpg"
                 />
                 <Typography>Valencia</Typography>
@@ -72,6 +73,7 @@ export default function MatchRounds(props) {
                 <Image
                   width="40px"
                   height="40px"
+                  alt="vecteezy"
                   src="https://static.vecteezy.com/system/resources/thumbnails/003/686/552/small/soccer-logo-america-logo-classic-logo-free-vector.jpg"
                 />
                 <Typography>Bei Hongxing</Typography>
