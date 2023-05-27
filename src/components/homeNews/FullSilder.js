@@ -48,11 +48,12 @@ export default function FullSilder(props) {
   console.log("banners:::",banners)
   console.log("NewBanners:::",newBanners)
 
+  const matches = useMediaQuery("(max-width:768px)");
 
   return (
     <> 
     { (newBanners && newBanners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
-        <Grid item xs={12} >
+        <Grid item xs={12} id="AddCarouselBtn">
          <Carousel
             responsive={responsive}
             additionalTransfrom={0}
@@ -81,11 +82,11 @@ export default function FullSilder(props) {
                   style={{
                     color: "white",
                     textAlign: "left",
-                   
+                  
                     // border: "1px solid grey",
                     borderRadius: "5px",
                   }} 
-                  sx={{height:{xs:'160px',md:'250px'}}}
+                  sx={{height:{xs:'160px',md:'350px'}}}
                 >
                   <Image  
                     src={ad.icon}
