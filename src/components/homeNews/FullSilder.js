@@ -47,88 +47,12 @@ export default function FullSilder(props) {
   },[banners,isH5])
   console.log("banners:::",banners)
   console.log("NewBanners:::",newBanners)
+
+
   return (
     <> 
     { (newBanners && newBanners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
-        {/* <AutoPlaySwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={activeStep}
-          onChangeIndex={handleStepChange}
-          enableMouseEvents
-        >
-          {
-            newBanners.map((banner, index) => (
-              <div key={index}>
-                {Math.abs(activeStep - index) <= 2 ? (
-                  <Grid item component="div" sx={{
-                    height: {xs:160,md:300},
-                    cursor:'pointer',
-                  }}
-                  onClick={()=>router.push(banner.ads_link)} 
-                  >
-                    <Image
-                      style={{
-                        height: '100%',
-                        width: "100%",
-                        objectFit:'cover'
-                      }}
-                      alt="banner"
-                      src={banner.icon || '/assets/no-image.png'}
-                      onError={(e) => e.target.src = '/assets/no-image.png'}
-                    />
-                  </Grid>
-                ) : null}
-              </div>
-            ))
-          }
-        </AutoPlaySwipeableViews>
-        <MobileStepper
-          steps={maxSteps}
-          activeStep={activeStep}
-          sx={[
-            {
-              position:'absolute',
-              background:'transparent',
-              transform: 'translate(-50%, -50%)',
-              left:'50%',
-              top:'50%',
-              width: '100%'  
-            },
-            {
-              '& .MuiMobileStepper-dots': { display: 'none' },
-            },
-          ]}
-          nextButton={ newBanners.length > 1 &&
-            <Button
-              size="small"
-              onClick={handleNext}
-              disabled={activeStep === maxSteps - 1}
-              className="arrow-control-custom"
-            >
-              {theme.direction === "rtl" ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
-            </Button>
-          }
-          backButton={
-            newBanners.length > 1 && 
-            <Button
-              size="small"
-              onClick={handleBack}
-              disabled={activeStep === 0}
-              className="arrow-control-custom"
-            >
-              {theme.direction === "rtl" ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-            </Button>
-          }
-        /> */}
-        <Grid item xs={12} id="AddCarouselBtn">
+        <Grid item xs={12} >
          <Carousel
             responsive={responsive}
             additionalTransfrom={0}
@@ -157,10 +81,11 @@ export default function FullSilder(props) {
                   style={{
                     color: "white",
                     textAlign: "left",
-                    height: "150px",
+                   
                     // border: "1px solid grey",
                     borderRadius: "5px",
                   }} 
+                  sx={{height:{xs:'160px',md:'250px'}}}
                 >
                   <Image  
                     src={ad.icon}
