@@ -406,7 +406,7 @@ export default function ProfileInfo(props) {
               inputProps={{ maxLength: 16 }}
               id="outlined-adornment-password"
               type={showCurrentPassword ? "text" : "password"}
-              // error={errorPassword}
+              error={errorCurrentPassword}
               value={currentPassword}
               onChange={onChangeCurrentPassword}
               endAdornment={

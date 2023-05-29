@@ -267,7 +267,8 @@ const UploadImg = () => {
     <Box sx={{ width: anchor === 'bottom' ? 'auto' : 250 }} role="presentation">
       <Typography className="drawerline"></Typography>
       <List sx={{ padding: "25px 20px 0 20px" }}>
-        {editUserName && <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
+        {editUserName && 
+        <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
           <Grid item xs={12} sm={12} >
             <Typography fontWeight="bold" pb={1} textAlign="left">
             {langKey && langKey.nick_name} <Typography component="span" sx={{ color: 'red' }}>*</Typography>
@@ -332,6 +333,7 @@ const UploadImg = () => {
                     type={showCurrentPassword ? 'text' : 'password'}
                     value={currentPassword}
                     onChange={onChangeCurrentPassword}
+                    error={errorCurrentPassword}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
