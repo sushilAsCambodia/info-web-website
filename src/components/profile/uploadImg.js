@@ -50,6 +50,7 @@ const UploadImg = () => {
   const [editUserName, setEditUserName] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const [password, setPassword] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorPasswordNotMatch, setErrorPasswordNotMatch] = useState(false);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
@@ -138,6 +139,10 @@ const UploadImg = () => {
       setImagePreviewUrl(customer.image.path || '');
     }
   }, [customer]); 
+  const onChangeOldPassword = (e) => {
+    setOldPassword(e.target.value);
+    
+  };
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     if (e.target.value == '') {
@@ -228,8 +233,10 @@ const UploadImg = () => {
   };
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showOldPassword, setShowOldPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowOldPassword = () => setShowOldPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -291,6 +298,43 @@ const UploadImg = () => {
         </ListItem>}
         {
           editPassword && <>
+          <ListItem disablePadding>
+              <Grid item xs={12} sm={12} >
+                <Typography fontWeight="bold" pb={1} textAlign="left">
+                {langKey && langKey.password}
+                </Typography>
+                <FormControl
+                  variant="outlined"
+                  fullWidth
+                  sx={{
+                    borderRadius: "15px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  <OutlinedInput
+                    name="password"
+                    placeholder={langKey && langKey.password}
+                    inputProps={{ maxLength: 16 }}
+                    id="outlined-adornment-password"
+                    type={showOldPassword ? 'text' : 'password'}
+                    value={oldPassword}
+                    onChange={onChangeOldPassword}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowOldPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showOldPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+              </Grid>
+            </ListItem>
             <ListItem disablePadding>
               <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
