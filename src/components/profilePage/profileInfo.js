@@ -51,16 +51,16 @@ export default function ProfileInfo(props) {
   const [editUsername, setEditUsername] = useState(true);
 
   const [password, setPassword] = useState("");
-  const [oldPassword, setOldPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [errorPassword, setErrorPassword] = useState(false);
-  const [errorOldPassword, setErrorOldPassword] = useState(false);
-  const [errorOldPasswordMessage, setErrorOldPasswordMessage] = useState('');
+  const [errorCurrentPassword, setErrorCurrentPassword] = useState(false);
+  const [errorCurrentPasswordMessage, setErrorCurrentPasswordMessage] = useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
   const [errorConfirmPasswordMessage, setConfirmErrorPasswordMessage] =
@@ -132,8 +132,12 @@ export default function ProfileInfo(props) {
     }
   };
 
-  const onChangeOldPassword = (e) => {
-    setOldPassword(e.target.value);
+  const onChangeCurrentPassword = (e) => {
+    setCurrentPassword(e.target.value);
+    if(e.target.value){
+      setErrorCurrentPasswordMessage('');
+      setErrorCurrentPassword(false);
+    }
   };
 
   const onChangePassword = (e) => {
@@ -178,12 +182,13 @@ export default function ProfileInfo(props) {
     }
   };
   const onSubmit = () => {
-    if (password == "" && confirmpassword == "" && oldPassword =="") {
+    if (password == "" && confirmpassword == "" && currentPassword =="") {
       setErrorPasswordMessage(langKey && langKey.password_required);
       setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
-      setErrorOldPasswordMessage('old password required');
+      setErrorCurrentPasswordMessage('current password required');
+      setErrorPassword(true);
       setErrorConfirmPassword(true);
-      setErrorOldPassword(true)
+      setErrorCurrentPassword(true)
       return;
     } else if (password === "") {
       setErrorPasswordMessage(langKey && langKey.password_required);
@@ -194,17 +199,18 @@ export default function ProfileInfo(props) {
       setErrorConfirmPassword(true);
       return;
     }
-    else if (oldPassword === "") {
-      setErrorOldPasswordMessage('old password required');
-      setErrorOldPassword(true);
+    else if (currentPassword === "") {
+      setErrorCurrentPasswordMessage('current password required');
+      setErrorCurrentPassword(true);
       return;
     }
     
-    if (!errorPassword && !errorConfirmPassword && !errorOldPassword) {
+    if (!errorPassword && !errorConfirmPassword && !errorCurrentPassword) {
       dispatch(
         updatePassword({
           body: {
             password,
+            current_password:currentPassword
           },
           callback: (res) => {
             let { status_code, message = "" } = res;
@@ -213,6 +219,7 @@ export default function ProfileInfo(props) {
             if ([200, 201, 202, 203, 204].includes(status_code)) {
               setPassword("");
               setConfirmPassword("");
+              setCurrentPassword("");
             }
           },
           auth: true,
@@ -224,7 +231,7 @@ export default function ProfileInfo(props) {
     setShowConfirmPassword((show) => !show);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleClickShowOldPassword = () => setShowOldPassword((show) => !show);
+    const handleClickShowCurrentPassword = () => setShowCurrentPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -390,33 +397,33 @@ export default function ProfileInfo(props) {
               marginBottom: "5px",
             }}
           >
-            <InputLabel> confirm old password</InputLabel>
+            <InputLabel> confirm current password</InputLabel>
             <OutlinedInput
               fullWidth
-              label="confirm old password"
-              name="password"
+              label="confirm current password"
+              name="currentPassword"
               // placeholder={t("password")}
               inputProps={{ maxLength: 16 }}
               id="outlined-adornment-password"
-              type={showOldPassword ? "text" : "password"}
+              type={showCurrentPassword ? "text" : "password"}
               // error={errorPassword}
-              value={oldPassword}
-              onChange={onChangeOldPassword}
+              value={currentPassword}
+              onChange={onChangeCurrentPassword}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    onClick={handleClickShowOldPassword}
+                    onClick={handleClickShowCurrentPassword}
                     // onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showOldPassword ? <VisibilityOff /> : <Visibility />}
+                    {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
             />
-           {errorOldPassword && (
-              <FormHelperText error>{errorOldPasswordMessage}</FormHelperText>
+           {errorCurrentPassword && (
+              <FormHelperText error>{errorCurrentPasswordMessage}</FormHelperText>
             )}
           </FormControl>
         </Grid>
