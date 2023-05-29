@@ -725,7 +725,7 @@ export default function Login() {
                         underline="none"
                         alignItems="center"
                       >
-                        <Typography>{langKey && (langKey.sign_up_with || t('sign_up_with'))}</Typography>
+                        <Typography onClick={() => signOut()}>{langKey && (langKey.sign_up_with || t('sign_up_with'))}</Typography>
                         <Grid>
                           <Link
                             underline="none"
@@ -734,7 +734,7 @@ export default function Login() {
                               color: "#013B91",
                               padding: "10px",
                             }}
-                            onClick={() => signIn("facebook",{})}
+                            onClick={() => signIn("facebook")}
                           >
                             <Icon icon="ic:baseline-facebook" fontSize="35px" />
                           </Link>
