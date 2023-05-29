@@ -32,7 +32,7 @@ import { useRouter } from "next/router";
 import Image from "mui-image";
 
 
-
+const nickNameMinLength = 4;
 export default function ProfileInfo(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -239,7 +239,7 @@ export default function ProfileInfo(props) {
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && langKey.user_name_required);
     } else {
-      if (e.target.value.length > 5) {
+      if (e.target.value.length >= nickNameMinLength) {
         setErrorUserName(false);
       } else {
         setErrorUserName(true);
