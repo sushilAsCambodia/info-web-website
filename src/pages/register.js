@@ -68,7 +68,7 @@ BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
-const minLength = 6;
+const minLength = 4;
 export default function Register() {
   const { t } = useTranslation();
   const [registerSuccess, setRegisterSuccess] = useState(false);
