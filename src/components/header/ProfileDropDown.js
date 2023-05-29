@@ -53,11 +53,7 @@ export default function ProfileDropDown(props) {
       border:"1px solid rgba(0, 0, 0, 0.12)",
     },
   }));
-
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
-  console.warn('hello vitou')
-
   return (
     <div>
       <Button

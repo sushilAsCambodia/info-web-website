@@ -71,14 +71,6 @@ export default function NewsSlider(props) {
   );
 
   const handleScroll = (event) => {
-    console.log("scroll clientheight:::", event.currentTarget.clientHeight);
-    console.log("scroll scrolltop:::", event.currentTarget.scrollTop);
-    console.log(
-      "scroll test:::",
-      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
-        event.currentTarget.clientHeight
-    );
-
     if (
       pageLimit !== currentPage &&
       pageLimit > currentPage &&
