@@ -95,7 +95,7 @@ const UploadImg = () => {
             console.log('xxxxx',res)
             let { message = '' } = res;
             setOpenDialog(true);
-            setResponseMessage(t(message));
+            setResponseMessage(langKey&& langKey[message]);
           },
           auth: true,
           formdata: true
@@ -202,7 +202,7 @@ const UploadImg = () => {
     if (password == '' && confirmpassword == '' && currentPassword == '') {
       setErrorPasswordMessage(langKey && langKey.password_required);
       setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
-      setErrorCurrentPasswordMessage('Current Password Required')
+      setErrorCurrentPasswordMessage(langKey?.current_password_required)
       setErrorPassword(true);
       setErrorConfirmPassword(true);
       setErrorCurrentPassword(true)
@@ -216,7 +216,7 @@ const UploadImg = () => {
       setErrorConfirmPassword(true);
       return;
     }else if (currentPassword === '') {
-      setErrorCurrentPasswordMessage('Current Password Required');
+      setErrorCurrentPasswordMessage(langKey?.current_password_required);
       setErrorCurrentPassword(true);
       return;
     }
@@ -231,7 +231,7 @@ const UploadImg = () => {
             callback: (res) => {
               let { status_code, message = '' } = res;
               setOpenDialog(true);
-              setResponseMessage(t(message));
+              setResponseMessage(langKey&& langKey[message]);
               if ([200, 201, 202, 203, 204].includes(status_code)) {
                 setPassword('');
                 setConfirmPassword('');
@@ -315,7 +315,7 @@ const UploadImg = () => {
           <ListItem disablePadding>
               <Grid item xs={12} sm={12}>
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                Current Password
+                {langKey?.confirm_current_password}
                 </Typography>
                 <FormControl
                   variant="outlined"
@@ -327,7 +327,7 @@ const UploadImg = () => {
                 >
                   <OutlinedInput
                     name="password"
-                    placeholder={'Current Password'}
+                    placeholder={langKey?.confirm_current_password}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-password"
                     type={showCurrentPassword ? 'text' : 'password'}
@@ -517,7 +517,7 @@ const UploadImg = () => {
                   message = 'update_user_name_unique';
                 }
                 setOpenDialog(true);
-                setResponseMessage(t(message));
+                setResponseMessage(langKey&& langKey[message]);
                 if([200,201,202,203,204].includes(status_code)) {
                   setTextAction('edit');
                 }
