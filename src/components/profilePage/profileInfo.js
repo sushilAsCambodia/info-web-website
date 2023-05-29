@@ -51,12 +51,16 @@ export default function ProfileInfo(props) {
   const [editUsername, setEditUsername] = useState(true);
 
   const [password, setPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showOldPassword, setShowOldPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [errorPassword, setErrorPassword] = useState(false);
+  const [errorOldPassword, setErrorOldPassword] = useState(false);
+  const [errorOldPasswordMessage, setErrorOldPasswordMessage] = useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
   const [errorConfirmPasswordMessage, setConfirmErrorPasswordMessage] =
@@ -128,6 +132,10 @@ export default function ProfileInfo(props) {
     }
   };
 
+  const onChangeOldPassword = (e) => {
+    setOldPassword(e.target.value);
+  };
+
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     if (e.target.value == "") {
@@ -170,11 +178,12 @@ export default function ProfileInfo(props) {
     }
   };
   const onSubmit = () => {
-    if (password == "" && confirmpassword == "") {
+    if (password == "" && confirmpassword == "" && oldPassword =="") {
       setErrorPasswordMessage(langKey && langKey.password_required);
       setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
-      setErrorPassword(true);
+      setErrorOldPasswordMessage('old password required');
       setErrorConfirmPassword(true);
+      setErrorOldPassword(true)
       return;
     } else if (password === "") {
       setErrorPasswordMessage(langKey && langKey.password_required);
@@ -185,7 +194,13 @@ export default function ProfileInfo(props) {
       setErrorConfirmPassword(true);
       return;
     }
-    if (!errorPassword && !errorConfirmPassword) {
+    else if (oldPassword === "") {
+      setErrorOldPasswordMessage('old password required');
+      setErrorOldPassword(true);
+      return;
+    }
+    
+    if (!errorPassword && !errorConfirmPassword && !errorOldPassword) {
       dispatch(
         updatePassword({
           body: {
@@ -208,7 +223,8 @@ export default function ProfileInfo(props) {
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleClickShowOldPassword = () => setShowOldPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -365,6 +381,45 @@ export default function ProfileInfo(props) {
             <Typography variant="h5">{langKey && langKey.change_password}</Typography>
           </Divider>
         </Grid>
+        <Grid item xs={12}>
+          <FormControl
+            variant="outlined"
+            fullWidth
+            sx={{
+              borderRadius: "15px",
+              marginBottom: "5px",
+            }}
+          >
+            <InputLabel> confirm old password</InputLabel>
+            <OutlinedInput
+              fullWidth
+              label="confirm old password"
+              name="password"
+              // placeholder={t("password")}
+              inputProps={{ maxLength: 16 }}
+              id="outlined-adornment-password"
+              type={showOldPassword ? "text" : "password"}
+              // error={errorPassword}
+              value={oldPassword}
+              onChange={onChangeOldPassword}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowOldPassword}
+                    // onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showOldPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+           {errorOldPassword && (
+              <FormHelperText error>{errorOldPasswordMessage}</FormHelperText>
+            )}
+          </FormControl>
+        </Grid>
 
         <Grid item xs={12}>
           <FormControl
@@ -405,7 +460,7 @@ export default function ProfileInfo(props) {
             )}
           </FormControl>
         </Grid>
-        <Grid item xs={12} my={1}>
+        <Grid item xs={12} mb={1}>
           <FormControl
             variant="outlined"
             fullWidth
@@ -434,6 +489,7 @@ export default function ProfileInfo(props) {
                     onClick={handleClickShowConfirmPassword}
                     onMouseDown={handleMouseDownConfirmPassword}
                     edge="end"
+                    style={{paddingRight:"11px"}}
                   >
                     {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>

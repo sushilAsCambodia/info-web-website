@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
-import {getLanguage} from '../store/actions/languageActions'
+import { getLanguage } from "../store/actions/languageActions";
 import ProfileDropDown from "@/components/header/ProfileDropDown";
 import HeaderLiveScore from "@/components/header/headerLiveScore";
 import Link from "next/link";
@@ -20,7 +20,7 @@ import utils from "@/common/utils";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const matches2 = useMediaQuery("(max-width:1074px)");
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { customer, isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -30,9 +30,9 @@ const Header = () => {
   const open = Boolean(anchorEl);
   const [scroll, setScroll] = useState(false);
 
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
-
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -61,14 +61,11 @@ const Header = () => {
   const id = openScore ? "simple-popover" : undefined;
 
   const menuList = [
-    { label: (langKey && langKey.lottery_draw), page: "LotteryPage" },
+    { label: langKey && langKey.lottery_draw, page: "LotteryPage" },
     // { label: (langKey && langKey.data_chart), page: "DataChart" },
-    { label: (langKey && langKey.foot_ball), page: "footBallPage" },
+    { label: langKey && langKey.foot_ball, page: "footBallPage" },
     // { label: (langKey && langKey.basket_ball), page: "basketBall" },
   ];
-
-
-   
 
   useEffect(() => {
     const path = router.asPath;
@@ -85,19 +82,19 @@ const Header = () => {
     setScroll(window.pageYOffset > 56);
   });
   useEffect(() => {
-    if(i18n.language) {
-        dispatch(getLanguage(
-        {
+    if (i18n.language) {
+      dispatch(
+        getLanguage({
           params: {
-            lang_id: utils.convertLangCodeToID(i18n.language)
+            lang_id: utils.convertLangCodeToID(i18n.language),
           },
-          callback:(res) => {
-            localStorage.setItem('languageKey', JSON.stringify(res))
-          }
-        }
-      ));
+          callback: (res) => {
+            localStorage.setItem("languageKey", JSON.stringify(res));
+          },
+        })
+      );
     }
-  },[dispatch,i18n.language])
+  }, [dispatch, i18n.language]);
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
   //     window.addEventListener("scroll", () =>
@@ -214,7 +211,9 @@ const Header = () => {
                       paddingLeft: "0px",
                     }}
                   >
-                    <Typography color="white">{langKey && langKey.live_score}</Typography>
+                    <Typography color="white">
+                      {langKey && langKey.live_score}
+                    </Typography>
                     {openScore ? (
                       <Icon
                         color="white"
@@ -304,89 +303,61 @@ const Header = () => {
                       })
                     : ""}
 
-                  {/* <Grid>
-                    <MenuItem
-                      id="basic-button"
-                      aria-controls={open ? "basic-menu" : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? "true" : undefined}
-                      onClick={handleClick}
-                      sx={{
-                        color: `${!open ? "#037DED" : undefined}`,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {t("more")}
-                      {open ? (
-                        <Icon icon="material-symbols:keyboard-arrow-up-rounded" />
-                      ) : (
-                        <Icon icon="material-symbols:keyboard-arrow-down-rounded" />
-                      )}
-                    </MenuItem>
-                    <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      MenuListProps={{
-                        "aria-labelledby": "basic-button",
-                      }}
-                    >
-                      {matches2
-                        ? menuList.map((item, index) => {
-                            return (
-                              <MenuItem
-                                key={index}
-                                onClick={() => {
-                                  router.push(`${item.page}`), handleClose();
-                                }}
-                              >
-                                <Typography
-                                  textAlign="center"
-                                  className={`${
-                                    hash == item.page || path == item.page
-                                      ? "selectedTab"
-                                      : ""
-                                  }`}
-                                >
-                                  {item.label}
-                                </Typography>
-                              </MenuItem>
-                            );
-                          })
-                        : ""}
-                  
+                  {matches2 ? (
+                    <Grid>
                       <MenuItem
-                        onClick={() => {
-                          router.push("/profile"), handleClose();
+                        id="basic-button"
+                        aria-controls={open ? "basic-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                        onClick={handleClick}
+                        sx={{
+                          color: `${!open ? "#037DED" : undefined}`,
+                          fontWeight: "bold",
                         }}
                       >
-                        <Typography
-                          textAlign="center"
-                          className={`${
-                            hash == "/profile" || path == "/profile"
-                              ? "selectedTab"
-                              : ""
-                          }`}
-                        >
-                        {langKey && langKey.profile}
-                        </Typography>
+                        {t("more")}
+                        {open ? (
+                          <Icon icon="material-symbols:keyboard-arrow-up-rounded" />
+                        ) : (
+                          <Icon icon="material-symbols:keyboard-arrow-down-rounded" />
+                        )}
                       </MenuItem>
-                      <MenuItem onClick={handleClose}>
-                        <Typography
-                          textAlign="center"
-                          className={`${
-                            hash == "/myAccount" || path == "/myAccount"
-                              ? "selectedTab"
-                              : ""
-                          }`}
-                        >
-                         {langKey && langKey.my_account}
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem onClick={handleLogout}>{langKey && langKey.logout}</MenuItem>
-                    </Menu>
-                  </Grid> */}
+                      <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                          "aria-labelledby": "basic-button",
+                        }}
+                      >
+                        {menuList.map((item, index) => {
+                          return (
+                            <MenuItem
+                              key={index}
+                              onClick={() => {
+                                router.push(`${item.page}`), handleClose();
+                              }}
+                            >
+                              <Typography
+                                textAlign="center"
+                                className={`${
+                                  hash == item.page || path == item.page
+                                    ? "selectedTab"
+                                    : ""
+                                }`}
+                              >
+                                {item.label}
+                              </Typography>
+                            </MenuItem>
+                          );
+                        })}
+                      </Menu>
+                    </Grid>
+                  ) : (
+                    ""
+                  )}
                 </Grid>
                 <Grid
                   item
@@ -400,7 +371,7 @@ const Header = () => {
                   <Button
                     variant="contain"
                     sx={{
-                      whiteSpace:'nowrap',
+                      whiteSpace: "nowrap",
                       padding: "4px 8px",
                       marginRight: "5px",
                       fontSize: "12px",
