@@ -50,6 +50,9 @@ const UploadImg = () => {
   const [editUserName, setEditUserName] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const [password, setPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [errorCurrentPassword, setErrorCurrentPassword] = useState(false);
+  const [errorCurrentPasswordMessage, setErrorCurrentPasswordMessage] = useState('');
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorPasswordNotMatch, setErrorPasswordNotMatch] = useState(false);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
@@ -138,6 +141,13 @@ const UploadImg = () => {
       setImagePreviewUrl(customer.image.path || '');
     }
   }, [customer]); 
+  const onChangeCurrentPassword = (e) => {
+    setCurrentPassword(e.target.value);
+    if(e.target.value){
+      setErrorCurrentPassword(false)
+      setErrorCurrentPasswordMessage('')
+    }
+  };
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     if (e.target.value == '') {
@@ -189,11 +199,13 @@ const UploadImg = () => {
     // }
   };
   const onSubmit = () => {
-    if (password == '' && confirmpassword == '') {
+    if (password == '' && confirmpassword == '' && currentPassword == '') {
       setErrorPasswordMessage(langKey && langKey.password_required);
       setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
+      setErrorCurrentPasswordMessage('Current Password Required')
       setErrorPassword(true);
       setErrorConfirmPassword(true);
+      setErrorCurrentPassword(true)
       return;
     } else if (password === '') {
       setErrorPasswordMessage(langKey && langKey.password_required);
@@ -203,13 +215,18 @@ const UploadImg = () => {
       setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
       setErrorConfirmPassword(true);
       return;
+    }else if (currentPassword === '') {
+      setErrorCurrentPasswordMessage('Current Password Required');
+      setErrorCurrentPassword(true);
+      return;
     }
-    if (!errorPassword && !errorConfirmPassword && !errorPasswordNotMatch) {
+    if (!errorPassword && !errorConfirmPassword && !errorPasswordNotMatch && !errorCurrentPassword) {
       dispatch(
         updatePassword(
           {
             body: {
-              password
+              password,
+              current_password:currentPassword
             },
             callback: (res) => {
               let { status_code, message = '' } = res;
@@ -218,6 +235,7 @@ const UploadImg = () => {
               if ([200, 201, 202, 203, 204].includes(status_code)) {
                 setPassword('');
                 setConfirmPassword('');
+                setCurrentPassword('');
               }
             },
             auth: true
@@ -228,8 +246,10 @@ const UploadImg = () => {
   };
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowCurrentPassword = () => setShowCurrentPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -247,7 +267,8 @@ const UploadImg = () => {
     <Box sx={{ width: anchor === 'bottom' ? 'auto' : 250 }} role="presentation">
       <Typography className="drawerline"></Typography>
       <List sx={{ padding: "25px 20px 0 20px" }}>
-        {editUserName && <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
+        {editUserName && 
+        <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
           <Grid item xs={12} sm={12} >
             <Typography fontWeight="bold" pb={1} textAlign="left">
             {langKey && langKey.nick_name} <Typography component="span" sx={{ color: 'red' }}>*</Typography>
@@ -291,6 +312,46 @@ const UploadImg = () => {
         </ListItem>}
         {
           editPassword && <>
+          <ListItem disablePadding>
+              <Grid item xs={12} sm={12}>
+                <Typography fontWeight="bold" pb={1} textAlign="left">
+                Current Password
+                </Typography>
+                <FormControl
+                  variant="outlined"
+                  fullWidth
+                  sx={{
+                    borderRadius: "15px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  <OutlinedInput
+                    name="password"
+                    placeholder={'Current Password'}
+                    inputProps={{ maxLength: 16 }}
+                    id="outlined-adornment-password"
+                    type={showCurrentPassword ? 'text' : 'password'}
+                    value={currentPassword}
+                    onChange={onChangeCurrentPassword}
+                    error={errorCurrentPassword}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowCurrentPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+              {errorCurrentPassword && <FormHelperText error>{errorCurrentPasswordMessage}</FormHelperText>}
+
+                </FormControl>
+              </Grid>
+            </ListItem>
             <ListItem disablePadding>
               <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">

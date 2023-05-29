@@ -121,7 +121,7 @@ const News = () => {
         container
         alignItems="flex-start"
         justifyContent="center"
-        padding="20px 16px">
+        padding="20px 16px" height="100vh">
         <Grid
           item
           xs={12}
