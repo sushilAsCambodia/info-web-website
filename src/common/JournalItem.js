@@ -63,13 +63,17 @@ export default function JournalItem(props) {
                 <Typography color="black" fontWeight="bold" fontSize="15px" className="singleLinesEllips">
                   {item.album_name}
                 </Typography>
-                <Grid display="flex">
-                  <Icon icon="ic:outline-calendar-today" color="grey" />
-                  <Typography color="grey" fontSize="12px" ml={1}>
-                    {" "}
-                    {item?.album_slavs_latest?.issue_date ? moment(item?.album_slavs_latest?.issue_date).format('yyyy') : "N/A"}
-                  </Typography>
-                </Grid>
+                { item?.album_slavs_latest?.issue_date && 
+                  (
+                  <Grid display="flex">
+                    <Icon icon="ic:outline-calendar-today" color="grey" />
+                    <Typography color="grey" fontSize="12px" ml={1}>
+                      {" "}
+                      { moment(item?.album_slavs_latest?.issue_date).format('yyyy')}
+                    </Typography>
+                  </Grid>
+                  )
+                }
                 {
                   item.album_slavs_latest !=null && <Button
                     variant="contained"

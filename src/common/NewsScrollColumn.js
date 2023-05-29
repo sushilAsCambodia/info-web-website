@@ -30,14 +30,6 @@ export default function NewsScrollColumn(props) {
   const [infiniteLoad, setInfiniteLoad] = useState(false);
   const [loading, setLoading] = useState(false); 
   const handleScroll = (event) => {
-    console.log("scroll clientheight:::", event.currentTarget.clientHeight);
-    console.log("scroll scrolltop:::", event.currentTarget.scrollTop);
-    console.log(
-      "scroll test:::",
-      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
-        event.currentTarget.clientHeight
-    );
-
     if (
       pageLimit !== currentPage &&
       pageLimit > currentPage &&
@@ -211,7 +203,7 @@ export default function NewsScrollColumn(props) {
                     paddingbottom="5px"
                     icon="line-md:loading-alt-loop"
                   />
-                ) : newsList.length > 0 ? (
+                ) : newsList && newsList.length > 0 ? (
                   newsList.map((item, index) => {
                     return (
                       <Grid
