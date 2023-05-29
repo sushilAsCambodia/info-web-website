@@ -110,5 +110,7 @@
     "password_must_contain_at_least_one_special_symbol": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់និមិត្តសញ្ញាពិសេសមួយ។",
     "account_deleted": "គណនីត្រូវបានលុប",
     "account_deactivated": "គណនីបិទដំណើរការ",
-    "customer_service":"ផ្នែកបំរើរអតិធិជន"
+    "customer_service":"ផ្នែកបំរើរអតិធិជន",
+    "current_password_not_match":"Current password not matching-kh"
+
 }

@@ -110,6 +110,7 @@
     "password_must_contain_at_least_one_special_symbol": "Password must contain at least one Special Symbol.Ch",
     "account_deleted": "Account deleted ch",
     "account_deactivated": "Account deactivated ch",
-    "customer_service":"Customer service ch"
+    "customer_service":"Customer service ch",
+    "current_password_not_match":"Current password not matching-ch"
 
 }

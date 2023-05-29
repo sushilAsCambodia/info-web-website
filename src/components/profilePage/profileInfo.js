@@ -103,7 +103,7 @@ export default function ProfileInfo(props) {
           callback:(res) => {
             let { message = ''} = res; 
             setOpenDialog(true);
-            setResponseMessage(t(message));
+            setResponseMessage(langKey && langKey[message]);
             console.log('update',res)
           },
           auth: true,
@@ -185,7 +185,7 @@ export default function ProfileInfo(props) {
     if (password == "" && confirmpassword == "" && currentPassword =="") {
       setErrorPasswordMessage(langKey && langKey.password_required);
       setConfirmErrorPasswordMessage(langKey && langKey.confirm_password_required);
-      setErrorCurrentPasswordMessage('current password required');
+      setErrorCurrentPasswordMessage(langKey?.current_password_required);
       setErrorPassword(true);
       setErrorConfirmPassword(true);
       setErrorCurrentPassword(true)
@@ -200,7 +200,7 @@ export default function ProfileInfo(props) {
       return;
     }
     else if (currentPassword === "") {
-      setErrorCurrentPasswordMessage('current password required');
+      setErrorCurrentPasswordMessage(langKey?.current_password_required);
       setErrorCurrentPassword(true);
       return;
     }
@@ -215,7 +215,7 @@ export default function ProfileInfo(props) {
           callback: (res) => {
             let { status_code, message = "" } = res;
             setOpenDialog(true);
-            setResponseMessage(t(message));
+            setResponseMessage(langKey && langKey[message]);
             if ([200, 201, 202, 203, 204].includes(status_code)) {
               setPassword("");
               setConfirmPassword("");
@@ -269,7 +269,7 @@ export default function ProfileInfo(props) {
               if (message === "user_name_unique") {
                 message = "update_user_name_unique";
               } 
-                setResponseMessage(t(message));
+                setResponseMessage(langKey && langKey[message]);
                 setEditUsername(!editUsername);
            
             },
@@ -397,12 +397,12 @@ export default function ProfileInfo(props) {
               marginBottom: "5px",
             }}
           >
-            <InputLabel> confirm current password</InputLabel>
+            <InputLabel> {langKey?.confirm_current_password}</InputLabel>
             <OutlinedInput
               fullWidth
-              label="confirm current password"
+              label={langKey?.confirm_current_password}
               name="currentPassword"
-              // placeholder={t("password")}
+              placeholder={langKey && langKey.current_password_not_match}
               inputProps={{ maxLength: 16 }}
               id="outlined-adornment-password"
               type={showCurrentPassword ? "text" : "password"}
@@ -545,7 +545,7 @@ export default function ProfileInfo(props) {
       </Paper>
       <Grid container justifyContent="center" py={5}>
         <Grid item>
-          <Button  style={{background:'#FAFAFA',border:'1px solid #DDDDDD',fontSize:'14px',padding:'5px 25px'}} onClick={handleLogout}>Logout</Button>
+          <Button  style={{background:'#FAFAFA',border:'1px solid #DDDDDD',fontSize:'14px',padding:'5px 25px'}} onClick={handleLogout}>{langKey?.logout}</Button>
         </Grid>
       </Grid>
       <LoadingDialog loading={loading}/>
