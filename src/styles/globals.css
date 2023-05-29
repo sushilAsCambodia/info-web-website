@@ -267,6 +267,12 @@ font-size: 14px;
 #logindialog .css-1vb6ifl-MuiButtonBase-root-MuiButton-root{
 padding: 0px;
 }
+#logindialog .MuiDialogContent-root  .MuiTypography-root::first-letter {
+  text-transform: uppercase;
+}
+#logindialog .MuiDialogContent-root  .MuiTypography-root{
+  text-transform: lowercase;
+} 
 /* #logindialog .MuiDialogContent-root {
   padding:16px;
 } */

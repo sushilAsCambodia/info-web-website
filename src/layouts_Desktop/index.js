@@ -42,6 +42,12 @@ const Layout = (props) => {
     vh = '100vh';
     height = `calc(${vh} - ${substrackHeight})`;
   } 
+  if (
+    router.pathname == "/announcement" 
+  ) {
+    vh = '100vh';
+    height = `calc(100vh - 237px)`;
+  } 
   switch (router.pathname.toLocaleLowerCase()) {
     case '/':
       title = (langKey && langKey.home_info_web)
@@ -107,7 +113,9 @@ const Layout = (props) => {
           <main style={{width: width, margin: "auto", height: height,overflowY:'auto'}}>
             {children}
           </main>
+          <div style={{height:'147px'}}>
             <Footer />
+          </div>
         </Container>
         <style jsx global>
           {`

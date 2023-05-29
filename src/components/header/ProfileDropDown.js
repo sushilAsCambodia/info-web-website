@@ -27,29 +27,37 @@ export default function ProfileDropDown(props) {
   const open = Boolean(anchorEl);
   const router = useRouter();
   const handleClick = (event) => {
+    const target = document.getElementById('demo-customized-button');
     setAnchorEl(event.currentTarget);
+    setTimeout(() => {
+      const dropDown = document.querySelector('#demo-customized-menu .MuiMenu-paper')
+      if(dropDown) {
+        dropDown.style.minWidth = target.offsetWidth+'px';
+        dropDown.style.transformOrigin = `${target.offsetWidth}px 0`;
+      }
+    }, 1);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  React.useEffect(() => {
+    const onScroll = () => {
+      setAnchorEl(null);
+    }
+    window.addEventListener("scroll",onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll); // clean up
+    }
+  },[]);
   const StyledMenu = styled((props) => (
     <Menu
-      elevation={0}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
+      elevation={0} 
       {...props}
     />
   ))(({ theme }) => ({
     "& .MuiPaper-root": {
       borderRadius: 6,
-      minWidth: 180,
       border:"1px solid rgba(0, 0, 0, 0.12)",
     },
   }));
