@@ -168,7 +168,8 @@ export default function Login() {
     } else {
       setErrorUserName(false);
     }
-    setUserName(e.target.value);
+    const userName = e.target.value.replace(/\s+/g,'');
+    setUserName(userName);
   };
   const onChangePassword = (e) => {
     if (e.target.value != "" && e.target.value.length < 6) {
