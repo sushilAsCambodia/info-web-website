@@ -295,6 +295,13 @@ export default function ProfileInfo(props) {
     );
   };
 
+  const [isValid, setValid] = useState(false);
+
+  const validate = () => {
+    return password.length || currentPassword.length || confirmpassword.length;
+  };
+
+
   return (
     <>
       <Paper sx={{ padding: "40px" }} elevation={3} component={Grid} container>
@@ -388,7 +395,7 @@ export default function ProfileInfo(props) {
             <Typography variant="h5">{langKey && langKey.change_password}</Typography>
           </Divider>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} >
           <FormControl
             variant="outlined"
             fullWidth
@@ -397,12 +404,12 @@ export default function ProfileInfo(props) {
               marginBottom: "5px",
             }}
           >
-            <InputLabel> {langKey?.confirm_current_password}</InputLabel>
+            <InputLabel> {langKey?.current_password}</InputLabel>
             <OutlinedInput
               fullWidth
-              label={langKey?.confirm_current_password}
+              label={langKey?.current_password}
               name="currentPassword"
-              placeholder={langKey && langKey.current_password_not_match}
+              placeholder={langKey && langKey.current_password}
               inputProps={{ maxLength: 16 }}
               id="outlined-adornment-password"
               type={showCurrentPassword ? "text" : "password"}
@@ -428,7 +435,7 @@ export default function ProfileInfo(props) {
           </FormControl>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} pt={1}>
           <FormControl
             variant="outlined"
             fullWidth
@@ -467,7 +474,7 @@ export default function ProfileInfo(props) {
             )}
           </FormControl>
         </Grid>
-        <Grid item xs={12} mb={1}>
+        <Grid item xs={12} mb={2} pt={1}>
           <FormControl
             variant="outlined"
             fullWidth
@@ -536,6 +543,7 @@ export default function ProfileInfo(props) {
                 "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
               textTransform: "capitalize",
             }}
+           disabled={!validate()}
             onClick={onSubmit}
           >
       {langKey && langKey.submit}

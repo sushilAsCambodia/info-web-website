@@ -171,9 +171,10 @@ export default function NewsSingle() {
                   alt={newsDetail.title || ""}
                   width="100%"
                   style={{
-                    objectFit: "cover",
+                    objectFit: "contain",
                     borderRadius: "10px",
-                    maxHeight: "600px",
+                    height:"auto"
+                   
                   }}
                 />
                 {/* <img width="100%" src="./assets/NewsCards/card_detail.png" /> */}

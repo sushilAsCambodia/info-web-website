@@ -34,74 +34,92 @@ const Feedback = () => {
   const [errorEmail,setErrorEmail]  = useState(false);
   const [disabled,setDisabled]  = useState(true);
   const [errorEmailMessage,setErrorEmailMessage]  = useState('');
+  const [errorContentMessage,setErrorContentMessage]  = useState('');
   const [responseMessage,setResponseMessage]  = useState(''); 
 
   const onChangeContent = (e) => {
+    setDisabled(false);
     if(e.target.value.length <= 500) {
       setContent(e.target.value)
       if(e.target.value != '') {
         setErrorContent(false);
-        if(!errorEmail) {
-          setDisabled(false)
-        }
+        // if(!errorEmail && contact!='') {
+        //   setDisabled(false)
+        // }
       }else {
         setErrorContent(true);
-        setDisabled(true);
       }
     }
+    // if(e.target.value =='' && contact =='') {
+    //   setDisabled(true);
+    // }
   }
   const onChangeContact = (e) => {
+    setDisabled(false);
     setContact(e.target.value);
     if(e.target.value!='') {
       const isValidEmail = utils.validateEmail(e.target.value);
       if(isValidEmail) {
-        setErrorEmail(false);
-        if(!errorContent) {
-          setDisabled(false)
-        }
+        setErrorEmail(false); 
       }else {
-        setErrorEmailMessage('invalid_email');
+        setErrorEmailMessage(langKey && (langKey.invalid_email || t('invalid_email')));
         setErrorEmail(true);
-        setDisabled(true);
       }
-    } 
+    }else {
+      setErrorEmailMessage(langKey && (langKey.contact_required || t('contact_required')));
+      setErrorEmail(true);
+    }
+    // if(e.target.value =='' && content =='') {
+    //   setDisabled(true);
+    // }
   } 
   const onSubmit = () => {
     if(content == '' && contact == '') {
       setErrorContent(true);
       setErrorEmail(true);
-      setErrorEmailMessage('contact_required');
+      setErrorEmailMessage(langKey && (langKey.contact_required || t('contact_required')));
+      setErrorContentMessage((langKey && (langKey.feedback_content_required || t('feedback_content_required'))));
     }else if (content == '') {
+      setErrorContentMessage((langKey && (langKey.feedback_content_required || t('feedback_content_required'))))
       setErrorContent(true);
-    }else if (content == '') {
-      setErrorEmailMessage('contact_required');
+    }else if (contact == '') {
+      setErrorEmailMessage(langKey && (langKey.contact_required || t('contact_required')));
       setErrorEmail(true);
-    }else {
-      if(!errorContent && !errorEmail && !disabled) { 
-        dispatch(createFeedback({
-          body: {
-            feedback_content: content,
-            contact: contact
-          },
-          callback:(res) => {
-            const {message = '' } = res;
-            if(res.status_code === 201){
-              setOpenDialog(true)
-              setResponseMessage(t(message));
-              setTimeout(()=> {setOpenDialog(false)
-              setContent('');
-              setContact('');
-              setDisabled(true);
-            },1000)
-            }else if(res.status_code === 401){
-              Cookies.remove('token')
-              setOpenDialog(true)
-              setResponseMessage(t(message));
-            }
-          }
-        }))
-      }
     } 
+    
+    if(contact!='') {
+      const isValidEmail = utils.validateEmail(contact);
+      if(isValidEmail) {
+        setErrorEmail(false); 
+      }else {
+        setErrorEmailMessage(langKey && (langKey.invalid_email || t('invalid_email')));
+        setErrorEmail(true);
+      }
+    }
+    if(!errorContent && !errorEmail && !disabled) { 
+      dispatch(createFeedback({
+        body: {
+          feedback_content: content,
+          contact: contact
+        },
+        callback:(res) => {
+          const {message = '' } = res;
+          if(res.status_code === 201){
+            setOpenDialog(true)
+            setResponseMessage(t(message));
+            setTimeout(()=> {setOpenDialog(false)
+            setContent('');
+            setContact('');
+            setDisabled(true);
+          },1000)
+          }else if(res.status_code === 401){
+            Cookies.remove('token')
+            setOpenDialog(true)
+            setResponseMessage(t(message));
+          }
+        }
+      }))
+    }
   };
   useEffect(() => {
     const hash = router.asPath;
@@ -136,7 +154,7 @@ const Feedback = () => {
             </Grid>
             <Grid item display="flex" flexDirection={`${profilePage? "column-reverse":"column" }`}>
             <Grid item xs={12} paddingTop="10px">
-              <Typography paddingBottom="20px" fontSize="12px">
+              <Typography fontSize="12px">
               {langKey && langKey.feedback_content} <Typography component="span" sx={{color:'red'}}>*</Typography>
               </Typography>
               <TextField
@@ -148,11 +166,11 @@ const Feedback = () => {
                 value={content}
                 onChange={onChangeContent}
                 error={errorContent}
-                helperText={errorContent ? (langKey && langKey.feedback_content_required) : ''}/>
+                helperText={errorContent ? (langKey && (langKey.feedback_content_required || t('feedback_content_required'))) : ''}/>
             </Grid>
 
             <Grid item xs={12} paddingTop="10px">
-              <Typography paddingBottom="20px" fontSize="12px">
+              <Typography  fontSize="12px">
                 {langKey && (langKey.contact || t('contact'))}
               </Typography> 
               <FormControl
@@ -180,7 +198,7 @@ const Feedback = () => {
                     </InputAdornment>
                   }
                 />
-                {errorEmail && <FormHelperText error>{langKey && (langKey.errorEmailMessage || t('invalid_email'))}</FormHelperText>}
+                {errorEmail && <FormHelperText error>{errorEmailMessage}</FormHelperText>}
               </FormControl>
             </Grid>
             </Grid>
