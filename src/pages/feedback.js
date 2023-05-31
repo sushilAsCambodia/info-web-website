@@ -20,6 +20,8 @@ import DialogMessage from "@/components/DialogMessage";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { Token } from "@mui/icons-material";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 const Feedback = () => {
   const {loading} = useSelector((state) => state.feedback);
@@ -36,7 +38,7 @@ const Feedback = () => {
   const [errorEmailMessage,setErrorEmailMessage]  = useState('');
   const [errorContentMessage,setErrorContentMessage]  = useState('');
   const [responseMessage,setResponseMessage]  = useState(''); 
-
+  const matches = useMediaQuery("(max-width:768px)");
   const onChangeContent = (e) => {
     setDisabled(false);
     if(e.target.value.length <= 500) {
@@ -50,28 +52,29 @@ const Feedback = () => {
         setErrorContent(true);
       }
     }
-    // if(e.target.value =='' && contact =='') {
-    //   setDisabled(true);
-    // }
+    if(e.target.value =='' && contact =='') {
+      setDisabled(true);
+    }
   }
   const onChangeContact = (e) => {
     setDisabled(false);
     setContact(e.target.value);
-    if(e.target.value!='') {
-      const isValidEmail = utils.validateEmail(e.target.value);
-      if(isValidEmail) {
-        setErrorEmail(false); 
-      }else {
-        setErrorEmailMessage(langKey && (langKey.invalid_email || t('invalid_email')));
-        setErrorEmail(true);
-      }
-    }else {
-      setErrorEmailMessage(langKey && (langKey.contact_required || t('contact_required')));
-      setErrorEmail(true);
-    }
-    // if(e.target.value =='' && content =='') {
-    //   setDisabled(true);
+    // if(e.target.value!='') {
+    //   const isValidEmail = utils.validateEmail(e.target.value);
+    //   if(isValidEmail) {
+    //     setErrorEmail(false); 
+    //   }else {
+    //     setErrorEmailMessage(langKey && (langKey.invalid_email || t('invalid_email')));
+    //     setErrorEmail(true);
+    //   }
     // }
+    // else {
+    //   setErrorEmailMessage(langKey && (langKey.contact_required || t('contact_required')));
+    //   setErrorEmail(true);
+    // }
+    if(e.target.value =='' && content =='') {
+      setDisabled(true);
+    }
   } 
   const onSubmit = () => {
     if(content == '' && contact == '') {
@@ -82,20 +85,21 @@ const Feedback = () => {
     }else if (content == '') {
       setErrorContentMessage((langKey && (langKey.feedback_content_required || t('feedback_content_required'))))
       setErrorContent(true);
-    }else if (contact == '') {
-      setErrorEmailMessage(langKey && (langKey.contact_required || t('contact_required')));
-      setErrorEmail(true);
-    } 
-    
-    if(contact!='') {
-      const isValidEmail = utils.validateEmail(contact);
-      if(isValidEmail) {
-        setErrorEmail(false); 
-      }else {
-        setErrorEmailMessage(langKey && (langKey.invalid_email || t('invalid_email')));
-        setErrorEmail(true);
-      }
     }
+    // else if (contact == '') {
+    //   setErrorEmailMessage(langKey && (langKey.contact_required || t('contact_required')));
+    //   setErrorEmail(true);
+    // } 
+    
+    // if(contact!='') {
+    //   const isValidEmail = utils.validateEmail(contact);
+    //   if(isValidEmail) {
+    //     setErrorEmail(false); 
+    //   }else {
+    //     setErrorEmailMessage(langKey && (langKey.invalid_email || t('invalid_email')));
+    //     setErrorEmail(true);
+    //   }
+    // }
     if(!errorContent && !errorEmail && !disabled) { 
       dispatch(createFeedback({
         body: {
@@ -128,12 +132,18 @@ const Feedback = () => {
     }
   }, [ router.asPath ]);
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-  return   ( 
+
+
+ const redirectToHome = (e)=> {
+router.push('/')
+}
+
+
+  return matches ? (
+
+
     <>
-
-
-    
-      <Grid
+ <Grid
         container
         alignItems="flex-start"
         justifyContent="center"
@@ -183,7 +193,7 @@ const Feedback = () => {
               >
                 <OutlinedInput
                   name="email"
-                  placeholder={langKey && langKey.email}
+                  placeholder={langKey && langKey.contact}
                   id="outlined-adornment-email"
                   type="text"
                   value={contact}
@@ -227,7 +237,129 @@ const Feedback = () => {
         message={responseMessage} 
         redirect={{pathname:'/login'}}
       />
+
+
+</>
+   
+
+) : (
+
+<> 
+<Grid
+container
+alignItems="flex-start"
+justifyContent="center"
+padding="0px 16px">
+<Grid
+  item
+  xs={12}
+  container
+  alignContent="flex-start"
+  alignItems="center"
+  overflow="auto"
+>
+  <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+    <Grid item xs={12} paddingTop="15px">
+      <Typography fontSize="18px">
+        {langKey && langKey.send_your_feedback_here}
+      </Typography>
+    </Grid>
+    <Grid item display="flex" flexDirection={`${profilePage? "column-reverse":"column" }`}>
+    <Grid item xs={12} paddingTop="10px">
+      <Typography fontSize="12px">
+      {langKey && langKey.feedback_content} <Typography component="span" sx={{color:'red'}}>*</Typography>
+      </Typography>
+      <TextField
+        fullWidth
+        id="outlined-multiline-static"
+        multiline
+        rows={6}
+        placeholder={langKey && langKey.do_not_exceed_characters}
+        value={content}
+        onChange={onChangeContent}
+        error={errorContent}
+        helperText={errorContent ? (langKey && (langKey.feedback_content_required || t('feedback_content_required'))) : ''}/>
+    </Grid>
+
+    <Grid item xs={12} paddingTop="10px">
+      <Typography  fontSize="12px">
+        {langKey && (langKey.contact || t('contact'))}
+      </Typography> 
+      <FormControl
+        variant="outlined"
+        fullWidth
+        sx={{
+          borderRadius: "15px",
+          marginBottom: "5px",
+        }}
+      >
+        <OutlinedInput
+          name="email"
+          placeholder={langKey && langKey.contact}
+          id="outlined-adornment-email"
+          type="text"
+          value={contact}
+          onChange={onChangeContact}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle email visibility"
+                edge="end">
+                <Icon icon="ooui:message" width={20} color="#F26522" />
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+        {errorEmail && <FormHelperText error>{errorEmailMessage}</FormHelperText>}
+      </FormControl>
+    </Grid>
+    </Grid>
+
+    <Grid item xs={12} spacing={1} paddingTop="30px" display="flex" justifyContent="space-between">
+  <Grid item xs={6} p={1} pl={0}>
+  <Button
+        fullWidth
+        variant="contained"
+      
+        sx={{
+          color:"white",
+          background:
+            "rgb(98, 98, 98)",
+          textTransform: 'capitalize'
+        }}
+        onClick={(e)=>redirectToHome(e)}
+        >
+        {langKey && (langKey.cancel || t('cancel'))} 
+      </Button>
+  </Grid>
+    <Grid item xs={6} p={1} pr={0}>
+    <Button
+        fullWidth
+        variant="contained"
+        disabled={disabled}
+        sx={{
+          color:"white",
+          background:
+            "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
+          textTransform: 'capitalize'
+        }}
+        onClick={onSubmit}>
+        {langKey && (langKey.submit || t('submit'))}
+      </Button>
+    </Grid>
+    </Grid>
+  </Grid>
+</Grid>
+</Grid>
+<DialogMessage 
+open={openDialog} 
+setOpen={setOpenDialog} 
+message={responseMessage} 
+redirect={{pathname:'/login'}}
+/>
     </>
+
+
   )
 };
 export default Feedback;
