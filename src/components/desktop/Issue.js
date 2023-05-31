@@ -101,7 +101,7 @@ export default function DialogDesktop(props) {
     }  
     const tabPanelElms = () => { 
         return <TabPanel value={value} index={value} padding="0px !important" >
-        <List sx={{  margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto auto auto auto auto auto", gridGap: "4px", justifyContent: "flex-start", textAlign: "center !important" }}>
+        <List sx={{ padding:'8px 13px',  margin: "0px !important", display: "grid", gridTemplateColumns: "auto auto auto auto auto auto auto auto auto auto", gridGap: "8px", justifyContent: "flex-start", textAlign: "center !important" }}>
                 {
                     issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
                         return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue mui-issue-custom':'mui-issue-custom'} style={{ width: '53px', justifyContent: "center", textAlign: "center !important",cursor:"pointer" }}>
@@ -112,8 +112,7 @@ export default function DialogDesktop(props) {
         </List>
     </TabPanel>
     };
-    const openIssue = (issue,index) => {
-        console.log('work');
+    const openIssue = (issue,index) => { 
         setActiveIssue(index);
         dispatch(
             getSelectedIssue(
@@ -175,7 +174,7 @@ export default function DialogDesktop(props) {
                                     onChange={handleChange} 
                                     aria-label="basic tabs example" className='scrollable-custom issue-card-custom'>
                                     {years.length > 0 && years.map((year,index) => {
-                                        return <Tab key={index} sx={{ padding: '0', minWidth: '53px', position: 'relative' }} label={year} {...a11yProps(index)} />
+                                        return <Tab key={index} sx={{ padding: '0', minWidth: '80px', position: 'relative' }} label={year} {...a11yProps(index)} />
                                     })}
                                 </Tabs>
                                 {loading ? <DataLoading size={20}/> : (issue && issue.hasOwnProperty('data') && issue.data.length <= 0 ? <DataNotFound height={200} width={200}/> : tabPanelElms())} 

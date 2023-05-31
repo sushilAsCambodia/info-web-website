@@ -104,7 +104,6 @@ export default function ProfileInfo(props) {
             let { message = ''} = res; 
             setOpenDialog(true);
             setResponseMessage(langKey && langKey[message]);
-            console.log('update',res)
           },
           auth: true,
           formdata: true
@@ -257,30 +256,23 @@ export default function ProfileInfo(props) {
   
   const onUpdateUserName = () => {
     if (!errorUserName) {
-      try {
-        dispatch(
-          updateNickName({
-            body: {
-              nick_name: nickName,
-            },
-            callback:(res)=> {
-             
-              let {status_code, message} = res; 
-              if (message === "user_name_unique") {
-                message = "update_user_name_unique";
-              } 
-                setResponseMessage(langKey && langKey[message]);
-                setEditUsername(!editUsername);
-           
-            },
-            auth: true,
-          })
-        );
-              
-      } catch (error) {
-        console.log(error)
-      }
-      setOpenDialog(true); 
+      dispatch(
+        updateNickName({
+          body: {
+            nick_name: nickName,
+          },
+          callback:(res)=> { 
+            setOpenDialog(true); 
+            let {status_code, message} = res; 
+            if (message === "user_name_unique") {
+              message = "update_user_name_unique";
+            } 
+            setResponseMessage(langKey && (langKey[message] || t(message)));
+            setEditUsername(!editUsername);
+          },
+          auth: true,
+        })
+      ); 
     }
 
   };
