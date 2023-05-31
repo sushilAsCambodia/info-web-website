@@ -86,7 +86,7 @@ export default function LotteryPastReults() {
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
       "Frozen yoghurt",
       159,
-      "09-03-2023",
+      "2023 Mar 23",
       { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
       1
     ),
@@ -94,7 +94,7 @@ export default function LotteryPastReults() {
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
       "Ice cream sandwich",
       237,
-      "21-09-2022",
+      "2023 Mar 23",
       { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
       2
     ),
@@ -102,7 +102,7 @@ export default function LotteryPastReults() {
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
       "Eclair",
       262,
-      "05-11-2022",
+      "2023 Mar 23",
       { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
       3
     ),
@@ -110,7 +110,7 @@ export default function LotteryPastReults() {
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
       "Cupcake",
       305,
-      "23-01-2023",
+      "2023 Mar 23",
       { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
       4
     ),
@@ -118,7 +118,7 @@ export default function LotteryPastReults() {
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
       "Gingerbread",
       356,
-      "11-11-2022",
+      "2023 Mar 23",
       { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
       5
     ),

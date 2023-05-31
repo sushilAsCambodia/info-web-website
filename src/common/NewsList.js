@@ -92,6 +92,7 @@ export default function NewsList(props) {
                       color="#8C8C8C"
                     >
                       {moment(item.release_date).format(utils.letterFormat)}
+                      {/* {moment(item.release_date).format('YYYY-MM-DD')}{' '} */}
                     </Typography>
                   </Grid>
                 </Grid>

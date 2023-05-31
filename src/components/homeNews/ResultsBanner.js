@@ -47,7 +47,7 @@ const announcement = [
   {
     title:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "03 Apr 2023",
+    date: "2023 Apr 03",
   },
 ];
 export default function ResultsBanner(props) {

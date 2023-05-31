@@ -31,42 +31,42 @@ const rows = [
     {
         id: 1,
         news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
+        date: "2023 Apr 03",
     },
     {
         id: 2,
         news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
+        date: "2023 Apr 03",
     },
     {
         id: 3,
         news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
+        date: "2023 Apr 03",
     },
     {
         id: 4,
         news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
+        date: "2023 Apr 03",
     },
     {
         id: 4,
         news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
+        date: "2023 Apr 03",
     },
     {
         id: 4,
         news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
+        date: "2023 Apr 03",
     },
     {
         id: 4,
         news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
+        date: "2023 Apr 03",
     },
     {
         id: 4,
         news: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "03 Apr 2023",
+        date: "2023 Apr 03",
     },
 ];
 
