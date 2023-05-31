@@ -83,7 +83,7 @@ export default function MatchLiveScroll(props) {
                 <Typography fontWeight="bold">
                   Russian Basketball Super League
                 </Typography>
-                <Typography variant="body2">18 Mar2023 00:00</Typography>
+                <Typography variant="body2">2023 Mar 18 00:00</Typography>
               </Grid>
 
               <Grid item xs={5} textAlign="center">

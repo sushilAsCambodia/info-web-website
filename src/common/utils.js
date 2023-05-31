@@ -2,7 +2,7 @@ import moment from "moment/moment";
 
 const utils = {
     formatDate: 'YYYY/MM/D',
-    letterFormat: 'DD MMM YYYY',
+    letterFormat: 'YYYY MMM DD',
     dateLetter: 'ddd',
     MonthYearFormat: 'MMM YYYY',
     DateMonthFormat: 'DD MMM',
