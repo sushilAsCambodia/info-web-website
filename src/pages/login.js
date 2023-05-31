@@ -94,6 +94,8 @@ export default function Login() {
   const [errorPassword, setErrorPassword] = useState(false);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [errorUserNameMessage, setErrorUserNameMessage] = useState("");
+  const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [mounted, setMounted] = useState(false);
@@ -146,13 +148,17 @@ export default function Login() {
     if (username == "" && password == "") {
       setErrorUserName(true);
       setErrorPassword(true);
-      return false;
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorPasswordMessage(langKey && (langKey.password_required || t('password_required')));
+      return;
     } else if (password == "") {
       setErrorPassword(true);
-      return false;
+      setErrorPasswordMessage(langKey && (langKey.password_required || t('password_required')));
+      return;
     } else if (username == "") {
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
       setErrorUserName(true);
-      return false;
+      return;
     }
     if (!errorPassword && !errorUserName) {
       setLoading(true);
@@ -165,6 +171,10 @@ export default function Login() {
   const onChangeUserName = (e) => {
     if (e.target.value != "" && e.target.value.length < 4) {
       setErrorUserName(true);
+      setErrorUserNameMessage(langKey && (langKey.validate_user_name || t('validate_user_name')));
+    }else if (e.target.value == '') {
+      setErrorUserName(true);
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
     } else {
       setErrorUserName(false);
     }
@@ -174,6 +184,10 @@ export default function Login() {
   const onChangePassword = (e) => {
     if (e.target.value != "" && e.target.value.length < 6) {
       setErrorPassword(true);
+      setErrorPasswordMessage(langKey && (langKey.validate_password || t('validate_password')));
+    }else if (e.target.value == '') {
+      setErrorPassword(true);
+      setErrorPasswordMessage(langKey && (langKey.password_required || t('password_required')));
     } else {
       setErrorPassword(false);
     }
@@ -244,7 +258,7 @@ export default function Login() {
                         />
                         {errorUserName && (
                           <FormHelperText error>
-                           {langKey && (langKey.validate_user_name || t('validate_user_name'))}
+                          {errorUserNameMessage}
                           </FormHelperText>
                         )}
                       </FormControl>
@@ -289,7 +303,7 @@ export default function Login() {
                         />
                         {errorPassword && (
                           <FormHelperText error>
-                     {langKey && (langKey.validate_password || t('validate_password'))}
+                          {errorPasswordMessage}
                           </FormHelperText>
                         )}
                       </FormControl>
@@ -611,7 +625,7 @@ export default function Login() {
                           />
                           {errorUserName && (
                             <FormHelperText error>
-                         {langKey && (langKey.validate_user_name || t('validate_user_name'))}
+                              {errorUserNameMessage}
                             </FormHelperText>
                           )}
                         </FormControl>
@@ -657,7 +671,7 @@ export default function Login() {
                           />
                           {errorPassword && (
                             <FormHelperText error>
-                            {langKey && (langKey.validate_password || t('validate_password'))}
+                              {errorPasswordMessage}
                             </FormHelperText>
                           )}
                         </FormControl>
