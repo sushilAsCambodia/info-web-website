@@ -64,7 +64,7 @@ const AdvertiseSlide = (props) => {
                   >
                     {card.title||'N/A'}
                   </Typography>
-                  <Typography
+                  {/* <Typography
                     position="absolute"
                     bottom="10%"
                     left="0"
@@ -76,7 +76,7 @@ const AdvertiseSlide = (props) => {
                     textOverflow="ellipsis"
                   >
                     {card.description||'N/A'}
-                  </Typography>
+                  </Typography> */}
                 </Grid></Link>}>
               </Tab> 
             })
