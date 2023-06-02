@@ -5,6 +5,13 @@ const initialState = {
 } 
 const CategoryReducer = (state = initialState, action) => {
   switch (action.type) { 
+    case 'category/list/pending':
+      return {
+        ...state,
+        categories: [],
+        status:'pending',
+        loading: true
+      };
     case 'category/list/fulfilled':
       let categories = action.payload?.data?.category || [];
       if(categories.length > 0) {

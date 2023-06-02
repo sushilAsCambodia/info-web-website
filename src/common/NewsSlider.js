@@ -58,7 +58,7 @@ export default function NewsSlider(props) {
           setLoading(true);
             setTimeout(() => {
               setLoading(false);    
-              setNewsList(newsList.concat(res.data.data));     
+              setNewsList(newsList && newsList.concat(res.data.data));     
             }, 3000);
         },
       })
