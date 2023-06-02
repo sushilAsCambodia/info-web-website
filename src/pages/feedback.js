@@ -231,6 +231,7 @@ router.push('/')
           </Grid>
         </Grid>
       </Grid>
+      <LoadingDialog loading={loading}/>
       <DialogMessage 
         open={openDialog} 
         setOpen={setOpenDialog} 
@@ -351,6 +352,7 @@ padding="0px 16px">
   </Grid>
 </Grid>
 </Grid>
+<LoadingDialog loading={loading}/>
 <DialogMessage 
 open={openDialog} 
 setOpen={setOpenDialog} 

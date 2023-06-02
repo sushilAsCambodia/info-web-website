@@ -262,7 +262,7 @@ const Header = () => {
                     </Grid>
                   </Popover>
                 </Grid>
-                <Grid item xs={6} md={6} lg={8} container color="black">
+                <Grid item xs={6} md={6} lg={8} container color="black" marginRight="auto">
                   <Grid>
                     <MenuItem
                       onClick={() => {
