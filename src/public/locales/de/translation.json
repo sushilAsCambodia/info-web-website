@@ -111,6 +111,8 @@
     "account_deleted": "Account deleted ch",
     "account_deactivated": "Account deactivated ch",
     "customer_service":"Customer service ch",
-    "current_password_not_match":"Current password not matching-ch"
+    "current_password_not_match":"Current password not matching-ch",
+    "copy_right":"Copyright © 1996-2021 KK Corporation, All Rights Reserved ch",
+    "terms_policy":"Terms & Conditions | Privacy Policy ch"
 
 }

@@ -112,5 +112,7 @@
     "account_deleted": "Account deleted",
     "account_deactivated": "Account deactivated",
     "customer_service":"Customer service",
-    "current_password_not_match":"Current password not matching"
+    "current_password_not_match":"Current password not matching",
+    "copy_right":"Copyright © 1996-2021 KK Corporation, All Rights Reserved",
+    "terms_policy":"Terms & Conditions | Privacy Policy"
 }
