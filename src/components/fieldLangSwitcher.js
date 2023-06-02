@@ -7,12 +7,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useTranslation } from 'react-i18next';
 import { Select,FormControl,InputLabel,InputAdornment,IconButton } from '@mui/material';
 import { Icon } from '@iconify/react';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {getLanguage} from '../store/actions/languageActions'
+import utils from "../common/utils";
 export default function FieldLanguageSwitcher() {
+  const dispatch = useDispatch();
   const {i18n} =  useTranslation();
-  const [lang, setLang] = React.useState('')
-
   const [langLabel,setLangLabel] = React.useState(i18n && i18n.language ? i18n.language :'en')
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
@@ -44,6 +44,20 @@ export default function FieldLanguageSwitcher() {
     }
     return language;
   } 
+  React.useEffect(() => {
+    if(langLabel) {
+      dispatch(getLanguage(
+        {
+          params: {
+            lang_id: utils.convertLangCodeToID(langLabel)
+          },
+          callback:(res) => {
+            localStorage.setItem('languageKey', JSON.stringify(res))
+          }
+        }
+      ));
+    }
+  },[langLabel]);
   return (
     <>
     <FormControl sx={{ minWidth: 120 }} className="switch-lang-dropdown-wrapper"
