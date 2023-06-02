@@ -81,20 +81,20 @@ const Header = () => {
   window.addEventListener("scroll", () => {
     setScroll(window.pageYOffset > 56);
   });
-  useEffect(() => {
-    if (i18n.language) {
-      dispatch(
-        getLanguage({
-          params: {
-            lang_id: utils.convertLangCodeToID(i18n.language),
-          },
-          callback: (res) => {
-            localStorage.setItem("languageKey", JSON.stringify(res));
-          },
-        })
-      );
-    }
-  }, [dispatch, i18n.language]);
+  // useEffect(() => {
+  //   if (i18n.language) {
+  //     dispatch(
+  //       getLanguage({
+  //         params: {
+  //           lang_id: utils.convertLangCodeToID(i18n.language),
+  //         },
+  //         callback: (res) => {
+  //           localStorage.setItem("languageKey", JSON.stringify(res));
+  //         },
+  //       })
+  //     );
+  //   }
+  // }, [dispatch, i18n.language]);
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
   //     window.addEventListener("scroll", () =>

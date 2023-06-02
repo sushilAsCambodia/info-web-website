@@ -20,34 +20,30 @@ const Layout = (props) => {
         anchor:'bottom'
     }); 
     const { t,i18n } = useTranslation();
-
     const dispatch = useDispatch();
-
-
-
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
     useEffect(() => {
         setMounted(true);
     }, []);
-    useEffect(() => {
-        if(i18n.language) {
-            if(i18n.language == 'kh') {
-                document.documentElement.setAttribute('lang',i18n.language);
-            }
-        }
-        dispatch(getLanguage(
-            {
-                params: {
-                    lang_id: utils.convertLangCodeToID(i18n.language)
-                },
-                callback:(res) => {
-    // console.log("resres",res)
-    localStorage.setItem('languageKey', JSON.stringify(res))
+    // useEffect(() => {
+    //     if(i18n.language) {
+    //         if(i18n.language == 'kh') {
+    //             document.documentElement.setAttribute('lang',i18n.language);
+    //         }
+    //     }
+    //     dispatch(getLanguage(
+    //         {
+    //             params: {
+    //                 lang_id: utils.convertLangCodeToID(i18n.language)
+    //             },
+    //             callback:(res) => {
+    // // console.log("resres",res)
+    // localStorage.setItem('languageKey', JSON.stringify(res))
     
-                 }
-            }
-        ));
-    },[dispatch,i18n.language])
+    //              }
+    //         }
+    //     ));
+    // },[dispatch,i18n.language])
     let { children } = props;  
     let title = '';
     const pages = [
@@ -78,13 +74,11 @@ const Layout = (props) => {
             if (pages.includes(router.pathname)) {
                 const {query} = router;
                 let title = '';
-                console.log(query)
                 if(Object.keys(query).length > 0) {
                     console.log(query?.title,langKey)
                     // title = langKey && langKey[(query?.title || '').toLowerCase()];
                     title = ( query?.title || '').toLowerCase();
                 }
-                console.log("title", langKey)
                 return <Navigate
                     title={title}
                     lead={<IconButton
