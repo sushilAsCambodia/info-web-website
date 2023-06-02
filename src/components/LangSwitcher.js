@@ -7,6 +7,8 @@ import {getLanguage} from '../store/actions/languageActions'
 import { useDispatch, useSelector } from "react-redux";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useTranslation } from 'react-i18next';
+import {getAdvertise} from '@/store/actions/advertiseActions'
+import {getCategory} from '@/store/actions/categoryActions'
 import utils from "../common/utils";
 const StyledMenu = styled((props) => (
   <Menu
@@ -60,25 +62,40 @@ export default function LangSwitcher() {
       setLang(lang);
     }else {
       setLang(i18n.language);
-    }
-    if(Object.keys(langKey).length===0){
-      dispatch(getLanguage(
-        {
+    } 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[i18n.language])
+  React.useEffect(() => {
+    if(lang!='') {
+      if(Object.keys(langKey).length===0){
+        dispatch(getLanguage(
+          {
             params: {
-                lang_id: utils.convertLangCodeToID(i18n.language)
+              lang_id: utils.convertLangCodeToID(i18n.language)
             },
             callback:(res) => {
-  
-  localStorage.setItem('languageKey', JSON.stringify(res))
-  
-             }
-        }
-    ));
+              localStorage.setItem('languageKey', JSON.stringify(res))
+            }
+          }
+        ));
       }
-  
+      dispatch(getAdvertise(
+        {
+          params: {
+              lang_id: utils.convertLangCodeToID(i18n.language)
+          },
+          callback:(res) => { }
+        }
+      )); 
+      dispatch(getCategory(
+        {
+          params: {lang_id: utils.convertLangCodeToID(i18n.language)},
+          callback:(res) => { }
+        }
+      ));
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[dispatch,i18n.language])
- 
+  },[lang])
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

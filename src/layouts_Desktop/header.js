@@ -81,20 +81,20 @@ const Header = () => {
   window.addEventListener("scroll", () => {
     setScroll(window.pageYOffset > 56);
   });
-  useEffect(() => {
-    if (i18n.language) {
-      dispatch(
-        getLanguage({
-          params: {
-            lang_id: utils.convertLangCodeToID(i18n.language),
-          },
-          callback: (res) => {
-            localStorage.setItem("languageKey", JSON.stringify(res));
-          },
-        })
-      );
-    }
-  }, [dispatch, i18n.language]);
+  // useEffect(() => {
+  //   if (i18n.language) {
+  //     dispatch(
+  //       getLanguage({
+  //         params: {
+  //           lang_id: utils.convertLangCodeToID(i18n.language),
+  //         },
+  //         callback: (res) => {
+  //           localStorage.setItem("languageKey", JSON.stringify(res));
+  //         },
+  //       })
+  //     );
+  //   }
+  // }, [dispatch, i18n.language]);
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
   //     window.addEventListener("scroll", () =>
@@ -262,7 +262,7 @@ const Header = () => {
                     </Grid>
                   </Popover>
                 </Grid>
-                <Grid item xs={6} md={6} lg={8} container color="black">
+                <Grid item xs={6} md={6} lg={8} container color="black" marginRight="auto">
                   <Grid>
                     <MenuItem
                       onClick={() => {

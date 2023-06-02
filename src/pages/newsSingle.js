@@ -166,9 +166,9 @@ export default function NewsSingle() {
               </Typography>
               <Grid>
                 <Image
-                  src={newsDetail.image?.path}
+                  src={newsDetail.image?.path || "/assets/no-image.png"}
                   onError={(e) => (e.target.src = "/assets/no-image.png")}
-                  alt={newsDetail.title || ""}
+                  alt={newsDetail && (newsDetail.title || "no-image")}
                   width="100%"
                   style={{
                     objectFit: "contain",
