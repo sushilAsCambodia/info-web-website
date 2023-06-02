@@ -49,7 +49,7 @@ export default function JournalItem(props) {
               draggable="false"
               style={{
                 width: "100%",
-                maxHeight: "80px",
+                maxHeight: "100px",
                 border: "5px solid #FFE0E0",
                 borderRadius: "5px",
                 objectFit:'contain',
