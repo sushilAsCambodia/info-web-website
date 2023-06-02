@@ -115,6 +115,7 @@ export default function PartnersColumns(props) {
         >
           {partners && partners.length > 0 && partners.map((item,index)=>{
             return(
+              <>
               <Link href={item.ads_link} target="_blank">
                 <Grid
               sx={{
@@ -141,14 +142,15 @@ export default function PartnersColumns(props) {
                     alt="clts_logo"
                     style={{
                       minWidth: "100px",
-                      maxHeight: "80px",
-                      maxWidth:"150px"
+                      maxHeight: "100px",
+                      maxWidth:"240px"
                     }}
                   />
                 </Grid>
               </Grid>
                 </Grid>
               </Link>
+              </>
             )
           })}
         </Carousel>
