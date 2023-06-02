@@ -440,7 +440,7 @@ export default function Register() {
                   }}
                   onClick={goToLogin}
                 >
-                  {langKey && (langKey.already_have_an_account || t('already_have_an_account'))}
+                  {langKey && (langKey.already_have_an_account || t('already_have_an_account'))} 
                   <Typography
                     style={{
                       fontSize: "12px",
@@ -448,7 +448,7 @@ export default function Register() {
                       color: "#F26522",
                     }}
                   >
-                    {langKey && (langKey.login || t('login'))}
+                  &nbsp;  {langKey && (langKey.login || t('login'))}
                   </Typography>
                 </Link>
               </Grid>
@@ -609,7 +609,7 @@ export default function Register() {
                   Router.push("/");
                 }}
               >
-                <Image alt="footer_logo" style={{maxWidth:144}} src="./assets/Logo/footer_logo.png" />
+                <Image alt="footer_logo" style={{maxWidth:150}} src="./assets/Logo/logo-infoweb.png" />
               </Grid>
               <Grid item xs={12} my={2}>
                 <Divider
@@ -880,7 +880,7 @@ export default function Register() {
                     Router.push("/login");
                   }}
                 >
-                  <Typography>{langKey && (langKey.already_have_an_account || t('already_have_an_account'))}</Typography>
+                  <Typography>{langKey && (langKey.already_have_an_account || t('already_have_an_account'))} </Typography>
                   <Typography
                     style={{
                       cursor: "pointer",

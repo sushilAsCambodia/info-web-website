@@ -429,7 +429,7 @@ export default function Login() {
                             color: "#F26522",
                           }}
                         >
-                        {langKey && (langKey.register || t('register'))}
+                     &nbsp;   {langKey && (langKey.register || t('register'))}
                         </Typography>
                       </Link>
                     </Grid>
@@ -553,7 +553,7 @@ export default function Login() {
                 >
                   <Grid item container xs={12} sm={12} padding={'40px 20px'}>
                   <Grid   container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
-                <Image style={{width:139}} alt="footer_logo" src="./assets/Logo/footer_logo.png" />
+                <Image style={{width:150}} alt="footer_logo" src="./assets/Logo/logo-infoweb.png" />
               </Grid>
                     <Grid item xs={12} my={2}>
                       <Divider
