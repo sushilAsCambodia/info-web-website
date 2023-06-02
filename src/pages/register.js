@@ -177,16 +177,17 @@ export default function Register() {
     }
   };
   const onChangeUserName = (e) => {
-    if (e.target.value != "" && e.target.value.length < minLength) {
+    const userName = e.target.value.replace(/\s+/g,'');
+    if (userName != "" && userName.length < minLength) {
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && (langKey.validate_user_name || t('validate_user_name')));
-    }else if(e.target.value == ''){
+    }else if(userName == ''){
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
     } else {
       setErrorUserName(false);
     }
-    const userName = e.target.value.replace(/\s+/g,'');
+
     setUserName(userName);
   };
   const onChangePassword = (e) => {
@@ -279,6 +280,7 @@ export default function Register() {
                 </Typography>
 
                 <FormControl
+             
                   variant="outlined"
                   fullWidth
                   sx={{
@@ -306,7 +308,7 @@ export default function Register() {
                     }
                   />
                   {errorUserName && (
-                    <FormHelperText error>
+                    <FormHelperText error >
                       {errorUserNameMessage}
                     </FormHelperText>
                   )}
@@ -317,6 +319,7 @@ export default function Register() {
                   {langKey && (langKey.password || t('password'))}
                 </Typography>
                 <FormControl
+               
                   variant="outlined"
                   fullWidth
                   sx={{
@@ -350,7 +353,7 @@ export default function Register() {
                     }
                   />
                   {errorPassword && (
-                    <FormHelperText error>
+                    <FormHelperText error >
                       {errorPasswordMessage}
                     </FormHelperText>
                   )}
@@ -440,7 +443,7 @@ export default function Register() {
                   }}
                   onClick={goToLogin}
                 >
-                  {langKey && (langKey.already_have_an_account || t('already_have_an_account'))}
+                  {langKey && (langKey.already_have_an_account || t('already_have_an_account'))} 
                   <Typography
                     style={{
                       fontSize: "12px",
@@ -448,7 +451,7 @@ export default function Register() {
                       color: "#F26522",
                     }}
                   >
-                    {langKey && (langKey.login || t('login'))}
+                  &nbsp;  {langKey && (langKey.login || t('login'))}
                   </Typography>
                 </Link>
               </Grid>
@@ -609,7 +612,7 @@ export default function Register() {
                   Router.push("/");
                 }}
               >
-                <Image alt="footer_logo" style={{maxWidth:144}} src="./assets/Logo/footer_logo.png" />
+                <Image alt="footer_logo" style={{maxWidth:150}} src="./assets/Logo/logo-infoweb.png" />
               </Grid>
               <Grid item xs={12} my={2}>
                 <Divider
@@ -642,6 +645,7 @@ export default function Register() {
                   </Grid>
                   <Grid item xs={12} sm={12} mb={3}>
                     <FormControl
+                    className="errorfreeparent"
                       // variant="outlined"
                       fullWidth
                       sx={{
@@ -675,7 +679,7 @@ export default function Register() {
                         }
                       />
                       {errorUserName && (
-                        <FormHelperText error>
+                        <FormHelperText error className="errorfreechild">
                           {errorUserNameMessage}
                         </FormHelperText>
                       )}
@@ -683,6 +687,7 @@ export default function Register() {
                   </Grid>
                   <Grid item xs={12} sm={12} mb={3}>
                     <FormControl
+                    className="errorfreeparent"
                       variant="outlined"
                       fullWidth
                       sx={{
@@ -722,7 +727,7 @@ export default function Register() {
                         }
                       />
                       {errorPassword && (
-                        <FormHelperText error>
+                        <FormHelperText error className="errorfreechild">
                           {errorPasswordMessage}
                         </FormHelperText>
                       )}
@@ -730,6 +735,7 @@ export default function Register() {
                   </Grid>
                   <Grid item xs={12} sm={12} mb={3}>
                     <FormControl
+                    className="errorfreeparent"
                       variant="outlined"
                       fullWidth
                       sx={{
@@ -769,7 +775,7 @@ export default function Register() {
                         }
                       />
                       {errorConfirmPassword && (
-                        <FormHelperText error>
+                        <FormHelperText error className="errorfreechild">
                           {confirmErrorPasswordMessage}
                         </FormHelperText>
                       )}
@@ -880,7 +886,7 @@ export default function Register() {
                     Router.push("/login");
                   }}
                 >
-                  <Typography>{langKey && (langKey.already_have_an_account || t('already_have_an_account'))}</Typography>
+                  <Typography>{langKey && (langKey.already_have_an_account || t('already_have_an_account'))} </Typography>
                   <Typography
                     style={{
                       cursor: "pointer",

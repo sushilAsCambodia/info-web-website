@@ -169,16 +169,16 @@ export default function Login() {
     setOpen(false);
   };
   const onChangeUserName = (e) => {
-    if (e.target.value != "" && e.target.value.length < 4) {
+    const userName = e.target.value.replace(/\s+/g,'');
+    if (userName != "" && userName.length < 4) {
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && (langKey.validate_user_name || t('validate_user_name')));
-    }else if (e.target.value == '') {
+    }else if (userName == '') {
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
     } else {
       setErrorUserName(false);
     }
-    const userName = e.target.value.replace(/\s+/g,'');
     setUserName(userName);
   };
   const onChangePassword = (e) => {
@@ -229,6 +229,7 @@ export default function Login() {
                 {langKey && (langKey.user_name  ||t('user_name'))}
                       </Typography>
                       <FormControl
+                    
                         variant="outlined"
                         fullWidth
                         sx={{
@@ -257,7 +258,7 @@ export default function Login() {
                           }
                         />
                         {errorUserName && (
-                          <FormHelperText error>
+                          <FormHelperText error >
                           {errorUserNameMessage}
                           </FormHelperText>
                         )}
@@ -269,6 +270,7 @@ export default function Login() {
                        {langKey && (langKey.password || t('password'))}
                       </Typography>
                       <FormControl
+                     
                         variant="outlined"
                         fullWidth
                         sx={{
@@ -302,7 +304,7 @@ export default function Login() {
                           }
                         />
                         {errorPassword && (
-                          <FormHelperText error>
+                          <FormHelperText error >
                           {errorPasswordMessage}
                           </FormHelperText>
                         )}
@@ -429,7 +431,7 @@ export default function Login() {
                             color: "#F26522",
                           }}
                         >
-                        {langKey && (langKey.register || t('register'))}
+                     &nbsp;   {langKey && (langKey.register || t('register'))}
                         </Typography>
                       </Link>
                     </Grid>
@@ -553,7 +555,7 @@ export default function Login() {
                 >
                   <Grid item container xs={12} sm={12} padding={'40px 20px'}>
                   <Grid   container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
-                <Image style={{width:139}} alt="footer_logo" src="./assets/Logo/footer_logo.png" />
+                <Image style={{width:150}} alt="footer_logo" src="./assets/Logo/logo-infoweb.png" />
               </Grid>
                     <Grid item xs={12} my={2}>
                       <Divider
@@ -587,6 +589,7 @@ export default function Login() {
                       </Grid>
                       <Grid item xs={12} sm={12} mb={1}>
                         <FormControl
+                        className="errorfreeparent"
                           variant="outlined"
                           fullWidth
                           sx={{
@@ -624,14 +627,15 @@ export default function Login() {
                             }
                           />
                           {errorUserName && (
-                            <FormHelperText error>
+                            <FormHelperText error className="errorfreechild">
                               {errorUserNameMessage}
                             </FormHelperText>
                           )}
                         </FormControl>
                       </Grid>
-                      <Grid item xs={12} sm={12} mb={3}>
+                      <Grid item xs={12} sm={12} mb={3} pt={2}>
                         <FormControl
+                        className="errorfreeparent"
                           variant="outlined"
                           fullWidth
                           sx={{
@@ -670,7 +674,7 @@ export default function Login() {
                             }
                           />
                           {errorPassword && (
-                            <FormHelperText error>
+                            <FormHelperText error className="errorfreechild">
                               {errorPasswordMessage}
                             </FormHelperText>
                           )}

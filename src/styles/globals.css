@@ -1051,3 +1051,13 @@ font-size: 12px;
 padding: 5px;
 }
 
+
+/* login register  */
+
+.errorfreeparent {
+position: relative;
+}
+.errorfreechild {
+position: absolute;
+bottom: -20px;
+}
