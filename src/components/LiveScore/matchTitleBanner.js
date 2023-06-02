@@ -39,7 +39,7 @@ const MatchTitleBanner = (props) => {
           <Grid color="white" container justifyContent="center">
             <Grid>
               <Typography>Russian Basketball Super League</Typography>
-              <Typography variant="body2">15 Mar 2023, 17:30</Typography>
+              <Typography variant="body2">2023  Mar 15, 17:30</Typography>
             </Grid>
             <Grid container item xs={12}>
               <Grid item xs={3}>

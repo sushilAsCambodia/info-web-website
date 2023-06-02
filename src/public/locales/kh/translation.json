@@ -111,6 +111,7 @@
     "account_deleted": "គណនីត្រូវបានលុប",
     "account_deactivated": "គណនីបិទដំណើរការ",
     "customer_service":"ផ្នែកបំរើរអតិធិជន",
-    "current_password_not_match":"Current password not matching-kh"
-
+    "current_password_not_match":"Current password not matching-kh",
+    "copy_right":"Copyright © 1996-2021 KK Corporation, All Rights Reserved kh",
+    "terms_policy":"Terms & Conditions | Privacy Policy kh"
 }

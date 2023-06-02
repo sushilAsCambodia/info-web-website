@@ -12,6 +12,7 @@ import { getAdvertise } from "@/store/actions/advertiseActions";
 import { Icon } from "@iconify/react";
 import { Image } from "mui-image";
 import utils from "@/common/utils";
+import Link from "next/link";
 
 const responsive = {
   largeDesktop: {
@@ -114,42 +115,42 @@ export default function PartnersColumns(props) {
         >
           {partners && partners.length > 0 && partners.map((item,index)=>{
             return(
-              <Grid
-            sx={{
-              margin: "5px",
-              borderRadius: "10px",
-              //   paddingX:"5px"
-            }}
-            key={index}
-          >
-            <Grid
-              style={{
-                height: "120px",
-                paddingX: "5px",
-                border: "1px solid grey",
-                borderRadius: "5px",
+              <Link href={item.ads_link} target="_blank">
+                <Grid
+              sx={{
+                margin: "5px",
+                borderRadius: "10px",
+                //   paddingX:"5px"
               }}
-              container
-              alignItems="center"
-              justifyContent="center"
+              key={index}
             >
-              <Grid item padding="5px">
-                <Image
-                  src={item.icon}
-                  alt="clts_logo"
-                  style={{
-                    minWidth: "100px",
-                    maxHeight: "80px",
-                    maxWidth:"150px"
-                  }}
-                />
+              <Grid
+                style={{
+                  height: "120px",
+                  paddingX: "5px",
+                  border: "1px solid grey",
+                  borderRadius: "5px",
+                }}
+                container
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Grid item padding="5px">
+                  <Image
+                    src={item.icon}
+                    alt="clts_logo"
+                    style={{
+                      minWidth: "100px",
+                      maxHeight: "80px",
+                      maxWidth:"150px"
+                    }}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
-          </Grid>
+                </Grid>
+              </Link>
             )
           })}
-        
-         
         </Carousel>
       </Grid>
     </Grid>

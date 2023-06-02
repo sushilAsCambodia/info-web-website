@@ -88,7 +88,7 @@ export default function LottoList(props) {
             sx={{ fontSize: "15px", borderBottom: "1px solid #ddd" }}
             px={1}
           >
-            29 Mar 2023, Monday
+          2023 Mar 29, Monday
           </Grid>
           <CardHeader
             sx={{ padding: "10px" }}

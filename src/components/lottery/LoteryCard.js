@@ -5,7 +5,7 @@ const LotteryCard = () => {
         <Card>
             <CardHeader style={{ padding: '0 5px 0 5px', borderBottom: '1px solid #ddd' }} title={
                 <Grid container style={{ flexWrap: 'nowrap', alignItems: "center" }}>
-                    <Grid item xs={10} style={{ fontSize: 12, color: '#8C8C8C' }}>29 Mar 2023, Monday</Grid>
+                    <Grid item xs={10} style={{ fontSize: 12, color: '#8C8C8C' }}>2023 Mar 29, Monday</Grid>
                     <Grid item xs={2} style={{ textAlign: 'right' }}>
                         <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.88331 12.6667L3.96665 7.98333L0.333313 4.83333L5.13331 4.41667L6.99998 0L8.86665 4.41667L13.6666 4.83333L10.0333 7.98333L11.1166 12.6667L6.99998 10.1833L2.88331 12.6667Z" fill="#F2DA00" />

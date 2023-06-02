@@ -90,7 +90,7 @@ export default function MatchItem(props) {
           textAlign="left"
           fontSize="10px"
         >
-          29 Mar 2023, Wednesday, 03:30 PM
+          2023 Apr 03, Wednesday, 03:30 PM
         </Grid>
       </Grid>
     </Grid>

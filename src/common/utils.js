@@ -2,7 +2,7 @@ import moment from "moment/moment";
 
 const utils = {
     formatDate: 'YYYY/MM/D',
-    letterFormat: 'DD MMM YYYY',
+    letterFormat: 'YYYY MMM DD',
     dateLetter: 'ddd',
     MonthYearFormat: 'MMM YYYY',
     DateMonthFormat: 'DD MMM',
@@ -31,6 +31,8 @@ const utils = {
           return "password_must_not_contain_whitespaces";
         }
     
+
+        const isForLetters = /[a-zA-Z]+/
         // const isContainsUppercase = /^(?=.*[A-Z])/;
         // if (!isContainsUppercase.test(value)) {
         //   return "password_must_have_at_least_one_uppercase_character";
@@ -53,7 +55,7 @@ const utils = {
         // }
         
         const isValidLength = RegExp(`^.{${min},${max}}$`);
-        if (!isValidLength.test(value) || !isContainsNumber.test(value)) {
+        if (!isValidLength.test(value) || !isContainsNumber.test(value) || !isForLetters.test(value)) {
           // return `The password format is a combination of ${min}-${max} letters and numbers`;
           return 'validate_password';
         }

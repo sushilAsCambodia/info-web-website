@@ -54,7 +54,7 @@ export default function MatchRounds(props) {
             sx={{ borderRight: "1px solid #ddd" }}
             p={1}
           >
-            <Typography variant="body2">29 Mar 2023</Typography>
+            <Typography variant="body2">2023  Mar 29</Typography>
             <Typography variant="body2">03:45 PM</Typography>
           </Grid>
           <Grid item xs={8} container className="roundChart">

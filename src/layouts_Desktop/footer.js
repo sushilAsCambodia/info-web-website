@@ -38,8 +38,8 @@ const Footer = () => {
       </Grid>
       <Grid container item xs={12} style={{background: '#F3F3F3'}}>
         <Grid container item style={{width:'80%',padding:'10px 0',margin:'0 auto'}}>
-          <Grid item xs={6} style={{color: '#777777', fontSize:12, fontWeight:400}}>Copyright © 1996-2021 KK Corporation, All Rights Reserved</Grid>
-          <Grid item xs={6} style={{color: '#777777', fontSize:12, fontWeight:400, textAlign:'right'}}>Terms & Conditions  |  Privacy Policy</Grid>
+          <Grid item xs={6} style={{color: '#777777', fontSize:12, fontWeight:400}}>{t('copy_right')}</Grid>
+          <Grid item xs={6} style={{color: '#777777', fontSize:12, fontWeight:400, textAlign:'right'}}>{t('terms_policy')}</Grid>
         </Grid>
       </Grid>
     </>

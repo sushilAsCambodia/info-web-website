@@ -180,6 +180,9 @@ export default function Register() {
     if (e.target.value != "" && e.target.value.length < minLength) {
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && (langKey.validate_user_name || t('validate_user_name')));
+    }else if(e.target.value == ''){
+      setErrorUserName(true);
+      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
     } else {
       setErrorUserName(false);
     }
@@ -673,7 +676,7 @@ export default function Register() {
                       />
                       {errorUserName && (
                         <FormHelperText error>
-                          {langKey && (langKey.validate_user_name || t('validate_user_name'))}
+                          {errorUserNameMessage}
                         </FormHelperText>
                       )}
                     </FormControl>
