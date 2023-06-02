@@ -1,7 +1,6 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -13,6 +12,8 @@ import {
   InputAdornment,
   IconButton,
   Divider,
+  Grid,
+  Button
 } from "@mui/material";
 import { Icon } from "@iconify/react";
 import MuiButton from "@material-ui/core/Button";
@@ -63,7 +64,8 @@ export default function ProfileDropDown(props) {
   }));
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   return (
-    <div>
+    <div 
+    >
       <Button
         id="demo-customized-button"
         aria-controls={open ? "demo-customized-menu" : undefined}
@@ -71,7 +73,8 @@ export default function ProfileDropDown(props) {
         aria-expanded={open ? "true" : undefined}
         variant="contained"
         disableElevation
-        onClick={handleClick}
+        // onClick={handleClick}
+        onMouseEnter={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
         sx={{
           background: "white",
@@ -92,17 +95,19 @@ export default function ProfileDropDown(props) {
         id="demo-customized-menu"
         MenuListProps={{
           "aria-labelledby": "demo-customized-button",
+          onMouseLeave: handleClose,
         }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+       
       >
         <MenuItem
           onClick={() => {
             router.push("/profile"),handleClose();
           }}
           disableRipple
-          sx={{ justifyContent: "flex-end" }}
+          sx={{ justifyContent: "flex-start" }}
         >
         {langKey && langKey.profile}
         </MenuItem>
@@ -110,7 +115,7 @@ export default function ProfileDropDown(props) {
         <MenuItem
           onClick={logout}
           disableRipple
-          sx={{ justifyContent: "flex-end" }}
+          sx={{ justifyContent: "flex-start" }}
         >
          {langKey && langKey.logout}
         </MenuItem>
