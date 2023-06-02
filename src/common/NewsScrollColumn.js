@@ -47,7 +47,7 @@ export default function NewsScrollColumn(props) {
       getNewsByCategory({
         params: {
           lang_id: lang_id,
-          rowsPerPage: 10,
+          rowsPerPage: 5,
           shortTitle: "",
           category_id: categoryId,
           page: 1,
@@ -81,7 +81,7 @@ export default function NewsScrollColumn(props) {
         callback: (res) => {
           setInfiniteLoad(true);
           setTimeout(() => { 
-            setNewsList(newsList.concat(res?.data?.data||[]));
+            setNewsList(newsList && newsList.concat(res?.data?.data||[]) );
             setInfiniteLoad(false);
           }, 2000);
         },
@@ -197,12 +197,13 @@ export default function NewsScrollColumn(props) {
                 className="newsColumn"
               >
                 {loading ? (
-                  <Icon
-                    color="white"
-                    width={40}
-                    paddingbottom="5px"
-                    icon="line-md:loading-alt-loop"
-                  />
+                  // <Icon
+                  //   color="white"
+                  //   width={40}
+                  //   paddingbottom="5px"
+                  //   icon="line-md:loading-alt-loop"
+                  // />
+                  <></>
                 ) : newsList && newsList.length > 0 ? (
                   newsList.map((item, index) => {
                     return (

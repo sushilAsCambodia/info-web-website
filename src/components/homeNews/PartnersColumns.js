@@ -56,6 +56,7 @@ export default function PartnersColumns(props) {
       setValue(0);
     }
   }, [router.asPath]);
+  
   useEffect(() => {
     dispatch(getAdvertise(
       {

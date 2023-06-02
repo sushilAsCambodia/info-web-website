@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link'
 import utils from "@/common/utils";
 import { Image } from "mui-image";
+import ForgotPassword from "./forgotPassword";
 
 const CustomerService = () => { 
     const {loading, data} = useSelector((state) => state.customer_service);
@@ -36,42 +37,34 @@ const CustomerService = () => {
         <>
             <Grid
                 container
-                alignItems="flex-start"
+                alignItems="center"
                 justifyContent="center"
                 padding="0px 16px"
-            >
-         
-                <Grid
-                    item
-                    xs={12}
-                    container
-                    alignContent="flex-start"
-                    alignItems="center"
-                    overflow="auto"
-                >
-                    <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-                        <Grid item xs={12} paddingTop="15px" textAlign="center">
-                            <Image alt="servicebigimg" src="./assets/Profile/servicebigimg.png" />
-                        </Grid>
-                        <Grid item xs={12} >
-                            <Typography paddingBottom="20px" textAlign="center">
-                                {langKey && langKey.contact_customer_service_via}
-                            </Typography>
-                           <List sx={{ display:"flex", justifyContent:"center"  }}>
-                            {
-                                data && data.length > 0 && data.map((social,key) => {
-                                    return <ListItem key={key} sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}>
-                                        <Link href={social.account || ''} target="_blank">
-                                            <Image alt="social" src={social.icon || ''} height={28} width={29} style={{objectFit: 'contain'}}/>
-                                        </Link>
-                                    </ListItem>;
-                                })
-                            } 
-                           </List>
-                        </Grid> 
+                height="100%"
+            > 
+                <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+                    <ForgotPassword showTitle={false}/>
+                    {/* <Grid item xs={12} paddingTop="15px" textAlign="center">
+                        <Image alt="servicebigimg" src="./assets/Profile/servicebigimg.png" />
                     </Grid>
-                  
+                    <Grid item xs={12} >
+                        <Typography paddingBottom="20px" textAlign="center">
+                            {langKey && langKey.contact_customer_service_via}
+                        </Typography>
+                        <List sx={{ display:"flex", justifyContent:"center"  }}>
+                        {
+                            data && data.length > 0 && data.map((social,key) => {
+                                return <ListItem key={key} sx={{padding: '0',display:'flex',flexDirection:'column', width:'45px'}}>
+                                    <Link href={social.account || ''} target="_blank">
+                                        <Image alt="social" src={social.icon || ''} height={28} width={29} style={{objectFit: 'contain'}}/>
+                                    </Link>
+                                </ListItem>;
+                            })
+                        } 
+                        </List>
+                    </Grid>  */}
                 </Grid>
+                
             </Grid>
         </>
     )
