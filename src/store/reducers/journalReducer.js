@@ -21,7 +21,9 @@ const JournalReducer =  (state = initialState, action) => {
     case 'journal/list/fulfilled':
       let journals = action.payload?.data;
       if(journals.length > 0) {
-        journals= journals.filter(j => j.status === 1)
+        journals= journals.filter(j => j.status === 1).sort(function(a, b) {
+          return  parseInt(b.sorting) - parseInt(a.sorting);
+        }); 
       }
       return {
         ...state,

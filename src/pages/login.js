@@ -27,7 +27,7 @@ import DialogActions from "@mui/material/DialogActions";
 import CloseIcon from "@mui/icons-material/Close";
 import FormHelperText from "@mui/material/FormHelperText";
 import LoadingDialog from "@/components/Loading";
-import { login } from "@/store/actions/authActions";
+import { login,register } from "@/store/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -38,7 +38,7 @@ import Cookies from "js-cookie";
 import ForgotPassword from "@/components/desktop/forgotPassword";
 import utils from "../common/utils";
 import { Image } from "mui-image";
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession,signIn, signOut } from "next-auth/react"; 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -49,10 +49,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function BootstrapDialogTitle(props) {
-  const { children, onClose, ...other } = props;
-
-
-  
+  const { children, onClose, ...other } = props; 
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
@@ -80,10 +77,9 @@ BootstrapDialogTitle.propTypes = {
 };
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
-export default function Login() {
-  const { data: session } = useSession()
-  console.log(session,'xxx')
+export default function Login(props) {
+  const dispatch = useDispatch();
+  const { data: session } = useSession();
   const { t } = useTranslation();
   const {i18n} =  useTranslation();
   const [lang, setLang] = React.useState('')
@@ -102,7 +98,37 @@ export default function Login() {
   const matches = useMediaQuery("(max-width:768px)");
   const [border, setBorder] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const handleSignup = (info) => {
+    setLoading(true);
+    const name = info.name.replace(/\s+/,'_');
+    const password = 'Admin@123';
+    dispatch(
+      register({
+        body: { user_name: name, password: password},
+        callback: (res) => {
+          setLoading(false);
+          const { status_code, message = "" } = res;
+          setResponseMessage(t(message));
+          setOpen(true);
+          if ([200, 201, 202, 203].includes(status_code)) {
+            setRegisterSuccess(true);
+            dispatch(
+              login({
+                body: { user_name: name, password: password },
+                callback: (res) => {
+                  const { status_code } = res;
+                  if ([200, 201, 202, 203].includes(status_code)) {
+                    matches ? Router.push("/home") : Router.push("/");
+                  }
+                },
+              })
+            );
+          }
+        },
+      })
+    );
+  };  
   useEffect(() => {
     setMounted(true);
     if(localStorage.getItem('remember_me') ==  'true') {
@@ -110,8 +136,12 @@ export default function Login() {
       setPassword(Cookies.get('user_pwd'));
       setRememberMe(true);
     }
-  },[]);
-  const dispatch = useDispatch();
+    if(session) {
+      // console.log(session,'xxx')
+      // setLoading(true);
+      // handleSignup(session);
+    }
+  },[session]);
   const handleLogin = () => {
     dispatch(
       login({

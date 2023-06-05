@@ -72,7 +72,6 @@ const utils = {
           DateMonth: moment(d).format(utils.DateMonthFormat),
         });
       }
-      console.log("::: LastXDays", result);
       return result;
     }
 }
