@@ -32,19 +32,19 @@ export default function Index() {
   const { i18n } = useTranslation();
   const { t } = useTranslation();
   useEffect(() => { 
-    dispatch(getLanguage(
+    dispatch(
+      getLanguage(
         {
-            params: {
-                lang_id: utils.convertLangCodeToID(i18n.language)
-            },
-            callback:(res) => {
-// console.log("resres",res)
-localStorage.setItem('languageKey', JSON.stringify(res))
-
-             }
+          params: {
+            lang_id: utils.convertLangCodeToID(i18n.language)
+          },
+          callback:(res) => {
+            // console.log("resres",res)
+            localStorage.setItem('languageKey', JSON.stringify(res))
+          }
         }
-    ));
-  
+      )
+    );
 },[dispatch,i18n.language]); 
 
 const langKey = useSelector((state) => state && state.load_language && state.load_language.language);

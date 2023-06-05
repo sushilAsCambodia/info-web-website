@@ -16,7 +16,7 @@ const AdvertiseReducer =  (state = initialState, action) => {
       if(ads.length > 0) {
         // sort DESC
         ads.sort(function(a, b) {
-          return  parseInt(a.sorting) - parseInt(b.sorting);
+          return  parseInt(b.sorting) - parseInt(a.sorting);
         });
       }
       return {
