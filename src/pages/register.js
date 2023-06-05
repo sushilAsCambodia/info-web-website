@@ -608,11 +608,9 @@ export default function Register() {
                 container
                 justifyContent="center"
                 style={{ cursor: "pointer" }}
-                onClick={() => {
-                  Router.push("/");
-                }}
+              
               >
-                <Image alt="footer_logo" style={{maxWidth:150}} src="./assets/Logo/logo-infoweb.png" />
+                <Image alt="register_logo" style={{maxWidth:150}} src="./assets/Logo/logo-infoweb.png" />
               </Grid>
               <Grid item xs={12} my={2}>
                 <Divider

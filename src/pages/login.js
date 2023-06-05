@@ -554,8 +554,8 @@ export default function Login() {
                   alignContent="center" 
                 >
                   <Grid item container xs={12} sm={12} padding={'40px 20px'}>
-                  <Grid   container justifyContent="center" style={{cursor:"pointer"}} onClick={()=>{Router.push('/')}}>
-                <Image style={{width:150}} alt="footer_logo" src="./assets/Logo/logo-infoweb.png" />
+                  <Grid   container justifyContent="center" style={{cursor:"pointer"}} >
+                <Image style={{width:150}} alt="login_logo" src="./assets/Logo/logo-infoweb.png" />
               </Grid>
                     <Grid item xs={12} my={2}>
                       <Divider
