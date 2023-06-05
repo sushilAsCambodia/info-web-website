@@ -123,6 +123,7 @@ const DataTabComponent = ({id,lang_id}) => {
         };
       },[])
     return <Grid sx={{
+        overflow:"auto", height:"55vh",
     //  height:news && news.length > 2 ? '900px' : 'auto',overflowY:'auto',
       display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}} className='tab-scroll'>
         {showLoadMore && <Typography component="span" style={{position:'fixed',bottom:'56px'}}>{loadingMore?<DataLoading size={20}/>:''}</Typography>}
@@ -150,8 +151,8 @@ const DataTabComponent = ({id,lang_id}) => {
                                             </Grid> 
                                             <Grid item xs={9}>
                                                 <Grid item sx={{paddingLeft:'5px'}}>
-                                                    <Box fontWeight="400" fontFamily="sans-serif" fontSize="10px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,140)}}></Box>
-                                                    <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="10px !important" whiteSpace="nowrap">
+                                                    <Box fontWeight="400" fontFamily="sans-serif" fontSize="12px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,140)}}></Box>
+                                                    <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="12px !important" whiteSpace="nowrap">
                                                         {moment(sport.created_at).format(utils.formatDate)}
                                                     </Typography>
                                                 </Grid>
