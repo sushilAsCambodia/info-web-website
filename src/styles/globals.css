@@ -863,6 +863,14 @@ visibility: visible;
     ),
     var(--liveBg) !important;
 }
+.team-logo-image{
+  max-width: 80px;
+  max-height: 80px;
+}
+.score-card-logo .mui-image-wrapper{
+  max-width: 70px !important;
+  max-height: 70px !important;
+}
 /* END  */
 
 
