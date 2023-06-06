@@ -322,9 +322,9 @@ export default function Login(props) {
                                 edge="end"
                               >
                                 {showPassword ? (
-                                  <Icon icon="ri:eye-close-fill" color="#F26522" />
-                                ) : (
                                   <Icon icon="ph:eye-bold" color="#F26522" />
+                                ) : (
+                                  <Icon  icon="ri:eye-close-fill" color="#F26522" />
                                 )}
                               </IconButton>
                             </InputAdornment>
@@ -692,9 +692,9 @@ export default function Login(props) {
                                   edge="end"
                                 >
                                   {showPassword ? (
-                                    <Icon icon="ri:eye-close-fill" color="#F26522" />
-                                  ) : (
                                     <Icon icon="ph:eye-bold" color="#F26522" />
+                                  ) : (
+                                    <Icon  icon="ri:eye-close-fill" color="#F26522" />
                                   )}
                                 </IconButton>
                               </InputAdornment>

@@ -12,11 +12,15 @@ import {
   FormHelperText 
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import Router from "next/router";
+
 import { createFeedback } from "@/store/actions/feedbackActions";
 import { useDispatch, useSelector } from 'react-redux';
 import utils from '@/common/utils';
 import LoadingDialog from "@/components/Loading";
 import DialogMessage from "@/components/DialogMessage";
+import DialogMessageFeedback from "@/components/DialogMessageFeedback";
+
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { Token } from "@mui/icons-material";
@@ -41,7 +45,7 @@ const Feedback = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const onChangeContent = (e) => {
     setDisabled(false);
-    if(e.target.value.length <= 500) {
+    if(e.target.value.length <= 140) {
       setContent(e.target.value)
       if(e.target.value != '') {
         setErrorContent(false);
@@ -111,7 +115,9 @@ const Feedback = () => {
           if(res.status_code === 201){
             setOpenDialog(true)
             setResponseMessage(t(message));
+            
             setTimeout(()=> {setOpenDialog(false)
+              Router.push("/profile");
             setContent('');
             setContact('');
             setDisabled(true);
@@ -196,6 +202,7 @@ router.push('/')
                   placeholder={langKey && langKey.contact}
                   id="outlined-adornment-email"
                   type="text"
+                
                   value={contact}
                   onChange={onChangeContact}
                   endAdornment={
@@ -225,14 +232,14 @@ router.push('/')
                   textTransform: 'capitalize'
                 }}
                 onClick={onSubmit}>
-                {langKey && (langKey.submit || t('submit'))}
+                {langKey && (langKey.submit || t('submit'))} 
               </Button>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
       <LoadingDialog loading={loading}/>
-      <DialogMessage 
+      <DialogMessageFeedback
         open={openDialog} 
         setOpen={setOpenDialog} 
         message={responseMessage} 
