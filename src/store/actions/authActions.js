@@ -61,6 +61,32 @@ export const register = createAsyncThunk(
     }
   },
 );
+export const registerWithSocial = createAsyncThunk(
+  "customers/register",
+  async ({ body = {}, callback }) => {
+    try {
+      const response = await api.post('/auth/customers/social-register',body);
+      const { data, status } = response;
+      data['status_code'] = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      if(typeof window !='undefined') {
+        if(data.data[utils.tokenKey]) {
+          Cookies.set(utils.tokenKey,data.data[utils.tokenKey] || '');
+        }
+      }
+      return data;
+    } catch (error) {
+      const {status, data} = error.response;
+      data['status_code']  = status;
+      if(typeof callback == 'function') {
+        callback(data);
+      }
+      return data;
+    }
+  },
+);
 // customer logout
 export const logout = createAsyncThunk(
   "customers/logout",

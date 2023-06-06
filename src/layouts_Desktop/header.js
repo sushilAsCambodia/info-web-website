@@ -17,6 +17,7 @@ import ProfileDropDown from "@/components/header/ProfileDropDown";
 import HeaderLiveScore from "@/components/header/headerLiveScore";
 import Link from "next/link";
 import utils from "@/common/utils";
+import Image from "mui-image";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const matches2 = useMediaQuery("(max-width:1074px)");
@@ -127,7 +128,7 @@ const Header = () => {
             >
               <Grid item xs={4}>
                 <Link href="/">
-                  <img src="./assets/Logo/logo-infoweb.png" width="130px" height="100%" />
+                  <Image src="./assets/Logo/logo-infoweb.png" width="130px" height="100%" alt="info_logo" />
                 </Link>
               </Grid>
               <Grid
