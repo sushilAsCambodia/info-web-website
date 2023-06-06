@@ -56,6 +56,7 @@ export default function LangSwitcher() {
   const dispatch = useDispatch();
   const [lang, setLang] = React.useState('')
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  console.log('langKey',langKey)
   React.useEffect(() => {
     if(typeof window !='undefined') {
       const lang = window.localStorage.getItem('lang') || 'en';
