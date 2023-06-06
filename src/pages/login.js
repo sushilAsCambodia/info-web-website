@@ -200,7 +200,7 @@ export default function Login(props) {
   };
   const onChangeUserName = (e) => {
     const userName = e.target.value.replace(/\s+/g,'');
-    if (userName != "" && userName.length < 4) {
+    if (userName != "" && userName.length < 6) {
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && (langKey.validate_user_name || t('validate_user_name')));
     }else if (userName == '') {
@@ -212,14 +212,16 @@ export default function Login(props) {
     setUserName(userName);
   };
   const onChangePassword = (e) => {
-    if (e.target.value != "" && e.target.value.length < 6) {
-      setErrorPassword(true);
-      setErrorPasswordMessage(langKey && (langKey.validate_password || t('validate_password')));
-    }else if (e.target.value == '') {
+    if (e.target.value == '') {
       setErrorPassword(true);
       setErrorPasswordMessage(langKey && (langKey.password_required || t('password_required')));
     } else {
-      setErrorPassword(false);
+      if(utils.checkPassword(e.target.value) != null) {
+        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
+        setErrorPassword(true);
+      }else {
+        setErrorPassword(false);
+      }
     }
     setPassword(e.target.value);
   };
