@@ -123,7 +123,7 @@ const DataTabComponent = ({id,lang_id}) => {
         };
       },[])
     return <Grid sx={{
-        overflow:"auto", height:"50vh",
+        overflow:"auto", height:"50vh",paddingBottom:'20px',
     //  height:news && news.length > 2 ? '900px' : 'auto',overflowY:'auto',
       display:'flex', justifyContent:'center', alignItems:loading ? 'center' : 'start'}} className='tab-scroll'>
         {showLoadMore && <Typography component="span" style={{position:'fixed',bottom:'56px'}}>{loadingMore?<DataLoading size={20}/>:''}</Typography>}
