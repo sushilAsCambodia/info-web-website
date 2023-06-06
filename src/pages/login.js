@@ -93,6 +93,7 @@ export default function Login(props) {
   const [errorUserNameMessage, setErrorUserNameMessage] = useState("");
   const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(true);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [mounted, setMounted] = useState(false);
   const matches = useMediaQuery("(max-width:768px)");
@@ -225,7 +226,13 @@ export default function Login(props) {
     }
     setPassword(e.target.value);
   };
-
+  useEffect(() => { 
+    if(!errorPassword && !errorUserName) {
+      setDisableSubmit(false)
+    }else {
+      setDisableSubmit(true)
+    }
+  },[errorPassword,errorUserName]);
  
   return <>
     {
@@ -348,7 +355,7 @@ export default function Login(props) {
                         <Button
                           fullWidth
                           variant="contained"
-                          disabled={loading ? true : false}
+                          disabled={disableSubmit}
                           sx={{
                             color: "white",
                             background: loading

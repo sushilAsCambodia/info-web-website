@@ -75,6 +75,7 @@ export default function Register() {
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(true);
   const [errorUserNameMessage, setErrorUserNameMessage] = useState('');
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
@@ -253,6 +254,13 @@ export default function Register() {
       setIsComponent('forgotpassword');
     }
   };
+  useEffect(() => { 
+    if(!errorPassword && !errorUserName) {
+      setDisableSubmit(false)
+    }else {
+      setDisableSubmit(true)
+    }
+  },[errorPassword,errorUserName]);
   return matches ? (
     <>
       <Grid container alignItems="center" justifyContent="center" height="100%">
@@ -370,6 +378,7 @@ export default function Register() {
                         "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
                       textTransform: "capitalize",
                     }}
+                    disabled={disableSubmit}
                     onClick={onSubmitMobile}
                   >
                     {langKey && (langKey.signup_for_now || t('signup_for_now'))}
