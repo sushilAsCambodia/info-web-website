@@ -22,7 +22,7 @@ export default function JournalCard(props) {
               width="100%"
               style={{ objectFit: 'cover', height: "88.25px", borderRadius: '4px' }}
             />
-            <Typography fontSize="10px">{journal.album_name || 'N/A'}</Typography>
+            <Typography fontSize="12px">{journal.album_name || 'N/A'}</Typography>
           </Grid>
         })
         : <Grid mx="auto"> <Typography component="div" sx={{padding:'5px'}}><Empty /></Typography> </Grid>}
