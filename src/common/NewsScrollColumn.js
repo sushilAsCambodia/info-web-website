@@ -53,20 +53,30 @@ export default function NewsScrollColumn(props) {
           page: currentPage,
         },
         callback: (res) => {
-            // console.log(currentPage,'currentPage')
             if(currentPage>1) {
               setInfiniteLoad(true);
               setTimeout(() => {
                 setNewsList((curr => {
-                  console.log(curr,'curr-abc',curr.concat(res?.data?.data||[]))
-                  return curr.concat(res?.data?.data||[]);
+                  let news = curr.concat(res?.data?.data||[]);
+                  if(news.length) {
+                    news.sort(function(a, b) {
+                      return  parseInt(b.sorting) - parseInt(a.sorting);
+                    });
+                  }
+                  return news;
                 }));
                 setLoading(false);
                 setInfiniteLoad(false);
               },3000)
             }else {
               setLoading(false);
-              setNewsList(res?.data?.data);
+              let news = res?.data?.data || []
+              if(news.length) {
+                news.sort(function(a, b) {
+                  return  parseInt(b.sorting) - parseInt(a.sorting);
+                });
+              }
+              setNewsList(news);
               setPageLimit(res?.data?.last_page);
             }
         },
