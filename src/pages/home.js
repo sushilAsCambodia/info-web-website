@@ -37,7 +37,10 @@ const Home = () => {
     //     // ));
     // },[i18n.language]); 
     return <>
+    
         <NewsJournalTabs  categories={categories} advertises={advertises} lang_id={utils.convertLangCodeToID(i18n.language)}/>
+
+        
     </>
 };
 export default Home;

@@ -112,11 +112,9 @@ export default function LangSwitcher() {
         params: {
           lang_id: utils.convertLangCodeToID(i18n.language)
       },
-          callback:(res) => {
-console.log("resres",res)
-localStorage.setItem('languageKey', JSON.stringify(res))
-
-           }
+        callback:(res) => {
+          localStorage.setItem('languageKey', JSON.stringify(res))
+        }
       }
   ));
     handleClose();
@@ -141,7 +139,7 @@ localStorage.setItem('languageKey', JSON.stringify(res))
   return (
     <div>
       <Button
-        sx={{backgroundColor:"transparent", border:"0.5px solid #FFFFFF", color:"#fff", padding:"0px", textTransform:"capitalize !important"}}
+        sx={{backgroundColor:"transparent", border:"0.5px solid #FFFFFF",minWidth:"60px", fontSize:"12px", color:"#fff", padding:"0px", textTransform:"capitalize !important"}}
         id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
         aria-haspopup="true"

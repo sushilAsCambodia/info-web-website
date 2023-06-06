@@ -66,7 +66,7 @@ const ImageCarouselComponent = (props) => {
                 margin-top:11px;
             }
             .image-gallery-content .image-gallery-slide .image-gallery-image {
-                height:100%;
+               
                 object-fit:cover;
                 max-height:initial;
             }

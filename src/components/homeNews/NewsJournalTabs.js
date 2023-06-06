@@ -79,8 +79,8 @@ export default function NewsJournalTabs(props) {
     (state) => state && state.load_language && state.load_language.language
   );
   return (
-    <Grid item className="tabclass" sx={{ height: "100%" }}>
-      <ResultsBanner banners={banners}/>
+    <Grid item className="tabclass makefixedtab" sx={{ height: "100%" }}>
+      {/* <ResultsBanner banners={banners}/> */}
 
       <Grid sx={{ height: "100%" }} >
         <Tabs
@@ -95,7 +95,7 @@ export default function NewsJournalTabs(props) {
         >
           <Tab
             className="mui-custom-home mui-custom-new"
-            label={langKey && langKey.news}
+            label={langKey && langKey.news }
             {...a11yProps(0)}
             onClick={() => router.push("/home#newsfeed")}
           />
@@ -106,9 +106,9 @@ export default function NewsJournalTabs(props) {
             onClick={() => router.push("/home#journal")}
           />
         </Tabs>
-        <TabPanel value={value} index={0} position="relative">
-          {/* <FullSilder banners={advertises} /> */}
 
+        <TabPanel value={value} index={0} position="relative">
+        <FullSilder banners={advertises} />
           <AdvertiseSlide advertises={advertises} />
           <MultiTabs categories={categories} lang_id={lang_id} />
         </TabPanel>

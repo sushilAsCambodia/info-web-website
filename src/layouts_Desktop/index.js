@@ -9,7 +9,6 @@ import Head from "next/head";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
-
 const Layout = (props) => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
@@ -22,6 +21,7 @@ const Layout = (props) => {
   useEffect(() => {
     setMounted(true);
   }, []);
+  
   const { t } = useTranslation();
   let { children } = props;
   let title = "";
@@ -134,6 +134,5 @@ const Layout = (props) => {
       </>
     )
   );
-};
-
+};   
 export default Layout;

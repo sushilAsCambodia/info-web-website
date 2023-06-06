@@ -40,7 +40,6 @@ export default function DialogDesktop(props) {
       setBanners([]);
       if(Array.isArray(journalDetail) && journalDetail.length > 0) {
         const item = journalDetail[0];
-        console.log("item",item)
         const images = []; 
         for (let j = 0; j < item.album_slavs.length; j++) {
           const issue = item.album_slavs[j].issue;
@@ -58,8 +57,6 @@ export default function DialogDesktop(props) {
         setBanners(images);
       }
   },[journalDetail]);
-  
-  console.log("banner",banners)
   return (
     <Dialog
       open={drawerOpen}
