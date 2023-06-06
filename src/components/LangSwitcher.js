@@ -139,7 +139,7 @@ export default function LangSwitcher() {
   return (
     <div>
       <Button
-        sx={{backgroundColor:"transparent", border:"0.5px solid #FFFFFF", color:"#fff", padding:"0px", textTransform:"capitalize !important"}}
+        sx={{backgroundColor:"transparent", border:"0.5px solid #FFFFFF",minWidth:"60px", fontSize:"12px", color:"#fff", padding:"0px", textTransform:"capitalize !important"}}
         id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
         aria-haspopup="true"
