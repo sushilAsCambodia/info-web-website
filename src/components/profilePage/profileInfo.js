@@ -110,6 +110,7 @@ export default function ProfileInfo(props) {
         }
       )
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[dispatch,t,setOpenDialog,setResponseMessage]);
   useEffect(()=> {
     if(file) {

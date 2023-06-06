@@ -57,6 +57,7 @@ export default function FieldLanguageSwitcher() {
         }
       ));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[langLabel]);
   return (
     <>

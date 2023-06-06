@@ -104,6 +104,7 @@ const UploadImg = () => {
     ).then(e => {
       console.log(e,'abss');
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[dispatch,t]);
   useEffect(() => {
     if(nickName!='') {
