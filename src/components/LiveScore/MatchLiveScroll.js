@@ -86,9 +86,8 @@ export default function MatchLiveScroll(props) {
                 <Typography variant="body2">2023 Mar 18 00:00</Typography>
               </Grid>
 
-              <Grid item xs={5} textAlign="center">
+              <Grid item xs={5} textAlign="center" className="score-card-logo" container justifyContent="center">
                 <Image
-                  width={50}
                   alt="Dynamo Vladivostok"
                   src={
                     "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
@@ -118,9 +117,8 @@ export default function MatchLiveScroll(props) {
                 </Grid>
               </Grid>
 
-              <Grid item xs={5} textAlign="center">
+              <Grid item xs={5} textAlign="center" className="score-card-logo" container justifyContent="center">
                 <Image
-                  width={50}
                   alt="Dynamo Vladivostok"
                   src={
                     "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"

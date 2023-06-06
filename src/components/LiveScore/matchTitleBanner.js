@@ -42,9 +42,9 @@ const MatchTitleBanner = (props) => {
               <Typography variant="body2">2023  Mar 15, 17:30</Typography>
             </Grid>
             <Grid container item xs={12}>
-              <Grid item xs={3}>
+              <Grid item xs={3} >
                 <Image
-                  width={60}
+                className="team-logo-image"
                   alt="Dynamo Vladivostok"
                   src={
                     "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
@@ -91,7 +91,7 @@ const MatchTitleBanner = (props) => {
 
               <Grid item xs={3}>
                 <Image
-                  width={60}
+                 className="team-logo-image"
                   alt="Dynamo Vladivostok"
                   src={
                     "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"

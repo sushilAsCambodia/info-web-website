@@ -48,7 +48,7 @@ export default function LiveScorePage() {
 
   return (
     <>
-      <TitleBreadCrumbs title={langKey &&  langKey.live_score} />
+      <TitleBreadCrumbs title={langKey?.live_score} />
 
       <Grid height="fit-content">
         <Grid container mb={2} alignItems="center">

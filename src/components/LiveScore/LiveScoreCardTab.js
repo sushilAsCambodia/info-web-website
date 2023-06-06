@@ -76,8 +76,9 @@ export default function LiveScoreCardTab(props) {
   const [value, setValue] = useState(0);
   const { matchData } = props;
 
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -113,14 +114,14 @@ export default function LiveScoreCardTab(props) {
             <HeaderTab
               label={
                 <Typography style={{ fontWeight: "bold" }}>
-                 { langKey && langKey.score_card} 
+                  {langKey && langKey.score_card}
                 </Typography>
               }
             />
             <HeaderTab
               label={
                 <Typography style={{ fontWeight: "bold" }}>
-                  { langKey && langKey.live_video} 
+                  {langKey && langKey.live_video}
                 </Typography>
               }
             />
@@ -165,7 +166,7 @@ export default function LiveScoreCardTab(props) {
                   </Grid>
                   <Grid item xs={4.5}>
                     <Image
-                      width={60}
+                      className="team-logo-image"
                       alt="dynamo_vladivostok"
                       src={
                         "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
@@ -201,7 +202,7 @@ export default function LiveScoreCardTab(props) {
 
                   <Grid item xs={4.5}>
                     <Image
-                      width={60}
+                      className="team-logo-image"
                       alt="dynamo_vladivostok"
                       src={
                         "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
@@ -217,13 +218,19 @@ export default function LiveScoreCardTab(props) {
               <Grid px={5}>
                 <Grid component={Card} container>
                   <Grid container px={1} borderBottom="1px solid #DDDDDD">
-                    <Grid item xs={4} container alignItems="center">
+                    <Grid
+                      item
+                      xs={4}
+                      container
+                      alignItems="center"
+                      className="score-card-logo"
+                    >
                       <Image
                         alt="dynamo_vladivostok"
-                        width={40}
                         src={
                           "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
                         }
+                        
                       />
                       <Grid textAlign="left">
                         <Typography fontWeight="bold">
@@ -245,7 +252,11 @@ export default function LiveScoreCardTab(props) {
                       xs={4}
                       container
                       justifyContent="flex-end"
-                      sx={{alignItems:{xs:"flex-end",lg:"center"},flexDirection: {xs:"column-reverse",lg:"row"}}}
+                      sx={{
+                        alignItems: { xs: "flex-end", lg: "center" },
+                        flexDirection: { xs: "column-reverse", lg: "row" },
+                      }}
+                      className="score-card-logo"
                     >
                       <Grid textAlign="right">
                         <Typography fontWeight="bold">
@@ -254,7 +265,6 @@ export default function LiveScoreCardTab(props) {
                         <Typography>GUEST</Typography>
                       </Grid>
                       <Image
-                        width={40}
                         alt="dynamo_vladivostok"
                         src={
                           "https://i.pinimg.com/originals/9a/70/de/9a70de3e4c7e4d046209036746b4a943.png"
@@ -275,7 +285,7 @@ export default function LiveScoreCardTab(props) {
                       <Chip
                         label={
                           <Typography p={1} fontWeight="bold">
-                          { langKey && langKey.pause} 
+                            {langKey && langKey.pause}
                           </Typography>
                         }
                         className="scoreChip"
@@ -284,7 +294,7 @@ export default function LiveScoreCardTab(props) {
                       <Chip
                         label={
                           <Typography p={1} fontWeight="bold">
-                       { langKey && langKey.foul} 
+                            {langKey && langKey.foul}
                           </Typography>
                         }
                         className="scoreChip"
@@ -383,7 +393,7 @@ export default function LiveScoreCardTab(props) {
                       <Chip
                         label={
                           <Typography p={1} fontWeight="bold">
-                            { langKey && langKey.pause} 
+                            {langKey && langKey.pause}
                           </Typography>
                         }
                         className="scoreChip"
@@ -392,7 +402,7 @@ export default function LiveScoreCardTab(props) {
                       <Chip
                         label={
                           <Typography p={1} fontWeight="bold">
-                           { langKey && langKey.foul} 
+                            {langKey && langKey.foul}
                           </Typography>
                         }
                         className="scoreChip"
