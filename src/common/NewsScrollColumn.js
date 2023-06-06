@@ -42,57 +42,70 @@ export default function NewsScrollColumn(props) {
 
   const dispatch = useDispatch();
   
-  const fetchNewsByCategory = useCallback((categoryId) => {
-    dispatch(
-      getNewsByCategory({
-        params: {
-          lang_id: lang_id,
-          rowsPerPage: 5,
-          shortTitle: "",
-          category_id: categoryId,
-          page: 1,
-        },
-        callback: (res) => {
-          setTimeout(() => {
-            setNewsList(res?.data?.data);
-            setPageLimit(res?.data?.last_page);
-            setLoading(false);
-          }, 3000);
-        },
-      })
-    );
-  },[dispatch,lang_id]);
-  
-  useEffect(() => {
-    setLoading(true);
-    fetchNewsByCategory(newsCategory.id);
-  }, [fetchNewsByCategory,newsCategory.id]);
-
-  const fetchNewsByCategoryNextPage = useCallback((currentPage) => {
+  const fetchNewsByCategory = useCallback((categoryId,currentPage) => {
     dispatch(
       getNewsByCategory({
         params: {
           lang_id: lang_id,
           rowsPerPage: 10,
           shortTitle: "",
-          category_id: newsCategory.id,
+          category_id: categoryId,
           page: currentPage,
         },
         callback: (res) => {
-          setInfiniteLoad(true);
-          setTimeout(() => { 
-            setNewsList(newsList && newsList.concat(res?.data?.data||[]) );
-            setInfiniteLoad(false);
-          }, 2000);
+            // console.log(currentPage,'currentPage')
+            if(currentPage>1) {
+              setInfiniteLoad(true);
+              setTimeout(() => {
+                setNewsList((curr => {
+                  console.log(curr,'curr-abc',curr.concat(res?.data?.data||[]))
+                  return curr.concat(res?.data?.data||[]);
+                }));
+                setLoading(false);
+                setInfiniteLoad(false);
+              },3000)
+            }else {
+              setLoading(false);
+              setNewsList(res?.data?.data);
+              setPageLimit(res?.data?.last_page);
+            }
         },
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[dispatch,lang_id,newsCategory.id]);
+  },[lang_id]);
   useEffect(() => {
-    // NEXT PAGE 
-    fetchNewsByCategoryNextPage(currentPage)
-  }, [fetchNewsByCategoryNextPage,currentPage]);
+    setLoading(true);
+    fetchNewsByCategory(newsCategory.id,currentPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newsCategory.id,currentPage]);
+
+  // const fetchNewsByCategoryNextPage = useCallback((currentPage) => {
+  //   dispatch(
+  //     getNewsByCategory({
+  //       params: {
+  //         lang_id: lang_id,
+  //         rowsPerPage: 10,
+  //         shortTitle: "",
+  //         category_id: newsCategory.id,
+  //         page: currentPage,
+  //         next:'true'
+  //       },
+  //       callback: (res) => {
+  //         setInfiniteLoad(true);
+  //         setTimeout(() => { 
+  //           setNewsList(newsList && newsList.concat(res?.data?.data||[]) );
+  //           setInfiniteLoad(false);
+  //         }, 2000);
+  //       },
+  //     })
+  //   );
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[dispatch,lang_id,newsCategory.id]);
+  // useEffect(() => {
+  //   // NEXT PAGE 
+  //   // fetchNewsByCategoryNextPage(currentPage)
+  // }, [currentPage]);
   
   const bg = ["Mask.png", "Mask2.png", "Mask3.png"];
 
@@ -196,15 +209,8 @@ export default function NewsScrollColumn(props) {
                 }}
                 className="newsColumn"
               >
-                {loading ? (
-                  // <Icon
-                  //   color="white"
-                  //   width={40}
-                  //   paddingbottom="5px"
-                  //   icon="line-md:loading-alt-loop"
-                  // />
-                  <></>
-                ) : newsList && newsList.length > 0 ? (
+                {
+                  newsList && newsList.length > 0 ? (
                   newsList.map((item, index) => {
                     return (
                       <Grid
