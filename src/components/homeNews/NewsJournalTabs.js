@@ -79,7 +79,7 @@ export default function NewsJournalTabs(props) {
     (state) => state && state.load_language && state.load_language.language
   );
   return (
-    <Grid item className="tabclass makefixedtab" sx={{ height: "100%" }}>
+    <Grid item className="tabclass makefixedtab" sx={{ height: "90vh" }}>
       {/* <ResultsBanner banners={banners}/> */}
 
       <Grid sx={{ height: "100%" }} >
