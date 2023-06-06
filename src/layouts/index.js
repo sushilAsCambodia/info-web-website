@@ -102,11 +102,17 @@ const Layout = (props) => {
             } else if (innerpages.includes(router.pathname)) {
                 //let title = router.pathname.replace('/', '').toLowerCase();
                 let title = langKey && langKey[router.pathname.replace('/', '').toLowerCase()];
-                
+                const onNavigate = (r) => {
+                    if(r.pathname === '/login' || r.pathname === '/register' || r.pathname === '/forgotPassword') {
+                       r.push('/home')
+                    }else {
+                        r.back();
+                    }
+                }
                 return <Navigate
                     title={title}
                     lead={<IconButton
-                        onClick={() => router.back()}
+                        onClick={() => onNavigate(router)}
                         size="large"
                         edge="start"
                         color="inherit"

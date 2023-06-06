@@ -41,16 +41,16 @@ export default function Advertisement(props) {
   const { i18n } = useTranslation(); 
   const isH5 = useMediaQuery("(max-width:768px)");
 
-  useEffect(() => {
-    dispatch(getAdvertise(
-      {
-          params: {
-            lang_id: utils.convertLangCodeToID(i18n.language)
-          },
-          callback:(res) => { }
-      }
-    ));
-  }, [i18n.language,dispatch]); 
+  // useEffect(() => {
+  //   dispatch(getAdvertise(
+  //     {
+  //         params: {
+  //           lang_id: utils.convertLangCodeToID(i18n.language)
+  //         },
+  //         callback:(res) => { }
+  //     }
+  //   ));
+  // }, [i18n.language,dispatch]); 
   useEffect(() => {
     let type = 'web';
     if(isH5) type = 'h5';

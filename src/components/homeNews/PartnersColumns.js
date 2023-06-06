@@ -57,16 +57,16 @@ export default function PartnersColumns(props) {
     }
   }, [router.asPath]);
   
-  useEffect(() => {
-    dispatch(getAdvertise(
-      {
-          params: {
-            lang_id: utils.convertLangCodeToID(t.language)
-          },
-          callback:(res) => { }
-      }
-    ));
-  }, [t.language,dispatch]); 
+  // useEffect(() => {
+  //   dispatch(getAdvertise(
+  //     {
+  //         params: {
+  //           lang_id: utils.convertLangCodeToID(t.language)
+  //         },
+  //         callback:(res) => { }
+  //     }
+  //   ));
+  // }, [t.language,dispatch]); 
 
   useEffect(() => {
     setPartners(advertises.filter(b =>b.position == 'partners'));

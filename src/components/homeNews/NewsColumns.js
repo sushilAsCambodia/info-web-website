@@ -24,16 +24,16 @@ export default function NewsColumns(props) {
   const { categories=[] } = useSelector((state) => state.category);
 
 
-  useEffect(() => {
-    dispatch(
-      getCategory({
-        params: { lang_id: lang_id },
-        callback: (res) => {
-          console.log("getCategorys:::", res);
-        },
-      })
-    );
-  }, [dispatch,lang_id]);
+  // useEffect(() => {
+  //   dispatch(
+  //     getCategory({
+  //       params: { lang_id: lang_id },
+  //       callback: (res) => {
+  //         console.log("getCategorys:::", res);
+  //       },
+  //     })
+  //   );
+  // }, [dispatch,lang_id]);
 
   
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
@@ -61,10 +61,8 @@ export default function NewsColumns(props) {
         </Divider>
       </Grid>
       <Grid item xs={12} container justifyContent="center">
-        {categories && categories.length>0 ? categories.map((item,index) => {
-          return (
-          <NewsScrollColumn key={index} newsCategory={item} lang_id={lang_id} />
-          );
+        {categories && categories.length > 0 ? categories.map((item,index) => {
+          return <NewsScrollColumn key={index} newsCategory={item} lang_id={lang_id} />
         }):<Typography component="div"> {langKey && langKey.no_news}</Typography>
       }
       </Grid>
