@@ -27,7 +27,7 @@ import DialogActions from "@mui/material/DialogActions";
 import CloseIcon from "@mui/icons-material/Close";
 import FormHelperText from "@mui/material/FormHelperText";
 import LoadingDialog from "@/components/Loading";
-import { login,register } from "@/store/actions/authActions";
+import { login,registerWithSocial } from "@/store/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -102,29 +102,15 @@ export default function Login(props) {
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   const handleSignup = (info) => {
     setLoading(true);
-    const name = info.name.replace(/\s+/,'_');
-    const password = 'Admin@123';
+    info.name = info.name.replace(/\s+/,'_'); 
     dispatch(
-      register({
-        body: { user_name: name, password: password},
-        callback: (res) => {
-          setLoading(false);
-          const { status_code, message = "" } = res;
-          setResponseMessage(t(message));
-          setOpen(true);
+      registerWithSocial({
+        body: info,
+        callback: (res) => { 
+          const { status_code, message = "" } = res; 
           if ([200, 201, 202, 203].includes(status_code)) {
-            setRegisterSuccess(true);
-            dispatch(
-              login({
-                body: { user_name: name, password: password },
-                callback: (res) => {
-                  const { status_code } = res;
-                  if ([200, 201, 202, 203].includes(status_code)) {
-                    matches ? Router.push("/home") : Router.push("/");
-                  }
-                },
-              })
-            );
+            setLoading(false);
+            matches ? Router.push("/home") : Router.push("/"); 
           }
         },
       })
@@ -138,9 +124,11 @@ export default function Login(props) {
       setRememberMe(true);
     }
     if(session) {
-      // console.log(session,'xxx')
       // setLoading(true);
       // handleSignup(session);
+
+      // console.log(session,'xxx')
+      // setLoading(true);
     }
   },[session]);
   const handleLogin = () => {
