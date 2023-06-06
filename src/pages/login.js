@@ -107,14 +107,15 @@ export default function Login(props) {
       registerWithSocial({
         body: info,
         callback: (res) => { 
-          const { status_code, message = "" } = res; 
-          if ([200, 201, 202, 203].includes(status_code)) {
-            setLoading(false);
-            matches ? Router.push("/home") : Router.push("/"); 
+          if(res) {
+            const { status_code, message = "" } = res; 
+            if ([200, 201, 202, 203].includes(status_code)) {
+              matches ? Router.push("/home") : Router.push("/");  
+            } 
           }
         },
       })
-    );
+    )
   };  
   useEffect(() => {
     setMounted(true);
@@ -124,10 +125,9 @@ export default function Login(props) {
       setRememberMe(true);
     }
     if(session) {
+      // console.log(session,'xxx')
       // setLoading(true);
       // handleSignup(session);
-
-      // console.log(session,'xxx')
       // setLoading(true);
     }
   },[session]);
@@ -380,8 +380,8 @@ export default function Login(props) {
                       {langKey && (langKey.forgot_password || t('forgot_password'))}
                       </Link>
                     </Grid>
-                    
-                    <Grid item container spacing={2} mt={1}>
+                    {/* Social */}
+                    {/* <Grid item container spacing={2} mt={1}>
                       <Grid
                         item
                         xs={12}
@@ -424,8 +424,7 @@ export default function Login(props) {
                       >
                         <Icon icon="flat-color-icons:google" fontSize="35px" />
                       </Link>
-                      {/* <Link underline="none" style={{ cursor: "pointer", color: "#0898D6", padding: "10px" }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link> */}
-                    </Grid>
+                    </Grid> */}
                     
                     <Grid
                       item
@@ -758,8 +757,8 @@ export default function Login(props) {
                           </Button>
                         </Grid>
                       </Grid>
-      
-                      <Grid
+                      {/* Social */}
+                      {/* <Grid
                         item
                         xs={12}
                         container
@@ -796,7 +795,7 @@ export default function Login(props) {
                             <Icon icon="flat-color-icons:google" fontSize="35px" />
                           </Link>
                         </Grid>
-                      </Grid>
+                      </Grid> */}
                       </form>
                     )}
                   </Grid>
