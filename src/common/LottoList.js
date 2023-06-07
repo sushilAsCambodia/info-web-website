@@ -146,9 +146,9 @@ export default function LottoList(props) {
                 {item?.lotterycode}
               </Typography>
             }
-            // subheader={lottoGrid(lottos)}
+            subheader={lottoGrid(lottos)}
           />
-                  {lottoBalls(item.attrs)}
+                  {/* {lottoBalls(item.attrs)} */}
 
         </Card>
       </div>
