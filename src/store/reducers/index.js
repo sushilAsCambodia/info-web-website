@@ -9,6 +9,7 @@ import languageReducer from "./languageReducer";
 import journalReducer from "./journalReducer";
 import feedbackReducer from "./feedbackReducer";
 import customerServiceReducer from "./customerServiceReducer";
+import LotteryReducer from "./lotteryReducer";
 export default  combineReducers({
     banner: bannerReducer,
     category: categoryReducer,
@@ -19,5 +20,6 @@ export default  combineReducers({
     advertise:advertiseReducer,
     feedback:feedbackReducer,
     customer_service:customerServiceReducer,
-    load_language:languageReducer
+    load_language:languageReducer,
+    lottery: LotteryReducer
 });

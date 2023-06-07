@@ -107,14 +107,15 @@ export default function Login(props) {
       registerWithSocial({
         body: info,
         callback: (res) => { 
-          const { status_code, message = "" } = res; 
-          if ([200, 201, 202, 203].includes(status_code)) {
-            setLoading(false);
-            matches ? Router.push("/home") : Router.push("/"); 
+          if(res) {
+            const { status_code, message = "" } = res; 
+            if ([200, 201, 202, 203].includes(status_code)) {
+              matches ? Router.push("/home") : Router.push("/");  
+            } 
           }
         },
       })
-    );
+    )
   };  
   useEffect(() => {
     setMounted(true);
@@ -124,10 +125,9 @@ export default function Login(props) {
       setRememberMe(true);
     }
     if(session) {
+      // console.log(session,'xxx')
       // setLoading(true);
       // handleSignup(session);
-
-      // console.log(session,'xxx')
       // setLoading(true);
     }
   },[session]);
@@ -380,7 +380,7 @@ export default function Login(props) {
                       {langKey && (langKey.forgot_password || t('forgot_password'))}
                       </Link>
                     </Grid>
-                    
+                    {/* Social */}
                     {/* <Grid item container spacing={2} mt={1}>
                       <Grid
                         item
@@ -758,7 +758,7 @@ export default function Login(props) {
                           </Button>
                         </Grid>
                       </Grid>
-      
+                      {/* Social */}
                       {/* <Grid
                         item
                         xs={12}
