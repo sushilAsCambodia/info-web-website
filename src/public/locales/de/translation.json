@@ -109,7 +109,7 @@
     "password_must_contain_at_least_one_digit":"Password must contain at least one Digit.Ch",
     "password_must_contain_at_least_one_special_symbol": "Password must contain at least one Special Symbol.Ch",
     "account_deleted": "Account deleted ch",
-    "account_deactivated": "Account deactivated ch",
+    "account_deactivated": "账号异常，请联系客服！",
     "customer_service":"Customer service ch",
     "current_password_not_match":"Current password not matching-ch",
     "copy_right":"Copyright © 1996-2021 KK Corporation, All Rights Reserved ch",

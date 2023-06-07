@@ -109,7 +109,7 @@
     "password_must_contain_at_least_one_digit":"ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់មួយខ្ទង់។",
     "password_must_contain_at_least_one_special_symbol": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់និមិត្តសញ្ញាពិសេសមួយ។",
     "account_deleted": "គណនីត្រូវបានលុប",
-    "account_deactivated": "គណនីបិទដំណើរការ",
+    "account_deactivated": "គណនីអ្នកមិនប្រក្រតីទេ សូមទាក់ទងសេវាបម្រើអតិថិជន!",
     "customer_service":"ផ្នែកបំរើរអតិធិជន",
     "current_password_not_match":"Current password not matching-kh",
     "copy_right":"Copyright © 1996-2021 KK Corporation, All Rights Reserved kh",
