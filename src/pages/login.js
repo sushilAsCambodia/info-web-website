@@ -322,9 +322,9 @@ export default function Login(props) {
                                 edge="end"
                               >
                                 {showPassword ? (
-                                  <Icon icon="ri:eye-close-fill" color="#F26522" />
-                                ) : (
                                   <Icon icon="ph:eye-bold" color="#F26522" />
+                                ) : (
+                                  <Icon  icon="ri:eye-close-fill" color="#F26522" />
                                 )}
                               </IconButton>
                             </InputAdornment>
@@ -353,7 +353,7 @@ export default function Login(props) {
                           }}
                           onClick={onSubmit}
                         >
-                         {langKey && (langKey.login || t('login'))}
+                         {langKey && (langKey.login || t('login'))} 
                         </Button>
                       </Grid>
                     </Grid>
@@ -381,7 +381,7 @@ export default function Login(props) {
                       </Link>
                     </Grid>
                     
-                    <Grid item container spacing={2} mt={1}>
+                    {/* <Grid item container spacing={2} mt={1}>
                       <Grid
                         item
                         xs={12}
@@ -390,42 +390,42 @@ export default function Login(props) {
                       >
                         <Typography>{langKey && (langKey.login_via || t('login_via'))}</Typography>
                       </Grid>
-                    </Grid>
+                    </Grid> */}
                     
-                    <Grid
-                      item
-                      sm={12}
-                      container
-                      sx={{
-                        cursor: "pointer",
-                        color: "#8C8C8C",
-                        fontSize: { xs: "13px", sm: "inerited" },
-                        justifyContent: { xs: "center", sm: "center" },
-                      }}
-                      underline="none"
-                    >
-                      <Link
-                        underline="none"
-                        style={{
+                      {/* <Grid
+                        item
+                        sm={12}
+                        container
+                        sx={{
                           cursor: "pointer",
-                          color: "#013B91",
-                          padding: "10px",
+                          color: "#8C8C8C",
+                          fontSize: { xs: "13px", sm: "inerited" },
+                          justifyContent: { xs: "center", sm: "center" },
                         }}
-                      >
-                        <Icon icon="ic:baseline-facebook" fontSize="35px" />
-                      </Link>
-                      <Link
                         underline="none"
-                        style={{
-                          cursor: "pointer",
-                          color: "#00C2FF",
-                          padding: "10px",
-                        }}
                       >
-                        <Icon icon="flat-color-icons:google" fontSize="35px" />
-                      </Link>
-                      {/* <Link underline="none" style={{ cursor: "pointer", color: "#0898D6", padding: "10px" }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link> */}
-                    </Grid>
+                        <Link
+                          underline="none"
+                          style={{
+                            cursor: "pointer",
+                            color: "#013B91",
+                            padding: "10px",
+                          }}
+                        >
+                          <Icon icon="ic:baseline-facebook" fontSize="35px" />
+                        </Link>
+                        <Link
+                          underline="none"
+                          style={{
+                            cursor: "pointer",
+                            color: "#00C2FF",
+                            padding: "10px",
+                          }}
+                        >
+                          <Icon icon="flat-color-icons:google" fontSize="35px" />
+                        </Link>
+                        <Link underline="none" style={{ cursor: "pointer", color: "#0898D6", padding: "10px" }} ><Icon icon="entypo-social:linkedin-with-circle" fontSize="35px" /></Link>
+                      </Grid> */}
                     
                     <Grid
                       item
@@ -692,9 +692,9 @@ export default function Login(props) {
                                   edge="end"
                                 >
                                   {showPassword ? (
-                                    <Icon icon="ri:eye-close-fill" color="#F26522" />
-                                  ) : (
                                     <Icon icon="ph:eye-bold" color="#F26522" />
+                                  ) : (
+                                    <Icon  icon="ri:eye-close-fill" color="#F26522" />
                                   )}
                                 </IconButton>
                               </InputAdornment>
@@ -759,7 +759,7 @@ export default function Login(props) {
                         </Grid>
                       </Grid>
       
-                      <Grid
+                      {/* <Grid
                         item
                         xs={12}
                         container
@@ -796,7 +796,7 @@ export default function Login(props) {
                             <Icon icon="flat-color-icons:google" fontSize="35px" />
                           </Link>
                         </Grid>
-                      </Grid>
+                      </Grid> */}
                       </form>
                     )}
                   </Grid>

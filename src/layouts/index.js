@@ -25,25 +25,25 @@ const Layout = (props) => {
     useEffect(() => {
         setMounted(true);
     }, []);
-    // useEffect(() => {
-    //     if(i18n.language) {
-    //         if(i18n.language == 'kh') {
-    //             document.documentElement.setAttribute('lang',i18n.language);
-    //         }
-    //     }
-    //     dispatch(getLanguage(
-    //         {
-    //             params: {
-    //                 lang_id: utils.convertLangCodeToID(i18n.language)
-    //             },
-    //             callback:(res) => {
-    // // console.log("resres",res)
-    // localStorage.setItem('languageKey', JSON.stringify(res))
+    useEffect(() => {
+        if(i18n.language) {
+            if(i18n.language == 'kh') {
+                document.documentElement.setAttribute('lang',i18n.language);
+            }
+        }
+        dispatch(getLanguage(
+            {
+                params: {
+                    lang_id: utils.convertLangCodeToID(i18n.language)
+                },
+                callback:(res) => {
+    // console.log("resres",res)
+    localStorage.setItem('languageKey', JSON.stringify(res))
     
-    //              }
-    //         }
-    //     ));
-    // },[dispatch,i18n.language])
+                 }
+            }
+        ));
+    },[dispatch,i18n.language])
     let { children } = props;  
     let title = '';
     const pages = [

@@ -417,7 +417,7 @@ export default function ProfileInfo(props) {
                     // onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                    {showCurrentPassword ?  <Visibility /> : <VisibilityOff /> }
                   </IconButton>
                 </InputAdornment>
               }
@@ -457,7 +457,7 @@ export default function ProfileInfo(props) {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
@@ -498,7 +498,7 @@ export default function ProfileInfo(props) {
                     edge="end"
                     style={{paddingRight:"11px"}}
                   >
-                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
