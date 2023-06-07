@@ -179,16 +179,23 @@ export default function Register() {
   };
   const onChangeUserName = (e) => {
     const userName = e.target.value.replace(/\s+/g,'');
+    const regex = /^[A-Za-z0-9]+$/;
+    const validateUsername = regex.test(e.target.value);
     if (userName != "" && userName.length < minLength) {
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && (langKey.validate_user_name || t('validate_user_name')));
-    }else if(userName == ''){
+    }
+    else if(userName == ''){
       setErrorUserName(true);
       setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
     } else {
-      setErrorUserName(false);
+      if(!validateUsername){
+        setErrorUserName(true);
+        setErrorUserNameMessage(langKey && (langKey.username_wrong_format || t('username_wrong_format')));
+      }else{
+        setErrorUserName(false);
+      }
     }
-
     setUserName(userName);
   };
   const onChangePassword = (e) => {
@@ -284,7 +291,7 @@ export default function Register() {
             >
               <Grid item xs={12} sm={12} mb={3}>
                 <Typography fontWeight="bold" pb={1}>
-               {langKey && (langKey.user_name || t('user_name'))}
+               {langKey && (langKey.user_name || t('user_name'))} 
                 </Typography>
 
                 <FormControl
@@ -661,7 +668,7 @@ export default function Register() {
                       }}
                     >
                       <InputLabel htmlFor="component-outlined" shrink>
-                        {langKey && (langKey.user_name || t('user_name'))}
+                        {langKey && (langKey.user_name || t('user_name'))}  
                       </InputLabel>
                       <OutlinedInput
                         name="Username"

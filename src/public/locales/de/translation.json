@@ -4,6 +4,7 @@
     "match":"匹配",
     "profile":"轮廓",
     "user_name_required":"用户名是必需的",
+    "username_wrong_format":"账号格式错误",
     "nick_name_required":"Nick name is required",
     "validate_nick_name":"Nick name is 4-16 letters or numbers",
     "user_name_unique":"该账号已存在，请登录",
