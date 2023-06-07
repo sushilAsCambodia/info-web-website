@@ -318,7 +318,7 @@ const UploadImg = () => {
           <ListItem disablePadding>
               <Grid item xs={12} sm={12}>
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                {langKey?.confirm_current_password}
+                {langKey?.current_password}
                 </Typography>
                 <FormControl
                   variant="outlined"
@@ -330,7 +330,7 @@ const UploadImg = () => {
                 >
                   <OutlinedInput
                     name="password"
-                    placeholder={langKey?.confirm_current_password}
+                    placeholder={langKey?.current_password}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-password"
                     type={showCurrentPassword ? 'text' : 'password'}
@@ -345,7 +345,7 @@ const UploadImg = () => {
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                          {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                          {showCurrentPassword ? <Visibility /> :  <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
                     }
@@ -358,7 +358,7 @@ const UploadImg = () => {
             <ListItem disablePadding>
               <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                {langKey && langKey.password}
+                {langKey && langKey.new_password}
                 </Typography>
                 <FormControl
                   variant="outlined"
@@ -370,7 +370,7 @@ const UploadImg = () => {
                 >
                   <OutlinedInput
                     name="password"
-                    placeholder={langKey && langKey.password}
+                    placeholder={langKey && langKey.new_password}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-password"
                     type={showPassword ? 'text' : 'password'}
@@ -385,7 +385,7 @@ const UploadImg = () => {
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                          {showPassword ? <Visibility /> :  <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
                     }
@@ -397,7 +397,7 @@ const UploadImg = () => {
             <ListItem disablePadding sx={{ paddingBottom: "10px" }}>
               <Grid item xs={12} sm={12} >
                 <Typography fontWeight="bold" pb={1} textAlign="left">
-                {langKey && langKey.confirm_password}
+                {langKey && langKey.confirm_new_password}
                 </Typography>
                 <FormControl
                   variant="outlined"
@@ -409,7 +409,7 @@ const UploadImg = () => {
                   <OutlinedInput
                     sx={{ paddingRight: "10px" }}
                     name="confirm_password"
-                    placeholder={langKey && langKey.confirm_password}
+                    placeholder={langKey && langKey.confirm_new_password}
                     inputProps={{ maxLength: 16 }}
                     id="outlined-adornment-confirmpassword"
                     type={showConfirmPassword ? 'text' : 'password'}
@@ -424,7 +424,7 @@ const UploadImg = () => {
                           onMouseDown={handleMouseDownConfirmPassword}
                           edge="end"
                         >
-                          {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                          {showConfirmPassword ? <Visibility /> :  <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
                     }

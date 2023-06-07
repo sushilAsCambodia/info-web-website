@@ -4,6 +4,7 @@
     "match":"ការប្រកួត",
     "profile":"ប្រវត្តិរូប",
     "user_name_required":"ឈ្មោះត្រូវបានទាមទារ",
+    "username_wrong_format":"Username wrong format-kh",
     "nick_name_required":"ឈ្មោះក្រៅត្រូវបានទាមទារ",
     "validate_nick_name":"ឈ្មោះក្រៅគឺ ៤-១៦ អក្សរ ឬលេខ",
     "user_not_registered":"អ្នកប្រើប្រាស់មិនទាន់បានចុះឈ្មោះ",
