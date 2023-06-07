@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import { Chip, Divider, Grid, Link, Skeleton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Card,
   CardHeader,
@@ -15,6 +15,7 @@ import FullSilder from "./FullSilder";
 import LottoList from "@/common/LottoList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import AnnouncementItem from "@/common/AnnouncementItem";
+import { getLatestLottery } from "@/store/actions/lotteryActions";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -57,9 +58,18 @@ export default function ResultsBanner(props) {
   const matches = useMediaQuery("(max-width:1199px)");
   const matches2 = useMediaQuery("(max-width:768px)");
 
+  const dispatch = useDispatch();
+
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
-  ); 
+  );
+  const { latest } = useSelector((state) => state.lottery);
+
+  useEffect(() => {
+    dispatch(
+      getLatestLottery("hey")
+    );
+  }, []);
   return (
     <>
       <Grid
@@ -78,7 +88,7 @@ export default function ResultsBanner(props) {
           xl={2.5}
           border={{ xs: "0px solid #ddd", md: "1px solid #ddd" }}
           borderRadius="2px"
-          height={`${matches2 ? "120px":"" }`}
+          height={`${matches2 ? "120px" : ""}`}
         >
           <Typography px={1.5} mb={1}>
             {" "}
@@ -89,12 +99,13 @@ export default function ResultsBanner(props) {
             className={matches ? "verticleLotto" : "horizontalLotto"}
             px={1}
           >
-            <LottoList />
-            <LottoList />
-            <LottoList />
-            <LottoList />
-            <LottoList />
-            <LottoList />
+            {latest?.MOLHC?.map((item, index) => {
+              return (
+                <>
+                  <LottoList item={item}/>
+                </>
+              );
+            })}
           </Grid>
         </Grid>
 
@@ -114,7 +125,7 @@ export default function ResultsBanner(props) {
             height="100%"
             container
             alignItems="space-between"
-          > 
+          >
             <MiddleShow />
           </Grid>
         </Grid>

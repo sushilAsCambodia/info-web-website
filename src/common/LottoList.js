@@ -26,9 +26,7 @@ const settings = {
   centerMode: false,
 };
 export function lottoGrid(lottos) {
-  const bgColor = (index, length, lotto) => {
-    if (lotto == 11) return "red";
-  };
+  
 
   return (
     <>
@@ -54,11 +52,42 @@ export function lottoGrid(lottos) {
     </>
   );
 }
+export function lottoBalls(lottos) {
+  return (
+    <>
+      <Grid
+        container
+        width="max-content"
+        borderRadius="10px"
+        p={1}
+      >
+        {lottos?.map((item, index) => {
+          return (
+            <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
+              key={index}
+              mx={0.2}
+              sx={{background:item.color,width:'30px',height:'30px',borderRadius:'20px'}}
+            >
+              <Grid
+              container
+              justifyContent="center"
+              alignItems="center" sx={{width:'20px',height:'20px',background:'white',borderRadius:'20px'}}>
+             <Typography fontSize='12px'>{item.num}</Typography> </Grid>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </>
+  );
+}
 export default function LottoList(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { catId = [], lang_id = [], news = [] } = props;
+  const { item } = props;
 
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
@@ -88,7 +117,7 @@ export default function LottoList(props) {
             sx={{ fontSize: "15px", borderBottom: "1px solid #ddd" }}
             px={1}
           >
-          2023 Mar 29, Monday
+          {item?.opendate}
           </Grid>
           <CardHeader
             sx={{ padding: "10px" }}
@@ -114,11 +143,13 @@ export default function LottoList(props) {
             }
             title={
               <Typography fontSize="13px" fontWeight="bold">
-                Super Lotto
+                {item?.lotterycode}
               </Typography>
             }
-            subheader={lottoGrid(lottos)}
+            // subheader={lottoGrid(lottos)}
           />
+                  {lottoBalls(item.attrs)}
+
         </Card>
       </div>
     </>
