@@ -386,7 +386,7 @@ export default function Register() {
                 </Grid>
               </Grid>
 
-              <Grid item container spacing={2} mt={1}>
+              {/* <Grid item container spacing={2} mt={1}>
                 <Grid
                   item
                   xs={12}
@@ -428,7 +428,7 @@ export default function Register() {
                 >
                   <Icon icon="flat-color-icons:google" fontSize="35px" />
                 </Link>
-              </Grid>
+              </Grid> */}
               <Grid
                 item
                 sm={12}
@@ -824,7 +824,7 @@ export default function Register() {
                     </Grid>
                   </Grid>
 
-                  <Grid
+                  {/* <Grid
                     item
                     xs={12}
                     container
@@ -859,7 +859,7 @@ export default function Register() {
                         <Icon icon="flat-color-icons:google" fontSize="35px" />
                       </Link>
                     </Grid>
-                  </Grid>
+                  </Grid> */}
                 </form>
               )}
             </Grid>

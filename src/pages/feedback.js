@@ -45,7 +45,7 @@ const Feedback = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const onChangeContent = (e) => {
     setDisabled(false);
-    if(e.target.value.length <= 140) {
+    if(e.target.value.length <= 500) {
       setContent(e.target.value)
       if(e.target.value != '') {
         setErrorContent(false);

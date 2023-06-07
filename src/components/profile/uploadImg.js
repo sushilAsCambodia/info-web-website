@@ -31,7 +31,9 @@ const ImgUpload = ({
   return (
     <label htmlFor="photo-upload" className="custom-file-upload fas">
       <div className="img-wrap img-upload" >
-        {src && <Image alt="photo_upload" htmlFor="photo-upload" src={src} />} 
+        {src ? <Image alt="photo_upload" htmlFor="photo-upload" src={src} /> : 
+        <Image alt="photo_default_upload" src="/assets/Profile/profile_upload.png" /> 
+      } 
       </div>
       <input id="photo-upload" type="file" onChange={onChange} />
     </label>
@@ -251,7 +253,7 @@ const UploadImg = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowCurrentPassword = () => setShowCurrentPassword((show) => !show);
-
+  
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };

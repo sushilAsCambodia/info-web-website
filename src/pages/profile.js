@@ -549,7 +549,7 @@ function TabPanel(props) {
                                 {langKey && langKey.logout}
                               </Typography>
                             </Grid>
-                            <Grid
+                            {/* <Grid
                               item
                               display="flex"
                               alignItems="center"
@@ -559,7 +559,7 @@ function TabPanel(props) {
                                 icon="material-symbols:keyboard-arrow-right"
                                 fontSize="25px"
                               />
-                            </Grid>
+                            </Grid> */}
                           </Grid>
                         </Grid>
                       </Grid>
