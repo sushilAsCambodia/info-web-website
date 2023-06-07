@@ -40,12 +40,26 @@ const AuthReducer = (state = initialState, action) => {
         status: 'pending',
       };
     case 'customers/register/fulfilled':
-      return {
+      const initState = {
         ...state,
         loading: false,
         isLogin: false,
         status: 'completed',
       };
+      if(action.payload) {
+        const data = action.payload?.data || {};
+        if(Object.keys(data).length > 0) {
+          const c = data?.customer;
+          const t = data?.token || '';
+          if(Object.keys(c).length) {
+            Cookies.set(utils.tokenKey,t);
+            window.localStorage.setItem('customer', JSON.stringify((c)));
+            initState.customer = c;
+            initState.isLogin = true;
+          }
+        }
+      }
+      return initState;
     // end register block
 
     // logout block

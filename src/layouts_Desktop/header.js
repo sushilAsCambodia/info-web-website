@@ -18,6 +18,7 @@ import HeaderLiveScore from "@/components/header/headerLiveScore";
 import Link from "next/link";
 import utils from "@/common/utils";
 import Image from "mui-image";
+// import { signOut } from "next-auth/react";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const matches2 = useMediaQuery("(max-width:1074px)");
@@ -45,6 +46,8 @@ const Header = () => {
     dispatch(
       logout({
         callback: (res) => {
+          // signOut(); // third party will refresh the page
+          // use this without social login 
           router.push("/login");
         },
         auth: true,
