@@ -117,7 +117,8 @@ export default function LottoList(props) {
             sx={{ fontSize: "15px", borderBottom: "1px solid #ddd" }}
             px={1}
           >
-          {item?.opendate}
+          {/* {item?.opendate} */}
+          2023-06-01 21:30:00
           </Grid>
           <CardHeader
             sx={{ padding: "10px" }}
@@ -143,7 +144,8 @@ export default function LottoList(props) {
             }
             title={
               <Typography fontSize="13px" fontWeight="bold">
-                {item?.lotterycode}
+                {/* {item?.lotterycode} */}
+                MOLHC
               </Typography>
             }
             subheader={lottoGrid(lottos)}

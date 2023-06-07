@@ -99,13 +99,20 @@ export default function ResultsBanner(props) {
             className={matches ? "verticleLotto" : "horizontalLotto"}
             px={1}
           >
-            {latest?.MOLHC?.map((item, index) => {
+             <LottoList />
+             <LottoList />
+             <LottoList />
+             <LottoList />
+             <LottoList />
+             <LottoList />
+             <LottoList />
+            {/* {latest?.MOLHC?.map((item, index) => {
               return (
                 <>
                   <LottoList item={item}/>
                 </>
               );
-            })}
+            })} */}
           </Grid>
         </Grid>
 
