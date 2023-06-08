@@ -127,7 +127,7 @@ a {
 .mui-home-tab-wrapper .MuiButtonBase-root.Mui-selected{
   background: linear-gradient(90deg, #FF0000 0%, #FF6E31 100%);
   border-radius: 30px;
-  color: #fff;
+  color: #fff !important;
 
 }
 .tabclass .css-19kntty-MuiPaper-root-MuiAppBar-root{
@@ -146,7 +146,8 @@ a {
 font-size: 12px;
 line-height: 18px;
 padding: 0px;
-  
+color:#8C8C8C !important;
+
 }
 .mui-home-tab-wrapper .MuiTabs-indicator{
   height: 0;
