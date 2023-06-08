@@ -64,6 +64,7 @@ const UploadImg = () => {
   const [responseMessage, setResponseMessage] = useState('');
   const [textAction, setTextAction] = useState('save');
   const [openDialog, setOpenDialog] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(true);
   const [file, setFile] = useState(undefined);
 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
@@ -146,7 +147,7 @@ const UploadImg = () => {
   }, [customer]); 
   const onChangeCurrentPassword = (e) => {
     setCurrentPassword(e.target.value);
-    if(e.target.value){
+    if(e.target.value) {
       setErrorCurrentPassword(false)
       setErrorCurrentPasswordMessage('')
     }
@@ -265,7 +266,13 @@ const UploadImg = () => {
   const handleMouseDownConfirmPassword = (event) => {
     event.preventDefault();
   };
-
+  useEffect(() => {
+    if((currentPassword!='' && confirmpassword!='' && password!='') && (!errorPassword && !errorCurrentPassword && !errorConfirmPassword)) {
+      setDisableSubmit(false)
+    }else {
+      setDisableSubmit(true)
+    }
+  },[currentPassword,password,confirmpassword,errorCurrentPassword,errorPassword,errorConfirmPassword])
   const list = (anchor) => (
     <Box sx={{ width: anchor === 'bottom' ? 'auto' : 250 }} role="presentation">
       <Typography className="drawerline"></Typography>
@@ -329,10 +336,10 @@ const UploadImg = () => {
                   }}
                 >
                   <OutlinedInput
-                    name="password"
+                    name="current_password"
                     placeholder={langKey?.current_password}
                     inputProps={{ maxLength: 16 }}
-                    id="outlined-adornment-password"
+                    id="outlined-adornment-current-password"
                     type={showCurrentPassword ? 'text' : 'password'}
                     value={currentPassword}
                     onChange={onChangeCurrentPassword}
@@ -440,6 +447,7 @@ const UploadImg = () => {
                 <Button
                   fullWidth
                   variant="contained"
+                  disabled={disableSubmit}
                   sx={{
                     color: "white",
                     background:
