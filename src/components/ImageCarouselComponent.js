@@ -38,7 +38,7 @@ const ImageCarouselComponent = (props) => {
         <style>
         {
             ` 
-            .carouselcard  {
+            .custom-original-mobile-wrapper  {
                 padding: 10px 15px 0 15px 
             }
             .custom-original-mobile-wrapper .image-gallery-thumbnails-wrapper .image-gallery-thumbnail{
