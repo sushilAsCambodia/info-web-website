@@ -91,7 +91,7 @@ export default function NewsJournalTabs(props) {
           variant="fullWidth"
           aria-label="full width tabs example"
           className="mui-home-tab-wrapper "
-          sx={{ background:"white",paddingTop:"10px" }}
+          sx={{ background:"white",paddingTop:"7px", minHeight:"auto" }}
         >
           <Tab
             className="mui-custom-home mui-custom-new"

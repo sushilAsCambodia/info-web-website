@@ -65,7 +65,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
   ) : (
     <Container
       sx={{
-        backgroundImage: 'url("./assets/Home/landingpagebg3.jpg")',
+        backgroundImage: 'url("./assets/Home/homebg1.png")',
         position: "relative",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -75,11 +75,11 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
     >
       <Grid container justifyContent="center" pt={5}>
         <Grid item xs={12} sm={12} md={12} xl={12}>
-          <Grid item textAlign="center" p={1} maxWidth="300px" width="100%" margin="auto">
-          <Typography fontWeight={500} fontSize="24px" lineHeight="36px" color="#fff">
+          <Grid item textAlign="center" p={1}  >
+          <Typography fontWeight={500} fontSize="24px" maxWidth="260px" width="100%" margin="auto" lineHeight="36px" color="#fff">
               {langKey && langKey.wonderful_information_in_the_palm_of  ||'Wonderful information in the palm of' }
           </Typography>
-          <Typography fontWeight={700} fontSize="39px" style={{textShadow:"0px 3px 1px rgba(0, 0, 0, 0.4)"}} lineHeight="58px" textTransform="uppercase" color="#fff">
+          <Typography fontWeight={800} fontSize="39px" style={{textShadow:"0px 3px 1px rgba(0, 0, 0, 0.4)"}} lineHeight="58px" textTransform="uppercase" color="#fff">
               {langKey && langKey.your_hand  ||'YOUR HAND' }
           </Typography>
           </Grid>
