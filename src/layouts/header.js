@@ -8,7 +8,7 @@ import LangSwitcher from '@/components/LangSwitcher';
 import Image from 'mui-image';
 const Header = () => {   
   return (
-    <AppBar position="static" style={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)',minHeight: '56px', justifyContent:'center'}} >
+    <AppBar position="static" style={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)',height: '40px', justifyContent:'center'}} >
       <Container maxWidth={false}>
         <Toolbar disableGutters>
           <Typography
@@ -27,7 +27,7 @@ const Header = () => {
               color: 'inherit',
               textDecoration: 'none',
             }}>
-            <Image src="./assets/Logo/logo-infoweb.png" width="120px" height="100%" alt='logo-infoweb' />
+            <Image src="./assets/Logo/new-logo.png" width="120px" height="100%" alt='logo-infoweb' />
           </Typography> 
           <Box sx={{ alignItems:'center' }}>
             <LangSwitcher/>

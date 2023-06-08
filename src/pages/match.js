@@ -76,7 +76,7 @@ export default function Match() {
             borderBottom: 1,
             borderColor: "divider",
             position: "fixed",
-            top: 56,
+            top: 40,
             width: "100%",
             background: "#fff",
             zIndex: 9,
