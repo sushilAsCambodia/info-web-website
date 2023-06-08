@@ -46,7 +46,7 @@ export default function JournalsColumns(props) {
   useEffect(() => {
     dispatch(getJournal(
       {
-        params: {lang_id: lang_id, take: 10},
+        params: {lang_id: lang_id, take: 60},
         callback:(res) => { }
       }
     ));
