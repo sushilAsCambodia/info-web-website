@@ -40,7 +40,7 @@ export default function JournalCardDetails() {
     }
   }, [journalDetail]);
   return (
-    <Grid container item textAlign="left" p={1} sx={{ height: '100%', alignItems: images.length ? 'auto' : 'center' }}>
+    <Grid container item textAlign="left" p={0} sx={{ height: '100%', alignItems: images.length ? 'auto' : 'center' }}>
       <Grid item xs={12}>
         {loadingJournalDetail ? <DataLoading /> : <ImageCarouselComponent images={images} />}
       </Grid>
