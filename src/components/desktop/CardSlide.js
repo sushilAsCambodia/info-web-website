@@ -16,11 +16,10 @@ export default function CardSlice(props) {
         <>
             {
                 (image && Object.keys(image).length) &&
-                <Paper sx={{ margin: '5px' }}>
-                    <Card sx={{ display: 'flex', width: 248, height: 90.54, padding: '7px' }}>
+                <Paper sx={{ margin: '5px' }} elevation={0}  >
+                    <Card sx={{ display: 'flex', width: 248, height: 90.54, padding: '7px',boxShadow:'inherit',border:'1px solid #ddd' }}>
                         <CardMedia
-                            component="img"
-                            sx={{ width: 106.88, height: 77.82 }}
+                            component="img" 
                             image={image.original}
                             draggable="false"
                         />
@@ -57,6 +56,13 @@ export default function CardSlice(props) {
             <style>
                 {
                     `
+                        .custom-original-wrapper .image-gallery-thumbnail{
+                            width: 248px;
+                            height: 90.54px;
+                        }
+                        .custom-original-wrapper .image-gallery-thumbnails{
+                            overflow:inherit
+                        }
                         .card-desktop-slice > .MuiButtonBase-root:first-child{
                             position: absolute;
                             top: 50%;

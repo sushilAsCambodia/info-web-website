@@ -29,7 +29,7 @@ const ImageCarouselComponent = (props) => {
                 return <CardSlice image={e} year={year}/>
             } : null}
             thumbnailPosition="bottom"
-            additionalClass={isWeb?"custom-original-wrapper image-gallery-bottom-left":"image-gallery-bottom-left"} 
+            additionalClass={isWeb?"custom-original-wrapper image-gallery-bottom-left":"image-gallery-bottom-left custom-original-mobile-wrapper"} 
             infinite={true} 
             slideWidth="400"
             slideHeight="400"
@@ -41,9 +41,9 @@ const ImageCarouselComponent = (props) => {
             .carouselcard  {
                 padding: 10px 15px 0 15px 
             }
-            .image-gallery-thumbnails-wrapper .image-gallery-thumbnail{
+            .custom-original-mobile-wrapper .image-gallery-thumbnails-wrapper .image-gallery-thumbnail{
                 height:55px;
-                width:55px !important;
+                width:19% !important;
             }
             @media (max-width: 320px) {
                 .image-gallery-thumbnail {
@@ -55,7 +55,7 @@ const ImageCarouselComponent = (props) => {
                 height:100%;
             }
             .image-gallery-thumbnail+.image-gallery-thumbnail{
-                margin-left: 3px;
+                margin-left: 4px;
             }
             .image-gallery-thumbnail .image-gallery-thumbnail-inner {
                 height:100% !important;
