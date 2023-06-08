@@ -50,7 +50,7 @@ const NewsCardDetails = () => {
                                 overflow="auto">
                                 <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                                     <Grid item xs={12} paddingTop="21px">
-                                        <Typography fontWeight='500' lineHeight="16px"  fontSize="14px" color="#000000">
+                                        <Typography fontWeight='550' lineHeight="16px"  fontSize="14px" color="#000000">
                                             {newsDetail.title || ''}
                                         </Typography>
                                         <Typography color="#8C8C8C" paddingTop="11px" lineHeight="14px" fontSize="12px">{moment(newsDetail.created_at).format(utils.formatDate)}</Typography>
@@ -61,7 +61,7 @@ const NewsCardDetails = () => {
                                             onError={(e) => e.target.src = '/assets/no-image.png'}
                                             alt={newsDetail.title || ''}
                                             width="100%" 
-                                            height="189px" 
+                                            height="200px" 
                                             objectFit="fill !important"
                                             style={{objectFit:"fill !important", borderRadius:'6px'}}
                                         />
