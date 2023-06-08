@@ -4,6 +4,7 @@ import {
 } from "@mui/material";
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { styled } from '@mui/material/styles';
 import PropTypes from "prop-types";
 import DataTabComponent from "./DataTabComponent";
 function TabPanel(props) {
@@ -31,6 +32,10 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
+const AntTabs = styled(Tabs)({
+  borderBottom: '1px solid #e8e8e8',
+  
+});
 export default function MultiTabs(props) {
   const { categories,lang_id } = props;
   const [value, setValue] = useState(0); 
@@ -57,7 +62,7 @@ export default function MultiTabs(props) {
       <Grid item xs={12}>
         <Grid container >
           <Grid item xs={12} justifyContent="center" sx={{background:"white", }}  >
-            <Tabs 
+            <AntTabs 
             id="news-multiTabs"
               value={value}
               onChange={handleChange}
@@ -66,14 +71,16 @@ export default function MultiTabs(props) {
               aria-label="visible arrows tabs example"
               sx={{
                 [`& .${tabsClasses.scrollButtons}`]: {
-                  '&.Mui-disabled': { opacity: 0.3 },
+                  '&.Mui-disabled': { opacity: 0.3, },
                 },
                 '& .MuiTabs-indicator':{
                   background: 'linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)'
                 },
+                // borderBottom: '1px solid #e8e8e8',
+
               }}>
-              { categories.map((category, index) => <Tab  key={index} label={category.translation ? category.translation?.category_name : (category.category_name||'N/A')} />)}
-            </Tabs>
+              { categories.map((category, index) => <Tab id='test' key={index} label={category.translation ? category.translation?.category_name : (category.category_name||'N/A')} />)}
+            </AntTabs>
           
             { categories.map((category,index) => {
                 return (
