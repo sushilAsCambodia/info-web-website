@@ -12,15 +12,18 @@ export default function JournalCard(props) {
     Router.push({ pathname: '/journalCardDetails', query: { album_id, lang_id,title: title} });
   };
   return (
-    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{paddingLeft:'10px',paddingRight:'10px'}}>
+    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{paddingLeft:'10px',  paddingTop:"9px", paddingRight:'12px'}}>
       {journals && journals.length > 0 ?
         journals.map((journal, index) => {
-          return <Grid key={index} item xs={4} sm={4} md={4} lg={4} xl={4} onClick={() => cardDetail(journal.id,journal.album_name)}>
-            <Image
+          return <Grid key={index} item xs={4} paddingLeft="12px !important" paddingTop="14px !important" sm={4} md={4} lg={4} xl={4} className='zxzxzxz'  onClick={() => cardDetail(journal.id,journal.album_name)}>
+            <img
+            
               src={journal.cover_img ? journal.cover_img : null}
               alt={journal.album_name || ''}
               width="100%"
-              style={{ objectFit: 'cover', height: "88.25px", borderRadius: '4px' }}
+              objectFit="fill !important"
+
+              style={{ height: "88.25px", borderRadius: '4px',objectFit:"fill !important" }}
             />
             <Typography fontSize="12px">{journal.album_name || 'N/A'}</Typography>
           </Grid>
@@ -29,3 +32,9 @@ export default function JournalCard(props) {
     </Grid>
   )
 }
+
+
+// display: grid;
+// grid-template-columns: auto auto auto;
+// grid-column-gap: 4px;
+// grid-row-gap: 4px;
