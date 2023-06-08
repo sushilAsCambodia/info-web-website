@@ -242,7 +242,7 @@ export default function NewsScrollColumn(props) {
                           cursor: "pointer",
                         }}
                       >
-                        <Typography textAlign="left">{item.title}</Typography>
+                        <Typography textAlign="left">  {utils.subString(item.title,50)}</Typography>
                         <Typography textAlign="left" fontSize="12px">
                           {moment(item.release_date).format(utils.formatDate)}
                         </Typography>

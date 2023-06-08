@@ -151,7 +151,7 @@ const DataTabComponent = ({id,lang_id}) => {
                                             </Grid> 
                                             <Grid item xs={9}>
                                                 <Grid item sx={{paddingLeft:'5px'}}>
-                                                    <Box fontWeight="400" fontFamily="sans-serif" fontSize="12px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,140)}}></Box>
+                                                    <Box fontWeight="400" fontFamily="sans-serif" fontSize="12px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,100)}}></Box>
                                                     <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="12px !important" whiteSpace="nowrap">
                                                         {moment(sport.created_at).format(utils.formatDate)}
                                                     </Typography>
