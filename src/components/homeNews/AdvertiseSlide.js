@@ -2,6 +2,7 @@ import {useEffect,useState} from 'react';
 import { Grid, Typography } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import utils from '@/common/utils';
 import Link from 'next/link';
 const AdvertiseSlide = (props) => {
     const {advertises = []} = props;
@@ -54,7 +55,8 @@ const AdvertiseSlide = (props) => {
                   <Typography
                     position="absolute"
                     fontSize="10px !important"
-                    bottom="25%"
+                    textTransform="capitalize"
+                    bottom="8%"
                     left="0"
                     right="0"
                     color='white'
@@ -62,7 +64,7 @@ const AdvertiseSlide = (props) => {
                     overflow="hidden"
                     textOverflow="ellipsis"
                   >
-                    {card.title||'N/A'}
+                {utils.subString(card.title||'N/A' ,10)}
                   </Typography>
                   {/* <Typography
                     position="absolute"
