@@ -16,7 +16,7 @@ export default function CardSlice(props) {
         <>
             {
                 (image && Object.keys(image).length) &&
-                <Paper sx={{ margin: '5px' }} elevation={0}  >
+                <Paper elevation={0}>
                     <Card sx={{ display: 'flex', width: 248, height: 90.54, padding: '7px',boxShadow:'inherit',border:'1px solid #ddd' }}>
                         <CardMedia
                             component="img" 

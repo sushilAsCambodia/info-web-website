@@ -38,12 +38,20 @@ const ImageCarouselComponent = (props) => {
         <style>
         {
             ` 
-            .carouselcard  {
+            .custom-original-mobile-wrapper  {
                 padding: 10px 15px 0 15px 
             }
             .custom-original-mobile-wrapper .image-gallery-thumbnails-wrapper .image-gallery-thumbnail{
                 height:55px;
                 width:19% !important;
+            }
+            
+            .custom-original-mobile-wrapper .image-gallery-thumbnail.active {
+                border:3px solid #fb261beb !important;
+                border-radius: 3px;
+            }
+            .custom-original-mobile-wrapper .image-gallery-thumbnail.active img {
+                border-radius: 0px;
             }
             @media (max-width: 320px) {
                 .image-gallery-thumbnail {
