@@ -3,6 +3,7 @@ import { Grid, Typography } from '@mui/material'
 import Router from "next/router";
 import DataLoading from '../DataLoading';
 import { useSelector } from 'react-redux';
+import utils from '@/common/utils';
 import Empty from '../Empty';
 import { Image } from 'mui-image';
 export default function JournalCard(props) {
@@ -25,7 +26,7 @@ export default function JournalCard(props) {
 
               style={{ height: "110.25px", borderRadius: '4px',objectFit:"fill !important" }}
             />
-            <Typography fontSize="12px">{journal.album_name || 'N/A'}</Typography>
+            <Typography fontSize="12px"> {utils.subString(journal.album_name || 'N/A',18)}</Typography>
           </Grid>
         })
         : <Grid mx="auto"> <Typography component="div" sx={{padding:'5px'}}><Empty /></Typography> </Grid>}
