@@ -68,7 +68,7 @@ export default function NewsJournalTabs(props) {
     if (value === 1) {
       dispatch(
         getJournal({
-          params: { lang_id: lang_id, take: 10 },
+          params: { lang_id: lang_id, take: 60 },
           callback: (res) => {},
         })
       );
@@ -90,7 +90,7 @@ export default function NewsJournalTabs(props) {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
-          className="mui-home-tab-wrapper "
+          className={`${router.asPath == '/home#journal' ? "sticky-header":"" } mui-home-tab-wrapper`}
           sx={{ background:"white",paddingTop:"7px", minHeight:"auto" }}
         >
           <Tab
