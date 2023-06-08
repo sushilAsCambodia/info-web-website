@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from './header';
 import Footer from './footer';
 import Container from '@mui/material/Container';
@@ -9,18 +9,21 @@ import { Grid, IconButton } from '@mui/material';
 import Head from 'next/head'
 import { useTranslation } from 'react-i18next'; 
 import {getLanguage} from '../store/actions/languageActions'
+import { logout } from "@/store/actions/authActions";
+import api from '@/services/http';
 import utils from "@/common/utils";
 
 import DrawerComponent from '@/components/drawer'; 
 const Layout = (props) => {
+    const dispatch = useDispatch();
     const router = useRouter();
+    const { customer } = useSelector((state) => state.auth);
     const [mounted, setMounted] = useState(false);
     const [openDrawer, setOpenDrawer] = useState({ 
         open:false,
         anchor:'bottom'
     }); 
     const { t,i18n } = useTranslation();
-    const dispatch = useDispatch();
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
     useEffect(() => {
         setMounted(true);
@@ -65,9 +68,9 @@ const Layout = (props) => {
     ];
     let height = '';
     if (router.pathname != '/') {
-        height = 'calc(100vh - 112px)';
+        height = 'calc(100vh - 96px)';
     } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
-        height = 'calc(100vh - 56px)';
+        height = 'calc(100vh - 40px)';
     }
     const switchHeader = () => { 
         if (router.pathname != '/') {
@@ -186,11 +189,34 @@ const Layout = (props) => {
         default:
             break;
     }
-
-
-   
-
-
+    const handleLogout = useCallback(() => {
+        dispatch(
+            logout({
+            callback: (res) => {
+                // signOut(); // third party will refresh the page
+                // use this without social login 
+                router.push("/login");
+            },
+            auth: true,
+            })
+        );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[dispatch]);
+    useEffect(() => {
+        if (customer && Object.keys(customer).length > 0) {
+            if (!['/login', '/register', '/forgotPassword'].includes(router.pathname)) {
+            api.get(`${utils.adminUrl}/auth/customers/${customer.id}/edit`, {}, true).then((result) => {
+                if (result && (result.status == 200 || result.status == 201)) {
+                const customer = result?.data?.data;
+                if (customer && customer.status == 0) {
+                    handleLogout();
+                }
+                }
+            }).catch((err) => { });
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [router]);
     return mounted && (
         <>
             <Head>

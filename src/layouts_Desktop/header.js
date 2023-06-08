@@ -131,7 +131,7 @@ const Header = () => {
             >
               <Grid item xs={4}>
                 <Link href="/">
-                  <Image src="./assets/Logo/logo-infoweb.png" width="130px" height="100%" alt="info_logo" />
+                  <Image src="./assets/Logo/new-logo.png" width="130px" height="100%" alt="info_logo" />
                 </Link>
               </Grid>
               <Grid

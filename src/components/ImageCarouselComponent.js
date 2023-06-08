@@ -38,22 +38,33 @@ const ImageCarouselComponent = (props) => {
         <style>
         {
             ` 
+            .carouselcard  {
+                padding: 10px 15px 0 15px 
+            }
             .image-gallery-thumbnails-wrapper .image-gallery-thumbnail{
-                width: auto !important;
+                height:55px;
+                width:55px !important;
             }
             @media (max-width: 320px) {
                 .image-gallery-thumbnail {
-                border: 3px solid transparent;
-                width:59px;
+                    border: 3px solid transparent;
+                    width:59px;
                 }
             }
             .image-gallery-slide{
                 height:100%;
             }
-            .image-gallery-thumbnail-image {
-                height:55px;
-                width:55px;
-                object-fit:contain;
+            .image-gallery-thumbnail+.image-gallery-thumbnail{
+                margin-left: 3px;
+            }
+            .image-gallery-thumbnail .image-gallery-thumbnail-inner {
+                height:100% !important;
+                width:100% !important;
+            }
+            .image-gallery-thumbnail-inner > img {
+                height:100% !important;
+                width:100% !important;
+                object-fit:cover;
                 border-radius:3px;
                 overflow:hidden
             }
@@ -66,9 +77,8 @@ const ImageCarouselComponent = (props) => {
                 margin-top:11px;
             }
             .image-gallery-content .image-gallery-slide .image-gallery-image {
-               
                 object-fit:cover;
-                max-height:initial;
+                height:100%;
             }
             .image-gallery-thumbnail{
                 border:none;

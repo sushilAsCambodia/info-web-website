@@ -114,7 +114,7 @@ const DrawerComponent = (props) => {
     } 
     const tabPanelElms = ( ) => { 
         return <TabPanel  value={value} index={value} padding="0px !important" >
-            <List sx={{  margin: "5px 10px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"5px", justifyContent: "flex-start", textAlign: "center !important" }}>
+            <List sx={{  margin: "5px 0 0 13px !important", display:"grid", gridTemplateColumns:"auto auto auto auto auto", gridGap:"5px", justifyContent: "flex-start", textAlign: "center !important" }}>
                 {
                     issue && issue.hasOwnProperty('data') && issue.data.map((is,index) => {
                         return <ListItem key={index} onClick={() => openIssue(is.issue,index)} className={activeIssue == index ? 'active-issue mui-issue-custom':'mui-issue-custom'} style={{ width:'53px', justifyContent: "center", textAlign: "center !important" }}>
@@ -132,7 +132,7 @@ const DrawerComponent = (props) => {
             className="calendraDrawer">
             <Typography className="drawerline"></Typography>
             <br />
-            <Typography textAlign="center" fontSize="12px">{langKey && langKey.choose_year_period}</Typography>
+            <Typography textAlign="center" fontSize="12px" marginBottom="17px">{langKey && langKey.choose_year_period}</Typography>
             <Typography textAlign="left" fontSize="12px" className='yearheadline'>{langKey && langKey.year}</Typography>
             <Box onClick={() => setOpenDrawer({open: false, anchor:'bottom'})} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '26px', height: '26px', bgcolor: 'white', borderRadius: '50%', position: 'absolute', top: '-17px', left: '50%', transform: "translate(-50%, -50%)" }}>
                 <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +179,7 @@ const DrawerComponent = (props) => {
                                 }}
                                 aria-label="basic tabs example" className='scrollable-custom'>
                                 {years.length > 0 && years.map((res,index) => {
-                                    return <Tab onClick={() => fetchIssue(res)} key={index} sx={{ padding: '0', minWidth: '75px', position: 'relative' }} label={res} {...a11yProps(index)} />;
+                                    return <Tab onClick={() => fetchIssue(res)} key={index} sx={{ padding: '0',minHeight: '38px', minWidth: '60px', position: 'relative' }} label={res} {...a11yProps(index)} />;
                                 })}
                             </Tabs>
                             {loading ? <DataLoading size={20}/> : (issue && issue.hasOwnProperty('data') && issue.data.length <= 0 ? <DataNotFound height={200} width={200}/> : tabPanelElms())} 
