@@ -77,13 +77,12 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
         <Grid item xs={12} sm={12} md={12} xl={12}>
           <Grid item textAlign="center" p={1}  >
           <Typography fontWeight={500} fontSize="24px" maxWidth="260px" width="100%" margin="auto" lineHeight="36px" color="#fff">
-              {langKey && langKey.wonderful_information_in_the_palm_of  ||'Wonderful information in the palm of' }
+              {langKey && langKey.half_slogan_2  ||'Wonderful information in the palm of' }
           </Typography>
           <Typography fontWeight={800} fontSize="39px" style={{textShadow:"0px 3px 1px rgba(0, 0, 0, 0.4)"}} lineHeight="58px" textTransform="uppercase" color="#fff">
               {langKey && langKey.your_hand  ||'YOUR HAND' }
           </Typography>
           </Grid>
-
 
 
           <Grid
@@ -93,10 +92,10 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
               position: "absolute",
               left: "0",
               right: "0",
-              bottom: "150px",
+              bottom: "200px",
             }}
           >
-            <Typography fontWeight={700} fontSize="18px" lineHeight="27px"  textTransform="uppercase">
+            <Typography color="black" fontWeight={700} fontSize="18px" lineHeight="27px"  textTransform="uppercase">
               {langKey && langKey.download_app}
             </Typography>
           </Grid>
@@ -107,7 +106,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
               position: "absolute",
               left: "0",
               right: "0",
-              bottom: "90px",
+              bottom: "140px",
             }}
           >
             <Grid item xs={12} display="flex" container spacing={2}>
@@ -131,11 +130,13 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
               position: "absolute",
               left: "0",
               right: "0",
-              bottom: "35px",
+              bottom: "65px",
             }}
           >
-            <Grid item>
-              <Button href="/home" variant="outlined"style={{textTransform:"initial", borderRadius:"4px", fontSize:"14px"}}> {langKey && langKey.continue_to_home} </Button>
+            <Grid>
+              <Button href="/home" variant="outlined"style={{textTransform:"initial", borderRadius:"4px", fontSize:"14px"}}>
+                 {langKey && langKey.continue_to_home}
+                 </Button>
             </Grid>
           </Grid>
         </Grid>
