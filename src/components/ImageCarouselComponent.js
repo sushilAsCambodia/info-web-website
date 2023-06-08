@@ -79,7 +79,7 @@ const ImageCarouselComponent = (props) => {
             .image-gallery-slides{
                 border-radius:6px;
                 overflow:hidden;
-                height: 398px;
+                height: 465px;
             }
             .image-gallery-thumbnails-wrapper{
                 margin-top:11px;
