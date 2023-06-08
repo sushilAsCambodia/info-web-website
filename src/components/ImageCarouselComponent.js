@@ -45,6 +45,14 @@ const ImageCarouselComponent = (props) => {
                 height:55px;
                 width:19% !important;
             }
+            
+            .custom-original-mobile-wrapper .image-gallery-thumbnail.active {
+                border:3px solid #fb261beb !important;
+                border-radius: 3px;
+            }
+            .custom-original-mobile-wrapper .image-gallery-thumbnail.active img {
+                border-radius: 0px;
+            }
             @media (max-width: 320px) {
                 .image-gallery-thumbnail {
                     border: 3px solid transparent;
