@@ -354,11 +354,9 @@ export default function Login(props) {
                       </FormControl>
                     </Grid>
 
-                    <Grid item container spacing={2} mb={1}>
                       <Grid item xs={12}>
                         <Button
-                          fullWidth
-                          variant="contained"
+                        fullWidth
                           disabled={disableSubmit}
                           sx={{
                             color: "white",
@@ -372,24 +370,25 @@ export default function Login(props) {
                          {langKey && (langKey.login || t('login'))} 
                         </Button>
                       </Grid>
-                    </Grid>
                     
 
                     <Grid
                       item
                       sm={12}
+                      md={12}
                       container
                       sx={{
                         cursor: "pointer",
                         color: "#8C8C8C",
                         fontSize: { xs: "13px", sm: "inerited" },
                         justifyContent: { xs: "center", sm: "center" },
+                        marginTop:2
                       }}
                       underline="none"
                     >
                       <Link
                         underline="none"
-                        style={{ cursor: "pointer", color: "#F26522" }}
+                        style={{ cursor: "pointer", color: "#F26522",width:'100%',textAlign:'center' }}
                         onClick={goToForgotPassword}
                       >
                         {" "}
