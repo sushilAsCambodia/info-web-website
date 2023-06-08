@@ -3,6 +3,7 @@ import { Grid, Typography } from '@mui/material'
 import Router from "next/router";
 import DataLoading from '../DataLoading';
 import { useSelector } from 'react-redux';
+import utils from '@/common/utils';
 import Empty from '../Empty';
 import { Image } from 'mui-image';
 export default function JournalCard(props) {
@@ -12,7 +13,7 @@ export default function JournalCard(props) {
     Router.push({ pathname: '/journalCardDetails', query: { album_id, lang_id,title: title} });
   };
   return (
-    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{paddingLeft:'10px',  paddingTop:"9px", paddingRight:'12px'}}>
+    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{paddingLeft:'10px',  paddingTop:"0px", paddingRight:'12px'}}>
       {journals && journals.length > 0 ?
         journals.map((journal, index) => {
           return <Grid key={index} item xs={4} paddingLeft="12px !important" paddingTop="14px !important" sm={4} md={4} lg={4} xl={4} className='zxzxzxz'  onClick={() => cardDetail(journal.id,journal.album_name)}>
@@ -25,7 +26,7 @@ export default function JournalCard(props) {
 
               style={{ height: "110.25px", borderRadius: '4px',objectFit:"fill !important" }}
             />
-            <Typography fontSize="12px">{journal.album_name || 'N/A'}</Typography>
+            <Typography fontSize="12px"> {utils.subString(journal.album_name || 'N/A',18)}</Typography>
           </Grid>
         })
         : <Grid mx="auto"> <Typography component="div" sx={{padding:'5px'}}><Empty /></Typography> </Grid>}
