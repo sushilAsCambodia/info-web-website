@@ -174,7 +174,7 @@ export default function DialogDesktop(props) {
                                     onChange={handleChange} 
                                     aria-label="basic tabs example" className='scrollable-custom issue-card-custom'>
                                     {years.length > 0 && years.map((year,index) => {
-                                        return <Tab key={index} sx={{ padding: '0', minWidth: '76px', position: 'relative' }} label={year} {...a11yProps(index)} />
+                                        return <Tab key={index} sx={{ padding: '0', minWidth: '65px', position: 'relative' }} label={year} {...a11yProps(index)} />
                                     })}
                                 </Tabs>
                                 {loading ? <DataLoading size={20}/> : (issue && issue.hasOwnProperty('data') && issue.data.length <= 0 ? <DataNotFound height={200} width={200}/> : tabPanelElms())} 
