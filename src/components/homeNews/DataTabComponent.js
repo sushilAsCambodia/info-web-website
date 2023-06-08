@@ -131,7 +131,7 @@ const DataTabComponent = ({id,lang_id}) => {
             loading ? <DataLoading size={30}/> :
             (
                 <Grid item xs={12} >
-                    <List sx={{padding:'5px',paddingBottom:"20px", overflow:"auto", height:`${viewport_height/17.5}vh`}} >
+                    <List sx={{padding:'5px',paddingBottom:"20px", overflow:"auto", height:`${viewport_height/14.8}vh`}} >
                         {news && news.length ? news.map((sport,index) => {
                             return (
                                     <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
@@ -140,18 +140,18 @@ const DataTabComponent = ({id,lang_id}) => {
                                             sx={{ borderRadius: "5px",paddingTop:'10px' ,paddingBottom:'10px' }}
                                             boxShadow="none"
                                             display="flex"
-                                            alignItems="start">
+                                            alignItems="stretch">
                                             <Grid item xs={3}>
                                                 <Image src={sport.image ? sport.image?.path :'./assets/no-image.png'}
                                                     onError={(e) => e.target.src = './assets/no-image.png'}
                                                     width="100%"
-                                                    height="50px"
+                                                    height="65px"
                                                     alt="no_image"
                                                     style={{objectFit:"cover",borderRadius:'6px'}}/>
                                             </Grid> 
-                                            <Grid item xs={9}>
-                                                <Grid item sx={{paddingLeft:'5px'}}>
-                                                    <Box fontWeight="400" fontFamily="sans-serif" fontSize="12px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,80)}}></Box>
+                                            <Grid item xs={9} container alignItems="stretch">
+                                                <Grid item container alignContent="space-between" sx={{paddingLeft:'5px'}}>
+                                                    <Typography sx={{color:"black !important"}} width="100%" className='twoLinesEllip' fontWeight="400" fontFamily="sans-serif" fontSize="12px" dangerouslySetInnerHTML={{ __html: utils.subString(sport.title,80)}}></Typography>
                                                     <Typography marginTop="3px" textAlign="left" color="#8C8C8C" fontSize="12px !important" whiteSpace="nowrap">
                                                         {moment(sport.created_at).format(utils.formatDate)}
                                                     </Typography>
@@ -161,7 +161,6 @@ const DataTabComponent = ({id,lang_id}) => {
                                     </ListItem> 
                             );
                         }) : <Empty/>}
-                    
                     </List>
                     { noMoreData && <Typography component="div" sx={{fontSize:10,color:'#8C8C8C',textAlign:'center',width:'100%'}}>{langKey && langKey.no_more_data} </Typography>}
                 </Grid>

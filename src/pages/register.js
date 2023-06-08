@@ -270,10 +270,10 @@ export default function Register() {
   },[errorPassword,errorUserName]);
   return matches ? (
     <>
-      <Grid container alignItems="center" justifyContent="center" height="100%">
+      <Grid container alignItems="stretch" justifyContent="center" height="100%">
         <Grid item container maxWidth="500px" sx={{ minHeight: "500px" }}>
-          <Grid item container xs={12} sm={12} padding={2}>
-            <Grid container alignItems="flex-end" alignContent="center" mb={4}>
+          <Grid item container xs={12} sm={12} padding={2} alignContent="space-evenly">
+            <Grid container alignContent="center" >
               <Typography variant="h5" sx={{ position: "relative" }}>
                 {langKey && (langKey.register || t('register'))}
               </Typography>
@@ -452,7 +452,7 @@ export default function Register() {
                   underline="none"
                   style={{
                     cursor: "pointer",
-                    fontSize: "12px",
+                    fontSize: "14px",
                     color: "#000",
                     padding: "10px",
                     display: "flex",
@@ -462,7 +462,7 @@ export default function Register() {
                   {langKey && (langKey.already_have_an_account || t('already_have_an_account'))} 
                   <Typography
                     style={{
-                      fontSize: "12px",
+                      fontSize: "14px",
                       cursor: "pointer",
                       color: "#F26522",
                     }}
