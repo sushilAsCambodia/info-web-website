@@ -597,7 +597,7 @@ export default function Login(props) {
                 >
                   <Grid item container xs={12} sm={12} padding={'40px 20px'}>
                   <Grid   container justifyContent="center" style={{cursor:"pointer"}} >
-                <Image style={{width:150}} alt="login_logo" src="./assets/Logo/logo-infoweb.png" />
+                <Image style={{width:150}} alt="login_logo" src="./assets/Logo/new-logo-white-bg.png" />
               </Grid>
                     <Grid item xs={12} my={2}>
                       <Divider
