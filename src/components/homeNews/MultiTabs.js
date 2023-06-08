@@ -33,8 +33,7 @@ TabPanel.propTypes = {
 };
 
 const AntTabs = styled(Tabs)({
-  borderBottom: '1px solid #e8e8e8',
-  
+  borderBottom: '1px solid #D9D9D9',
 });
 export default function MultiTabs(props) {
   const { categories,lang_id } = props;

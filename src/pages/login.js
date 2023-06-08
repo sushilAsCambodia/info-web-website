@@ -243,29 +243,31 @@ export default function Login(props) {
       mounted && (
         matches ? (
           <>
-            <Grid container alignItems="center" justifyContent="center" height="100%">
+            <Grid container alignItems="stretch" justifyContent="center" height="100%">
               <Grid
                 item
                 container
                 maxWidth="500px" 
                 sx={{ minHeight: "500px" }}
               >
-                <Grid item container xs={12} sm={12} padding={2}>
-                  <Grid container alignItems="flex-end" alignContent="center" mb={4}>
-                    <Typography variant="h5" sx={{ position: "relative" }}>
+                <Grid item container alignContent="space-evenly" xs={12} sm={12} padding={2}>
+                  <Grid container alignContent="center" >
+                    <Typography variant="h5" sx={{ position: "relative",textTransform:'capitalize' }}>
                       {langKey && (langKey.login || t('login'))}
                     </Typography>
                   </Grid>
-                  <form
-                    className="lnr"
-                    style={{
+                  <Grid 
+                   sx={{
                       boxSizing: "borderBox",
                       flexWrap: "wrap",
                       flexDirection: "row",
                       alignItems: "flex-end",
                       marginBottom: "16px",
                       width: "100%",
-                    }}
+                    }}>
+                  <form
+                    className="lnr"
+                   
                   >
                     <Grid item xs={12} sm={12} mb={3}>
                       <Typography fontWeight="bold" pb={1}>
@@ -388,7 +390,7 @@ export default function Login(props) {
                     >
                       <Link
                         underline="none"
-                        style={{ cursor: "pointer", color: "#F26522",width:'100%',textAlign:'center' }}
+                        style={{ cursor: "pointer", color: "#F26522",width:'100%',textAlign:'center',fontSize:'14.5px' }}
                         onClick={goToForgotPassword}
                       >
                         {" "}
@@ -458,7 +460,7 @@ export default function Login(props) {
                         underline="none"
                         style={{
                           cursor: "pointer",
-                          fontSize: "12px",
+                          fontSize: "14px",
                           color: "#000",
                           padding: "10px",
                           display: "flex",
@@ -468,7 +470,7 @@ export default function Login(props) {
                      {langKey && (langKey.no_account || t('no_account'))}
                         <Typography
                           style={{
-                            fontSize: "12px",
+                            fontSize: "14px",
                             cursor: "pointer",
                             color: "#F26522",
                           }}
@@ -477,7 +479,7 @@ export default function Login(props) {
                         </Typography>
                       </Link>
                     </Grid>
-                  </form>
+                  </form></Grid>
                 </Grid>
               </Grid>
             </Grid>

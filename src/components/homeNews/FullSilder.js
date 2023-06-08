@@ -80,29 +80,29 @@ export default function FullSilder(props) {
               // rtl={true}
               >
               {newBanners.map((ad, index) => (
-                <Link href={ad.ads_link} target='_blank' key={index}>
-                  <Grid 
-                    style={{
-                      color: "white",
-                      textAlign: "left",
-                      // height: isH5 ? "160px" : "300px",
-                      // border: "1px solid grey",
-                      borderRadius: "5px",
-                    }} 
-                    sx={{height:{xs:'200px',md:'300px'}}}
-                  >
-                    <Image  
-                      src={ad.icon}
-                      alt={ad.title}
-                      style={{
-                        width: "100%",
-                        height:'auto',
-                        objectFit:"cover", 
-                      }}
-                      draggable={false}
-                    />
-                  </Grid>
-                </Link>
+               <Link href={ad.ads_link} target='_blank' key={index}>
+               <Grid 
+                 style={{
+                   color: "white",
+                   textAlign: "left",
+                  //  height: isH5 ? "160px" : "300px",
+                   // border: "1px solid grey",
+                   borderRadius: "5px",
+                 }} 
+                 sx={{height:{xs:'160px',md:'300px'}}}
+               >
+                 <Image  
+                   src={ad.icon}
+                   alt={ad.title}
+                   style={{
+                     width: "100%",
+                     height:'100%',
+                     objectFit:"fill", 
+                   }}
+                   draggable={false}
+                 />
+               </Grid>
+             </Link>
               ))}
             </Carousel>
           </Grid>
