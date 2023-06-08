@@ -16,6 +16,7 @@ instance.interceptors.response.use(function (response) {
 }, function (error) {
     if(error && error.response && error.response.status === 401) {
         Cookies.remove('token');
+        localStorage.removeItem('customer');
         setTimeout(() => {
             window.location = '/login';
         }, 1);

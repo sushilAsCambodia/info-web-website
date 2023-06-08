@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Header from "./header";
 import Footer from "./footer";
 import Container from "@mui/material/Container";
@@ -8,20 +8,49 @@ import { Grid, IconButton } from "@mui/material";
 import Head from "next/head";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/store/actions/authActions";
+import api from '@/services/http';
+import utils from '@/common/utils';
 const Layout = (props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language); 
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const { customer } = useSelector((state) => state.auth);
   const matches = useMediaQuery("(max-width:1535px)");
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const handleLogout = useCallback(() => {
+    dispatch(
+      logout({
+        callback: (res) => {
+          // signOut(); // third party will refresh the page
+          // use this without social login 
+          router.push("/login");
+        },
+        auth: true,
+      })
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[dispatch]);
+  useEffect(() => {
+    if (customer && Object.keys(customer).length > 0) {
+      if (!['/login', '/register', '/forgotPassword'].includes(router.pathname)) {
+        api.get(`${utils.adminUrl}/auth/customers/${customer.id}/edit`, {}, true).then((result) => {
+          if (result && (result.status == 200 || result.status == 201)) {
+            const customer = result?.data?.data;
+            if (customer && customer.status == 0) {
+              handleLogout();
+            }
+          }
+        }).catch((err) => { });
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]);
   useEffect(() => {
     setMounted(true);
   }, []);
-  
+
   const { t } = useTranslation();
   let { children } = props;
   let title = "";
@@ -41,13 +70,13 @@ const Layout = (props) => {
     width = "100%";
     vh = '100vh';
     height = `calc(${vh} - ${substrackHeight})`;
-  } 
+  }
   if (
-    router.pathname == "/announcement" 
+    router.pathname == "/announcement"
   ) {
     vh = '100vh';
     height = `calc(100vh - 237px)`;
-  } 
+  }
   switch (router.pathname.toLocaleLowerCase()) {
     case '/':
       title = (langKey && langKey.home_info_web)
@@ -63,10 +92,10 @@ const Layout = (props) => {
       break;
     case '/datachart':
       title = (langKey && (langKey.datachart_info_web || t('data_chart_info_web')))
-      break; 
+      break;
     case '/lotterypastresults':
       title = (langKey && (langKey.lottery_past_result_info_web || t('lottery_past_results_info_web')))
-      break; 
+      break;
     case '/profile':
       title = (langKey && langKey.profile_info_web)
       break;
@@ -78,7 +107,7 @@ const Layout = (props) => {
       break;
     case '/feedback':
       title = (langKey && langKey.feedback_info_web)
-      break; 
+      break;
     case '/newssingle':
       title = (langKey && (langKey.news_single_page_info_web || t('news_single_page_info_web')))
       break;
@@ -101,7 +130,7 @@ const Layout = (props) => {
           <title>{title}</title>
           <meta property="og:title" content={title} key="title" />
         </Head>
-        <Container 
+        <Container
           maxWidth="false"
           sx={{
             bgcolor: "#fff",
@@ -109,11 +138,11 @@ const Layout = (props) => {
             height: vh
             // overflowY: 'auto',height: "100%",
           }}>
-            <Header />
-          <main style={{width: width, margin: "auto", height: height,overflowY:'auto'}}>
+          <Header />
+          <main style={{ width: width, margin: "auto", height: height, overflowY: 'auto' }}>
             {children}
           </main>
-          <div style={{height:'147px'}}>
+          <div style={{ height: '147px' }}>
             <Footer />
           </div>
         </Container>
@@ -134,5 +163,5 @@ const Layout = (props) => {
       </>
     )
   );
-};   
+};
 export default Layout;

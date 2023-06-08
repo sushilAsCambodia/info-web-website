@@ -8,6 +8,7 @@ const utils = {
     DateMonthFormat: 'DD MMM',
     tokenKey: "token",
     baseUrl: process.env.apiUrl,
+    adminUrl: process.env.apiUrlAuth,
     convertLangCodeToID: (languageCode) => {
         let lang_id = 1;
         if (languageCode === "en") lang_id = 1;
