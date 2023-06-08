@@ -5,7 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useTranslation } from 'react-i18next';
-import { Select,FormControl,InputLabel,InputAdornment,IconButton } from '@mui/material';
+import { Select,FormControl,InputLabel,InputAdornment,IconButton,Grid } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getLanguage} from '../store/actions/languageActions'
@@ -72,22 +72,25 @@ export default function FieldLanguageSwitcher() {
         value={langLabel}
         label={langKey && langKey.language}
         onChange={handleClick}
-        style={{paddingright:"30px"}}
+        style={{paddingright:"30px",position:'relative',zIndex:'1000'}}
         renderValue={() => {
           return <em>{langKey && langKey.lang}</em>;
         }}
-        endAdornment={
-          <InputAdornment position="end" style={{marginRight:'20px'}}>
-            <Icon width={40} icon="fa-solid:language" />
-          </InputAdornment>
-        }
+        // endAdornment={
+        //   <InputAdornment position="end" style={{marginRight:'20px'}}>
+        //     <Icon width={40} icon="fa-solid:language"/>
+        //   </InputAdornment>
+        // }
       >
-        {['en','kh','de'].map(
+        {['en','kh','de'].map( 
           (l) => { 
             return (<MenuItem style={{display:l !== langLabel?'':'none'}} key={l} value={l} onClick={() => changeLanguage(l)} disableRipple> { labelLanguage(l)  } </MenuItem>);
           },
         )} 
       </Select>
+      <Grid style={{position:"absolute",right:'30px',top:'12px'}}>
+             <Icon width={40} icon="fa-solid:language" color='grey'/>
+          </Grid>
     </FormControl>
     </>
   );
