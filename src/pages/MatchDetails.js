@@ -124,7 +124,7 @@ export default function MatchDetails(props) {
   return (
     <Grid container>
       <MatchDetailHeader />
-      <Grid item xs={12} className="sticky-header"  sx={{background:"#f6f6f6",borderTop: "1px solid #8c8c8c",borderBottom: "1px solid #8c8c8c"}}>
+      <Grid item xs={12} className="sticky-header"  sx={{background:"#f6f6f6",borderTop: "1px solid #8c8c8c",paddingBottom:"0px", borderBottom: "1px solid #8c8c8c"}}>
         <Grid py={1}>
           <HeaderTabs value={value} onChange={handleChange} >
             <Tab label="Info" {...a11yProps(0)} />

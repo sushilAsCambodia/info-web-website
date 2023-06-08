@@ -626,7 +626,7 @@ export default function Register() {
                 style={{ cursor: "pointer" }}
               
               >
-                <Image alt="register_logo" style={{maxWidth:150}} src="./assets/Logo/logo-infoweb.png" />
+                <Image alt="register_logo" style={{maxWidth:150}} src="./assets/Logo/new-logo-white-bg.png" />
               </Grid>
               <Grid item xs={12} my={2}>
                 <Divider

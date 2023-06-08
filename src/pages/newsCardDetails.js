@@ -49,22 +49,23 @@ const NewsCardDetails = () => {
                                 alignItems="center"
                                 overflow="auto">
                                 <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-                                    <Grid item xs={12} paddingTop="15px">
-                                        <Typography fontSize="14px" color="#000000">
+                                    <Grid item xs={12} paddingTop="21px">
+                                        <Typography fontWeight='550' lineHeight="16px"  fontSize="14px" color="#000000">
                                             {newsDetail.title || ''}
                                         </Typography>
-                                        <Typography color="#8C8C8C" pt={1} fontSize="12px">{moment(newsDetail.created_at).format(utils.formatDate)}</Typography>
+                                        <Typography color="#8C8C8C" paddingTop="11px" lineHeight="14px" fontSize="12px">{moment(newsDetail.created_at).format(utils.formatDate)}</Typography>
                                     </Grid>
-                                    <Grid item xs={12} paddingTop="10px">
+                                    <Grid item xs={12} paddingTop="8px">
                                         <Image 
                                             src={newsDetail.image?.path}
                                             onError={(e) => e.target.src = '/assets/no-image.png'}
                                             alt={newsDetail.title || ''}
                                             width="100%" 
-                                            height="189px" 
-                                            style={{objectFit:'cover', borderRadius:'6px'}}
+                                            height="200px" 
+                                            objectFit="fill !important"
+                                            style={{objectFit:"fill !important", borderRadius:'6px'}}
                                         />
-                                        <Typography  color="#444444" textAlign="justify" pt={2} pb={4} fontSize="12px" dangerouslySetInnerHTML={{ __html: newsDetail.description || '' }}></Typography>
+                                        <Typography  color="#444444" textAlign="justify" lineHeight="14.06px" paddingTop="24px" pb={4} fontSize="14px" dangerouslySetInnerHTML={{ __html: newsDetail.description || '' }}></Typography>
                                     </Grid>
     
                                 </Grid>

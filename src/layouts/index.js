@@ -225,7 +225,7 @@ const Layout = (props) => {
             </Head>
             {switchHeader()}
             <Container id="main-container-wrapper" maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding: "0px !important", overflowY: 'auto' }}>
-                <main style={{height:'100%',overflow:router.pathname === '/home'?'hidden':'auto'}}>
+                <main style={{height:'100%',overflow:router.asPath === '/home#newsfeed' || router.asPath === '/home'?'hidden':'auto'}}>
                     
                     {children}
                 </main>
