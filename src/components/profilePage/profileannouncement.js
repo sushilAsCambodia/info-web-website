@@ -30,31 +30,31 @@ const rows = [
   {
     id: 1,
     heading: "System Announcement",
-    date: "15 March 2023, 00:00:00",
+    date: "08-06-2023",
     content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
   },
   {
     id: 2,
     heading: "System Announcement",
-    date: "15 March 2023, 00:00:00",
+    date: "08-06-2023",
     content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
   },
   {
     id: 3,
     heading: "System Announcement",
-    date: "15 March 2023, 00:00:00",
+    date: "08-06-2023",
     content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
   },
   {
     id: 4,
     heading: "System Announcement",
-    date: "15 March 2023, 00:00:00",
+    date: "08-06-2023",
     content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
   },
   {
     id: 4,
     heading: "System Announcement",
-    date: "15 March 2023, 00:00:00",
+    date: "08-06-2023",
     content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
   },
 

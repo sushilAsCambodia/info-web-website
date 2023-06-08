@@ -1,4 +1,4 @@
-import {useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import { Typography, Divider, Button } from "@mui/material";
@@ -43,8 +43,8 @@ export default function PartnersColumns(props) {
   const theme = useTheme();
   const router = useRouter();
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-  const { advertises = []} = useSelector((state) => state.advertise);
-  const dispatch  = useDispatch();
+  const { advertises = [] } = useSelector((state) => state.advertise);
+  const dispatch = useDispatch();
 
   const [value, setValue] = useState(0);
   const [partners, setPartners] = useState([]);
@@ -56,7 +56,7 @@ export default function PartnersColumns(props) {
       setValue(0);
     }
   }, [router.asPath]);
-  
+
   // useEffect(() => {
   //   dispatch(getAdvertise(
   //     {
@@ -69,13 +69,13 @@ export default function PartnersColumns(props) {
   // }, [t.language,dispatch]); 
 
   useEffect(() => {
-    setPartners(advertises.filter(b =>b.position == 'partners'));
-  },[advertises])
+    setPartners(advertises.filter(b => b.position == 'partners'));
+  }, [advertises])
   // console.log("partenrs:::",advertises)
   // console.log("partenrs:::",partners)
-  
+
   return (
-    partners && partners.length > 0 && 
+    partners && partners.length > 0 &&
     <Grid container justifyContent="center">
       <Grid item xs={4} marginY="15px">
         <Divider
@@ -89,13 +89,13 @@ export default function PartnersColumns(props) {
           }}
         >
           <Typography variant="h5" paddingX="10px" fontWeight="bold">
-          {langKey && langKey.partners}
+            {langKey && langKey.partners}
           </Typography>
         </Divider>
       </Grid>
       <Grid item xs={12}>
         <Carousel
-        className="makecenterforpartner"
+          className="makecenterforpartner"
           responsive={responsive}
           additionalTransfrom={0}
           arrows
@@ -114,44 +114,42 @@ export default function PartnersColumns(props) {
           renderButtonGroupOutside={false}
           renderDotsOutside={false}
         >
-          {partners && partners.length > 0 && partners.map((item,index)=>{
-            return(
-              <>
-              <Link href={item.ads_link} target="_blank">
+          {partners && partners.length > 0 && partners.map((item, index) => {
+            return (
+              <Link href={item.ads_link} target="_blank" key={index}>
                 <Grid
-              sx={{
-                margin: "5px",
-                borderRadius: "10px",
-                //   paddingX:"5px"
-              }}
-              key={index}
-            >
-              <Grid
-                style={{
-                  height: "120px",
-                  paddingX: "5px",
-                  border: "1px solid grey",
-                  borderRadius: "5px",
-                }}
-                container
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Grid item padding="5px">
-                  <Image
-                    src={item.icon}
-                    alt="clts_logo"
+                  sx={{
+                    margin: "5px",
+                    borderRadius: "10px",
+                    //   paddingX:"5px"
+                  }}
+
+                >
+                  <Grid
                     style={{
-                      minWidth: "100px",
-                      maxHeight: "100px",
-                      maxWidth:"240px"
+                      height: "120px",
+                      paddingX: "5px",
+                      border: "1px solid grey",
+                      borderRadius: "5px",
                     }}
-                  />
-                </Grid>
-              </Grid>
+                    container
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Grid item padding="5px">
+                      <Image
+                        src={item.icon}
+                        alt="clts_logo"
+                        style={{
+                          minWidth: "100px",
+                          maxHeight: "100px",
+                          maxWidth: "240px"
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Link>
-              </>
             )
           })}
         </Carousel>
