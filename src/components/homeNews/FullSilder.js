@@ -85,19 +85,19 @@ export default function FullSilder(props) {
                     style={{
                       color: "white",
                       textAlign: "left",
-                      height: isH5 ? "160px" : "300px",
+                      // height: isH5 ? "160px" : "300px",
                       // border: "1px solid grey",
                       borderRadius: "5px",
                     }} 
-                    sx={{height:{xs:'160px',md:'300px'}}}
+                    sx={{height:{xs:'200px',md:'300px'}}}
                   >
                     <Image  
                       src={ad.icon}
                       alt={ad.title}
                       style={{
                         width: "100%",
-                        height:'100%',
-                        objectFit:"fill", 
+                        height:'auto',
+                        objectFit:"cover", 
                       }}
                       draggable={false}
                     />
