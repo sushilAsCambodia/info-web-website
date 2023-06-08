@@ -12,7 +12,7 @@ export default function JournalCard(props) {
     Router.push({ pathname: '/journalCardDetails', query: { album_id, lang_id,title: title} });
   };
   return (
-    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{paddingLeft:'10px',  paddingTop:"9px", paddingRight:'12px'}}>
+    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{paddingLeft:'10px',  paddingTop:"0px", paddingRight:'12px'}}>
       {journals && journals.length > 0 ?
         journals.map((journal, index) => {
           return <Grid key={index} item xs={4} paddingLeft="12px !important" paddingTop="14px !important" sm={4} md={4} lg={4} xl={4} className='zxzxzxz'  onClick={() => cardDetail(journal.id,journal.album_name)}>
