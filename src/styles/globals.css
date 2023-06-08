@@ -1100,3 +1100,12 @@ padding-top: 62px;
   padding-bottom: 10px;
 } */
 }
+
+/* // clas for news details  */
+
+.synopsis{
+  font-style: normal;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
+}
