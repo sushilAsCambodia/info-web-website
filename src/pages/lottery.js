@@ -89,10 +89,9 @@ export default function Lottery() {
           >
             <Tab className="lotterytab" label="Guānzhù" {...a11yProps(0)} />
             <Tab className="lotterytab" label="History" {...a11yProps(1)} />
-            <Tab className="lotterytab" label="Soccer" {...a11yProps(2)} />
-            <Tab className="lotterytab" label="Basket Ball" {...a11yProps(3)} />
-            <Tab className="lotterytab" label="xxx Cǎixxx" {...a11yProps(4)} />
-            <Tab className="lotterytab" label="Favourite" {...a11yProps(5)} />
+           
+            <Tab className="lotterytab" label="xxx Cǎixxx" {...a11yProps(2)} />
+            <Tab className="lotterytab" label="Favourite" {...a11yProps(3)} />
           </Tabs>
           {value == 1 ? '':
          <> <Button
@@ -256,16 +255,11 @@ export default function Lottery() {
             <LotteryHistoryCard />
           </Grid>
         </TabPanel>
+       
         <TabPanel value={value} index={2}>
-          <MatchWithDates />  
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-        <MatchWithRounds />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
           Shíshí Cǎi
         </TabPanel>
-        <TabPanel value={value} index={5}>
+        <TabPanel value={value} index={3}>
         <FavouritePage />
 
         </TabPanel>
