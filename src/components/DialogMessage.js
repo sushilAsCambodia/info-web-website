@@ -44,10 +44,17 @@ const DialogMessage = (props) => {
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
     return <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-        id="logindialog">
+            onClose={handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={open}
+            id="logindialog" 
+            sx={{
+                '.MuiDialog-paper' : {
+                    width:'90%',
+                    margin:0
+                }
+            }}
+        >
         <DialogContent dividers sx={{ maxWidth: "290px" }}>
             <Typography gutterBottom>
                 {message}

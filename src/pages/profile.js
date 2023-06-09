@@ -232,8 +232,8 @@ function TabPanel(props) {
                               onError={(e) => e.target.src = '/assets/Profile/user-icon.png'}
                             />
                             &nbsp;{" "}
-                            <Typography fontWeight="600" fontSize="12px">
-                              {customer.user_name || "Profile Name"}
+                            <Typography fontWeight="600" fontSize="12px" style={{whiteSpace:'nowrap'}}>
+                              {(customer.nick_name != null ? customer.nick_name : (customer.user_name || "Profile Name"))}
                             </Typography>
                           </Grid>
                         </>
@@ -290,7 +290,7 @@ function TabPanel(props) {
               overflow="auto"
             >
               <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
-                <Grid item xs={12} paddingTop="15px">
+                <Grid item xs={12} paddingTop="15px" paddingBottom="15px">
                   <Typography>{langKey && langKey.important_links}</Typography>
                 </Grid>
       
@@ -299,7 +299,7 @@ function TabPanel(props) {
                     <Grid
                       item
                       xs={12}
-                      sx={{ padding: "8px 0px", borderRadius: "5px" }}
+                      sx={{ padding: "10px 0px", borderRadius: "5px" }}
                       boxShadow="none"
                       display="flex"
                       alignItems="center"
@@ -351,7 +351,7 @@ function TabPanel(props) {
                     <Grid
                       item
                       xs={12}
-                      sx={{ padding: "8px 0px", borderRadius: "5px" }}
+                      sx={{ padding: "10px 0px", borderRadius: "5px" }}
                       boxShadow="none"
                       display="flex"
                       alignItems="center"
@@ -403,7 +403,7 @@ function TabPanel(props) {
                     <Grid
                       item
                       xs={12}
-                      sx={{ padding: "8px 0px", borderRadius: "5px" }}
+                      sx={{ padding: "10px 0px", borderRadius: "5px" }}
                       boxShadow="none"
                       display="flex"
                       alignItems="center"
@@ -458,7 +458,7 @@ function TabPanel(props) {
                     <Grid
                       item
                       xs={12}
-                      sx={{ padding: "8px 0px", borderRadius: "5px" }}
+                      sx={{ padding: "10px 0px", borderRadius: "5px" }}
                       boxShadow="none"
                       display="flex"
                       alignItems="center"
