@@ -144,6 +144,12 @@ const AuthReducer = (state = initialState, action) => {
         st['customer'] = c; 
       } 
       return st; 
+    case 'customers/update-profile/rejected':
+      return {
+        ...state,
+        loading: false,
+        status: 'failed'
+      };
     // end profile photo block
   }
   return state;

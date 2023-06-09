@@ -105,12 +105,12 @@ export default function Match() {
               },
             }}
           >
-            <Tab label="All" {...a11yProps(0)} />
-            <Tab label="Events" {...a11yProps(1)} />
-            <Tab label="Soccer" {...a11yProps(2)} />
-            <Tab label="Basket Ball" {...a11yProps(3)} />
-            <Tab label="Category 2" {...a11yProps(4)} />
-            <Tab label="Category 3" {...a11yProps(5)} />
+            <Tab className="matchtab" label="All" {...a11yProps(0)} />
+            <Tab className="matchtab" label="Events" {...a11yProps(1)} />
+            <Tab className="matchtab" label="Soccer" {...a11yProps(2)} />
+            <Tab className="matchtab" label="Basket Ball" {...a11yProps(3)} />
+            <Tab className="matchtab" label="Category 2" {...a11yProps(4)} />
+            <Tab className="matchtab" label="Category 3" {...a11yProps(5)} />
           </Tabs>
           <Grid
             width="60px"

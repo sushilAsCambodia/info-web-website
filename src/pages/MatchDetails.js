@@ -105,12 +105,12 @@ export default function MatchDetails(props) {
   return (
     <Grid container>
       <MatchDetailHeader />
-      <Grid item xs={12} className="sticky-header"  sx={{background:"#f6f6f6",borderTop: "1px solid #8c8c8c",paddingBottom:"0px", borderBottom: "1px solid #8c8c8c"}}>
+      <Grid item xs={12} className="sticky-header"  sx={{background:"#F3F3F3", borderWidth:"0.5px 0px", borderColor:"#DDDDDD", borderStyle:"solid", paddingBottom:"0px", }}>
         <Grid py={1} container justifyContent="center">
           <HeaderTabs value={value} onChange={handleChange} >
-            <Tab label="Info" {...a11yProps(0)} />
-            <Tab label="Live Text" {...a11yProps(1)} />
-            <Tab label="Statistics" {...a11yProps(2)} />
+            <Tab className="matchtab" label="Info" {...a11yProps(0)} />
+            <Tab className="matchtab" label="Live Text" {...a11yProps(1)} />
+            <Tab className="matchtab" label="Statics" {...a11yProps(2)} />
           </HeaderTabs>
         </Grid>
       </Grid>

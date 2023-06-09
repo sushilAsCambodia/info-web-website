@@ -88,12 +88,12 @@ const UploadImg = () => {
     }
   }
   const updateProfilePhoto = useCallback(file => {
-    if(Math.abs(file.size / (1024 ** 2)) > 1) {
-      setOpenDialog(true);
-      setResponseMessage(langKey && (langKey.file_is_too_large || t('file_is_too_large')) );
-      setFile(null);
-      setImagePreviewUrl('');
-    }else {
+    // if(Math.abs(file.size / (1024 ** 2)) > 1) {
+    //   setOpenDialog(true);
+    //   setResponseMessage(langKey && (langKey.file_is_too_large || t('file_is_too_large')) );
+    //   setFile(null);
+    //   setImagePreviewUrl('');
+    // }else {
       dispatch(
         uploadProfile(
           {
@@ -110,9 +110,14 @@ const UploadImg = () => {
           }
         )
       ).then(e => {
-        console.log(e,'abss');
+        if(!e.payload) {
+          setFile(null);
+          setOpenDialog(true);
+          setImagePreviewUrl('');
+          setResponseMessage(langKey && (langKey.something_went_wrong || t('something_went_wrong')));
+        }
       })
-    }
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[dispatch,t]);
   useEffect(() => {
