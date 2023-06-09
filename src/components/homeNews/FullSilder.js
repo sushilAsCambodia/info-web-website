@@ -56,7 +56,7 @@ export default function FullSilder(props) {
     <> 
     { (newBanners && newBanners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
          
-          <Grid item xs={12} id="AddCarouselBtn">
+          <Grid item xs={12} id="AddCarouselBtn" sx={{maxHeight:"230px"}}>
             <Carousel
               responsive={responsive}
               additionalTransfrom={0}
@@ -89,7 +89,10 @@ export default function FullSilder(props) {
                    // border: "1px solid grey",
                    borderRadius: "5px",
                  }} 
-                 sx={{height:{xs:'160px',md:'300px'}}}
+                 sx={{
+                  height:{xs:'25vh',md:'300px'},
+                // maxHeight:{xs:'250px',md:'300px'}
+              }}
                >
                  <Image  
                    src={ad.icon}
