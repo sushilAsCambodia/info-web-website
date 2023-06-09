@@ -71,7 +71,7 @@ export default function Lottery() {
             textTransform="capitalize"
             onChange={handleChange}
             aria-label="basic tabs example"
-            className="zxzxzxzxz123"
+         
             TabIndicatorProps={{
               style: {
                 background: "#FF6F31",
@@ -246,10 +246,16 @@ export default function Lottery() {
             <LotteryHistoryCard />
             <Box height={12}></Box>
             <LotteryHistoryCard />
+            <Box height={12}></Box>
+            <LotteryHistoryCard />
+            <Box height={12}></Box>
+            <LotteryHistoryCard />
+            <Box height={12}></Box>
+            <LotteryHistoryCard />
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <MatchWithDates />
+          <MatchWithDates />  
         </TabPanel>
         <TabPanel value={value} index={3}>
         <MatchWithRounds />

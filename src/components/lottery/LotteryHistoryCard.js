@@ -3,13 +3,13 @@ import { Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@m
 const LotteryHistoryCard = () => {
     return (
         <Card>
-            <CardHeader style={{ padding: '0 5px 0 5px', borderBottom: '1px solid #ddd' }} title={
+            <CardHeader style={{ padding: '5px 5px', borderBottom: '1px solid #ddd' }} title={
                 <Grid container style={{ flexWrap: 'nowrap', alignItems: "center" }}>
                     <Grid item xs={10} style={{ fontSize: 12, color: '#8C8C8C' }}>2023 Mar 29, Monday</Grid>
                    
                 </Grid>
             } />
-            <CardContent style={{ padding:'5px 0px 5px 0px' }}>
+            <CardContent style={{ padding:'10px 0px 10px 0px' }}>
                 <Grid container style={{ position: 'relative', alignItems: 'center', paddingTop: 10, paddingBottom: 10 }}>
                     <Typography component="span" style={{ background: '#FFE0D2', width: '37px', height: '24px' }}></Typography>
                     <Grid container style={{ position: 'absolute', alignItems: 'center', left: 20 }}>
@@ -24,11 +24,11 @@ const LotteryHistoryCard = () => {
                                 </defs>
                             </svg>
                         </Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>1</Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>2</Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>3</Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>4</Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #00C2FF 0%, #05A3D5 91.67%)' }}>5</Grid>
+                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>11</Grid>
+                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>11</Grid>
+                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>11</Grid>
+                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>11</Grid>
+                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #00C2FF 0%, #05A3D5 91.67%)' }}>12</Grid>
                     </Grid>
                 </Grid>
             </CardContent>

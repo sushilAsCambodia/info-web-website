@@ -20,21 +20,25 @@ const GamesInfo = (props) => {
         alignItems="center"
         justifyContent="center"
         style={{
-          width: "40px",
-          height: "40px",
+          width: "35px",
+          height: "35px",
           borderRadius: "50px",
           background: "linear-gradient(90deg, #FF0000 0%, #FF6F31 100%)",
         }}
       >
-        <Typography variant="h5" style={{ color: "white" }}>
+        <Typography variant="h6" style={{ color: "white" }}>
           {Array.from(name)[0]}
         </Typography>
       </Grid>
       <Grid container item xs={9} px={1}>
-        <Typography>{name}</Typography>
+        <Typography style={{
+          fontSize:"14px",
+          fontWeight:"550",
+
+        }}>{name}</Typography>
       </Grid>
       <Grid container item xs={1}>
-        <Icon width={30} color={favourite ?"#F2DA00":"#DDDDDD"} icon="material-symbols:star-rate-rounded" />
+        <Icon width={24} color={favourite ?"#F2DA00":"#DDDDDD"} icon="material-symbols:star-rate-rounded" />
       </Grid>
     </Grid>
   );

@@ -36,6 +36,7 @@ const LotteryCard = () => {
                         <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>3</Grid>
                         <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>4</Grid>
                         <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #00C2FF 0%, #05A3D5 91.67%)' }}>5</Grid>
+                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #00C2FF 0%, #05A3D5 91.67%)' }}>5</Grid>
                     </Grid>
                 </Grid>
             </CardContent>
