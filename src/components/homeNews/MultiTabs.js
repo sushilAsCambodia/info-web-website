@@ -64,7 +64,7 @@ export default function MultiTabs(props) {
       >
       <Grid item xs={12}>
         <Grid container >
-          <Grid item xs={12} justifyContent="center" sx={{background:"white", }}  >
+          <Grid item xs={12} justifyContent="center" sx={{background:"white" }}  >
             <AntTabs 
             id="news-multiTabs"
               value={value}
