@@ -301,6 +301,11 @@ export default function Register() {
       setDisableSubmit(true);
     }
   }, [errorPassword, errorUserName, password, username]); 
+  // useEffect(() => {
+  //   setResponseMessage('Registration Successful');
+  //   setOpen(true);
+  //   setRegisterSuccess(true);
+  // },[])
   return matches ? (
     <>
       <Grid item container alignContent="flex-start" height="100%">
@@ -530,8 +535,8 @@ export default function Register() {
         id="registerdialog"
       >
         <DialogContent dividers sx={{ maxWidth: "220px", textAlign: "center" }}>
-          <Typography style={{fontWeight:registerSuccess?'bold':''}}>{responseMessage}</Typography>
-          {registerSuccess && <CircularProgress size={30} style={{marginTop:6}}/>}
+          <Typography style={{fontWeight:registerSuccess?'700':'',fontSize:registerSuccess?'20px':''}}>{responseMessage}</Typography>
+          {registerSuccess && <CircularProgress size={40} style={{marginTop:6}}/>}
         </DialogContent>
         {!registerSuccess && (
           <DialogActions>

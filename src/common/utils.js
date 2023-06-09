@@ -4,6 +4,7 @@ const utils = {
     formatDate: 'YYYY/MM/D',
     letterFormat: 'YYYY MMM DD',
     letterFormat2: 'DD MMM YYYY',
+    letterFormatDDMMYYYY: 'DD/MM/YYYY',
     dateLetter: 'ddd',
     MonthYearFormat: 'MMM YYYY',
     DateMonthFormat: 'DD MMM',

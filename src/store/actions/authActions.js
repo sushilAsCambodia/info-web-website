@@ -159,7 +159,6 @@ export const uploadProfile = createAsyncThunk(
   async ({ body = {}, callback, auth = false, formdata = false }) => {
     try {
       const response = await api.post('/auth/customers-update/profilePictureUpdate', body, auth, formdata);
-      console.log('response',response)
       const { data, status } = response;
       data['status_code'] = status;
       if(typeof callback == 'function') {
@@ -167,7 +166,6 @@ export const uploadProfile = createAsyncThunk(
       } 
       return data;
     } catch (error) {
-      console.log('error',error)
       const {status, data} = error.response;
       data['status_code']  = status;
       if(typeof callback == 'function') {

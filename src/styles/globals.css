@@ -249,6 +249,22 @@ color: #fff;
 #registerdialog .css-d3wcwz-MuiTypography-root{
 text-align: center;
 }
+#registerdialog .MuiDialog-paper{
+  max-width: inherit;
+  width: 90%;  
+  border-radius: 10px;
+  margin: 0;
+}
+#registerdialog .MuiDialog-paper .MuiDialogContent-root{
+  margin: 0 auto;
+  max-width:inherit;
+}
+#registerdialog .MuiDialog-paper .MuiDialogContent-root > p{
+  width: 100%;
+  margin: 0 auto;
+  padding: 5px;
+  font-size: 16px;
+}
 #registerdialog .css-hlj6pa-MuiDialogActions-root{
 justify-content: center;
 }
@@ -280,7 +296,7 @@ padding: 0px;
 }
 #logindialog .MuiDialogContent-root  .MuiTypography-root{
   text-transform: lowercase;
-} 
+}  
 /* #logindialog .MuiDialogContent-root {
   padding:16px;
 } */
@@ -1119,6 +1135,13 @@ padding-top: 62px;
 .lotterytab{
   text-transform: capitalize !important;
   font-style: normal;
+font-weight: 700 !important;
+font-size: 12px !important;
+line-height: 12px !important;
+}
+.gametab{
+text-transform: capitalize !important;
+font-style: normal;
 font-weight: 700 !important;
 font-size: 12px !important;
 line-height: 12px !important;
