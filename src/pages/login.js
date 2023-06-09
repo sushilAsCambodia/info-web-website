@@ -144,8 +144,6 @@ export default function Login(props) {
         callback: (res) => {
           setLoading(false);
           const { status, status_code, message = "" } = res;
-          // setResponseMessage(t(message.toLowerCase()));
-          // setOpen(true);
           if ([200, 201, 202, 203].includes(status_code)) {
             // setTimeout(() => {
               //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
@@ -153,6 +151,9 @@ export default function Login(props) {
                 ? (window.location.href = window.location.origin + "/home")
                 : Router.push("/");
             // }, 4000);
+          }else {
+            setResponseMessage(t(message.toLowerCase()));
+            setOpen(true);
           }
         },
       })
