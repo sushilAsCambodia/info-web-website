@@ -14,7 +14,6 @@ export default function JournalCard(props) {
     Router.push({ pathname: '/journalCardDetails', query: { album_id, lang_id,title: title} });
   };
   const dispatch = useDispatch();
-
   useEffect(() => {
       dispatch(
         getJournal({
@@ -25,7 +24,8 @@ export default function JournalCard(props) {
     
   }, [dispatch,lang_id]);
   return (
-    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{padding:'5px 5px 0px 5px'}}>
+    loading ? <DataLoading /> : 
+    <Grid container item spacing={1} sx={{padding:'5px 5px 0px 5px'}}>
       {journals && journals.length > 0 ?
         journals.map((journal, index) => {
           return <>

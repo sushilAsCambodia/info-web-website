@@ -7,7 +7,7 @@ import DataLoading from '@/components/DataLoading';
 import ImageCarouselComponent from '@/components/ImageCarouselComponent';
 
 export default function JournalCardDetails() {
-  const { loadingJournalDetail, journalDetail = [], years = [] } = useSelector(state => state.journal);
+  const { loadingJournalDetail, journalDetail = [], years = [],loading } = useSelector(state => state.journal);
   const [images, setImages] = useState([]);
   const router = useRouter();
   // const { query } = router;
@@ -48,7 +48,7 @@ export default function JournalCardDetails() {
   return (
     <Grid container item textAlign="left" p={0} sx={{ height: '100%', alignItems: images.length ? 'auto' : 'center' }}>
       <Grid item xs={12}>
-        {loadingJournalDetail ? <DataLoading /> : <ImageCarouselComponent images={images} />}
+        {loadingJournalDetail ? <DataLoading /> : <ImageCarouselComponent images={images} loading={loading}/>}
       </Grid>
     </Grid>
   )
