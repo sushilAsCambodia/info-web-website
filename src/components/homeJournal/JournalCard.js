@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Grid, Typography } from '@mui/material'
 import Router from "next/router";
 import DataLoading from '../DataLoading';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import utils from '@/common/utils';
 import Empty from '../Empty';
+import { getJournal } from '@/store/actions/journalActions';
 import { Image } from 'mui-image';
 export default function JournalCard(props) {
   const { lang_id } = props;
@@ -12,6 +13,17 @@ export default function JournalCard(props) {
   const cardDetail = (album_id,title='') => {
     Router.push({ pathname: '/journalCardDetails', query: { album_id, lang_id,title: title} });
   };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(
+        getJournal({
+          params: { lang_id: lang_id, take: 60 },
+          callback: (res) => {},
+        })
+      );
+    
+  }, [dispatch,lang_id]);
   return (
     loading ? <DataLoading /> : <Grid container item spacing={1} sx={{padding:'5px 5px 0px 5px'}}>
       {journals && journals.length > 0 ?

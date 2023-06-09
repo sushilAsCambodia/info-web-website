@@ -940,7 +940,8 @@ label.MuiFormLabel-root.Mui-focused {
   color: #999999 !important;
   background: #FAFAFA;
   text-transform:capitalize !important;
-  border-radius: 10px !important;
+  border-radius: 5px !important;
+  padding: 0px 15px !important;
 }
 .filterBtnSelected{
   white-space: nowrap;
@@ -949,7 +950,8 @@ label.MuiFormLabel-root.Mui-focused {
   font-weight: bold;
   border: 1px solid #DDDDDD !important;
   text-transform: capitalize !important;
-  border-radius: 10px !important;
+  border-radius: 5px !important;
+  padding: 0px 15px !important;
 }
 #ballDivider .MuiDivider-wrapper{
 padding-left: 0;
@@ -1056,7 +1058,7 @@ height: 50px !important;
 }
 .right .content .match-icon{
   position: absolute;
-  left: 0;
+  left: -5px;
   top: 5px;
 }
 .right .content{
