@@ -26,7 +26,7 @@ export default function JournalCard(props) {
 
               style={{ height: "110.25px", borderRadius: '4px',objectFit:"fill !important" }}
             />
-            <Typography fontSize="12px"> {utils.subString(journal.album_name || 'N/A',18)}</Typography>
+            <Typography sx={{color:'black !important'}} className='singleLinesEllips' fontSize="12px"> {utils.subString(journal.album_name || 'N/A',18)}</Typography>
           </Grid>
         })
         : <Grid mx="auto"> <Typography component="div" sx={{padding:'5px'}}><Empty /></Typography> </Grid>}

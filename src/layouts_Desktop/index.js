@@ -158,6 +158,9 @@ const Layout = (props) => {
               // font-family: 'Poppins' !important;
               font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             }
+            p{
+              color:'black'
+            }
           `}
         </style>
       </>
