@@ -41,20 +41,18 @@ export default function MatchWithDates(props) {
           width: "100%",
         }}
       >
-        <Grid container borderBottom="1px solid #ddd" pb={1}>
-          <Grid item xs={9} container>
+        <Grid container borderBottom="1px solid #ddd" justifyContent="center" pb={1}>
+          <Grid item xs={8} container  flexWrap="nowrap" sx={{ width:'120px', overflow:"auto"}}>
             {utils.LastXDays(6).map((item, index) => {
               return (
                 <Grid
                   key={index}
                   item
-                  xs={"auto"}
-                  textAlign="center"
                   className={`${item.day === dateFilter ? "dateSelected" : ""}`}
                   onClick={() => {
                     setDateFilter(item.day);
                   }}
-                  sx={{ borderRight: "1px solid #ddd" }}
+                  sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap' }}
                 >
                   <Typography
                     sx={{ fontWeight: "bold", fontSize: "12px" }}
@@ -72,10 +70,9 @@ export default function MatchWithDates(props) {
           </Grid>
           <Grid
             item
-            xs={3}
+            xs={4}
             display="flex"
-            alignItems="center"
-            justifyContent="flex-end"
+            justifyContent="center"
           >
             <FormControl size="small">
               <Select

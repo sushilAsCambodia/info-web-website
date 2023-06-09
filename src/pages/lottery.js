@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { Box, Button } from "@mui/material";
 import { Grid } from "@material-ui/core";
 import LotteryCard from "@/components/lottery/LoteryCard";
+import LotteryHistoryCard from "@/components/lottery/LotteryHistoryCard";
 import NoSsr from "@mui/base/NoSsr";
 import { Icon } from "@iconify/react";
 
@@ -234,17 +235,17 @@ export default function Lottery() {
             </Grid>
           </Grid>
           <Grid item xs={12} style={{ padding: 10 }}>
-            <LotteryCard />
+            <LotteryHistoryCard />
             <Box height={12}></Box>
-            <LotteryCard />
+            <LotteryHistoryCard />
             <Box height={12}></Box>
-            <LotteryCard />
+            <LotteryHistoryCard />
             <Box height={12}></Box>
-            <LotteryCard />
+            <LotteryHistoryCard />
             <Box height={12}></Box>
-            <LotteryCard />
+            <LotteryHistoryCard />
             <Box height={12}></Box>
-            <LotteryCard />
+            <LotteryHistoryCard />
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={2}>
