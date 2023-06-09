@@ -1137,3 +1137,10 @@ font-weight: 700 !important;
 font-size: 12px !important;
 line-height: 12px !important;
 }
+.gametab{
+text-transform: capitalize !important;
+font-style: normal;
+font-weight: 700 !important;
+font-size: 12px !important;
+line-height: 12px !important;
+}
