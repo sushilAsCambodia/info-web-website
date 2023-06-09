@@ -268,6 +268,23 @@ const Layout = (props) => {
             <Grid item >
                 <DrawerComponent openDrawer={openDrawer} setOpenDrawer={setOpenDrawer}/> 
             </Grid>
+            <style jsx global>
+          {`
+            html,
+            body {
+              // background: #f9f9f9;
+              font-size: 14px;
+            }
+            p,
+            a {
+              // font-family: 'Poppins' !important;
+              font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            }
+            p{
+              color:'black'
+            }
+          `}
+        </style>
         </>
     );
 }

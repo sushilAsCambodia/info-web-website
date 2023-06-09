@@ -1,12 +1,15 @@
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import DataNotFound from './DataNotFound';
+import DataLoading from './DataLoading';
 import { Grid } from '@mui/material'
 import CardSlice from './desktop/CardSlide';
 const ImageCarouselComponent = (props) => {
-    const {images = [], isWeb = false,year} = props;
+    const {images = [], isWeb = false,year,loading} = props;
     return <>
-        { images.length > 0 ? <Grid item className='carouselcard'>
+        { !loading ? 
+      <> {images.length > 0 ? 
+      <Grid item className='carouselcard'>
         <ImageGallery
             items={images}
             showPlayButton={false}
@@ -103,7 +106,7 @@ const ImageCarouselComponent = (props) => {
             `
         }
         </style>
-    </Grid> : <DataNotFound/> }
+    </Grid>: <DataNotFound/>}</> : <DataLoading />  }
     </>
 }
 export default ImageCarouselComponent;
