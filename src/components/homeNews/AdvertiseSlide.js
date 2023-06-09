@@ -9,7 +9,6 @@ const AdvertiseSlide = (props) => {
     const [tabValue, setTabValue] = useState(0);
     const [newAds, setNewAds] = useState([]);
 
-    console.log("advertisessliders:::",advertises)
 
     useEffect(() => {
      
@@ -18,7 +17,7 @@ const AdvertiseSlide = (props) => {
     },[advertises])
     return <>
     {
-        newAds && newAds.length > 0 && <Grid item   
+        newAds && newAds.length > 0 && <Grid item minHeight="80px"
         // sx={{marginTop:'5px',marginBottom:'5px'}}
         >
         <Tabs

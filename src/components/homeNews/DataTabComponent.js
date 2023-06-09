@@ -131,7 +131,7 @@ const DataTabComponent = ({id,lang_id}) => {
             loading ? <DataLoading size={30}/> :
             (
                 <Grid item xs={12} >
-                    <List sx={{padding:'5px',paddingBottom:"20px", overflow:"auto", height:`${viewport_height/14.8}vh`}} >
+                    <List sx={{padding:'5px',paddingBottom:"20px"}} >
                         {news && news.length ? news.map((sport,index) => {
                             return (
                                     <ListItem key={index} sx={{ padding:'0px',  borderBottom: '1px solid #D9D9D9;' }} onClick={() => Router.push({pathname:'/newsCardDetails',query:{news_id:sport.id}})}>
