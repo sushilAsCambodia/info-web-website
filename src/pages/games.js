@@ -50,7 +50,7 @@ export default function Games() {
             borderBottom: 1,
             borderColor: "divider",
             position: "fixed",
-            top: 56,
+            // top: 56,
             width: "100%",
             background: "#fff",
             zIndex: 9,

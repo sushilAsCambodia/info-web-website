@@ -13,21 +13,22 @@ export default function JournalCard(props) {
     Router.push({ pathname: '/journalCardDetails', query: { album_id, lang_id,title: title} });
   };
   return (
-    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{paddingLeft:'10px',  paddingTop:"0px", paddingRight:'12px'}}>
+    loading ? <DataLoading /> : <Grid container item spacing={1} sx={{padding:'5px 5px 0px 5px'}}>
       {journals && journals.length > 0 ?
         journals.map((journal, index) => {
-          return <Grid key={index} item xs={4} paddingLeft="12px !important" paddingTop="14px !important" sm={4} md={4} lg={4} xl={4} className='zxzxzxz'  onClick={() => cardDetail(journal.id,journal.album_name)}>
+          return <>
+          <Grid key={index} item xs={4} paddingLeft="12px !important" paddingTop="14px !important" sm={4} md={4} lg={4} xl={4} className='zxzxzxz'  onClick={() => cardDetail(journal.id,journal.album_name)}>
             <img
             
               src={journal.cover_img ? journal.cover_img : null}
               alt={journal.album_name || ''}
-              width="100%"
+             
               objectFit="fill !important"
 
-              style={{ height: "110.25px", borderRadius: '4px',objectFit:"fill !important" }}
+              style={{height: "14vh", width:"100%", borderRadius: '4px',objectFit:"fill !important" }}
             />
             <Typography sx={{color:'black !important'}} className='singleLinesEllips' fontSize="12px"> {utils.subString(journal.album_name || 'N/A',18)}</Typography>
-          </Grid>
+          </Grid></>
         })
         : <Grid mx="auto"> <Typography component="div" sx={{padding:'5px'}}><Empty /></Typography> </Grid>}
     </Grid>
