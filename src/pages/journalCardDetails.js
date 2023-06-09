@@ -7,7 +7,7 @@ import DataLoading from '@/components/DataLoading';
 import ImageCarouselComponent from '@/components/ImageCarouselComponent';
 
 export default function JournalCardDetails() {
-  const { loadingJournalDetail, journalDetail = [] } = useSelector(state => state.journal);
+  const { loadingJournalDetail, journalDetail = [], years = [] } = useSelector(state => state.journal);
   const [images, setImages] = useState([]);
   const router = useRouter();
   // const { query } = router;
@@ -24,21 +24,27 @@ export default function JournalCardDetails() {
   //   }
   // }, [query])
   useEffect(() => {
-    if (Array.isArray(journalDetail) && journalDetail.length > 0) {
-      const item = journalDetail[0];
-      const images = []; 
-      for (let j = 0; j < item.album_slavs.length; j++) {
-        for (let i = 0; i < item.album_slavs[j].album_slav_images.length; i++) {
-          const itm = item.album_slavs[j].album_slav_images[i];
-          images.push({
-            original: itm.images,
-            thumbnail: itm.images,
-          })
+    if(years.length > 0) { // if have issue year will be render issue other wish empty
+      if (Array.isArray(journalDetail) && journalDetail.length > 0) {
+        const images = []; 
+        const item = journalDetail[0];
+        for (let j = 0; j < item.album_slavs.length; j++) {
+          for (let i = 0; i < item.album_slavs[j].album_slav_images.length; i++) {
+            const itm = item.album_slavs[j].album_slav_images[i];
+            images.push({
+              original: itm.images,
+              thumbnail: itm.images,
+            })
+          }
         }
+        setImages(images);
+      }else {
+        setImages([]);
       }
-      setImages(images);
+    }else {
+      setImages([]);
     }
-  }, [journalDetail]);
+  }, [journalDetail,years]);
   return (
     <Grid container item textAlign="left" p={0} sx={{ height: '100%', alignItems: images.length ? 'auto' : 'center' }}>
       <Grid item xs={12}>
