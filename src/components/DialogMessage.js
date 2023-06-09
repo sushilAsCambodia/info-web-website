@@ -52,6 +52,9 @@ const DialogMessage = (props) => {
                 '.MuiDialog-paper' : {
                     width:'90%',
                     margin:0
+                },
+                '.MuiDialogContent-root': {
+                    maxWidth:'inherit'
                 }
             }}
         >
