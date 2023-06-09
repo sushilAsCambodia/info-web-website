@@ -88,25 +88,31 @@ const UploadImg = () => {
     }
   }
   const updateProfilePhoto = useCallback(file => {
-    dispatch(
-      uploadProfile(
-        {
-          body: {
-            image: file
-          },
-          callback: (res) => {
-            console.log('xxxxx',res)
-            let { message = '' } = res;
-            setOpenDialog(true);
-            setResponseMessage(langKey&& langKey[message]);
-          },
-          auth: true,
-          formdata: true
-        }
-      )
-    ).then(e => {
-      console.log(e,'abss');
-    })
+    if(Math.abs(file.size / (1024 ** 2)) > 1) {
+      setOpenDialog(true);
+      setResponseMessage(langKey && (langKey.file_is_too_large || t('file_is_too_large')) );
+      setFile(null);
+      setImagePreviewUrl('');
+    }else {
+      dispatch(
+        uploadProfile(
+          {
+            body: {
+              image: file
+            },
+            callback: (res) => {
+              let { message = '' } = res;
+              setOpenDialog(true);
+              setResponseMessage(langKey && (langKey[message] || t(message)) );
+            },
+            auth: true,
+            formdata: true
+          }
+        )
+      ).then(e => {
+        console.log(e,'abss');
+      })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[dispatch,t]);
   useEffect(() => {
@@ -483,8 +489,10 @@ const UploadImg = () => {
         setEditUserName(true);
         setState({ ...state, bottom: true });
       }else {
-        setErrorNickName(true);
-        setErrorNickNameMessage(langKey && langKey.nick_name_required);
+        setEditUserName(true);
+        setState({ ...state, bottom: true });
+        // setErrorNickName(true);
+        // setErrorNickNameMessage(langKey && langKey.nick_name_required);
       }
     }else {
       if (nickName.length < 6) {
@@ -522,13 +530,14 @@ const UploadImg = () => {
                 nick_name: nickName
               },
               callback: (res) => {
+                console.log(res)
                 const {status_code} = res;
                 let { message = '' } = res;
                 if (message === 'user_name_unique') {
                   message = 'update_user_name_unique';
                 }
                 setOpenDialog(true);
-                setResponseMessage(langKey&& langKey[message]);
+                setResponseMessage(langKey && langKey[message]);
                 if([200,201,202,203,204].includes(status_code)) {
                   setTextAction('edit');
                 }
@@ -590,6 +599,7 @@ const UploadImg = () => {
                 id="outlined-adornment-nickname"
                 type="text"
                 // disabled={disabledNickName}
+                readOnly
                 value={nickName}
                 onChange={(e) => setNickName(e.target.value)}
                 endAdornment={
@@ -602,13 +612,14 @@ const UploadImg = () => {
                         background: "#FF6E31",
                         textTransform: 'capitalize'
                       }}
-                      onClick={onUpdateNickName}>
-                      {textAction == 'edit' ? (langKey && (langKey.edit || t('edit'))) : (langKey && (langKey.save || t('save')))}
+                      onClick={onUpdateNickName}
+                      >
+                      {textAction == 'edit' ? (langKey && (langKey.edit || t('edit'))) : (langKey && (langKey.add || t('add')))}
                     </Button>
                   </InputAdornment>
                 }
               />
-              {errorNickName && <FormHelperText error>{errorNickNameMessage}</FormHelperText>}
+              {/* {errorNickName && <FormHelperText error>{errorNickNameMessage}</FormHelperText>} */}
             </FormControl>
           </Grid>
           <Grid item>

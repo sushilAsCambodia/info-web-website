@@ -144,15 +144,15 @@ export default function Login(props) {
         callback: (res) => {
           setLoading(false);
           const { status, status_code, message = "" } = res;
-          setResponseMessage(t(message.toLowerCase()));
-          setOpen(true);
+          // setResponseMessage(t(message.toLowerCase()));
+          // setOpen(true);
           if ([200, 201, 202, 203].includes(status_code)) {
-            setTimeout(() => {
+            // setTimeout(() => {
               //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
               matches
                 ? (window.location.href = window.location.origin + "/home")
                 : Router.push("/");
-            }, 1000);
+            // }, 4000);
           }
         },
       })
