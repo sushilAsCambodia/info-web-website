@@ -23,6 +23,7 @@ import MatchDetailHeader from "@/components/match/MatchDetailHeader";
 import MatchDetailLiveText from "@/components/match/MatchDetailLiveText";
 import MatchStats from "@/components/match/MatchStats";
 import MatchVerticleChart from "@/components/match/MatchVerticleChart";
+import { Padding } from "@mui/icons-material";
 
 
 const HeaderTabs = styled(Tabs)({
@@ -44,31 +45,11 @@ const HeaderTabs = styled(Tabs)({
     marginRight: '10px',
     marginLeft: '10px',
     fontSize: '11px',
-    minHeight: 'fit-content !important'
+    minHeight: 'fit-content !important',
+    padding: '5px 0px 5px 0px'
   }
 });
 
-const HeaderTab = styled((props) => <Tab disableRipple {...props} />)(
-  ({ theme }) => ({
-    backgroundColor: "#222222",
-    textTransform: "none",
-    minWidth: 0,
-    [theme.breakpoints.up("sm")]: {
-      minWidth: 0,
-    },
-    fontWeight: theme.typography.fontWeightRegular,
-    color: "#A6A6A6",
-
-    "&.Mui-selected": {
-      color: "white",
-      fontWeight: theme.typography.fontWeightMedium,
-      backgroundColor: "black",
-    },
-    "&.Mui-focusVisible": {
-      backgroundColor: "#d1eaff",
-    },
-  })
-);
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -125,7 +106,7 @@ export default function MatchDetails(props) {
     <Grid container>
       <MatchDetailHeader />
       <Grid item xs={12} className="sticky-header"  sx={{background:"#f6f6f6",borderTop: "1px solid #8c8c8c",paddingBottom:"0px", borderBottom: "1px solid #8c8c8c"}}>
-        <Grid py={1}>
+        <Grid py={1} container justifyContent="center">
           <HeaderTabs value={value} onChange={handleChange} >
             <Tab label="Info" {...a11yProps(0)} />
             <Tab label="Live Text" {...a11yProps(1)} />

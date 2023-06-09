@@ -33,10 +33,10 @@ export default function MatchDetailHeader(props) {
         }}
       >
         <Grid color="white" container justifyContent="center">
-          <Grid pt={3}>
+          <Grid pt={2}>
             <Typography>English Premier League</Typography>
           </Grid>
-          <Grid container item xs={12} justifyContent="center">
+          <Grid container item xs={12} justifyContent="center" alignItems="start" >
             <Grid
               item
               xs={2}
@@ -57,38 +57,41 @@ export default function MatchDetailHeader(props) {
               xs={6}
               container
               justifyContent="center"
-              alignItems="center"
+              alignItems="stretch"
               position="relative"
             >
-              <Typography mx={1} variant="h5">
-                0
-              </Typography>
-              <span style={{ borderColor: "white" }} className="inner-circle">
-                <Grid
-                  width={40}
-                  height={40}
-                  container
-                  alignItems="center"
-                  justifyContent="center"
-                  sx={{
-                    background: "white",
-                    borderRadius: "50px",
-                    position: "absolute",
-                    top: "3px",
-                    left: "3px",
-                  }}
-                >
-                  <Typography sx={{ color: "red", fontWeight: "bold" }}>
-                    VS
-                  </Typography>
-                </Grid>
-              </span>
-              <Typography mx={1} variant="h5">
-                0
-              </Typography>
-              <Typography sx={{ position: "absolute", bottom: "5px" }}>
-                FT
-              </Typography>
+              <Grid container       alignItems="center"        justifyContent="center"
+>
+                <Typography mx={1} variant="h5">
+                  0
+                </Typography>
+                <span style={{ borderColor: "white",marginTop:'10px' }} className="inner-circle">
+                  <Grid
+                    width={40}
+                    height={40}
+                    container
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{
+                      background: "white",
+                      borderRadius: "50px",
+                      position: "absolute",
+                      top: "3px",
+                      left: "3px",
+                    }}
+                  >
+                    <Typography sx={{ color: "red", fontWeight: "bold" }}>
+                      VS
+                    </Typography>
+                  </Grid>
+                </span>
+                <Typography mx={1} variant="h5">
+                  0
+                </Typography>
+                <Typography sx={{ position: "absolute", bottom: "-30px", }}>
+                  FT
+                </Typography>
+              </Grid>
             </Grid>
 
             <Grid
