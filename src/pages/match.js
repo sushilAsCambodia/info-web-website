@@ -104,10 +104,10 @@ export default function Match() {
               },
             }}
           >
-            <Tab label="All" {...a11yProps(0)} />
-            <Tab label="Events" {...a11yProps(1)} />
-            <Tab label="Category 2" {...a11yProps(2)} />
-            <Tab label="Category 3" {...a11yProps(3)} />
+            <Tab className="matchtab" label="All" {...a11yProps(0)} />
+            <Tab className="matchtab" label="Events" {...a11yProps(1)} />
+            <Tab className="matchtab" label="Category 2" {...a11yProps(2)} />
+            <Tab className="matchtab" label="Category 3" {...a11yProps(3)} />
           </Tabs>
           <Grid
             width="60px"
