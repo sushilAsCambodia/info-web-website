@@ -152,7 +152,7 @@ export default function Login(props) {
               matches
                 ? (window.location.href = window.location.origin + "/home")
                 : Router.push("/");
-            }, 1);
+            }, 1000);
           }
         },
       })
@@ -248,12 +248,12 @@ export default function Login(props) {
     setPassword(value);
   };
   useEffect(() => {
-    if (!errorPassword && !errorUserName) {
+    if (!errorPassword && !errorUserName && (password!='' && username!='')) {
       setDisableSubmit(false);
     } else {
       setDisableSubmit(true);
     }
-  },[errorPassword,errorUserName]);
+  },[errorPassword,errorUserName,password,username]);
   useEffect(() => {
     if(Object.keys(langKey).length > 0) {
       if(username!='') {

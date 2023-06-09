@@ -265,7 +265,7 @@ justify-content: center;
   right: -6px;
 }
 #registerdialog .MuiDialogContent-root > p{
-font-size: 14px;
+  font-size: 14px;
 }
 #logindialog .MuiDialogActions-root{
   display: block;

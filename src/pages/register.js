@@ -14,6 +14,7 @@ import {
   FormControlLabel,
   Checkbox,
   InputLabel,
+  CircularProgress
 } from "@mui/material";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -133,7 +134,9 @@ export default function Register() {
                 callback: (res) => {
                   const { status_code } = res;
                   if ([200, 201, 202, 203].includes(status_code)) {
-                    matches ? Router.push("/home") : Router.push("/");
+                    setTimeout(() => {
+                      matches ? Router.push("/home") : Router.push("/");
+                    }, 500);
                   }
                 },
               })
@@ -291,12 +294,13 @@ export default function Register() {
     }
   };
   useEffect(() => {
-    if (!errorPassword && !errorUserName) {
+    
+    if (!errorPassword && !errorUserName && (password !='' && username!='')) {
       setDisableSubmit(false);
     } else {
       setDisableSubmit(true);
     }
-  }, [errorPassword, errorUserName]);
+  }, [errorPassword, errorUserName, password, username]); 
   return matches ? (
     <>
       <Grid item container alignContent="flex-start" height="100%">
@@ -526,7 +530,8 @@ export default function Register() {
         id="registerdialog"
       >
         <DialogContent dividers sx={{ maxWidth: "220px", textAlign: "center" }}>
-          <Typography>{responseMessage}</Typography>
+          <Typography style={{fontWeight:registerSuccess?'bold':''}}>{responseMessage}</Typography>
+          {registerSuccess && <CircularProgress size={30} style={{marginTop:6}}/>}
         </DialogContent>
         {!registerSuccess && (
           <DialogActions>
