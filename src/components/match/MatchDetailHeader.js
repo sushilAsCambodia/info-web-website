@@ -36,10 +36,10 @@ export default function MatchDetailHeader(props) {
           <Grid pt={2}>
             <Typography>English Premier League</Typography>
           </Grid>
-          <Grid container item xs={12} justifyContent="center" alignItems="start" >
+          <Grid container item xs={12} justifyContent="center" alignItems="start" px={1}>
             <Grid
               item
-              xs={2}
+              xs={3}
               container
               justifyContent="center"
               alignItems="center"
@@ -96,7 +96,7 @@ export default function MatchDetailHeader(props) {
 
             <Grid
               item
-              xs={2}
+              xs={3}
               container
               justifyContent="center"
               alignItems="center"
