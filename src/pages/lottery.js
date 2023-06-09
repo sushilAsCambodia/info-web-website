@@ -13,7 +13,7 @@ import { Icon } from "@iconify/react";
 import router from "next/router";
 import MatchWithDates from "@/components/match/MatchWithDates";
 import MatchWithRounds from "@/components/match/MatchWithRounds";
-
+import FavouritePage from "@/components/favourite/favouritePage";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -92,6 +92,7 @@ export default function Lottery() {
             <Tab className="lotterytab" label="Soccer" {...a11yProps(2)} />
             <Tab className="lotterytab" label="Basket Ball" {...a11yProps(3)} />
             <Tab className="lotterytab" label="xxx Cǎixxx" {...a11yProps(4)} />
+            <Tab className="lotterytab" label="Favourite" {...a11yProps(5)} />
           </Tabs>
           {value == 1 ? '':
          <> <Button
@@ -263,6 +264,10 @@ export default function Lottery() {
         </TabPanel>
         <TabPanel value={value} index={4}>
           Shíshí Cǎi
+        </TabPanel>
+        <TabPanel value={value} index={5}>
+        <FavouritePage />
+
         </TabPanel>
       </Box>
     </NoSsr>

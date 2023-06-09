@@ -3,6 +3,7 @@ import moment from "moment/moment";
 const utils = {
     formatDate: 'YYYY/MM/D',
     letterFormat: 'YYYY MMM DD',
+    letterFormat2: 'DD MMM YYYY',
     dateLetter: 'ddd',
     MonthYearFormat: 'MMM YYYY',
     DateMonthFormat: 'DD MMM',
@@ -71,6 +72,7 @@ const utils = {
         result.push({
           day: moment(d).format(utils.dateLetter),
           DateMonth: moment(d).format(utils.DateMonthFormat),
+          ddmmmyyyy:moment(d).format(utils.letterFormat2)
         });
       }
       return result;
