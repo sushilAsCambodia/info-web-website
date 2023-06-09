@@ -265,7 +265,7 @@ justify-content: center;
   right: -6px;
 }
 #registerdialog .MuiDialogContent-root > p{
-font-size: 14px;
+  font-size: 14px;
 }
 #logindialog .MuiDialogActions-root{
   display: block;
@@ -1108,4 +1108,16 @@ padding-top: 62px;
   font-weight: 400 !important;
   font-size: 12px !important;
   line-height: 14px !important;
+}
+
+
+
+/* lottery css  */
+
+.lotterytab{
+  text-transform: capitalize !important;
+  font-style: normal;
+font-weight: 700 !important;
+font-size: 12px !important;
+line-height: 12px !important;
 }
