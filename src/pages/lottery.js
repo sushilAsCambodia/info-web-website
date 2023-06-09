@@ -93,7 +93,8 @@ export default function Lottery() {
             <Tab className="lotterytab" label="Basket Ball" {...a11yProps(3)} />
             <Tab className="lotterytab" label="xxx Cǎixxx" {...a11yProps(4)} />
           </Tabs>
-          <Button
+          {value == 1 ? '':
+         <> <Button
             variant="contained"
             sx={{
               background: "linear-gradient(90deg, #FF0000 0%, #FF6E31 100%)",
@@ -133,7 +134,7 @@ export default function Lottery() {
               </svg>
               &nbsp; Filter
             </Typography>
-          </Button>
+          </Button></>}
         </Box>
         <TabPanel value={value} index={0}>
           <Grid
