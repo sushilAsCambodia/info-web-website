@@ -723,9 +723,10 @@ export default function Login(props) {
                           alignItems: "flex-end",
                           marginBottom: "16px",
                           width: "100%",
+                          height:'400px'
                         }}
                       >
-                        <Grid item xs={12} sm={12} mb={1}>
+                        <Grid item xs={12} sm={12} mb={3}>
                           <FieldLanguageSwitcher />
                         </Grid>
                         <Grid item xs={12} sm={12} mb={1}>
@@ -838,37 +839,38 @@ export default function Login(props) {
                             )}
                           </FormControl>
                         </Grid>
-                        <Grid
-                          item
-                          container
-                          justifyContent="space-between"
-                          alignItems="center"
-                        >
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                checked={rememberMe}
-                                onChange={() => setRememberMe(!rememberMe)}
-                              />
-                            }
-                            label={
-                              langKey &&
-                              (langKey.remember_me || t("remember_me"))
-                            }
-                          />
-                          <Link
-                            underline="none"
-                            style={{ cursor: "pointer", color: "#F26522" }}
-                            onClick={goToForgotPassword}
+                        <Grid height="43px"></Grid>
+                      <Grid>   
+                         <Grid
+                            container
+                            justifyContent="space-between"
+                            alignItems="center"
                           >
-                            <Typography>
-                              {langKey &&
-                                (langKey.forgot_password ||
-                                  t("forgot_password"))}
-                            </Typography>
-                          </Link>
-                        </Grid>
-                        <Grid item container spacing={2} mb={3}>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={rememberMe}
+                                  onChange={() => setRememberMe(!rememberMe)}
+                                />
+                              }
+                              label={
+                                langKey &&
+                                (langKey.remember_me || t("remember_me"))
+                              }
+                            />
+                            <Link
+                              underline="none"
+                              style={{ cursor: "pointer", color: "#F26522" }}
+                              onClick={goToForgotPassword}
+                            >
+                              <Typography>
+                                {langKey &&
+                                  (langKey.forgot_password ||
+                                    t("forgot_password"))}
+                              </Typography>
+                            </Link>
+                          </Grid>
+                        <Grid  container spacing={2} >
                           <Grid item xs={6}>
                             <Button
                               fullWidth
@@ -901,6 +903,7 @@ export default function Login(props) {
                               {langKey && (langKey.login || t("login"))}
                             </Button>
                           </Grid>
+                        </Grid>
                         </Grid>
                         {/* Social */}
                         {/* <Grid

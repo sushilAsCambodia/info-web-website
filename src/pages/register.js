@@ -308,8 +308,8 @@ export default function Register() {
   // },[])
   return matches ? (
     <>
-      <Grid item container alignContent="flex-start" height="100%">
-        <Grid item container minHeight="500px">
+      <Grid item container alignContent="flex-start" justifyContent="center" height="100%">
+        <Grid item container justifyContent="center" minHeight="500px" maxWidth='500px'>
           <Grid
             item
             container
@@ -738,6 +738,7 @@ export default function Register() {
                     alignItems: "flex-end",
                     marginBottom: "16px",
                     width: "100%",
+                    height:'400px'
                   }}
                 >
                   <Grid item xs={12} sm={12} mb={3}>
