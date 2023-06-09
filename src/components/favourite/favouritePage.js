@@ -21,8 +21,8 @@ import moment from "moment/moment";
 import utils from "@/common/utils";
 import MatchItem from "@/common/MatchItem";
 import MatchRounds from "@/common/MatchRounds";
-import DateFilterBar from "@/common/dateFilterBar";
-export default function MatchWithRounds(props) {
+import DateFilterBar2 from "@/common/dateFilterBar2";
+export default function favouritePage(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
@@ -30,7 +30,6 @@ export default function MatchWithRounds(props) {
   const [dateFilter, setDateFilter] = useState("");
   const [age, setAge] = useState("");
 
-  
   return (
     <Grid style={{ position: "relative" }}>
       <Grid
@@ -43,11 +42,15 @@ export default function MatchWithRounds(props) {
           width: "100%",
         }}
       >
-                 <DateFilterBar />
-
-        <Grid pt={1}>
+        <DateFilterBar2 />
+        <Grid pt={1} textAlign="center">
           {" "}
-          <MatchRounds/>
+          <Image
+            alt="not_found_2"
+            style={{ width: "90%" }}
+            src="./assets/not-found.png"
+          />
+          <Typography>No Data Found</Typography>
         </Grid>
       </Grid>
     </Grid>
