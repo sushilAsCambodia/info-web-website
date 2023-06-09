@@ -55,8 +55,8 @@ export default function Lottery() {
       <Box sx={{ width: "100%" }}>
         <Box
           sx={{
-            borderBottom: 1,
-            borderColor: "divider",
+            
+           boxShadow:"0px 1px 4px rgba(0, 0, 0, 0.1)",
             position: "fixed",
             top: 40,
             width: "100%",

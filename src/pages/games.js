@@ -48,8 +48,7 @@ export default function Games() {
       <Grid>
         <Grid
           sx={{
-            borderBottom: 1,
-            borderColor: "divider",
+            boxShadow:"0px 1px 4px rgba(0, 0, 0, 0.1)",
             position: "fixed",
             // top: 56,
             width: "100%",
@@ -93,7 +92,7 @@ export default function Games() {
             style={{
               padding: 10,
               position: "absolute",
-              top: 50,
+              top: 70,
               width: "100%",
             }}
           >
@@ -119,7 +118,7 @@ export default function Games() {
             style={{
               padding: 10,
               position: "absolute",
-              top: 50,
+              top: 70,
               width: "100%",
             }}
           >
@@ -141,7 +140,7 @@ export default function Games() {
             style={{
               padding: 10,
               position: "absolute",
-              top: 50,
+              top: 70,
               width: "100%",
             }}
           >
@@ -165,7 +164,7 @@ export default function Games() {
             style={{
               padding: 10,
               position: "absolute",
-              top: 50,
+              top: 70,
               width: "100%",
             }}
           >
@@ -190,7 +189,7 @@ export default function Games() {
             style={{
               padding: 10,
               position: "absolute",
-              top: 50,
+              top: 70,
               width: "100%",
             }}
           >
@@ -215,7 +214,7 @@ export default function Games() {
             style={{
               padding: 10,
               position: "absolute",
-              top: 50,
+              top: 70,
               width: "100%",
             }}
           >
