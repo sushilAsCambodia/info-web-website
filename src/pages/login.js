@@ -152,7 +152,7 @@ export default function Login(props) {
               matches
                 ? (window.location.href = window.location.origin + "/home")
                 : Router.push("/");
-            }, 1);
+            }, 1000);
           }
         },
       })
@@ -203,10 +203,10 @@ export default function Login(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  const onChangeUserName = (e) => {
-    const userName = e.target.value.replace(/\s+/g, "");
+  const onChangeUserName = (value) => {
+    const userName = value.replace(/\s+/g,'');
     const regex = /^[A-Za-z0-9]+$/;
-    const validateUsername = regex.test(e.target.value);
+    const validateUsername = regex.test(value);
     if (userName != "" && userName.length < 6) {
       setErrorUserName(true);
       setErrorUserNameMessage(
@@ -230,35 +230,44 @@ export default function Login(props) {
     }
     setUserName(userName);
   };
-
-  const onChangePassword = (e) => {
-    if (e.target.value == "") {
+ 
+  const onChangePassword = (value) => {
+    if (value == '') {
       setErrorPassword(true);
       setErrorPasswordMessage(
         langKey && (langKey.password_required || t("password_required"))
       );
     } else {
-      if (utils.checkPassword(e.target.value) != null) {
-        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
+      if(utils.checkPassword(value) != null) {
+        setErrorPasswordMessage(t(utils.checkPassword(value)));
         setErrorPassword(true);
       } else {
         setErrorPassword(false);
       }
     }
-    setPassword(e.target.value);
+    setPassword(value);
   };
   useEffect(() => {
-    if (!errorPassword && !errorUserName) {
+    if (!errorPassword && !errorUserName && (password!='' && username!='')) {
       setDisableSubmit(false);
     } else {
       setDisableSubmit(true);
     }
-  }, [errorPassword, errorUserName]);
-
-  return (
-    <>
-      {mounted &&
-        (matches ? (
+  },[errorPassword,errorUserName,password,username]);
+  useEffect(() => {
+    if(Object.keys(langKey).length > 0) {
+      if(username!='') {
+        onChangeUserName(username);
+      }
+      if(password!='') {
+        onChangePassword(password);
+      }
+    }
+  },[langKey]);
+  return <>
+    {
+      mounted && (
+        matches ? (
           <>
             <Grid
               container
@@ -316,7 +325,7 @@ export default function Login(props) {
                               id="outlined-adornment-username"
                               type="text"
                               value={username}
-                              onChange={(e) => onChangeUserName(e)}
+                              onChange={(e) => onChangeUserName(e.target.value)}
                               error={errorUserName}
                               endAdornment={
                                 <InputAdornment position="end">
@@ -362,7 +371,7 @@ export default function Login(props) {
                               id="outlined-adornment-password"
                               type={showPassword ? "text" : "password"}
                               value={password}
-                              onChange={(e) => onChangePassword(e)}
+                              onChange={(e) => onChangePassword(e.target.value)}
                               error={errorPassword}
                               endAdornment={
                                 <InputAdornment position="end">
@@ -747,7 +756,7 @@ export default function Login(props) {
                               id="outlined-adornment-username"
                               type="text"
                               value={username || ""}
-                              onChange={(e) => onChangeUserName(e)}
+                              onChange={(e) => onChangeUserName(e.target.value)}
                               error={errorUserName}
                               notched
                               endAdornment={
@@ -798,7 +807,7 @@ export default function Login(props) {
                               id="outlined-adornment-password"
                               type={showPassword ? "text" : "password"}
                               value={password || ""}
-                              onChange={(e) => onChangePassword(e)}
+                              onChange={(e) => onChangePassword(e.target.value)}
                               error={errorPassword}
                               endAdornment={
                                 <InputAdornment position="end">
@@ -1016,5 +1025,4 @@ export default function Login(props) {
           </Grid>
         ))}
     </>
-  );
 }

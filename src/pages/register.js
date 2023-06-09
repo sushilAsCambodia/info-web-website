@@ -14,6 +14,7 @@ import {
   FormControlLabel,
   Checkbox,
   InputLabel,
+  CircularProgress
 } from "@mui/material";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -103,7 +104,19 @@ export default function Register() {
   useEffect(() => {
     setMounted(true);
   }, []);
-
+  useEffect(() => {
+    if(Object.keys(langKey).length > 0) {
+      if(username!='') {
+        onChangeUserName(username);
+      }
+      if(password!='') {
+        onChangePassword(password);
+      }
+      if(confirmPassword!='') {
+        onChangeConfirmPassword(confirmPassword);
+      }
+    }
+  },[langKey]);
   const handleSignup = () => {
     dispatch(
       register({
@@ -121,7 +134,9 @@ export default function Register() {
                 callback: (res) => {
                   const { status_code } = res;
                   if ([200, 201, 202, 203].includes(status_code)) {
-                    matches ? Router.push("/home") : Router.push("/");
+                    setTimeout(() => {
+                      matches ? Router.push("/home") : Router.push("/");
+                    }, 500);
                   }
                 },
               })
@@ -167,9 +182,7 @@ export default function Register() {
         langKey && (langKey.user_name_required || t("user_name_required"))
       );
       setErrorPasswordMessage(langKey && langKey.password_required);
-      setConfirmErrorPasswordMessage(
-        langKey && langKey.confirm_password_required
-      );
+      setConfirmErrorPasswordMessage(langKey && (langKey.confirm_password_required || t('confirm_password_required')));
       return;
     } else if (password == "") {
       setErrorPassword(true);
@@ -180,10 +193,8 @@ export default function Register() {
         langKey && (langKey.user_name_required || t("user_name_required"))
       );
       return;
-    } else if (confirmPassword === "") {
-      setConfirmErrorPasswordMessage(
-        langKey && langKey.confirm_password_required
-      );
+    }else if (confirmPassword === '') {
+      setConfirmErrorPasswordMessage(langKey && (langKey.confirm_password_required || t('confirm_password_required')));
       setErrorConfirmPassword(true);
       return;
     }
@@ -192,10 +203,10 @@ export default function Register() {
       handleSignup();
     }
   };
-  const onChangeUserName = (e) => {
-    const userName = e.target.value.replace(/\s+/g, "");
+  const onChangeUserName = (value) => {
+    const userName = value.replace(/\s+/g,'');
     const regex = /^[A-Za-z0-9]+$/;
-    const validateUsername = regex.test(e.target.value);
+    const validateUsername = regex.test(value);
     if (userName != "" && userName.length < minLength) {
       setErrorUserName(true);
       setErrorUserNameMessage(
@@ -219,24 +230,22 @@ export default function Register() {
     }
     setUserName(userName);
   };
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-    if (e.target.value == "") {
+  const onChangePassword = (value) => {
+    setPassword(value);
+    if (value == '') {
       setErrorPasswordMessage(langKey && langKey.password_required);
       setErrorPassword(true);
     } else {
-      if (utils.checkPassword(e.target.value) != null) {
-        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
+      if(utils.checkPassword(value) != null) {
+        setErrorPasswordMessage(t(utils.checkPassword(value)));
         setErrorPassword(true);
       } else {
         setErrorPassword(false);
       }
     }
-    if (confirmPassword != "") {
-      if (confirmPassword != e.target.value) {
-        setConfirmErrorPasswordMessage(
-          langKey && langKey.password_is_not_match
-        );
+    if (confirmPassword != '') { 
+      if (confirmPassword != value) {
+        setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
         setErrorConfirmPassword(true);
       } else {
         setErrorConfirmPassword(false);
@@ -244,26 +253,26 @@ export default function Register() {
     }
   };
 
-  const onChangeConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value);
-    if (e.target.value == "") {
+  const onChangeConfirmPassword = (value) => {
+    setConfirmPassword(value);
+    if (value == '') {
       setErrorPasswordMessage(langKey && langKey.confirm_password_required);
       setErrorConfirmPassword(true);
     } else {
-      if (utils.checkPassword(e.target.value) != null) {
-        setErrorPasswordMessage(t(utils.checkPassword(e.target.value)));
+      if(utils.checkPassword(value) != null) {
+        setErrorPasswordMessage(t(utils.checkPassword(value)));
         setErrorConfirmPassword(true);
       } else {
         setErrorConfirmPassword(false);
       }
     }
-    if (password != e.target.value) {
+    if (password != value) {
       setConfirmErrorPasswordMessage(langKey && langKey.password_is_not_match);
       setErrorConfirmPassword(true);
     } else {
       setErrorConfirmPassword(false);
     }
-    if (e.target.value.length < minLength) {
+    if (value.length < minLength) {
       setConfirmErrorPasswordMessage(langKey && langKey.validate_password);
       setErrorConfirmPassword(true);
     }
@@ -285,12 +294,13 @@ export default function Register() {
     }
   };
   useEffect(() => {
-    if (!errorPassword && !errorUserName) {
+    
+    if (!errorPassword && !errorUserName && (password !='' && username!='')) {
       setDisableSubmit(false);
     } else {
       setDisableSubmit(true);
     }
-  }, [errorPassword, errorUserName]);
+  }, [errorPassword, errorUserName, password, username]); 
   return matches ? (
     <>
       <Grid item container alignContent="flex-start" height="100%">
@@ -341,7 +351,7 @@ export default function Register() {
                       inputProps={{ maxLength: 16 }}
                       id="outlined-adornment-username"
                       value={username}
-                      onChange={(e) => onChangeUserName(e)}
+                      onChange={(e) => onChangeUserName(e.target.value)}
                       error={errorUserName}
                       endAdornment={
                         <InputAdornment position="end">
@@ -382,7 +392,7 @@ export default function Register() {
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
                       value={password}
-                      onChange={(e) => onChangePassword(e)}
+                      onChange={(e) => onChangePassword(e.target.value)}
                       error={errorPassword}
                       endAdornment={
                         <InputAdornment position="end">
@@ -520,7 +530,8 @@ export default function Register() {
         id="registerdialog"
       >
         <DialogContent dividers sx={{ maxWidth: "220px", textAlign: "center" }}>
-          <Typography>{responseMessage}</Typography>
+          <Typography style={{fontWeight:registerSuccess?'bold':''}}>{responseMessage}</Typography>
+          {registerSuccess && <CircularProgress size={30} style={{marginTop:6}}/>}
         </DialogContent>
         {!registerSuccess && (
           <DialogActions>
@@ -735,8 +746,7 @@ export default function Register() {
                       sx={{
                         borderRadius: "15px",
                         marginBottom: "5px",
-                      }}
-                    >
+                      }}>
                       <InputLabel htmlFor="component-outlined" shrink>
                         {langKey && (langKey.user_name || t("user_name"))}
                       </InputLabel>
@@ -751,7 +761,7 @@ export default function Register() {
                         type="text"
                         notched
                         value={username}
-                        onChange={(e) => onChangeUserName(e)}
+                        onChange={(e) => onChangeUserName(e.target.value)}
                         error={errorUserName}
                         endAdornment={
                           <InputAdornment position="end">
@@ -800,7 +810,7 @@ export default function Register() {
                         type={showPassword ? "text" : "password"}
                         value={password}
                         notched
-                        onChange={(e) => onChangePassword(e)}
+                        onChange={(e) => onChangePassword(e.target.value)}
                         error={errorPassword}
                         endAdornment={
                           <InputAdornment position="end">
@@ -858,7 +868,7 @@ export default function Register() {
                         type={showConfirmPassword ? "text" : "password"}
                         value={confirmPassword}
                         notched
-                        onChange={(e) => onChangeConfirmPassword(e)}
+                        onChange={(e) => onChangeConfirmPassword(e.target.value)}
                         error={errorConfirmPassword}
                         endAdornment={
                           <InputAdornment position="end">
