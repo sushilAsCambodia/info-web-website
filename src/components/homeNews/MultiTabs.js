@@ -7,6 +7,7 @@ import Tab from '@mui/material/Tab';
 import { styled } from '@mui/material/styles';
 import PropTypes from "prop-types";
 import DataTabComponent from "./DataTabComponent";
+import { useSelector } from "react-redux";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -33,8 +34,7 @@ TabPanel.propTypes = {
 };
 
 const AntTabs = styled(Tabs)({
-  borderBottom: '1px solid #e8e8e8',
-  
+  borderBottom: '1px solid #D9D9D9',
 });
 export default function MultiTabs(props) {
   const { categories,lang_id } = props;
@@ -47,6 +47,9 @@ export default function MultiTabs(props) {
     setValue(0);
   },[lang_id]); 
 
+  const viewport_height= window.innerHeight;
+
+  const {advertises} = useSelector((state) => state.advertise);
 
   return (categories && categories.length > 0) && (
     <Grid
@@ -84,8 +87,11 @@ export default function MultiTabs(props) {
           
             { categories.map((category,index) => {
                 return (
-                  <TabPanel key={index} value={value} index={index} >
+                  <TabPanel key={index} value={value} index={index}>
+                    <Grid sx={{overflow:"auto", height:advertises?.length > 0 ?`${viewport_height/21}vh`:`50vh`}}>
+                    {/* <Grid sx={{overflow:"auto", height:`50vh`}}> */}
                     <DataTabComponent id={category?.id} lang_id={lang_id}/>
+                    </Grid>
                   </TabPanel>
                 );
               })

@@ -76,7 +76,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(true);
-  const [errorUserNameMessage, setErrorUserNameMessage] = useState('');
+  const [errorUserNameMessage, setErrorUserNameMessage] = useState("");
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [username, setUserName] = useState("");
@@ -84,8 +84,9 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
-  const [confirmErrorPasswordMessage, setConfirmErrorPasswordMessage] = useState('');
+  const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
+  const [confirmErrorPasswordMessage, setConfirmErrorPasswordMessage] =
+    useState("");
   const [isComponent, setIsComponent] = useState("login");
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
@@ -118,7 +119,7 @@ export default function Register() {
   const handleSignup = () => {
     dispatch(
       register({
-        body: { user_name: username, password: password},
+        body: { user_name: username, password: password },
         callback: (res) => {
           setLoading(false);
           const { status_code, message = "" } = res;
@@ -146,15 +147,21 @@ export default function Register() {
     if (username == "" && password == "") {
       setErrorUserName(true);
       setErrorPassword(true);
-      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorUserNameMessage(
+        langKey && (langKey.user_name_required || t("user_name_required"))
+      );
       setErrorPasswordMessage(langKey && langKey.password_required);
       return;
     } else if (password == "") {
-      setErrorPasswordMessage(langKey && (langKey.password_required || t('password_required')));
+      setErrorPasswordMessage(
+        langKey && (langKey.password_required || t("password_required"))
+      );
       setErrorPassword(true);
       return;
     } else if (username == "") {
-      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorUserNameMessage(
+        langKey && (langKey.user_name_required || t("user_name_required"))
+      );
       setErrorUserName(true);
       return;
     }
@@ -168,7 +175,9 @@ export default function Register() {
       setErrorUserName(true);
       setErrorPassword(true);
       setErrorConfirmPassword(true);
-      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorUserNameMessage(
+        langKey && (langKey.user_name_required || t("user_name_required"))
+      );
       setErrorPasswordMessage(langKey && langKey.password_required);
       setConfirmErrorPasswordMessage(langKey && (langKey.confirm_password_required || t('confirm_password_required')));
       return;
@@ -177,7 +186,9 @@ export default function Register() {
       return;
     } else if (username == "") {
       setErrorUserName(true);
-      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorUserNameMessage(
+        langKey && (langKey.user_name_required || t("user_name_required"))
+      );
       return;
     }else if (confirmPassword === '') {
       setConfirmErrorPasswordMessage(langKey && (langKey.confirm_password_required || t('confirm_password_required')));
@@ -195,16 +206,22 @@ export default function Register() {
     const validateUsername = regex.test(value);
     if (userName != "" && userName.length < minLength) {
       setErrorUserName(true);
-      setErrorUserNameMessage(langKey && (langKey.validate_user_name || t('validate_user_name')));
-    }
-    else if(userName == ''){
+      setErrorUserNameMessage(
+        langKey && (langKey.validate_user_name || t("validate_user_name"))
+      );
+    } else if (userName == "") {
       setErrorUserName(true);
-      setErrorUserNameMessage(langKey && (langKey.user_name_required || t('user_name_required')));
+      setErrorUserNameMessage(
+        langKey && (langKey.user_name_required || t("user_name_required"))
+      );
     } else {
-      if(!validateUsername){
+      if (!validateUsername) {
         setErrorUserName(true);
-        setErrorUserNameMessage(langKey && (langKey.username_wrong_format || t('username_wrong_format')));
-      }else{
+        setErrorUserNameMessage(
+          langKey &&
+            (langKey.username_wrong_format || t("username_wrong_format"))
+        );
+      } else {
         setErrorUserName(false);
       }
     }
@@ -219,7 +236,7 @@ export default function Register() {
       if(utils.checkPassword(value) != null) {
         setErrorPasswordMessage(t(utils.checkPassword(value)));
         setErrorPassword(true);
-      }else {
+      } else {
         setErrorPassword(false);
       }
     }
@@ -242,7 +259,7 @@ export default function Register() {
       if(utils.checkPassword(value) != null) {
         setErrorPasswordMessage(t(utils.checkPassword(value)));
         setErrorConfirmPassword(true);
-      }else {
+      } else {
         setErrorConfirmPassword(false);
       }
     }
@@ -267,27 +284,34 @@ export default function Register() {
     setOpen(false);
   };
   const goToForgotPassword = () => {
-    if(matches) {
+    if (matches) {
       Router.push("/forgotPassword");
-    }else {
-      setIsComponent('forgotpassword');
+    } else {
+      setIsComponent("forgotpassword");
     }
   };
-  useEffect(() => { 
-    if(!errorPassword && !errorUserName) {
-      setDisableSubmit(false)
-    }else {
-      setDisableSubmit(true)
+  useEffect(() => {
+    if (!errorPassword && !errorUserName) {
+      setDisableSubmit(false);
+    } else {
+      setDisableSubmit(true);
     }
-  },[errorPassword,errorUserName]);
+  }, [errorPassword, errorUserName]);
   return matches ? (
     <>
-      <Grid container alignItems="center" justifyContent="center" height="100%">
-        <Grid item container maxWidth="500px" sx={{ minHeight: "500px" }}>
-          <Grid item container xs={12} sm={12} padding={2}>
-            <Grid container alignItems="flex-end" alignContent="center" mb={4}>
+      <Grid item container alignContent="flex-start" height="100%">
+        <Grid item container minHeight="500px">
+          <Grid
+            item
+            container
+            xs={12}
+            sm={12}
+            padding={2}
+            alignContent="space-evenly"
+          >
+            <Grid container alignContent="center" minHeight="100px">
               <Typography variant="h5" sx={{ position: "relative" }}>
-                {langKey && (langKey.register || t('register'))}
+                {langKey && (langKey.register || t("register"))}
               </Typography>
             </Grid>
             <form
@@ -301,90 +325,94 @@ export default function Register() {
                 width: "100%",
               }}
             >
-              <Grid item xs={12} sm={12} mb={3}>
-                <Typography fontWeight="bold" pb={1}>
-               {langKey && (langKey.user_name || t('user_name'))} 
-                </Typography>
+              <Grid my={7}>
+                <Grid item xs={12} sm={12} mb={3}>
+                  <Typography fontWeight="bold" pb={1}>
+                    {langKey && (langKey.user_name || t("user_name"))}
+                  </Typography>
 
-                <FormControl
-             
-                  variant="outlined"
-                  fullWidth
-                  sx={{
-                    borderRadius: "15px",
-                    marginBottom: "5px",
-                  }}
-                >
-                  <OutlinedInput
-                    name="Username"
-                    placeholder={langKey && (langKey.user_name || t('user_name'))}
-                    inputProps={{ maxLength: 16 }}
-                    id="outlined-adornment-username"
-                    value={username}
-                    onChange={(e) => onChangeUserName(e.target.value)}
-                    error={errorUserName}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle username visibility"
-                          edge="end"
-                        >
-                          <Icon icon="mdi:user" width={20} color="#F26522" />
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                  {errorUserName && (
-                    <FormHelperText error >
-                      {errorUserNameMessage}
-                    </FormHelperText>
-                  )}
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={12} mb={4}>
-                <Typography fontWeight="bold" pb={1}>
-                  {langKey && (langKey.password || t('password'))}
-                </Typography>
-                <FormControl
-               
-                  variant="outlined"
-                  fullWidth
-                  sx={{
-                    borderRadius: "15px",
-                    marginBottom: "5px",
-                  }}
-                >
-                  <OutlinedInput
-                    name="password"
-                    placeholder={langKey && (langKey.password || t('password'))}
-                    inputProps={{ maxLength: 16 }}
-                    id="outlined-adornment-password"
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => onChangePassword(e.target.value)}
-                    error={errorPassword}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          edge="end"
-                        >
-                          {showPassword ? (
-                            <Icon icon="ph:eye-bold" color="#F26522" />
-                          ) : (
-                            <Icon  icon="ri:eye-close-fill" color="#F26522" />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                  {errorPassword && (
-                    <FormHelperText error >
-                      {errorPasswordMessage}
-                    </FormHelperText>
-                  )}
-                </FormControl>
+                  <FormControl
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                      borderRadius: "15px",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    <OutlinedInput
+                      name="Username"
+                      placeholder={
+                        langKey && (langKey.user_name || t("user_name"))
+                      }
+                      inputProps={{ maxLength: 16 }}
+                      id="outlined-adornment-username"
+                      value={username}
+                      onChange={(e) => onChangeUserName(e.target.value)}
+                      error={errorUserName}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle username visibility"
+                            edge="end"
+                          >
+                            <Icon icon="mdi:user" width={20} color="#F26522" />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                    {errorUserName && (
+                      <FormHelperText error>
+                        {errorUserNameMessage}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={12} mb={4}>
+                  <Typography fontWeight="bold" pb={1}>
+                    {langKey && (langKey.password || t("password"))}
+                  </Typography>
+                  <FormControl
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                      borderRadius: "15px",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    <OutlinedInput
+                      name="password"
+                      placeholder={
+                        langKey && (langKey.password || t("password"))
+                      }
+                      inputProps={{ maxLength: 16 }}
+                      id="outlined-adornment-password"
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => onChangePassword(e.target.value)}
+                      error={errorPassword}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            edge="end"
+                          >
+                            {showPassword ? (
+                              <Icon icon="ph:eye-bold" color="#F26522" />
+                            ) : (
+                              <Icon icon="ri:eye-close-fill" color="#F26522" />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                    {errorPassword && (
+                      <FormHelperText error>
+                        {errorPasswordMessage}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
               </Grid>
               <Grid item container spacing={2} mb={1}>
                 <Grid item xs={12}>
@@ -400,7 +428,7 @@ export default function Register() {
                     disabled={disableSubmit}
                     onClick={onSubmitMobile}
                   >
-                    {langKey && (langKey.signup_for_now || t('signup_for_now'))}
+                    {langKey && (langKey.signup_for_now || t("signup_for_now"))}
                   </Button>
                 </Grid>
               </Grid>
@@ -464,22 +492,24 @@ export default function Register() {
                   underline="none"
                   style={{
                     cursor: "pointer",
-                    fontSize: "12px",
+                    fontSize: "14px",
                     color: "#000",
                     padding: "10px",
                     display: "flex",
                   }}
                   onClick={goToLogin}
                 >
-                  {langKey && (langKey.already_have_an_account || t('already_have_an_account'))} 
+                  {langKey &&
+                    (langKey.already_have_an_account ||
+                      t("already_have_an_account"))}
                   <Typography
                     style={{
-                      fontSize: "12px",
+                      fontSize: "14px",
                       cursor: "pointer",
                       color: "#F26522",
                     }}
                   >
-                  &nbsp;  {langKey && (langKey.login || t('login'))}
+                    &nbsp; {langKey && (langKey.login || t("login"))}
                   </Typography>
                 </Link>
               </Grid>
@@ -509,7 +539,7 @@ export default function Register() {
                 padding="5px"
                 onClick={handleClose}
               >
-                {langKey && (langKey.cancel || t('cancel'))}
+                {langKey && (langKey.cancel || t("cancel"))}
               </Grid>
               <Grid
                 item
@@ -519,7 +549,7 @@ export default function Register() {
                 onClick={() => Router.push("/login")}
                 sx={{ color: "#0898D6" }}
               >
-                {langKey && (langKey.login || t('login'))}
+                {langKey && (langKey.login || t("login"))}
               </Grid>
             </Grid>
           </DialogActions>
@@ -531,13 +561,19 @@ export default function Register() {
       display="flex"
       justifyContent="center"
       overflow="auto"
-      sx={{ backgroundImage: "url('./assets/login/login_bg.png')", backgroundPosition:'center', backgroundSize:'cover',height:'100%',alignItems:'center' }}
+      sx={{
+        backgroundImage: "url('./assets/login/login_bg.png')",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        height: "100%",
+        alignItems: "center",
+      }}
     >
       <Grid
         container
         justifyContent="center"
         alignItems="stretch"
-        width={{xs:"90%", lg:"90%", xl:"1000px",}}
+        width={{ xs: "90%", lg: "90%", xl: "1000px" }}
         height="fit-content"
       >
         <Grid
@@ -554,17 +590,23 @@ export default function Register() {
           }}
           borderRadius="20px 0px 0px 20px"
         >
-          <Grid item xs={10} container alignContent="space-between" style={{margin:30}}>
+          <Grid
+            item
+            xs={10}
+            container
+            alignContent="space-between"
+            style={{ margin: 30 }}
+          >
             <Typography
               variant="h4"
               fontWeight="bold"
               color="white"
               textAlign="center"
-              marginTop={'18px'}
-              fontSize={'36px'}
-              lineHeight={'54px'}
+              marginTop={"18px"}
+              fontSize={"36px"}
+              lineHeight={"54px"}
             >
-      {langKey && (langKey.anytime_anywhere || t('anytime_anywhere'))}
+              {langKey && (langKey.anytime_anywhere || t("anytime_anywhere"))}
             </Typography>
             <Grid container justifyContent="center">
               <Grid item xs={12} sm={12} md={12} xl={12}>
@@ -577,8 +619,13 @@ export default function Register() {
                     bottom: "150px",
                   }}
                 >
-                  <Typography fontWeight={700} fontSize="20px" margin={2} textTransform="uppercase">
-                  {langKey && (langKey.download_app || t('download_app'))}
+                  <Typography
+                    fontWeight={700}
+                    fontSize="20px"
+                    margin={2}
+                    textTransform="uppercase"
+                  >
+                    {langKey && (langKey.download_app || t("download_app"))}
                   </Typography>
                 </Grid>
 
@@ -600,12 +647,24 @@ export default function Register() {
                   >
                     <Grid item xs={6} className="mui-iosbtn-wrapper">
                       <Typography component="div" textAlign="center">
-                        <Image alt="iosbtn" style={{maxWidth:144}} src="./assets/Home/iosbtn.png" />
+                        <Image
+                          alt="iosbtn"
+                          style={{ maxWidth: 144 }}
+                          src="./assets/Home/iosbtn.png"
+                        />
                       </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                      <Typography component="div" textAlign="center" className="mui-androidbtn-wrapper">
-                        <Image alt="androidbtn" style={{maxWidth:144}} src="./assets/Home/androidbtn.png" />
+                      <Typography
+                        component="div"
+                        textAlign="center"
+                        className="mui-androidbtn-wrapper"
+                      >
+                        <Image
+                          alt="androidbtn"
+                          style={{ maxWidth: 144 }}
+                          src="./assets/Home/androidbtn.png"
+                        />
                       </Typography>
                     </Grid>
                   </Grid>
@@ -629,32 +688,37 @@ export default function Register() {
             container
             justifyContent="center"
             alignContent="center"
-            xs={12} 
+            xs={12}
           >
-            <Grid item container xs={12} sm={12} padding={'40px 20px'}>
+            <Grid item container xs={12} sm={12} padding={"40px 20px"}>
               <Grid
                 container
                 justifyContent="center"
                 style={{ cursor: "pointer" }}
-              
               >
-                <Image alt="register_logo" style={{maxWidth:150}} src="./assets/Logo/new-logo-white-bg.png" />
+                <Image
+                  alt="register_logo"
+                  style={{ maxWidth: 150 }}
+                  src="./assets/Logo/new-logo-white-bg.png"
+                />
               </Grid>
               <Grid item xs={12} my={2}>
                 <Divider
                   sx={{
                     "&::before, &::after": {
                       borderColor: "#FF6F31",
-                      borderWidth: '2px'
+                      borderWidth: "2px",
                     },
                   }}
                 >
                   <Typography variant="h5" fontWeight="bold">
-                    {langKey && (langKey.register || t('register'))}
+                    {langKey && (langKey.register || t("register"))}
                   </Typography>
                 </Divider>
               </Grid>
-              {isComponent == 'forgotpassword' ? <ForgotPassword t={t} setIsComponent={setIsComponent}/> : (
+              {isComponent == "forgotpassword" ? (
+                <ForgotPassword t={t} setIsComponent={setIsComponent} />
+              ) : (
                 <form
                   className="lnr"
                   style={{
@@ -679,12 +743,14 @@ export default function Register() {
                         marginBottom: "5px",
                       }}>
                       <InputLabel htmlFor="component-outlined" shrink>
-                        {langKey && (langKey.user_name || t('user_name'))}
+                        {langKey && (langKey.user_name || t("user_name"))}
                       </InputLabel>
                       <OutlinedInput
                         name="Username"
-                        placeholder={langKey && (langKey.user_name || t('user_name'))}
-                        label={langKey && (langKey.user_name || t('user_name'))}
+                        placeholder={
+                          langKey && (langKey.user_name || t("user_name"))
+                        }
+                        label={langKey && (langKey.user_name || t("user_name"))}
                         inputProps={{ maxLength: 16 }}
                         id="outlined-adornment-username"
                         type="text"
@@ -698,7 +764,11 @@ export default function Register() {
                               aria-label="toggle username visibility"
                               edge="end"
                             >
-                              <Icon icon="mdi:user" width={20} color="#F26522" />
+                              <Icon
+                                icon="mdi:user"
+                                width={20}
+                                color="#F26522"
+                              />
                             </IconButton>
                           </InputAdornment>
                         }
@@ -712,7 +782,7 @@ export default function Register() {
                   </Grid>
                   <Grid item xs={12} sm={12} mb={3}>
                     <FormControl
-                    className="errorfreeparent"
+                      className="errorfreeparent"
                       variant="outlined"
                       fullWidth
                       sx={{
@@ -721,13 +791,15 @@ export default function Register() {
                       }}
                     >
                       <InputLabel htmlFor="component-outlined" shrink>
-                        {langKey && (langKey.password || t('password'))}
+                        {langKey && (langKey.password || t("password"))}
                       </InputLabel>
 
                       <OutlinedInput
                         name="password"
-                        placeholder={langKey && (langKey.password || t('password'))}
-                        label={langKey && (langKey.password || t('password'))}
+                        placeholder={
+                          langKey && (langKey.password || t("password"))
+                        }
+                        label={langKey && (langKey.password || t("password"))}
                         inputProps={{ maxLength: 16 }}
                         id="outlined-adornment-password"
                         type={showPassword ? "text" : "password"}
@@ -745,7 +817,10 @@ export default function Register() {
                               {showPassword ? (
                                 <Icon icon="ph:eye-bold" color="#F26522" />
                               ) : (
-                                <Icon  icon="ri:eye-close-fill" color="#F26522" />
+                                <Icon
+                                  icon="ri:eye-close-fill"
+                                  color="#F26522"
+                                />
                               )}
                             </IconButton>
                           </InputAdornment>
@@ -760,7 +835,7 @@ export default function Register() {
                   </Grid>
                   <Grid item xs={12} sm={12} mb={3}>
                     <FormControl
-                    className="errorfreeparent"
+                      className="errorfreeparent"
                       variant="outlined"
                       fullWidth
                       sx={{
@@ -769,13 +844,20 @@ export default function Register() {
                       }}
                     >
                       <InputLabel htmlFor="component-outlined" shrink>
-                        {langKey && (langKey.confirm_password || t('confirm_password'))}
+                        {langKey &&
+                          (langKey.confirm_password || t("confirm_password"))}
                       </InputLabel>
 
                       <OutlinedInput
                         name="password"
-                        placeholder={langKey && (langKey.confirm_password || t('confirm_password'))}
-                        label={langKey && (langKey.confirm_password || t('confirm_password'))}
+                        placeholder={
+                          langKey &&
+                          (langKey.confirm_password || t("confirm_password"))
+                        }
+                        label={
+                          langKey &&
+                          (langKey.confirm_password || t("confirm_password"))
+                        }
                         inputProps={{ maxLength: 16 }}
                         id="outlined-adornment-confirmpassword"
                         type={showConfirmPassword ? "text" : "password"}
@@ -787,13 +869,18 @@ export default function Register() {
                           <InputAdornment position="end">
                             <IconButton
                               aria-label="toggle password visibility"
-                              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                              onClick={() =>
+                                setShowConfirmPassword(!showConfirmPassword)
+                              }
                               edge="end"
                             >
                               {showConfirmPassword ? (
                                 <Icon icon="ph:eye-bold" color="#F26522" />
                               ) : (
-                                <Icon  icon="ri:eye-close-fill" color="#F26522" />
+                                <Icon
+                                  icon="ri:eye-close-fill"
+                                  color="#F26522"
+                                />
                               )}
                             </IconButton>
                           </InputAdornment>
@@ -819,7 +906,7 @@ export default function Register() {
                         }}
                         onClick={() => Router.push("/")}
                       >
-                        {langKey && (langKey.cancel || t('cancel'))}
+                        {langKey && (langKey.cancel || t("cancel"))}
                       </Button>
                     </Grid>
                     <Grid item xs={6}>
@@ -828,7 +915,7 @@ export default function Register() {
                         variant="contained"
                         disabled={loading ? true : false}
                         sx={{
-                          whiteSpace:'nowrap',
+                          whiteSpace: "nowrap",
                           color: "white",
                           background: loading
                             ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);"
@@ -837,7 +924,8 @@ export default function Register() {
                         }}
                         onClick={onSubmit}
                       >
-                        {langKey && (langKey.signup_for_now || t('signup_for_now'))}
+                        {langKey &&
+                          (langKey.signup_for_now || t("signup_for_now"))}
                       </Button>
                     </Grid>
                   </Grid>
@@ -911,7 +999,11 @@ export default function Register() {
                     Router.push("/login");
                   }}
                 >
-                  <Typography>{langKey && (langKey.already_have_an_account || t('already_have_an_account'))} </Typography>
+                  <Typography>
+                    {langKey &&
+                      (langKey.already_have_an_account ||
+                        t("already_have_an_account"))}{" "}
+                  </Typography>
                   <Typography
                     style={{
                       cursor: "pointer",
@@ -919,12 +1011,19 @@ export default function Register() {
                     }}
                     mx={1}
                   >
-                      {langKey && (langKey.sign_in_here || t('sign_in_here'))}
+                    {langKey && (langKey.sign_in_here || t("sign_in_here"))}
                   </Typography>
                 </Link>
-                <Grid display="flex" sx={{ cursor: "pointer" }} onClick={goToForgotPassword}>
+                <Grid
+                  display="flex"
+                  sx={{ cursor: "pointer" }}
+                  onClick={goToForgotPassword}
+                >
                   <Icon icon="bi:chat-square-dots-fill" width={25} />
-                  <Typography mx={1}>{langKey && (langKey.customer_service || t('customer_service'))}</Typography>
+                  <Typography mx={1}>
+                    {langKey &&
+                      (langKey.customer_service || t("customer_service"))}
+                  </Typography>
                 </Grid>
               </Grid>
             </Grid>
@@ -944,7 +1043,7 @@ export default function Register() {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            {langKey && (langKey.ok || t('ok'))}
+            {langKey && (langKey.ok || t("ok"))}
           </Button>
         </DialogActions>
       </BootstrapDialog>
