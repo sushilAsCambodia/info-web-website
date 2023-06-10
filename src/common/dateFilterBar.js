@@ -8,7 +8,7 @@ import utils from './utils';
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
 
-export default function dateFilterBar() {
+export default function DateFilterBar() {
     
     const [dateFilter, setDateFilter] = useState("");
     const [age, setAge] = useState("");

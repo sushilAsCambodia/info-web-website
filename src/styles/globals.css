@@ -364,7 +364,9 @@ padding: 0px;
   width: auto;
   height: 100%;
 }
-
+.img-upload .mui-image-wrapper,.img-upload .mui-image-wrapper img{
+  border-radius: 50%;
+}
 .mui-profile-drawer-wrapper .MuiDrawer-paper, .custom-drawer-wrapper .MuiDrawer-paper{
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;

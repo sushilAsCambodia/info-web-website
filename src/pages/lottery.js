@@ -12,7 +12,7 @@ import { Icon } from "@iconify/react";
 import router, { useRouter } from "next/router";
 import MatchWithDates from "@/components/match/MatchWithDates";
 import MatchWithRounds from "@/components/match/MatchWithRounds";
-import FavouritePage from "@/components/favourite/favouritePage";
+import FavouritePage from "@/components/favourite/FavouritePage";
 import { getLotteryCategory,getLotteryResultByCategory } from "@/store/actions/lotteryActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
