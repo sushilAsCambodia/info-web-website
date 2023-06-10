@@ -135,11 +135,12 @@ const Layout = (props) => {
           sx={{
             bgcolor: "#fff",
             padding: "0px !important",
-            height: vh
-            // overflowY: 'auto',height: "100%",
+            // height: vh
+            overflowY: 'auto',
+            height: "100vh",
           }}>
           <Header />
-          <main style={{ width: width, margin: "auto", height: height, overflowY: 'auto' }}>
+          <main style={{ width: width, margin: "auto", height: vh, overflowY: 'auto' }}>
             {children}
           </main>
           <div style={{ height: '147px' }}>
