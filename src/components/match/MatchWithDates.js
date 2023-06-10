@@ -20,7 +20,7 @@ import { Image } from "mui-image";
 import moment from "moment/moment";
 import utils from "@/common/utils";
 import MatchItem from "@/common/MatchItem";
-import DateFilterBar from "@/common/dateFilterBar";
+import DateFilterBar from "@/common/DateFilterBar";
 export default function MatchWithDates(props) {
   const { t } = useTranslation();
   const theme = useTheme();

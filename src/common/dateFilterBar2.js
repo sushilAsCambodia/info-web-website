@@ -16,7 +16,7 @@ import utils from "./utils";
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
 
-export default function dateFilterBar2() {
+export default function DateFilterBar2() {
   const [dateFilter, setDateFilter] = useState("");
   const [date, setDate] = useState("");
 
@@ -51,7 +51,7 @@ export default function dateFilterBar2() {
             </MenuItem>
             {utils.LastXDays(6).map((item, index) => {
               return (
-                  <MenuItem value={item.ddmmmyyyy}>
+                  <MenuItem key={index} value={item.ddmmmyyyy}>
                     <Typography>{item.ddmmmyyyy}</Typography>
                   </MenuItem>
               );
