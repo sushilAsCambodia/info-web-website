@@ -171,14 +171,16 @@ useEffect(() => {
                     }
                   />
 
-                  <Image
+                 <Grid style={{borderRadius:"50px", border:'1.5px solid #DDDDDD'}}>
+                 <Image
                     src={item.icon}
                     width={40}
                     height={40}
-                    style={{ borderRadius: "50px" }}
+                    style={{ borderRadius: "50px",  }}
                     alt="Image"
                   />
-                  <Typography fontWeight="bold" mx={1}>
+                 </Grid>
+                  <Typography fontWeight="bold" mx={1} fontSize="14px">
                     {" "}
                     {item.name}
                   </Typography>
@@ -187,7 +189,7 @@ useEffect(() => {
                   <IconButton onClick={()=>handleFavouriteUpdate(index,!item.favourite)}>
                   <Icon
                     icon="iconamoon:star-fill"
-                    width={25}
+                    width={20}
                     color={`${item.favourite ? "#F2DA00" : "#DDDDDD"}`}
                   />
                   </IconButton>
