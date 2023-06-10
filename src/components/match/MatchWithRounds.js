@@ -21,7 +21,7 @@ import moment from "moment/moment";
 import utils from "@/common/utils";
 import MatchItem from "@/common/MatchItem";
 import MatchRounds from "@/common/MatchRounds";
-import DateFilterBar from "@/common/DateFilterBar";
+import DateFilterBar from "@/common/dateFilterBar";
 export default function MatchWithRounds(props) {
   const { t } = useTranslation();
   const theme = useTheme();
