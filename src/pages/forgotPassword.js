@@ -33,9 +33,10 @@ export default function ForgotPassword(props) {
         {/* {showTitle && <Typography variant="h5">
           {title||''}
         </Typography>} */}
-        <Image alt="customersupport1" src="/assets/Home/customersupport1.png" style={{ maxWidth: "200px", margin:"0 auto", display:"flex" }} />
-        <Typography component="h6" fontSize={12} textAlign="center">
-          {langKey && langKey.notify_following}
+        <Image alt="customersupport1" src="/assets/Home/customersupport1.png" style={{ maxWidth: "300px", margin:"0 auto", display:"flex" }} />
+        <Typography component="h6" fontSize={14} textAlign="center">
+        {/* {langKey && langKey.notify_following} */}
+        {langKey && langKey.contact_customer_service_via}
         </Typography>
         <Typography component="div" sx={{display:'flex', justifyContent:'center', margin:'5px'}}>
           <Link href="https://t.me/+855762055536" target="_blank">

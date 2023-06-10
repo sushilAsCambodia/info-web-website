@@ -6,7 +6,7 @@ const ForgotPassword = (props) => {
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
     return <>
         <Grid container display="flex" alignItems="center">
-            <Grid item md={12}>
+            <Grid item md={12} height="370px">
                 <ForgotPasswordPage showTitle={false} />
             </Grid>
             <Grid px={1} py={1} underline="none" item md={12} display="flex" justifyContent="center">
