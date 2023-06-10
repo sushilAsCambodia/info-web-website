@@ -940,18 +940,19 @@ label.MuiFormLabel-root.Mui-focused {
   color: #999999 !important;
   background: #FAFAFA;
   text-transform:capitalize !important;
-  border-radius: 5px !important;
-  padding: 0px 15px !important;
+  border-radius: 4px !important;
+  border: .5px solid #DDDDDD !important;
+  padding: 4px 15px !important;
 }
 .filterBtnSelected{
   white-space: nowrap;
   background: #FF6F31 !important;
   color: white !important;
   font-weight: bold;
-  border: 1px solid #DDDDDD !important;
+  border: .5px solid #DDDDDD !important;
   text-transform: capitalize !important;
-  border-radius: 5px !important;
-  padding: 0px 15px !important;
+  border-radius: 4px !important;
+  padding: 4px 15px !important;
 }
 #ballDivider .MuiDivider-wrapper{
 padding-left: 0;

@@ -82,7 +82,7 @@ export default function Lottery() {
     handleGetCategory();
   },[handleGetCategory]);
   React.useEffect(() => {
-    console.log(lotteryCategories,'alotteryCategories')
+    console.log(lotteryCategories,'alotteryCategories:::')
   },[lotteryCategories])
   React.useEffect(() => {
     console.log('value',value)
