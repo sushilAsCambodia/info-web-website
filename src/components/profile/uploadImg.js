@@ -94,12 +94,12 @@ const UploadImg = () => {
     //   setFile(null);
     //   setImagePreviewUrl('');
     // }else {
+      const formdata = new FormData;
+      formdata.append('image',file);
       dispatch(
         uploadProfile(
           {
-            body: {
-              image: file
-            },
+            body: formdata,
             callback: (res) => {
               let { message = '' } = res;
               setOpenDialog(true);
@@ -110,6 +110,7 @@ const UploadImg = () => {
           }
         )
       ).then(e => {
+        console.log(e)
         if(!e.payload) {
           setFile(null);
           setOpenDialog(true);

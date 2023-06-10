@@ -1,8 +1,10 @@
 
-import { Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@mui/material';
 import utils from '@/common/utils';
 import moment from 'moment/moment';
+import { useRouter } from 'next/router';
 const LotteryCard = ({lottery}) => {
+    const router = useRouter();
     const checkActive = (active_features,value) => {
         if(active_features && active_features !== '') {
             const arr = active_features.split(',');
@@ -11,6 +13,10 @@ const LotteryCard = ({lottery}) => {
             }
         }
         return false
+    }
+    const goToLotteryHistory = (lottery={}) => {
+        const title = lottery?.translation?.translation + lottery?.latest_result?.issue;
+        router.push({ pathname:'/lotteryHistory', query: { title:title, id: lottery.id } });
     }
     return (
         <Card>
@@ -78,7 +84,7 @@ const LotteryCard = ({lottery}) => {
                     </Grid>
                     <Grid item xs={4} style={{ fontSize: '10px', color: '#8C8C8C', textAlign: 'center' }}>
                         { 
-                            checkActive(lottery?.active_features,'PastResult') && <span>History</span>
+                            checkActive(lottery?.active_features,'PastResult') && <span onClick={() => goToLotteryHistory(lottery)}>History</span>
                         }
                     </Grid>
                     {

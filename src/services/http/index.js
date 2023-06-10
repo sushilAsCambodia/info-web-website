@@ -3,9 +3,10 @@ import utils from '@/common/utils';
 import Cookies from 'js-cookie';
 
 const instance = axios.create({
-    baseURL: utils.baseUrl || '',
+    baseURL: utils.baseUrl || '', 
     headers: {
-        'content-type':'application/json'
+        'content-type':'application/json',
+        "Accept": "application/json, text/plain, */*"
     },
 });
 // Add a response interceptor
@@ -60,6 +61,7 @@ const http = {
         }
         if(formdata) {
             header["Content-Type"] = "multipart/form-data";
+            header["Content-Length"] = "-1";
         }
         return instance({
             'method': 'POST',
