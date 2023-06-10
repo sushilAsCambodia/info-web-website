@@ -4,6 +4,7 @@ import DataNotFound from './DataNotFound';
 import DataLoading from './DataLoading';
 import { Grid } from '@mui/material'
 import CardSlice from './desktop/CardSlide';
+import { useState } from 'react';
 const ImageCarouselComponent = (props) => {
     const {images = [], isWeb = false,year,loading} = props;
     return <>

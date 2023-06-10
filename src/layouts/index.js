@@ -18,7 +18,8 @@ const Layout = (props) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const { customer } = useSelector((state) => state.auth);
-    const [mounted, setMounted] = useState(false);
+    const [mounted, setMounted] = useState(false); 
+    const [hash, setHash] = useState(''); 
     const [openDrawer, setOpenDrawer] = useState({ 
         open:false,
         anchor:'bottom'
@@ -73,20 +74,22 @@ const Layout = (props) => {
     } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
         height = 'calc(100vh - 40px)';
     }
+    useEffect(() => {
+        console.log(router,'router')
+    },[router])
     const switchHeader = () => { 
         if (router.pathname != '/') {
             if (pages.includes(router.pathname)) {
                 const {query} = router;
                 let title = '';
                 if(Object.keys(query).length > 0) {
-                    console.log(query?.title,langKey)
                     // title = langKey && langKey[(query?.title || '').toLowerCase()];
                     title = ( query?.title || '').toLowerCase();
                 }
-                if(router.pathname == '/lottery'){
+                if(router.pathname == '/lottery') {
                     return <Navigate
-                    title={'Lottery'}
-                    lead={<IconButton
+                        title={router.asPath.replace(router.pathname,'').replace('#','')}
+                        lead={<IconButton
                         onClick={() => router.back()}
                         size="large" 
                         edge="start"

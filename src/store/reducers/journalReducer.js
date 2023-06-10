@@ -118,13 +118,13 @@ const JournalReducer =  (state = initialState, action) => {
     case 'journal/album/selected-issue/pending':
       return {
         ...state, 
-        loading:true,
         loadingJournalDetail:true,
         journalDetail: [{
           album_slavs:   []
         }],
         status:'pending'
       };
+    
     case 'journal/album/selected-issue/fulfilled':
       return {
         ...state,
@@ -132,14 +132,22 @@ const JournalReducer =  (state = initialState, action) => {
         journalDetail: [{
           album_slavs: action.payload?.data?.data || []
         }],
-        loading: false,
         loadingJournalDetail:false,
       };
     case 'journal/album/selected-issue/rejected':
       return {
         ...state, 
-        loading:false,
+        loadingJournalDetail:false,
         status:'failed'
+      };
+    case 'CLEAR_SELECTED_ISSUE':
+      return {
+        ...state, 
+        loadingJournalDetail: false,
+        journalDetail: [{
+          album_slavs:   []
+        }],
+        status: ''
       };
     // end selected issue
   }

@@ -44,7 +44,7 @@ export default function Navigate(props) {
                             <Grid item xs={2}>
                                 {lead}
                             </Grid>
-                            <Grid item xs={8} textAlign="center" sx={{whiteSpace:'nowrap'}}>
+                            <Grid item xs={8} textAlign="center" sx={{whiteSpace:'nowrap',color:'#fff',textTransform:'capitalize'}}>
                                 <Typography variant="h6" component="div" >
                                     {title}
                                 </Typography>
