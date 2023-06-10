@@ -30,9 +30,9 @@ export default function ForgotPassword(props) {
       sx={{padding:'5px'}}
       >
       <Grid item md={12}>
-        {showTitle && <Typography variant="h5">
+        {/* {showTitle && <Typography variant="h5">
           {title||''}
-        </Typography>}
+        </Typography>} */}
         <Image alt="customersupport1" src="/assets/Home/customersupport1.png" style={{ maxWidth: "200px", margin:"0 auto", display:"flex" }} />
         <Typography component="h6" fontSize={12} textAlign="center">
           {langKey && langKey.notify_following}
