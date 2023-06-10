@@ -7,9 +7,16 @@ import DataLoading from '@/components/DataLoading';
 import ImageCarouselComponent from '@/components/ImageCarouselComponent';
 
 export default function JournalCardDetails() {
+  const { journal } = useSelector(state => state);
   const { loadingJournalDetail, journalDetail = [], years = [],loading } = useSelector(state => state.journal);
   const [images, setImages] = useState([]);
+  const [imagesLoad, setImagesLoad] = useState(false);
   const router = useRouter();
+
+
+
+  console.log('loadingJournalDetail:',loadingJournalDetail);
+  console.log('journal:',journal);
   // const { query } = router;
   // const dispatch = useDispatch();
   // useEffect(() => {
@@ -23,7 +30,10 @@ export default function JournalCardDetails() {
   //     ));
   //   }
   // }, [query])
+
+
   useEffect(() => {
+    console.log('loadingJournalDetail2222:');
     if (Array.isArray(journalDetail) && journalDetail.length > 0) {
       const images = []; 
       const item = journalDetail[0];
@@ -37,12 +47,25 @@ export default function JournalCardDetails() {
         }
       }
       setImages(images);
+
     } 
   }, [journalDetail]);
+
+
+  useEffect(() => {
+     setTimeout(() => {
+      setImagesLoad(true);
+     }, 2000);
+  }, []);
+
+
+
+
   return (
     <Grid container item textAlign="left" p={0} sx={{ height: '100%', alignItems: images.length ? 'auto' : 'center' }}>
       <Grid item xs={12}>
-        {loadingJournalDetail ? <DataLoading /> : <ImageCarouselComponent images={images} loading={loading}/>}
+        {/* {loadingJournalDetail ? <DataLoading /> : <ImageCarouselComponent images={images} loading={loading}/>} */}
+         {!imagesLoad ? <DataLoading /> : <ImageCarouselComponent images={images} loading={loading}/>} 
       </Grid>
     </Grid>
   )
