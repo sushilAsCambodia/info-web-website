@@ -19,21 +19,21 @@ export default function MatchDetailLiveText(props) {
   const router = useRouter();
   
   const message = [
-    {id:1,title:"90' + 13'",message:'Goal Kick Leads',type:'yellow'},
-    {id:2,title:"40' + 22'",message:'michael awards free kicks to united',type:'ToFrom'},
-    {id:3,title:"90' + 3'",message:'hsdhfhd jsdjfsdjfsjdf jsdf jsdfjsdjfsj ddjs jsdf',type:''},
-    {id:4,title:"2' + 1'",message:'Goal Kick Leads',type:'ball'},
+    {id:1,title:"90' + 13'",message:'Goal Kick Leads',icon:<Icon icon="icon-park-solid:rectangle" color="yellow" />  },
+    {id:2,title:"40' + 22'",message:'michael awards free kicks to united',icon:''},
+    {id:3,title:"90' + 3'",message:'hsdhfhd jsdjfsdjfsjdf jsdf jsdfjsdjfsj ddjs jsdf',icon:<><Icon icon="icons8:arrows-long-up" color="green" /><Icon icon="icons8:arrows-long-down" color="red" /></> },
+    {id:4,title:"2' + 1'",message:'Goal Kick Leads',icon:<Icon icon="openmoji:soccer-ball" color="red" />  },
 ]
   return (
     <Grid container height="100vh" overflow="auto" alignContent="flex-start">
     {message.map((item,index)=>{
         return(
             <Grid py={1} item xs={12} key={index} container borderBottom="1px solid grey">
-                <Grid item xs={3} textAlign="center">
+                <Grid item container justifyContent="center" xs={3} alignContent="center">
                     <Typography>{item.title}</Typography>
                 </Grid>
                 <Grid item xs={2} container alignItems="center" justifyContent="flex-end" pr={1}>
-                    <Typography>{item.type}</Typography>
+                    {item.icon}
                 </Grid>
                <Grid item xs={7}>
                  <Typography>{item.message}</Typography>

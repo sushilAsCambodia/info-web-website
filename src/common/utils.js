@@ -5,6 +5,7 @@ const utils = {
     lotteryFormat: 'Do MMM YYYY, dddd',
     letterFormat: 'YYYY MMM DD',
     letterFormat2: 'DD MMM YYYY',
+    letterFormatDDMMYYYY: 'DD/MM/YYYY',
     dateLetter: 'ddd',
     MonthYearFormat: 'MMM YYYY',
     DateMonthFormat: 'DD MMM',

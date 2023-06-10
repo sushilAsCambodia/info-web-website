@@ -64,16 +64,16 @@ export default function NewsJournalTabs(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  useEffect(() => {
-    if (value === 1) {
-      dispatch(
-        getJournal({
-          params: { lang_id: lang_id, take: 60 },
-          callback: (res) => {},
-        })
-      );
-    }
-  }, [dispatch,lang_id, value]);
+  // useEffect(() => {
+  //   if (value === 1) {
+  //     dispatch(
+  //       getJournal({
+  //         params: { lang_id: lang_id, take: 60 },
+  //         callback: (res) => {},
+  //       })
+  //     );
+  //   }
+  // }, [dispatch,lang_id, value]);
 
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
