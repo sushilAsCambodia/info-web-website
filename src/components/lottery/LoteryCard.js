@@ -28,7 +28,7 @@ const LotteryCard = ({lottery}) => {
             } />
             <CardContent style={{ padding: 5 }}>
                 <Typography component="span" style={{ fontSize: 12, color: '#444444' }}>
-                    {lottery?.latest_result?.lotterycode} {lottery?.latest_result?.issue}
+                    {lottery?.translation?.translation} {lottery?.latest_result?.issue}
                 </Typography>
                 <Grid container style={{ position: 'relative', alignItems: 'center', paddingTop: 10, paddingBottom: 10 }}>
                     <Typography component="span" style={{ background: '#FFE0D2', width: '37px', height: '24px' }}></Typography>

@@ -108,3 +108,10 @@ export const getSelectedIssue = createAsyncThunk(
     }
   },
 );
+
+export const clearSelectedIssue = () => (dispatch) => {
+  dispatch({
+    type:'CLEAR_SELECTED_ISSUE',
+    payload:[]
+  })
+} 

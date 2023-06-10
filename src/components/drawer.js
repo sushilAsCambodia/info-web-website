@@ -11,7 +11,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIssue, getYear, getSelectedIssue } from '@/store/actions/journalActions';
+import { getIssue, getYear, getSelectedIssue,clearSelectedIssue } from '@/store/actions/journalActions';
 import { useRouter } from 'next/router';
 import DataLoading from './DataLoading';
 import DataNotFound from './DataNotFound';
@@ -75,6 +75,8 @@ const DrawerComponent = (props) => {
     useEffect(() => {
         if(years.length  > 0) {
             fetchIssue(years[value]);
+        }else {
+            fetchIssue('2023');
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[years,value]);
@@ -91,12 +93,17 @@ const DrawerComponent = (props) => {
                         if(Object.keys(data).length > 0 && data.hasOwnProperty('data') && data.data.length > 0) {
                             const firstIssue = data.data[0];
                             openIssue(firstIssue.issue,0)
+                        }else {
+                            clearIssue();
                         }
                     }
                 }
             )
         )
     };
+    const clearIssue = () => {
+        dispatch(clearSelectedIssue())
+    }
     const openIssue = (issue,index) => {
         setActiveIssue(index);
         dispatch(
@@ -104,8 +111,8 @@ const DrawerComponent = (props) => {
                 {
                     params: {
                         albumId: router.query?.album_id,
-                        issue:issue,
-                        issueDate:years[value]
+                        issue: issue,
+                        issueDate: years[value]
                     },
                     callback:(res) => { },
                 }
