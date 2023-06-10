@@ -1,12 +1,15 @@
 
-import { Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@material-ui/core';
-const LotteryHistoryCard = () => {
+import { Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@mui/material';
+import utils from '@/common/utils';
+import moment from 'moment/moment';
+const LotteryHistoryCard = ({lottery}) => {
     return (
         <Card>
             <CardHeader style={{ padding: '5px 5px', borderBottom: '1px solid #ddd' }} title={
-                <Grid container style={{ flexWrap: 'nowrap', alignItems: "center" }}>
-                    <Grid item xs={10} style={{ fontSize: 12, color: '#8C8C8C' }}>2023 Mar 29, Monday</Grid>
-                   
+                <Grid  container style={{ flexWrap: 'nowrap', alignItems: "center" }}>
+                    <Grid item xs={10} style={{ fontSize: 12, color: '#8C8C8C' }}>
+                        {lottery?.opendate && moment(lottery?.opendate).format(utils.lotteryFormat)}
+                    </Grid>
                 </Grid>
             } />
             <CardContent style={{ padding:'10px 0px 10px 0px' }}>
@@ -24,11 +27,26 @@ const LotteryHistoryCard = () => {
                                 </defs>
                             </svg>
                         </Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>11</Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>11</Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>11</Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #FF0000 0%, #FF6E31 91.67%)' }}>11</Grid>
-                        <Grid item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(90deg, #00C2FF 0%, #05A3D5 91.67%)' }}>12</Grid>
+                        {
+                            lottery && lottery.result_data && lottery.result_data.map((r,key) => {
+                                return (
+                                    <Grid item key={key}
+                                        style={{ 
+                                            margin: 2, 
+                                            textAlign: 'center', 
+                                            fontSize: 12, 
+                                            color: '#fff', 
+                                            padding: 1, 
+                                            width: 20, 
+                                            height: 20, 
+                                            borderRadius: '50%', 
+                                            background: r.color }}>
+                                        {r.num}
+                                    </Grid> 
+                                );
+                            })
+                        }
+                        
                     </Grid>
                 </Grid>
             </CardContent>

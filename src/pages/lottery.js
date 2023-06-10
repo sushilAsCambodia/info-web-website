@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import { Box, Button } from "@mui/material";
 import { Grid } from "@material-ui/core";
 import LotteryCard from "@/components/lottery/LoteryCard";
-import LotteryHistoryCard from "@/components/lottery/LotteryHistoryCard";
 import NoSsr from "@mui/base/NoSsr";
 import { Icon } from "@iconify/react";
 
