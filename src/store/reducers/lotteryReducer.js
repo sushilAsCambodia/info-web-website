@@ -1,7 +1,9 @@
 const initialState = { 
     status: 'idle',
     latest:[],
-    loading:false
+    loading:false,
+    lotteryResults:[],
+    lotteryCategories:[]
   } 
   const LotteryReducer =  (state = initialState, action) => {
     switch (action.type) {
@@ -25,6 +27,34 @@ const initialState = {
           ...state, 
           status:'failed',
           latest:[],
+          loading: false
+        };
+      
+      case 'lottery/category/fulfilled':
+        return {
+          ...state,
+          lotteryCategories:  action?.payload?.data || [],
+          status:'completed',
+          loading: false
+        };
+      case 'lottery/result-by-category/pending':
+        return {
+          ...state,
+          lotteryResults: [],
+          status:'pending',
+          loading: true
+        };
+      case 'lottery/result-by-category/fulfilled':
+        return {
+          ...state,
+          lotteryResults:  action?.payload?.data || [],
+          status:'completed',
+          loading: false
+        };
+      case 'lottery/result-by-category/rejected':
+        return {
+          ...state,
+          status:'failed',
           loading: false
         };
     }

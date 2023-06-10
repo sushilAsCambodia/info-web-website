@@ -2,6 +2,7 @@ import moment from "moment/moment";
 
 const utils = {
     formatDate: 'YYYY/MM/D',
+    lotteryFormat: 'Do MMM YYYY, dddd',
     letterFormat: 'YYYY MMM DD',
     letterFormat2: 'DD MMM YYYY',
     letterFormatDDMMYYYY: 'DD/MM/YYYY',

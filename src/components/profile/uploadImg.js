@@ -32,7 +32,7 @@ const ImgUpload = ({
     <label htmlFor="photo-upload" className="custom-file-upload fas">
       <div className="img-wrap img-upload" >
         {src ? <Image alt="photo_upload" htmlFor="photo-upload" src={src} onError={(e) => e.target.src = '/assets/Profile/defaultavatar.jpg'} /> : 
-        <Image alt="photo_default_upload" src="/assets/Profile/defaultavatar.jpg" /> 
+        <Image alt="photo_default_upload" src="/assets/Profile/defaultavatar.jpg" style={{borderRadius: '50%'}}/> 
       } 
       </div>
       <input id="photo-upload" type="file" onChange={onChange} />
