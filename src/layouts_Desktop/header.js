@@ -66,9 +66,9 @@ const Header = () => {
 
   const menuList = [
     { label: langKey && langKey.lottery_draw, page: "LotteryPage" },
-    // { label: (langKey && langKey.data_chart), page: "DataChart" },
+    { label: (langKey && langKey.data_chart), page: "DataChart" },
     { label: langKey && langKey.foot_ball, page: "footBallPage" },
-    // { label: (langKey && langKey.basket_ball), page: "basketBall" },
+    { label: (langKey && langKey.basket_ball), page: "basketBall" },
   ];
 
   useEffect(() => {
@@ -230,7 +230,7 @@ const Header = () => {
                       />
                     )}
                   </MenuItem>
-                  {/* <Menu
+                  <Menu
                     id="fade-menu"
                     MenuListProps={{
                       "aria-labelledby": "fade-button",
@@ -243,7 +243,7 @@ const Header = () => {
                     <MenuItem onClick={handleScoreClose}>score 1</MenuItem>
                     <MenuItem onClick={handleScoreClose}>score 2</MenuItem>
                     <MenuItem onClick={handleScoreClose}>score 3</MenuItem>
-                  </Menu> */}
+                  </Menu>
                   <Popover
                     id={id}
                     open={openScore}

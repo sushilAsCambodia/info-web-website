@@ -130,10 +130,10 @@ export default function FootBallPage() {
         </Grid>
       </Grid>
 
-      <TabPanel value={value} index={"Follow"}>
+      <TabPanel value={value} index={"Score"}>
         <ScoreTable />
       </TabPanel>
-      <TabPanel value={value} index={"Score"}>
+      <TabPanel value={value} index={"Follow"}>
         <ScoreTab />
       </TabPanel>
       <TabPanel value={value} index={"End"}>
