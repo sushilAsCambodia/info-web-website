@@ -66,15 +66,14 @@ const Header = () => {
 
   const menuList = [
     { label: langKey && langKey.lottery_draw, page: "LotteryPage" },
-    // { label: (langKey && langKey.data_chart), page: "DataChart" },
+    { label: (langKey && langKey.data_chart), page: "DataChart" },
     { label: langKey && langKey.foot_ball, page: "footBallPage" },
-    // { label: (langKey && langKey.basket_ball), page: "basketBall" },
+    { label: (langKey && langKey.basket_ball), page: "basketBallPage" },
   ];
 
   useEffect(() => {
     const path = router.asPath;
     const hash = router.asPath.split("#")[0];
-    console.log("header hash:::", hash, path);
 
     setPath(path);
     setHash(hash);
@@ -230,7 +229,7 @@ const Header = () => {
                       />
                     )}
                   </MenuItem>
-                  {/* <Menu
+                  <Menu
                     id="fade-menu"
                     MenuListProps={{
                       "aria-labelledby": "fade-button",
@@ -243,7 +242,7 @@ const Header = () => {
                     <MenuItem onClick={handleScoreClose}>score 1</MenuItem>
                     <MenuItem onClick={handleScoreClose}>score 2</MenuItem>
                     <MenuItem onClick={handleScoreClose}>score 3</MenuItem>
-                  </Menu> */}
+                  </Menu>
                   <Popover
                     id={id}
                     open={openScore}
@@ -372,7 +371,7 @@ const Header = () => {
                   flexWrap="nowrap"
                   justifyContent="flex-end"
                 >
-                  <Button
+                  {/* <Button
                     variant="contain"
                     sx={{
                       whiteSpace: "nowrap",
@@ -387,7 +386,7 @@ const Header = () => {
                   >
                     <Icon icon="material-symbols:app-shortcut" width={20} />
                     {langKey && langKey.download_app}
-                  </Button>
+                  </Button> */}
 
                   <Button
                     variant="contain"

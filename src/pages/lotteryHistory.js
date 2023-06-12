@@ -16,37 +16,45 @@ const lotteryHistory = () => {
   const [lotteryHistories, setLotteryHistories] = useState([]);
   const { lotteryHistory = {}, loading_history } = useSelector(state => state.lottery);
   const router = useRouter();
+  const {id} = router.query
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setPageLimit] = useState(1);
   const [toBottom, setToBottom] = useState(false);
-  const handleGetLotteryHistory = useCallback((lotteryId,currentPage) => {
+  const handleGetLotteryHistory = useCallback(() => {
+    console.log(id,'lotteryId')
     dispatch(getLotteryHistory(
       {
         params: {
           rowsPerPage: 10,
-          page:currentPage,
-          lottery_id: lotteryId,
+          page:1,
+          lottery_id: id,
           lang_id: utils.convertLangCodeToID(i18n.language)
         }
       }
     ))
-  }, [dispatch,i18n.language])
+  }, [dispatch,i18n.language,id])
+
   useEffect(() => {
-    handleGetLotteryHistory(router?.query.id,currentPage);
-  }, [router,currentPage]);
+    handleGetLotteryHistory();
+  }, []);
   useEffect(() => {
     if (Object.keys(lotteryHistory).length) {
-      setLotteryHistories(curr => curr.concat(lotteryHistory.data))
+      setLotteryHistories(curr => {
+        console.log(curr.concat(lotteryHistory.data))
+        return curr.concat(lotteryHistory.data);
+      })
     }else {
       setLotteryHistories([])
     }
   }, [lotteryHistory]);
+
   const handleScroll = (event) => { 
     if ( 
       event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
         event.currentTarget.clientHeight
     ) { 
-      // setCurrentPage(currentPage + 1);
+      setCurrentPage(currentPage + 1);
+      console.log(currentPage+1)
     }
   };
   return (

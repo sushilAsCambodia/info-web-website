@@ -81,7 +81,7 @@ export default function ProfileInfo(props) {
         className="desktop-file-upload fas"
         style={{ "--uploadImg": `${imagePreviewUrl ? "" : "url('/assets/Profile/profile_upload.png')"}` }}
       >
-        {src &&  <Image alt="photo_upload" htmlFor="photo-upload" width={50} height={50} src={src} style={{borderRadius:"50px"}}/>} 
+        {src &&  <Image alt="photo_upload" htmlFor="photo-upload" width={120} height={120} src={src} style={{borderRadius:"50%"}}/>} 
         <input id="photo-upload" type="file" onChange={onChange} />
       </label>
     );
@@ -310,7 +310,6 @@ export default function ProfileInfo(props) {
           className="uploadimg_main"
         >
           <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
-
           <FormControl fullWidth id="nickNameFormControl">
             <InputLabel>{langKey && langKey.nick_name}</InputLabel>
             <FilledInput

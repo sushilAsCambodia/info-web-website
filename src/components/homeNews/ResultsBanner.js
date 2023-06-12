@@ -19,10 +19,11 @@ import AnnouncementItem from "@/common/AnnouncementItem";
 import { getLatestLottery } from "@/store/actions/lotteryActions";
 import { getLotteryCategory,getLotteryResultByCategory } from "@/store/actions/lotteryActions";
 import utils from "@/common/utils";
-
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { getAnnouncement } from "@/store/actions/announcementAction";
 
+import NoDataMessage from "@/common/NoDataMessage";
 const responsive = {
   largeDesktop: { 
     breakpoint: { max: 4000, min: 1321 },
@@ -47,13 +48,7 @@ const responsive = {
   },
 };
 
-const announcement = [
-  {
-    title:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "2023 Apr 03",
-  },
-];
+
 export default function ResultsBanner(props) {
   const { lang_id = [], banners = {} } = props;
   const { t } = useTranslation();
@@ -70,10 +65,19 @@ export default function ResultsBanner(props) {
     (state) => state && state.load_language && state.load_language.language
   );
   const { latest } = useSelector((state) => state.lottery);
+  const { announcement } = useSelector(
+    (state) => state?.announcement?.announcements
+  );
+const announcements = announcement?.filter(item => {
+  return item.status === "0";});
 
   useEffect(() => {
+    dispatch(getLatestLottery("hey"));
     dispatch(
-      getLatestLottery("hey")
+      getAnnouncement({
+        params: { lang_id: utils.convertLangCodeToID(langKey), take: 10 },
+        callback: (res) => {},
+      })
     );
   }, []);
 
@@ -137,7 +141,6 @@ export default function ResultsBanner(props) {
           height={`${matches2 ? "120px" : ""}`}
         >
           <Typography px={1.5} mb={1}>
-            {" "}
             {langKey && langKey.latest_results}
           </Typography>
           <Grid
@@ -215,12 +218,18 @@ export default function ResultsBanner(props) {
               className={matches ? "verticleLotto" : "horizontalLotto"}
               px={1}
             >
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
+              {announcements?.length > 0 && announcements.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <AnnouncementItem announcement={item} />
+                  </div>
+                );
+              })}
+               {announcements?.length == 0 && announcements.map((item, index) => {
+                return (
+                  <NoDataMessage />
+                );
+              })}
             </Grid>
           </Grid>
         ) : (
