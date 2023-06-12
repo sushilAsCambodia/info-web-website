@@ -16,8 +16,8 @@ import ScoreTable from "@/components/football/ScoreTable";
 import Schedule from "@/components/football/schedule";
 
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
-import ScoreTab from "@/components/football/ScoreTab";
-import EndTab from "@/components/football/EndTab";
+import FootBallFollow from "@/components/football/FootBallFollow";
+import FootBallEnd from "@/components/football/FootBallEnd";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -29,11 +29,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
@@ -44,11 +40,10 @@ export default function FootBallPage() {
   const [age, setAge] = useState("");
 
   const [value, setValue] = useState("");
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
-
-
-  
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -70,10 +65,16 @@ export default function FootBallPage() {
       {/* <Typography variant="h5" fontWeight="bold">
       {langKey && langKey.foot_ball} 
       </Typography> */}
-      <TitleBreadCrumbs title={langKey && langKey.foot_ball}  />
+      <TitleBreadCrumbs title={langKey && langKey.foot_ball} />
 
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
-        <Grid item xs={"auto"} container border="1px solid grey" borderRadius="5px">
+        <Grid
+          item
+          xs={"auto"}
+          container
+          border="1px solid grey"
+          borderRadius="5px"
+        >
           <MenuItem
             sx={{ borderRadius: "5px 0px 0px 5px" }}
             className={`${select === "Follow" ? "filterTabSelected" : ""}`}
@@ -81,7 +82,7 @@ export default function FootBallPage() {
               router.push("/footBallPage#Follow");
             }}
           >
-                  {langKey && langKey.follow}
+            {langKey && langKey.follow}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 0px 0px 0px" }}
@@ -90,7 +91,7 @@ export default function FootBallPage() {
               router.push("/footBallPage#Score");
             }}
           >
-               {langKey && langKey.score}
+            {langKey && langKey.score}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 0px 0px 0px" }}
@@ -98,8 +99,8 @@ export default function FootBallPage() {
             onClick={() => {
               router.push("/footBallPage#End");
             }}
-          > 
-               {langKey && langKey.end}
+          >
+            {langKey && langKey.end}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 5px 5px 0px" }}
@@ -108,12 +109,14 @@ export default function FootBallPage() {
               router.push("/footBallPage#Schedule");
             }}
           >
-               {langKey && langKey.schedule}
-          </MenuItem> 
+            {langKey && langKey.schedule}
+          </MenuItem>
         </Grid>
         <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel id="category-select-label">{langKey && langKey.select_category}</InputLabel>
+            <InputLabel id="category-select-label">
+              {langKey && langKey.select_category}
+            </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="category-select"
@@ -129,15 +132,15 @@ export default function FootBallPage() {
           </FormControl>
         </Grid>
       </Grid>
- <TabPanel value={value} index={"Follow"}>
-        <ScoreTab />
+      <TabPanel value={value} index={"Follow"}>
+        <FootBallFollow />
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
-      <ScoreTab />
+        <FootBallFollow />
       </TabPanel>
-     
+
       <TabPanel value={value} index={"End"}>
-      <EndTab />
+        <FootBallEnd />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
         <Schedule />

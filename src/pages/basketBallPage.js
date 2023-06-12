@@ -17,7 +17,7 @@ import Schedule from "@/components/football/schedule";
 
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 import ScoreTab from "@/components/football/ScoreTab";
-import EndTab from "@/components/football/EndTab";
+import EndTab from "@/components/football/FootBallEnd";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
