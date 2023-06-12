@@ -372,7 +372,7 @@ const Header = () => {
                   flexWrap="nowrap"
                   justifyContent="flex-end"
                 >
-                  <Button
+                  {/* <Button
                     variant="contain"
                     sx={{
                       whiteSpace: "nowrap",
@@ -387,7 +387,7 @@ const Header = () => {
                   >
                     <Icon icon="material-symbols:app-shortcut" width={20} />
                     {langKey && langKey.download_app}
-                  </Button>
+                  </Button> */}
 
                   <Button
                     variant="contain"
