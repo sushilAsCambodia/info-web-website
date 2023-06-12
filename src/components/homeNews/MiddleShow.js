@@ -73,7 +73,7 @@ export default function MiddleShow(props) {
       <Grid container mt={2}>
         <Grid item xs={12} mx={1} container justifyContent="space-between" height="40px">
           <Typography> 
-            {langKey && langKey.live_score}
+            {langKey && langKey.match_recommendation}
           </Typography>
         </Grid>
         <Grid item xs={12} id="customCarouselBtn">
@@ -92,6 +92,7 @@ export default function MiddleShow(props) {
             keyBoardControl
             minimumTouchDrag={80}
             pauseOnHover
+           
             renderArrowsWhenDisabled={false}
             renderButtonGroupOutside={false}
             renderDotsOutside={false}

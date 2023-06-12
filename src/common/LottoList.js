@@ -118,7 +118,7 @@ export default function LottoList(props) {
             px={1}
           >
           {/* {item?.opendate} */}
-          2023-06-01 21:30:00
+          2023-06-01 21:30:00 Monday
           </Grid>
           <CardHeader
             sx={{ padding: "10px" }}

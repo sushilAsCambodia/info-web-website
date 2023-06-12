@@ -141,13 +141,13 @@ const Header = () => {
                 sx={{ alignItems: "center", justifyContent: "flex-end" }}
               >
                 <Grid item>
-                  <Icon width={20} icon="solar:moon-bold" />
+                  <Icon width={22} icon="solar:moon-bold" />
                 </Grid>
                 <Grid item>
-                  <Icon width={20} icon="zondicons:notification" />
+                  <Icon width={22} icon="zondicons:notification" />
                 </Grid>
                 <Grid item>
-                  <Icon width={20} icon="material-symbols:search-rounded" />
+                  <Icon width={23} icon="material-symbols:search-rounded" />
                 </Grid>
                 <Grid item>
                   {!isLogin ? (
