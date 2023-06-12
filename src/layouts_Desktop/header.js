@@ -68,7 +68,7 @@ const Header = () => {
     { label: langKey && langKey.lottery_draw, page: "LotteryPage" },
     { label: (langKey && langKey.data_chart), page: "DataChart" },
     { label: langKey && langKey.foot_ball, page: "footBallPage" },
-    { label: (langKey && langKey.basket_ball), page: "basketBall" },
+    { label: (langKey && langKey.basket_ball), page: "basketBallPage" },
   ];
 
   useEffect(() => {

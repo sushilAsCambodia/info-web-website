@@ -45,6 +45,7 @@ export default function ScoreTable() {
   }));
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    border:'1px solid #ddd',
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.grey,
     },
