@@ -577,7 +577,7 @@ export default function Login(props) {
               container
               justifyContent="center"
               alignItems="stretch"
-              width={{ xs: "90%", lg: "90%", xl: "1000px" }}
+              width={{ xs: "90%", lg: "90%", xl: "1250px" }}
               height="fit-content"
             >
               <Grid
@@ -601,18 +601,33 @@ export default function Login(props) {
                   alignContent="space-between"
                   style={{ margin: 30 }}
                 >
-                  <Typography
-                    variant="h4"
-                    fontWeight="bold"
-                    color="white"
-                    textAlign="center"
-                    marginTop={"18px"}
-                    fontSize={"36px"}
-                    lineHeight={"54px"}
-                  >
-                    {langKey &&
-                      (langKey.anytime_anywhere || t("anytime_anywhere"))}
-                  </Typography>
+                   <Grid>
+           <Typography
+              variant="h4"
+              fontWeight="bold"
+              color="white"
+              textAlign="center"
+              marginTop={"18px"}
+              fontSize={"36px"}
+              textTransform={'uppercase'}
+             
+            >
+              {langKey && (langKey.wonderful_information || t("wonderful_information"))}
+
+            </Typography>
+            <Typography
+              variant="h4"
+              fontWeight="500"
+              color="white"
+              textAlign="center"
+              
+              fontSize={"36px"}
+          
+            >
+             
+              {langKey && (langKey.in_the_palm || t("in_the_palm"))}
+            </Typography>
+           </Grid>
                   <Grid container justifyContent="center">
                     <Grid item xs={12} sm={12} md={12} xl={12}>
                       <Grid
@@ -880,7 +895,7 @@ export default function Login(props) {
                               sx={{
                                 color: "black",
                                 background: "#D4D4D4",
-                                textTransform: "capitalize",
+                                textTransform: "uppercase",
                               }}
                               onClick={() => Router.push("/")}
                             >
@@ -897,7 +912,7 @@ export default function Login(props) {
                                 background: loading
                                   ? "linear-gradient(90.04deg, #8C8C8C 0.04%, #D0D0D0 99.97%);"
                                   : "linear-gradient(90.04deg, #FF0000 0.04%, #FF6F31 99.97%);",
-                                textTransform: "capitalize",
+                                textTransform: "uppercase",
                               }}
                               onClick={onSubmit}
                             >
@@ -998,7 +1013,7 @@ export default function Login(props) {
                         <Icon icon="bi:chat-square-dots-fill" width={25} />
                         <Typography mx={1}>
                           {langKey &&
-                            (langKey.customer_service || t("customer_service"))}
+                            (langKey.contact || t("contact"))}
                         </Typography>
                       </Grid>
                     </Grid>
