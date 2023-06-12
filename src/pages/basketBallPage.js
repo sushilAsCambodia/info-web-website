@@ -29,26 +29,21 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
 
-export default function FootBallPage() {
+export default function BasketBallPage() {
   const router = useRouter();
   const [select, setSelect] = useState(0);
   const [age, setAge] = useState("");
 
   const [value, setValue] = useState("");
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
-
-
-  
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -68,52 +63,60 @@ export default function FootBallPage() {
   return (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
-      {langKey && langKey.foot_ball} 
-      </Typography> */}
-      <TitleBreadCrumbs title={langKey && langKey.foot_ball}  />
+        {langKey && langKey.foot_ball} 
+        </Typography> */}
+      <TitleBreadCrumbs title={langKey && langKey.basket_ball} />
 
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
-        <Grid item xs={"auto"} container border="1px solid grey" borderRadius="5px">
+        <Grid
+          item
+          xs={"auto"}
+          container
+          border="1px solid grey"
+          borderRadius="5px"
+        >
           <MenuItem
             sx={{ borderRadius: "5px 0px 0px 5px" }}
             className={`${select === "Follow" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              router.push("/footBallPage#Follow");
+              router.push("/basketBallPage#Follow");
             }}
           >
-                  {langKey && langKey.follow}
+            {langKey && langKey.follow}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 0px 0px 0px" }}
             className={`${select === "Score" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              router.push("/footBallPage#Score");
+              router.push("/basketBallPage#Score");
             }}
           >
-               {langKey && langKey.score}
+            {langKey && langKey.score}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 0px 0px 0px" }}
             className={`${select === "End" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              router.push("/footBallPage#End");
+              router.push("/basketBallPage#End");
             }}
-          > 
-               {langKey && langKey.end}
+          >
+            {langKey && langKey.end}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 5px 5px 0px" }}
             className={`${select === "Schedule" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              router.push("/footBallPage#Schedule");
+              router.push("/basketBallPage#Schedule");
             }}
           >
-               {langKey && langKey.schedule}
-          </MenuItem> 
+            {langKey && langKey.schedule}
+          </MenuItem>
         </Grid>
         <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel id="category-select-label">{langKey && langKey.select_category}</InputLabel>
+            <InputLabel id="category-select-label">
+              {langKey && langKey.select_category}
+            </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="category-select"
@@ -129,18 +132,18 @@ export default function FootBallPage() {
           </FormControl>
         </Grid>
       </Grid>
- <TabPanel value={value} index={"Follow"}>
-        <ScoreTab />
+      <TabPanel value={value} index={"Follow"}>
+        <ScoreTable />
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
-      <ScoreTab />
+        <ScoreTable />
       </TabPanel>
-     
+
       <TabPanel value={value} index={"End"}>
-      <EndTab />
+      <ScoreTable />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
-        <Schedule />
+      <ScoreTable />
       </TabPanel>
     </>
   );

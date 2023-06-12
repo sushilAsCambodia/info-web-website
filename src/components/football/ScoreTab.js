@@ -100,26 +100,8 @@ export default function ScoreTab() {
       "analysis of Asia and Europe",
       true
     ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-      "Ice cream sandwich",
-      237,
-      "2023 Mar 23",
-      5,
-      2,
-      "analysis of Asia and Europe",
-      false
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Eclair",
-      262,
-      "2023 Mar 23",
-      32,
-      3,
-      "analysis of Asia and Europe",
-      false
-    ),
+   
+  
     createData(
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
       "Cupcake",

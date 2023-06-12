@@ -1,4 +1,6 @@
 import React from "react";
+import moment from "moment/moment";
+import utils from "./utils";
 import PropTypes from "prop-types";
 import { Typography, Divider, Button, Link } from "@mui/material";
 import { Grid, Card, CardHeader } from "@mui/material";
@@ -10,22 +12,6 @@ import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
 
-const settings = {
-  dots: false,
-  infinite: true,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-  vertical: true,
-  verticalSwiping: true,
-  swipeToSlide: true,
-  autoplay: true,
-  autoplaySpeed: 2000,
-  pauseOnFocus: true,
-  arrows: false,
-  lazyLoad: false,
-  centerMode: false,
-};
-
 export default function AnnouncementItem(props) {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -34,7 +20,6 @@ export default function AnnouncementItem(props) {
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
-  const [newsList, setNewsList] = useState([]);
 
   return (
     <>
@@ -48,7 +33,7 @@ export default function AnnouncementItem(props) {
           }}
         >
           <Typography
-            title={announcement[0].title}
+            title={announcement.title}
             className="twoLinesEllip"
             sx={{ fontSize: "14px",  
             "&:hover": {
@@ -57,10 +42,10 @@ export default function AnnouncementItem(props) {
    }}
             px={1}
           >
-            {announcement[0].title}
+            {announcement.title}
           </Typography>
           <Typography sx={{ fontSize: "12px", color: "#8C8C8C" }} px={1}>
-            {announcement[0].date}
+            {moment(announcement.created_at).format(utils.DateWithTime)}
           </Typography>
         </Grid>
       </div>

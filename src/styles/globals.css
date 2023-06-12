@@ -373,14 +373,14 @@ padding: 0px;
 }
 
 .uploadimg_main .desktop-file-upload {
-  border-radius: 50%;
+  border-radius: 50px;
   display: inline-block;
   position: relative;
   padding: 6px;
   cursor: pointer;
   background-image: var(--uploadImg);
-  width: 60px;
-  height: 60px;
+  width: 150px;
+  height: 150px;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -1157,5 +1157,9 @@ line-height: 12px !important;
   line-height: 12px !important;
   border: 0.5px solid #DDDDDD !important;
 
+  }
+  /* END  */
+  .mui-image-round .mui-image-wrapper {
+    border-radius: 50px;
   }
  
