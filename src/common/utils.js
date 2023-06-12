@@ -9,6 +9,7 @@ const utils = {
     dateLetter: 'ddd',
     MonthYearFormat: 'MMM YYYY',
     DateMonthFormat: 'DD MMM',
+    DateWithTime:'LLLL',
     tokenKey: "token",
     baseUrl: process.env.apiUrl,
     adminUrl: process.env.apiUrlAuth,

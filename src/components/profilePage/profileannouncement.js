@@ -27,39 +27,7 @@ import {
 import utils from "@/common/utils";
 import { getAnnouncement } from "@/store/actions/announcementAction";
 import NoDataMessage from "@/common/NoDataMessage";
-const rows = [
-  {
-    id: 1,
-    heading: "System Announcement",
-    date: "08-06-2023",
-    content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
-  },
-  {
-    id: 2,
-    heading: "System Announcement",
-    date: "08-06-2023",
-    content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
-  },
-  {
-    id: 3,
-    heading: "System Announcement",
-    date: "08-06-2023",
-    content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
-  },
-  {
-    id: 4,
-    heading: "System Announcement",
-    date: "08-06-2023",
-    content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
-  },
-  {
-    id: 4,
-    heading: "System Announcement",
-    date: "08-06-2023",
-    content: "Congratulations, your level has reached level 4. Upgrading to the next level requires 290 experience, which can be obtained through daily tasks and novice tasks in the task center.",
-  },
-
-];
+import moment from "moment/moment";
 
 export default function ProfileAnnouncement() {
   const { t } = useTranslation();
@@ -110,8 +78,8 @@ export default function ProfileAnnouncement() {
                         <Typography fontWeight="700" fontSize="14px" color="#000">{item.title}</Typography>
                         <Icon icon="radix-icons:dot-filled" fontSize={30} color="red" />
                       </Grid>
-                      <Typography textAlign="left" fontSize="14px !important" color="#8C8C8C">{item.created_at}</Typography>
-                      <Typography textAlign="left" paddingTop={1} fontSize="12px !important" color="#000">{item.comment}</Typography>
+                      <Typography textAlign="left" fontSize="14px !important" color="#8C8C8C">{item.comment}</Typography>
+                      <Typography textAlign="left" paddingTop={1} fontSize="12px !important" color="#000">{ moment(item.created_at).format(utils.DateWithTime) }</Typography>
                     </Grid>
                   </Grid>
                 </ListItem>

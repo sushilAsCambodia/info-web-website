@@ -46,13 +46,7 @@ const responsive = {
   },
 };
 
-const announcement = [
-  {
-    title:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "2023 Apr 03",
-  },
-];
+
 export default function ResultsBanner(props) {
   const { lang_id = [], banners = {} } = props;
   const { t } = useTranslation();

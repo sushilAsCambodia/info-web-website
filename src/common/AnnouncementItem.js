@@ -1,4 +1,6 @@
 import React from "react";
+import moment from "moment/moment";
+import utils from "./utils";
 import PropTypes from "prop-types";
 import { Typography, Divider, Button, Link } from "@mui/material";
 import { Grid, Card, CardHeader } from "@mui/material";
@@ -9,22 +11,6 @@ import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
-
-const settings = {
-  dots: false,
-  infinite: true,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-  vertical: true,
-  verticalSwiping: true,
-  swipeToSlide: true,
-  autoplay: true,
-  autoplaySpeed: 2000,
-  pauseOnFocus: true,
-  arrows: false,
-  lazyLoad: false,
-  centerMode: false,
-};
 
 export default function AnnouncementItem(props) {
   const { t } = useTranslation();
@@ -59,7 +45,7 @@ export default function AnnouncementItem(props) {
             {announcement.title}
           </Typography>
           <Typography sx={{ fontSize: "12px", color: "#8C8C8C" }} px={1}>
-            {announcement.created_at}
+            {moment(announcement.created_at).format(utils.DateWithTime)}
           </Typography>
         </Grid>
       </div>

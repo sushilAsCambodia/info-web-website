@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
+import moment from "moment/moment";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Pagination from "@mui/material/Pagination";
@@ -153,7 +154,7 @@ const Announcement = () => {
                         fontSize="12px"
                         color="#8C8C8C"
                       >
-                        {item.created_at}
+                        { moment(item.created_at).format(utils.DateWithTime) }
                       </Typography>
                     </Grid>
                   </Grid>
@@ -251,7 +252,7 @@ const Announcement = () => {
                                   fontSize="10px !important"
                                   color="#8C8C8C"
                                 >
-                                  {item.created_at}
+                                 { moment(item.created_at).format(utils.DateWithTime) }
                                 </Typography>
                               </Grid>
                             </Grid>
