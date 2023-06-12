@@ -21,6 +21,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { getAnnouncement } from "@/store/actions/announcementAction";
 import utils from "@/common/utils";
+import NoDataMessage from "@/common/NoDataMessage";
 const responsive = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -68,8 +69,9 @@ export default function ResultsBanner(props) {
   const { announcement } = useSelector(
     (state) => state?.announcement?.announcements
   );
+const announcements = announcement?.filter(item => {
+  return item.status === "0";});
 
-  console.log("announcemnt:::", announcement);
   useEffect(() => {
     dispatch(getLatestLottery("hey"));
     dispatch(
@@ -173,11 +175,16 @@ export default function ResultsBanner(props) {
               className={matches ? "verticleLotto" : "horizontalLotto"}
               px={1}
             >
-              {announcement?.map((item, index) => {
+              {announcements?.length > 0 && announcements.map((item, index) => {
                 return (
                   <div key={index}>
                     <AnnouncementItem announcement={item} />
                   </div>
+                );
+              })}
+               {announcements?.length == 0 && announcements.map((item, index) => {
+                return (
+                  <NoDataMessage />
                 );
               })}
             </Grid>
