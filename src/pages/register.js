@@ -616,7 +616,22 @@ export default function Register() {
               fontSize={"36px"}
               lineHeight={"54px"}
             >
-              {langKey && (langKey.anytime_anywhere || t("anytime_anywhere"))}
+            
+            Anytime anywhere
+            Wonderful information
+
+            </Typography>
+            <Typography
+              variant="h4"
+              fontWeight="bold"
+              color="white"
+              textAlign="center"
+              marginTop={"18px"}
+              fontSize={"36px"}
+              lineHeight={"54px"}
+            >
+              
+              in the palm of your hand
             </Typography>
             <Grid container justifyContent="center">
               <Grid item xs={12} sm={12} md={12} xl={12}>
