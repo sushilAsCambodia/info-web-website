@@ -6,6 +6,10 @@ import {
   InputLabel,
   Select,
   Box,
+  OutlinedInput,
+  Checkbox,
+  ListItemText,
+  ListSubheader,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 
@@ -34,19 +38,46 @@ function TabPanel(props) {
   );
 }
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const League = [
+  "Oliver Hansen",
+  "Carlos Abbott",
+  "Miriam Wagner",
+  "Bradley Wilkerson",
+  "Virginia Andrews",
+  "Kelly Snyder",
+];
+const Cup = ["Olivers Hansen", "Van Henry", "April Tucker", "Ralph Hubbard"];
+
 export default function FootBallPage() {
   const router = useRouter();
-  const [select, setSelect] = useState(0);
-  const [age, setAge] = useState("");
 
+  const [select, setSelect] = useState(0);
+  const [selectedName, setSelectedName] = useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
   const [value, setValue] = useState("");
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
 
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
@@ -112,23 +143,44 @@ export default function FootBallPage() {
             {langKey && langKey.schedule}
           </MenuItem>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <FormControl fullWidth>
-            <InputLabel id="category-select-label">
-              {langKey && langKey.select_category}
-            </InputLabel>
+            <InputLabel id="demo-multiple-checkbox-label">Filter</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="category-select"
-              value={age}
-              label="Select Category"
+              labelId="demo-multiple-checkbox-label"
+              id="demo-multiple-checkbox"
+              multiple
+              value={selectedName}
               onChange={handleChange}
-              style={{ paddingY: "0px" }}
+              onClose={()=>console.log("picked:::",selectedName)}
+              input={<OutlinedInput label="Filter" />}
+              renderValue={(selected) => selected.join(", ")}
+              MenuProps={MenuProps}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <ListSubheader>Country</ListSubheader>
+
+              {League.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item}>
+                    <Checkbox checked={selectedName.indexOf(item) > -1} />
+                    <ListItemText primary={item} />
+                  </MenuItem>
+                );
+              })}
+              <ListSubheader>Competition</ListSubheader>
+
+              {Cup.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item}>
+                    <Checkbox checked={selectedName.indexOf(item) > -1} />
+                    <ListItemText primary={item} />
+                  </MenuItem>
+                );
+              })}
+         
+            
             </Select>
+
           </FormControl>
         </Grid>
       </Grid>
