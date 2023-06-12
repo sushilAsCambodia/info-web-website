@@ -31,6 +31,18 @@ import utils from "@/common/utils";
 import { getAnnouncement } from "@/store/actions/announcementAction";
 import NoDataMessage from "@/common/NoDataMessage";
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
 const Announcement = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const router = useRouter();
@@ -41,6 +53,10 @@ const Announcement = () => {
   const announcements = announcement?.filter((item) => {
     return item.status === "0";
   });
+
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+
   const dispatch = useDispatch();
 
   const breadcrumbs = [
@@ -67,6 +83,10 @@ const Announcement = () => {
       })
     );
   }, [langKey]);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return !matches ? (
     <>
@@ -174,7 +194,7 @@ const Announcement = () => {
               paddingTop={3}
             >
               <Stack spacing={2} sx={{ textAlign: "center" }}>
-                <Pagination count={5} variant="outlined" shape="rounded" />
+                <Pagination count={totalPage} page={page} variant="outlined" shape="rounded" />
               </Stack>
             </Grid>
           )}

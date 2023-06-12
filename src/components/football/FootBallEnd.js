@@ -32,7 +32,7 @@ import {
   import { Icon } from "@iconify/react";
   import { lottoTable } from "@/pages/LotteryPage";
 import { Image } from "mui-image";
-  export default function EndTab() {
+  export default function FootBallEnd() {
     const [select, setSelect] = useState(0);
     const [filter, setFilter] = useState("China National");
   
@@ -98,50 +98,50 @@ import { Image } from "mui-image";
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
         "Frozen yoghurt",
         159,
-        "2023 Mar 23",
-        32,
+        "1 Subject to tie/half 0",
+      '[18] Gunma Hot Spring',
         1,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:2,team2:0}
       ),
       createData(
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
         "Ice cream sandwich",
         237,
-        "2023 Mar 23",
-        5,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
         2,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:1,team2:3}
       ),
       createData(
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
         "Eclair",
         262,
-        "2023 Mar 23",
-        32,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
         3,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:0,team2:0}
       ),
       createData(
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
         "Cupcake",
         305,
-        "2023 Mar 23",
-        5,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
         4,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:1,team2:1}
       ),
       createData(
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
         "Gingerbread",
         356,
-        "2023 Mar 23",
-        10,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
         5,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:2,team2:2}
       ),
     ];
@@ -224,14 +224,12 @@ import { Image } from "mui-image";
                       Rounds
                     </StyledHeaderCell>
                     <StyledHeaderCell width="50px" align="left">
-                      Draw Time
+                      Competing Time
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
-                      Competing Team
+                     State
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="50px" align="center">
-                      State
-                    </StyledHeaderCell>
+                    
                     <StyledHeaderCell width="100px" align="center">
                       Home team
                     </StyledHeaderCell>
@@ -251,11 +249,13 @@ import { Image } from "mui-image";
                     return (
                         <StyledTableRow key={item.id}>
                           <StyledTableCell align="center">
-                            <Image width={30} src={item.img} alt="football" />
-                            <Typography>{item.name}</Typography>
+                           <Grid container alignItems="center">
+                             <Image width={30} src={item.img} alt="football" />
+                             <Typography mx={1}>{item.name}</Typography>
+                           </Grid>
                           </StyledTableCell>
                           <StyledTableCell align="center">
-                            {item.fat}
+                            {item.calories}
                           </StyledTableCell>
                           <StyledTableCell align="center">
                             {item.fat}
@@ -266,9 +266,7 @@ import { Image } from "mui-image";
                           <StyledTableCell align="center">
                             {item.data}
                           </StyledTableCell>
-                          <StyledTableCell align="center">
-                            {item.fat}
-                          </StyledTableCell>
+                          
                           <StyledTableCell align="center">
                             {item.fat}
                           </StyledTableCell>

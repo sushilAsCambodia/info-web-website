@@ -33,7 +33,7 @@ import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
 import { Image } from "mui-image";
-export default function ScoreTab() {
+export default function FootBallFollow() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
 
@@ -86,19 +86,19 @@ export default function ScoreTab() {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
-  function createData(img, name, calories, fat, data, id, analyze, favourite) {
-    return { img, name, calories, fat, data, id, analyze, favourite };
+  function createData(img, name, calories, fat, data, id, favourite,awayTeam) {
+    return { img, name, calories, fat, data, id, favourite,awayTeam };
   }
   const rows = [
     createData(
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
       "Frozen yoghurt",
       159,
-      "2023 Mar 23",
-      32,
+      '03-12 16:00',
       1,
-      "analysis of Asia and Europe",
-      true
+      "[18] Gunma Hot Spring",
+      true,
+      'Yamagata Mountain God'
     ),
    
   
@@ -106,21 +106,21 @@ export default function ScoreTab() {
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
       "Cupcake",
       305,
-      "2023 Mar 23",
-      5,
+      '03-12 16:00',
       4,
-      "analysis of Asia and Europe",
-      true
+      "[18] Gunma Hot Spring",
+      true,
+      'Yamagata Mountain God'
     ),
     createData(
       "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
       "Gingerbread",
       356,
-      "2023 Mar 23",
-      10,
+      '03-12 16:00',
       5,
-      "analysis of Asia and Europe",
-      true
+      "[18] Gunma Hot Spring",
+      true,
+      'Yamagata Mountain God'
     ),
   ];
 
@@ -150,28 +150,25 @@ export default function ScoreTab() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledHeaderCell width="60px">Competition</StyledHeaderCell>
+                  <StyledHeaderCell width="60px">League</StyledHeaderCell>
 
                   <StyledHeaderCell width="50px" align="left">
                     Rounds
                   </StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="left">
-                    Draw Time
+                    Match Time
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                    Home Team
+                    State
                   </StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="center">
+                    Home Team
+                  </StyledHeaderCell>
+                  <StyledHeaderCell width="100px" align="center">
                     Score
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
                     Visiting team
-                  </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
-                    Data
-                  </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
-                    Stream
                   </StyledHeaderCell>
                   <StyledHeaderCell width="30px" align="center">
                     Favourite
@@ -182,15 +179,14 @@ export default function ScoreTab() {
                 {rows.map((item, index) => {
                   return (
                       <StyledTableRow key={item.id}>
-                        <StyledTableCell align="left">
-                          <Image width={30} src={item.img} alt="football_endtab"/>
-                          <Typography>{item.name}</Typography>
+                        <StyledTableCell align="left" >
+                          <Grid style={{display:'flex'}}>
+                          <Image width={25} src={item.img} alt="football_endtab"/>
+                          <Typography mx={1}>{item.name}</Typography></Grid>
                         </StyledTableCell>
+                        
                         <StyledTableCell align="left">
-                          {item.fat}
-                        </StyledTableCell>
-                        <StyledTableCell align="left">
-                          {item.fat}
+                          {item.calories}
                         </StyledTableCell>
                         <StyledTableCell align="center">
                           {item.fat}
@@ -199,15 +195,17 @@ export default function ScoreTab() {
                           {item.data}
                         </StyledTableCell>
                         <StyledTableCell align="left">
-                          {item.fat}
+                          {item.id}
                         </StyledTableCell>
+                        
                         <StyledTableCell align="left">
-                          {item.fat}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <IconButton onClick={() => setOpenModal(true)}>
+                          {item.fat} <IconButton onClick={() => setOpenModal(true)}>
                             <Icon icon="ic:baseline-live-tv" color="#03C12D" />
                           </IconButton>
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.awayTeam}
+                         
                         </StyledTableCell>
                         <StyledTableCell align="center">
                           {item.favourite ? (
