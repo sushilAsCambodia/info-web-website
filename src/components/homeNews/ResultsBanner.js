@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Icon } from "@iconify/react";
 import { Chip, Divider, Grid, Link, Skeleton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -16,12 +17,14 @@ import LottoList from "@/common/LottoList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import AnnouncementItem from "@/common/AnnouncementItem";
 import { getLatestLottery } from "@/store/actions/lotteryActions";
+import { getLotteryCategory,getLotteryResultByCategory } from "@/store/actions/lotteryActions";
+import utils from "@/common/utils";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const responsive = {
-  largeDesktop: {
+  largeDesktop: { 
     breakpoint: { max: 4000, min: 1321 },
     items: 3,
   },
@@ -54,9 +57,12 @@ const announcement = [
 export default function ResultsBanner(props) {
   const { lang_id = [], banners = {} } = props;
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
+  const [value, setValue] = React.useState(0);
   const matches = useMediaQuery("(max-width:1199px)");
   const matches2 = useMediaQuery("(max-width:768px)");
+  const {lotteryCategories = [], lotteryResults = []} = useSelector(state => state.lottery)
 
   const dispatch = useDispatch();
 
@@ -70,6 +76,46 @@ export default function ResultsBanner(props) {
       getLatestLottery("hey")
     );
   }, []);
+
+  const handleGetCategory = React.useCallback(() => {
+    dispatch(
+      getLotteryCategory({
+        params: {
+          lang_id:utils.convertLangCodeToID(i18n.language)
+        }
+      })
+    ); 
+  },[dispatch,i18n.language]);
+  const handleGetLotteryResult = React.useCallback((categoryId = undefined) => {
+    dispatch(
+      getLotteryResultByCategory({
+        params: {
+          lang_id:utils.convertLangCodeToID(i18n.language),
+          category_id: categoryId
+        }
+      })
+    ); 
+  },[dispatch,i18n.language]);
+  React.useEffect(() => {
+    handleGetCategory();
+  },[handleGetCategory]);
+  React.useEffect(() => {
+    console.log(lotteryCategories,'alotteryCategories:::')
+  },[lotteryCategories])
+  React.useEffect(() => {
+    console.log('value',value)
+    if(value >= 0) {
+      let hash = '';
+      const lotteryCategory = lotteryCategories[value - 1] || {};
+      if(Object.keys(lotteryCategory).length) {
+        hash = '#'+(lotteryCategory?.translation?.translation);
+      }
+      // router.replace(`${router.route}${hash}`)
+        handleGetLotteryResult(lotteryCategory?.id);
+    }
+  },[value]);
+
+  console.log("lotteryResults",lotteryResults)
   return (
     <>
       <Grid
@@ -99,13 +145,17 @@ export default function ResultsBanner(props) {
             className={matches ? "verticleLotto" : "horizontalLotto"}
             px={1}
           >
-             <LottoList />
-             <LottoList />
-             <LottoList />
-             <LottoList />
-             <LottoList />
-             <LottoList />
-             <LottoList />
+            {
+              
+              lotteryResults && lotteryResults.length>0 &&  lotteryResults.map((lr,key) => {
+                  return (
+                    <div key={key}>
+                      <LottoList lottery={lr}/>                     
+                    </div>
+                  );
+                })
+            
+            }             
             {/* {latest?.MOLHC?.map((item, index) => {
               return (
                 <>

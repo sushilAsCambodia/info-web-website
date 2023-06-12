@@ -239,7 +239,7 @@ import { Image } from "mui-image";
                       Score
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
-                      Visiting Team
+                      Away Team
                     </StyledHeaderCell>
                     <StyledHeaderCell width="30px" align="center">
                       Half Time
