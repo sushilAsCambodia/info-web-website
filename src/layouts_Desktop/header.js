@@ -74,7 +74,6 @@ const Header = () => {
   useEffect(() => {
     const path = router.asPath;
     const hash = router.asPath.split("#")[0];
-    console.log("header hash:::", hash, path);
 
     setPath(path);
     setHash(hash);

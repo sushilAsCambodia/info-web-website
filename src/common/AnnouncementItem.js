@@ -34,7 +34,6 @@ export default function AnnouncementItem(props) {
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
-  const [newsList, setNewsList] = useState([]);
 
   return (
     <>
@@ -48,7 +47,7 @@ export default function AnnouncementItem(props) {
           }}
         >
           <Typography
-            title={announcement[0].title}
+            title={announcement.title}
             className="twoLinesEllip"
             sx={{ fontSize: "14px",  
             "&:hover": {
@@ -57,10 +56,10 @@ export default function AnnouncementItem(props) {
    }}
             px={1}
           >
-            {announcement[0].title}
+            {announcement.title}
           </Typography>
           <Typography sx={{ fontSize: "12px", color: "#8C8C8C" }} px={1}>
-            {announcement[0].date}
+            {announcement.created_at}
           </Typography>
         </Grid>
       </div>

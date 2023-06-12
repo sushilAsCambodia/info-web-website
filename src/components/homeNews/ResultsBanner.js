@@ -19,7 +19,8 @@ import { getLatestLottery } from "@/store/actions/lotteryActions";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
+import { getAnnouncement } from "@/store/actions/announcementAction";
+import utils from "@/common/utils";
 const responsive = {
   largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
@@ -64,12 +65,20 @@ export default function ResultsBanner(props) {
     (state) => state && state.load_language && state.load_language.language
   );
   const { latest } = useSelector((state) => state.lottery);
+  const { announcement } = useSelector(
+    (state) => state?.announcement?.announcements
+  );
 
+  console.log("announcemnt:::", announcement);
   useEffect(() => {
+    dispatch(getLatestLottery("hey"));
     dispatch(
-      getLatestLottery("hey")
+      getAnnouncement({
+        params: { lang_id: utils.convertLangCodeToID(langKey), take: 10 },
+        callback: (res) => {},
+      })
     );
-  }, []);
+  }, [langKey]);
   return (
     <>
       <Grid
@@ -91,7 +100,6 @@ export default function ResultsBanner(props) {
           height={`${matches2 ? "120px" : ""}`}
         >
           <Typography px={1.5} mb={1}>
-            {" "}
             {langKey && langKey.latest_results}
           </Typography>
           <Grid
@@ -99,13 +107,13 @@ export default function ResultsBanner(props) {
             className={matches ? "verticleLotto" : "horizontalLotto"}
             px={1}
           >
-             <LottoList />
-             <LottoList />
-             <LottoList />
-             <LottoList />
-             <LottoList />
-             <LottoList />
-             <LottoList />
+            <LottoList />
+            <LottoList />
+            <LottoList />
+            <LottoList />
+            <LottoList />
+            <LottoList />
+            <LottoList />
             {/* {latest?.MOLHC?.map((item, index) => {
               return (
                 <>
@@ -165,12 +173,13 @@ export default function ResultsBanner(props) {
               className={matches ? "verticleLotto" : "horizontalLotto"}
               px={1}
             >
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
-              <AnnouncementItem announcement={announcement} />
+              {announcement?.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <AnnouncementItem announcement={item} />
+                  </div>
+                );
+              })}
             </Grid>
           </Grid>
         ) : (

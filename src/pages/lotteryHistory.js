@@ -33,6 +33,7 @@ const lotteryHistory = () => {
       }
     ))
   }, [dispatch,i18n.language,id])
+
   useEffect(() => {
     handleGetLotteryHistory();
   }, []);
@@ -46,12 +47,14 @@ const lotteryHistory = () => {
       setLotteryHistories([])
     }
   }, [lotteryHistory]);
+
   const handleScroll = (event) => { 
     if ( 
       event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
         event.currentTarget.clientHeight
     ) { 
       setCurrentPage(currentPage + 1);
+      console.log(currentPage+1)
     }
   };
   return (
