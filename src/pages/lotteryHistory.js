@@ -1,11 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
-import { Grid, Typography, Button } from "@mui/material";
+import { Grid, Typography, Button, Backdrop } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+
 import { getLotteryHistory } from "@/store/actions/lotteryActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import utils from "@/common/utils";
 import { useTranslation } from "react-i18next";
 import LotteryHistoryCard from "@/components/lottery/LotteryHistoryCard";
+import DataLoading from "@/components/DataLoading";
+import LoadingBackDrop from "@/components/LoadingBackDrop";
+
 const lotteryHistory = () => {
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
@@ -22,26 +27,29 @@ const lotteryHistory = () => {
   // console.log("handleGetLotteryHistory:::",lotteryHistory.data);
 
   const handleGetLotteryHistory = (page = 1) => {
-    console.log("currentPage:::",page);
-page !== pageLimit ?  dispatch(
-      getLotteryHistory({
-        params: {
-          rowsPerPage: 10,
-          page: page,
-          lottery_id: id,
-          lang_id: utils.convertLangCodeToID(i18n.language),
-        },
-        callback:(res) => {
-        page == 1 ?  (setLotteryHistories(res.data.data),
-        setPageLimit(res.data.last_page))
-        :
-          setLotteryHistories(data => data.concat(res.data.data));
-          // console.log("old:::",lotteryHistories)
-          // console.log("added new:::",res.data.data)
-        }
-      })
-    ):''
-
+    console.log("currentPage:::", page);
+   
+        dispatch(
+          getLotteryHistory({
+            params: {
+              rowsPerPage: 10,
+              page: page,
+              lottery_id: id,
+              lang_id: utils.convertLangCodeToID(i18n.language),
+            },
+            callback: (res) => {
+              page == 1
+                ? (setLotteryHistories(res.data.data),
+                  setPageLimit(res.data.last_page),
+                  handleClose())
+                : setLotteryHistories((data) => data.concat(res.data.data));
+              handleClose();
+              // console.log("old:::",lotteryHistories)
+              // console.log("added new:::",res.data.data)
+            },
+          })
+        )
+     
   };
 
   useEffect(() => {
@@ -49,7 +57,10 @@ page !== pageLimit ?  dispatch(
   }, []);
 
   useEffect(() => {
-    handleGetLotteryHistory(currentPage);
+    if(currentPage < pageLimit){
+      handleOpen()
+      handleGetLotteryHistory(currentPage);
+    }
   }, [currentPage]);
 
   const handleScroll = (event) => {
@@ -60,8 +71,16 @@ page !== pageLimit ?  dispatch(
       setCurrentPage(currentPage + 1);
     }
   };
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
   return (
     <>
+     <LoadingBackDrop loading={open}/>
       <Grid
         className="sticky-header"
         item
@@ -73,6 +92,7 @@ page !== pageLimit ?  dispatch(
       >
         <Typography>{router?.query?.title}</Typography>
       </Grid>
+
       <Grid
         item
         xs={12}
@@ -85,8 +105,7 @@ page !== pageLimit ?  dispatch(
         {lotteryHistories.map((r, key) => {
           return (
             <div key={key} style={{ marginBottom: 10 }}>
-              {" "}
-              <LotteryHistoryCard lottery={r} />{" "}
+              <LotteryHistoryCard lottery={r} />
             </div>
           );
         })}

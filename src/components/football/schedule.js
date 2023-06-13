@@ -61,7 +61,7 @@ export default function Schedule() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      padding: '0px'
+      padding: '0px',
     },
   }));
 
