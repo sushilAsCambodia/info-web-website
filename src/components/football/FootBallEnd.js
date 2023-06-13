@@ -54,7 +54,7 @@ import { Image } from "mui-image";
       },
       [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
-        padding: '5px 2px'
+        padding: '10px'
       },
     }));
   
