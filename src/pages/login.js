@@ -39,6 +39,7 @@ import ForgotPassword from "@/components/desktop/forgotPassword";
 import utils from "../common/utils";
 import { Image } from "mui-image";
 import { useSession, signIn, signOut } from "next-auth/react";
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
