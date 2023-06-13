@@ -124,13 +124,13 @@ export default function LangSwitcher() {
     let language = '';
     switch (l) {
       case 'en':
-        language = 'Eng';
+        language = 'English';
         break;
       case 'de':
-        language = 'Ch';
+        language = 'Chinese';
         break;
       case 'kh':
-        language = 'Kh';
+        language = 'Khmer';
         break;
       default:
         break;
@@ -140,7 +140,7 @@ export default function LangSwitcher() {
   return (
     <div>
       <Button
-        sx={{backgroundColor:"transparent", border:"0.5px solid #FFFFFF",minWidth:"60px", fontSize:"12px", color:"#fff", padding:"0px", textTransform:"capitalize !important"}}
+        sx={{backgroundColor:"transparent", border:"0.5px solid #FFFFFF",minWidth:"70px", fontSize:"12px", color:"#fff", padding:"6px", borderRadius:"20px", textTransform:"capitalize !important"}}
         id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
         aria-haspopup="true"
@@ -150,6 +150,7 @@ export default function LangSwitcher() {
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}>
+       <img src='./assets/Logo/langicon.png' alt='' /> &nbsp;
         {labelLanguage(lang)}
       </Button>
       <StyledMenu
