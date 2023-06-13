@@ -60,6 +60,7 @@ export default function Schedule() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      padding: '0px'
     },
   }));
 
@@ -181,7 +182,7 @@ export default function Schedule() {
                     setDateFilter(item.day);
                   }}
                 >
-                  <Typography sx={{ fontWeight: "bold" }} mr={1}>
+                  <Typography sx={{ fontWeight: "bold",cursor:'pointer' }} mr={1}>
                     {item.ddmmmyyyy}
                   </Typography>
                   <Divider orientation="vertical" flexItem />
@@ -279,7 +280,7 @@ export default function Schedule() {
                           <IconButton>
                             {" "}
                             <Icon
-                              width={35}
+                              width={30}
                               color="orange"
                               icon="ic:round-star"
                             />
@@ -287,7 +288,7 @@ export default function Schedule() {
                         ) : (
                           <IconButton>
                             {" "}
-                            <Icon width={35} icon="ic:round-star" />
+                            <Icon width={30} icon="ic:round-star" />
                           </IconButton>
                         )}
                       </StyledTableCell>

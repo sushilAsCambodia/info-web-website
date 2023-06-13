@@ -57,6 +57,7 @@ export default function LotteryPage() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      padding: '0px'
     },
   }));
 

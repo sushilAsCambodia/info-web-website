@@ -50,7 +50,6 @@ export default function BasketBallPage() {
 
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
-    console.log("hash:::", hash);
     if (hash) {
       setSelect(hash);
       setValue(hash);
