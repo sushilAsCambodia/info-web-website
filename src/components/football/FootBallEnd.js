@@ -285,7 +285,7 @@ import { Image } from "mui-image";
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                   </Select>
-                  {/* <FormHelperText>Without label</FormHelperText> */}
+                  
                 </FormControl>
               </Grid>
             </Grid>

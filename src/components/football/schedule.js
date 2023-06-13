@@ -315,7 +315,7 @@ export default function Schedule() {
                         ) : (
                           <IconButton>
                             {" "}
-                            <Icon width={30} icon="ic:round-star" />
+                            <Icon width={25} icon="ic:round-star" />
                           </IconButton>
                         )}
                       </StyledTableCell>

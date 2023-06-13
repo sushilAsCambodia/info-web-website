@@ -215,7 +215,7 @@ export default function FootBallFollow() {
                             <IconButton>
                               {" "}
                               <Icon
-                                width={35}
+                                width={25}
                                 color="orange"
                                 icon="ic:round-star"
                               />
@@ -223,7 +223,7 @@ export default function FootBallFollow() {
                           ) : (
                             <IconButton>
                               {" "}
-                              <Icon width={35} icon="ic:round-star" />
+                              <Icon width={25} icon="ic:round-star" />
                             </IconButton>
                           )}
                         </StyledTableCell>
