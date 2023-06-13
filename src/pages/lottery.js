@@ -132,12 +132,12 @@ export default function Lottery() {
               },
             }}
           >
-            <Tab  className="lotterytab" label={langKey?.favorites} {...a11yProps(0)}/>
-            <Tab  className="lotterytab" label={langKey?.all} {...a11yProps(1)}/>
+            <Tab  className="lotterytab" label={langKey?.all} {...a11yProps(0)}/>
+            <Tab  className="lotterytab" label={langKey?.favorites} {...a11yProps(1)}/>
             {
               lotteryCategories.map((lc,index) => {
                 return (
-                  <Tab key={index} className="lotterytab" label={lc?.translation?.translation} {...a11yProps((index+2))}/>
+                  <Tab key={index} className="lotterytab" label={lc?.translation?.translation + lc.category_id} {...a11yProps((index+2))}/>
                 )
               })
             }
@@ -185,6 +185,8 @@ export default function Lottery() {
                     <div key={key}>
                       <LotteryCard lottery={lr}/>
                       <Box height={12}></Box> 
+                      {lr.category_id }
+
                     </div>
                   );
                 }):
@@ -234,9 +236,11 @@ export default function Lottery() {
                lotteryResults.length > 0 ? 
                lotteryResults.map((lr,key) => {
                   return (
-                    <div key={key}>
+                   <div key={key}>
                       <LotteryCard lottery={lr}/>
                       <Box height={12}></Box> 
+                      {lr.category_id}
+
                     </div>
                   );
                 }):
@@ -291,6 +295,7 @@ export default function Lottery() {
                           <div key={key}>
                             <LotteryCard lottery={lr}/>
                             <Box height={12}></Box> 
+                            {lr.category_id}
                           </div>
                         );
                       })
