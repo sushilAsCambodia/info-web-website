@@ -36,6 +36,7 @@ import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
 import { Image } from "mui-image";
+import DateFilterBar from "@/common/dateFilterBar";
 export default function Schedule() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
@@ -134,6 +135,76 @@ export default function Schedule() {
       false,
       "Yamagata Mountain God"
     ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Stanley League",
+      "Marvel Stadium",
+      "Sunday, June 18, 2023",
+      5,
+      "[18] Gunma Hot Spring",
+      false,
+      "Yamagata Mountain God"
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Stanley League",
+      "Marvel Stadium",
+      "Sunday, June 18, 2023",
+      5,
+      "[18] Gunma Hot Spring",
+      false,
+      "Yamagata Mountain God"
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Stanley League",
+      "Marvel Stadium",
+      "Sunday, June 18, 2023",
+      5,
+      "[18] Gunma Hot Spring",
+      false,
+      "Yamagata Mountain God"
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Stanley League",
+      "Marvel Stadium",
+      "Sunday, June 18, 2023",
+      5,
+      "[18] Gunma Hot Spring",
+      false,
+      "Yamagata Mountain God"
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Stanley League",
+      "Marvel Stadium",
+      "Sunday, June 18, 2023",
+      5,
+      "[18] Gunma Hot Spring",
+      false,
+      "Yamagata Mountain God"
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Stanley League",
+      "Marvel Stadium",
+      "Sunday, June 18, 2023",
+      5,
+      "[18] Gunma Hot Spring",
+      false,
+      "Yamagata Mountain God"
+    ),
+    createData(
+      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+      "Stanley League",
+      "Marvel Stadium",
+      "Sunday, June 18, 2023",
+      5,
+      "[18] Gunma Hot Spring",
+      false,
+      "Yamagata Mountain God"
+    ),
   ];
 
   const [dateFilter, setDateFilter] = useState("");
@@ -161,9 +232,11 @@ export default function Schedule() {
           </Grid>
         </Fade>
       </Modal>
-      <Grid container>
+      <Grid container px={{xs:2,md:0}}>
         <Grid
           container
+          pt={1}
+          px={1}
           sx={{
             background: "#FAFAFA",
             border: "1px solid #DDDDDD",
@@ -171,64 +244,15 @@ export default function Schedule() {
             marginBottom: "10px",
           }}
         >
-          <Grid container item xs={10} alignItems="center">
-            {utils.LastXDays(7).map((item, index) => {
-              return (
-                <Grid
-                  key={index}
-                  item
-                  xs={"auto"}
-                  mx={1}
-                  container
-                  className={`${item.day === dateFilter ? "dateSelected" : ""}`}
-                  onClick={() => {
-                    setDateFilter(item.day);
-                  }}
-                >
-                  <Typography sx={{ fontWeight: "bold",cursor:'pointer' }} mr={1}>
-                    {item.ddmmmyyyy}
-                  </Typography>
-                  <Divider orientation="vertical" flexItem />
-                </Grid>
-              );
-            })}
-          </Grid>
-          <Grid
-            item
-            xs={2}
-            display="flex"
-            alignItems="center"
-            justifyContent="flex-end"
-          >
-            <FormControl sx={{ m: 1 }} size="small">
-              <Select
-                value={age}
-                onChange={handleChange}
-                displayEmpty
-                inputProps={{ "aria-label": "Without label" }}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <Icon icon="material-symbols:calendar-today" width={25} />
-                  </InputAdornment>
-                }
-              >
-                <MenuItem value="">
-                  <em>Date</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-              {/* <FormHelperText>Without label</FormHelperText> */}
-            </FormControl>
-          </Grid>
+                <DateFilterBar/>
+
         </Grid>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledHeaderCell width="60px">Competition</StyledHeaderCell>
+                  <StyledHeaderCell width="60px" align="left">Competition</StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="center">
                     Round
                   </StyledHeaderCell>

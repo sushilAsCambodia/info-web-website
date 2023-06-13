@@ -54,7 +54,7 @@ import { Image } from "mui-image";
       },
       [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
-        padding: '2px'
+        padding: '5px 2px'
       },
     }));
   
@@ -148,11 +148,81 @@ import { Image } from "mui-image";
         "Yamagata Mountain God",
         {team1:2,team2:2}
       ),
+      createData(
+        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+        "Gingerbread",
+        356,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
+        5,
+        "Yamagata Mountain God",
+        {team1:2,team2:2}
+      ),
+      createData(
+        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+        "Gingerbread",
+        356,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
+        5,
+        "Yamagata Mountain God",
+        {team1:2,team2:2}
+      ),
+      createData(
+        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+        "Gingerbread",
+        356,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
+        5,
+        "Yamagata Mountain God",
+        {team1:2,team2:2}
+      ),
+      createData(
+        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+        "Gingerbread",
+        356,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
+        5,
+        "Yamagata Mountain God",
+        {team1:2,team2:2}
+      ),
+      createData(
+        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+        "Gingerbread",
+        356,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
+        5,
+        "Yamagata Mountain God",
+        {team1:2,team2:2}
+      ),
+      createData(
+        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+        "Gingerbread",
+        356,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
+        5,
+        "Yamagata Mountain God",
+        {team1:2,team2:2}
+      ),
+      createData(
+        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+        "Gingerbread",
+        356,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
+        5,
+        "Yamagata Mountain God",
+        {team1:2,team2:2}
+      ),
     ];
   
     return (
       <>
-        <Grid container>
+        <Grid container px={{xs:2,md:0}}>
           <Grid item xs={12}>
             <Grid
               container

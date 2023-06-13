@@ -25,6 +25,7 @@ import moment from "moment/moment";
 import Events from "./events";
 import MatchWithDates from "@/components/match/MatchWithDates";
 import MatchWithRounds from "@/components/match/MatchWithRounds";
+import FavouritePage from "@/components/favourite/favouritePage";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -109,7 +110,7 @@ export default function Match() {
             <Tab className="matchtab" label="Events" {...a11yProps(1)} />
             <Tab className="matchtab" label="Soccer" {...a11yProps(2)} />
             <Tab className="matchtab" label="Basket Ball" {...a11yProps(3)} />
-            <Tab className="matchtab" label="Category 2" {...a11yProps(4)} />
+            <Tab className="matchtab" label="favourite" {...a11yProps(4)} />
             <Tab className="matchtab" label="Category 3" {...a11yProps(5)} />
           </Tabs>
           <Grid
@@ -163,7 +164,7 @@ export default function Match() {
         <MatchWithRounds />
         </TabPanel>
         <TabPanel value={value} index={4}>
-          Shíshí Cǎi
+          <FavouritePage/>
         </TabPanel>
         <TabPanel value={value} index={5}>
           Shíshí Cǎi
