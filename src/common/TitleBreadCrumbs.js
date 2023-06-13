@@ -61,7 +61,7 @@ export default function TitleBreadCrumbs(props) {
   ];
 
   return (
-    <Grid container justifyContent="space-between" my={1}>
+    <Grid container justifyContent="space-between" my={1} px={{xs:2,md:0}}>
       <Typography variant="h5" fontWeight="bold">
         {title}
       </Typography>

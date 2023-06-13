@@ -49,12 +49,25 @@ const MenuProps = {
   },
 };
 
-const filterList = {America:['Stanley cup','FIFA'],UK:['Euro cup']}
-const America = [
-  'Stanley cup',
-  'FIFA'
-];
+const filterList = { America: ["Stanley cup", "FIFA"], UK: ["Euro cup"] };
+const America = ["Stanley cup", "FIFA"];
 const UK = ["Euro Cup"];
+
+const data = [
+  {
+    id: 1,
+    name: "America",
+    plans: [
+      { id: 1, name: "Stanley cup", type: "ltd" },
+      { id: 2, name: "FIFA", type: "subscription" },
+    ],
+  },
+  {
+    id: 2,
+    name: "UK",
+    plans: [{ id: 3, name: "Euro cup", type: "ltd" }],
+  },
+];
 
 export default function FootBallPage() {
   const router = useRouter();
@@ -66,7 +79,7 @@ export default function FootBallPage() {
     const {
       target: { value },
     } = event;
-    console.log("target:::",event.target.value)
+    console.log("target:::", event.target.value);
     setSelectedName(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
@@ -88,6 +101,17 @@ export default function FootBallPage() {
     }
   }, [router.asPath]);
 
+  const renderSelectGroup = (product) => {
+    const items = product.plans.map((p) => {
+      return (
+        <MenuItem key={p.id} value={p.name}>
+          <Checkbox checked={selectedName.indexOf(p.name) > -1} />
+          <ListItemText primary={p.name} />
+        </MenuItem>
+      );
+    });
+    return [<ListSubheader>{product.name}</ListSubheader>, items];
+  };
   return (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
@@ -95,7 +119,13 @@ export default function FootBallPage() {
       </Typography> */}
       <TitleBreadCrumbs title={langKey && langKey.foot_ball} />
 
-      <Grid container mb={2} alignItems="center" justifyContent="space-between">
+      <Grid
+        container
+        mb={2}
+        px={{ xs: 2, md: 0 }}
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <Grid
           item
           xs={"auto"}
@@ -148,46 +178,14 @@ export default function FootBallPage() {
               id="demo-multiple-checkbox"
               multiple
               value={selectedName}
-              onChange={handleChange}
-              onClose={()=>console.log("picked:::",selectedName)}
+              onChange={(e) => handleChange(e)}
+              onClose={() => console.log("picked:::", selectedName)}
               input={<OutlinedInput label="Filter" />}
               renderValue={(selected) => selected.join(", ")}
               MenuProps={MenuProps}
             >
-              <ListSubheader>America</ListSubheader>
-              {America.map((item, index) => {
-                return (
-                  <MenuItem key={index} value={item}>
-                    <Checkbox checked={selectedName.indexOf(item) > -1} />
-                    <ListItemText primary={item} />
-                  </MenuItem>
-                );
-              })}
-
-              <ListSubheader>UK</ListSubheader>
-              {UK.map((item, index) => {
-                return (
-                  <MenuItem key={index} value={item}>
-                    <Checkbox checked={selectedName.indexOf(item) > -1} />
-                    <ListItemText primary={item} />
-                  </MenuItem>
-                );
-              })}
-         
-            {/* {Object.keys(filterList).map((item,index)=>{
-              return(<>
-              <ListSubheader>{item}</ListSubheader>
-              {filterList[item].map((name,index)=>{
-                return(
-                <MenuItem key={index} value={name}>
-                  <Checkbox checked={selectedName.indexOf(name) > -1} />
-                  <ListItemText primary={name} />
-                </MenuItem>)
-              })}
-              </>)
-            })} */}
+              {data?.map((p) => renderSelectGroup(p))}
             </Select>
-
           </FormControl>
         </Grid>
       </Grid>

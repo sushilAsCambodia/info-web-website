@@ -60,6 +60,7 @@ export default function FootBallFollow() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      padding: '0px'
     },
   }));
 
@@ -144,7 +145,7 @@ export default function FootBallFollow() {
           </Grid>
         </Fade>
       </Modal>
-      <Grid container>
+      <Grid container px={{xs:2,md:0}}>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
