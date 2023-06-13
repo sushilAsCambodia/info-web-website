@@ -45,7 +45,7 @@ export default function AnnouncementItem(props) {
             {announcement.title}
           </Typography>
           <Typography sx={{ fontSize: "12px", color: "#8C8C8C" }} px={1}>
-            {moment(announcement.created_at).format(utils.DateWithTime)}
+            {moment(announcement.created_at).format(utils.letterFormat2)}
           </Typography>
         </Grid>
       </div>
