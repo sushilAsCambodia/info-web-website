@@ -58,7 +58,6 @@ export default function Lottery() {
     lotteryResults = [],
   } = useSelector((state) => state.lottery);
   const langKey = useSelector((state) => state?.load_language?.language);
-  console.log("lotteryCategories:::", lotteryCategories);
   const router = useRouter();
   const handleChange = (event, newValue) => {
     setValue(newValue);
