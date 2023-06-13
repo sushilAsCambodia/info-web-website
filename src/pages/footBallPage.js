@@ -172,7 +172,7 @@ export default function FootBallPage() {
         </Grid>
         <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel id="demo-multiple-checkbox-label">Select event</InputLabel>
+            <InputLabel id="demo-multiple-checkbox-label">{langKey && langKey.select_event}</InputLabel>
             <Select
               labelId="demo-multiple-checkbox-label"
               id="demo-multiple-checkbox"
