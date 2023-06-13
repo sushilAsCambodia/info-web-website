@@ -50,8 +50,7 @@ export default function Lottery() {
   const [value, setValue] = React.useState(0);
   const { i18n } = useTranslation();
   const {loading, lotteryCategories = [], lotteryResults = []} = useSelector(state => state.lottery)
-  const langKey = useSelector((state) => state?.load_language?.language);
-  console.log("lotteryCategories:::",lotteryCategories)
+  const langKey = useSelector((state) => state?.load_language?.language);  
   const router = useRouter();
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -70,7 +69,6 @@ export default function Lottery() {
     ); 
   },[dispatch,i18n.language]);
   const handleGetLotteryResult = React.useCallback((categoryId = undefined,tab) => {
-    // console.log("categoryId",categoryId,tab)
    
     dispatch(
       getLotteryResultByCategory({
@@ -84,11 +82,9 @@ export default function Lottery() {
   React.useEffect(() => {
     handleGetCategory();
   },[handleGetCategory]);
-  React.useEffect(() => {
-    console.log(lotteryCategories,'alotteryCategories:::')
+  React.useEffect(() => {   
   },[lotteryCategories])
-  React.useEffect(() => {
-    console.log('value',value)
+  React.useEffect(() => {   
     if(value >= 0) {
       let hash = '';
       const lotteryCategory = lotteryCategories[value - 1] || {};
@@ -134,8 +130,8 @@ export default function Lottery() {
               },
             }}
           >
-            <Tab  className="lotterytab" label={langKey?.all} {...a11yProps(0)}/>
-            <Tab  className="lotterytab" label={langKey?.favorites} {...a11yProps(1)}/>
+            <Tab  className="lotterytab" label={langKey?.favorites} {...a11yProps(0)}/>
+            <Tab  className="lotterytab" label={langKey?.all} {...a11yProps(1)}/>
             {
               lotteryCategories.map((lc,index) => {              
                 if(lc && lc.lottery_bind>0)
