@@ -62,7 +62,7 @@ export default function FootBallFollow() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      padding: '0px'
+      padding: '10px'
     },
   }));
 
