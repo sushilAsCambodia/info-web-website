@@ -6,6 +6,10 @@ import {
   InputLabel,
   Select,
   Box,
+  OutlinedInput,
+  Checkbox,
+  ListItemText,
+  ListSubheader,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 
@@ -16,8 +20,8 @@ import ScoreTable from "@/components/football/ScoreTable";
 import Schedule from "@/components/football/schedule";
 
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
-import ScoreTab from "@/components/football/ScoreTab";
-import EndTab from "@/components/football/EndTab";
+import FootBallFollow from "@/components/football/FootBallFollow";
+import FootBallEnd from "@/components/football/FootBallEnd";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -29,33 +33,52 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const filterList = {America:['Stanley cup','FIFA'],UK:['Euro cup']}
+const America = [
+  'Stanley cup',
+  'FIFA'
+];
+const UK = ["Euro Cup"];
+
 export default function FootBallPage() {
   const router = useRouter();
+
   const [select, setSelect] = useState(0);
-  const [age, setAge] = useState("");
+  const [selectedName, setSelectedName] = useState([]);
 
-  const [value, setValue] = useState("");
-  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
-
-
-  
   const handleChange = (event) => {
-    setAge(event.target.value);
+    const {
+      target: { value },
+    } = event;
+    console.log("target:::",event.target.value)
+    setSelectedName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
   };
+  const [value, setValue] = useState("");
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
-    console.log("hash:::", hash);
     if (hash) {
       setSelect(hash);
       setValue(hash);
@@ -70,10 +93,16 @@ export default function FootBallPage() {
       {/* <Typography variant="h5" fontWeight="bold">
       {langKey && langKey.foot_ball} 
       </Typography> */}
-      <TitleBreadCrumbs title={langKey && langKey.foot_ball}  />
+      <TitleBreadCrumbs title={langKey && langKey.foot_ball} />
 
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
-        <Grid item xs={"auto"} container border="1px solid grey" borderRadius="5px">
+        <Grid
+          item
+          xs={"auto"}
+          container
+          border="1px solid grey"
+          borderRadius="5px"
+        >
           <MenuItem
             sx={{ borderRadius: "5px 0px 0px 5px" }}
             className={`${select === "Follow" ? "filterTabSelected" : ""}`}
@@ -81,7 +110,7 @@ export default function FootBallPage() {
               router.push("/footBallPage#Follow");
             }}
           >
-                  {langKey && langKey.follow}
+            {langKey && langKey.follow}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 0px 0px 0px" }}
@@ -90,7 +119,7 @@ export default function FootBallPage() {
               router.push("/footBallPage#Score");
             }}
           >
-               {langKey && langKey.score}
+            {langKey && langKey.score}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 0px 0px 0px" }}
@@ -98,8 +127,8 @@ export default function FootBallPage() {
             onClick={() => {
               router.push("/footBallPage#End");
             }}
-          > 
-               {langKey && langKey.end}
+          >
+            {langKey && langKey.end}
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 5px 5px 0px" }}
@@ -108,36 +137,69 @@ export default function FootBallPage() {
               router.push("/footBallPage#Schedule");
             }}
           >
-               {langKey && langKey.schedule}
-          </MenuItem> 
+            {langKey && langKey.schedule}
+          </MenuItem>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <FormControl fullWidth>
-            <InputLabel id="category-select-label">{langKey && langKey.select_category}</InputLabel>
+            <InputLabel id="demo-multiple-checkbox-label">Filter</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="category-select"
-              value={age}
-              label="Select Category"
+              labelId="demo-multiple-checkbox-label"
+              id="demo-multiple-checkbox"
+              multiple
+              value={selectedName}
               onChange={handleChange}
-              style={{ paddingY: "0px" }}
+              onClose={()=>console.log("picked:::",selectedName)}
+              input={<OutlinedInput label="Filter" />}
+              renderValue={(selected) => selected.join(", ")}
+              MenuProps={MenuProps}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <ListSubheader>America</ListSubheader>
+              {America.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item}>
+                    <Checkbox checked={selectedName.indexOf(item) > -1} />
+                    <ListItemText primary={item} />
+                  </MenuItem>
+                );
+              })}
+
+              <ListSubheader>UK</ListSubheader>
+              {UK.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item}>
+                    <Checkbox checked={selectedName.indexOf(item) > -1} />
+                    <ListItemText primary={item} />
+                  </MenuItem>
+                );
+              })}
+         
+            {/* {Object.keys(filterList).map((item,index)=>{
+              return(<>
+              <ListSubheader>{item}</ListSubheader>
+              {filterList[item].map((name,index)=>{
+                return(
+                <MenuItem key={index} value={name}>
+                  <Checkbox checked={selectedName.indexOf(name) > -1} />
+                  <ListItemText primary={name} />
+                </MenuItem>)
+              })}
+              </>)
+            })} */}
             </Select>
+
           </FormControl>
         </Grid>
       </Grid>
- <TabPanel value={value} index={"Follow"}>
-        <ScoreTab />
+      <TabPanel value={value} index={"Follow"}>
+        <FootBallFollow />
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
-      <ScoreTab />
+        <FootBallFollow />
       </TabPanel>
-     
+
       <TabPanel value={value} index={"End"}>
-      <EndTab />
+        <FootBallEnd />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
         <Schedule />

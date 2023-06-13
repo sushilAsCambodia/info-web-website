@@ -17,6 +17,8 @@ import {
     IconButton,
     Modal,
     Backdrop,
+    Stack,
+
     Fade,
     Box,
     Divider,
@@ -25,6 +27,7 @@ import {
     TextField,
     InputAdornment,
   } from "@mui/material";
+  import Pagination from "@mui/material/Pagination";
   import { useState } from "react";
   import utils from "@/common/utils";
   import moment from "moment/moment";
@@ -32,7 +35,7 @@ import {
   import { Icon } from "@iconify/react";
   import { lottoTable } from "@/pages/LotteryPage";
 import { Image } from "mui-image";
-  export default function EndTab() {
+  export default function FootBallEnd() {
     const [select, setSelect] = useState(0);
     const [filter, setFilter] = useState("China National");
   
@@ -51,6 +54,7 @@ import { Image } from "mui-image";
       },
       [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
+        padding: '2px'
       },
     }));
   
@@ -98,50 +102,50 @@ import { Image } from "mui-image";
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
         "Frozen yoghurt",
         159,
-        "2023 Mar 23",
-        32,
+        "1 Subject to tie/half 0",
+      '[18] Gunma Hot Spring',
         1,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:2,team2:0}
       ),
       createData(
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
         "Ice cream sandwich",
         237,
-        "2023 Mar 23",
-        5,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
         2,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:1,team2:3}
       ),
       createData(
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
         "Eclair",
         262,
-        "2023 Mar 23",
-        32,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
         3,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:0,team2:0}
       ),
       createData(
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
         "Cupcake",
         305,
-        "2023 Mar 23",
-        5,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
         4,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:1,team2:1}
       ),
       createData(
         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
         "Gingerbread",
         356,
-        "2023 Mar 23",
-        10,
+        "1 Subject to tie/half 0",
+        '[18] Gunma Hot Spring',
         5,
-        "analysis of Asia and Europe",
+        "Yamagata Mountain God",
         {team1:2,team2:2}
       ),
     ];
@@ -166,6 +170,7 @@ import { Image } from "mui-image";
                       key={index}
                       item
                       xs={"auto"}
+                      sx={{cursor:'pointer'}}
                       mx={1}
                       container
                       className={`${
@@ -178,7 +183,7 @@ import { Image } from "mui-image";
                       <Typography sx={{ fontWeight: "bold" }} mr={1}>
                         {item.day}
                       </Typography>
-                      <Typography mr={1}>{item.monthyear}</Typography>
+                      <Typography  mr={1}>{item.monthyear}</Typography>
                       <Divider orientation="vertical" flexItem />
                     </Grid>
                   );
@@ -204,7 +209,7 @@ import { Image } from "mui-image";
                     }
                   >
                     <MenuItem value="">
-                      <em>None</em>
+                      <em>Date</em>
                     </MenuItem>
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
@@ -218,20 +223,18 @@ import { Image } from "mui-image";
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledHeaderCell width="60px">Competition</StyledHeaderCell>
+                    <StyledHeaderCell width="100px">Competition</StyledHeaderCell>
   
-                    <StyledHeaderCell width="50px" align="left">
+                    <StyledHeaderCell width="50px" align="center">
                       Rounds
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="50px" align="left">
-                      Draw Time
+                    <StyledHeaderCell width="50px" align="center">
+                      Competing Time
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
-                      Competing Team
+                     State
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="50px" align="center">
-                      State
-                    </StyledHeaderCell>
+                    
                     <StyledHeaderCell width="100px" align="center">
                       Home team
                     </StyledHeaderCell>
@@ -239,7 +242,7 @@ import { Image } from "mui-image";
                       Score
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
-                      Visiting Team
+                      Away Team
                     </StyledHeaderCell>
                     <StyledHeaderCell width="30px" align="center">
                       Half Time
@@ -251,11 +254,13 @@ import { Image } from "mui-image";
                     return (
                         <StyledTableRow key={item.id}>
                           <StyledTableCell align="center">
-                            <Image width={30} src={item.img} alt="football" />
-                            <Typography>{item.name}</Typography>
+                           <Grid display='flex' alignItems="center">
+                             <Image width={30} src={item.img} alt="football" />
+                             <Typography mx={1}>{item.name}</Typography>
+                           </Grid>
                           </StyledTableCell>
                           <StyledTableCell align="center">
-                            {item.fat}
+                            {item.calories}
                           </StyledTableCell>
                           <StyledTableCell align="center">
                             {item.fat}
@@ -266,9 +271,7 @@ import { Image } from "mui-image";
                           <StyledTableCell align="center">
                             {item.data}
                           </StyledTableCell>
-                          <StyledTableCell align="center">
-                            {item.fat}
-                          </StyledTableCell>
+                          
                           <StyledTableCell align="center">
                             {item.fat}
                           </StyledTableCell>
@@ -292,6 +295,24 @@ import { Image } from "mui-image";
                 </TableBody>
               </Table>
             </TableContainer>
+
+
+            {rows?.length > 0 && (
+            <Grid
+              item
+              xs={12}
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              paddingTop={3}
+              paddingBottom={3}
+            >
+              <Stack spacing={2} sx={{ textAlign: "center" }}>
+                <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
+              </Stack>
+            </Grid>
+          )}
+
           </Grid>
         </Grid>
       </>
