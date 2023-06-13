@@ -1163,3 +1163,14 @@ line-height: 12px !important;
     border-radius: 50px;
   }
  
+
+  /* bug  */
+
+  .announce-pagination .css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover{
+background: #F24E1E;
+color: #fff;
+  }
+  .announce-pagination .css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+    background: #F24E1E;
+color: #fff;
+  }

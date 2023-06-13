@@ -80,7 +80,7 @@ export default function Advertisement(props) {
             keyBoardControl
             minimumTouchDrag={80}
             pauseOnHover
-            showDots
+            // showDots
             renderArrowsWhenDisabled={false}
             renderButtonGroupOutside={false}
             renderDotsOutside={false} 

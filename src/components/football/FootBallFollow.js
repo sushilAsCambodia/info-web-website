@@ -19,6 +19,8 @@ import {
   Backdrop,
   Fade,
   Box,
+  Stack,
+
   Divider,
   Collapse,
   Button,
@@ -28,7 +30,7 @@ import {
 import { useState } from "react";
 import utils from "@/common/utils";
 import moment from "moment/moment";
-
+import Pagination from "@mui/material/Pagination";
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
@@ -60,6 +62,7 @@ export default function FootBallFollow() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      padding: '10px'
     },
   }));
 
@@ -144,7 +147,7 @@ export default function FootBallFollow() {
           </Grid>
         </Fade>
       </Modal>
-      <Grid container>
+      <Grid container px={{xs:2,md:0}}>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -152,10 +155,10 @@ export default function FootBallFollow() {
                 <TableRow>
                   <StyledHeaderCell width="60px">League</StyledHeaderCell>
 
-                  <StyledHeaderCell width="50px" align="left">
+                  <StyledHeaderCell width="50px" align="center">
                     Rounds
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="50px" align="left">
+                  <StyledHeaderCell width="50px" align="center">
                     Match Time
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
@@ -185,8 +188,8 @@ export default function FootBallFollow() {
                           <Typography mx={1}>{item.name}</Typography></Grid>
                         </StyledTableCell>
                         
-                        <StyledTableCell align="left">
-                          {item.calories}
+                        <StyledTableCell align="center">
+                          {item.calories} 
                         </StyledTableCell>
                         <StyledTableCell align="center">
                           {item.fat}
@@ -194,11 +197,11 @@ export default function FootBallFollow() {
                         <StyledTableCell align="center">
                           {item.data}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
-                          {item.id}
+                        <StyledTableCell align="center">
+                          {item.id} 
                         </StyledTableCell>
                         
-                        <StyledTableCell align="left">
+                        <StyledTableCell align="center">
                           {item.fat} <IconButton onClick={() => setOpenModal(true)}>
                             <Icon icon="ic:baseline-live-tv" color="#03C12D" />
                           </IconButton>
@@ -212,7 +215,7 @@ export default function FootBallFollow() {
                             <IconButton>
                               {" "}
                               <Icon
-                                width={35}
+                                width={25}
                                 color="orange"
                                 icon="ic:round-star"
                               />
@@ -220,7 +223,7 @@ export default function FootBallFollow() {
                           ) : (
                             <IconButton>
                               {" "}
-                              <Icon width={35} icon="ic:round-star" />
+                              <Icon width={25} icon="ic:round-star" />
                             </IconButton>
                           )}
                         </StyledTableCell>
@@ -230,6 +233,23 @@ export default function FootBallFollow() {
               </TableBody>
             </Table>
           </TableContainer>
+
+          {rows?.length > 0 && (
+            <Grid
+              item
+              xs={12}
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              paddingTop={3}
+              paddingBottom={3}
+            >
+              <Stack spacing={2} sx={{ textAlign: "center" }}>
+                <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
+              </Stack>
+            </Grid>
+          )}
+
         </Grid>
       </Grid>
     </>
