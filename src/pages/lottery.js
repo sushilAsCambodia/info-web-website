@@ -137,7 +137,7 @@ export default function Lottery() {
                 if(lc && lc.lottery_bind>0)
                 
                 return (
-                  <Tab key={index} className="lotterytab" label={lc?.translation?.translation + lc.category_id} {...a11yProps((index+2))}/>
+                  <Tab key={index} className="lotterytab" label={lc?.translation?.translation} {...a11yProps((index+2))}/>
                 )
               })
             }
