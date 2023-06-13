@@ -199,7 +199,7 @@ const Header = () => {
                 justifyContent="space-between"
                 alignItems="strech"
               >
-                <Grid item xs={3} sm={2} md={2} lg={1}>
+                {/* <Grid item xs={3} sm={2} md={2} lg={1}>
                   <MenuItem
                     id="fade-button"
                     aria-controls={openScore ? "fade-menu" : undefined}
@@ -264,7 +264,7 @@ const Header = () => {
                       <HeaderLiveScore />
                     </Grid>
                   </Popover>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={6} md={6} lg={8} container color="black" marginRight="auto">
                   <Grid>
                     <MenuItem

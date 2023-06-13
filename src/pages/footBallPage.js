@@ -49,7 +49,7 @@ const MenuProps = {
   },
 };
 
-const filterList = {America:['stanley cup','FIFA'],UK:['Euro cup']}
+const filterList = {America:['Stanley cup','FIFA'],UK:['Euro cup']}
 const America = [
   'Stanley cup',
   'FIFA'
@@ -66,6 +66,7 @@ export default function FootBallPage() {
     const {
       target: { value },
     } = event;
+    console.log("target:::",event.target.value)
     setSelectedName(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
@@ -78,7 +79,6 @@ export default function FootBallPage() {
 
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
-    console.log("hash:::", hash);
     if (hash) {
       setSelect(hash);
       setValue(hash);
@@ -155,7 +155,6 @@ export default function FootBallPage() {
               MenuProps={MenuProps}
             >
               <ListSubheader>America</ListSubheader>
-
               {America.map((item, index) => {
                 return (
                   <MenuItem key={index} value={item}>
@@ -164,8 +163,8 @@ export default function FootBallPage() {
                   </MenuItem>
                 );
               })}
-              <ListSubheader>UK</ListSubheader>
 
+              <ListSubheader>UK</ListSubheader>
               {UK.map((item, index) => {
                 return (
                   <MenuItem key={index} value={item}>
@@ -175,8 +174,17 @@ export default function FootBallPage() {
                 );
               })}
          
-            {/* {filterList.map((item,index)=>{
-              return(<ListSubheader>{item}</ListSubheader>)
+            {/* {Object.keys(filterList).map((item,index)=>{
+              return(<>
+              <ListSubheader>{item}</ListSubheader>
+              {filterList[item].map((name,index)=>{
+                return(
+                <MenuItem key={index} value={name}>
+                  <Checkbox checked={selectedName.indexOf(name) > -1} />
+                  <ListItemText primary={name} />
+                </MenuItem>)
+              })}
+              </>)
             })} */}
             </Select>
 

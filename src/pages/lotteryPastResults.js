@@ -52,6 +52,7 @@ export default function LotteryPastReults() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      padding: '0px'
     },
   }));
 

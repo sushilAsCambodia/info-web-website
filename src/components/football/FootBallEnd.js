@@ -51,6 +51,7 @@ import { Image } from "mui-image";
       },
       [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
+        padding: '2px'
       },
     }));
   
@@ -166,6 +167,7 @@ import { Image } from "mui-image";
                       key={index}
                       item
                       xs={"auto"}
+                      sx={{cursor:'pointer'}}
                       mx={1}
                       container
                       className={`${
@@ -178,7 +180,7 @@ import { Image } from "mui-image";
                       <Typography sx={{ fontWeight: "bold" }} mr={1}>
                         {item.day}
                       </Typography>
-                      <Typography mr={1}>{item.monthyear}</Typography>
+                      <Typography  mr={1}>{item.monthyear}</Typography>
                       <Divider orientation="vertical" flexItem />
                     </Grid>
                   );
@@ -218,7 +220,7 @@ import { Image } from "mui-image";
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledHeaderCell width="60px">Competition</StyledHeaderCell>
+                    <StyledHeaderCell width="100px">Competition</StyledHeaderCell>
   
                     <StyledHeaderCell width="50px" align="left">
                       Rounds
@@ -249,7 +251,7 @@ import { Image } from "mui-image";
                     return (
                         <StyledTableRow key={item.id}>
                           <StyledTableCell align="center">
-                           <Grid container alignItems="center">
+                           <Grid display='flex' alignItems="center">
                              <Image width={30} src={item.img} alt="football" />
                              <Typography mx={1}>{item.name}</Typography>
                            </Grid>
