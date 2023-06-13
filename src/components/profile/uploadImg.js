@@ -35,7 +35,7 @@ const ImgUpload = ({
         <Image alt="photo_default_upload" src="/assets/Profile/defaultavatar.jpg" style={{borderRadius: '50%'}}/> 
       } 
       </div>
-      <input id="photo-upload" type="file" onChange={onChange} />
+      <input id="photo-upload" type="file" onChange={onChange}    accept="image/png , image/jpeg, image/jpg" />
     </label>
   );
 }
