@@ -38,9 +38,9 @@ export default function ProfileAnnouncement() {
   const { announcement } = useSelector(
     (state) => state?.announcement?.announcements
   );
-  const announcements = announcement?.filter((item) => {
-    return item.status === "0";
-  });
+  // const announcements = announcement?.filter((item) => {
+  //   return item.status === "0";
+  // });
 
   useEffect(() => {
     dispatch(

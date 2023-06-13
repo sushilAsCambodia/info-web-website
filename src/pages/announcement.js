@@ -47,12 +47,18 @@ const Announcement = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const router = useRouter();
   const langKey = useSelector((state) => state?.load_language?.language);
-  const { announcement } = useSelector(
-    (state) => state?.announcement?.announcements
-  );
-  const announcements = announcement?.filter((item) => {
-    return item.status === "0";
-  });
+  // const { announcement } = useSelector(
+  //   (state) => state?.announcement?.announcements
+  // );
+  // const announcements = announcement?.filter((item) => {
+  //   return item.status === "0";
+  // });
+
+
+  const  announcements  = useSelector((state) => state?.announcement?.announcements);
+
+
+  //const announcements = announcement;
 
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
@@ -174,7 +180,7 @@ const Announcement = () => {
                         fontSize="12px"
                         color="#8C8C8C"
                       >
-                        { moment(item.created_at).format(utils.DateWithTime) }
+                        { moment(item.created_at).format(utils.letterFormat2) }
                       </Typography>
                     </Grid>
                   </Grid>
