@@ -17,6 +17,8 @@ import {
     IconButton,
     Modal,
     Backdrop,
+    Stack,
+
     Fade,
     Box,
     Divider,
@@ -25,6 +27,7 @@ import {
     TextField,
     InputAdornment,
   } from "@mui/material";
+  import Pagination from "@mui/material/Pagination";
   import { useState } from "react";
   import utils from "@/common/utils";
   import moment from "moment/moment";
@@ -276,13 +279,13 @@ import { Image } from "mui-image";
                     }
                   >
                     <MenuItem value="">
-                      <em>None</em>
+                      <em>Date</em>
                     </MenuItem>
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                   </Select>
-                  {/* <FormHelperText>Without label</FormHelperText> */}
+                  
                 </FormControl>
               </Grid>
             </Grid>
@@ -292,10 +295,10 @@ import { Image } from "mui-image";
                   <TableRow>
                     <StyledHeaderCell width="100px">Competition</StyledHeaderCell>
   
-                    <StyledHeaderCell width="50px" align="left">
+                    <StyledHeaderCell width="50px" align="center">
                       Rounds
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="50px" align="left">
+                    <StyledHeaderCell width="50px" align="center">
                       Competing Time
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
@@ -362,6 +365,24 @@ import { Image } from "mui-image";
                 </TableBody>
               </Table>
             </TableContainer>
+
+
+            {rows?.length > 0 && (
+            <Grid
+              item
+              xs={12}
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              paddingTop={3}
+              paddingBottom={3}
+            >
+              <Stack spacing={2} sx={{ textAlign: "center" }}>
+                <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
+              </Stack>
+            </Grid>
+          )}
+
           </Grid>
         </Grid>
       </>

@@ -325,7 +325,7 @@ export default function LotteryPastReults() {
                   inputProps={{ "aria-label": "Without label" }}
                 >
                   <MenuItem value="">
-                    <em>None</em>
+                    <em>Select Issue</em>
                   </MenuItem>
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
@@ -340,6 +340,7 @@ export default function LotteryPastReults() {
                   paddingTop: "5px",
                   paddingBottom: "5px",
                   color: "white",
+                  textTransform:"capitalize"
                 }}
               >
                 Search
