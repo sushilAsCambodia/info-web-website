@@ -69,12 +69,14 @@ export default function Lottery() {
       })
     ); 
   },[dispatch,i18n.language]);
-  const handleGetLotteryResult = React.useCallback((categoryId = undefined) => {
+  const handleGetLotteryResult = React.useCallback((categoryId = undefined,tab) => {
+    // console.log("categoryId",categoryId,tab)
+   
     dispatch(
       getLotteryResultByCategory({
         params: {
           lang_id:utils.convertLangCodeToID(i18n.language),
-          category_id: categoryId
+          category_id:tab==1?'':categoryId 
         }
       })
     ); 
@@ -94,7 +96,7 @@ export default function Lottery() {
         hash = '#'+(lotteryCategory?.translation?.translation);
       }
       // router.replace(`${router.route}${hash}`)
-        handleGetLotteryResult(lotteryCategory?.id);
+        handleGetLotteryResult(lotteryCategory?.id,value);
     }
   },[value]);
   return (
@@ -136,8 +138,11 @@ export default function Lottery() {
             <Tab  className="lotterytab" label={langKey?.all} {...a11yProps(1)}/>
             {
               lotteryCategories.map((lc,index) => {
+                console.log("lc",lc)
+                if(lc && lc.lottery_bind>0)
+                
                 return (
-                  <Tab key={index} className="lotterytab" label={lc?.translation?.translation} {...a11yProps((index+2))}/>
+                  <Tab key={index} className="lotterytab" label={lc?.translation?.translation} {...a11yProps((index+3))}/>
                 )
               })
             }
