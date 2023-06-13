@@ -18,6 +18,8 @@ import {
   Modal,
   Backdrop,
   Fade,
+  Stack,
+
   Box,
   Divider,
   Collapse,
@@ -25,6 +27,7 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import utils from "@/common/utils";
 import moment from "moment/moment";
@@ -249,11 +252,11 @@ export default function Schedule() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledHeaderCell width="60px">Competition</StyledHeaderCell>
-                  <StyledHeaderCell width="50px" align="left">
+                  <StyledHeaderCell width="60px" align="left">Competition</StyledHeaderCell>
+                  <StyledHeaderCell width="50px" align="center">
                     Round
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="50px" align="left">
+                  <StyledHeaderCell width="50px" align="center">
                     Competing Time
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
@@ -284,16 +287,16 @@ export default function Schedule() {
                           <Typography mx={1}>{item.comp}</Typography>
                         </Grid>
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell align="center">
                         {item.round}
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell align="center">
                         {item.time}
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell align="center">
                         {item.home}
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell align="center">
                         {item.away}
                       </StyledTableCell>
                       <StyledTableCell align="center">
@@ -312,7 +315,7 @@ export default function Schedule() {
                         ) : (
                           <IconButton>
                             {" "}
-                            <Icon width={30} icon="ic:round-star" />
+                            <Icon width={25} icon="ic:round-star" />
                           </IconButton>
                         )}
                       </StyledTableCell>
@@ -322,6 +325,22 @@ export default function Schedule() {
               </TableBody>
             </Table>
           </TableContainer>
+
+          {rows?.length > 0 && (
+            <Grid
+              item
+              xs={12}
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              paddingTop={3}
+              paddingBottom={3}
+            >
+              <Stack spacing={2} sx={{ textAlign: "center" }}>
+                <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
+              </Stack>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </>
