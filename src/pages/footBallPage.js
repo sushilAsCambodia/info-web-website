@@ -49,15 +49,12 @@ const MenuProps = {
   },
 };
 
-const League = [
-  "Oliver Hansen",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
+const filterList = {America:['stanley cup','FIFA'],UK:['Euro cup']}
+const America = [
+  'Stanley cup',
+  'FIFA'
 ];
-const Cup = ["Olivers Hansen", "Van Henry", "April Tucker", "Ralph Hubbard"];
+const UK = ["Euro Cup"];
 
 export default function FootBallPage() {
   const router = useRouter();
@@ -157,9 +154,9 @@ export default function FootBallPage() {
               renderValue={(selected) => selected.join(", ")}
               MenuProps={MenuProps}
             >
-              <ListSubheader>Country</ListSubheader>
+              <ListSubheader>America</ListSubheader>
 
-              {League.map((item, index) => {
+              {America.map((item, index) => {
                 return (
                   <MenuItem key={index} value={item}>
                     <Checkbox checked={selectedName.indexOf(item) > -1} />
@@ -167,9 +164,9 @@ export default function FootBallPage() {
                   </MenuItem>
                 );
               })}
-              <ListSubheader>Competition</ListSubheader>
+              <ListSubheader>UK</ListSubheader>
 
-              {Cup.map((item, index) => {
+              {UK.map((item, index) => {
                 return (
                   <MenuItem key={index} value={item}>
                     <Checkbox checked={selectedName.indexOf(item) > -1} />
@@ -178,7 +175,9 @@ export default function FootBallPage() {
                 );
               })}
          
-            
+            {/* {filterList.map((item,index)=>{
+              return(<ListSubheader>{item}</ListSubheader>)
+            })} */}
             </Select>
 
           </FormControl>
