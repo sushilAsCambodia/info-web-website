@@ -170,9 +170,9 @@ export default function FootBallPage() {
             {langKey && langKey.schedule}
           </MenuItem>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel id="demo-multiple-checkbox-label">Filter</InputLabel>
+            <InputLabel id="demo-multiple-checkbox-label">Select event</InputLabel>
             <Select
               labelId="demo-multiple-checkbox-label"
               id="demo-multiple-checkbox"
@@ -180,7 +180,7 @@ export default function FootBallPage() {
               value={selectedName}
               onChange={(e) => handleChange(e)}
               onClose={() => console.log("picked:::", selectedName)}
-              input={<OutlinedInput label="Filter" />}
+              input={<OutlinedInput label="Select event" />}
               renderValue={(selected) => selected.join(", ")}
               MenuProps={MenuProps}
             >

@@ -15,8 +15,8 @@ export default function DateFilterBar() {
 
 
   return (
-    <Grid container  justifyContent="center" pb={1}>
-    <Grid item xs={8} md={10} container flexWrap="nowrap" sx={{  overflow:"auto"}}>
+    <Grid container  justifyContent="center" pb={1} >
+    <Grid item xs={10} md={10} container flexWrap="nowrap" sx={{  overflow:"auto"}}  >
       {utils.LastXDays(7).map((item, index) => {
         return (
           <Grid
@@ -43,7 +43,7 @@ export default function DateFilterBar() {
     </Grid>
     <Grid
       item
-      xs={4} md={2}
+      xs={2} md={2}
       display="flex"
       justifyContent="center"
     >
@@ -63,7 +63,7 @@ export default function DateFilterBar() {
           }
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>Date</em>
           </MenuItem>
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
