@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
+import moment from "moment/moment";
 import Slider from "react-slick";
 
 const settings = {
@@ -69,13 +70,13 @@ export function lottoBalls(lottos) {
             alignItems="center"
               key={index}
               mx={0.2}
-              sx={{background:item.color,width:'30px',height:'30px',borderRadius:'20px'}}
+              sx={{background:item.color,width:'25px',height:'25px',borderRadius:'20px'}}
             >
               <Grid
               container
               justifyContent="center"
-              alignItems="center" sx={{width:'20px',height:'20px',background:'white',borderRadius:'20px'}}>
-             <Typography fontSize='12px'>{item.num}</Typography> </Grid>
+              alignItems="center" >
+             <Typography color={'white'} fontSize='12px'>{item.num}</Typography> </Grid>
             </Grid>
           );
         })}
@@ -83,11 +84,11 @@ export function lottoBalls(lottos) {
     </>
   );
 }
-export default function LottoList(props) {
+export default function LottoList({lottery}) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { item } = props;
+  //const { item } = props;
 
   const { banners } = useSelector((state) => state.banner);
   const dispatch = useDispatch();
@@ -95,6 +96,7 @@ export default function LottoList(props) {
   const [newsList, setNewsList] = useState([]);
 
   const lottos = { numbers: [12, 32, 4, 5, 12, 34], winner: 34 };
+const lottery_result=lottery && lottery.latest_result
 
   return (
     <>
@@ -118,7 +120,8 @@ export default function LottoList(props) {
             px={1}
           >
           {/* {item?.opendate} */}
-          2023-06-01 21:30:00 Monday
+          {/* 2023-06-01 21:30:00 */}
+          { moment(lottery && lottery.created_at).format('YYYY-MM-DD h:s')}
           </Grid>
           <CardHeader
             sx={{ padding: "10px" }}
@@ -133,24 +136,31 @@ export default function LottoList(props) {
                 textAlign="center"
               >
                 <picture>
+                  {lottery && lottery.icon?
                   <img
                     width="100%"
                     height="100%"
                     alt="supper-logo"
-                    src="/assets/Logo/superlotto-logo.png"
-                  />
+                    src={lottery && lottery.icon}
+                  />:<img
+                  width="100%"
+                  height="100%"
+                  alt="supper-logo"
+                  src="/assets/Logo/superlotto-logo.png"
+                />}
                 </picture>
               </Grid>
             }
             title={
               <Typography fontSize="13px" fontWeight="bold">
                 {/* {item?.lotterycode} */}
-                MOLHC
+                {lottery && lottery.translation && lottery.translation.translation}      {lottery_result && lottery_result.issue}                
               </Typography>
             }
-            subheader={lottoGrid(lottos)}
+            subheader= {lottoBalls(lottery_result  && lottery_result.result_data
+)} 
           />
-                  {/* {lottoBalls(item.attrs)} */}
+                  
 
         </Card>
       </div>
