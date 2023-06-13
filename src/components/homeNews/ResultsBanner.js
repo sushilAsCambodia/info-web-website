@@ -66,10 +66,11 @@ export default function ResultsBanner(props) {
   );
   const { latest } = useSelector((state) => state.lottery);
   const { announcement } = useSelector(
-    (state) => state?.announcement?.announcements
+    (state) => state?.announcement
   );
-const announcements = announcement?.filter(item => {
-  return item.status === "0";});
+
+
+  const  announcements  = useSelector((state) => state?.announcement?.announcements);
 
   useEffect(() => {
     dispatch(getLatestLottery("hey"));
@@ -223,6 +224,8 @@ const announcements = announcement?.filter(item => {
                   <div key={index}>
                     <AnnouncementItem announcement={item} />
                   </div>
+
+                  
                 );
               })}
                {announcements?.length == 0 && announcements.map((item, index) => {
