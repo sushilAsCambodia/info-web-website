@@ -19,8 +19,11 @@ import {
   Backdrop,
   Fade,
   Box,
+  Stack,
   Divider,
 } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
+
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -422,23 +425,25 @@ export default function LotteryPage() {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledHeaderCell width="300px">Lottery</StyledHeaderCell>
-                <StyledHeaderCell width="100px" align="left">
+                <StyledHeaderCell  align="left">
+                  Lottery
+                </StyledHeaderCell>
+                <StyledHeaderCell  align="left">
                   Issue
                 </StyledHeaderCell>
-                <StyledHeaderCell width="100px" align="left">
+                <StyledHeaderCell  align="left">
                   Draw Time
                 </StyledHeaderCell>
-                <StyledHeaderCell width="500px" align="center">
+                <StyledHeaderCell  align="center">
                   Results
                 </StyledHeaderCell>
-                <StyledHeaderCell width="100px" align="right">
+                <StyledHeaderCell  align="center">
                   Past Results
                 </StyledHeaderCell>
-                <StyledHeaderCell width="100px" align="right">
+                <StyledHeaderCell  align="center">
                   Chart
                 </StyledHeaderCell>
-                <StyledHeaderCell width="100px" align="right">
+                <StyledHeaderCell  align="center">
                   Favorite
                 </StyledHeaderCell>
               </TableRow>
@@ -449,7 +454,7 @@ export default function LotteryPage() {
                   <>
                   <StyledTableRow key={index}>
                       <StyledTableCell component="th" scope="row" colSpan={7}>
-                        <Grid display="flex" alignItems="center">
+                        <Grid display="flex" alignItems="center" >
                           {" "}
                           <Image
                             alt={row.lottoTitle}
@@ -462,7 +467,7 @@ export default function LotteryPage() {
                             }}
                             src={row.logo}
                           />
-                          {row.lottoTitle}
+                           <Typography paddingLeft={1}>{row.lottoTitle}</Typography>
                         </Grid>
                       </StyledTableCell>
                     </StyledTableRow>
@@ -477,15 +482,15 @@ export default function LotteryPage() {
                                 alt={item.name}
                                 width="30px"
                                 src={item.img}
-                                style={{ marginRight: "10px" }}
+                                style={{}}
                               />{" "}
-                              <Typography>{item.name}</Typography>
+                              <Typography paddingLeft={1}>{item.name}</Typography>
                             </Grid>
                           </StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell align="left">
                             {item.calories}
                           </StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell align="left">
                             {item.fat}
                           </StyledTableCell>
                           <StyledTableCell align="center">
@@ -499,7 +504,7 @@ export default function LotteryPage() {
                               {lottoTable(item.results)}
                             </Grid>
                           </StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell align="center">
                             <IconButton
                               sx={{
                                 background: "#F3F3F3",
@@ -510,7 +515,7 @@ export default function LotteryPage() {
                               <Icon icon="solar:clipboard-list-broken" />
                             </IconButton>
                           </StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell align="center">
                             <IconButton
                               sx={{
                                 background: "#F3F3F3",
@@ -521,7 +526,7 @@ export default function LotteryPage() {
                               <Icon icon="material-symbols:add-chart-rounded" />
                             </IconButton>
                           </StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell align="center">
                             <IconButton
                               sx={{
                                 background: "#F3F3F3",
@@ -550,7 +555,30 @@ export default function LotteryPage() {
             </TableBody>
           </Table>
         </TableContainer>
+
+
+
+        {rows?.length > 0 && (
+            <Grid
+              item
+              xs={12}
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              paddingTop={3}
+              paddingBottom={3}
+            >
+              <Stack spacing={2} sx={{ textAlign: "center" }}>
+                <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
+              </Stack>
+            </Grid>
+          )}
+     
       </Grid>
+
+
+
+     
     </>
   );
 }

@@ -174,7 +174,7 @@ const Announcement = () => {
               paddingTop={3}
             >
               <Stack spacing={2} sx={{ textAlign: "center" }}>
-                <Pagination count={5} variant="outlined" shape="rounded" />
+                <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
               </Stack>
             </Grid>
           )}
