@@ -1,4 +1,5 @@
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import {
   Card,
   CardActions,
@@ -12,11 +13,30 @@ import moment from "moment/moment";
 import { useRouter } from "next/router";
 import Image from "mui-image";
 import { addRemoveFavourite } from "@/store/actions/favouriteActions";
+import { Icon } from "@iconify/react";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+const toastOption = {
+    position: toast.POSITION.BOTTOM_RIGHT,
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  }
+
 
 const LotteryCard = ({ lottery }) => {
   const router = useRouter();
   const { customer = {} } = useSelector((state) => state.auth);
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [isFavourite, setIsFavourite] = useState(lottery.is_favorite);
+
   const checkActive = (active_features, value) => {
     if (active_features && active_features !== "") {
       const arr = active_features.split(",");
@@ -35,37 +55,42 @@ const dispatch = useDispatch()
     });
   };
   const handleAddRemove = () => {
-    customer?.member_ID ?
-    dispatch(
-      addRemoveFavourite({
-        body: {
-          lottery_id: lottery?.lottery_id,
-          member_ID: customer?.member_ID,
-        },
-        callback: (res) => {
-        //   const { message = "" } = res;
-        //   if (res.status_code === 201) {
-        //     setOpenDialog(true);
-        //     setResponseMessage(t(message));
+    customer?.member_ID
+      ? dispatch(
+          addRemoveFavourite({
+            body: {
+              lottery_id: lottery?.lottery_id,
+              member_ID: customer?.member_ID,
+            },
+            callback: (res) => {
+                setIsFavourite(!isFavourite)
+                toast.success(res?.data?.message, toastOption);
 
-        //     setTimeout(() => {
-        //       setOpenDialog(false);
-        //       Router.push("/profile");
-        //       setContent("");
-        //       setContact("");
-        //       setDisabled(true);
-        //     }, 1000);
-        //   } else if (res.status_code === 401) {
-        //     Cookies.remove("token");
-        //     setOpenDialog(true);
-        //     setResponseMessage(t(message));
-        //   }
-        },
-      })
-    )
-    :router.push('/login')
+              //   const { message = "" } = res;
+              //   if (res.status_code === 201) {
+              //     setOpenDialog(true);
+              //     setResponseMessage(t(message));
+              //     setTimeout(() => {
+              //       setOpenDialog(false);
+              //       Router.push("/profile");
+              //       setContent("");
+              //       setContact("");
+              //       setDisabled(true);
+              //     }, 1000);
+              //   } else if (res.status_code === 401) {
+              //     Cookies.remove("token");
+              //     setOpenDialog(true);
+              //     setResponseMessage(t(message));
+              //   }
+            },
+          })
+        )
+      : router.push("/login");
   };
-  return (
+  
+  return (<>     
+   <ToastContainer />
+  
     <Card>
       <CardHeader
         style={{ padding: "0 5px 0 5px", borderBottom: "1px solid #ddd" }}
@@ -77,19 +102,25 @@ const dispatch = useDispatch()
                   utils.lotteryFormat
                 )}
             </Grid>
-            <Grid item xs={2} style={{ textAlign: "right" }} onClick={()=>{handleAddRemove()}}>
-              <svg
-                width="14"
-                height="13"
-                viewBox="0 0 14 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.88331 12.6667L3.96665 7.98333L0.333313 4.83333L5.13331 4.41667L6.99998 0L8.86665 4.41667L13.6666 4.83333L10.0333 7.98333L11.1166 12.6667L6.99998 10.1833L2.88331 12.6667Z"
-                  fill="#F2DA00"
-                />
-              </svg>
+            <Grid
+              item
+              xs={2}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+              }}
+             
+            >
+              {isFavourite ? (
+                <Icon icon="ant-design:star-filled" color="yellow"  onClick={() => {
+                    (handleAddRemove());
+                  }}/>
+              ) : (
+                <Icon icon="ant-design:star-filled" color="#ddd"  onClick={() => {
+                    (handleAddRemove());
+                  }}/>
+              )}
             </Grid>
           </Grid>
         }
@@ -203,7 +234,7 @@ const dispatch = useDispatch()
           )}
         </Grid>
       </CardActions>
-    </Card>
+    </Card></>
   );
 };
 export default LotteryCard;
