@@ -224,6 +224,8 @@ export default function ResultsBanner(props) {
                   <div key={index}>
                     <AnnouncementItem announcement={item} />
                   </div>
+
+                  
                 );
               })}
                {announcements?.length == 0 && announcements.map((item, index) => {
