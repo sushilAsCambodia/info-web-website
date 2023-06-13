@@ -41,7 +41,7 @@ const LotteryCard = ({lottery}) => {
                     <Typography component="span" style={{ background: '#FFE0D2', width: '37px', height: '24px' }}></Typography>
                     <Grid container style={{ position: 'absolute', alignItems: 'center', left: 20 }}>
                         <Grid className='mui-image-round' item style={{ margin: 2, textAlign: 'center', fontSize: 12, color: '#fff', padding: 1, width: 30, height: 30, borderRadius: '50%', border: '0.5px solid #DDDDDD', background: '#fff' }}>
-                        <Image alt="photo_upload" htmlFor="photo-upload" width={30} height={30} src={lottery?.src ? lottery.src :'/assets/Lottery/superlotto-logo1.png'} sx={{borderRadius:"50px"}}/>
+                        <Image alt="photo_upload" htmlFor="photo-upload" width={30} height={30} src={lottery?.icon ? lottery.icon :'/assets/Lottery/superlotto-logo1.png'} sx={{borderRadius:"50px"}}/>
 
                         </Grid>
                         {

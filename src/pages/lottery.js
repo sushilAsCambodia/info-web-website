@@ -50,8 +50,7 @@ export default function Lottery() {
   const [value, setValue] = React.useState(0);
   const { i18n } = useTranslation();
   const {loading, lotteryCategories = [], lotteryResults = []} = useSelector(state => state.lottery)
-  const langKey = useSelector((state) => state?.load_language?.language);
-  console.log("lotteryCategories:::",lotteryCategories)
+  const langKey = useSelector((state) => state?.load_language?.language);  
   const router = useRouter();
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -69,12 +68,13 @@ export default function Lottery() {
       })
     ); 
   },[dispatch,i18n.language]);
-  const handleGetLotteryResult = React.useCallback((categoryId = undefined) => {
+  const handleGetLotteryResult = React.useCallback((categoryId = undefined,tab) => {
+   
     dispatch(
       getLotteryResultByCategory({
         params: {
           lang_id:utils.convertLangCodeToID(i18n.language),
-          category_id: categoryId
+          category_id:tab==1?'':categoryId 
         }
       })
     ); 
@@ -82,11 +82,9 @@ export default function Lottery() {
   React.useEffect(() => {
     handleGetCategory();
   },[handleGetCategory]);
-  React.useEffect(() => {
-    console.log(lotteryCategories,'alotteryCategories:::')
+  React.useEffect(() => {   
   },[lotteryCategories])
-  React.useEffect(() => {
-    console.log('value',value)
+  React.useEffect(() => {   
     if(value >= 0) {
       let hash = '';
       const lotteryCategory = lotteryCategories[value - 1] || {};
@@ -94,7 +92,7 @@ export default function Lottery() {
         hash = '#'+(lotteryCategory?.translation?.translation);
       }
       // router.replace(`${router.route}${hash}`)
-        handleGetLotteryResult(lotteryCategory?.id);
+        handleGetLotteryResult(lotteryCategory?.id,value);
     }
   },[value]);
   return (
@@ -132,10 +130,12 @@ export default function Lottery() {
               },
             }}
           >
-            <Tab  className="lotterytab" label={langKey?.all} {...a11yProps(0)}/>
-            <Tab  className="lotterytab" label={langKey?.favorites} {...a11yProps(1)}/>
+            <Tab  className="lotterytab" label={langKey?.favorites} {...a11yProps(0)}/>
+            <Tab  className="lotterytab" label={langKey?.all} {...a11yProps(1)}/>
             {
-              lotteryCategories.map((lc,index) => {
+              lotteryCategories.map((lc,index) => {              
+                if(lc && lc.lottery_bind>0)
+                
                 return (
                   <Tab key={index} className="lotterytab" label={lc?.translation?.translation + lc.category_id} {...a11yProps((index+2))}/>
                 )
@@ -184,8 +184,7 @@ export default function Lottery() {
                   return (
                     <div key={key}>
                       <LotteryCard lottery={lr}/>
-                      <Box height={12}></Box> 
-                      {lr.category_id }
+                      <Box height={12}></Box>                     
 
                     </div>
                   );
@@ -238,8 +237,7 @@ export default function Lottery() {
                   return (
                    <div key={key}>
                       <LotteryCard lottery={lr}/>
-                      <Box height={12}></Box> 
-                      {lr.category_id}
+                      <Box height={12}></Box>                     
 
                     </div>
                   );
@@ -294,8 +292,7 @@ export default function Lottery() {
                         return (
                           <div key={key}>
                             <LotteryCard lottery={lr}/>
-                            <Box height={12}></Box> 
-                            {lr.category_id}
+                            <Box height={12}></Box>                             
                           </div>
                         );
                       })
