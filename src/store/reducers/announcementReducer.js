@@ -4,7 +4,7 @@ const initialState = {
     loading: true,
     current_page:1,
     per_page:10,
-    total:0
+    last_page:1
 
   } 
   const announcementReducer = (state = initialState, action) => {
@@ -22,7 +22,7 @@ const initialState = {
           announcements: action?.payload?.data,
           current_page:action?.payload?.current_page,
           per_page:action?.payload?.per_page,
-          total:action?.payload?.total,
+          last_page:action?.payload?.last_page,
           status:'completed',
           loading: false
         };
