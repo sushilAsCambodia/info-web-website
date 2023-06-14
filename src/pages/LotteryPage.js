@@ -35,7 +35,22 @@ import { useState,useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
+import DataLoading from "@/components/DataLoading";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
+import { addRemoveFavourite } from "@/store/actions/favouriteActions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const toastOption = {
+  position: toast.POSITION.TOP_RIGHT,
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: false,
+  pauseOnHover: false,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+};
 import { Image } from "mui-image";
 import utils from "@/common/utils";
 const style = {
@@ -58,10 +73,14 @@ export default function LotteryPage() {
   const [value, setValue] = React.useState(0);
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   const {lotteryCategories = [], lotteryResults = [],lotteryResultByID=[]} = useSelector(state => state.lottery)
-  
+  const { customer = {} } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(false);
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -218,13 +237,17 @@ export default function LotteryPage() {
     setPastResult(false);
   };
 
+
+
   useEffect(() => {
+    setLoading(true);
     dispatch(
       getLotteryResultByCategoryId({
         params: {
           rowsPerPage: 10,
           page: 1,          
           lang_id: utils.convertLangCodeToID(i18n.language),
+          member_id: customer.member_ID
         },
         callback: (res) => {
           // page == 1
@@ -233,12 +256,12 @@ export default function LotteryPage() {
           //     handleClose())
           //   : setLotteryHistories((data) => data.concat(res.data.data));
           handleClose();
-          // console.log("old:::",lotteryHistories)
-          // console.log("added new:::",res.data.data)
+       
         },
       })
     )
     dispatch(getLatestLottery("hey"));    
+    setLoading(false);
   }, []);
 
   const handleGetCategory = React.useCallback(() => {
@@ -264,10 +287,10 @@ export default function LotteryPage() {
     handleGetCategory();
   },[handleGetCategory]);
   React.useEffect(() => {
-    //console.log(lotteryCategories,'alotteryCategories:::')
+
   },[lotteryCategories])
   React.useEffect(() => {
-    console.log('value',value)
+
     if(value >= 0) {
       let hash = '';
       const lotteryCategory = lotteryCategories[value - 1] || {};
@@ -279,7 +302,39 @@ export default function LotteryPage() {
     }
   },[value]);
 
-console.log("lotteryCategorieslotteryCategories",lotteryCategories)
+
+  const handleAddRemove = (lottery_id) => {
+    setLoading(true);
+    customer?.member_ID
+      ? dispatch(
+          addRemoveFavourite({
+            body: {
+              lottery_id: lottery_id,
+              member_ID: customer?.member_ID,
+            },
+            callback: (res) => {
+              toast.success(langKey[res?.message], toastOption);
+              dispatch( getLotteryResultByCategoryId({
+                  params: {
+                    rowsPerPage: 10,
+                    page: 1,          
+                    lang_id: utils.convertLangCodeToID(i18n.language),
+                    member_id: customer.member_ID
+                  },
+                  callback: (res) => {
+                    // handleClose();
+                   
+                    console.log("added new:::",res)
+                  },
+                }))
+                setLoading(false);
+            },
+          })
+        )
+      : router.push("/login");
+  };
+
+  
   return ( 
     <>
       {/* <Typography variant="h5" fontWeight="bold">
@@ -512,7 +567,7 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                    {langKey && langKey.draw_time}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="center">
-                  {langKey && langKey.results}
+                  {langKey && langKey.result}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="center">
                   {langKey && langKey.past_results}
@@ -527,9 +582,19 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
             </TableHead>
            
             <TableBody>
-              { lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.length > 0 ? 
-              lotteryResultByID.data.map((rowData, index) => {
-                console.log("rowData",rowData)
+              {
+              loading ? (
+                <TableRow>
+                <TableCell component="th" scope="row" colSpan={7} >
+                <Grid textAlign={'center'} item xs={12} paddingTop={5}>
+                <DataLoading />
+                </Grid>
+              </TableCell>
+             </TableRow>
+              ) :
+              lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.length > 0 ? 
+             ( lotteryResultByID.data.map((rowData, index) => {
+    
                 if(rowData && rowData.lottery_bind!=null)
                 return (
                   <>
@@ -557,7 +622,7 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                     </TableRow>
                     
                     {rowData && rowData.lottery  && rowData.lottery.map((item, index) => {
-                     
+    
                       return (
                         <TableRow key={item?.latest_result?.id}>
                           <TableCell component="th" scope="row">
@@ -620,7 +685,7 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                                 border: "1px solid #DDDDDD",
                               }}
                             >
-                              {item.calories % 2 == 0 ? (
+                              {/* {item.calories % 2 == 0 ? (
                                 <Icon
                                 width="20px"
                                   color="#C9C9C9"
@@ -632,7 +697,25 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                                   color="#FF6F31"
                                   icon="clarity:favorite-solid"
                                 />
+                              )} */}
+                              {item.is_favorite ? (
+                                <Icon
+                                  icon="ant-design:star-filled"
+                                  color="#F2DA00"
+                                  onClick={() => {
+                                    handleAddRemove(item?.lottery_id);
+                                  }}
+                                />
+                              ) : (
+                                <Icon
+                                  icon="ant-design:star-filled"
+                                  color="#ddd"
+                                  onClick={() => {
+                                    handleAddRemove(item?.lottery_id);
+                                  }}
+                                />
                               )}
+
                             </IconButton>
                           </TableCell>
                         </TableRow>
@@ -640,17 +723,22 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                     })}
                   </>
                 );
-              })
-              
+              }))
               : 
+             (
               <TableRow>
-
               <TableCell component="th" scope="row" colSpan={7} >
-              <Grid textAlign={'center'} item xs={12} paddingTop={2}>
-        <img style={{height:'40vh'}} src='./assets/Home/not-found.gif' alt='not-found'/> 
-      </Grid></TableCell></TableRow>
-              
-              
+              <Grid textAlign={'center'} item xs={12} paddingTop={5}>
+                      <img
+                        alt="not_found_2"
+                        style={{height:'50vh'}}
+                        src="./assets/Home/not-found.gif"
+                      />
+                      <Typography textAlign="center">{langKey.no_lottery_data}</Typography>
+              </Grid>
+              </TableCell>
+             </TableRow>
+             )
               
               }
             </TableBody>
@@ -685,7 +773,7 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
 }
 
 export function lottoTable(lottos) {
-  //console.log("lottoslottos",lottos && lottos.result_data)
+
   return (
     <>
       <Grid
