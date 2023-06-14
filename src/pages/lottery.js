@@ -95,19 +95,18 @@ export default function Lottery() {
     },
     [dispatch, i18n.language]
   );
-  const allFavouriteList = () => {
+  const allFavouriteList = React.useCallback(() => {
     dispatch(
       getFavouriteList({
         params: {
           lang_id: utils.convertLangCodeToID(i18n.language),
-          category_id: 1,
           member_id: customer.member_ID,
           pick: "favorite",
         },
         callback: (res) => {},
       })
     );
-  };
+  },[dispatch, i18n.language])
 
   React.useEffect(() => {
     handleGetCategory();
