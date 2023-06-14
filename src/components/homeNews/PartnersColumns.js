@@ -116,7 +116,7 @@ export default function PartnersColumns(props) {
         >
           {partners && partners.length > 0 && partners.map((item, index) => {
             return (
-              <Link href={item.ads_link} target="_blank" key={index}>
+              <Link href={item?.ads_link? item.ads_link:''} target="_blank" key={index}>
                 <Grid
                   sx={{
                     margin: "5px",
