@@ -39,6 +39,7 @@ import ForgotPassword from "@/components/desktop/forgotPassword";
 import utils from "../common/utils";
 import { Image } from "mui-image";
 import { useSession, signIn, signOut } from "next-auth/react";
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -145,12 +146,13 @@ export default function Login(props) {
           setLoading(false);
           const { status, status_code, message = "" } = res;
           if ([200, 201, 202, 203].includes(status_code)) {
-            // setTimeout(() => {
-              //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
-              matches
-                ? (window.location.href = window.location.origin + "/home")
-                : Router.push("/");
-            // }, 4000);
+            // // setTimeout(() => {
+            //   //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
+            //   matches
+            //     ? (window.location.href = window.location.origin + "/home")
+            //     : Router.push("/");
+            // // }, 4000);
+            Router.back()
           }else {
             setResponseMessage(t(message.toLowerCase()));
             setOpen(true);
@@ -628,7 +630,7 @@ export default function Login(props) {
               {langKey && (langKey.in_the_palm || t("in_the_palm"))}
             </Typography>
            </Grid>
-                  <Grid container justifyContent="center">
+                  {/* <Grid container justifyContent="center">
                     <Grid item xs={12} sm={12} md={12} xl={12}>
                       <Grid
                         item
@@ -680,7 +682,7 @@ export default function Login(props) {
                         </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </Grid>
               <Grid
