@@ -728,7 +728,12 @@ console.log('customer ::::',customer)
               <TableRow>
               <TableCell component="th" scope="row" colSpan={7} >
               <Grid textAlign={'center'} item xs={12} paddingTop={5}>
-             <img style={{height:'50vh'}} src='./assets/Home/not-found.gif' alt='not-found'/> 
+                      <img
+                        alt="not_found_2"
+                        style={{height:'50vh'}}
+                        src="./assets/Home/not-found.gif"
+                      />
+                      <Typography textAlign="center">{langKey.no_lottery_data}</Typography>
               </Grid>
               </TableCell>
              </TableRow>
