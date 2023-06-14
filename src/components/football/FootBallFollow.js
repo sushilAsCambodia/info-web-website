@@ -34,6 +34,8 @@ import Pagination from "@mui/material/Pagination";
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
+import { useSelector } from "react-redux";
+
 import { Image } from "mui-image";
 export default function FootBallFollow() {
   const [select, setSelect] = useState(0);
@@ -42,6 +44,10 @@ export default function FootBallFollow() {
   const [openModal, setOpenModal] = useState(false);
 
   const [age, setAge] = useState("");
+
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
   const handleCloseModal = (event) => {
     setOpenModal(false);
@@ -153,28 +159,28 @@ export default function FootBallFollow() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledHeaderCell width="60px">League</StyledHeaderCell>
+                  <StyledHeaderCell width="60px">{langKey && langKey.league}</StyledHeaderCell>
 
                   <StyledHeaderCell width="50px" align="center">
-                    Rounds
+                     {langKey && langKey.rounds}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="center">
-                    Match Time
+                  {langKey && langKey.match_time}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                    State
+               {langKey && langKey.state}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="center">
-                    Home Team
+                   {langKey && langKey.home_team}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                    Score
+                 {langKey && langKey.score}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                    Visiting team
+                    {langKey && langKey.visiting_team}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="30px" align="center">
-                    Favourite
+                     {langKey && langKey.favourite}
                   </StyledHeaderCell>
                 </TableRow>
               </TableHead>

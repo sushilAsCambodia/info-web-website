@@ -37,6 +37,8 @@ import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
 import { Image } from "mui-image";
 import DateFilterBar from "@/common/dateFilterBar";
+import { useSelector } from "react-redux";
+
 export default function Schedule() {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
@@ -44,6 +46,9 @@ export default function Schedule() {
   const [openModal, setOpenModal] = useState(false);
 
   const [age, setAge] = useState("");
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
 
   const handleCloseModal = (event) => {
     setOpenModal(false);
@@ -252,24 +257,24 @@ export default function Schedule() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledHeaderCell width="60px" align="left">Competition</StyledHeaderCell>
+                  <StyledHeaderCell width="60px" align="left">{langKey && langKey.competition}</StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="center">
-                    Round
+                  {langKey && langKey.rounds}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="center">
-                    Competing Time
+                  {langKey && langKey.competing_time}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                    Home Team
+                {langKey && langKey.home_team}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                    Visiting team
+                       {langKey && langKey.visiting_team}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                    Location
+                      {langKey && langKey.location}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="30px" align="center">
-                    Favourite
+                      {langKey && langKey.favourite}
                   </StyledHeaderCell>
                 </TableRow>
               </TableHead>

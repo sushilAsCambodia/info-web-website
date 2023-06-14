@@ -68,7 +68,7 @@ export default function LotteryPage() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      padding: '0px'
+      padding: '10px'
     },
   }));
 
@@ -456,7 +456,7 @@ console.log("lotteryResults",lotteryResults)
         </Grid>
         <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel id="category-select-label">Select Category</InputLabel>
+            <InputLabel id="category-select-label"> {langKey && langKey.select_category}</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="category-select"
@@ -479,25 +479,25 @@ console.log("lotteryResults",lotteryResults)
             <TableHead>
               <TableRow>
                 <StyledHeaderCell  align="left">
-                  Lottery
+                    {langKey && langKey.lottery}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="left">
-                  Issue
+                     {langKey && langKey.issue}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="left">
-                  Draw Time
+                   {langKey && langKey.draw_time}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="center">
-                  Results
+                  {langKey && langKey.results}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="center">
-                  Past Results
+                  {langKey && langKey.past_results}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="center">
-                  Chart
+                 {langKey && langKey.chart}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="center">
-                  Favorite
+                   {langKey && langKey.favorites}
                 </StyledHeaderCell>
               </TableRow>
             </TableHead>
@@ -519,6 +519,7 @@ console.log("lotteryResults",lotteryResults)
                               borderRadius: "20px",
                             }}
                             src={row.logo}
+                            
                           />
                            <Typography paddingLeft={1}>{row.lottoTitle}</Typography>
                         </Grid>
@@ -565,7 +566,7 @@ console.log("lotteryResults",lotteryResults)
                               }}
                               onClick={() => router.push('/lotteryPastResults')}
                             >
-                              <Icon icon="solar:clipboard-list-broken" />
+                              <Icon width="20px" icon="solar:clipboard-list-broken" />
                             </IconButton>
                           </StyledTableCell>
                           <StyledTableCell align="center">
@@ -576,7 +577,7 @@ console.log("lotteryResults",lotteryResults)
                               }}
                               onClick={() => handleChartOpen(row.id)}
                             >
-                              <Icon icon="material-symbols:add-chart-rounded" />
+                              <Icon width="25px" icon="material-symbols:add-chart-rounded" />
                             </IconButton>
                           </StyledTableCell>
                           <StyledTableCell align="center">
@@ -588,11 +589,13 @@ console.log("lotteryResults",lotteryResults)
                             >
                               {item.calories % 2 == 0 ? (
                                 <Icon
+                                width="20px"
                                   color="#C9C9C9"
                                   icon="clarity:favorite-solid"
                                 />
                               ) : (
                                 <Icon
+                                width="20px"
                                   color="#FF6F31"
                                   icon="clarity:favorite-solid"
                                 />
