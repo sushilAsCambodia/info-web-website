@@ -630,7 +630,7 @@ export default function Login(props) {
               {langKey && (langKey.in_the_palm || t("in_the_palm"))}
             </Typography>
            </Grid>
-                  <Grid container justifyContent="center">
+                  {/* <Grid container justifyContent="center">
                     <Grid item xs={12} sm={12} md={12} xl={12}>
                       <Grid
                         item
@@ -682,7 +682,7 @@ export default function Login(props) {
                         </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </Grid>
               <Grid

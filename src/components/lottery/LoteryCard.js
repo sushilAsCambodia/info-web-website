@@ -64,7 +64,7 @@ const LotteryCard = ({ lottery }) => {
             },
             callback: (res) => {
                 setIsFavourite(!isFavourite)
-                toast.success(res?.data?.message, toastOption);
+                toast.success((res?.message), toastOption);
 
               //   const { message = "" } = res;
               //   if (res.status_code === 201) {
