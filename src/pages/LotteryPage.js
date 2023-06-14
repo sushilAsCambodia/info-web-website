@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Typography,
   Grid,
@@ -23,14 +24,18 @@ import {
   Divider,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
+import { getLatestLottery } from "@/store/actions/lotteryActions";
+import { getLotteryCategory,getLotteryResultByCategory } from "@/store/actions/lotteryActions";
+import { useTranslation } from "react-i18next";
 
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState,useEffect } from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 import { Image } from "mui-image";
+import utils from "@/common/utils";
 const style = {
   position: "absolute",
   top: "300px",
@@ -43,11 +48,14 @@ const style = {
 };
 
 export default function LotteryPage() {
-  const router = useRouter()
+  const router = useRouter()  
+  const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
   const [age, setAge] = useState("");
-
+  const { i18n } = useTranslation();
+  const [value, setValue] = React.useState(0);
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const {lotteryCategories = [], lotteryResults = []} = useSelector(state => state.lottery)
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -207,6 +215,50 @@ export default function LotteryPage() {
     setChart(false);
     setPastResult(false);
   };
+
+  useEffect(() => {
+    dispatch(getLatestLottery("hey"));    
+  }, []);
+
+  const handleGetCategory = React.useCallback(() => {
+    dispatch(
+      getLotteryCategory({
+        params: {
+          lang_id:utils.convertLangCodeToID(i18n.language)
+        }
+      })
+    ); 
+  },[dispatch,i18n.language]);
+  const handleGetLotteryResult = React.useCallback((categoryId = undefined) => {
+    dispatch(
+      getLotteryResultByCategory({
+        params: {
+          lang_id:utils.convertLangCodeToID(i18n.language),
+          category_id: categoryId
+        }
+      })
+    ); 
+  },[dispatch,i18n.language]);
+  React.useEffect(() => {
+    handleGetCategory();
+  },[handleGetCategory]);
+  React.useEffect(() => {
+    console.log(lotteryCategories,'alotteryCategories:::')
+  },[lotteryCategories])
+  React.useEffect(() => {
+    console.log('value',value)
+    if(value >= 0) {
+      let hash = '';
+      const lotteryCategory = lotteryCategories[value - 1] || {};
+      if(Object.keys(lotteryCategory).length) {
+        hash = '#'+(lotteryCategory?.translation?.translation);
+      }
+      // router.replace(`${router.route}${hash}`)
+        handleGetLotteryResult(lotteryCategory?.id);
+    }
+  },[value]);
+
+console.log("lotteryResults",lotteryResults)
   return ( 
     <>
       {/* <Typography variant="h5" fontWeight="bold">

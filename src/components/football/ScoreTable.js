@@ -13,6 +13,7 @@ import {
   Paper,
   Table,
   TableHead,
+  Stack,
   TableBody,
   Divider,
   InputAdornment
@@ -23,6 +24,7 @@ import moment from "moment/moment";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import { Image } from "mui-image";
+import Pagination from "@mui/material/Pagination";
 
 export default function ScoreTable() {
   const router = useRouter();
@@ -177,7 +179,7 @@ export default function ScoreTable() {
                   }
                 >
                   <MenuItem value="">
-                    <em>None</em>
+                    <em>Date</em>
                   </MenuItem>
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
@@ -199,25 +201,25 @@ export default function ScoreTable() {
                       width="200px"
                       sx={{ background: `${bgColor}` }}
                     >
-                      <Grid container alignItems="center">
+                      <Grid container alignItems="left">
                         {" "}
                         <Image
                           width="30px"
                           src={item.img}
                           alt="football_score"
-                          style={{ marginRight: "10px" }}
+                        
                         />{" "}
-                        Taiwan Basket Ball
+                        <Typography paddingLeft={1}>Taiwan Basket Ball</Typography>
                       </Grid>
                     </StyledHeaderCell>
                     <StyledHeaderCell
                       width="200px"
-                      align="left"
+                      align="center"
                       sx={{ background: `${bgColor}` }}
                     >
                       chapter 1
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="100px" align="left">
+                    <StyledHeaderCell width="100px" align="center">
                       session 1
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
@@ -226,88 +228,94 @@ export default function ScoreTable() {
                     <StyledHeaderCell width="100px" align="right">
                       Session 3
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="100px" align="right">
+                    <StyledHeaderCell width="100px" align="center">
                       Session 4
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="100px" align="right">
+                    <StyledHeaderCell width="100px" align="center">
                       Up and Down
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="100px" align="right">
+                    <StyledHeaderCell width="100px" align="center">
                       Audience
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="150px" align="right">
+                    <StyledHeaderCell width="150px" align="center">
                       Points difference
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="100px" align="right">
+                    <StyledHeaderCell width="100px" align="center">
                       Total score
                     </StyledHeaderCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <StyledTableRow key={item.name}>
-                    <StyledTableCell component="th" scope="row">
-                      <Grid sx={{ display: "flex", alignItems: "center" }}>
-                        <Typography>{item.name}</Typography>
-                      </Grid>
+                  <StyledTableCell
+                      align="center"
+                      style={{ verticalAlign: "top" }}
+                    >
+                  
+                  <Typography>{item.name}</Typography>
                     </StyledTableCell>
+
+
+
+             
                     <StyledTableCell
-                      align="left"
+                      align="center"
                       style={{ verticalAlign: "top" }}
                     >
                       <Typography>{item.chapter}</Typography>
                       <Typography>{item.chapter}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
-                      align="left"
+                      align="center"
                       style={{ verticalAlign: "top" }}
                     >
                       <Typography>{item.session1}</Typography>
                       <Typography>{item.session1}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
-                      align="right"
+                      align="center"
                       style={{ verticalAlign: "top" }}
                     >
                       <Typography>{item.session1}</Typography>
                       <Typography>{item.session1}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
-                      align="right"
-                      style={{ verticalAlign: "top" }}
-                    >
-                      <Typography>{item.session1}</Typography>
-                      <Typography>{item.id}</Typography>
-                    </StyledTableCell>
-                    <StyledTableCell
-                      align="right"
+                      align="center"
                       style={{ verticalAlign: "top" }}
                     >
                       <Typography>{item.session1}</Typography>
                       <Typography>{item.id}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
-                      align="right"
+                      align="center"
                       style={{ verticalAlign: "top" }}
                     >
                       <Typography>{item.session1}</Typography>
                       <Typography>{item.id}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
-                      align="right"
+                      align="center"
                       style={{ verticalAlign: "top" }}
                     >
                       <Typography>{item.session1}</Typography>
                       <Typography>{item.id}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
-                      align="right"
+                      align="center"
                       style={{ verticalAlign: "top" }}
                     >
                       <Typography>{item.session1}</Typography>
                       <Typography>{item.id}</Typography>
                     </StyledTableCell>
                     <StyledTableCell
-                      align="right"
+                      align="center"
+                      style={{ verticalAlign: "top" }}
+                    >
+                      <Typography>{item.session1}</Typography>
+                      <Typography>{item.id}</Typography>
+                    </StyledTableCell>
+                    <StyledTableCell
+                      align="center"
                       style={{ verticalAlign: "top" }}
                     >
                       <Typography>Half: {item.session1}</Typography>
@@ -317,8 +325,32 @@ export default function ScoreTable() {
                 </TableBody>
               </Table>
             </TableContainer>
+
+
+
+
         );
       })}
+
+{rows?.length > 0 && (
+            <Grid
+              item
+              xs={12}
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              paddingTop={3}
+              paddingBottom={3}
+            >
+              <Stack spacing={2} sx={{ textAlign: "center" }}>
+                <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
+              </Stack>
+            </Grid>
+          )}
+
+
+
+
     </>
   );
 }
