@@ -100,12 +100,24 @@ setOpen(true)
   useEffect(() => {
     dispatch(
       getAnnouncement({
-        params: { lang_id: utils.convertLangCodeToID(langKey), rowsPerPage: 2,page:currentPage },
+        params: { lang_id: utils.convertLangCodeToID(langKey), rowsPerPage: 10,page:currentPage },
         callback: (res) => {},
       })
     );
   }, [langKey,currentPage]);
 
+
+  const handleScroll = (event) => {
+    if (
+      last_page !== currentPage &&
+      last_page > currentPage &&
+      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+        event.currentTarget.clientHeight
+    ) {
+      setCurrentPage(currentPage + 1);
+      console.log("scroll bottom:::")
+    }
+  };
   return !matches ? (
     <>
      <ArticleModal article={article} open={open} setOpen={setOpen}/>
@@ -203,6 +215,7 @@ setOpen(true)
                   </Grid>
                 );
               })}
+              
             {announcements?.length == 0 && (
              <NoDataMessage />
             )}
@@ -238,9 +251,9 @@ setOpen(true)
           container
           alignContent="flex-start"
           alignItems="center"
-          overflow="auto"
-        >
-          <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+          overflow="auto" height='90vh'   onScroll={handleScroll}
+          >
+          
             <List sx={{ padding: "0px" }}>
               {announcements?.length > 0 &&
                 announcements.map((item, index) => {
@@ -306,10 +319,10 @@ setOpen(true)
                     </div>
                   );
                 })}
+                
             </List>
             {/* <Divider /> */}
             {announcements?.length == 0 && <NoDataMessage />}
-          </Grid>
         </Grid>
       </Grid>
     </>
