@@ -35,6 +35,9 @@ import {
   import { Icon } from "@iconify/react";
   import { lottoTable } from "@/pages/LotteryPage";
 import { Image } from "mui-image";
+import { useSelector } from "react-redux";
+
+
   export default function FootBallEnd() {
     const [select, setSelect] = useState(0);
     const [filter, setFilter] = useState("China National");
@@ -42,6 +45,9 @@ import { Image } from "mui-image";
     const [dateFilter, setDateFilter] = useState("");
   
     const [age, setAge] = useState("");
+    const langKey = useSelector(
+      (state) => state && state.load_language && state.load_language.language
+    );
   
     const handleChange = (event) => {
       setAge(event.target.value);
@@ -279,7 +285,7 @@ import { Image } from "mui-image";
                     }
                   >
                     <MenuItem value="">
-                      <em>Date</em>
+                      <em> {langKey && langKey.date}</em>
                     </MenuItem>
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
@@ -293,29 +299,29 @@ import { Image } from "mui-image";
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledHeaderCell width="100px">Competition</StyledHeaderCell>
+                    <StyledHeaderCell width="100px">  {langKey && langKey.competition}</StyledHeaderCell>
   
                     <StyledHeaderCell width="50px" align="center">
-                      Rounds
+                  {langKey && langKey.rounds}
                     </StyledHeaderCell>
                     <StyledHeaderCell width="50px" align="center">
-                      Competing Time
+                  {langKey && langKey.competing_time}
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
-                     State
+                {langKey && langKey.state}
                     </StyledHeaderCell>
                     
                     <StyledHeaderCell width="100px" align="center">
-                      Home team
+                 {langKey && langKey.home_team}
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
-                      Score
+                 {langKey && langKey.score}
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
-                      Away Team
+                     {langKey && langKey.away_team}
                     </StyledHeaderCell>
                     <StyledHeaderCell width="30px" align="center">
-                      Half Time
+          {langKey && langKey.half_time}
                     </StyledHeaderCell>
                   </TableRow>
                 </TableHead>
