@@ -21,6 +21,10 @@ import {
   Dialog,
   OutlinedInput,
   Divider,
+  Modal,
+  Backdrop,
+  Fade,
+  Box
 } from "@mui/material";
 import { useRouter } from "next/router";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -36,11 +40,13 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: '50vw',
+    height: 'auto',
+    maxHeight: '90vh',
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    // border: '1px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 2,
   };
 
 const Announcement = () => {
@@ -91,11 +97,41 @@ const Announcement = () => {
   }, [langKey]);
 
   const [open, setOpen] = useState(false);
+  const [article, setArticle] = useState({title:'',comment:''});
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handleModalOpen =(title,comment)=>{
+setArticle({title,comment})
+setOpen(true)
+  }
   return !matches ? (
     <>
+   
+     <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography id="transition-modal-title" variant="h6" component="h2" fontWeight='bold'>
+              {article.title}
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              {article.comment}
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
       <Grid
         container
         alignItems="flex-start"
@@ -149,7 +185,8 @@ const Announcement = () => {
                     sm={6}
                     md={4}
                     lg={3}
-                    sx={{ padding: "10px", textAlign: "left" }}
+                    sx={{ padding: "10px", textAlign: "left",cursor:'pointer' }}
+                    onClick={()=>handleModalOpen(item.title,item.comment)}
                   >
                     <Grid
                       item
@@ -161,9 +198,10 @@ const Announcement = () => {
                       }}
                     >
                       <Typography
-                        fontWeight="500"
+                        fontWeight="bold"
                         className="twoLinesEllip"
                         color="#000"
+                        height="48px"
                       >
                         {item.title}
                       </Typography>
@@ -171,6 +209,8 @@ const Announcement = () => {
                         fontWeight="500"
                         className="twoLinesEllip"
                         color="#000"
+                        height="48px"
+                        title={item.comment}
                       >
                         {item.comment}
                       </Typography>

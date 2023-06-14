@@ -262,7 +262,7 @@ export default function Lottery() {
                     style={{ width: "90%" }}
                     src="./assets/not-found.png"
                   />
-                  <Typography textAlign="center" >No Data Found</Typography>
+                  <Typography textAlign="center" >{langKey.no_lottery_data}</Typography>
                 </Grid>
               ):''}
               {favouriteList?.length > 0 &&
@@ -331,7 +331,7 @@ export default function Lottery() {
                     style={{ width: "90%" }}
                     src="./assets/not-found.png"
                   />
-                  <Typography textAlign="center">No Data Found</Typography>
+                  <Typography textAlign="center">{langKey.no_lottery_data}</Typography>
                 </Grid>
               )}
             </Grid>
@@ -389,7 +389,7 @@ export default function Lottery() {
                         style={{ width: "90%" }}
                         src="./assets/not-found.png"
                       />
-                      <Typography textAlign="center">No Data Found</Typography>
+                      <Typography textAlign="center">{langKey.no_lottery_data}</Typography>
                     </Grid>
                   )}
                 </Grid>

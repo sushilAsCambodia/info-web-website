@@ -722,6 +722,7 @@ export default function Register() {
                 container
                 justifyContent="center"
                 style={{ cursor: "pointer" }}
+                onClick={()=>Router.push('/')}
               >
                 <Image
                   alt="register_logo"
