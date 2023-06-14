@@ -211,11 +211,13 @@ export default function Lottery() {
               return (
                 <Tab
                   key={index}
-                  className="lotterytab"
+                  className="lotterytab"                  
                   label={lc?.translation?.translation}
                   {...a11yProps(index + 2)}
                 />
               );
+              
+              
             })}
             {/* <Tab className="lotterytab" label="Guānzhù" {...a11yProps(0)}/>
             <Tab className="lotterytab" label="History" {...a11yProps(1)}/>

@@ -120,7 +120,7 @@ export default function ResultsBanner(props) {
     }
   },[value]);
 
-  console.log("lotteryResults",lotteryResults)
+  
   return (
     <>
       <Grid
