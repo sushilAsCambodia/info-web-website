@@ -80,7 +80,7 @@ export default function LotteryPage() {
     setAge(event.target.value);
   };
 
-console.log('customer ::::',customer)
+
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -240,6 +240,7 @@ console.log('customer ::::',customer)
 
 
   useEffect(() => {
+    setLoading(true);
     dispatch(
       getLotteryResultByCategoryId({
         params: {
@@ -255,12 +256,12 @@ console.log('customer ::::',customer)
           //     handleClose())
           //   : setLotteryHistories((data) => data.concat(res.data.data));
           handleClose();
-          // console.log("old:::",lotteryHistories)
-          // console.log("added new:::",res.data.data)
+       
         },
       })
     )
     dispatch(getLatestLottery("hey"));    
+    setLoading(false);
   }, []);
 
   const handleGetCategory = React.useCallback(() => {
@@ -286,10 +287,10 @@ console.log('customer ::::',customer)
     handleGetCategory();
   },[handleGetCategory]);
   React.useEffect(() => {
-    //console.log(lotteryCategories,'alotteryCategories:::')
+
   },[lotteryCategories])
   React.useEffect(() => {
-    console.log('value',value)
+
     if(value >= 0) {
       let hash = '';
       const lotteryCategory = lotteryCategories[value - 1] || {};
@@ -322,7 +323,7 @@ console.log('customer ::::',customer)
                   },
                   callback: (res) => {
                     // handleClose();
-                    // console.log("old:::",lotteryHistories)
+                   
                     console.log("added new:::",res)
                   },
                 }))
@@ -593,7 +594,7 @@ console.log('customer ::::',customer)
               ) :
               lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.length > 0 ? 
              ( lotteryResultByID.data.map((rowData, index) => {
-                console.log("rowData",rowData)
+    
                 if(rowData && rowData.lottery_bind!=null)
                 return (
                   <>
@@ -621,7 +622,7 @@ console.log('customer ::::',customer)
                     </TableRow>
                     
                     {rowData && rowData.lottery  && rowData.lottery.map((item, index) => {
-                     console.log('item?.latest_result?.id', item?.latest_result?.id)
+    
                       return (
                         <TableRow key={item?.latest_result?.id}>
                           <TableCell component="th" scope="row">
@@ -772,7 +773,7 @@ console.log('customer ::::',customer)
 }
 
 export function lottoTable(lottos) {
-  //console.log("lottoslottos",lottos && lottos.result_data)
+
   return (
     <>
       <Grid
