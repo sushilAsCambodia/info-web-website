@@ -80,7 +80,7 @@ export default function FullSilder(props) {
               // rtl={true}
               >
               {newBanners.map((ad, index) => (
-               <Link href={ad.ads_link} target='_blank' key={index}>
+               <Link href={ad?.ads_link? ad.ads_link:''} target='_blank' key={index}>
                <Grid 
                  style={{
                    color: "white",

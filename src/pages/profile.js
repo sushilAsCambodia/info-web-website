@@ -570,7 +570,7 @@ function TabPanel(props) {
                 </List>
                 <Divider />
               </Grid>
-              <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+              {/* <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
                 <Grid item xs={12} paddingTop="20px" paddingBottom="20px">
                   <Typography fontWeight="600">{langKey && langKey.download_app}</Typography>
                 </Grid>
@@ -607,7 +607,7 @@ function TabPanel(props) {
                     </Grid>
                   </ListItem>
                 </List>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
         )

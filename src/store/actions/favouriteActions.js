@@ -24,9 +24,9 @@ export const addRemoveFavourite = createAsyncThunk(
 
 export const getFavouriteList = createAsyncThunk(
     "list/favourite",
-    async ({ body = {}, callback }) => {
+    async ({ params = {}, callback }) => {
       try {
-        const response = await api.post('lotto/customer/add-favorite-lotto', body, true);
+        const response = await api.get('lotto/lotteryList/all', params, true);
         const {data,status} = response;
         data['status_code'] = status;
         if(typeof callback == 'function') {
