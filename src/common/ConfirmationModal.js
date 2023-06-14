@@ -72,7 +72,7 @@ export default function ConfirmationModal(props) {
             </Grid>
             <Grid item xs={12} container alignContent="center" justifyContent="space-evenly">
               <Button variant="outlined" onClick={() => setOpen(false)}>No</Button>
-              <Button variant="outlined" onClick={handleClose}>Yes</Button>
+              <Button variant="contained" sx={{color:"white",background:"#ff703d" }} onClick={handleClose}>Yes</Button>
             </Grid>
           </Grid>
         ) : (
