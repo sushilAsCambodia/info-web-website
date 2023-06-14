@@ -26,6 +26,7 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
+import { useSelector } from "react-redux";
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "./LotteryPage";
@@ -41,6 +42,12 @@ export default function LotteryPastReults() {
 
   const [age, setAge] = useState("");
 
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
+
+
+
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -52,7 +59,7 @@ export default function LotteryPastReults() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      padding: '0px'
+      padding: '10px'
     },
   }));
 
@@ -145,7 +152,7 @@ export default function LotteryPastReults() {
                   setSelect(0);
                 }}
               >
-                View By Category
+              {langKey && langKey.view_by_category}
               </MenuItem>
               <MenuItem
                 sx={{
@@ -159,7 +166,7 @@ export default function LotteryPastReults() {
                   setSelect(1);
                 }}
               >
-                View By Time
+            {langKey && langKey.view_by_time}
               </MenuItem>
             </Grid>
 
@@ -303,8 +310,8 @@ export default function LotteryPastReults() {
             <Grid container item xs={6} alignItems="center">
               <Image
                 alt="Welfare lottery lottery"
-                width="40px"
-                height="40px"
+                width="30px"
+                height="30px"
                 style={{ borderRadius: "30px" }}
                 src="https://t.pimg.jp/040/863/617/1/40863617.jpg"
               />
@@ -325,7 +332,7 @@ export default function LotteryPastReults() {
                   inputProps={{ "aria-label": "Without label" }}
                 >
                   <MenuItem value="">
-                    <em>Select Issue</em>
+                    <em>{langKey && langKey.select_issue} </em>
                   </MenuItem>
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
@@ -343,19 +350,19 @@ export default function LotteryPastReults() {
                   textTransform:"capitalize"
                 }}
               >
-                Search
+              {langKey && langKey.search} 
               </Button>
             </Grid>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledHeaderCell width="50px">Issue</StyledHeaderCell>
+                    <StyledHeaderCell width="50px">  {langKey && langKey.issue} </StyledHeaderCell>
                     <StyledHeaderCell width="50px" align="left">
-                      Draw Time
+                 {langKey && langKey.draw_time} 
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
-                      Result
+                        {langKey && langKey.result} 
                     </StyledHeaderCell>
                   </TableRow>
                 </TableHead>

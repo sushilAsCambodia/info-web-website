@@ -12,11 +12,12 @@ export default function DateFilterBar() {
     
     const [dateFilter, setDateFilter] = useState("");
     const [age, setAge] = useState("");
+    const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
 
   return (
     <Grid container  justifyContent="center" pb={1} >
-    <Grid item xs={10} md={10} container flexWrap="nowrap" sx={{  overflow:"auto"}}  >
+    <Grid item xs={11} md={11} container flexWrap="nowrap" sx={{  overflow:"auto"}}  >
       {utils.LastXDays(7).map((item, index) => {
         return (
           <Grid
@@ -29,12 +30,12 @@ export default function DateFilterBar() {
             sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'flex'},alignItems:'center' }}
           >
             <Typography
-              sx={{ fontWeight: "bold", fontSize: {xs:"12px",md:"14px"} }}
+              sx={{ fontWeight: "bold", fontSize: {xs:"14px",md:"16px"} }}
               px={0.5}
             >
               {item.day}
             </Typography>
-            <Typography px={0.5} sx={{ fontSize: {xs:"12px",md:"14px"} }}>
+            <Typography px={0.5} sx={{ fontSize: {xs:"14px",md:"16px"} }}>
               {item.DateMonth}
             </Typography>
           </Grid>
@@ -43,7 +44,7 @@ export default function DateFilterBar() {
     </Grid>
     <Grid
       item
-      xs={2} md={2}
+      xs={1} md={1}
       display="flex"
       justifyContent="center"
     >
@@ -63,7 +64,7 @@ export default function DateFilterBar() {
           }
         >
           <MenuItem value="">
-            <em>Date</em>
+            <em>   {langKey && langKey.date}</em>
           </MenuItem>
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
