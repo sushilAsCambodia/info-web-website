@@ -845,7 +845,7 @@ visibility: visible;
   color: white !important;
 }
 .selectedTab{
-  color: #FF0000;
+  color: #FF0000 !important;
   font-weight: bold !important;
 }
 .sticky-header{
