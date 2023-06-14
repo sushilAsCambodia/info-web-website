@@ -105,7 +105,7 @@ const lotteryHistory = () => {
         {lotteryHistories.map((r, key) => {
           return (
             <div key={key} style={{ marginBottom: 10 }}>
-              <LotteryHistoryCard lottery={r} />
+              <LotteryHistoryCard lottery={r} icon={router?.query?.icon}/>
             </div>
           );
         })}

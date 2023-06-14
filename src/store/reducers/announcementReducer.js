@@ -1,7 +1,11 @@
 const initialState = { 
     status: 'idle',
     announcements:[],
-    loading: true
+    loading: true,
+    current_page:1,
+    per_page:10,
+    last_page:1
+
   } 
   const announcementReducer = (state = initialState, action) => {
     switch (action.type) { 
@@ -16,6 +20,9 @@ const initialState = {
         return {
           ...state,
           announcements: action?.payload?.data,
+          current_page:action?.payload?.current_page,
+          per_page:action?.payload?.per_page,
+          last_page:action?.payload?.last_page,
           status:'completed',
           loading: false
         };

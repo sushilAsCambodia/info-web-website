@@ -23,6 +23,21 @@ import { useTranslation } from "react-i18next";
 import utils from "@/common/utils";
 import DataLoading from "@/components/DataLoading";
 import { getFavouriteList } from "@/store/actions/favouriteActions";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const toastOption = {
+  position: toast.POSITION.BOTTOM_RIGHT,
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: false,
+  pauseOnHover: false,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+};
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -61,7 +76,9 @@ export default function Lottery() {
   } = useSelector((state) => state.lottery);
   const langKey = useSelector((state) => state?.load_language?.language);
   const { customer = {} } = useSelector((state) => state?.auth);
-  const { favouriteList = {} } = useSelector((state) => state?.favourite);
+  const { favouriteList = {}, status } = useSelector(
+    (state) => state?.favourite
+  );
 
   const router = useRouter();
   const handleChange = (event, newValue) => {
@@ -69,6 +86,7 @@ export default function Lottery() {
   };
   const dispatch = useDispatch();
   const [lotteryCategoryList, setLotteryCategoryList] = useState([]);
+  const [favLoading, setFavLoading] = useState(false);
   const onChangeTab = (hash) => {
     router.replace(`${router.route}#${hash}`);
   };
@@ -95,7 +113,8 @@ export default function Lottery() {
     },
     [dispatch, i18n.language]
   );
-  const allFavouriteList = React.useCallback(() => {
+  const allFavouriteList = () => {
+    setFavLoading(true);
     dispatch(
       getFavouriteList({
         params: {
@@ -103,18 +122,23 @@ export default function Lottery() {
           member_id: customer.member_ID,
           pick: "favorite",
         },
-        callback: (res) => {},
+        callback: (res) => {
+          setFavLoading(false);
+        },
       })
     );
-  },[dispatch, i18n.language])
+  };
 
   React.useEffect(() => {
     handleGetCategory();
   }, [handleGetCategory]);
 
   React.useEffect(() => {
-    lotteryCategories.length >0 ? setLotteryCategoryList(lotteryCategories.filter(i => i.lottery_bind !== null)):''
-
+    lotteryCategories.length > 0
+      ? setLotteryCategoryList(
+          lotteryCategories.filter((i) => i.lottery_bind !== null)
+        )
+      : "";
   }, [lotteryCategories]);
 
   React.useEffect(() => {
@@ -130,14 +154,18 @@ export default function Lottery() {
       handleGetLotteryResult();
       console.log(":::value", value);
     } else if (value == 0) {
-      allFavouriteList();
+      customer?.member_ID ? allFavouriteList() : "";
     }
+    localStorage.setItem("prepage", "lottery");
   }, [value]);
-  
-  console.log("lotteryCategories",lotteryCategories)
+
+  const handleToastMessage = (message) => {
+    toast.success(message, toastOption);
+  };
   return (
     <NoSsr>
       <Box sx={{ width: "100%" }}>
+        <ToastContainer />
         <Box
           sx={{
             boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
@@ -184,13 +212,11 @@ export default function Lottery() {
               return (
                 <Tab
                   key={index}
-                  className="lotterytab"                  
+                  className="lotterytab"
                   label={lc?.translation?.translation}
                   {...a11yProps(index + 2)}
                 />
               );
-              
-              
             })}
             {/* <Tab className="lotterytab" label="Guānzhù" {...a11yProps(0)}/>
             <Tab className="lotterytab" label="History" {...a11yProps(1)}/>
@@ -228,27 +254,51 @@ export default function Lottery() {
                 width: "100%",
               }}
             >
-              {loading ? (
-                <DataLoading />
-              ) : favouriteList.length > 0 ? (
-                favouriteList.map((lr, key) => {
-                  return (
-                    <div key={key}>
-                      <LotteryCard lottery={lr} 
-                      allFavourite={allFavouriteList} 
-                      />
-                      <Box height={12}></Box>
-                    </div>
-                  );
-                })
-              ) : (
+              {favLoading ? <DataLoading /> : ""}
+
+              {!favLoading &&
+              status === "completed" &&
+              favouriteList.length == 0 ? (
                 <Grid pt={1} style={{ marginTop: "40%" }} height="100vh">
                   <Image
                     alt="not_found_2"
                     style={{ width: "90%" }}
                     src="./assets/not-found.png"
                   />
-                  <Typography textAlign="center">No Data Found</Typography>
+                  <Typography textAlign="center">
+                    {langKey.no_lottery_data}
+                  </Typography>
+                </Grid>
+              ) : (
+                ""
+              )}
+              {favouriteList?.length > 0 &&
+                favouriteList.map((lr, key) => {
+                  return (
+                    <div key={key}>
+                      <LotteryCard
+                        lottery={lr}
+                        allFavourite={allFavouriteList}
+                        toastMessage={handleToastMessage}
+                      />
+                      <Box height={12}></Box>
+                    </div>
+                  );
+                })}
+              {customer?.member_ID ? (
+                ""
+              ) : (
+                <Grid
+                  pt={1}
+                  style={{ marginTop: "40%", textAlign: "center" }}
+                  height="100vh"
+                >
+                  <Icon
+                    width="40vw"
+                    color="#ff733e"
+                    icon="material-symbols:login"
+                  />
+                  <Typography> please login to see favorite list</Typography>
                 </Grid>
               )}
             </Grid>
@@ -288,7 +338,11 @@ export default function Lottery() {
                 lotteryResults.map((lr, key) => {
                   return (
                     <div key={key}>
-                      <LotteryCard lottery={lr} />
+                      <LotteryCard
+                        lottery={lr}
+                        allFavourite={allFavouriteList}
+                        toastMessage={handleToastMessage}
+                      />
                       <Box height={12}></Box>
                     </div>
                   );
@@ -300,7 +354,9 @@ export default function Lottery() {
                     style={{ width: "90%" }}
                     src="./assets/not-found.png"
                   />
-                  <Typography textAlign="center">No Data Found</Typography>
+                  <Typography textAlign="center">
+                    {langKey.no_lottery_data}
+                  </Typography>
                 </Grid>
               )}
             </Grid>
@@ -342,7 +398,11 @@ export default function Lottery() {
                     lotteryResults.map((lr, key) => {
                       return (
                         <div key={key}>
-                          <LotteryCard lottery={lr} />
+                          <LotteryCard
+                            lottery={lr}
+                            allFavourite={allFavouriteList}
+                            toastMessage={handleToastMessage}
+                          />
                           <Box height={12}></Box>
                         </div>
                       );
@@ -354,7 +414,9 @@ export default function Lottery() {
                         style={{ width: "90%" }}
                         src="./assets/not-found.png"
                       />
-                      <Typography textAlign="center">No Data Found</Typography>
+                      <Typography textAlign="center">
+                        {langKey.no_lottery_data}
+                      </Typography>
                     </Grid>
                   )}
                 </Grid>

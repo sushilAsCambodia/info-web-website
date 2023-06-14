@@ -4,7 +4,7 @@ import utils from '@/common/utils';
 import moment from 'moment/moment';
 import Image from "mui-image";
 
-const LotteryHistoryCard = ({lottery}) => {
+const LotteryHistoryCard = ({lottery,icon}) => {
     return (
         <Card>
             <CardHeader style={{ padding: '5px 5px', borderBottom: '1px solid #ddd' }} title={
@@ -19,7 +19,7 @@ const LotteryHistoryCard = ({lottery}) => {
                     <Typography component="span" style={{ background: '#FFE0D2', width: '37px', height: '24px' }}></Typography>
                     <Grid container style={{ position: 'absolute', alignItems: 'center', left: 20 }}>
                         <Grid className='mui-image-round' item style={{ margin: 2, textAlign: 'center', color: '#fff', padding: 1, width: 35, height: 35, borderRadius: '50%', border: '0.5px solid #DDDDDD', background: '#fff' }}>
-                        <Image  alt="photo_upload" htmlFor="photo-upload" width={30} height={30} src={lottery?.src ? lottery.src :'/assets/Lottery/superlotto-logo1.png'} sx={{borderRadius:"50px"}}/>
+                        <Image  alt="photo_upload" htmlFor="photo-upload" width={30} height={30} src={icon ? icon :'/assets/Lottery/superlotto-logo1.png'} sx={{borderRadius:"50px"}}/>
                         </Grid>
                         {
                             lottery && lottery.result_data && lottery.result_data.map((r,key) => {

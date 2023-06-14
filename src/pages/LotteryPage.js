@@ -60,6 +60,27 @@ export default function LotteryPage() {
   const {lotteryCategories = [], lotteryResults = [],lotteryResultByID=[]} = useSelector(state => state.lottery)
   
   const handleChange = (event) => {
+    console.log("event.target.value",event.target.value)
+    dispatch(
+      getLotteryResultByCategoryId({
+        params: {
+          rowsPerPage: 10,
+          page: 1,          
+          lang_id: utils.convertLangCodeToID(i18n.language),
+          category_id:event.target.value
+        },
+        callback: (res) => {
+          // page == 1
+          //   ? (setLotteryHistories(res.data.data),
+          //     setPageLimit(res.data.last_page),
+          //     handleClose())
+          //   : setLotteryHistories((data) => data.concat(res.data.data));
+          handleClose();
+          // console.log("old:::",lotteryHistories)
+          // console.log("added new:::",res.data.data)
+        },
+      })
+    )
     setAge(event.target.value);
   };
 
@@ -497,7 +518,7 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
         </Grid>
       </Grid>
 
-      <Grid container>
+      <Grid container item xs={12}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -525,15 +546,19 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                 </StyledHeaderCell>
               </TableRow>
             </TableHead>
+           
             <TableBody>
-              {lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.map((rowData, index) => {
+              { lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.length > 0 ? 
+              lotteryResultByID.data.map((rowData, index) => {
                 console.log("rowData",rowData)
                 if(rowData && rowData.lottery_bind!=null)
                 return (
                   <>
-                  <StyledTableRow key={index}>
-                      <StyledTableCell component="th" scope="row"  colSpan={7}>
-                        <Grid display="flex" alignItems="center" >
+                  <TableRow key={index}>
+                      <TableCell component="th" scope="row"  colSpan={7} style={{
+                          backgroundColor:"#dbd6d6"
+                        }}>
+                        <Grid display="flex" alignItems="center">
                           {" "}
                           <Image
                             alt={rowData.lottoTitle}
@@ -547,16 +572,16 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                             src={rowData.icon}
                             
                           />
-                           <Typography  paddingLeft={1}>{rowData && rowData.translation && rowData.translation.translation} </Typography>
+                           <Typography fontWeight={600}  paddingLeft={1}>{rowData && rowData.translation && rowData.translation.translation} </Typography>
                         </Grid>
-                      </StyledTableCell>
-                    </StyledTableRow>
+                      </TableCell>
+                    </TableRow>
                     
                     {rowData && rowData.lottery  && rowData.lottery.map((item, index) => {
                      
                       return (
-                        <StyledTableRow key={item?.latest_result?.id}>
-                          <StyledTableCell component="th" scope="row">
+                        <TableRow key={item?.latest_result?.id}>
+                          <TableCell component="th" scope="row">
                             <Grid
                               sx={{ display: "flex", alignItems: "center" }}
                             >
@@ -568,15 +593,15 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                               />{" "}
                               <Typography paddingLeft={1}>{item?.translation?.translation}</Typography>
                             </Grid>
-                          </StyledTableCell>
-                          <StyledTableCell align="left">
+                          </TableCell>
+                          <TableCell align="left">
                             {item?.latest_result?.issue}
-                          </StyledTableCell>
-                          <StyledTableCell align="left">
+                          </TableCell>
+                          <TableCell align="left">
                           {/* {item?.latest_result?.created_at} */}
                           {moment(item?.latest_result?.created_at).format('YYYY-MM-DD')}
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
+                          </TableCell>
+                          <TableCell align="center">
                             <Grid
                               sx={{
                                 display: "flex",
@@ -586,8 +611,8 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                             >
                                {lottoTable(item?.latest_result)} 
                             </Grid>
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
+                          </TableCell>
+                          <TableCell align="center">
                             <IconButton
                               sx={{
                                 background: "#F3F3F3",
@@ -597,8 +622,8 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                             >
                               <Icon width="20px" icon="solar:clipboard-list-broken" />
                             </IconButton>
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
+                          </TableCell>
+                          <TableCell align="center">
                             <IconButton
                               sx={{
                                 background: "#F3F3F3",
@@ -608,8 +633,8 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                             >
                               <Icon width="25px" icon="material-symbols:add-chart-rounded" />
                             </IconButton>
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
+                          </TableCell>
+                          <TableCell align="center">
                             <IconButton
                               sx={{
                                 background: "#F3F3F3",
@@ -630,13 +655,25 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                                 />
                               )}
                             </IconButton>
-                          </StyledTableCell>
-                        </StyledTableRow>
+                          </TableCell>
+                        </TableRow>
                       );
                     })}
                   </>
                 );
-              })}
+              })
+              
+              : 
+              <TableRow>
+
+              <TableCell component="th" scope="row" colSpan={7} >
+              <Grid textAlign={'center'} item xs={12} paddingTop={2}>
+        <img style={{height:'40vh'}} src='./assets/Home/not-found.gif' alt='not-found'/> 
+      </Grid></TableCell></TableRow>
+              
+              
+              
+              }
             </TableBody>
           </Table>
         </TableContainer>
