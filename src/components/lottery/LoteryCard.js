@@ -17,6 +17,7 @@ import { Icon } from "@iconify/react";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingBackDrop from "../LoadingBackDrop";
 
 
 const toastOption = {
@@ -31,11 +32,14 @@ const toastOption = {
   }
 
 
-const LotteryCard = ({ lottery }) => {
+const LotteryCard = (props) => {
   const router = useRouter();
+  const {lottery,allFavourite}=props
   const { customer = {} } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [isFavourite, setIsFavourite] = useState(lottery.is_favorite);
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const [loading, setLoading] = useState(false);
 
   const checkActive = (active_features, value) => {
     if (active_features && active_features !== "") {
@@ -51,10 +55,11 @@ const LotteryCard = ({ lottery }) => {
       lottery?.translation?.translation + lottery?.latest_result?.issue;
     router.push({
       pathname: "/lotteryHistory",
-      query: { title: title, id: lottery.id },
+      query: { title: title, id: lottery.id, },
     });
   };
   const handleAddRemove = () => {
+    setLoading(true)
     customer?.member_ID
       ? dispatch(
           addRemoveFavourite({
@@ -64,8 +69,9 @@ const LotteryCard = ({ lottery }) => {
             },
             callback: (res) => {
                 setIsFavourite(!isFavourite)
-                toast.success((res?.message), toastOption);
-
+                toast.success(langKey[res?.message], toastOption);
+                setLoading(false)
+                allFavourite()
               //   const { message = "" } = res;
               //   if (res.status_code === 201) {
               //     setOpenDialog(true);
@@ -90,7 +96,7 @@ const LotteryCard = ({ lottery }) => {
   
   return (<>     
    <ToastContainer />
-  
+  <LoadingBackDrop loading={loading} />
     <Card>
       <CardHeader
         style={{ padding: "0 5px 0 5px", borderBottom: "1px solid #ddd" }}
@@ -113,7 +119,7 @@ const LotteryCard = ({ lottery }) => {
              
             >
               {isFavourite ? (
-                <Icon icon="ant-design:star-filled" color="yellow"  onClick={() => {
+                <Icon icon="ant-design:star-filled" color="#F2DA00"  onClick={() => {
                     (handleAddRemove());
                   }}/>
               ) : (
@@ -210,7 +216,7 @@ const LotteryCard = ({ lottery }) => {
             style={{ fontSize: "10px", color: "#8C8C8C", textAlign: "left" }}
           >
             {checkActive(lottery?.active_features, "Chart") && (
-              <span>Chart</span>
+              <span>{langKey.chart}</span>
             )}
           </Grid>
           <Grid
@@ -219,7 +225,7 @@ const LotteryCard = ({ lottery }) => {
             style={{ fontSize: "10px", color: "#8C8C8C", textAlign: "center" }}
           >
             {checkActive(lottery?.active_features, "PastResult") && (
-              <span onClick={() => goToLotteryHistory(lottery)}>History</span>
+              <span onClick={() => goToLotteryHistory(lottery)}>{langKey.history}</span>
             )}
           </Grid>
           {moment(lottery?.latest_result?.opendate).format(utils.formatDate) ==
@@ -229,7 +235,7 @@ const LotteryCard = ({ lottery }) => {
               xs={4}
               style={{ fontSize: "10px", color: "#8C8C8C", textAlign: "right" }}
             >
-              Today Result
+              {langKey.today_result}
             </Grid>
           )}
         </Grid>

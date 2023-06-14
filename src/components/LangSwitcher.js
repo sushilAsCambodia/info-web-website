@@ -9,6 +9,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useTranslation } from 'react-i18next';
 import {getAdvertise} from '@/store/actions/advertiseActions'
 import {getCategory} from '@/store/actions/categoryActions'
+import useMediaQuery from "@mui/material/useMediaQuery";
 import utils from "../common/utils";
 const StyledMenu = styled((props) => (
   <Menu
@@ -52,6 +53,7 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function LangSwitcher() { 
+  const matches = useMediaQuery("(max-width:768px)");
   const {i18n} =  useTranslation();
   const dispatch = useDispatch();
   const [lang, setLang] = React.useState('')
@@ -124,13 +126,13 @@ export default function LangSwitcher() {
     let language = '';
     switch (l) {
       case 'en':
-        language = 'English';
+        language = 'Eng';
         break;
       case 'de':
-        language = 'Chinese';
+        language = 'Ch';
         break;
       case 'kh':
-        language = 'Khmer';
+        language = 'Kh';
         break;
       default:
         break;
@@ -140,17 +142,30 @@ export default function LangSwitcher() {
   return (
     <div>
       <Button
-        sx={{backgroundColor:"transparent", border:"0.5px solid #FFFFFF",minWidth:"70px", fontSize:"12px", color:"#fff", padding:"6px", borderRadius:"20px", textTransform:"capitalize !important"}}
+
+
+
+
+
+  sx={matches ? {backgroundColor:"transparent", border:"0.5px solid #FFFFFF",minWidth:"60px", fontSize:"12px", color:"#fff", 
+   padding:"0px", borderRadius:"5px", textTransform:"capitalize !important"}
+   :
+   {backgroundColor:"transparent", border:"0.5px solid #FFFFFF",minWidth:"100px", fontSize:"12px", color:"#fff",
+    padding:"6px", borderRadius:"20px", textTransform:"capitalize !important"}}
+
         id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-    
         padding="0px !important"
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}>
-       <img src='./assets/Logo/langicon.png' alt='' /> &nbsp;
+          {
+            matches ? null :
+            <img src='./assets/Logo/langicon.png' alt='' style={{paddingRight:"5px"}} /> 
+          }
+       {/* <img src='./assets/Logo/langicon.png' alt='' /> &nbsp; */}
         {labelLanguage(lang)}
       </Button>
       <StyledMenu
