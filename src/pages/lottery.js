@@ -281,6 +281,12 @@ export default function Lottery() {
                     </div>
                   );
                 })}
+                {customer?.member_ID ?'':
+                                <Grid pt={1} style={{ marginTop: "40%",textAlign:'center' }} height="100vh">
+<Icon width='40vw' color="#ff733e" icon="material-symbols:login" />
+<Typography>                please login to see favorite list
+</Typography>
+                </Grid>}
             </Grid>
           </Grid>
         </TabPanel>
