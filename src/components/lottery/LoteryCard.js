@@ -38,6 +38,7 @@ const LotteryCard = (props) => {
   const { customer = {} } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [isFavourite, setIsFavourite] = useState(lottery.is_favorite);
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   const [loading, setLoading] = useState(false);
 
   const checkActive = (active_features, value) => {
@@ -54,7 +55,7 @@ const LotteryCard = (props) => {
       lottery?.translation?.translation + lottery?.latest_result?.issue;
     router.push({
       pathname: "/lotteryHistory",
-      query: { title: title, id: lottery.id },
+      query: { title: title, id: lottery.id, },
     });
   };
   const handleAddRemove = () => {
@@ -68,7 +69,7 @@ const LotteryCard = (props) => {
             },
             callback: (res) => {
                 setIsFavourite(!isFavourite)
-                toast.success((res?.message), toastOption);
+                toast.success(langKey[res?.message], toastOption);
                 setLoading(false)
                 allFavourite()
               //   const { message = "" } = res;
@@ -118,7 +119,7 @@ const LotteryCard = (props) => {
              
             >
               {isFavourite ? (
-                <Icon icon="ant-design:star-filled" color="yellow"  onClick={() => {
+                <Icon icon="ant-design:star-filled" color="#F2DA00"  onClick={() => {
                     (handleAddRemove());
                   }}/>
               ) : (
@@ -215,7 +216,7 @@ const LotteryCard = (props) => {
             style={{ fontSize: "10px", color: "#8C8C8C", textAlign: "left" }}
           >
             {checkActive(lottery?.active_features, "Chart") && (
-              <span>Chart</span>
+              <span>{langKey.chart}</span>
             )}
           </Grid>
           <Grid
@@ -224,7 +225,7 @@ const LotteryCard = (props) => {
             style={{ fontSize: "10px", color: "#8C8C8C", textAlign: "center" }}
           >
             {checkActive(lottery?.active_features, "PastResult") && (
-              <span onClick={() => goToLotteryHistory(lottery)}>History</span>
+              <span onClick={() => goToLotteryHistory(lottery)}>{langKey.history}</span>
             )}
           </Grid>
           {moment(lottery?.latest_result?.opendate).format(utils.formatDate) ==
@@ -234,7 +235,7 @@ const LotteryCard = (props) => {
               xs={4}
               style={{ fontSize: "10px", color: "#8C8C8C", textAlign: "right" }}
             >
-              Today Result
+              {langKey.today_result}
             </Grid>
           )}
         </Grid>
