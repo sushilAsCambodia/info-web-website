@@ -527,7 +527,8 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
             </TableHead>
            
             <TableBody>
-              { lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.length > 0 ? lotteryResultByID.data.map((rowData, index) => {
+              { lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.length > 0 ? 
+              lotteryResultByID.data.map((rowData, index) => {
                 console.log("rowData",rowData)
                 if(rowData && rowData.lottery_bind!=null)
                 return (
@@ -641,9 +642,13 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                 );
               })
               
-              : <Grid textAlign={'center'} item xs={12} paddingTop={2}>
-        <img src='./assets/Home/not-found.gif' alt='not-found'/> 
-      </Grid>
+              : 
+              <TableRow>
+
+              <TableCell component="th" scope="row" colSpan={7} >
+              <Grid textAlign={'center'} item xs={12} paddingTop={2}>
+        <img style={{height:'40vh'}} src='./assets/Home/not-found.gif' alt='not-found'/> 
+      </Grid></TableCell></TableRow>
               
               
               
