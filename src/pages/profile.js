@@ -34,6 +34,7 @@ import Announcement from "./announcement";
 import ProfileAnnouncement from "@/components/profilePage/profileannouncement";
 import Cookies from "js-cookie";
 import { Image } from "mui-image";
+import ConfirmationModal from "@/common/ConfirmationModal";
 const Profile = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
@@ -41,6 +42,7 @@ const Profile = () => {
   const router = useRouter();
   const [value, setValue] = useState(0);
   const [openDialog,setOpenDialog]=useState(false)
+  const [open,setOpen] = useState(false)
   const [responseMessage,setResponseMessage]  = useState('');
 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
@@ -77,6 +79,9 @@ const Profile = () => {
   }, []);
   const { isLogin, customer } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const handleConfirmation = ()=>{
+    setOpen(true)
+  }
   const handleLogout = () => {
     dispatch(
       logout({
@@ -165,6 +170,7 @@ function TabPanel(props) {
       mounted && (
         !matches ? (
           <Grid display="flex" justifyContent="center" pt={9} minHeight={750}>
+
            <Grid sx={{ width: 700 }} className="profiletab">
               <CusTabs
                 value={value}
@@ -203,6 +209,8 @@ function TabPanel(props) {
           </Grid>
         ) : ( 
           <Grid container sx={{padding:2}}>
+                        <ConfirmationModal action={()=>handleLogout()} open={open} setOpen={setOpen}/>
+
             <Grid
               item
               xs={12}
@@ -508,7 +516,7 @@ function TabPanel(props) {
                   </ListItem>
                   <Divider />
 
-                  <ListItem sx={{ padding: "0px 0px" }} onClick={handleLogout}>
+                  <ListItem sx={{ padding: "0px 0px" }} onClick={handleConfirmation}>
                     {isLogin ? (
                       <Grid
                         container

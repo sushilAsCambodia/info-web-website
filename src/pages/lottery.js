@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -162,11 +162,12 @@ export default function Lottery() {
   const handleToastMessage = (message) => {
     toast.success(message, toastOption);
   };
+  
   return (
     <NoSsr>
       <Box sx={{ width: "100%" }}>
         <ToastContainer />
-        <Box
+        <Grid
           sx={{
             boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
             position: "fixed",
@@ -175,6 +176,7 @@ export default function Lottery() {
             background: "#fff",
             zIndex: 9,
           }}
+          style={{'-webkit-overflow-scrolling': 'touch'}}
         >
           <Tabs
             variant="scrollable"
@@ -182,7 +184,6 @@ export default function Lottery() {
             value={value}
             texttransform="capitalize"
             onChange={handleChange}
-            aria-label="basic tabs example"
             TabIndicatorProps={{
               style: {
                 background: "#FF6F31",
@@ -225,7 +226,7 @@ export default function Lottery() {
             <Tab className="lotterytab" label="xxx Cǎixxx" {...a11yProps(4)}/>
             <Tab className="lotterytab" label="Favourite" {...a11yProps(5)}/> */}
           </Tabs>
-        </Box>
+        </Grid>
         <TabPanel value={value} index={0}>
           <Grid
             item
@@ -272,7 +273,7 @@ export default function Lottery() {
               ) : (
                 ""
               )}
-              {favouriteList?.length > 0 &&
+              {favouriteList?.length > 0 && customer.member_ID?
                 favouriteList.map((lr, key) => {
                   return (
                     <div key={key}>
@@ -284,7 +285,7 @@ export default function Lottery() {
                       <Box height={12}></Box>
                     </div>
                   );
-                })}
+                }):''}
               {customer?.member_ID ? (
                 ""
               ) : (
