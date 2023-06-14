@@ -34,20 +34,9 @@ import { Image } from "mui-image";
 import utils from "@/common/utils";
 import { getAnnouncement } from "@/store/actions/announcementAction";
 import NoDataMessage from "@/common/NoDataMessage";
+import ArticleModal from "@/common/ArticleModal";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '50vw',
-    height: 'auto',
-    maxHeight: '90vh',
-    bgcolor: 'background.paper',
-    // border: '1px solid #000',
-    boxShadow: 24,
-    p: 2,
-  };
+
 
 const Announcement = () => {
   const matches = useMediaQuery("(max-width:768px)");
@@ -97,41 +86,17 @@ const Announcement = () => {
   }, [langKey]);
 
   const [open, setOpen] = useState(false);
-  const [article, setArticle] = useState({title:'',comment:''});
+  const [article, setArticle] = useState({});
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleModalOpen =(title,comment)=>{
-setArticle({title,comment})
+  const handleModalOpen =(article)=>{
+setArticle(article)
 setOpen(true)
   }
   return !matches ? (
     <>
-   
-     <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2" fontWeight='bold'>
-              {article.title}
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              {article.comment}
-            </Typography>
-          </Box>
-        </Fade>
-      </Modal>
+     <ArticleModal article={article} open={open} setOpen={setOpen}/>
       <Grid
         container
         alignItems="flex-start"
@@ -186,7 +151,7 @@ setOpen(true)
                     md={4}
                     lg={3}
                     sx={{ padding: "10px", textAlign: "left",cursor:'pointer' }}
-                    onClick={()=>handleModalOpen(item.title,item.comment)}
+                    onClick={()=>handleModalOpen(item)}
                   >
                     <Grid
                       item
