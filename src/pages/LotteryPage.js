@@ -547,7 +547,7 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                             src={rowData.icon}
                             
                           />
-                           <Typography background="red" paddingLeft={1}>{rowData && rowData.translation && rowData.translation.translation} </Typography>
+                           <Typography  paddingLeft={1}>{rowData && rowData.translation && rowData.translation.translation} </Typography>
                         </Grid>
                       </StyledTableCell>
                     </StyledTableRow>
