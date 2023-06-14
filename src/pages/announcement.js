@@ -55,13 +55,17 @@ const Announcement = () => {
   // });
 
 
-  const  announcements  = useSelector((state) => state?.announcement?.announcements);
+  const  {announcements,current_page,per_page,total}  = useSelector((state) => state?.announcement);
 
+  console.log('announcements:',announcements);
+  console.log('current_page:',current_page);
+  console.log('per_page:',per_page);
+  console.log('total:',total);
 
   //const announcements = announcement;
 
   const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(10);
 
   const dispatch = useDispatch();
 

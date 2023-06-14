@@ -132,6 +132,7 @@ export default function Lottery() {
     } else if (value == 0) {
       allFavouriteList();
     }
+    localStorage.setItem("prepage", "lottery");
   }, [value]);
   return (
     <NoSsr>
