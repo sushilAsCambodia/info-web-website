@@ -212,13 +212,11 @@ export default function Lottery() {
               return (
                 <Tab
                   key={index}
-                  className="lotterytab"                  
+                  className="lotterytab"
                   label={lc?.translation?.translation}
                   {...a11yProps(index + 2)}
                 />
               );
-              
-              
             })}
             {/* <Tab className="lotterytab" label="Guānzhù" {...a11yProps(0)}/>
             <Tab className="lotterytab" label="History" {...a11yProps(1)}/>
@@ -258,16 +256,22 @@ export default function Lottery() {
             >
               {favLoading ? <DataLoading /> : ""}
 
-              {!favLoading && status === 'completed' && favouriteList.length == 0 ? (
+              {!favLoading &&
+              status === "completed" &&
+              favouriteList.length == 0 ? (
                 <Grid pt={1} style={{ marginTop: "40%" }} height="100vh">
                   <Image
                     alt="not_found_2"
                     style={{ width: "90%" }}
                     src="./assets/not-found.png"
                   />
-                  <Typography textAlign="center" >{langKey.no_lottery_data}</Typography>
+                  <Typography textAlign="center">
+                    {langKey.no_lottery_data}
+                  </Typography>
                 </Grid>
-              ):''}
+              ) : (
+                ""
+              )}
               {favouriteList?.length > 0 &&
                 favouriteList.map((lr, key) => {
                   return (
@@ -281,12 +285,22 @@ export default function Lottery() {
                     </div>
                   );
                 })}
-                {customer?.member_ID ?'':
-                                <Grid pt={1} style={{ marginTop: "40%",textAlign:'center' }} height="100vh">
-<Icon width='40vw' color="#ff733e" icon="material-symbols:login" />
-<Typography>                please login to see favorite list
-</Typography>
-                </Grid>}
+              {customer?.member_ID ? (
+                ""
+              ) : (
+                <Grid
+                  pt={1}
+                  style={{ marginTop: "40%", textAlign: "center" }}
+                  height="100vh"
+                >
+                  <Icon
+                    width="40vw"
+                    color="#ff733e"
+                    icon="material-symbols:login"
+                  />
+                  <Typography> please login to see favorite list</Typography>
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </TabPanel>
@@ -340,7 +354,9 @@ export default function Lottery() {
                     style={{ width: "90%" }}
                     src="./assets/not-found.png"
                   />
-                  <Typography textAlign="center">{langKey.no_lottery_data}</Typography>
+                  <Typography textAlign="center">
+                    {langKey.no_lottery_data}
+                  </Typography>
                 </Grid>
               )}
             </Grid>
@@ -398,7 +414,9 @@ export default function Lottery() {
                         style={{ width: "90%" }}
                         src="./assets/not-found.png"
                       />
-                      <Typography textAlign="center">{langKey.no_lottery_data}</Typography>
+                      <Typography textAlign="center">
+                        {langKey.no_lottery_data}
+                      </Typography>
                     </Grid>
                   )}
                 </Grid>
