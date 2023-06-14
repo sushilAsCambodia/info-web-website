@@ -70,9 +70,9 @@ export default function Match() {
 
  
   return (
-  <>  {mounted &&
+  <>  
     <NoSsr>
-      <Grid>
+      <Box sx={{ width: "100%" }}>
         <Grid
           sx={{
             borderBottom: 1,
@@ -85,6 +85,7 @@ export default function Match() {
           }}
           container
           alignItems="center"
+          style={{'-webkit-overflow-scrolling': 'touch'}}
         >
           <Tabs
             variant="scrollable"
@@ -169,8 +170,8 @@ export default function Match() {
         <TabPanel value={value} index={5}>
           Shíshí Cǎi
         </TabPanel>
-      </Grid>
+      </Box>
     </NoSsr>
-  }</>
+  </>
   );
 }

@@ -87,7 +87,7 @@ const Layout = (props) => {
                 if(router.pathname == '/lottery') {
                     return <Navigate
                         // title={router.asPath.replace(router.pathname,'').replace('#','')}
-                        title={title}
+                        title={langKey.lottery}
                         lead={<IconButton
                         onClick={() => router.back()}
                         size="large" 
@@ -133,7 +133,7 @@ const Layout = (props) => {
                 }
                 else {
                     return <Navigate
-                    title={title}
+                    title={'title'}
                     lead={<IconButton
                         onClick={() => router.back()}
                         size="large" 

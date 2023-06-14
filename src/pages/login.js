@@ -103,6 +103,9 @@ export default function Login(props) {
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
+  const {member_ID} = useSelector(
+    (state) => state?.auth?.customer
+  );
   const handleSignup = (info) => {
     setLoading(true);
     info.name = info.name.replace(/\s+/, "_");
@@ -155,11 +158,9 @@ export default function Login(props) {
               //   ? (window.location.href = window.location.origin + localStorage.getItem("prepage"))
               //   : Router.push("/home");
 
-                (matches && localStorage.getItem("prepage"))
+                (localStorage.getItem("prepage"))
                 ? Router.push(localStorage.getItem("prepage"))
-                : Router.push("/home");
-
-
+                : !matches ?Router.push("/"): Router.push("/home");
 
 
             // // }, 4000);
@@ -279,6 +280,11 @@ export default function Login(props) {
       }
     }
   },[langKey]);
+  // useEffect(() => {
+  //   if(member_ID){
+  //     !matches ? Router.push('/'):Router.push('/home')
+  //   }
+  // },[Router.isReady]);
   return <>
     {
       mounted && (
