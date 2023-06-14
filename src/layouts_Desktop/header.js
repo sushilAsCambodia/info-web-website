@@ -294,10 +294,7 @@ const Header = () => {
                               <Typography
                                 textAlign="center"
                                 className={`${
-                                  hash == item.page || path == item.page
-                                    ? "selectedTab"
-                                    : ""
-                                }`}
+                                  hash == item.page || path == item.page ? "selectedTab" : "" }`}
                               >
                                 {item.label}
                               </Typography>
