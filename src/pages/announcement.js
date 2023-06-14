@@ -50,12 +50,12 @@ const Announcement = () => {
   // });
 
 
-  const  {announcements,current_page,per_page,total}  = useSelector((state) => state?.announcement);
+  const  {announcements,current_page,per_page,last_page}  = useSelector((state) => state?.announcement);
 
   console.log('announcements:',announcements);
   console.log('current_page:',current_page);
-  console.log('per_page:',per_page);
-  console.log('total:',total);
+  console.log('per_page:',per_page);  
+  console.log('total:',last_page);
 
   //const announcements = announcement;
 
@@ -80,14 +80,6 @@ const Announcement = () => {
     </Typography>,
   ];
 
-  useEffect(() => {
-    dispatch(
-      getAnnouncement({
-        params: { lang_id: utils.convertLangCodeToID(langKey), take: 10 },
-        callback: (res) => {},
-      })
-    );
-  }, [langKey]);
 
   const [open, setOpen] = useState(false);
   const [article, setArticle] = useState({});
@@ -98,6 +90,34 @@ const Announcement = () => {
 setArticle(article)
 setOpen(true)
   }
+
+  const [currentPage, setCurrentPage] = useState(page);
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  
+  useEffect(() => {
+    dispatch(
+      getAnnouncement({
+        params: { lang_id: utils.convertLangCodeToID(langKey), rowsPerPage: 10,page:currentPage },
+        callback: (res) => {},
+      })
+    );
+  }, [langKey,currentPage]);
+
+
+  const handleScroll = (event) => {
+    if (
+      last_page !== currentPage &&
+      last_page > currentPage &&
+      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+        event.currentTarget.clientHeight
+    ) {
+      setCurrentPage(currentPage + 1);
+      console.log("scroll bottom:::")
+    }
+  };
   return !matches ? (
     <>
      <ArticleModal article={article} open={open} setOpen={setOpen}/>
@@ -195,6 +215,7 @@ setOpen(true)
                   </Grid>
                 );
               })}
+              
             {announcements?.length == 0 && (
              <NoDataMessage />
             )}
@@ -209,7 +230,7 @@ setOpen(true)
               paddingTop={3}
             >
               <Stack spacing={2} sx={{ textAlign: "center" }}>
-                <Pagination count={totalPage} page={page} variant="outlined" shape="rounded" className="announce-pagination" />
+                <Pagination count={last_page} page={currentPage} onChange={handleChange} variant="outlined" shape="rounded" className="announce-pagination" />
               </Stack>
             </Grid>
           )}
@@ -230,9 +251,9 @@ setOpen(true)
           container
           alignContent="flex-start"
           alignItems="center"
-          overflow="auto"
-        >
-          <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+          overflow="auto" height='90vh'   onScroll={handleScroll}
+          >
+          
             <List sx={{ padding: "0px" }}>
               {announcements?.length > 0 &&
                 announcements.map((item, index) => {
@@ -298,10 +319,10 @@ setOpen(true)
                     </div>
                   );
                 })}
+                
             </List>
             {/* <Divider /> */}
             {announcements?.length == 0 && <NoDataMessage />}
-          </Grid>
         </Grid>
       </Grid>
     </>

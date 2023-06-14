@@ -87,7 +87,7 @@ const Layout = (props) => {
                 if(router.pathname == '/lottery') {
                     return <Navigate
                         // title={router.asPath.replace(router.pathname,'').replace('#','')}
-                        title={title}
+                        title={langKey.lottery}
                         lead={<IconButton
                         onClick={() => router.back()}
                         size="large" 
@@ -133,7 +133,7 @@ const Layout = (props) => {
                 }
                 else {
                     return <Navigate
-                    title={title}
+                    title={'title'}
                     lead={<IconButton
                         onClick={() => router.back()}
                         size="large" 
@@ -274,6 +274,7 @@ const Layout = (props) => {
             <Head>
                 <title>{title}</title>
                 <meta property="og:title" content={title} key="title" /> 
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
             </Head>
             {switchHeader()}
             <Container id="main-container-wrapper" maxWidth="false" sx={{ bgcolor: '#fff', height: height, padding: "0px !important", overflowY: 'auto' }}>

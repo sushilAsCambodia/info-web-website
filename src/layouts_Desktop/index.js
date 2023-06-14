@@ -129,6 +129,7 @@ const Layout = (props) => {
         <Head>
           <title>{title}</title>
           <meta property="og:title" content={title} key="title" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
         </Head>
         <Container
           maxWidth="false"

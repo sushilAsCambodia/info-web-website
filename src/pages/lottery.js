@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -162,11 +162,12 @@ export default function Lottery() {
   const handleToastMessage = (message) => {
     toast.success(message, toastOption);
   };
+  
   return (
     <NoSsr>
       <Box sx={{ width: "100%" }}>
         <ToastContainer />
-        <Box
+        <Grid
           sx={{
             boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
             position: "fixed",
@@ -175,6 +176,7 @@ export default function Lottery() {
             background: "#fff",
             zIndex: 9,
           }}
+          style={{'-webkit-overflow-scrolling': 'touch'}}
         >
           <Tabs
             variant="scrollable"
@@ -182,7 +184,6 @@ export default function Lottery() {
             value={value}
             texttransform="capitalize"
             onChange={handleChange}
-            aria-label="basic tabs example"
             TabIndicatorProps={{
               style: {
                 background: "#FF6F31",
@@ -212,13 +213,11 @@ export default function Lottery() {
               return (
                 <Tab
                   key={index}
-                  className="lotterytab"                  
+                  className="lotterytab"
                   label={lc?.translation?.translation}
                   {...a11yProps(index + 2)}
                 />
               );
-              
-              
             })}
             {/* <Tab className="lotterytab" label="Guānzhù" {...a11yProps(0)}/>
             <Tab className="lotterytab" label="History" {...a11yProps(1)}/>
@@ -227,7 +226,7 @@ export default function Lottery() {
             <Tab className="lotterytab" label="xxx Cǎixxx" {...a11yProps(4)}/>
             <Tab className="lotterytab" label="Favourite" {...a11yProps(5)}/> */}
           </Tabs>
-        </Box>
+        </Grid>
         <TabPanel value={value} index={0}>
           <Grid
             item
@@ -258,17 +257,23 @@ export default function Lottery() {
             >
               {favLoading ? <DataLoading /> : ""}
 
-              {!favLoading && status === 'completed' && favouriteList.length == 0 ? (
+              {!favLoading &&
+              status === "completed" &&
+              favouriteList.length == 0 ? (
                 <Grid pt={1} style={{ marginTop: "40%" }} height="100vh">
                   <Image
                     alt="not_found_2"
                     style={{ width: "90%" }}
                     src="./assets/not-found.png"
                   />
-                  <Typography textAlign="center" >{langKey.no_lottery_data}</Typography>
+                  <Typography textAlign="center">
+                    {langKey.no_lottery_data}
+                  </Typography>
                 </Grid>
-              ):''}
-              {favouriteList?.length > 0 &&
+              ) : (
+                ""
+              )}
+              {favouriteList?.length > 0 && customer.member_ID?
                 favouriteList.map((lr, key) => {
                   return (
                     <div key={key}>
@@ -280,7 +285,23 @@ export default function Lottery() {
                       <Box height={12}></Box>
                     </div>
                   );
-                })}
+                }):''}
+              {customer?.member_ID ? (
+                ""
+              ) : (
+                <Grid
+                  pt={1}
+                  style={{ marginTop: "40%", textAlign: "center" }}
+                  height="100vh"
+                >
+                  <Icon
+                    width="40vw"
+                    color="#ff733e"
+                    icon="material-symbols:login"
+                  />
+                  <Typography> please login to see favorite list</Typography>
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </TabPanel>
@@ -334,7 +355,9 @@ export default function Lottery() {
                     style={{ width: "90%" }}
                     src="./assets/not-found.png"
                   />
-                  <Typography textAlign="center">{langKey.no_lottery_data}</Typography>
+                  <Typography textAlign="center">
+                    {langKey.no_lottery_data}
+                  </Typography>
                 </Grid>
               )}
             </Grid>
@@ -392,7 +415,9 @@ export default function Lottery() {
                         style={{ width: "90%" }}
                         src="./assets/not-found.png"
                       />
-                      <Typography textAlign="center">{langKey.no_lottery_data}</Typography>
+                      <Typography textAlign="center">
+                        {langKey.no_lottery_data}
+                      </Typography>
                     </Grid>
                   )}
                 </Grid>
