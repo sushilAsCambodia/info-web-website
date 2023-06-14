@@ -35,13 +35,14 @@ export default function ProfileAnnouncement() {
 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
-  const { announcement } = useSelector(
-    (state) => state?.announcement?.announcements
+  const { announcements } = useSelector(
+    (state) => state?.announcement
   );
   // const announcements = announcement?.filter((item) => {
   //   return item.status === "0";
   // });
 
+  console.log("announcements:::",announcements)
   useEffect(() => {
     dispatch(
       getAnnouncement({
@@ -67,11 +68,13 @@ export default function ProfileAnnouncement() {
         overflow="auto"
       >
 
-        <Grid item xs={12} textAlign="center" sm={12} md={12} xl={12} padding="0px" className="profileannouncement">
-          <List sx={{ padding: "0px !important", margin: "0px !important", display: "flex", gridTemplateColumns: "auto", gridGap: "20px", justifyContent: "flex-start", textAlign: "center !important" }}>
+        <Grid item  textAlign="center"xs={12} sm={12} md={12} xl={12} padding="0px" className="profileannouncement">
+          <List sx={{ padding: "0px !important", margin: "0px !important"}}>
             {announcements?.length > 0 && announcements.map((item,index) => {
               return (
-                <ListItem key={index} sx={{ padding: "16px 5px 16px 16px!important", borderRadius: "6px", border: "2px solid #DDDDDD", }} className="listitem">
+                <ListItem key={index} sx={{ padding: "16px 5px 16px 16px!important", borderRadius: "6px", border: "2px solid #DDDDDD",marginY:'5px',"&:hover": {
+                  border: "2px solid red",
+                }, }}  >
                   <Grid item xs={12}>
                     <Grid item>
                       <Grid item display="flex" justifyContent="space-between" alignItems="center">

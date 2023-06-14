@@ -712,6 +712,7 @@ export default function Login(props) {
                       container
                       justifyContent="center"
                       style={{ cursor: "pointer" }}
+                      onClick={()=>Router.push('/')}
                     >
                       <Image
                         style={{ width: 150 }}

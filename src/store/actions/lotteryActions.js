@@ -94,3 +94,25 @@ export const getLotteryHistory = createAsyncThunk(
     }
   }
 );
+
+export const getLotteryResultByCategoryId = createAsyncThunk(
+  "lottery/result-by-categoryId",
+  async ({ params = {}, callback }) => {
+    try {
+      const response = await api.get('lotto/lotteryCategory/all-with-lotto', params);
+      const { data, status } = response;
+      data["status_code"] = status;
+      if (typeof callback == "function") {
+        callback(data);
+      }
+      return data;
+    } catch (error) {
+      const { status, data } = error.response;
+      data["status_code"] = status;
+      if (typeof callback == "function") {
+        callback(data);
+      }
+      return data;
+    }
+  }
+);

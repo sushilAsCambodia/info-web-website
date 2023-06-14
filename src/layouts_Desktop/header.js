@@ -65,16 +65,17 @@ const Header = () => {
   const id = openScore ? "simple-popover" : undefined;
 
   const menuList = [
-    { label: langKey && langKey.lottery_draw, page: "LotteryPage" },
-    { label: (langKey && langKey.data_chart), page: "DataChart" },
-    { label: langKey && langKey.foot_ball, page: "footBallPage" },
-    { label: (langKey && langKey.basket_ball), page: "basketBallPage" },
+    { label: langKey && langKey.lottery_draw, page: "/LotteryPage" },
+    { label: (langKey && langKey.data_chart), page: "/DataChart" },
+    { label: langKey && langKey.foot_ball, page: "/footBallPage" },
+    { label: (langKey && langKey.basket_ball), page: "/basketBallPage" },
   ];
 
   useEffect(() => {
     const path = router.asPath;
     const hash = router.asPath.split("#")[0];
 
+    
     setPath(path);
     setHash(hash);
 
