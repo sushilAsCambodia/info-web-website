@@ -512,7 +512,7 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                    {langKey && langKey.draw_time}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="center">
-                  {langKey && langKey.results}
+                  {langKey && langKey.result}
                 </StyledHeaderCell>
                 <StyledHeaderCell  align="center">
                   {langKey && langKey.past_results}
@@ -641,11 +641,14 @@ console.log("lotteryCategorieslotteryCategories",lotteryCategories)
                 );
               })
               
-              : <Grid textAlign={'center'} item xs={12} paddingTop={2}>
-        <img src='./assets/Home/not-found.gif' alt='not-found'/> 
-      </Grid>
-              
-              
+              : 
+              <TableRow>
+              <TableCell component="th" scope="row" colSpan={7} >
+              <Grid textAlign={'center'} item xs={12} paddingTop={5}>
+             <img style={{height:'50vh'}} src='./assets/Home/not-found.gif' alt='not-found'/> 
+              </Grid>
+              </TableCell>
+             </TableRow>
               
               }
             </TableBody>
