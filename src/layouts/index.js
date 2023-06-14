@@ -89,7 +89,7 @@ const Layout = (props) => {
                         // title={router.asPath.replace(router.pathname,'').replace('#','')}
                         title={langKey.lottery}
                         lead={<IconButton
-                        onClick={() => router.back()}
+                        onClick={() => router.push('/home')}
                         size="large" 
                         edge="start"
                         color="inherit"
@@ -104,7 +104,7 @@ const Layout = (props) => {
                     return <Navigate
                         title={'History'}
                         lead={<IconButton
-                        onClick={() => router.back()}
+                        onClick={() => router.push('/home')}
                         size="large" 
                         edge="start"
                         color="inherit"
@@ -119,7 +119,7 @@ const Layout = (props) => {
                     return <Navigate
                     title={'match'}
                     lead={<IconButton
-                        onClick={() => router.back()}
+                        onClick={() => router.push('/home')}
                         size="large" 
                         edge="start"
                         color="inherit"
@@ -135,7 +135,7 @@ const Layout = (props) => {
                     return <Navigate
                     title={'title'}
                     lead={<IconButton
-                        onClick={() => router.back()}
+                        onClick={() => router.push('/home')}
                         size="large" 
                         edge="start"
                         color="inherit"

@@ -280,11 +280,11 @@ export default function Login(props) {
       }
     }
   },[langKey]);
-  // useEffect(() => {
-  //   if(member_ID){
-  //     !matches ? Router.push('/'):Router.push('/home')
-  //   }
-  // },[Router.isReady]);
+  useEffect(() => {
+    if(member_ID){
+      !matches ? Router.push('/'):Router.push('/home')
+    }
+  },[Router.isReady]);
   return <>
     {
       mounted && (
