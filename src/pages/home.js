@@ -1,3 +1,4 @@
+import * as React from "react";
 import NewsJournalTabs from '@/components/homeNews/NewsJournalTabs';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +13,14 @@ const Home = () => {
     const {categories} = useSelector((state) => state.category); 
     // const dispatch = useDispatch();
     const {i18n} = useTranslation();
+
+
+    React.useEffect(() => {
+        localStorage.removeItem("prepage");
+      }, []);
+
+
+    
     // useEffect(() => { 
     //     // dispatch(getBanner(
     //     //     {

@@ -23,7 +23,7 @@ export default function AnnouncementItem(props) {
 
   return (
     <>
-      <div style={{ paddingRight: "10px",cursor:"pointer" }}>
+      <div style={{ paddingRight: "10px"}}>
         <Grid
           sx={{
             borderBottom: "2px solid grey",
@@ -36,9 +36,9 @@ export default function AnnouncementItem(props) {
             title={announcement.title}
             className="twoLinesEllip"
             sx={{ fontSize: "14px",  
-            "&:hover": {
-              textDecoration:"underline"
-            },
+            // "&:hover": {
+            //   textDecoration:"underline"
+            // },
    }}
             px={1}
           >

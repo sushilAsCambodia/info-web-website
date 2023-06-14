@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-var routePreventToken = ['/profile','/profileDetail','/announcement','/feedback','/customerService'];
+var routePreventToken = ['/profile','/profileDetail','/feedback','/customerService'];
 export function middleware(req) {
     const { pathname } =  req.nextUrl;
     const absoluteUrl = new URL("/", req.url).toString();

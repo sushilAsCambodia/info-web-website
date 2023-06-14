@@ -21,6 +21,10 @@ import {
   Dialog,
   OutlinedInput,
   Divider,
+  Modal,
+  Backdrop,
+  Fade,
+  Box
 } from "@mui/material";
 import { useRouter } from "next/router";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -30,18 +34,9 @@ import { Image } from "mui-image";
 import utils from "@/common/utils";
 import { getAnnouncement } from "@/store/actions/announcementAction";
 import NoDataMessage from "@/common/NoDataMessage";
+import ArticleModal from "@/common/ArticleModal";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
+
 
 const Announcement = () => {
   const matches = useMediaQuery("(max-width:768px)");
@@ -55,13 +50,17 @@ const Announcement = () => {
   // });
 
 
-  const  announcements  = useSelector((state) => state?.announcement?.announcements);
+  const  {announcements,current_page,per_page,total}  = useSelector((state) => state?.announcement);
 
+  console.log('announcements:',announcements);
+  console.log('current_page:',current_page);
+  console.log('per_page:',per_page);
+  console.log('total:',total);
 
   //const announcements = announcement;
 
   const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(10);
 
   const dispatch = useDispatch();
 
@@ -91,11 +90,17 @@ const Announcement = () => {
   }, [langKey]);
 
   const [open, setOpen] = useState(false);
+  const [article, setArticle] = useState({});
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handleModalOpen =(article)=>{
+setArticle(article)
+setOpen(true)
+  }
   return !matches ? (
     <>
+     <ArticleModal article={article} open={open} setOpen={setOpen}/>
       <Grid
         container
         alignItems="flex-start"
@@ -149,7 +154,8 @@ const Announcement = () => {
                     sm={6}
                     md={4}
                     lg={3}
-                    sx={{ padding: "10px", textAlign: "left" }}
+                    sx={{ padding: "10px", textAlign: "left",cursor:'pointer' }}
+                    onClick={()=>handleModalOpen(item)}
                   >
                     <Grid
                       item
@@ -161,9 +167,10 @@ const Announcement = () => {
                       }}
                     >
                       <Typography
-                        fontWeight="500"
+                        fontWeight="bold"
                         className="twoLinesEllip"
                         color="#000"
+                        height="48px"
                       >
                         {item.title}
                       </Typography>
@@ -171,6 +178,8 @@ const Announcement = () => {
                         fontWeight="500"
                         className="twoLinesEllip"
                         color="#000"
+                        height="48px"
+                        title={item.comment}
                       >
                         {item.comment}
                       </Typography>

@@ -75,6 +75,7 @@ const Header = () => {
     const path = router.asPath;
     const hash = router.asPath.split("#")[0];
 
+    
     setPath(path);
     setHash(hash);
 
