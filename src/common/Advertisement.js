@@ -87,7 +87,7 @@ export default function Advertisement(props) {
             // rtl={true}
             >
             {newAdverts.map((ad, index) => (
-              <Link href={ad.ads_link} target='_blank' key={index}>
+              <Link href={ad?.ads_link} target='_blank' key={index}>
                 <Grid 
                   style={{
                     color: "white",
