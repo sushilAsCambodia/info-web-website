@@ -1,3 +1,5 @@
+import * as React from "react";
+import moment from "moment/moment";
 import {
   Typography,
   Grid,
@@ -23,14 +25,19 @@ import {
   Divider,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
+import { getLatestLottery } from "@/store/actions/lotteryActions";
+import { getLotteryCategory,getLotteryResultByCategory } from "@/store/actions/lotteryActions";
+import { useTranslation } from "react-i18next";
+import { getLotteryResultByCategoryId } from "@/store/actions/lotteryActions";
 
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState,useEffect } from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 import { Image } from "mui-image";
+import utils from "@/common/utils";
 const style = {
   position: "absolute",
   top: "300px",
@@ -43,12 +50,15 @@ const style = {
 };
 
 export default function LotteryPage() {
-  const router = useRouter()
+  const router = useRouter()  
+  const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
   const [age, setAge] = useState("");
-
+  const { i18n } = useTranslation();
+  const [value, setValue] = React.useState(0);
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-
+  const {lotteryCategories = [], lotteryResults = [],lotteryResultByID=[]} = useSelector(state => state.lottery)
+  
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -207,6 +217,69 @@ export default function LotteryPage() {
     setChart(false);
     setPastResult(false);
   };
+
+  useEffect(() => {
+    dispatch(
+      getLotteryResultByCategoryId({
+        params: {
+          rowsPerPage: 10,
+          page: 1,          
+          lang_id: utils.convertLangCodeToID(i18n.language),
+        },
+        callback: (res) => {
+          // page == 1
+          //   ? (setLotteryHistories(res.data.data),
+          //     setPageLimit(res.data.last_page),
+          //     handleClose())
+          //   : setLotteryHistories((data) => data.concat(res.data.data));
+          handleClose();
+          // console.log("old:::",lotteryHistories)
+          // console.log("added new:::",res.data.data)
+        },
+      })
+    )
+    dispatch(getLatestLottery("hey"));    
+  }, []);
+
+  const handleGetCategory = React.useCallback(() => {
+    dispatch(
+      getLotteryCategory({
+        params: {
+          lang_id:utils.convertLangCodeToID(i18n.language)
+        }
+      })
+    ); 
+  },[dispatch,i18n.language]);
+  const handleGetLotteryResult = React.useCallback((categoryId = undefined) => {
+    dispatch(
+      getLotteryResultByCategory({
+        params: {
+          lang_id:utils.convertLangCodeToID(i18n.language),
+          category_id: categoryId
+        }
+      })
+    ); 
+  },[dispatch,i18n.language]);
+  React.useEffect(() => {
+    handleGetCategory();
+  },[handleGetCategory]);
+  React.useEffect(() => {
+    //console.log(lotteryCategories,'alotteryCategories:::')
+  },[lotteryCategories])
+  React.useEffect(() => {
+    console.log('value',value)
+    if(value >= 0) {
+      let hash = '';
+      const lotteryCategory = lotteryCategories[value - 1] || {};
+      if(Object.keys(lotteryCategory).length) {
+        hash = '#'+(lotteryCategory?.translation?.translation);
+      }
+      // router.replace(`${router.route}${hash}`)
+        handleGetLotteryResult(lotteryCategory?.id);
+    }
+  },[value]);
+
+console.log("lotteryCategorieslotteryCategories",lotteryCategories)
   return ( 
     <>
       {/* <Typography variant="h5" fontWeight="bold">
@@ -412,10 +485,13 @@ export default function LotteryPage() {
               label="Select Category"
               onChange={handleChange}
               style={{ paddingY: "0px" }}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+            >{lotteryCategories && lotteryCategories.map((catData, index) => {
+             if(catData.lottery_bind!==null)
+              return(<MenuItem value={catData.id}>{catData && catData.translation && catData.translation.translation}</MenuItem>)
+             
+
+})}
+             
             </Select>
           </FormControl>
         </Grid>
@@ -451,126 +527,124 @@ export default function LotteryPage() {
             </TableHead>
            
             <TableBody>
-            {rows.length < 0 ? rows.map((row, index) => {
-              return (
-                <>
-                <StyledTableRow key={index}>
-                    <StyledTableCell component="th" scope="row" colSpan={7}>
-                      <Grid display="flex" alignItems="center" >
-                        {" "}
-                        <Image
-                          alt={row.lottoTitle}
-                          width={30}
-                          style={{
-                            marginRight: "10px",
-                            width: "30px",
-                            height: "30px",
-                            borderRadius: "20px",
-                          }}
-                          src={row.logo}
-                          
-                        />
-                        <Typography paddingLeft={1}>{row.lottoTitle} </Typography>
-                      </Grid>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                  {row.items.map((item, index) => {
-                    return (
-                      <StyledTableRow key={item.name}>
-                        <StyledTableCell component="th" scope="row">
-                          <Grid
-                            sx={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Image
-                              alt={item.name}
-                              width="30px"
-                              src={item.img}
-                              style={{}}
-                            />{" "}
-                            <Typography paddingLeft={1}>{item.name}</Typography>
-                          </Grid>
-                        </StyledTableCell>
-                        <StyledTableCell align="left">
-                          {item.calories}
-                        </StyledTableCell>
-                        <StyledTableCell align="left">
-                          {item.fat}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <Grid
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
+              {lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.map((rowData, index) => {
+                console.log("rowData",rowData)
+                if(rowData && rowData.lottery_bind!=null)
+                return (
+                  <>
+                  <StyledTableRow key={index}>
+                      <StyledTableCell component="th" scope="row"  colSpan={7}>
+                        <Grid display="flex" alignItems="center" >
+                          {" "}
+                          <Image
+                            alt={rowData.lottoTitle}
+                            width={30}
+                            style={{
+                              marginRight: "10px",
+                              width: "30px",
+                              height: "30px",
+                              borderRadius: "20px",
                             }}
-                          >
-                            {lottoTable(item.results)}
-                          </Grid>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <IconButton
-                            sx={{
-                              background: "#F3F3F3",
-                              border: "1px solid #DDDDDD",
-                            }}
-                            onClick={() => router.push('/lotteryPastResults')}
-                          >
-                            <Icon width="20px" icon="solar:clipboard-list-broken" />
-                          </IconButton>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <IconButton
-                            sx={{
-                              background: "#F3F3F3",
-                              border: "1px solid #DDDDDD",
-                            }}
-                            onClick={() => handleChartOpen(row.id)}
-                          >
-                            <Icon width="25px" icon="material-symbols:add-chart-rounded" />
-                          </IconButton>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <IconButton
-                            sx={{
-                              background: "#F3F3F3",
-                              border: "1px solid #DDDDDD",
-                            }}
-                          >
-                            {item.calories % 2 == 0 ? (
-                              <Icon
-                              width="20px"
-                                color="#C9C9C9"
-                                icon="clarity:favorite-solid"
-                              />
-                            ) : (
-                              <Icon
-                              width="20px"
-                                color="#FF6F31"
-                                icon="clarity:favorite-solid"
-                              />
-                            )}
-                          </IconButton>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    );
-                  })}
-                </>
-              );
-            })
-            : <Grid textAlign={'center'} item xs={12} paddingTop={2}>
-            <img src='./assets/Home/not-found.gif' alt='not-found'/> 
-          </Grid>
-            
-            }
-          </TableBody>
-          
-           
+                            src={rowData.icon}
+                            
+                          />
+                           <Typography background="red" paddingLeft={1}>{rowData && rowData.translation && rowData.translation.translation} </Typography>
+                        </Grid>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                    
+                    {rowData && rowData.lottery  && rowData.lottery.map((item, index) => {
+                     
+                      return (
+                        <StyledTableRow key={item?.latest_result?.id}>
+                          <StyledTableCell component="th" scope="row">
+                            <Grid
+                              sx={{ display: "flex", alignItems: "center" }}
+                            >
+                              <Image
+                                alt={item?.latest_result?.id}
+                                width="30px"
+                                src={item.icon}
+                                style={{}}
+                              />{" "}
+                              <Typography paddingLeft={1}>{item?.translation?.translation}</Typography>
+                            </Grid>
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {item?.latest_result?.issue}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                          {/* {item?.latest_result?.created_at} */}
+                          {moment(item?.latest_result?.created_at).format('YYYY-MM-DD')}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <Grid
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                               {lottoTable(item?.latest_result)} 
+                            </Grid>
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <IconButton
+                              sx={{
+                                background: "#F3F3F3",
+                                border: "1px solid #DDDDDD",
+                              }}
+                              onClick={() => router.push('/lotteryPastResults')}
+                            >
+                              <Icon width="20px" icon="solar:clipboard-list-broken" />
+                            </IconButton>
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <IconButton
+                              sx={{
+                                background: "#F3F3F3",
+                                border: "1px solid #DDDDDD",
+                              }}
+                              onClick={() => handleChartOpen(row.id)}
+                            >
+                              <Icon width="25px" icon="material-symbols:add-chart-rounded" />
+                            </IconButton>
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <IconButton
+                              sx={{
+                                background: "#F3F3F3",
+                                border: "1px solid #DDDDDD",
+                              }}
+                            >
+                              {item.calories % 2 == 0 ? (
+                                <Icon
+                                width="20px"
+                                  color="#C9C9C9"
+                                  icon="clarity:favorite-solid"
+                                />
+                              ) : (
+                                <Icon
+                                width="20px"
+                                  color="#FF6F31"
+                                  icon="clarity:favorite-solid"
+                                />
+                              )}
+                            </IconButton>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      );
+                    })}
+                  </>
+                );
+              })}
+            </TableBody>
           </Table>
         </TableContainer>
 
 
 
-        {rows?.length > 0 && (
+        {/* {rows?.length > 0 && (
             <Grid
               item
               xs={12}
@@ -585,7 +659,7 @@ export default function LotteryPage() {
               </Stack>
             </Grid>
           )}
-     
+      */}
       </Grid>
 
 
@@ -596,25 +670,43 @@ export default function LotteryPage() {
 }
 
 export function lottoTable(lottos) {
+  //console.log("lottoslottos",lottos && lottos.result_data)
   return (
     <>
       <Grid
         container
         width="max-content"
-        border="1px solid grey"
+       // border="1px solid grey"
         // borderRadius="10px"
-        background="red"
+        background={lottos}
       >
-        {lottos.numbers.map((lotto, index) => {
+        {lottos && lottos.result_data.length>0 && lottos.result_data.map((lotto, index) => {
           return (
+            // <Grid
+            //   key={index}
+            //   px={1}
+            //   color={'white'}
+            //   backgroundColor={lotto.color}
+            //   borderRadius="10px"
+            //   // className={`${
+            //   //   lotto === lottos.winner ? "lotteryPageHit" : "lotteryPageMiss"
+            //   // }`}
+            // >
+            //   {lotto.num}
+            // </Grid>
             <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
               key={index}
-              px={1}
-              className={`${
-                lotto === lottos.winner ? "lotteryPageHit" : "lotteryPageMiss"
-              }`}
+              mx={0.2}
+              sx={{background:lotto.color,width:'25px',height:'25px',borderRadius:'20px'}}
             >
-              {lotto}
+              <Grid
+              container
+              justifyContent="center"
+              alignItems="center" >
+             <Typography color={'white'} fontSize='12px'>{lotto.num}</Typography> </Grid>
             </Grid>
           );
         })}
