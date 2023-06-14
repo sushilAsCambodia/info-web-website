@@ -161,7 +161,8 @@ const Layout = (props) => {
                     if(r.pathname === '/login' || r.pathname === '/register' || r.pathname === '/forgotPassword') {
                        r.push('/home')
                     }else {
-                        r.back();
+                        // r.back();
+                        r.push('/home')
                     }
                 }
                 return <Navigate
