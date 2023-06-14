@@ -22,6 +22,26 @@ const FavouriteReducer =  (state = initialState, action) => {
         status:'completed',
         loading: false
       };
+      case 'list/favourite/pending':
+      return {
+        ...initialState, 
+        loading:true,
+        favouriteList:[]
+      };
+    case 'list/favourite/rejected':
+      return {
+        ...state,
+        status:'failed',
+        loading: false,
+        favouriteList:[]
+      };
+    case 'list/favourite/fulfilled':
+      return {
+        ...state,
+        status:'completed',
+        loading: false,
+        favouriteList:action?.payload?.data
+      };
   }
   return state;
 }

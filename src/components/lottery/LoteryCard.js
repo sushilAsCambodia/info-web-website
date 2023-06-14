@@ -17,6 +17,7 @@ import { Icon } from "@iconify/react";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingBackDrop from "../LoadingBackDrop";
 
 
 const toastOption = {
@@ -31,11 +32,13 @@ const toastOption = {
   }
 
 
-const LotteryCard = ({ lottery }) => {
+const LotteryCard = (props) => {
   const router = useRouter();
+  const {lottery,allFavourite}=props
   const { customer = {} } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [isFavourite, setIsFavourite] = useState(lottery.is_favorite);
+  const [loading, setLoading] = useState(false);
 
   const checkActive = (active_features, value) => {
     if (active_features && active_features !== "") {
@@ -55,6 +58,7 @@ const LotteryCard = ({ lottery }) => {
     });
   };
   const handleAddRemove = () => {
+    setLoading(true)
     customer?.member_ID
       ? dispatch(
           addRemoveFavourite({
@@ -65,7 +69,8 @@ const LotteryCard = ({ lottery }) => {
             callback: (res) => {
                 setIsFavourite(!isFavourite)
                 toast.success((res?.message), toastOption);
-
+                setLoading(false)
+                allFavourite()
               //   const { message = "" } = res;
               //   if (res.status_code === 201) {
               //     setOpenDialog(true);
@@ -90,7 +95,7 @@ const LotteryCard = ({ lottery }) => {
   
   return (<>     
    <ToastContainer />
-  
+  <LoadingBackDrop loading={loading} />
     <Card>
       <CardHeader
         style={{ padding: "0 5px 0 5px", borderBottom: "1px solid #ddd" }}

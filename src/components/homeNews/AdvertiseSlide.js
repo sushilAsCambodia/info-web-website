@@ -44,7 +44,7 @@ const AdvertiseSlide = (props) => {
                   key={index} 
                   onClick={()=> setTabValue(0)} 
                   sx={{ padding: '5px', minWidth:"80px"}} 
-                  label={<Link href={card.ads_link} target='_blank'><Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
+                  label={<Link href={card?.ads_link ? card.ads_link:''} target='_blank'><Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
                   <Grid 
                     sx={{backgroundImage:`url(${card.icon})`, backgroundSize:'cover'}} 
                     alt="机率" width="70px" height="70px" className="card-custom"

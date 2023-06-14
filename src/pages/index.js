@@ -86,7 +86,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
           </Grid>
 
 
-          <Grid
+          {/* <Grid
             item
             textAlign="center"
             sx={{
@@ -99,9 +99,9 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
             <Typography color="black" fontWeight={700} fontSize="18px" lineHeight="27px"  textTransform="uppercase">
               {langKey && langKey.download_app}
             </Typography>
-          </Grid>
+          </Grid> */}
 
-          <Grid 
+          {/* <Grid 
             item
             sx={{
               position: "absolute",
@@ -122,7 +122,7 @@ const langKey = useSelector((state) => state && state.load_language && state.loa
                 </Typography>
               </Grid>
             </Grid>
-          </Grid>
+          </Grid> */}
 
           <Grid
             item

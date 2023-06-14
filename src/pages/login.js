@@ -148,11 +148,11 @@ export default function Login(props) {
           if ([200, 201, 202, 203].includes(status_code)) {
             // // setTimeout(() => {
             //   //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
-            //   matches
-            //     ? (window.location.href = window.location.origin + "/home")
-            //     : Router.push("/");
+              matches
+                ? (window.location.href = window.location.origin + "/home")
+                : Router.push("/");
             // // }, 4000);
-            Router.back()
+            // Router.back()
           }else {
             setResponseMessage(t(message.toLowerCase()));
             setOpen(true);

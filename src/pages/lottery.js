@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -21,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import utils from "@/common/utils";
 import DataLoading from "@/components/DataLoading";
+import { getFavouriteList } from "@/store/actions/favouriteActions";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -58,11 +60,15 @@ export default function Lottery() {
     lotteryResults = [],
   } = useSelector((state) => state.lottery);
   const langKey = useSelector((state) => state?.load_language?.language);
+  const { customer = {} } = useSelector((state) => state?.auth);
+  const { favouriteList = {} } = useSelector((state) => state?.favourite);
+
   const router = useRouter();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const dispatch = useDispatch();
+  const [lotteryCategoryList, setLotteryCategoryList] = useState([]);
   const onChangeTab = (hash) => {
     router.replace(`${router.route}#${hash}`);
   };
@@ -82,45 +88,51 @@ export default function Lottery() {
           params: {
             lang_id: utils.convertLangCodeToID(i18n.language),
             category_id: categoryId,
+            member_id: customer.member_ID,
           },
         })
       );
     },
     [dispatch, i18n.language]
   );
+  const allFavouriteList = () => {
+    dispatch(
+      getFavouriteList({
+        params: {
+          lang_id: utils.convertLangCodeToID(i18n.language),
+          category_id: 1,
+          member_id: customer.member_ID,
+          pick: "favorite",
+        },
+        callback: (res) => {},
+      })
+    );
+  };
+
   React.useEffect(() => {
     handleGetCategory();
   }, [handleGetCategory]);
+
   React.useEffect(() => {
-    console.log("alotteryCategories:::", lotteryCategories);
+    lotteryCategories.length >0 ? setLotteryCategoryList(lotteryCategories.filter(i => i.lottery_bind !== null)):''
+
   }, [lotteryCategories]);
 
   React.useEffect(() => {
     if (value > 1) {
       let hash = "";
-      const lotteryCategory = lotteryCategories[value - 2] || {};
+      const lotteryCategory = lotteryCategoryList[value - 2] || {};
       if (Object.keys(lotteryCategory).length) {
         hash = "#" + lotteryCategory?.translation?.translation;
       }
       // router.replace(`${router.route}${hash}`)
       handleGetLotteryResult(lotteryCategory?.id);
-    }
-    else if(value == 1 ){
+    } else if (value == 1) {
       handleGetLotteryResult();
-console.log(":::value",value)
+      console.log(":::value", value);
+    } else if (value == 0) {
+      allFavouriteList();
     }
-    else if(value == 0 ){
-      console.log(":::value",value)
-
-      let hash = "";
-      const lotteryCategory = lotteryCategories[value - 2] || {};
-      if (Object.keys(lotteryCategory).length) {
-        hash = "#" + lotteryCategory?.translation?.translation;
-      }
-      // router.replace(`${router.route}${hash}`)
-      handleGetLotteryResult(2);
-    }
-
   }, [value]);
   return (
     <NoSsr>
@@ -166,8 +178,8 @@ console.log(":::value",value)
               label={langKey?.all}
               {...a11yProps(1)}
             />
-            
-            {lotteryCategories.map((lc, index) => {
+
+            {lotteryCategoryList.map((lc, index) => {
               return (
                 <Tab
                   key={index}
@@ -215,13 +227,14 @@ console.log(":::value",value)
             >
               {loading ? (
                 <DataLoading />
-              ) : lotteryResults.length > 0 ? (
-                lotteryResults.map((lr, key) => {
+              ) : favouriteList.length > 0 ? (
+                favouriteList.map((lr, key) => {
                   return (
                     <div key={key}>
-                      <LotteryCard lottery={lr} />
+                      <LotteryCard lottery={lr} 
+                      allFavourite={allFavouriteList} 
+                      />
                       <Box height={12}></Box>
-                      
                     </div>
                   );
                 })
@@ -274,7 +287,6 @@ console.log(":::value",value)
                     <div key={key}>
                       <LotteryCard lottery={lr} />
                       <Box height={12}></Box>
-                      
                     </div>
                   );
                 })
@@ -291,7 +303,7 @@ console.log(":::value",value)
             </Grid>
           </Grid>
         </TabPanel>
-        {lotteryCategories.map((lc, index) => {
+        {lotteryCategoryList.map((lc, index) => {
           return (
             <TabPanel key={index} value={value} index={index + 2}>
               <Grid
@@ -329,7 +341,6 @@ console.log(":::value",value)
                         <div key={key}>
                           <LotteryCard lottery={lr} />
                           <Box height={12}></Box>
-                          
                         </div>
                       );
                     })
