@@ -421,7 +421,7 @@ export default function LotteryPage() {
         </Grid>
       </Grid>
 
-      <Grid container>
+      <Grid container item xs={12}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -449,114 +449,122 @@ export default function LotteryPage() {
                 </StyledHeaderCell>
               </TableRow>
             </TableHead>
+           
             <TableBody>
-              {rows.map((row, index) => {
-                return (
-                  <>
-                  <StyledTableRow key={index}>
-                      <StyledTableCell component="th" scope="row" colSpan={7}>
-                        <Grid display="flex" alignItems="center" >
-                          {" "}
-                          <Image
-                            alt={row.lottoTitle}
-                            width={30}
-                            style={{
-                              marginRight: "10px",
-                              width: "30px",
-                              height: "30px",
-                              borderRadius: "20px",
+            {rows.length < 0 ? rows.map((row, index) => {
+              return (
+                <>
+                <StyledTableRow key={index}>
+                    <StyledTableCell component="th" scope="row" colSpan={7}>
+                      <Grid display="flex" alignItems="center" >
+                        {" "}
+                        <Image
+                          alt={row.lottoTitle}
+                          width={30}
+                          style={{
+                            marginRight: "10px",
+                            width: "30px",
+                            height: "30px",
+                            borderRadius: "20px",
+                          }}
+                          src={row.logo}
+                          
+                        />
+                        <Typography paddingLeft={1}>{row.lottoTitle} </Typography>
+                      </Grid>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                  {row.items.map((item, index) => {
+                    return (
+                      <StyledTableRow key={item.name}>
+                        <StyledTableCell component="th" scope="row">
+                          <Grid
+                            sx={{ display: "flex", alignItems: "center" }}
+                          >
+                            <Image
+                              alt={item.name}
+                              width="30px"
+                              src={item.img}
+                              style={{}}
+                            />{" "}
+                            <Typography paddingLeft={1}>{item.name}</Typography>
+                          </Grid>
+                        </StyledTableCell>
+                        <StyledTableCell align="left">
+                          {item.calories}
+                        </StyledTableCell>
+                        <StyledTableCell align="left">
+                          {item.fat}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          <Grid
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
                             }}
-                            src={row.logo}
-                            
-                          />
-                           <Typography paddingLeft={1}>{row.lottoTitle}</Typography>
-                        </Grid>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                    {row.items.map((item, index) => {
-                      return (
-                        <StyledTableRow key={item.name}>
-                          <StyledTableCell component="th" scope="row">
-                            <Grid
-                              sx={{ display: "flex", alignItems: "center" }}
-                            >
-                              <Image
-                                alt={item.name}
-                                width="30px"
-                                src={item.img}
-                                style={{}}
-                              />{" "}
-                              <Typography paddingLeft={1}>{item.name}</Typography>
-                            </Grid>
-                          </StyledTableCell>
-                          <StyledTableCell align="left">
-                            {item.calories}
-                          </StyledTableCell>
-                          <StyledTableCell align="left">
-                            {item.fat}
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
-                            <Grid
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              {lottoTable(item.results)}
-                            </Grid>
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
-                            <IconButton
-                              sx={{
-                                background: "#F3F3F3",
-                                border: "1px solid #DDDDDD",
-                              }}
-                              onClick={() => router.push('/lotteryPastResults')}
-                            >
-                              <Icon width="20px" icon="solar:clipboard-list-broken" />
-                            </IconButton>
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
-                            <IconButton
-                              sx={{
-                                background: "#F3F3F3",
-                                border: "1px solid #DDDDDD",
-                              }}
-                              onClick={() => handleChartOpen(row.id)}
-                            >
-                              <Icon width="25px" icon="material-symbols:add-chart-rounded" />
-                            </IconButton>
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
-                            <IconButton
-                              sx={{
-                                background: "#F3F3F3",
-                                border: "1px solid #DDDDDD",
-                              }}
-                            >
-                              {item.calories % 2 == 0 ? (
-                                <Icon
-                                width="20px"
-                                  color="#C9C9C9"
-                                  icon="clarity:favorite-solid"
-                                />
-                              ) : (
-                                <Icon
-                                width="20px"
-                                  color="#FF6F31"
-                                  icon="clarity:favorite-solid"
-                                />
-                              )}
-                            </IconButton>
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      );
-                    })}
-                  </>
-                );
-              })}
-            </TableBody>
+                          >
+                            {lottoTable(item.results)}
+                          </Grid>
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          <IconButton
+                            sx={{
+                              background: "#F3F3F3",
+                              border: "1px solid #DDDDDD",
+                            }}
+                            onClick={() => router.push('/lotteryPastResults')}
+                          >
+                            <Icon width="20px" icon="solar:clipboard-list-broken" />
+                          </IconButton>
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          <IconButton
+                            sx={{
+                              background: "#F3F3F3",
+                              border: "1px solid #DDDDDD",
+                            }}
+                            onClick={() => handleChartOpen(row.id)}
+                          >
+                            <Icon width="25px" icon="material-symbols:add-chart-rounded" />
+                          </IconButton>
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          <IconButton
+                            sx={{
+                              background: "#F3F3F3",
+                              border: "1px solid #DDDDDD",
+                            }}
+                          >
+                            {item.calories % 2 == 0 ? (
+                              <Icon
+                              width="20px"
+                                color="#C9C9C9"
+                                icon="clarity:favorite-solid"
+                              />
+                            ) : (
+                              <Icon
+                              width="20px"
+                                color="#FF6F31"
+                                icon="clarity:favorite-solid"
+                              />
+                            )}
+                          </IconButton>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  })}
+                </>
+              );
+            })
+            : <Grid textAlign={'center'} item xs={12} paddingTop={2}>
+            <img src='./assets/Home/not-found.gif' alt='not-found'/> 
+          </Grid>
+            
+            }
+          </TableBody>
+          
+           
           </Table>
         </TableContainer>
 
