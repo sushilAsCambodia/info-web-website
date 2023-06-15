@@ -539,7 +539,7 @@ export default function LotteryPage() {
               setSelect(0);
             }}
           >
-             {langKey && langKey.all}
+             {langKey && langKey.all} 
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 10px 10px 0px" }}
@@ -804,7 +804,8 @@ export function lottoTable(lottos) {
         // borderRadius="10px"
         background={lottos}
       >
-        {lottos && lottos.result_data.length>0 && lottos.result_data.map((lotto, index) => {
+        {lottos && lottos.result_data && lottos.result_data.length >0 && lottos.result_data.map((lotto, index) => {
+   
           return (
             // <Grid
             //   key={index}
