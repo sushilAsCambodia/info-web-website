@@ -131,7 +131,7 @@ export default function Login(props) {
       setRememberMe(true);
     }
     if (session) {
-      // console.log(session,'xxx')
+   
       // setLoading(true);
       // handleSignup(session);
       // setLoading(true);
@@ -152,8 +152,6 @@ export default function Login(props) {
             // // setTimeout(() => {
             //   //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
 
-            console.log('matches:',matches);
-            console.log('localStorage.getItem("prepage"):',localStorage.getItem("prepage"));
               // (matches && window.localStorage.getItem("prepage"))
               //   ? (window.location.href = window.location.origin + localStorage.getItem("prepage"))
               //   : Router.push("/home");

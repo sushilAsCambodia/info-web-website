@@ -324,7 +324,7 @@ export default function LotteryPage() {
                   callback: (res) => {
                     // handleClose();
                    
-                    console.log("added new:::",res)
+                    console.log('')
                   },
                 }))
                 setLoading(false);

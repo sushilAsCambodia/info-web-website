@@ -32,7 +32,6 @@ const http = {
             'content-type':'application/json; charset=utf-8'
         }; 
         let fakeUrl = undefined;
-        // console.log("http get:::",params,Object.keys(params).length)
 
         if(Object.keys(params).length > 0 && params?.fake === true) {
             fakeUrl  = process.env.fronEndShareUrl

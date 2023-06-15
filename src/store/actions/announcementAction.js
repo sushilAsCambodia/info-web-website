@@ -16,8 +16,6 @@ export const getAnnouncement = createAsyncThunk(
         data['current_page'] = response.data && response.data.data.data &&  response.data.data.current_page ? response.data.data.current_page : 0  ;
         data['per_page'] = response.data && response.data.data.data &&  response.data.data.per_page ? response.data.data.per_page : 0  ;
         data['last_page'] = response?.data?.data?.last_page ;
-
-        console.log('data:',data);
         if(typeof callback == 'function') {
           callback(data);
         }

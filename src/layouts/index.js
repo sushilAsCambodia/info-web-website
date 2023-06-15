@@ -41,7 +41,7 @@ const Layout = (props) => {
                     lang_id: utils.convertLangCodeToID(i18n.language)
                 },
                 callback:(res) => {
-    // console.log("resres",res)
+
     localStorage.setItem('languageKey', JSON.stringify(res))
     
                  }

@@ -152,7 +152,7 @@ export default function Lottery() {
       handleGetLotteryResult(lotteryCategory?.id);
     } else if (value == 1) {
       handleGetLotteryResult();
-      console.log(":::value", value);
+     
     } else if (value == 0) {
       customer?.member_ID ? allFavouriteList() : "";
     }

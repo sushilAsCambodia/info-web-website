@@ -42,7 +42,7 @@ export default function ProfileAnnouncement() {
   //   return item.status === "0";
   // });
 
-  console.log("announcements:::",announcements)
+
   useEffect(() => {
     dispatch(
       getAnnouncement({

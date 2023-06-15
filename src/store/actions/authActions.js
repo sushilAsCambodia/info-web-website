@@ -166,7 +166,6 @@ export const uploadProfile = createAsyncThunk(
       } 
       return data;
     } catch (error) {
-      console.log(error,'xxxxx')
       const {status, data} = error.response;
       data['status_code']  = status;
       if(typeof callback == 'function') {

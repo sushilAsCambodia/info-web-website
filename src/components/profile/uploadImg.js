@@ -110,7 +110,7 @@ const UploadImg = () => {
           }
         )
       ).then(e => {
-        console.log(e)
+       
         if(!e.payload) {
           setFile(null);
           setOpenDialog(true);
@@ -536,7 +536,7 @@ const UploadImg = () => {
                 nick_name: nickName
               },
               callback: (res) => {
-                console.log(res)
+           
                 const {status_code} = res;
                 let { message = '' } = res;
                 if (message === 'user_name_unique') {

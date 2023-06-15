@@ -52,7 +52,7 @@ export default function DateFilterBar() {
         <Select
           value={age}
           onChange={(e) => {
-            console.log("select:::", e.target.value);
+            console.log('');
           }}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
