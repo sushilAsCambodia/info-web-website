@@ -138,7 +138,7 @@ export default function LotteryPastReults() {
       <Grid container height='100vh'>
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
-            <Grid container justifyContent="center" borderRadius="10px">
+            {/* <Grid container justifyContent="center" borderRadius="10px">
               <MenuItem
                 sx={{
                   borderRadius: "10px 0px 0px 10px",
@@ -168,7 +168,7 @@ export default function LotteryPastReults() {
               >
             {langKey && langKey.view_by_time}
               </MenuItem>
-            </Grid>
+            </Grid> */}
 
             <Grid container>
               <Grid className="container" item xs={10}>

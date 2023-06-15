@@ -130,12 +130,6 @@ export default function Login(props) {
       setPassword(Cookies.get("user_pwd"));
       setRememberMe(true);
     }
-    if (session) {
-   
-      // setLoading(true);
-      // handleSignup(session);
-      // setLoading(true);
-    }
   }, [session]);
   const handleLogin = () => {
     dispatch(
@@ -149,21 +143,9 @@ export default function Login(props) {
           setLoading(false);
           const { status, status_code, message = "" } = res;
           if ([200, 201, 202, 203].includes(status_code)) {
-            // // setTimeout(() => {
-            //   //  window.location.href = '/home' : is use for server side  to effect set cookie in middleware
-
-              // (matches && window.localStorage.getItem("prepage"))
-              //   ? (window.location.href = window.location.origin + localStorage.getItem("prepage"))
-              //   : Router.push("/home");
-
                 (localStorage.getItem("prepage"))
                 ? Router.push(localStorage.getItem("prepage"))
                 : !matches ?Router.push("/"): Router.push("/home");
-
-
-            // // }, 4000);
-            // Router.back()
-
           }else {
             setResponseMessage(t(message.toLowerCase()));
             setOpen(true);
