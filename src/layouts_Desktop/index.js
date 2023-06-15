@@ -90,7 +90,7 @@ const Layout = (props) => {
     case '/basketball':
       title = (langKey && (langKey.basketball_info_web || t('basketball_info_web')))
       break;
-    case '/datachart':
+    case '/datachartpage':
       title = (langKey && (langKey.datachart_info_web || t('data_chart_info_web')))
       break;
     case '/lotterypastresults':
