@@ -68,7 +68,7 @@ export default function ConfirmationModal(props) {
               justifyContent="center"
               alignContent="center"
             >
-              <Typography variant="h4">{message}</Typography>
+              <Typography variant="h5">{message}</Typography>
             </Grid>
             <Grid item xs={12} container alignContent="center" justifyContent="space-evenly">
               <Button variant="outlined" onClick={() => setOpen(false)}>No</Button>

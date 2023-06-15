@@ -209,7 +209,7 @@ function TabPanel(props) {
           </Grid>
         ) : ( 
           <Grid container sx={{padding:2}}>
-                        <ConfirmationModal action={()=>handleLogout()} open={open} setOpen={setOpen} message={'Are you sure ?'}/>
+                        <ConfirmationModal action={()=>handleLogout()} open={open} setOpen={setOpen} message={langKey && langKey.you_want_logout}/>
 
             <Grid
               item
