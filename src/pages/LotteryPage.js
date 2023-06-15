@@ -321,6 +321,7 @@ export default function LotteryPage() {
       // router.replace(`${router.route}${hash}`)
         handleGetLotteryResult(lotteryCategory?.id);
     }
+    localStorage.setItem("prepage", "LotteryPage");
   },[value]);
 
 
