@@ -100,7 +100,7 @@ import { useSelector } from "react-redux";
           monthyear: moment(d).format(utils.MonthYearFormat),
         });
       }
-      console.log("::: 7 days ", result);
+      
       return result;
     }
     const rows = [

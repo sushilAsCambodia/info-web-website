@@ -56,8 +56,6 @@ export default function Advertisement(props) {
     if(isH5) type = 'h5';
     setNewAdverts(advertises.filter(b => b.position == 'central_carousel'));
   },[advertises,isH5])
-  // console.log("advertises:::",advertises)
-  // console.log("newadverts:::",newAdverts)
   return (
     <>
     { 

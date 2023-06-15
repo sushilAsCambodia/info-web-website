@@ -52,10 +52,7 @@ const Announcement = () => {
 
   const  {announcements,current_page,per_page,last_page}  = useSelector((state) => state?.announcement);
 
-  console.log('announcements:',announcements);
-  console.log('current_page:',current_page);
-  console.log('per_page:',per_page);  
-  console.log('total:',last_page);
+
 
   //const announcements = announcement;
 
@@ -115,7 +112,7 @@ setOpen(true)
         event.currentTarget.clientHeight
     ) {
       setCurrentPage(currentPage + 1);
-      console.log("scroll bottom:::")
+      
     }
   };
   return !matches ? (

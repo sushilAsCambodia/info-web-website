@@ -24,10 +24,10 @@ const lotteryHistory = () => {
   const [pageLimit, setPageLimit] = useState(2);
   const [toBottom, setToBottom] = useState(false);
 
-  // console.log("handleGetLotteryHistory:::",lotteryHistory.data);
+
 
   const handleGetLotteryHistory = (page = 1) => {
-    console.log("currentPage:::", page);
+    
    
         dispatch(
           getLotteryHistory({
@@ -44,8 +44,7 @@ const lotteryHistory = () => {
                   handleClose())
                 : setLotteryHistories((data) => data.concat(res.data.data));
               handleClose();
-              // console.log("old:::",lotteryHistories)
-              // console.log("added new:::",res.data.data)
+              
             },
           })
         )

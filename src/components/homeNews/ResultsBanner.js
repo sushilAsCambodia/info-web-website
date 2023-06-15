@@ -105,10 +105,9 @@ export default function ResultsBanner(props) {
     handleGetCategory();
   },[handleGetCategory]);
   React.useEffect(() => {
-    console.log(lotteryCategories,'alotteryCategories:::')
   },[lotteryCategories])
   React.useEffect(() => {
-    console.log('value',value)
+  
     if(value >= 0) {
       let hash = '';
       const lotteryCategory = lotteryCategories[value - 1] || {};

@@ -79,7 +79,7 @@ export default function FootBallPage() {
     const {
       target: { value },
     } = event;
-    console.log("target:::", event.target.value);
+
     setSelectedName(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value

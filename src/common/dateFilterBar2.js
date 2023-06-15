@@ -21,7 +21,7 @@ export default function DateFilterBar2() {
   const [date, setDate] = useState("");
 
   const handleChange = (event) => {
-    console.log(":::setdate",event.target.value)
+
     setDate(event.target.value);
   };
   return (

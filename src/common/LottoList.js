@@ -61,6 +61,7 @@ export function lottoBalls(lottos) {
         width="max-content"
         borderRadius="10px"
         p={1}
+        sx={{ overflowX: "auto", cursor: "pointer" }}
       >
         {lottos?.map((item, index) => {
           return (
