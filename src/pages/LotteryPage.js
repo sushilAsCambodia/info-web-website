@@ -340,7 +340,8 @@ export default function LotteryPage() {
                     rowsPerPage: 10,
                     page: 1,          
                     lang_id: utils.convertLangCodeToID(i18n.language),
-                    member_id: customer.member_ID
+                    member_id: customer.member_ID,
+                    pick:select==1?'favorite':''
                   },
                   callback: (res) => {
                     // handleClose();
@@ -354,14 +355,43 @@ export default function LotteryPage() {
         )
       : router.push("/login");
   };
+  const handleLotteryData=(tabId)=>{
+    console.log("selectselecttabIdtabId",tabId)
+    setLoading(true);  
+    dispatch(
+      getLotteryResultByCategoryId({
+        params: {
+          rowsPerPage: 10,
+          page: 1,          
+          lang_id: utils.convertLangCodeToID(i18n.language),
+          member_id: customer.member_ID,
+          pick:tabId==1?'favorite':''
 
-  
+        },
+        callback: (res) => {
+          setLoading(false);
+          // page == 1
+          //   ? (setLotteryHistories(res.data.data),
+          //     setPageLimit(res.data.last_page),
+          //     handleClose())
+          //   : setLotteryHistories((data) => data.concat(res.data.data));
+          handleClose();
+       
+        },
+      })
+    )
+
+
+  }
+
+
   return ( 
     <>
       {/* <Typography variant="h5" fontWeight="bold">
               {langKey && langKey.lottery}
       </Typography> */}
         <TitleBreadCrumbs title= {langKey && langKey.lottery} />
+          <ToastContainer />
       {/* past result modal  */}
       <Modal
         open={pastResult}
@@ -537,6 +567,7 @@ export default function LotteryPage() {
             className={`${select === 0 ? "filterTabSelected" : ""}`}
             onClick={() => {
               setSelect(0);
+              handleLotteryData(0);
             }}
           >
              {langKey && langKey.all} 
@@ -546,6 +577,7 @@ export default function LotteryPage() {
             className={`${select === 1 ? "filterTabSelected" : ""}`}
             onClick={() => {
               setSelect(1);
+              handleLotteryData(1);
             }}
           >
              {langKey && langKey.favorites}
@@ -616,7 +648,8 @@ export default function LotteryPage() {
               lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.length > 0 ? 
              ( lotteryResultByID.data.map((rowData, index) => {
     
-                if(rowData && rowData.lottery_bind!=null)
+                if(rowData && rowData.lottery_bind!=null && rowData && rowData.lottery.length>0)
+
                 return (
                   <>
                   <TableRow key={index}>
