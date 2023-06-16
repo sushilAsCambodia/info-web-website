@@ -299,7 +299,7 @@ export default function Lottery() {
                     color="#ff733e"
                     icon="material-symbols:login"
                   />
-                  <Typography> please login to see favorite list</Typography>
+                  <Typography> {langKey?.login_for_favorite}</Typography>
                 </Grid>
               )}
             </Grid>

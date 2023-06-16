@@ -27,8 +27,7 @@ const lotteryHistory = () => {
 
 
   const handleGetLotteryHistory = (page = 1) => {
-    
-   
+   console.log('handleGetLotteryHistory id:::',id)
         dispatch(
           getLotteryHistory({
             params: {
@@ -51,16 +50,16 @@ const lotteryHistory = () => {
      
   };
 
-  useEffect(() => {
-    handleGetLotteryHistory(1);
-  }, []);
+  // useEffect(() => {
+  //   handleGetLotteryHistory(1);
+  // }, []);
 
   useEffect(() => {
-    if(currentPage < pageLimit){
+    if(currentPage < pageLimit && id !== undefined){
       handleOpen()
       handleGetLotteryHistory(currentPage);
     }
-  }, [currentPage]);
+  }, [currentPage,router.query]);
 
   const handleScroll = (event) => {
     if (

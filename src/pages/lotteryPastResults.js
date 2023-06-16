@@ -22,7 +22,9 @@ import {
   Divider,
   Collapse,
   Button,
+  Pagination,
 } from "@mui/material";
+import moment from "moment/moment";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
@@ -38,7 +40,7 @@ import { lottoTable } from "./LotteryPage";
 import { Image } from "mui-image";
 export default function LotteryPastReults() {
   const router = useRouter();
-  const { id } = router.query;
+  const { id,icon,title } = router.query;
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
@@ -47,10 +49,10 @@ export default function LotteryPastReults() {
   const [pageLimit, setPageLimit] = useState(2);
   const [expanded, setExpanded] = useState(false);
 
-  const [lotteryHistories, setLotteryHistories] = useState([]);
-  const { lotteryHistory = {}, loading_history } = useSelector(
+  const { lotteryHistories = {}, loading_history } = useSelector(
     (state) => state.lottery
   );
+  console.log("query:::",id,icon,title)
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -62,34 +64,40 @@ export default function LotteryPastReults() {
   );
    const {lotteryCategories = [], lotteryResults = [],lotteryResultByID=[]} = useSelector(state => state.lottery)
 
-  const handleGetLotteryHistory = (page = 1) => {  
+   const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleGetLotteryHistory = () => {  
    
         dispatch(
           getLotteryHistory({
             params: {
               rowsPerPage: 10,
-              page: page,
+              page: currentPage,
               lottery_id: id,
               lang_id: utils.convertLangCodeToID(i18n.language),
             },
             callback: (res) => {
-              page == 1
-                ? (setLotteryHistories(res.data.data),
-                  setPageLimit(res.data.last_page),
-                  handleClose())
-                : setLotteryHistories((data) => data.concat(res.data.data));
-              handleClose();
-              // console.log("old:::",lotteryHistories)
-              // console.log("added new:::",res.data.data)
             },
           })
         )
-     
   };
 
+  const handlePageChange = (event, value) => {
+    console.log("page:::", value);
+    setCurrentPage(value);
+  };
+ 
   useEffect(() => {
-    handleGetLotteryHistory(1);
-  }, []);
+if(id!== undefined)
+      handleGetLotteryHistory();
+    
+  }, [currentPage,router.isReady]);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -128,11 +136,7 @@ export default function LotteryPastReults() {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
-  function createData(img, name, calories, fat, results, id) {
-    return { img, name, calories, fat, results, id };
-  }
 
-  
 
   return (
     <>
@@ -315,7 +319,7 @@ export default function LotteryPastReults() {
                 width="30px"
                 height="30px"
                 style={{ borderRadius: "30px" }}
-                src="https://t.pimg.jp/040/863/617/1/40863617.jpg"
+                src={icon}
               />
               <Typography ml={1}>{router?.query?.title}</Typography>{" "}
             </Grid>
@@ -369,15 +373,14 @@ export default function LotteryPastReults() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {lotteryHistories && lotteryHistories.length>0 && lotteryHistories.map((item, index) => {
+                  {lotteryHistories?.data?.length>0 && lotteryHistories?.data?.map((item, index) => {
                     return (
-                      
                         <StyledTableRow key={item.name}>
                           <StyledTableCell align="left">
                             {item.issue}
                           </StyledTableCell>
                           <StyledTableCell align="left">
-                            {item.created_at}
+                          {moment(item.opendate).format(utils.lotteryFormat)}
                           </StyledTableCell>
                           <StyledTableCell align="center">
                             <Grid
@@ -391,12 +394,12 @@ export default function LotteryPastReults() {
                             </Grid>
                           </StyledTableCell>
                         </StyledTableRow>
-                      
                     );
                   })}
                 </TableBody>
               </Table>
             </TableContainer>
+            <Pagination count={10} page={currentPage} onChange={handlePageChange} />
           </Grid>
         </Grid>
       </Grid>
