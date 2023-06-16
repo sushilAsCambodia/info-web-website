@@ -1174,3 +1174,57 @@ color: #fff;
     background: #F24E1E;
 color: #fff;
   }
+
+
+  /* .lottotablist .css-i36jm5-MuiButtonBase-root-MuiTab-root{
+    max-width: 36px !important;
+    min-width: 36px !important;
+    padding: 1px !important;
+    min-height: 20px !important;
+  } */
+  /* .lottotablist .css-1ujnqem-MuiTabs-root{
+    min-height: 20px !important;
+  } */
+  .lottotablist .css-145v6pe-MuiButtonBase-root-MuiTabScrollButton-root{
+    width: 20px !important;
+    height: 30px !important;
+  }
+  
+  /* .lottotablist .css-6vn051-MuiButtonBase-root-MuiTab-root{
+    max-width: 25px !important;
+    min-width: 25px !important;
+    height: 25px !important;
+    padding: 1px !important;
+    min-height: 20px !important;
+    border-radius: 20px !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    margin:1px !important;
+  } */
+  /* .lottotablist .css-svu4pb-MuiButtonBase-root-MuiTab-root{
+    max-width: 25px !important;
+    min-width: 25px !important;
+    height: 25px !important;
+    padding: 1px !important;
+    min-height: 20px !important;
+    border-radius: 20px !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    margin:1px !important;
+  } */
+  
+  .lottotablist .MuiTab-root{
+    max-width: 25px !important;
+    min-width: 25px !important;
+    height: 25px !important;
+    padding: 1px !important;
+    min-height: 20px !important;
+    border-radius: 20px !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    margin:1px !important;
+  }
+
+  .cardhead .css-1ssile9-MuiCardHeader-avatar{
+    margin-right:10px !important
+  }
