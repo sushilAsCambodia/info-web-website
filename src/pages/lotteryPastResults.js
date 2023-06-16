@@ -49,9 +49,9 @@ export default function LotteryPastReults() {
   const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("");
+  const [titleIcon, setTitleIcon] = useState({ title: "", icon: "" });
   const [currentPage, setCurrentPage] = useState(1);
   const [expanded, setExpanded] = useState("");
-const [gameIcon,setGameIcon]=useState('')
   const { lotteryHistories = {}, loading_history } = useSelector(
     (state) => state.lottery
   );
@@ -92,12 +92,13 @@ const [gameIcon,setGameIcon]=useState('')
 
   useEffect(() => {
     if (id !== undefined) {
-      handleGetLotteryHistory(), setFilter(filter == '' ?id:filter),setGameIcon(icon);
+      handleGetLotteryHistory(),
+        setFilter(filter == "" ? id : filter)
     }
   }, [currentPage, router.isReady, filter]);
 
   useEffect(() => {
-    setCurrentPage(1)
+    setCurrentPage(1);
   }, [filter]);
 
   useEffect(() => {
@@ -158,7 +159,6 @@ const [gameIcon,setGameIcon]=useState('')
       return obj.lottery_bind !== null;
     });
 
-
     return item;
   };
   return (
@@ -167,45 +167,17 @@ const [gameIcon,setGameIcon]=useState('')
       <Grid container height="100vh">
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
-            {/* <Grid container justifyContent="center" borderRadius="10px">
-              <MenuItem
-                sx={{
-                  borderRadius: "10px 0px 0px 10px",
-                  padding: "10px",
-                  border: "1px solid #DDDDDD",
-                  borderRight: "0px",
-                  background: "#F3F3F3",
-                }}
-                className={`${select === 0 ? "filterTabSelected" : ""}`}
-                onClick={() => {
-                  setSelect(0);
-                }}
-              >
-              {langKey && langKey.view_by_category}
-              </MenuItem>
-              <MenuItem
-                sx={{
-                  borderRadius: "0px 10px 10px 0px",
-                  padding: "10px",
-                  border: "1px solid #DDDDDD",
-                  background: "#F3F3F3",
-                }}
-                className={`${select === 1 ? "filterTabSelected" : ""}`}
-                onClick={() => {
-                  setSelect(1);
-                }}
-              >
-            {langKey && langKey.view_by_time}
-              </MenuItem>
-            </Grid> */}
-
             {lotteryResultByIDFilter()?.length > 0 &&
               lotteryResultByIDFilter().map((item, index) => {
                 return (
                   <Grid container key={index}>
                     <Grid className="container" item xs={10}>
                       {/* <!-- completed --> */}
-                      <div className={`step ${"completed"}`}>
+                      <div
+                        className={`step ${"completed"}`}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleExpandClick(item.category_id)}
+                      >
                         <div className="v-stepper">
                           <div
                             // onClick={() => {
@@ -246,11 +218,17 @@ const [gameIcon,setGameIcon]=useState('')
                                     ? "completed"
                                     : ""
                                 }`}
+                                style={{ cursor: "pointer" }}
                               >
                                 <div className="v-stepper">
                                   <div
                                     onClick={() => {
-                                      setFilter(lottery?.lottery_id);
+                                      setFilter(lottery?.lottery_id),
+                                        setTitleIcon({
+                                          title:
+                                            lottery.translation.translation,
+                                          icon: lottery.icon,
+                                        });
                                     }}
                                     className="circle"
                                     style={{
@@ -262,7 +240,11 @@ const [gameIcon,setGameIcon]=useState('')
                                 <div
                                   className="contents"
                                   onClick={() => {
-                                    setFilter(lottery?.lottery_id);
+                                    setFilter(lottery?.lottery_id),
+                                      setTitleIcon({
+                                        title: lottery.translation.translation,
+                                        icon: lottery.icon,
+                                      });
                                   }}
                                 >
                                   {lottery?.translation?.translation}
@@ -281,7 +263,11 @@ const [gameIcon,setGameIcon]=useState('')
                       >
                         <Icon
                           width="15px"
-                          className={`${expanded ? "rotate90" : "rotate0"}`}
+                          className={`${
+                            expanded == item.category_id
+                              ? "rotate90"
+                              : "rotate0"
+                          }`}
                           icon="material-symbols:arrow-forward-ios-rounded"
                         />
                       </IconButton>
@@ -299,9 +285,9 @@ const [gameIcon,setGameIcon]=useState('')
                 width="30px"
                 height="30px"
                 style={{ borderRadius: "30px" }}
-                src={gameIcon}
+                src={titleIcon.icon ? titleIcon.icon: icon}
               />
-              <Typography ml={1}>{title}</Typography>{" "}
+              <Typography ml={1}>{titleIcon.title ? titleIcon.title: title}</Typography>{" "}
             </Grid>
             <Grid
               item
@@ -356,7 +342,8 @@ const [gameIcon,setGameIcon]=useState('')
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {!loading_history && lotteryHistories?.data?.length > 0 &&
+                  {!loading_history &&
+                    lotteryHistories?.data?.length > 0 &&
                     lotteryHistories?.data?.map((item, index) => {
                       return (
                         <StyledTableRow key={item.name}>
@@ -381,23 +368,31 @@ const [gameIcon,setGameIcon]=useState('')
                       );
                     })}
 
-                    {loading_history && <TableRow>
-                  <TableCell component="th" scope="row" colSpan={3}>
-                    <Grid textAlign={"center"} item xs={12} paddingTop={5}>
-                      <DataLoading />
-                    </Grid>
-                  </TableCell>
-                </TableRow>}
+                  {loading_history && (
+                    <TableRow>
+                      <TableCell component="th" scope="row" colSpan={3}>
+                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                          <DataLoading />
+                        </Grid>
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
             {lotteryHistories?.data?.length > 0 && (
-              <Grid my={1} item xs={12} sx={{display:'flex',justifyContent:'center'}}>
-              <Pagination
-                count={lotteryHistories.last_page}
-                page={currentPage}
-                onChange={handlePageChange}
-              /></Grid>
+              <Grid
+                my={1}
+                item
+                xs={12}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <Pagination
+                  count={lotteryHistories.last_page}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                />
+              </Grid>
             )}
           </Grid>
         </Grid>
