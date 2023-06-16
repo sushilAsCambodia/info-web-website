@@ -10,6 +10,44 @@ import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import moment from "moment/moment";
 import Slider from "react-slick";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+
+
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 const settings = {
   dots: false,
@@ -58,13 +96,13 @@ export function lottoBalls(lottos) {
     <>
       <Grid
         container
-        width="max-content"
+      
         borderRadius="10px"
         p={1}
-        sx={{ overflowX: "auto", cursor: "pointer" }}
       >
         {lottos?.map((item, index) => {
           return (
+<>
             <Grid
             container
             justifyContent="center"
@@ -77,11 +115,37 @@ export function lottoBalls(lottos) {
               container
               justifyContent="center"
               alignItems="center" >
-             <Typography color={'white'} fontSize='12px'>{item.num}</Typography> </Grid>
+             <Typography color={'white'} fontSize='12px'>{item.num}</Typography> 
+             </Grid>
             </Grid>
+            </>
           );
         })}
       </Grid>
+
+
+      <Box sx={{ maxWidth: { sm: 220 } }} className="lottotablist">
+      <Tabs
+        variant="scrollable"
+        scrollButtons="auto"
+        aria-label="scrollable auto tabs example"
+      >
+        <Tab label="11" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
+        <Tab label="22" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
+        <Tab label="33" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
+        <Tab label="44" className="tbsbutton"   sx={{backgroundColor:"red"}} component={'p'}  />
+        <Tab label="55" className="tbsbutton"   sx={{backgroundColor:"red"}} component={'p'} />
+        <Tab label="66" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
+        <Tab label="77"className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'}  />
+        <Tab label="44" className="tbsbutton"   sx={{backgroundColor:"red"}} component={'p'}  />
+        <Tab label="55" className="tbsbutton"   sx={{backgroundColor:"red"}} component={'p'} />
+        <Tab label="66" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
+        <Tab label="77"className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'}  />
+      </Tabs>
+    </Box>
+
+
+
     </>
   );
 }
