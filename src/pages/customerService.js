@@ -24,7 +24,7 @@ const CustomerService = () => {
         dispatch(getCustomerService({
             params: {lang_id: utils.convertLangCodeToID(i18n.language)},
             callback:(res) => {
-                console.log(res,'abc')
+                console.log('')
             }
           }))
     },[dispatch,i18n.language])

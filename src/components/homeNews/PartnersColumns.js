@@ -71,8 +71,7 @@ export default function PartnersColumns(props) {
   useEffect(() => {
     setPartners(advertises.filter(b => b.position == 'partners'));
   }, [advertises])
-  // console.log("partenrs:::",advertises)
-  // console.log("partenrs:::",partners)
+
 
   return (
     partners && partners.length > 0 &&

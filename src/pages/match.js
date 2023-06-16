@@ -127,9 +127,7 @@ export default function Match() {
           >
             <Icon
               color="white"
-              onClick={() => {
-                console.log("refreshed:::");
-              }}
+             
               width={25}
               icon="material-symbols:refresh"
             />
@@ -143,9 +141,7 @@ export default function Match() {
 
             <Icon
               color="white"
-              onClick={() => {
-                console.log("filter:::");
-              }}
+             
               width={25}
               icon="material-symbols:filter-alt-outline"
             />

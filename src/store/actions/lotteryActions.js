@@ -17,8 +17,6 @@ export const getLatestLottery = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      console.log("api error :::", error);
-
       const { status, data } = error.response;
       data["status_code"] = status;
       if (typeof callback == "function") {

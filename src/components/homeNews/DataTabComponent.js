@@ -58,8 +58,7 @@ const DataTabComponent = ({id,lang_id}) => {
         }
     };
     const viewport_height= window.innerHeight;
-    // console.log("windowheight:::",viewport_height)
-    // console.log("height overflow:::",(viewport_height/13 ))
+
     // get more news by category
     const loadMore = (p) => {
         if(!isLastPage) {

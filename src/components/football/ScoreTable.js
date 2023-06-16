@@ -120,7 +120,7 @@ export default function ScoreTable() {
         monthyear: moment(d).format(utils.MonthYearFormat),
       });
     }
-    console.log("::: 7 days ", result);
+
     return result;
   }
   return (

@@ -29,7 +29,7 @@ export default function NewsColumns(props) {
   //     getCategory({
   //       params: { lang_id: lang_id },
   //       callback: (res) => {
-  //         console.log("getCategorys:::", res);
+
   //       },
   //     })
   //   );

@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function DrawerModal() {
     const drawerState = useSelector((state) => state);
-console.log("drawerState", drawerState)
+
     const [state, setState] = React.useState({
         bottom: false,
       });

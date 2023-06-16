@@ -55,7 +55,6 @@ export default function NewsSingle() {
   const { query } = router;
   const id = query?.news_id || undefined;
   const handleChange = (event) => {
-    console.log("setNewsCat :::",event.target.value)
     setNewsCat(event.target.value);
   };
   const scrollDown = (type) => {

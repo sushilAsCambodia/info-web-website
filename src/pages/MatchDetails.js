@@ -94,7 +94,7 @@ export default function MatchDetails(props) {
   };
 
   useEffect(() => {
-    console.log("new selectedList:::", selected);
+    console.log('');
   }, [selected]);
 
   const [value, setValue] = React.useState(0);

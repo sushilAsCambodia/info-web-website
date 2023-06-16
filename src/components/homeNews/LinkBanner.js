@@ -53,7 +53,7 @@ export default function LinkBanner(props) {
       {
           params: { fake:true },
           callback:(res) => {
-              console.log(res,'callback')
+              console.log('')
           }
       }
   ));

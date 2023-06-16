@@ -21,7 +21,6 @@ export default function ChipDataFilter(props) {
 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
-console.log(langKey.no_data_found , "xxxxxxxxxxxxxxxx")
 
   return (
     <>

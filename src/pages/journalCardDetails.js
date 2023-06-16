@@ -15,8 +15,6 @@ export default function JournalCardDetails() {
 
 
 
-  console.log('loadingJournalDetail:',loadingJournalDetail);
-  console.log('journal:',journal);
   // const { query } = router;
   // const dispatch = useDispatch();
   // useEffect(() => {
@@ -33,7 +31,7 @@ export default function JournalCardDetails() {
 
 
   useEffect(() => {
-    console.log('loadingJournalDetail2222:');
+    
     if (Array.isArray(journalDetail) && journalDetail.length > 0) {
       const images = []; 
       const item = journalDetail[0];

@@ -24,7 +24,7 @@ const NewsCardDetails = () => {
                     id,
                     params: {},
                     callback:(res) => {
-                        console.log(res,'callback');
+                        console.log('');
                     }
                 })
             )

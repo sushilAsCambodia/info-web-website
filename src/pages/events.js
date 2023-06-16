@@ -76,10 +76,10 @@ export default function Events(props) {
       setEventList(nextstate);
   }
   useEffect(() => {
-    console.log("new eventList:::",eventList)
+  
 },[eventList]);
 useEffect(() => {
-    console.log("new selectedList:::",selected)
+   
 },[selected]);
   return (
     <Grid container>
