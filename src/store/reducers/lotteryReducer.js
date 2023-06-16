@@ -63,14 +63,14 @@ const initialState = {
       case 'lottery/history/pending':
         return {
           ...state,
-          lotteryHistory: {},
+          lotteryHistories: {},
           status:'pending',
           loading_history: true
         };
       case 'lottery/history/fulfilled':
         return {
           ...state,
-          lotteryHistory: action?.payload?.data || {},
+          lotteryHistories: action?.payload?.data || {},
           status:'completed',
           loading_history: false
         };
