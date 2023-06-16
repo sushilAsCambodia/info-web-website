@@ -23,19 +23,34 @@ import {
   Collapse,
   Button,
 } from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
-import { useSelector } from "react-redux";
+import utils from "@/common/utils";
+import { getLotteryHistory } from "@/store/actions/lotteryActions";
+import { useRouter } from "next/router";
+
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "./LotteryPage";
 import { Image } from "mui-image";
 export default function LotteryPastReults() {
+  const router = useRouter();
+  const { id } = router.query;
+  const { i18n } = useTranslation();
+  const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageLimit, setPageLimit] = useState(2);
   const [expanded, setExpanded] = useState(false);
+
+  const [lotteryHistories, setLotteryHistories] = useState([]);
+  const { lotteryHistory = {}, loading_history } = useSelector(
+    (state) => state.lottery
+  );
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -45,8 +60,36 @@ export default function LotteryPastReults() {
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
+   const {lotteryCategories = [], lotteryResults = [],lotteryResultByID=[]} = useSelector(state => state.lottery)
 
+  const handleGetLotteryHistory = (page = 1) => {  
+   
+        dispatch(
+          getLotteryHistory({
+            params: {
+              rowsPerPage: 10,
+              page: page,
+              lottery_id: id,
+              lang_id: utils.convertLangCodeToID(i18n.language),
+            },
+            callback: (res) => {
+              page == 1
+                ? (setLotteryHistories(res.data.data),
+                  setPageLimit(res.data.last_page),
+                  handleClose())
+                : setLotteryHistories((data) => data.concat(res.data.data));
+              handleClose();
+              // console.log("old:::",lotteryHistories)
+              // console.log("added new:::",res.data.data)
+            },
+          })
+        )
+     
+  };
 
+  useEffect(() => {
+    handleGetLotteryHistory(1);
+  }, []);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -89,48 +132,7 @@ export default function LotteryPastReults() {
     return { img, name, calories, fat, results, id };
   }
 
-  const rows = [
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-      "Frozen yoghurt",
-      159,
-      "2023 Mar 23",
-      { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-      1
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-      "Ice cream sandwich",
-      237,
-      "2023 Mar 23",
-      { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-      2
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Eclair",
-      262,
-      "2023 Mar 23",
-      { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-      3
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Cupcake",
-      305,
-      "2023 Mar 23",
-      { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-      4
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Gingerbread",
-      356,
-      "2023 Mar 23",
-      { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
-      5
-    ),
-  ];
+  
 
   return (
     <>
@@ -198,7 +200,7 @@ export default function LotteryPastReults() {
                     }}
                     style={{ display: "flex", alignItems: "center" }}
                   >
-                    China National Welfare Lottery
+                    {router?.query?.title} Category
                   </div>
                 </div>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -315,7 +317,7 @@ export default function LotteryPastReults() {
                 style={{ borderRadius: "30px" }}
                 src="https://t.pimg.jp/040/863/617/1/40863617.jpg"
               />
-              <Typography ml={1}>Welfare lottery lottery</Typography>{" "}
+              <Typography ml={1}>{router?.query?.title}</Typography>{" "}
             </Grid>
             <Grid
             item
@@ -367,15 +369,15 @@ export default function LotteryPastReults() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((item, index) => {
+                  {lotteryHistories && lotteryHistories.length>0 && lotteryHistories.map((item, index) => {
                     return (
                       
                         <StyledTableRow key={item.name}>
                           <StyledTableCell align="left">
-                            {item.calories}
+                            {item.issue}
                           </StyledTableCell>
                           <StyledTableCell align="left">
-                            {item.fat}
+                            {item.created_at}
                           </StyledTableCell>
                           <StyledTableCell align="center">
                             <Grid
@@ -385,7 +387,7 @@ export default function LotteryPastReults() {
                                 justifyContent: "center",
                               }}
                             >
-                              {lottoTable(item.results)}
+                              {lottoTable(item)}
                             </Grid>
                           </StyledTableCell>
                         </StyledTableRow>

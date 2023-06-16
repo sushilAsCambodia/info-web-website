@@ -84,7 +84,23 @@ export default function LotteryPage() {
     setCategory(event.target.value);
   };
 
-
+  const goToLotteryHistory = (lottery = {}) => {
+    const title =
+      lottery?.translation?.translation + lottery?.latest_result?.issue;
+    router.push(
+      {
+        pathname: "/lotteryHistory",
+        query: {
+          title: title,
+          id: lottery.id,
+          icon: lottery.icon
+            ? lottery.icon
+            : "/assets/Lottery/superlotto-logo1.png",
+        },
+      },
+      `/lotteryPastResults?title=${title}&id=${lottery.id}`
+    );
+  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -558,7 +574,8 @@ export default function LotteryPage() {
                                 background: "#F3F3F3",
                                 border: "1px solid #DDDDDD",
                               }}
-                              onClick={() => router.push('/lotteryPastResults')}
+                              //onClick={() => router.push('/lotteryPastResults')}
+                              onClick={() => goToLotteryHistory(item)}
                             >
                               <Icon width="20px" icon="solar:clipboard-list-broken" />
                             </IconButton>
