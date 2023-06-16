@@ -16,38 +16,38 @@ import Box from '@mui/material/Box';
 
 
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+// function TabPanel(props) {
+//   const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`simple-tabpanel-${index}`}
+//       aria-labelledby={`simple-tab-${index}`}
+//       {...other}
+//     >
+//       {value === index && (
+//         <Box sx={{ p: 3 }}>
+//           <Typography>{children}</Typography>
+//         </Box>
+//       )}
+//     </div>
+//   );
+// }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
+// TabPanel.propTypes = {
+//   children: PropTypes.node,
+//   index: PropTypes.number.isRequired,
+//   value: PropTypes.number.isRequired,
+// };
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `simple-tab-${index}`,
+//     'aria-controls': `simple-tabpanel-${index}`,
+//   };
+// }
 
 const settings = {
   dots: false,
@@ -94,53 +94,24 @@ export function lottoGrid(lottos) {
 export function lottoBalls(lottos) {
   return (
     <>
-      <Grid
-        container
-      
-        borderRadius="10px"
-        p={1}
-      >
-        {lottos?.map((item, index) => {
-          return (
-<>
-            <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-              key={index}
-              mx={0.2}
-              sx={{background:item.color,width:'25px',height:'25px',borderRadius:'20px'}}
-            >
-              <Grid
-              container
-              justifyContent="center"
-              alignItems="center" >
-             <Typography color={'white'} fontSize='12px'>{item.num}</Typography> 
-             </Grid>
-            </Grid>
-            </>
-          );
-        })}
-      </Grid>
-
-
-      <Box sx={{ maxWidth: { sm: 220 } }} className="lottotablist">
+    
+      <Box sx={{ maxWidth: { sm: 230 } }} className="lottotablist">
       <Tabs
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
+        style={{
+          paddingTop:"10px"
+        }}
+        
       >
-        <Tab label="11" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
-        <Tab label="22" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
-        <Tab label="33" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
-        <Tab label="44" className="tbsbutton"   sx={{backgroundColor:"red"}} component={'p'}  />
-        <Tab label="55" className="tbsbutton"   sx={{backgroundColor:"red"}} component={'p'} />
-        <Tab label="66" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
-        <Tab label="77"className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'}  />
-        <Tab label="44" className="tbsbutton"   sx={{backgroundColor:"red"}} component={'p'}  />
-        <Tab label="55" className="tbsbutton"   sx={{backgroundColor:"red"}} component={'p'} />
-        <Tab label="66" className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'} />
-        <Tab label="77"className="tbsbutton"  sx={{backgroundColor:"red"}}  component={'p'}  />
+           {lottos?.map((item, index) => {
+          return (
+            <Grid key={index} >
+        <Tab label={item.num} className="tbsbutton"  sx={{background:item.color,width:'25px',height:'25px',borderRadius:'20px'}} />
+        </Grid>
+        );
+      })}
       </Tabs>
     </Box>
 
@@ -176,7 +147,7 @@ const lottery_result=lottery && lottery.latest_result
           sx={{
             border: "1px solid #ddd",
             marginY: "5px",
-            width: "max-content",
+            width: "300px",
             overflow: "auto",
           }}
         >
@@ -190,8 +161,11 @@ const lottery_result=lottery && lottery.latest_result
           </Grid>
           <CardHeader
             sx={{ padding: "10px" }}
+            className="cardhead"
             avatar={
+         
               <Grid
+
                 sx={{
                   background: "#FFE0E0",
                   borderRadius: "50%",

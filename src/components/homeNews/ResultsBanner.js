@@ -22,9 +22,8 @@ import utils from "@/common/utils";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { getAnnouncement } from "@/store/actions/announcementAction";
-
 import NoDataMessage from "@/common/NoDataMessage";
-import LottoListComp from "@/common/LottoListComp";
+
 const responsive = {
   largeDesktop: { 
     breakpoint: { max: 4000, min: 1321 },
@@ -155,7 +154,6 @@ export default function ResultsBanner(props) {
                   return (
                     <div key={key}>
                       <LottoList lottery={lr}/>       
-                      {/* <LottoListComp  lottery={lr} />               */}
                     </div>
                   );
                 })
