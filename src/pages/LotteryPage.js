@@ -101,7 +101,23 @@ export default function LotteryPage() {
     setAge(event.target.value);
   };
 
-
+  const goToLotteryHistory = (lottery = {}) => {
+    const title =
+      lottery?.translation?.translation + lottery?.latest_result?.issue;
+    router.push(
+      {
+        pathname: "/lotteryHistory",
+        query: {
+          title: title,
+          id: lottery.id,
+          icon: lottery.icon
+            ? lottery.icon
+            : "/assets/Lottery/superlotto-logo1.png",
+        },
+      },
+      `/lotteryPastResults?title=${title}&id=${lottery.id}`
+    );
+  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -140,102 +156,102 @@ export default function LotteryPage() {
     return { img, name, calories, fat, results, id };
   }
 
-  const rows = [
-    {
-      id: 1,
-      lottoTitle: "Red Lotto",
-      logo: "https://media.istockphoto.com/id/457815375/photo/flame-icon.jpg?s=170667a&w=0&k=20&c=ApbZCTyyXaBjp7qVTPqXrb3Si_p6ehJERIztA_vfIPw=",
-      items: [
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-          "Frozen yoghurt",
-          111,
-          6.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          1
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-          "Ice cream sandwich",
-          237,
-          9.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          2
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Eclair",
-          222,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          3
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Cupcake",
-          5000,
-          3.7,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          4
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Gingerbread",
-          272,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
-          5
-        ),
-      ],
-    },
-    {
-      id: 2,
-      lottoTitle: "Blue Lotto",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP83gncuWce8kisGWt8JwftWJUK_dx_4WNjw&usqp=CAU",
-      items: [
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-          "Frozen yoghurt",
-          159,
-          6.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          1
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-          "Ice cream sandwich",
-          237,
-          9.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          2
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Eclair",
-          262,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          3
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Cupcake",
-          305,
-          3.7,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          4
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Gingerbread",
-          356,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
-          5
-        ),
-      ],
-    },
-  ];
+  // const rows = [
+  //   {
+  //     id: 1,
+  //     lottoTitle: "Red Lotto",
+  //     logo: "https://media.istockphoto.com/id/457815375/photo/flame-icon.jpg?s=170667a&w=0&k=20&c=ApbZCTyyXaBjp7qVTPqXrb3Si_p6ehJERIztA_vfIPw=",
+  //     items: [
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
+  //         "Frozen yoghurt",
+  //         111,
+  //         6.0,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
+  //         1
+  //       ),
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
+  //         "Ice cream sandwich",
+  //         237,
+  //         9.0,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
+  //         2
+  //       ),
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+  //         "Eclair",
+  //         222,
+  //         16.0,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
+  //         3
+  //       ),
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+  //         "Cupcake",
+  //         5000,
+  //         3.7,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
+  //         4
+  //       ),
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+  //         "Gingerbread",
+  //         272,
+  //         16.0,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
+  //         5
+  //       ),
+  //     ],
+  //   },
+  //   {
+  //     id: 2,
+  //     lottoTitle: "Blue Lotto",
+  //     logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP83gncuWce8kisGWt8JwftWJUK_dx_4WNjw&usqp=CAU",
+  //     items: [
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
+  //         "Frozen yoghurt",
+  //         159,
+  //         6.0,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
+  //         1
+  //       ),
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
+  //         "Ice cream sandwich",
+  //         237,
+  //         9.0,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
+  //         2
+  //       ),
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+  //         "Eclair",
+  //         262,
+  //         16.0,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
+  //         3
+  //       ),
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+  //         "Cupcake",
+  //         305,
+  //         3.7,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
+  //         4
+  //       ),
+  //       createData(
+  //         "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
+  //         "Gingerbread",
+  //         356,
+  //         16.0,
+  //         { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
+  //         5
+  //       ),
+  //     ],
+  //   },
+  // ];
   // past result modal controls
   const [pastResultModalData, setPastResultModalData] = useState("");
 
@@ -717,7 +733,8 @@ export default function LotteryPage() {
                                 background: "#F3F3F3",
                                 border: "1px solid #DDDDDD",
                               }}
-                              onClick={() => router.push('/lotteryPastResults')}
+                              //onClick={() => router.push('/lotteryPastResults')}
+                              onClick={() => goToLotteryHistory(item)}
                             >
                               <Icon width="20px" icon="solar:clipboard-list-broken" />
                             </IconButton>
