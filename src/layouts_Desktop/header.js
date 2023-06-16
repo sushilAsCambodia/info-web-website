@@ -289,7 +289,7 @@ const Header = () => {
                           <Grid key={index}>
                             <MenuItem
                               sx={{ paddingX: { xs: "3px", lg: "15px" } }}
-                              onClick={() => router.push(`${item.page}`)}
+                              onClick={() => router.push(`${item.page!=='/dataChartPage'?item.page:'#'}`)}
                             >
                               <Typography
                                 textAlign="center"
