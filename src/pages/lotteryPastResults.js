@@ -31,30 +31,34 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 import utils from "@/common/utils";
-import { getLotteryHistory } from "@/store/actions/lotteryActions";
+import {
+  getLotteryHistory,
+  getLotteryCategory,
+  getLotteryResultByCategoryId,
+} from "@/store/actions/lotteryActions";
 import { useRouter } from "next/router";
-
+import DataLoading from "@/components/DataLoading";
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "./LotteryPage";
 import { Image } from "mui-image";
 export default function LotteryPastReults() {
   const router = useRouter();
-  const { id,icon,title } = router.query;
+  const { id, icon, title } = router.query;
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
-  const [filter, setFilter] = useState("China National");
+  const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageLimit, setPageLimit] = useState(2);
-  const [expanded, setExpanded] = useState(false);
-
+  const [expanded, setExpanded] = useState("");
+const [gameIcon,setGameIcon]=useState('')
   const { lotteryHistories = {}, loading_history } = useSelector(
     (state) => state.lottery
   );
-  console.log("query:::",id,icon,title)
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+
+  const handleExpandClick = (index) => {
+    if (index === expanded) setExpanded("");
+    else setExpanded(index);
   };
 
   const [age, setAge] = useState("");
@@ -62,42 +66,54 @@ export default function LotteryPastReults() {
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
-   const {lotteryCategories = [], lotteryResults = [],lotteryResultByID=[]} = useSelector(state => state.lottery)
+  const {
+    lotteryCategories = [],
+    lotteryResults = [],
+    lotteryResultByID = [],
+  } = useSelector((state) => state.lottery);
 
-   const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleGetLotteryHistory = () => {  
-   
-        dispatch(
-          getLotteryHistory({
-            params: {
-              rowsPerPage: 10,
-              page: currentPage,
-              lottery_id: id,
-              lang_id: utils.convertLangCodeToID(i18n.language),
-            },
-            callback: (res) => {
-            },
-          })
-        )
+  const handleGetLotteryHistory = () => {
+    dispatch(
+      getLotteryHistory({
+        params: {
+          rowsPerPage: 10,
+          page: currentPage,
+          lottery_id: filter ? filter : id,
+          lang_id: utils.convertLangCodeToID(i18n.language),
+        },
+        callback: (res) => {},
+      })
+    );
   };
 
   const handlePageChange = (event, value) => {
-    console.log("page:::", value);
     setCurrentPage(value);
   };
- 
+
   useEffect(() => {
-if(id!== undefined)
-      handleGetLotteryHistory();
-    
-  }, [currentPage,router.isReady]);
+    if (id !== undefined) {
+      handleGetLotteryHistory(), setFilter(filter == '' ?id:filter),setGameIcon(icon);
+    }
+  }, [currentPage, router.isReady, filter]);
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filter]);
+
+  useEffect(() => {
+    dispatch(
+      getLotteryResultByCategoryId({
+        params: {
+          rowsPerPage: 5,
+          page: 1,
+          lang_id: utils.convertLangCodeToID(i18n.language),
+          pick: select,
+          category_id: "",
+        },
+        callback: (res) => {},
+      })
+    );
+  }, []);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -110,7 +126,7 @@ if(id!== undefined)
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      padding: '10px'
+      padding: "10px",
     },
   }));
 
@@ -137,11 +153,18 @@ if(id!== undefined)
     },
   }));
 
+  const lotteryResultByIDFilter = () => {
+    const item = lotteryResultByID?.data?.filter((obj) => {
+      return obj.lottery_bind !== null;
+    });
 
+
+    return item;
+  };
   return (
     <>
       <TitleBreadCrumbs title={"Past Result"} />
-      <Grid container height='100vh'>
+      <Grid container height="100vh">
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
             {/* <Grid container justifyContent="center" borderRadius="10px">
@@ -176,139 +199,96 @@ if(id!== undefined)
               </MenuItem>
             </Grid> */}
 
-            <Grid container>
-              <Grid className="container" item xs={10}>
-                {/* <!-- completed --> */}
-                <div
-                  className={`step ${
-                    filter == "China National" ? "completed" : ""
-                  }`}
-                >
-                  <div className="v-stepper">
-                    <div
-                    onClick={() => {
-                      setFilter("China National");
-                    }}
-                      className="circle"
-                      style={{
-                        "--iconImg": `url("https://thumbs.dreamstime.com/b/modern-creative-color-triangle-arrow-shape-logo-design-creative-color-triangle-arrow-shape-logo-design-142723014.jpg")`,
-                      }}
-                    ></div>
-                    <div className="line"></div>
-                  </div>
+            {lotteryResultByIDFilter()?.length > 0 &&
+              lotteryResultByIDFilter().map((item, index) => {
+                return (
+                  <Grid container key={index}>
+                    <Grid className="container" item xs={10}>
+                      {/* <!-- completed --> */}
+                      <div className={`step ${"completed"}`}>
+                        <div className="v-stepper">
+                          <div
+                            // onClick={() => {
+                            //   setFilter("China National");
+                            // }}
+                            className="circle"
+                            style={{
+                              "--iconImg": `url("${item?.icon}")`,
+                            }}
+                          ></div>
+                          <div className="line"></div>
+                        </div>
 
-                  <div
-                    className="contents"
-                    onClick={() => {
-                      setFilter("China National");
-                    }}
-                    style={{ display: "flex", alignItems: "center" }}
-                  >
-                    {router?.query?.title} Category
-                  </div>
-                </div>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  {/* <!-- active --> */}
-                  <div
-                    className={`step ${
-                      filter == "Double color" ? "completed" : ""
-                    }`}
-                  >
-                    <div className="v-stepper">
-                      <div
-                      onClick={() => {
-                        setFilter("Double color");
-                      }}
-                        className="circle"
-                        style={{
-                          "--iconImg": `url("https://c8.alamy.com/comp/2A8GB3A/red-star-in-circle-icon-on-white-background-flat-style-red-star-in-circle-icon-for-your-web-site-design-logo-app-ui-set-of-star-circle-symbol-r-2A8GB3A.jpg")`,
-                        }}
-                      ></div>
-                      <div className="line"></div>
-                    </div>
-                    <div
-                      className="contents"
-                      onClick={() => {
-                        setFilter("Double color");
-                      }}
-                    >
-                      Double color ball
-                    </div>
-                  </div>
-
-                  {/* <!-- empty --> */}
-                  <div
-                    className={`step ${
-                      filter == "Welfare 3D" ? "completed" : ""
-                    }`}
-                  >
-                    <div className="v-stepper">
-                      <div
-                      onClick={() => {
-                        setFilter("Welfare 3D");
-                      }}
-                        className="circle"
-                        style={{
-                          "--iconImg": `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqy_oXQU85RpvKBMoJwuj22hHTActWhqArVA&usqp=CAU")`,
-                        }}
-                      ></div>
-                      <div className="line"></div>
-                    </div>
-
-                    <div
-                      className="contents"
-                      onClick={() => {
-                        setFilter("Welfare 3D");
-                      }}
-                    >
-                      Welfare 3D
-                    </div>
-                  </div>
-
-                  {/* <!-- regular --> */}
-                  <div
-                    className={`step ${
-                      filter == "Colorful lottery" ? "completed" : ""
-                    }`}
-                  >
-                    <div className="v-stepper">
-                      <div
-                      onClick={() => {
-                        setFilter("Colorful lottery");
-                      }}
-                        className="circle"
-                        style={{
-                          "--iconImg": `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLYFhTpGv_NCmwQ48A7jvD3hQrQvd_6JLGTQ&usqp=CAU")`,
-                        }}
-                      ></div>
-                      <div className="line"></div>
-                    </div>
-
-                    <div
-                      className="contents"
-                      onClick={() => {
-                        setFilter("Colorful lottery");
-                      }}
-                    >
-                      Colorful lottery
-                    </div>
-                  </div>
-                </Collapse>
-              </Grid>
-              <Grid item xs={2} textAlign="right">
-                <IconButton
-                  onClick={handleExpandClick}
-                  className="rotate"
-                  sx={{ paddingTop: "15px" }}
-                >
-                  <Icon
-                    width="15px"
-                    className={`${expanded ? "rotate90" : "rotate0"}`}
-                    icon="material-symbols:arrow-forward-ios-rounded"
-                  />
-                </IconButton>
-              </Grid>
-            </Grid>
+                        <div
+                          className="contents"
+                          // onClick={() => {
+                          //   setFilter("China National");
+                          // }}
+                          style={{ display: "flex", alignItems: "center" }}
+                        >
+                          {item?.translation?.translation
+                            ? item.translation.translation
+                            : "title not available"}
+                        </div>
+                      </div>
+                      <Collapse
+                        in={expanded == item.category_id}
+                        timeout="auto"
+                        unmountOnExit
+                      >
+                        {item?.lottery.map((lottery, i) => {
+                          return (
+                            <>
+                              {/* <!-- active --> */}
+                              <div
+                                className={`step ${
+                                  filter == lottery?.lottery_id
+                                    ? "completed"
+                                    : ""
+                                }`}
+                              >
+                                <div className="v-stepper">
+                                  <div
+                                    onClick={() => {
+                                      setFilter(lottery?.lottery_id);
+                                    }}
+                                    className="circle"
+                                    style={{
+                                      "--iconImg": `url("${lottery?.icon}")`,
+                                    }}
+                                  ></div>
+                                  <div className="line"></div>
+                                </div>
+                                <div
+                                  className="contents"
+                                  onClick={() => {
+                                    setFilter(lottery?.lottery_id);
+                                  }}
+                                >
+                                  {lottery?.translation?.translation}
+                                </div>
+                              </div>
+                            </>
+                          );
+                        })}
+                      </Collapse>
+                    </Grid>
+                    <Grid item xs={2} textAlign="right">
+                      <IconButton
+                        onClick={() => handleExpandClick(item.category_id)}
+                        className="rotate"
+                        sx={{ paddingTop: "15px" }}
+                      >
+                        <Icon
+                          width="15px"
+                          className={`${expanded ? "rotate90" : "rotate0"}`}
+                          icon="material-symbols:arrow-forward-ios-rounded"
+                        />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                );
+              })}
           </Grid>
         </Grid>
         <Grid item xs={8} p={1}>
@@ -319,12 +299,12 @@ if(id!== undefined)
                 width="30px"
                 height="30px"
                 style={{ borderRadius: "30px" }}
-                src={icon}
+                src={gameIcon}
               />
-              <Typography ml={1}>{router?.query?.title}</Typography>{" "}
+              <Typography ml={1}>{title}</Typography>{" "}
             </Grid>
             <Grid
-            item
+              item
               xs={6}
               display="flex"
               alignItems="center"
@@ -353,34 +333,38 @@ if(id!== undefined)
                   paddingTop: "5px",
                   paddingBottom: "5px",
                   color: "white",
-                  textTransform:"capitalize"
+                  textTransform: "capitalize",
                 }}
               >
-              {langKey && langKey.search} 
+                {langKey && langKey.search}
               </Button>
             </Grid>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledHeaderCell width="50px">  {langKey && langKey.issue} </StyledHeaderCell>
+                    <StyledHeaderCell width="50px">
+                      {" "}
+                      {langKey && langKey.issue}{" "}
+                    </StyledHeaderCell>
                     <StyledHeaderCell width="50px" align="left">
-                 {langKey && langKey.draw_time} 
+                      {langKey && langKey.draw_time}
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
-                        {langKey && langKey.result} 
+                      {langKey && langKey.result}
                     </StyledHeaderCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {lotteryHistories?.data?.length>0 && lotteryHistories?.data?.map((item, index) => {
-                    return (
+                  {!loading_history && lotteryHistories?.data?.length > 0 &&
+                    lotteryHistories?.data?.map((item, index) => {
+                      return (
                         <StyledTableRow key={item.name}>
                           <StyledTableCell align="left">
                             {item.issue}
                           </StyledTableCell>
                           <StyledTableCell align="left">
-                          {moment(item.opendate).format(utils.lotteryFormat)}
+                            {moment(item.opendate).format(utils.lotteryFormat)}
                           </StyledTableCell>
                           <StyledTableCell align="center">
                             <Grid
@@ -394,12 +378,27 @@ if(id!== undefined)
                             </Grid>
                           </StyledTableCell>
                         </StyledTableRow>
-                    );
-                  })}
+                      );
+                    })}
+
+                    {loading_history && <TableRow>
+                  <TableCell component="th" scope="row" colSpan={3}>
+                    <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                      <DataLoading />
+                    </Grid>
+                  </TableCell>
+                </TableRow>}
                 </TableBody>
               </Table>
             </TableContainer>
-            <Pagination count={10} page={currentPage} onChange={handlePageChange} />
+            {lotteryHistories?.data?.length > 0 && (
+              <Grid my={1} item xs={12} sx={{display:'flex',justifyContent:'center'}}>
+              <Pagination
+                count={lotteryHistories.last_page}
+                page={currentPage}
+                onChange={handlePageChange}
+              /></Grid>
+            )}
           </Grid>
         </Grid>
       </Grid>
