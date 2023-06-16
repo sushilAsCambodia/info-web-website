@@ -10,6 +10,44 @@ import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import moment from "moment/moment";
 import Slider from "react-slick";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+
+
+
+// function TabPanel(props) {
+//   const { children, value, index, ...other } = props;
+
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`simple-tabpanel-${index}`}
+//       aria-labelledby={`simple-tab-${index}`}
+//       {...other}
+//     >
+//       {value === index && (
+//         <Box sx={{ p: 3 }}>
+//           <Typography>{children}</Typography>
+//         </Box>
+//       )}
+//     </div>
+//   );
+// }
+
+// TabPanel.propTypes = {
+//   children: PropTypes.node,
+//   index: PropTypes.number.isRequired,
+//   value: PropTypes.number.isRequired,
+// };
+
+// function a11yProps(index) {
+//   return {
+//     id: `simple-tab-${index}`,
+//     'aria-controls': `simple-tabpanel-${index}`,
+//   };
+// }
 
 const settings = {
   dots: false,
@@ -56,32 +94,29 @@ export function lottoGrid(lottos) {
 export function lottoBalls(lottos) {
   return (
     <>
-      <Grid
-        container
-        width="max-content"
-        borderRadius="10px"
-        p={1}
-        sx={{ overflowX: "auto", cursor: "pointer" }}
+    
+      <Box sx={{ maxWidth: { sm: 230 } }} className="lottotablist">
+      <Tabs
+        variant="scrollable"
+        scrollButtons="auto"
+        aria-label="scrollable auto tabs example"
+        style={{
+          paddingTop:"10px"
+        }}
+        
       >
-        {lottos?.map((item, index) => {
+           {lottos?.map((item, index) => {
           return (
-            <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-              key={index}
-              mx={0.2}
-              sx={{background:item.color,width:'25px',height:'25px',borderRadius:'20px'}}
-            >
-              <Grid
-              container
-              justifyContent="center"
-              alignItems="center" >
-             <Typography color={'white'} fontSize='12px'>{item.num}</Typography> </Grid>
-            </Grid>
-          );
-        })}
-      </Grid>
+            <Grid key={index} >
+        <Tab label={item.num} className="tbsbutton"  sx={{background:item.color,width:'25px',height:'25px',borderRadius:'20px'}} />
+        </Grid>
+        );
+      })}
+      </Tabs>
+    </Box>
+
+
+
     </>
   );
 }
@@ -112,7 +147,7 @@ const lottery_result=lottery && lottery.latest_result
           sx={{
             border: "1px solid #ddd",
             marginY: "5px",
-            width: "max-content",
+            width: "300px",
             overflow: "auto",
           }}
         >
@@ -126,8 +161,11 @@ const lottery_result=lottery && lottery.latest_result
           </Grid>
           <CardHeader
             sx={{ padding: "10px" }}
+            className="cardhead"
             avatar={
+         
               <Grid
+
                 sx={{
                   background: "#FFE0E0",
                   borderRadius: "50%",
