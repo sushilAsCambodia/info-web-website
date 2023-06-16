@@ -102,10 +102,11 @@ export default function LotteryPage() {
           icon: lottery.icon
             ? lottery.icon
             : "/assets/Lottery/superlotto-logo1.png",
+            categoryId:lottery.category_id
 
         },
       },
-      `/lotteryPastResults?title=${title}&id=${lottery.id}`
+      `/lotteryPastResults?title=${title}&id=${lottery.id}&categoryId=${lottery.category_id}`
     );
   };
 

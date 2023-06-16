@@ -44,7 +44,7 @@ import { lottoTable } from "./LotteryPage";
 import { Image } from "mui-image";
 export default function LotteryPastReults() {
   const router = useRouter();
-  const { id, icon, title } = router.query;
+  const { id, icon, title,categoryId } = router.query;
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
@@ -93,14 +93,18 @@ export default function LotteryPastReults() {
   useEffect(() => {
     if (id !== undefined) {
       handleGetLotteryHistory(),
-        setFilter(filter == "" ? id : filter)
-    }
+        setFilter(filter == "" ? id : filter)}
   }, [currentPage, router.isReady, filter]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [filter]);
 
+  useEffect(() => {
+    if(categoryId !== undefined){
+      setExpanded(categoryId)
+    }
+  }, [router.isReady]);
   useEffect(() => {
     dispatch(
       getLotteryResultByCategoryId({
@@ -176,7 +180,7 @@ export default function LotteryPastReults() {
                       <div
                         className={`step ${"completed"}`}
                         style={{ cursor: "pointer" }}
-                        onClick={() => handleExpandClick(item.category_id)}
+                        onClick={() => handleExpandClick(item.id)}
                       >
                         <div className="v-stepper">
                           <div
@@ -204,7 +208,7 @@ export default function LotteryPastReults() {
                         </div>
                       </div>
                       <Collapse
-                        in={expanded == item.category_id}
+                        in={expanded == item.id}
                         timeout="auto"
                         unmountOnExit
                       >
@@ -257,14 +261,14 @@ export default function LotteryPastReults() {
                     </Grid>
                     <Grid item xs={2} textAlign="right">
                       <IconButton
-                        onClick={() => handleExpandClick(item.category_id)}
+                        onClick={() => handleExpandClick(item.id)}
                         className="rotate"
                         sx={{ paddingTop: "15px" }}
                       >
                         <Icon
                           width="15px"
                           className={`${
-                            expanded == item.category_id
+                            expanded == item.id
                               ? "rotate90"
                               : "rotate0"
                           }`}
