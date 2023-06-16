@@ -23,8 +23,8 @@ import {
   Box,
   Stack,
   Divider,
+  Pagination
 } from "@mui/material";
-import Pagination from "@mui/material/Pagination";
 import { getLatestLottery } from "@/store/actions/lotteryActions";
 import { getLotteryCategory,getLotteryResultByCategory } from "@/store/actions/lotteryActions";
 import { useTranslation } from "react-i18next";
@@ -67,38 +67,21 @@ const style = {
 export default function LotteryPage() {
   const router = useRouter()  
   const dispatch = useDispatch();
-  const [select, setSelect] = useState(0);
-  const [age, setAge] = useState("");
+  const [select, setSelect] = useState('');
+  const [category, setCategory] = useState("");
   const { i18n } = useTranslation();
+  const perPage = 1
   const [value, setValue] = React.useState(0);
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-  const {lotteryCategories = [], lotteryResults = [],lotteryResultByID=[]} = useSelector(state => state.lottery)
+  const {lotteryCategories = [], lotteryResults = [],lotteryResultByID=[],loading=false} = useSelector(state => state.lottery)
   const { customer = {} } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [isFavourite, setIsFavourite] = useState(false);
+  console.log('lotteryResultByID:::',lotteryResultByID)
   const handleChange = (event) => {
-    console.log("event.target.value",event.target.value)
-    dispatch(
-      getLotteryResultByCategoryId({
-        params: {
-          rowsPerPage: 10,
-          page: 1,          
-          lang_id: utils.convertLangCodeToID(i18n.language),
-          category_id:event.target.value
-        },
-        callback: (res) => {
-          // page == 1
-          //   ? (setLotteryHistories(res.data.data),
-          //     setPageLimit(res.data.last_page),
-          //     handleClose())
-          //   : setLotteryHistories((data) => data.concat(res.data.data));
-          handleClose();
-          // console.log("old:::",lotteryHistories)
-          // console.log("added new:::",res.data.data)
-        },
-      })
-    )
-    setAge(event.target.value);
+    console.log(":::handleselectcategory",event.target.value)
+   setPage(1)
+    setCategory(event.target.value);
   };
 
 
@@ -136,114 +119,14 @@ export default function LotteryPage() {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
-  function createData(img, name, calories, fat, results, id) {
-    return { img, name, calories, fat, results, id };
-  }
 
-  const rows = [
-    {
-      id: 1,
-      lottoTitle: "Red Lotto",
-      logo: "https://media.istockphoto.com/id/457815375/photo/flame-icon.jpg?s=170667a&w=0&k=20&c=ApbZCTyyXaBjp7qVTPqXrb3Si_p6ehJERIztA_vfIPw=",
-      items: [
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-          "Frozen yoghurt",
-          111,
-          6.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          1
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-          "Ice cream sandwich",
-          237,
-          9.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          2
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Eclair",
-          222,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          3
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Cupcake",
-          5000,
-          3.7,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          4
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Gingerbread",
-          272,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
-          5
-        ),
-      ],
-    },
-    {
-      id: 2,
-      lottoTitle: "Blue Lotto",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP83gncuWce8kisGWt8JwftWJUK_dx_4WNjw&usqp=CAU",
-      items: [
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-          "Frozen yoghurt",
-          159,
-          6.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          1
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-          "Ice cream sandwich",
-          237,
-          9.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          2
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Eclair",
-          262,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 32 },
-          3
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Cupcake",
-          305,
-          3.7,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 5 },
-          4
-        ),
-        createData(
-          "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-          "Gingerbread",
-          356,
-          16.0,
-          { numbers: [12, 32, 4, 5, 12, 34], winner: 10 },
-          5
-        ),
-      ],
-    },
-  ];
+
+
   // past result modal controls
   const [pastResultModalData, setPastResultModalData] = useState("");
 
   const [pastResult, setPastResult] = useState(false);
-  const handleOpen = (data) => {
-    setPastResultModalData(data);
-    setPastResult(true);
-  };
+  
   // chart modal control
   const [chartModalData, setChartModalData] = useState("");
 
@@ -258,17 +141,23 @@ export default function LotteryPage() {
     setPastResult(false);
   };
 
-
+  const [page, setPage] = useState(1);
+  const handlePageChange = (event, value) => {
+    console.log('page:::',value)
+    setPage(value);
+  };
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     dispatch(
       getLotteryResultByCategoryId({
         params: {
-          rowsPerPage: 10,
-          page: 1,          
+          rowsPerPage: perPage,
+          page: page,          
           lang_id: utils.convertLangCodeToID(i18n.language),
-          member_id: customer.member_ID
+          member_id: customer.member_ID,
+          pick:select,
+          category_id:category
         },
         callback: (res) => {
           // page == 1
@@ -281,9 +170,9 @@ export default function LotteryPage() {
         },
       })
     )
-    dispatch(getLatestLottery("hey"));    
-    setLoading(false);
-  }, []);
+    // dispatch(getLatestLottery("hey"));    
+    // setLoading(false);
+  }, [page,select,category]);
 
   const handleGetCategory = React.useCallback(() => {
     dispatch(
@@ -326,7 +215,7 @@ export default function LotteryPage() {
 
 
   const handleAddRemove = (lottery_id) => {
-    setLoading(true);
+    // setLoading(true);
     customer?.member_ID
       ? dispatch(
           addRemoveFavourite({
@@ -338,11 +227,12 @@ export default function LotteryPage() {
               toast.success(langKey[res?.message], toastOption);
               dispatch( getLotteryResultByCategoryId({
                   params: {
-                    rowsPerPage: 10,
-                    page: 1,          
+                    rowsPerPage: perPage,
+                    page: select=== 'favorite'? 1 : page,          
                     lang_id: utils.convertLangCodeToID(i18n.language),
                     member_id: customer.member_ID,
-                    pick:select==1?'favorite':''
+                    pick:select,
+                    category_id:''
                   },
                   callback: (res) => {
                     // handleClose();
@@ -350,42 +240,17 @@ export default function LotteryPage() {
                     console.log('')
                   },
                 }))
-                setLoading(false);
+                // setLoading(false);
             },
           })
         )
       : router.push("/login");
   };
-  const handleLotteryData=(tabId)=>{
-    console.log("selectselecttabIdtabId",tabId)
-    setLoading(true);  
-    dispatch(
-      getLotteryResultByCategoryId({
-        params: {
-          rowsPerPage: 10,
-          page: 1,          
-          lang_id: utils.convertLangCodeToID(i18n.language),
-          member_id: customer.member_ID,
-          pick:tabId==1?'favorite':''
 
-        },
-        callback: (res) => {
-          setLoading(false);
-          // page == 1
-          //   ? (setLotteryHistories(res.data.data),
-          //     setPageLimit(res.data.last_page),
-          //     handleClose())
-          //   : setLotteryHistories((data) => data.concat(res.data.data));
-          handleClose();
-       
-        },
-      })
-    )
-
-
-  }
-
-
+ const handleSelectChange=(pick)=>{
+  setSelect(pick);
+              setPage(1)
+ }
   return ( 
     <>
       {/* <Typography variant="h5" fontWeight="bold">
@@ -393,29 +258,7 @@ export default function LotteryPage() {
       </Typography> */}
         <TitleBreadCrumbs title= {langKey && langKey.lottery} />
           <ToastContainer />
-      {/* past result modal  */}
-      <Modal
-        open={pastResult}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={pastResult}>
-          <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              Past Result Modal
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              has ID of {pastResultModalData}
-            </Typography>
-          </Box>
-        </Fade>
-      </Modal>
+     
       {/* chart modal  */}
       <Modal
         open={chart}
@@ -565,20 +408,18 @@ export default function LotteryPage() {
         <Grid item xs={"auto"} container border="1px solid grey" borderRadius="10px">
           <MenuItem
             sx={{ borderRadius: "10px 0px 0px 10px" }}
-            className={`${select === 0 ? "filterTabSelected" : ""}`}
+            className={`${select === '' ? "filterTabSelected" : ""}`}
             onClick={() => {
-              setSelect(0);
-              handleLotteryData(0);
+              handleSelectChange('')
             }}
           >
              {langKey && langKey.all} 
           </MenuItem>
           <MenuItem
             sx={{ borderRadius: "0px 10px 10px 0px" }}
-            className={`${select === 1 ? "filterTabSelected" : ""}`}
+            className={`${select === 'favorite' ? "filterTabSelected" : ""}`}
             onClick={() => {
-              setSelect(1);
-              handleLotteryData(1);
+              handleSelectChange('favorite')
             }}
           >
              {langKey && langKey.favorites}
@@ -590,15 +431,16 @@ export default function LotteryPage() {
             <Select
               labelId="demo-simple-select-label"
               id="category-select"
-              value={age}
+              value={category}
               label="Select Category"
               onChange={handleChange}
               style={{ paddingY: "0px" }}
-            >{lotteryCategories && lotteryCategories.map((catData, index) => {
+            >
+              <MenuItem value={''}>all</MenuItem>
+               {
+              lotteryCategories && lotteryCategories.map((catData, index) => {
              if(catData.lottery_bind!==null)
-              return(<MenuItem value={catData.id}>{catData && catData.translation && catData.translation.translation}</MenuItem>)
-             
-
+              return(<MenuItem value={catData.id}>{catData?.translation?.translation}</MenuItem>)
 })}
              
             </Select>
@@ -637,7 +479,7 @@ export default function LotteryPage() {
            
             <TableBody>
               {
-              loading ? (
+              loading &&
                 <TableRow>
                 <TableCell component="th" scope="row" colSpan={7} >
                 <Grid textAlign={'center'} item xs={12} paddingTop={5}>
@@ -645,12 +487,11 @@ export default function LotteryPage() {
                 </Grid>
               </TableCell>
              </TableRow>
-              ) :
-              lotteryResultByID && lotteryResultByID.data && lotteryResultByID.data.length > 0 ? 
-             ( lotteryResultByID.data.map((rowData, index) => {
+             }
+             {!loading && lotteryResultByID?.data?.length > 0 &&
+              lotteryResultByID.data.map((rowData, index) => {
     
                 if(rowData && rowData.lottery_bind!=null && rowData && rowData.lottery.length>0)
-
                 return (
                   <>
                   <TableRow key={index}>
@@ -728,7 +569,7 @@ export default function LotteryPage() {
                                 background: "#F3F3F3",
                                 border: "1px solid #DDDDDD",
                               }}
-                              onClick={() => handleChartOpen(row.id)}
+                              // onClick={() => handleChartOpen(3)}
                             >
                               <Icon width="25px" icon="material-symbols:add-chart-rounded" />
                             </IconButton>
@@ -778,9 +619,9 @@ export default function LotteryPage() {
                     })}
                   </>
                 );
-              }))
-              : 
-             (
+              })}
+              {
+              lotteryResultByID?.data?.length === 0 &&
               <TableRow>
               <TableCell component="th" scope="row" colSpan={7} >
               <Grid textAlign={'center'} item xs={12} paddingTop={5}>
@@ -793,14 +634,15 @@ export default function LotteryPage() {
               </Grid>
               </TableCell>
              </TableRow>
-             )
-              
               }
             </TableBody>
           </Table>
         </TableContainer>
-
-
+{lotteryResultByID?.data?.length > 0 && 
+<Grid my={1} item xs={12} sx={{justifyContent:'center',display:'flex'}}>
+        <Pagination count={lotteryResultByID.last_page} page={page} onChange={handlePageChange} />
+        </Grid>
+}
 
         {/* {rows?.length > 0 && (
             <Grid
