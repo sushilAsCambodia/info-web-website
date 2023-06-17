@@ -17,6 +17,8 @@ export default function NoDataMessage(props) {
   const router = useRouter();
   const { announcement } = props; 
   const { banners } = useSelector((state) => state.banner);
+  const langKey = useSelector((state) => state?.load_language?.language);
+
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
   return (
@@ -26,9 +28,10 @@ export default function NoDataMessage(props) {
                 justifyContent="center"
                 alignItems="center"
                 flexDirection="column"
+                paddingTop={5}
               >
                 <Icon color="#ff723e" width={50} icon="lucide:megaphone-off" />
-                <Typography>no announcement today</Typography>
+                <Typography paddingTop={2}> {langKey && langKey.no_data_available}</Typography>
               </Grid>
     </>
   );
