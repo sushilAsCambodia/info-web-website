@@ -1179,6 +1179,13 @@ color: #fff;
     width: 20px !important;
     height: 30px !important;
   }
+  .lottotablist .css-1q0ig8p{
+    width: 20px !important;
+    height: 30px !important;
+  }
+  .MuiTabs-scrollButtons.Mui-disabled {
+    opacity: 0.3;
+  }
   
   .lottotablist .MuiTab-root{
     max-width: 25px !important;
@@ -1193,5 +1200,13 @@ color: #fff;
   }
 
   .cardhead .css-1ssile9-MuiCardHeader-avatar{
-    margin-right:10px !important
+    margin-right:8px !important
+  }
+
+  .cardhead .css-1p83tvv{
+    margin-right:8px !important
+  }
+  .lottotablist .css-1k33q06{
+    color: #000 !important;
+    font-size: 1.50rem !important;
   }
