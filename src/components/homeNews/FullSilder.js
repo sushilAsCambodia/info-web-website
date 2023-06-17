@@ -24,6 +24,7 @@ export default function FullSilder(props) {
   const [tabValue, setTabValue] = React.useState(0);
   const [newBanners, setNewBanners] = React.useState([]);
   const maxSteps = newBanners?.length;
+  console.log('test')
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
