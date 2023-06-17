@@ -162,7 +162,13 @@ export default function LotteryPastReults() {
     const item = lotteryResultByID?.data?.filter((obj) => {
       return obj.lottery_bind !== null;
     });
+    return item;
+  };
 
+  const lotteryGameHistoryResult = () => {
+    const item = lotteryResultByID?.data?.filter((obj) => {
+      return obj.issue.includes('24') ;
+    });
     return item;
   };
   return (

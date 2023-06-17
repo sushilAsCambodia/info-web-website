@@ -70,7 +70,7 @@ export default function MiddleShow(props) {
       <Grid item xs={12}>
         <FullSilder banners={advertises} />
       </Grid>
-      <Grid container mt={2}>
+      {/* <Grid container mt={2}>
         <Grid item xs={12} mx={1} container justifyContent="space-between" height="40px">
           <Typography> 
             {langKey && langKey.match_recommendation}
@@ -104,7 +104,7 @@ export default function MiddleShow(props) {
             <MatchItem />
           </Carousel>
         </Grid>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

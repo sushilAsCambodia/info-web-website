@@ -81,6 +81,8 @@ export const getLotteryHistory = createAsyncThunk(
       if (typeof callback == "function") {
         callback(data);
       }
+
+      console.log("getLotteryHistory:::lotto/lotteryResult/all",data)
       return data;
     } catch (error) {
       const { status, data } = error.response;

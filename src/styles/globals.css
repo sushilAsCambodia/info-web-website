@@ -655,7 +655,8 @@ border: 2px solid red;
   width: 100%;
 }
 .horizontalLotto{
-  height:470px
+  /* height:470px */
+  height:270px;
 }
 
 /* LOTTERY PAGE  */
