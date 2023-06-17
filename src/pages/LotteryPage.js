@@ -76,6 +76,7 @@ export default function LotteryPage() {
   const perPage = 5;
   const [value, setValue] = React.useState(0);
   const langKey = useSelector((state) => state?.load_language?.language);
+  const {filter}=router.query
   const {
     lotteryCategories = [],
     lotteryResults = [],
@@ -171,7 +172,14 @@ export default function LotteryPage() {
     );
     // dispatch(getLatestLottery("hey"));
     // setLoading(false);
-  }, [page, select, category]);
+  }, [page, select, category,i18n.language]);
+
+ useEffect(() => {
+    if(filter == 'favorite'){
+      setSelect('favorite')
+    }
+    else setSelect('')
+  }, [router.asPath]);
 
   const handleGetCategory = React.useCallback(() => {
     dispatch(
@@ -422,7 +430,7 @@ export default function LotteryPage() {
             sx={{ borderRadius: "10px 0px 0px 10px" }}
             className={`${select === "" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              handleSelectChange("");
+              (router.push("/LotteryPage"),setSelect(''));
             }}
           >
             {langKey && langKey.all}
@@ -431,7 +439,7 @@ export default function LotteryPage() {
             sx={{ borderRadius: "0px 10px 10px 0px" }}
             className={`${select === "favorite" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              handleSelectChange("favorite");
+              (router.push("/LotteryPage?filter=favorite"),setSelect('favorite'));
             }}
           >
             {langKey && langKey.favorites}

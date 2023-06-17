@@ -81,8 +81,6 @@ export const getLotteryHistory = createAsyncThunk(
       if (typeof callback == "function") {
         callback(data);
       }
-
-      console.log("getLotteryHistory:::lotto/lotteryResult/all",data)
       return data;
     } catch (error) {
       const { status, data } = error.response;
@@ -100,6 +98,28 @@ export const getLotteryResultByCategoryId = createAsyncThunk(
   async ({ params = {}, callback }) => {
     try {
       const response = await api.get('lotto/lotteryCategory/all-with-lotto', params);
+      const { data, status } = response;
+      data["status_code"] = status;
+      if (typeof callback == "function") {
+        callback(data);
+      }
+      return data;
+    } catch (error) {
+      const { status, data } = error.response;
+      data["status_code"] = status;
+      if (typeof callback == "function") {
+        callback(data);
+      }
+      return data;
+    }
+  }
+);
+
+export const getLotteryHistoryAll = createAsyncThunk(
+  "lottery/history/all",
+  async ({ params = {}, callback }) => {
+    try {
+      const response = await api.get('lotto/lotteryResult/all', params);
       const { data, status } = response;
       data["status_code"] = status;
       if (typeof callback == "function") {

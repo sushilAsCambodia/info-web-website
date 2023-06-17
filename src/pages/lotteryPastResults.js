@@ -23,8 +23,12 @@ import {
   Collapse,
   Button,
   Pagination,
+  TextField,
 } from "@mui/material";
-import moment from "moment/moment";
+// import moment from "moment/moment";
+import moment from 'moment/min/moment-with-locales'
+
+
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
@@ -35,6 +39,7 @@ import {
   getLotteryHistory,
   getLotteryCategory,
   getLotteryResultByCategoryId,
+  getLotteryHistoryAll
 } from "@/store/actions/lotteryActions";
 import { useRouter } from "next/router";
 import DataLoading from "@/components/DataLoading";
@@ -44,18 +49,21 @@ import { lottoTable } from "./LotteryPage";
 import { Image } from "mui-image";
 export default function LotteryPastReults() {
   const router = useRouter();
-  const { id, icon, title,categoryId } = router.query;
+  const { id, icon, title, categoryId } = router.query;
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
-  const [select, setSelect] = useState(0);
+  const rowsPerPage = 10
   const [filter, setFilter] = useState("");
+  const [search, setSearch] = useState("");
   const [titleIcon, setTitleIcon] = useState({ title: "", icon: "" });
   const [currentPage, setCurrentPage] = useState(1);
   const [expanded, setExpanded] = useState("");
-  const { lotteryHistories = {}, loading_history } = useSelector(
+  const { lotteryHistories = {}, loading_history,lotteryResultByID = [] } = useSelector(
     (state) => state.lottery
   );
-
+const {total} = useSelector(
+  (state) => state.lottery.lotteryHistories
+);
   const handleExpandClick = (index) => {
     if (index === expanded) setExpanded("");
     else setExpanded(index);
@@ -66,24 +74,36 @@ export default function LotteryPastReults() {
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
-  const {
-    lotteryCategories = [],
-    lotteryResults = [],
-    lotteryResultByID = [],
-  } = useSelector((state) => state.lottery);
 
   const handleGetLotteryHistory = () => {
     dispatch(
       getLotteryHistory({
         params: {
-          rowsPerPage: 10,
+          rowsPerPage: rowsPerPage,
           page: currentPage,
           lottery_id: filter ? filter : id,
           lang_id: utils.convertLangCodeToID(i18n.language),
         },
-        callback: (res) => {},
+        callback: (res) => {
+          console.log(':::',res.data.data[0].lottery.icon)
+          setTitleIcon({icon:res.data.data[0].lottery.icon,title:title})
+        },
       })
     );
+  };
+
+  const handleGetLotteryHistoryAll = () => {
+    dispatch(
+      getLotteryHistoryAll({
+        params: {
+          rowsPerPage: lotteryHistories? lotteryHistories.total:50,
+          page: 1,
+          lottery_id: filter ? filter : id,
+          lang_id: utils.convertLangCodeToID(i18n.language),
+        },
+        callback: (res) => { },
+      })
+    )
   };
 
   const handlePageChange = (event, value) => {
@@ -92,30 +112,37 @@ export default function LotteryPastReults() {
 
   useEffect(() => {
     if (id !== undefined) {
-      handleGetLotteryHistory(),
-        setFilter(filter == "" ? id : filter)}
-  }, [currentPage, router.isReady, filter]);
+      handleGetLotteryHistory(), setFilter(filter == "" ? id : filter);
+    }
+  }, [currentPage, router.isReady, filter, i18n.language]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [filter]);
 
+  useEffect(()=>{
+    handleGetLotteryHistoryAll()
+    
+  },[search,i18n.language,total])
+
   useEffect(() => {
-    if(categoryId !== undefined){
-      setExpanded(categoryId)
+    if (categoryId !== undefined) {
+      setExpanded(categoryId);
     }
   }, [router.isReady]);
   useEffect(() => {
     dispatch(
       getLotteryResultByCategoryId({
         params: {
-          rowsPerPage: 5,
+          rowsPerPage: rowsPerPage,
           page: 1,
           lang_id: utils.convertLangCodeToID(i18n.language),
-          pick: select,
+          pick: "",
           category_id: "",
         },
-        callback: (res) => {},
+        callback: (res) => {
+          
+        },
       })
     );
   }, []);
@@ -166,11 +193,26 @@ export default function LotteryPastReults() {
   };
 
   const lotteryGameHistoryResult = () => {
-    const item = lotteryResultByID?.data?.filter((obj) => {
-      return obj.issue.includes('24') ;
+    const item = lotteryHistories?.data?.filter((obj) => {
+      return obj?.issue.includes(search);
     });
-    return item;
+const pagination = <Pagination
+    count={Math.ceil(item?.length / 10)}
+    page={currentPage}
+    onChange={handlePageChange}
+  />
+    return {item,pagination};
   };
+  const localChange =(key)=>{
+    switch(key){
+      case 'kh':
+      return 'km';
+      case 'de':
+        return 'zh-cn'
+        default:
+          return 'en'
+    }
+  }
   return (
     <>
       <TitleBreadCrumbs title={"Past Result"} />
@@ -182,7 +224,6 @@ export default function LotteryPastReults() {
                 return (
                   <Grid container key={index}>
                     <Grid className="container" item xs={10}>
-                      {/* <!-- completed --> */}
                       <div
                         className={`step ${"completed"}`}
                         style={{ cursor: "pointer" }}
@@ -190,9 +231,6 @@ export default function LotteryPastReults() {
                       >
                         <div className="v-stepper">
                           <div
-                            // onClick={() => {
-                            //   setFilter("China National");
-                            // }}
                             className="circle"
                             style={{
                               "--iconImg": `url("${item?.icon}")`,
@@ -203,9 +241,6 @@ export default function LotteryPastReults() {
 
                         <div
                           className="contents"
-                          // onClick={() => {
-                          //   setFilter("China National");
-                          // }}
                           style={{ display: "flex", alignItems: "center" }}
                         >
                           {item?.translation?.translation
@@ -221,7 +256,6 @@ export default function LotteryPastReults() {
                         {item?.lottery.map((lottery, i) => {
                           return (
                             <>
-                              {/* <!-- active --> */}
                               <div
                                 className={`step ${
                                   filter == lottery?.lottery_id
@@ -274,9 +308,7 @@ export default function LotteryPastReults() {
                         <Icon
                           width="15px"
                           className={`${
-                            expanded == item.id
-                              ? "rotate90"
-                              : "rotate0"
+                            expanded == item.id ? "rotate90" : "rotate0"
                           }`}
                           icon="material-symbols:arrow-forward-ios-rounded"
                         />
@@ -295,9 +327,11 @@ export default function LotteryPastReults() {
                 width="30px"
                 height="30px"
                 style={{ borderRadius: "30px" }}
-                src={titleIcon.icon ? titleIcon.icon: icon}
+                src={titleIcon.icon ? titleIcon.icon : icon}
               />
-              <Typography ml={1}>{titleIcon.title ? titleIcon.title: title}</Typography>{" "}
+              <Typography ml={1}>
+                {titleIcon.title ? titleIcon.title : title}
+              </Typography>{" "}
             </Grid>
             <Grid
               item
@@ -307,20 +341,16 @@ export default function LotteryPastReults() {
               justifyContent="flex-end"
             >
               <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-                <Select
-                  value={age}
-                  onChange={handleChange}
-                  displayEmpty
-                  inputProps={{ "aria-label": "Without label" }}
-                >
-                  <MenuItem value="">
-                    <em>{langKey && langKey.select_issue} </em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-                {/* <FormHelperText>Without label</FormHelperText> */}
+                <TextField
+                  id="search-filter"
+                  name="search-filter"
+                  label={langKey?.issue}
+                  value={search}
+                  onChange={() => {
+                    setSearch(event.target.value);
+                  }}
+                  variant="outlined"
+                />
               </FormControl>
               <Button
                 variant="contained"
@@ -331,8 +361,9 @@ export default function LotteryPastReults() {
                   color: "white",
                   textTransform: "capitalize",
                 }}
+                onClick={()=>setSearch('')}
               >
-                {langKey && langKey.search}
+                {langKey?.reset}
               </Button>
             </Grid>
             <TableContainer component={Paper}>
@@ -352,7 +383,50 @@ export default function LotteryPastReults() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
+                  {search != "" &&
+                    lotteryGameHistoryResult().item?.map((item, index) => {
+                      return (
+                        <StyledTableRow key={index}>
+                          <StyledTableCell align="left">
+                            {item.issue}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {moment(item.opendate).locale(localChange(i18n.language)).format(utils.lotteryFormat)}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <Grid
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {lottoTable(item)}
+                            </Grid>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      );
+                    })}
+                    {search != "" && lotteryGameHistoryResult().item?.length ==0 &&
+                     <TableRow>
+                     <TableCell component="th" scope="row" colSpan={3}>
+                       <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                         <img
+                           alt="not_found_2"
+                           style={{ height: "50vh" }}
+                           src="./assets/Home/not-found.gif"
+                         />
+                         <Typography textAlign="center">
+                           {langKey.no_lottery_data}
+                         </Typography>
+                       </Grid>
+                     </TableCell>
+                   </TableRow>
+                      
+                    }
+
                   {!loading_history &&
+                    search == "" &&
                     lotteryHistories?.data?.length > 0 &&
                     lotteryHistories?.data?.map((item, index) => {
                       return (
@@ -361,7 +435,8 @@ export default function LotteryPastReults() {
                             {item.issue}
                           </StyledTableCell>
                           <StyledTableCell align="left">
-                            {moment(item.opendate).format(utils.lotteryFormat)}
+                            {moment(item.opendate).locale(localChange(i18n.language)).format(utils.lotteryFormat)}
+
                           </StyledTableCell>
                           <StyledTableCell align="center">
                             <Grid
@@ -390,18 +465,29 @@ export default function LotteryPastReults() {
                 </TableBody>
               </Table>
             </TableContainer>
-            {lotteryHistories?.data?.length > 0 && (
+            {search == "" ? (
+              lotteryHistories?.data?.length > 0 && (
+                <Grid
+                  my={1}
+                  item
+                  xs={12}
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Pagination
+                    count={lotteryHistories.last_page}
+                    page={currentPage}
+                    onChange={handlePageChange}
+                  />
+                </Grid>
+              )
+            ) : (
               <Grid
                 my={1}
                 item
                 xs={12}
                 sx={{ display: "flex", justifyContent: "center" }}
               >
-                <Pagination
-                  count={lotteryHistories.last_page}
-                  page={currentPage}
-                  onChange={handlePageChange}
-                />
+              {lotteryGameHistoryResult().pagination}
               </Grid>
             )}
           </Grid>
