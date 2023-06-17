@@ -11,6 +11,7 @@ import NoSsr from "@mui/base/NoSsr";
 import { Icon } from "@iconify/react";
 import Image from "mui-image";
 import router, { useRouter } from "next/router";
+import Router from "next/router";
 import MatchWithDates from "@/components/match/MatchWithDates";
 import MatchWithRounds from "@/components/match/MatchWithRounds";
 // import FavouritePage from "@/components/favourite/FavouritePage";
@@ -23,7 +24,7 @@ import { useTranslation } from "react-i18next";
 import utils from "@/common/utils";
 import DataLoading from "@/components/DataLoading";
 import { getFavouriteList } from "@/store/actions/favouriteActions";
-
+import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -69,6 +70,7 @@ function a11yProps(index) {
 export default function Lottery() {
   const [value, setValue] = React.useState(0);
   const { i18n } = useTranslation();
+
   const {
     loading,
     lotteryCategories = [],
@@ -87,9 +89,24 @@ export default function Lottery() {
   const dispatch = useDispatch();
   const [lotteryCategoryList, setLotteryCategoryList] = useState([]);
   const [favLoading, setFavLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
   const onChangeTab = (hash) => {
     router.replace(`${router.route}#${hash}`);
   };
+
+  useEffect(() => {
+    if(Cookies.get('token')) {
+      setMounted(true);
+    }else {
+      goToLogin();
+    }
+  },[]);
+
+  const goToLogin = () => {
+    Router.push("/login");
+  };
+
   const handleGetCategory = React.useCallback(() => {
     dispatch(
       getLotteryCategory({
@@ -163,7 +180,9 @@ export default function Lottery() {
     toast.success(message, toastOption);
   };
   
-  return (
+  return <>
+{
+      mounted && (
     <NoSsr>
       <Box sx={{ width: "100%" }}>
         <ToastContainer />
@@ -427,5 +446,8 @@ export default function Lottery() {
         })}
       </Box>
     </NoSsr>
-  );
+
+)
+}
+ </>
 }
