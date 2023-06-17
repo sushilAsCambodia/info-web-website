@@ -677,6 +677,12 @@ border: 2px solid red;
   -webkit-box-orient: vertical;
 }
 /* LOTTERY PAST RESULTS  */
+.issue-textfield .MuiOutlinedInput-root input{
+padding:8.5px 14px !important
+}
+.issue-textfield .MuiInputLabel-root{
+top:-5px !important
+}
 .ribbon {
   width: 145px;
   height: 45px;

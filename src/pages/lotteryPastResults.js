@@ -342,6 +342,8 @@ const pagination = <Pagination
             >
               <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
                 <TextField
+                
+                className="issue-textfield"
                   id="search-filter"
                   name="search-filter"
                   label={langKey?.issue}
