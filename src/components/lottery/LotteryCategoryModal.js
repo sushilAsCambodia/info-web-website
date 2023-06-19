@@ -44,24 +44,8 @@ const LotteryCategoryModal = (props) => {
     return item;
   };
 
-  const handleGetCategory = () => {
-    dispatch(
-      getLotteryCategory({
-        params: {
-          lang_id:utils.convertLangCodeToID(i18n.language)
-        },
-        callback:(res) => {
-            console.log(':::getcategory',res.data)
-        }
-      },)
-    ); 
-  };
-
   useEffect(() => {
-    handleGetCategory();
-  },[i18n.language]);
-
-  useEffect(() => {
+    if(open){
     dispatch(
       getLotteryResultByCategoryId({
         params: {
@@ -77,7 +61,7 @@ const LotteryCategoryModal = (props) => {
         },
       })
     );
-  
+  }
   }, [i18n.language,open]);
   
   return (
