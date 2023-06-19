@@ -134,8 +134,8 @@ const {total} = useSelector(
     dispatch(
       getLotteryResultByCategoryId({
         params: {
-          rowsPerPage: rowsPerPage,
-          page: 1,
+          // rowsPerPage: rowsPerPage,
+          // page: 1,
           lang_id: utils.convertLangCodeToID(i18n.language),
           pick: "",
           category_id: "",
@@ -342,7 +342,12 @@ const pagination = <Pagination
             >
               <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
                 <TextField
-                
+                  onKeyDownCapture={(ev) => {
+                    if (ev.key === 'Enter') {
+                      setToSearch(true);setCurrentPage(1);
+                      // ev.preventDefault();
+                    }
+                  }}
                 className="issue-textfield"
                   id="search-filter"
                   name="search-filter"
@@ -363,7 +368,24 @@ const pagination = <Pagination
                   color: "white",
                   textTransform: "capitalize",
                 }}
-                onClick={()=>setSearch('')}
+                onClick={()=>(setToSearch(true),setCurrentPage(1))}
+                
+              
+              >
+                {langKey?.search}
+              </Button>
+
+              <Button
+                variant="outlined"
+                sx={{
+                  paddingTop: "5px",
+                  paddingBottom: "5px",
+                  color: "#FF6F31",
+                  textTransform: "capitalize",
+                  marginLeft:'5px',
+                  border:'1px solid #FF6F31'
+                }}
+                onClick={()=>(setToSearch(false),allReset())}
               >
                 {langKey?.reset}
               </Button>
