@@ -65,6 +65,7 @@ export default function LotteryPage() {
   const dispatch = useDispatch();
   const [select, setSelect] = useState("");
   const [category, setCategory] = useState("");
+  const [lotteryData, setLotteryData] = useState([]);
   const { i18n } = useTranslation();
   const perPage = 5;
   const [value, setValue] = React.useState(0);
@@ -120,6 +121,7 @@ export default function LotteryPage() {
   // past result modal controls
 
   const [pastResult, setPastResult] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   // chart modal control
 
@@ -151,6 +153,7 @@ export default function LotteryPage() {
           category_id: category,
         },
         callback: (res) => {
+          setLotteryData(res && res.data)
           // page == 1
           //   ? (setLotteryHistories(res.data.data),
           //     setPageLimit(res.data.last_page),
@@ -197,12 +200,12 @@ export default function LotteryPage() {
     handleGetCategory();
   }, [handleGetCategory]);
   useEffect(() => {
-    let temp = lotteryResultByID;
+    let temp = lotteryData;
     if (!customer.member_ID && select == "favorite") temp = {};
-    else temp = lotteryResultByID;
+    else temp = lotteryData;
 
     setLotteryResultList(temp);
-  }, [lotteryResultByID]);
+  }, [lotteryData]);
   React.useEffect(() => {
     if (value >= 0) {
       let hash = "";
@@ -226,6 +229,7 @@ export default function LotteryPage() {
               member_ID: customer?.member_ID,
             },
             callback: (res) => {
+              setFavorite(true)
               toast.success(langKey[res?.message], toastOption);
               dispatch(
                 getLotteryResultByCategoryId({
@@ -239,7 +243,7 @@ export default function LotteryPage() {
                   },
                   callback: (res) => {
                     // handleClose();
-
+                    setLotteryData(res && res.data)
                     console.log("");
                   },
                 })
@@ -255,6 +259,9 @@ export default function LotteryPage() {
     setSelect(pick);
     setPage(1);
   };
+  console.log("lotterydata",lotteryData)
+  console.log("lotterydataresultbycat",lotteryResultByID)
+  
   return (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
@@ -313,7 +320,7 @@ export default function LotteryPage() {
                 lotteryCategories.map((catData, index) => {
                   if (catData.lottery_bind !== null)
                     return (
-                      <MenuItem value={catData.id}>
+                      <MenuItem value={catData.id} key={catData.id}>
                         {catData?.translation?.translation}
                       </MenuItem>
                     );
@@ -417,7 +424,7 @@ export default function LotteryPage() {
                                     }}
                                   >
                                     <Image
-                                      alt={item?.latest_result?.id}
+                                      alt={item?.latest_result?.id+'icon'}
                                       width="30px"
                                       src={item.icon}
                                       style={{}}
@@ -497,6 +504,7 @@ export default function LotteryPage() {
                                   icon="clarity:favorite-solid"
                                 />
                               )} */}
+                              
                                     {item.is_favorite ? (
                                       <Icon
                                         icon="ant-design:star-filled"
@@ -625,7 +633,7 @@ export function lottoTable(lottos) {
                 container
                 justifyContent="center"
                 alignItems="center"
-                key={index}
+                key={lotto.num}
                 mx={0.2}
                 sx={{
                   background: lotto.color,

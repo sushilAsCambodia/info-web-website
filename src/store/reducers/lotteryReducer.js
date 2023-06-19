@@ -7,6 +7,7 @@ const initialState = {
     lotteryHistories:{},
     loading_history:false,
     lotteryResultByID:[],
+    scheduleResultList:[],
     lotteryHistoriesAll:[]
   } 
   const LotteryReducer =  (state = initialState, action) => {
