@@ -60,7 +60,6 @@ const toastOption = {
 import { Image } from "mui-image";
 import utils from "@/common/utils";
 
-
 export default function LotteryPage() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -72,7 +71,7 @@ export default function LotteryPage() {
   const [value, setValue] = React.useState(0);
   const langKey = useSelector((state) => state?.load_language?.language);
   const [mounted, setMounted] = useState(false);
-  const {filter}=router.query
+  const { filter } = router.query;
   const {
     lotteryCategories = [],
     lotteryResults = [],
@@ -87,22 +86,20 @@ export default function LotteryPage() {
     setCategory(event.target.value);
   };
 
-
   useEffect(() => {
-    if(Cookies.get('token')) {
+    if (Cookies.get("token")) {
       setMounted(true);
-    }else {
+    } else {
       goToLogin();
     }
-  },[]);
+  }, []);
 
   const goToLogin = () => {
     Router.push("/login");
   };
 
   const goToLotteryHistory = (lottery = {}) => {
-    const title =
-      lottery?.translation?.translation;
+    const title = lottery?.translation?.translation;
     router.push(
       {
         pathname: "/lotteryHistory",
@@ -112,8 +109,7 @@ export default function LotteryPage() {
           icon: lottery.icon
             ? lottery.icon
             : "/assets/Lottery/superlotto-logo1.png",
-            categoryId:lottery.category_id
-
+          categoryId: lottery.category_id,
         },
       },
       `/lotteryPastResults?title=${title}&id=${lottery.id}&categoryId=${lottery.category_id}`
@@ -135,7 +131,7 @@ export default function LotteryPage() {
 
   // past result modal controls
 
-  const [pastResult, setPastResult] = useState(false);
+  const [noDataSign, setNoDataSign] = useState(false);
   const [favorite, setFavorite] = useState(false);
 
   // chart modal control
@@ -151,7 +147,6 @@ export default function LotteryPage() {
 
   const [page, setPage] = useState(1);
   const handlePageChange = (event, value) => {
-    console.log("page:::", value);
     setPage(value);
   };
 
@@ -168,7 +163,7 @@ export default function LotteryPage() {
           category_id: category,
         },
         callback: (res) => {
-          setLotteryData(res && res.data)
+          setLotteryData(res && res.data);
           // page == 1
           //   ? (setLotteryHistories(res.data.data),
           //     setPageLimit(res.data.last_page),
@@ -180,13 +175,12 @@ export default function LotteryPage() {
     );
     // dispatch(getLatestLottery("hey"));
     // setLoading(false);
-  }, [page, select, category,i18n.language]);
+  }, [page, select, category, i18n.language]);
 
- useEffect(() => {
-    if(filter == 'favorite'){
-      setSelect('favorite')
-    }
-    else setSelect('')
+  useEffect(() => {
+    if (filter == "favorite") {
+      setSelect("favorite");
+    } else setSelect("");
   }, [router.asPath]);
 
   const handleGetCategory = React.useCallback(() => {
@@ -220,6 +214,11 @@ export default function LotteryPage() {
     else temp = lotteryData;
 
     setLotteryResultList(temp);
+    setNoDataSign(
+      temp?.data?.find(
+        (item) => item?.lottery?.length > 0 && item.lottery_bind != null
+      ) == undefined
+    );
   }, [lotteryData]);
   React.useEffect(() => {
     if (value >= 0) {
@@ -244,7 +243,7 @@ export default function LotteryPage() {
               member_ID: customer?.member_ID,
             },
             callback: (res) => {
-              setFavorite(true)
+              setFavorite(true);
               toast.success(langKey[res?.message], toastOption);
               dispatch(
                 getLotteryResultByCategoryId({
@@ -258,7 +257,7 @@ export default function LotteryPage() {
                   },
                   callback: (res) => {
                     // handleClose();
-                    setLotteryData(res && res.data)
+                    setLotteryData(res && res.data);
                     console.log("");
                   },
                 })
@@ -270,246 +269,246 @@ export default function LotteryPage() {
       : router.push("/login");
   };
 
-  const handleSelectChange = (pick) => {
-    setSelect(pick);
-    setPage(1);
+  const checkActive = (active_features, value) => {
+    if (active_features && active_features !== "") {
+      const arr = active_features.split(",");
+      if (arr && arr.length > 0) {
+        if (arr.includes(value)) return true;
+      }
+    }
+    return false;
   };
-  return <>
-  {
-        mounted && (
+  return (
     <>
-      {/* <Typography variant="h5" fontWeight="bold">
+      {mounted && (
+        <>
+          {/* <Typography variant="h5" fontWeight="bold">
               {langKey && langKey.lottery}
       </Typography> */}
-      <TitleBreadCrumbs title={langKey && langKey.lottery} />
-      <ToastContainer />
+          <TitleBreadCrumbs title={langKey && langKey.lottery} />
+          <ToastContainer />
 
-      {/* category filter modal  */}
-     <LotteryCategoryModal open={filterCategory} handleClose={handleClose}/>
+          {/* category filter modal  */}
+          <LotteryCategoryModal
+            open={filterCategory}
+            handleClose={handleClose}
+          />
 
-      <Grid container mb={2} alignItems="center" justifyContent="space-between">
-        <Grid
-          item
-          xs={"auto"}
-          container
-          border="1px solid grey"
-          borderRadius="10px"
-        >
-          <MenuItem
-            sx={{ borderRadius: "10px 0px 0px 10px" }}
-            className={`${select === "" ? "filterTabSelected" : ""}`}
-            onClick={() => {
-              (router.push("/LotteryPage"),setSelect(''));
-            }}
+          <Grid
+            container
+            mb={2}
+            alignItems="center"
+            justifyContent="space-between"
           >
-            {langKey && langKey.all}
-          </MenuItem>
-        
-        
-          <MenuItem
-            sx={{ borderRadius: "0px 10px 10px 0px" }}
-            className={`${select === "favorite" ? "filterTabSelected" : ""}`}
-            onClick={() => {
-              (router.push("/LotteryPage?filter=favorite"),setSelect('favorite'));
-            }}
-          >
-            {langKey && langKey.favorites}
-          </MenuItem>
-
-
-        </Grid>
-        <Grid item xs={2}>
-          <FormControl fullWidth>
-            <Button variant="outlined" id="category-select-label" 
-            onClick={()=>{handleChartOpen()}}>
-              {" "}
-              {langKey && langKey.select_category}
-            </Button>
-            {/* <Select
-              labelId="demo-simple-select-label"
-              id="category-select"
-              value={category}
-              label="Select Category"
-              onChange={handleChange}
-              style={{ paddingY: "0px" }}
+            <Grid
+              item
+              xs={"auto"}
+              container
+              border="1px solid grey"
+              borderRadius="10px"
             >
-              <MenuItem value={""}>{langKey && langKey.all}</MenuItem>
-              {lotteryCategories &&
-                lotteryCategories.map((catData, index) => {
-                  if (catData.lottery_bind !== null)
-                    return (
-                      <MenuItem value={catData.id} key={catData.id}>
-                        {catData?.translation?.translation}
-                      </MenuItem>
-                    );
-                })}
-            </Select> */}
-          </FormControl>
-        </Grid>
-      </Grid>
+              <MenuItem
+                sx={{ borderRadius: "10px 0px 0px 10px" }}
+                className={`${select === "" ? "filterTabSelected" : ""}`}
+                onClick={() => {
+                  router.push("/LotteryPage"), setSelect("");
+                }}
+              >
+                {langKey && langKey.all}
+              </MenuItem>
 
-      <Grid container item xs={12}>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledHeaderCell align="left">
-                  {langKey && langKey.lottery}
-                </StyledHeaderCell>
-                <StyledHeaderCell align="left">
-                  {langKey && langKey.issue}
-                </StyledHeaderCell>
-                <StyledHeaderCell align="left">
-                  {langKey && langKey.draw_time}
-                </StyledHeaderCell>
-                <StyledHeaderCell align="center">
-                  {langKey && langKey.result}
-                </StyledHeaderCell>
-                <StyledHeaderCell align="center">
-                  {langKey && langKey.past_results}
-                </StyledHeaderCell>
-                <StyledHeaderCell align="center">
-                  {langKey && langKey.data_chart}
-                </StyledHeaderCell>
-                <StyledHeaderCell align="center">
-                  {langKey && langKey.favorites}
-                </StyledHeaderCell>
-              </TableRow>
-            </TableHead>
+              <MenuItem
+                sx={{ borderRadius: "0px 10px 10px 0px" }}
+                className={`${
+                  select === "favorite" ? "filterTabSelected" : ""
+                }`}
+                onClick={() => {
+                  router.push("/LotteryPage?filter=favorite"),
+                    setSelect("favorite");
+                }}
+              >
+                {langKey && langKey.favorites}
+              </MenuItem>
+            </Grid>
+            <Grid item xs={2}>
+              <FormControl fullWidth>
+                <Button
+                  variant="outlined"
+                  id="category-select-label"
+                  onClick={() => {
+                    handleChartOpen();
+                  }}
+                >
+                  {" "}
+                  {langKey && langKey.select_category}
+                </Button>
+              </FormControl>
+            </Grid>
+          </Grid>
 
-            <TableBody>
-              {loading && (
-                <TableRow>
-                  <TableCell component="th" scope="row" colSpan={7}>
-                    <Grid textAlign={"center"} item xs={12} paddingTop={5}>
-                      <DataLoading />
-                    </Grid>
-                  </TableCell>
-                </TableRow>
-              )}
-              {!loading &&
-                lotteryResultList?.data?.length > 0 &&
-                lotteryResultList.data.map((rowData, index) => {
-                  if (
-                    rowData &&
-                    rowData.lottery_bind != null &&
-                    rowData &&
-                    rowData.lottery.length > 0
-                  )
-                    return (
-                      <>
-                        <TableRow key={index}>
-                          <TableCell
-                            component="th"
-                            scope="row"
-                            colSpan={7}
-                            style={{
-                              backgroundColor: "#dbd6d6",
-                            }}
-                          >
-                            <Grid display="flex" alignItems="center">
-                              {" "}
-                              <Image
-                                alt={rowData.lottoTitle}
-                                width={30}
+          <Grid container item xs={12}>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledHeaderCell align="left">
+                      {langKey && langKey.lottery}
+                    </StyledHeaderCell>
+                    <StyledHeaderCell align="left">
+                      {langKey && langKey.issue}
+                    </StyledHeaderCell>
+                    <StyledHeaderCell align="left">
+                      {langKey && langKey.draw_time}
+                    </StyledHeaderCell>
+                    <StyledHeaderCell align="center">
+                      {langKey && langKey.result}
+                    </StyledHeaderCell>
+                    <StyledHeaderCell align="center">
+                      {langKey && langKey.past_results}
+                    </StyledHeaderCell>
+                    <StyledHeaderCell align="center">
+                      {langKey && langKey.data_chart}
+                    </StyledHeaderCell>
+                    <StyledHeaderCell align="center">
+                      {langKey && langKey.favorites}
+                    </StyledHeaderCell>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody>
+                  {loading && (
+                    <TableRow>
+                      <TableCell component="th" scope="row" colSpan={7}>
+                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                          <DataLoading />
+                        </Grid>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {!loading &&
+                    lotteryResultList?.data?.length > 0 &&
+                    lotteryResultList.data.map((rowData, index) => {
+                      if (
+                        rowData &&
+                        rowData.lottery_bind != null &&
+                        rowData &&
+                        rowData.lottery.length > 0
+                      )
+                        return (
+                          <>
+                            <TableRow key={index}>
+                              <TableCell
+                                component="th"
+                                scope="row"
+                                colSpan={7}
                                 style={{
-                                  marginRight: "10px",
-                                  width: "30px",
-                                  height: "30px",
-                                  borderRadius: "20px",
+                                  backgroundColor: "#dbd6d6",
                                 }}
-                                src={rowData.icon}
-                              />
-                              <Typography fontWeight={600} paddingLeft={1}>
-                                {rowData &&
-                                  rowData.translation &&
-                                  rowData.translation.translation}{" "}
-                              </Typography>
-                            </Grid>
-                          </TableCell>
-                        </TableRow>
-
-                        {rowData &&
-                          rowData.lottery &&
-                          rowData.lottery.map((item, index) => {
-                            return (
-                              <TableRow key={item?.latest_result?.id}>
-                                <TableCell component="th" scope="row">
-                                  <Grid
-                                    sx={{
-                                      display: "flex",
-                                      alignItems: "center",
+                              >
+                                <Grid display="flex" alignItems="center">
+                                  {" "}
+                                  <Image
+                                    alt={rowData.lottoTitle}
+                                    width={30}
+                                    style={{
+                                      marginRight: "10px",
+                                      width: "30px",
+                                      height: "30px",
+                                      borderRadius: "20px",
                                     }}
-                                  >
-                                    <Image
-                                      alt={item?.latest_result?.id+'icon'}
-                                      width="30px"
-                                      src={item.icon}
-                                      style={{}}
-                                    />{" "}
-                                    <Typography paddingLeft={1}>
-                                      {item?.translation?.translation}
-                                    </Typography>
-                                  </Grid>
-                                </TableCell>
-                                <TableCell align="left">
-                                  {item?.latest_result?.issue}
-                                </TableCell>
-                                <TableCell align="left">
-                                  {/* {item?.latest_result?.created_at} */}
-                                  {moment(
-                                    item?.latest_result?.created_at
-                                  ).format("YYYY-MM-DD")}
-                                </TableCell>
-                                <TableCell align="center">
-                                  <Grid
-                                    sx={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                    }}
-                                  >
-                                    {lottoTable(item?.latest_result)}
-                                  </Grid>
-                                </TableCell>
-                                <TableCell align="center">
-                                  <IconButton
-                                    sx={{
-                                      background: "#F3F3F3",
-                                      border: "1px solid #DDDDDD",
-                                    }}
-                                    //onClick={() => router.push('/lotteryPastResults')}
-                                    onClick={() => goToLotteryHistory(item)}
-                                  >
-                                    <Icon
-                                      width="25px"
-                                      icon="solar:clipboard-bold"
-                                      color="#6f6f6f"
-                                    />
-                                  </IconButton>
-                                </TableCell>
-                                <TableCell align="center">
-                                  <IconButton
-                                    sx={{
-                                      background: "#F3F3F3",
-                                      border: "1px solid #DDDDDD",
-                                    }}
-                                  >
-                                    <Icon
-                                      width="25px"
-                                      icon="material-symbols:add-chart-rounded"
-                                      color="#dddddd"
-                                    />
-                                  </IconButton>
-                                </TableCell>
-                                <TableCell align="center">
-                                  <IconButton
-                                    sx={{
-                                      background: "#F3F3F3",
-                                      border: "1px solid #DDDDDD",
-                                    }}
-                                  >
-                                    {/* {item.calories % 2 == 0 ? (
+                                    src={rowData.icon}
+                                  />
+                                  <Typography fontWeight={600} paddingLeft={1}>
+                                    {rowData &&
+                                      rowData.translation &&
+                                      rowData.translation.translation}{" "}
+                                  </Typography>
+                                </Grid>
+                              </TableCell>
+                            </TableRow>
+                            {rowData &&
+                              rowData.lottery &&
+                              rowData.lottery.map((item, index) => {
+                                return (
+                                  <TableRow key={item?.latest_result?.id}>
+                                    <TableCell component="th" scope="row">
+                                      <Grid
+                                        sx={{
+                                          display: "flex",
+                                          alignItems: "center",
+                                        }}
+                                      >
+                                        <Image
+                                          alt={item?.latest_result?.id + "icon"}
+                                          width="30px"
+                                          src={item.icon}
+                                          style={{}}
+                                        />{" "}
+                                        <Typography paddingLeft={1}>
+                                          {item?.translation?.translation}
+                                        </Typography>
+                                      </Grid>
+                                    </TableCell>
+                                    <TableCell align="left">
+                                      {item?.latest_result?.issue}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                      {/* {item?.latest_result?.created_at} */}
+                                      {moment(
+                                        item?.latest_result?.created_at
+                                      ).format("YYYY-MM-DD")}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                      <Grid
+                                        sx={{
+                                          display: "flex",
+                                          alignItems: "center",
+                                          justifyContent: "center",
+                                        }}
+                                      >
+                                        {lottoTable(item?.latest_result)}
+                                      </Grid>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                  
+                                      <IconButton
+                                        sx={{
+                                          background: "#F3F3F3",
+                                          border: "1px solid #DDDDDD",
+                                        }}
+                                        disabled={!checkActive(item?.active_features, "PastResult")}
+                                        onClick={() => goToLotteryHistory(item)}
+                                      >
+                                        <Icon
+                                          width="25px"
+                                          icon="solar:clipboard-bold"
+                                          color={ checkActive(item?.active_features, "PastResult") ? "#6f6f6f":'#e0e0e0'}
+                                        />
+                                      </IconButton>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                      <IconButton
+                                        sx={{
+                                          background: "#F3F3F3",
+                                          border: "1px solid #DDDDDD",
+                                        }}
+                                        disabled={!checkActive(item?.active_features, "Chart")}
+                                      >
+                                        <Icon
+                                          width="25px"
+                                          icon="material-symbols:add-chart-rounded"
+                                          color={ checkActive(item?.active_features, "Chart") ? "#6f6f6f":'#e0e0e0'}
+                                        />
+                                      </IconButton>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                      <IconButton
+                                        sx={{
+                                          background: "#F3F3F3",
+                                          border: "1px solid #DDDDDD",
+                                        }}
+                                      >
+                                        {/* {item.calories % 2 == 0 ? (
                                 <Icon
                                 width="20px"
                                   color="#C9C9C9"
@@ -522,85 +521,88 @@ export default function LotteryPage() {
                                   icon="clarity:favorite-solid"
                                 />
                               )} */}
-                              
-                                    {item.is_favorite ? (
-                                      <Icon
-                                        icon="ant-design:star-filled"
-                                        color="#F2DA00"
-                                        onClick={() => {
-                                          handleAddRemove(item?.lottery_id);
-                                        }}
-                                      />
-                                    ) : (
-                                      <Icon
-                                        icon="ant-design:star-filled"
-                                        color="#6f6f6f"
-                                        onClick={() => {
-                                          handleAddRemove(item?.lottery_id);
-                                        }}
-                                      />
-                                    )}
-                                  </IconButton>
-                                </TableCell>
-                              </TableRow>
-                            );
-                          })}
-                      </>
-                    );
-                })}
-                
-              {lotteryResultList?.data?.length == 0 && (
-                <TableRow>
-                  <TableCell component="th" scope="row" colSpan={7}>
-                    <Grid textAlign={"center"} item xs={12} paddingTop={5}>
-                      <img
-                        alt="not_found_2"
-                        style={{ height: "50vh" }}
-                        src="./assets/Home/not-found.gif"
-                      />
-                      <Typography textAlign="center">
-                        {langKey.no_lottery_data}
-                      </Typography>
-                    </Grid>
-                  </TableCell>
-                </TableRow>
-              )}
-              {!customer.member_ID && select == "favorite" && (
-                <TableRow>
-                  <TableCell component="th" scope="row" colSpan={7}>
-                    <Grid textAlign={"center"} item xs={12} paddingTop={5}>
-                      <Icon
-                        width="20vw"
-                        color="#ff733e"
-                        icon="material-symbols:login"
-                      />
-                      <Typography>
-                        {langKey?.login_for_favorite}
-                       
-                      </Typography>
-                    </Grid>
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {lotteryResultList?.data?.length > 0 && (
-          <Grid
-            my={1}
-            item
-            xs={12}
-            sx={{ justifyContent: "center", display: "flex" }}
-          >
-            <Pagination
-              count={lotteryResultList.last_page}
-              page={page}
-              onChange={handlePageChange}
-            />
-          </Grid>
-        )}
 
-        {/* {rows?.length > 0 && (
+                                        {item.is_favorite ? (
+                                          <Icon
+                                            icon="ant-design:star-filled"
+                                            color="#F2DA00"
+                                            onClick={() => {
+                                              handleAddRemove(item?.lottery_id);
+                                            }}
+                                          />
+                                        ) : (
+                                          <Icon
+                                            icon="ant-design:star-filled"
+                                            color="#6f6f6f"
+                                            onClick={() => {
+                                              handleAddRemove(item?.lottery_id);
+                                            }}
+                                          />
+                                        )}
+                                      </IconButton>
+                                    </TableCell>
+                                  </TableRow>
+                                );
+                              })}
+                          </>
+                        );
+                    })}
+
+                  {lotteryResultList?.data?.length == 0 && !loading ||
+                    (noDataSign && !loading &&(
+                      <TableRow>
+                        <TableCell component="th" scope="row" colSpan={7}>
+                          <Grid
+                            textAlign={"center"}
+                            item
+                            xs={12}
+                            paddingTop={5}
+                          >
+                            <img
+                              alt="not_found_2"
+                              style={{ height: "50vh" }}
+                              src="./assets/Home/not-found.gif"
+                            />
+                            <Typography textAlign="center">
+                              {langKey.no_lottery_data}
+                            </Typography>
+                          </Grid>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  {!customer.member_ID && select == "favorite" && (
+                    <TableRow>
+                      <TableCell component="th" scope="row" colSpan={7}>
+                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                          <Icon
+                            width="20vw"
+                            color="#ff733e"
+                            icon="material-symbols:login"
+                          />
+                          <Typography>{langKey?.login_for_favorite}</Typography>
+                        </Grid>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {lotteryResultList?.data?.length > 0 && (
+              <Grid
+                mt={10}
+                item
+                xs={12}
+                sx={{ justifyContent: "center", display: "flex" }}
+              >
+                <Pagination
+                  count={lotteryResultList.last_page}
+                  page={page}
+                  onChange={handlePageChange}
+                />
+              </Grid>
+            )}
+
+            {/* {rows?.length > 0 && (
             <Grid
               item
               xs={12}
@@ -616,11 +618,11 @@ export default function LotteryPage() {
             </Grid>
           )}
       */}
-      </Grid>
+          </Grid>
+        </>
+      )}
     </>
-  )
-}
- </>
+  );
 }
 
 export function lottoTable(lottos) {
