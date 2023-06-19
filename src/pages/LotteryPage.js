@@ -88,13 +88,11 @@ export default function LotteryPage() {
   };
 
 
-  useEffect(() => {
-    if(Cookies.get('token')) {
-      setMounted(true);
-    }else {
-      goToLogin();
-    }
-  },[]);
+  // useEffect(() => {    
+  //   if(Cookies.get('token') && select == 'favorite') {
+  //     goToLogin();
+  //   }
+  // },[]);
 
   const goToLogin = () => {
     Router.push("/login");
@@ -274,9 +272,16 @@ export default function LotteryPage() {
     setSelect(pick);
     setPage(1);
   };
-  return <>
-  {
-        mounted && (
+  const handleFavoriteLogin=()=>{
+    //router.push("/LotteryPage?filter=favorite"),setSelect('favorite')
+   
+    if(Cookies.get('token')) {
+      router.push("/LotteryPage?filter=favorite"),setSelect('favorite')
+        } else {
+          goToLogin();
+        }
+  }
+  return  (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
               {langKey && langKey.lottery}
@@ -298,9 +303,8 @@ export default function LotteryPage() {
           <MenuItem
             sx={{ borderRadius: "10px 0px 0px 10px" }}
             className={`${select === "" ? "filterTabSelected" : ""}`}
-            onClick={() => {
-              (router.push("/LotteryPage"),setSelect(''));
-            }}
+            onClick={() => 
+            {router.push("/LotteryPage"),setSelect('')}}
           >
             {langKey && langKey.all}
           </MenuItem>
@@ -309,9 +313,7 @@ export default function LotteryPage() {
           <MenuItem
             sx={{ borderRadius: "0px 10px 10px 0px" }}
             className={`${select === "favorite" ? "filterTabSelected" : ""}`}
-            onClick={() => {
-              (router.push("/LotteryPage?filter=favorite"),setSelect('favorite'));
-            }}
+            onClick={() => handleFavoriteLogin()}
           >
             {langKey && langKey.favorites}
           </MenuItem>
@@ -353,10 +355,10 @@ export default function LotteryPage() {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledHeaderCell align="left">
-                  {langKey && langKey.lottery}
+                <StyledHeaderCell align="center">
+                  {langKey && langKey.lottery} 
                 </StyledHeaderCell>
-                <StyledHeaderCell align="left">
+                <StyledHeaderCell align="center">
                   {langKey && langKey.issue}
                 </StyledHeaderCell>
                 <StyledHeaderCell align="left">
@@ -618,9 +620,8 @@ export default function LotteryPage() {
       */}
       </Grid>
     </>
-  )
-}
- </>
+        )
+
 }
 
 export function lottoTable(lottos) {
