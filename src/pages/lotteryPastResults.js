@@ -204,7 +204,7 @@ if(id!== undefined)
                     }}
                     style={{ display: "flex", alignItems: "center" }}
                   >
-                    {router?.query?.title} Category
+                    {router?.query?.title} 
                   </div>
                 </div>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>

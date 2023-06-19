@@ -16,12 +16,16 @@ import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import ScoreTable from "@/components/football/ScoreTable";
 import Schedule from "@/components/football/schedule";
 
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 import FootBallFollow from "@/components/football/FootBallFollow";
 import FootBallEnd from "@/components/football/FootBallEnd";
+import {
+  getScheduleList
+} from "@/store/actions/lotteryActions";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -71,7 +75,8 @@ const data = [
 
 export default function FootBallPage() {
   const router = useRouter();
-
+  const { i18n } = useTranslation();
+  const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
   const [selectedName, setSelectedName] = useState([]);
 
@@ -89,6 +94,10 @@ export default function FootBallPage() {
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
+  
+  const {
+    scheduleResultList = []  
+  } = useSelector((state) => state?.lottery);
 
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
@@ -100,6 +109,32 @@ export default function FootBallPage() {
       setValue("Follow");
     }
   }, [router.asPath]);
+
+  useEffect(() => {
+    // setLoading(true);
+    dispatch(
+      getScheduleList({
+        params: {
+          rowsPerPage: perPage,
+          page: page,
+          lang_id: utils.convertLangCodeToID(i18n.language),
+          member_id: customer.member_ID,
+          pick: select,
+          category_id: category,
+        },
+        callback: (res) => {
+          // page == 1
+          //   ? (setLotteryHistories(res.data.data),
+          //     setPageLimit(res.data.last_page),
+          //     handleClose())
+          //   : setLotteryHistories((data) => data.concat(res.data.data));
+          handleClose();
+        },
+      })
+    );
+    // dispatch(getLatestLottery("hey"));
+    // setLoading(false);
+  }, [page, select, category]);
 
   const renderSelectGroup = (product) => {
     const items = product.plans.map((p) => {
