@@ -24,6 +24,7 @@ import {
   Stack,
   Divider,
   Pagination,
+  Button,
 } from "@mui/material";
 import { getLatestLottery } from "@/store/actions/lotteryActions";
 import {
@@ -40,6 +41,7 @@ import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import DataLoading from "@/components/DataLoading";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
+import LotteryCategoryModal from "@/components/lottery/LotteryCategoryModal";
 import { addRemoveFavourite } from "@/store/actions/favouriteActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -57,22 +59,14 @@ const toastOption = {
 };
 import { Image } from "mui-image";
 import utils from "@/common/utils";
-const style = {
-  position: "absolute",
-  top: "300px",
-  left: "75%",
-  transform: "translate(-50%, -50%)",
-  width: 600,
-  bgcolor: "background.paper",
-  border: "1px solid #DDDDDD",
-  p: 2,
-};
+
 
 export default function LotteryPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const [select, setSelect] = useState("");
   const [category, setCategory] = useState("");
+  const [lotteryData, setLotteryData] = useState([]);
   const { i18n } = useTranslation();
   const perPage = 5;
   const [value, setValue] = React.useState(0);
@@ -108,7 +102,7 @@ export default function LotteryPage() {
 
   const goToLotteryHistory = (lottery = {}) => {
     const title =
-      lottery?.translation?.translation + lottery?.latest_result?.issue;
+      lottery?.translation?.translation;
     router.push(
       {
         pathname: "/lotteryHistory",
@@ -142,19 +136,17 @@ export default function LotteryPage() {
   // past result modal controls
 
   const [pastResult, setPastResult] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   // chart modal control
-  const [chartModalData, setChartModalData] = useState("");
 
-  const [chart, setChart] = useState(false);
-  const handleChartOpen = (data) => {
-    setChartModalData(data);
-    setChart(true);
+  const [filterCategory, setFilterCategory] = useState(false);
+  const handleChartOpen = () => {
+    setFilterCategory(true);
   };
 
   const handleClose = () => {
-    setChart(false);
-    setPastResult(false);
+    setFilterCategory(false);
   };
 
   const [page, setPage] = useState(1);
@@ -176,6 +168,7 @@ export default function LotteryPage() {
           category_id: category,
         },
         callback: (res) => {
+          setLotteryData(res && res.data)
           // page == 1
           //   ? (setLotteryHistories(res.data.data),
           //     setPageLimit(res.data.last_page),
@@ -222,12 +215,12 @@ export default function LotteryPage() {
     handleGetCategory();
   }, [handleGetCategory]);
   useEffect(() => {
-    let temp = lotteryResultByID;
+    let temp = lotteryData;
     if (!customer.member_ID && select == "favorite") temp = {};
-    else temp = lotteryResultByID;
+    else temp = lotteryData;
 
     setLotteryResultList(temp);
-  }, [lotteryResultByID]);
+  }, [lotteryData]);
   React.useEffect(() => {
     if (value >= 0) {
       let hash = "";
@@ -251,6 +244,7 @@ export default function LotteryPage() {
               member_ID: customer?.member_ID,
             },
             callback: (res) => {
+              setFavorite(true)
               toast.success(langKey[res?.message], toastOption);
               dispatch(
                 getLotteryResultByCategoryId({
@@ -264,7 +258,7 @@ export default function LotteryPage() {
                   },
                   callback: (res) => {
                     // handleClose();
-
+                    setLotteryData(res && res.data)
                     console.log("");
                   },
                 })
@@ -290,151 +284,9 @@ export default function LotteryPage() {
       <TitleBreadCrumbs title={langKey && langKey.lottery} />
       <ToastContainer />
 
-      {/* chart modal  */}
-      <Modal
-        open={chart}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={chart}>
-          <Grid sx={style}>
-            <Divider>
-              <Typography id="transition-modal-title" variant="h6">
-                Speed ​​color series {chartModalData}
-              </Typography>
-            </Divider>
-            <Grid container>
-              <Grid item xs={4} p={1} position="relative">
-                <div className="ribbon ribbon-top-right">
-                  <span>New</span>
-                </div>
+      {/* category filter modal  */}
+     <LotteryCategoryModal open={filterCategory} handleClose={handleClose}/>
 
-                <Grid
-                  sx={{
-                    background: "#F3F3F3",
-                    border: "1px solid #DDDDDD",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid
-                  sx={{
-                    background: "#F3F3F3",
-                    border: "1px solid #DDDDDD",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid
-                  sx={{
-                    background: "#F3F3F3",
-                    border: "1px solid #DDDDDD",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid
-                  sx={{
-                    background: "#F3F3F3",
-                    border: "1px solid #DDDDDD",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid
-                  sx={{
-                    background: "#F3F3F3",
-                    border: "1px solid #DDDDDD",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid
-                  sx={{
-                    background: "#F3F3F3",
-                    border: "1px solid #DDDDDD",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid
-                  sx={{
-                    background: "#F3F3F3",
-                    border: "1px solid #DDDDDD",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid
-                  sx={{
-                    background: "#F3F3F3",
-                    border: "1px solid #DDDDDD",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={4} p={1}>
-                <Grid
-                  sx={{
-                    background: "#F3F3F3",
-                    border: "1px solid #DDDDDD",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography>Speed Racing</Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Fade>
-      </Modal>
       <Grid container mb={2} alignItems="center" justifyContent="space-between">
         <Grid
           item
@@ -468,11 +320,12 @@ export default function LotteryPage() {
         </Grid>
         <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel id="category-select-label">
+            <Button variant="outlined" id="category-select-label" 
+            onClick={()=>{handleChartOpen()}}>
               {" "}
               {langKey && langKey.select_category}
-            </InputLabel>
-            <Select
+            </Button>
+            {/* <Select
               labelId="demo-simple-select-label"
               id="category-select"
               value={category}
@@ -485,12 +338,12 @@ export default function LotteryPage() {
                 lotteryCategories.map((catData, index) => {
                   if (catData.lottery_bind !== null)
                     return (
-                      <MenuItem value={catData.id}>
+                      <MenuItem value={catData.id} key={catData.id}>
                         {catData?.translation?.translation}
                       </MenuItem>
                     );
                 })}
-            </Select>
+            </Select> */}
           </FormControl>
         </Grid>
       </Grid>
@@ -516,7 +369,7 @@ export default function LotteryPage() {
                   {langKey && langKey.past_results}
                 </StyledHeaderCell>
                 <StyledHeaderCell align="center">
-                  {langKey && langKey.chart}
+                  {langKey && langKey.data_chart}
                 </StyledHeaderCell>
                 <StyledHeaderCell align="center">
                   {langKey && langKey.favorites}
@@ -589,7 +442,7 @@ export default function LotteryPage() {
                                     }}
                                   >
                                     <Image
-                                      alt={item?.latest_result?.id}
+                                      alt={item?.latest_result?.id+'icon'}
                                       width="30px"
                                       src={item.icon}
                                       style={{}}
@@ -629,8 +482,9 @@ export default function LotteryPage() {
                                     onClick={() => goToLotteryHistory(item)}
                                   >
                                     <Icon
-                                      width="20px"
-                                      icon="solar:clipboard-list-broken"
+                                      width="25px"
+                                      icon="solar:clipboard-bold"
+                                      color="#6f6f6f"
                                     />
                                   </IconButton>
                                 </TableCell>
@@ -640,11 +494,11 @@ export default function LotteryPage() {
                                       background: "#F3F3F3",
                                       border: "1px solid #DDDDDD",
                                     }}
-                                    // onClick={() => handleChartOpen(3)}
                                   >
                                     <Icon
                                       width="25px"
                                       icon="material-symbols:add-chart-rounded"
+                                      color="#dddddd"
                                     />
                                   </IconButton>
                                 </TableCell>
@@ -668,6 +522,7 @@ export default function LotteryPage() {
                                   icon="clarity:favorite-solid"
                                 />
                               )} */}
+                              
                                     {item.is_favorite ? (
                                       <Icon
                                         icon="ant-design:star-filled"
@@ -679,7 +534,7 @@ export default function LotteryPage() {
                                     ) : (
                                       <Icon
                                         icon="ant-design:star-filled"
-                                        color="#ddd"
+                                        color="#6f6f6f"
                                         onClick={() => {
                                           handleAddRemove(item?.lottery_id);
                                         }}
@@ -798,7 +653,7 @@ export function lottoTable(lottos) {
                 container
                 justifyContent="center"
                 alignItems="center"
-                key={index}
+                key={lotto.num}
                 mx={0.2}
                 sx={{
                   background: lotto.color,

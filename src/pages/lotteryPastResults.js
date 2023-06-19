@@ -55,6 +55,7 @@ export default function LotteryPastReults() {
   const rowsPerPage = 10
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
+  const [toSearch, setToSearch] = useState(false);
   const [titleIcon, setTitleIcon] = useState({ title: "", icon: "" });
   const [currentPage, setCurrentPage] = useState(1);
   const [expanded, setExpanded] = useState("");
@@ -111,13 +112,13 @@ const {total} = useSelector(
   };
 
   useEffect(() => {
-    if (id !== undefined) {
+    if (id !== undefined && !toSearch) {
       handleGetLotteryHistory(), setFilter(filter == "" ? id : filter);
     }
   }, [currentPage, router.isReady, filter, i18n.language]);
 
   useEffect(() => {
-    setCurrentPage(1);
+    allReset()
   }, [filter]);
 
   useEffect(()=>{
@@ -144,7 +145,7 @@ const {total} = useSelector(
         },
       })
     );
-  }, []);
+  }, [i18n.language]);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -200,7 +201,7 @@ const pagination = <Pagination
     page={currentPage}
     onChange={handlePageChange}
   />
-    return {item,pagination};
+    return({item,pagination});
   };
   const localChange =(key)=>{
     switch(key){
@@ -212,9 +213,17 @@ const pagination = <Pagination
           return 'en'
     }
   }
+  const allReset=()=>{
+    setSearch(''),
+    setCurrentPage(1)
+  }
   return (
     <>
+<<<<<<< HEAD
       <TitleBreadCrumbs title={langKey && langKey.past_result} />
+=======
+      <TitleBreadCrumbs title={langKey?.past_results} />
+>>>>>>> 19ca9519bcb45f7442d74510d7bee54a5518d469
       <Grid container height="100vh">
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
@@ -235,7 +244,7 @@ const pagination = <Pagination
                               "--iconImg": `url("${item?.icon}")`,
                             }}
                           ></div>
-                          <div className="line"></div>
+                          {/* <div className="line"></div> */}
                         </div>
 
                         <div
@@ -244,10 +253,11 @@ const pagination = <Pagination
                         >
                           {item?.translation?.translation
                             ? item.translation.translation
-                            : "title not available"}
+                            : ""}
                         </div>
                       </div>
                       <Collapse
+                      style={{paddingLeft:'20px'}}
                         in={expanded == item.id}
                         timeout="auto"
                         unmountOnExit
@@ -271,7 +281,7 @@ const pagination = <Pagination
                                           title:
                                             lottery.translation.translation,
                                           icon: lottery.icon,
-                                        }),setCurrentPage(1);
+                                        });
                                     }}
                                     className="circle"
                                     style={{
@@ -287,7 +297,7 @@ const pagination = <Pagination
                                       setTitleIcon({
                                         title: lottery.translation.translation,
                                         icon: lottery.icon,
-                                      }),setCurrentPage(1);
+                                      });
                                   }}
                                 >
                                   {lottery?.translation?.translation}
@@ -355,6 +365,8 @@ const pagination = <Pagination
               </FormControl>
               <Button
                 variant="contained"
+                disabled={search=='' ? true:false}
+
                 sx={{
                   background: "#FF6F31",
                   paddingTop: "5px",
@@ -362,7 +374,22 @@ const pagination = <Pagination
                   color: "white",
                   textTransform: "capitalize",
                 }}
-                onClick={()=>(setSearch(''),setCurrentPage(1))}
+                onClick={()=>(setToSearch(true),setCurrentPage(1))}
+              >
+                {langKey?.search}
+              </Button>
+
+              <Button
+                variant="contained"
+                sx={{
+                  background: "#FF6F31",
+                  paddingTop: "5px",
+                  paddingBottom: "5px",
+                  color: "white",
+                  textTransform: "capitalize",
+                  marginLeft:'5px'
+                }}
+                onClick={()=>(setToSearch(false),allReset())}
               >
                 {langKey?.reset}
               </Button>
@@ -384,7 +411,7 @@ const pagination = <Pagination
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {search != "" &&
+                  {toSearch &&
                     lotteryGameHistoryResult().item?.slice((currentPage-1)*rowsPerPage,(rowsPerPage*currentPage)).map((item, index) => {
                       return (
                         <StyledTableRow key={index}>
@@ -408,7 +435,7 @@ const pagination = <Pagination
                         </StyledTableRow>
                       );
                     })}
-                    {search != "" && lotteryGameHistoryResult().item?.length ==0 &&
+                    {toSearch && lotteryGameHistoryResult().item?.length ==0 &&
                      <TableRow>
                      <TableCell component="th" scope="row" colSpan={3}>
                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
@@ -427,7 +454,7 @@ const pagination = <Pagination
                     }
 
                   {!loading_history &&
-                    search == "" &&
+                    !toSearch &&
                     lotteryHistories?.data?.length > 0 &&
                     lotteryHistories?.data?.map((item, index) => {
                       return (
@@ -466,7 +493,7 @@ const pagination = <Pagination
                 </TableBody>
               </Table>
             </TableContainer>
-            {search == "" ? (
+            {!toSearch ? (
               lotteryHistories?.data?.length > 0 && (
                 <Grid
                   my={1}
