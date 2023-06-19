@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import ScoreTable from "@/components/football/ScoreTable";
 import Schedule from "@/components/football/schedule";
@@ -79,6 +79,7 @@ export default function FootBallPage() {
   const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
   const [selectedName, setSelectedName] = useState([]);
+  const [page, setPage] = useState(1);
 
   const handleChange = (event) => {
     const {
@@ -112,29 +113,27 @@ export default function FootBallPage() {
 
   useEffect(() => {
     // setLoading(true);
-    dispatch(
-      getScheduleList({
-        params: {
-          rowsPerPage: perPage,
-          page: page,
-          lang_id: utils.convertLangCodeToID(i18n.language),
-          member_id: customer.member_ID,
-          pick: select,
-          category_id: category,
-        },
-        callback: (res) => {
-          // page == 1
-          //   ? (setLotteryHistories(res.data.data),
-          //     setPageLimit(res.data.last_page),
-          //     handleClose())
-          //   : setLotteryHistories((data) => data.concat(res.data.data));
-          handleClose();
-        },
-      })
-    );
+    // dispatch(
+    //   getScheduleList({
+    //     params: {
+    //       rowsPerPage: 10,
+    //       page: page,
+    //       lang_id: utils.convertLangCodeToID(i18n.language),
+    //       member_id: customer.member_ID          
+    //     },
+    //     callback: (res) => {
+    //       // page == 1
+    //       //   ? (setLotteryHistories(res.data.data),
+    //       //     setPageLimit(res.data.last_page),
+    //       //     handleClose())
+    //       //   : setLotteryHistories((data) => data.concat(res.data.data));
+    //       handleClose();
+    //     },
+    //   })
+    // );
     // dispatch(getLatestLottery("hey"));
     // setLoading(false);
-  }, [page, select, category]);
+  }, [page]);
 
   const renderSelectGroup = (product) => {
     const items = product.plans.map((p) => {
