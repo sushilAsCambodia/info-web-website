@@ -35,22 +35,39 @@ export default function ProfileAnnouncement() {
 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
-  const { announcements } = useSelector(
-    (state) => state?.announcement
-  );
-  // const announcements = announcement?.filter((item) => {
-  //   return item.status === "0";
-  // });
+  const  {announcements,current_page,per_page,last_page}  = useSelector((state) => state?.announcement);
+
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(page);
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
 
   useEffect(() => {
     dispatch(
       getAnnouncement({
-        params: { lang_id: utils.convertLangCodeToID(langKey), take: 10 },
+        params: { lang_id: utils.convertLangCodeToID(langKey), rowsPerPage: 6,page:currentPage },
         callback: (res) => {},
       })
     );
-  }, [langKey]);
+  }, [langKey,currentPage]);
+
+
+  const handleScroll = (event) => {
+    if (
+      last_page !== currentPage &&
+      last_page > currentPage &&
+      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+        event.currentTarget.clientHeight
+    ) {
+      setCurrentPage(currentPage + 1);
+      
+    }
+  };
+
+
 
   return (
     <Grid
@@ -78,10 +95,10 @@ export default function ProfileAnnouncement() {
                   <Grid item xs={12}>
                     <Grid item>
                       <Grid item display="flex" justifyContent="space-between" alignItems="center">
-                        <Typography fontWeight="700" fontSize="14px" color="#000">{item.title}</Typography>
+                        <Typography fontWeight="700" fontSize="14px" color="#000">{item.title} </Typography>
                         <Icon icon="radix-icons:dot-filled" fontSize={30} color="red" />
                       </Grid>
-                      <Typography textAlign="left" fontSize="14px !important" color="#8C8C8C">{item.comment}</Typography>
+                      <Typography textAlign="left" fontSize="14px !important" color="#8C8C8C">{item.comment} </Typography>
                       <Typography textAlign="left" paddingTop={1} fontSize="12px !important" color="#000">{ moment(item.created_at).format(utils.DateWithTime) }</Typography>
                     </Grid>
                   </Grid>
@@ -90,14 +107,28 @@ export default function ProfileAnnouncement() {
             })}
 
           </List>
-          {announcements?.length > 0 && <Grid item xs={12} textAlign="center" display="flex" justifyContent="center" paddingTop={3}>
-            <Stack spacing={2} sx={{ textAlign: "center" }}>
-              <Pagination count={5} variant="outlined" shape="rounded" />
-            </Stack>
-          </Grid>}
-          
-          {announcements?.length == 0 && <NoDataMessage />}
+
+            {announcements?.length == 0 && (
+             <NoDataMessage />
+            )}
+
+
         </Grid>
+
+        {announcements?.length > 0 && (
+            <Grid
+              item
+              xs={12}
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              paddingTop={3}
+            >
+              <Stack spacing={2} sx={{ textAlign: "center" }}>
+                <Pagination count={last_page} page={currentPage} onChange={handleChange} variant="outlined" shape="rounded" className="announce-pagination" />
+              </Stack>
+            </Grid>
+          )}
       </Grid>
     </Grid>
 
