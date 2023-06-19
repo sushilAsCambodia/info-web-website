@@ -214,7 +214,7 @@ const pagination = <Pagination
   }
   return (
     <>
-      <TitleBreadCrumbs title={"Past Result"} />
+      <TitleBreadCrumbs title={langKey && langKey.past_result} />
       <Grid container height="100vh">
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
