@@ -206,7 +206,7 @@ setOpen(true)
                         fontSize="12px"
                         color="#8C8C8C"
                       >
-                        { moment(item.created_at).format(utils.letterFormat2) }
+                        { moment(item.created_at).format(utils.letterFormat2) } 
                       </Typography>
                     </Grid>
                   </Grid>
@@ -307,7 +307,7 @@ setOpen(true)
                                   fontSize="12px !important"
                                   color="#8C8C8C"
                                 >
-                                 { moment(item.created_at).format(utils.DateWithTime) }
+                                 { moment(item.created_at).format(utils.letterFormat2) }
                                 </Typography>
                               </Grid>
                             </Grid>
