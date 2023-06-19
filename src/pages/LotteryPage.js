@@ -439,9 +439,7 @@ export default function LotteryPage() {
                                 </TableCell>
                                 <TableCell align="left">
                                   {/* {item?.latest_result?.created_at} */}
-                                  {moment(
-                                    item?.latest_result?.created_at
-                                  ).format("YYYY-MM-DD")}
+                                  {item?.latest_result?.opendate}
                                 </TableCell>
                                 <TableCell align="center">
                                   <Grid
