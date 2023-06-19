@@ -317,6 +317,7 @@ export default function Register() {
             sm={12}
             padding={2}
             alignContent="space-evenly"
+            my={10}
           >
             <Grid container alignContent="center" minHeight="100px">
               <Typography variant="h5" sx={{ position: "relative" }}>
@@ -334,7 +335,7 @@ export default function Register() {
                 width: "100%",
               }}
             >
-              <Grid my={7}>
+              <Grid >
                 <Grid item xs={12} sm={12} mb={3}>
                   <Typography fontWeight="bold" pb={1}>
                     {langKey && (langKey.user_name || t("user_name"))}

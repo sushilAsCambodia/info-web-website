@@ -402,10 +402,12 @@ export default function LotteryPage() {
                       <>
                         <TableRow key={index}>
                           <TableCell
-                            component="th"
-                            scope="row"
-                            colSpan={7}
-                            style={{
+                          align="center"
+                          textAlign="center"
+                          component="th"
+                          scope="row"
+                          colSpan={7}
+                          style={{
                               backgroundColor: "#dbd6d6",
                             }}
                           >
@@ -436,7 +438,7 @@ export default function LotteryPage() {
                           rowData.lottery.map((item, index) => {
                             return (
                               <TableRow key={item?.latest_result?.id}>
-                                <TableCell component="th" scope="row">
+                                <TableCell component="th" scope="row" align="center">
                                   <Grid
                                     sx={{
                                       display: "flex",
@@ -454,10 +456,10 @@ export default function LotteryPage() {
                                     </Typography>
                                   </Grid>
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align="center">
                                   {item?.latest_result?.issue}
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align="center">
                                   {/* {item?.latest_result?.created_at} */}
                                   {item?.latest_result?.opendate}
                                 </TableCell>
