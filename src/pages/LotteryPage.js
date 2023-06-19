@@ -592,7 +592,7 @@ export default function LotteryPage() {
                 </TableBody>
               </Table>
             </TableContainer>
-            {lotteryResultList?.data?.length > 0 && (
+            {lotteryResultList?.data?.length > 0 && !noDataSign && (
               <Grid
                 mt={10}
                 item

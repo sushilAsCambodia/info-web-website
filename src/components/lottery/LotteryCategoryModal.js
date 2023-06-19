@@ -18,7 +18,7 @@ import { getLotteryResultByCategoryId,getLotteryCategory } from "@/store/actions
 const style = {
   position: "absolute",
   top: "300px",
-  left: "75%",
+  right: "-140px",
   transform: "translate(-50%, -50%)",
   width: 600,
   bgcolor: "background.paper",
@@ -83,7 +83,7 @@ const LotteryCategoryModal = (props) => {
               return (
                 <>
                   <Divider>
-                    <Typography id="transition-modal-title" title={item?.translation?.translation} variant="h6" className="singleLinesEllips" style={{maxWidth:'500px'}}>
+                    <Typography id="transition-modal-title" title={item?.translation?.translation} fontSize='14px' className="singleLinesEllips" style={{maxWidth:'500px'}}>
                       {item?.translation?.translation}
                     </Typography>
                   </Divider>
@@ -112,7 +112,7 @@ const LotteryCategoryModal = (props) => {
                               onClick={()=>{router.push(`/lotteryPastResults?title=${lottery?.translation?.translation}&id=${lottery.id}&categoryId=${lottery.category_id}`)}}
 
                             >
-                              <Typography title={lottery?.translation?.translation} className="singleLinesEllips">
+                              <Typography fontSize="14px" title={lottery?.translation?.translation} className="singleLinesEllips">
                                 {lottery?.translation?.translation}
                               </Typography>
                             </Grid>
