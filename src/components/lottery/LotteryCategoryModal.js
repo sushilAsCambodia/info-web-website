@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { useEffect,useState } from "react";
 import {
   Grid,
   Typography,
@@ -12,7 +13,8 @@ import utils from "@/common/utils";
 import moment from "moment/moment";
 import Image from "mui-image";
 import { useRouter } from "next/router";
-
+import { useTranslation } from "react-i18next";
+import { getLotteryResultByCategoryId,getLotteryCategory } from "@/store/actions/lotteryActions";
 const style = {
   position: "absolute",
   top: "300px",
@@ -26,18 +28,42 @@ const style = {
 
 const LotteryCategoryModal = (props) => {
     const router = useRouter()
-  const { lotteryResultByID = [] } = useSelector((state) => state.lottery);
+  const { lotteryResultByID = [],lotteryCategories=[] } = useSelector((state) => state.lottery);
+  const [categoryData, setCategoryData] = useState([]);
+
+  const {customer}=useSelector((state)=>state.auth)
+  const dispatch = useDispatch();
 
   const { open, handleClose } = props;
+  const { i18n } = useTranslation();
 
   const lotteryResultByIDFilter = () => {
-    const item = lotteryResultByID?.data?.filter((obj) => {
+    const item = categoryData?.data?.filter((obj) => {
       return obj.lottery_bind !== null && obj.lottery.length > 0;
     });
     return item;
   };
 
-  console.log("category lists:::", lotteryResultByIDFilter());
+  useEffect(() => {
+    if(open){
+    dispatch(
+      getLotteryResultByCategoryId({
+        params: {
+            // rowsPerPage: rowsPerPage,
+            // page: 1,
+            lang_id: utils.convertLangCodeToID(i18n.language),
+            pick: "",
+            category_id: "",
+        },
+        callback: (res) => {
+        //   console.log(':::datamodal',res.data)
+          setCategoryData(res?.data)
+        },
+      })
+    );
+  }
+  }, [i18n.language,open]);
+  
   return (
     <Modal
       open={open}

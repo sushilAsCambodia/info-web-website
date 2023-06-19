@@ -548,7 +548,8 @@ export default function LotteryPage() {
                       </>
                     );
                 })}
-              {lotteryResultList?.data?.length === 0 && (
+                
+              {lotteryResultList?.data?.length == 0 && (
                 <TableRow>
                   <TableCell component="th" scope="row" colSpan={7}>
                     <Grid textAlign={"center"} item xs={12} paddingTop={5}>
