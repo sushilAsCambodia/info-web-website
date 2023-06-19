@@ -43,7 +43,8 @@ import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 import { addRemoveFavourite } from "@/store/actions/favouriteActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Cookies from "js-cookie";
+import Router from "next/router";
 const toastOption = {
   position: toast.POSITION.TOP_RIGHT,
   autoClose: 2000,
@@ -76,6 +77,7 @@ export default function LotteryPage() {
   const perPage = 5;
   const [value, setValue] = React.useState(0);
   const langKey = useSelector((state) => state?.load_language?.language);
+  const [mounted, setMounted] = useState(false);
   const {filter}=router.query
   const {
     lotteryCategories = [],
@@ -89,6 +91,19 @@ export default function LotteryPage() {
   const handleChange = (event) => {
     setPage(1);
     setCategory(event.target.value);
+  };
+
+
+  useEffect(() => {
+    if(Cookies.get('token')) {
+      setMounted(true);
+    }else {
+      goToLogin();
+    }
+  },[]);
+
+  const goToLogin = () => {
+    Router.push("/login");
   };
 
   const goToLotteryHistory = (lottery = {}) => {
@@ -265,7 +280,9 @@ export default function LotteryPage() {
     setSelect(pick);
     setPage(1);
   };
-  return (
+  return <>
+  {
+        mounted && (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
               {langKey && langKey.lottery}
@@ -435,6 +452,8 @@ export default function LotteryPage() {
           >
             {langKey && langKey.all}
           </MenuItem>
+        
+        
           <MenuItem
             sx={{ borderRadius: "0px 10px 10px 0px" }}
             className={`${select === "favorite" ? "filterTabSelected" : ""}`}
@@ -444,6 +463,8 @@ export default function LotteryPage() {
           >
             {langKey && langKey.favorites}
           </MenuItem>
+
+
         </Grid>
         <Grid item xs={2}>
           <FormControl fullWidth>
@@ -459,7 +480,7 @@ export default function LotteryPage() {
               onChange={handleChange}
               style={{ paddingY: "0px" }}
             >
-              <MenuItem value={""}>all</MenuItem>
+              <MenuItem value={""}>{langKey && langKey.all}</MenuItem>
               {lotteryCategories &&
                 lotteryCategories.map((catData, index) => {
                   if (catData.lottery_bind !== null)
@@ -741,7 +762,9 @@ export default function LotteryPage() {
       */}
       </Grid>
     </>
-  );
+  )
+}
+ </>
 }
 
 export function lottoTable(lottos) {
