@@ -115,11 +115,11 @@ export const getLotteryResultByCategoryId = createAsyncThunk(
   }
 );
 
-export const getScheduleList = createAsyncThunk(
-  "matchschedule/list",
+export const getLotteryHistoryAll = createAsyncThunk(
+  "lottery/history/all",
   async ({ params = {}, callback }) => {
     try {
-      const response = await api.get('api/lotto/data44-aistat/match-schedules?competition_id=70&season=2023&isFinish=0', params);
+      const response = await api.get('lotto/lotteryResult/all', params);
       const { data, status } = response;
       data["status_code"] = status;
       if (typeof callback == "function") {

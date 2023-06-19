@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
+import utils from "@/common/utils";
+
 import moment from "moment/moment";
 import Slider from "react-slick";
-import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Box from '@mui/material/Box';
 
 
@@ -95,15 +97,29 @@ export function lottoBalls(lottos) {
   return (
     <>
     
-      <Box sx={{ maxWidth: { sm: 230 } }} className="lottotablist">
+      <Box  sx={{
+        flexGrow: 1,
+        maxWidth: { sm: 230 },
+        bgcolor: 'background.paper',
+      }} 
+      className="lottotablist">
       <Tabs
         variant="scrollable"
-        scrollButtons="auto"
-        aria-label="scrollable auto tabs example"
         style={{
-          paddingTop:"10px"
+          paddingTop:"5px",
+        
         }}
         
+        scrollButtons
+        aria-label="visible arrows tabs example"
+        sx={{
+          [`& .${tabsClasses.scrollButtons}`]: {
+            '&.Mui-disabled': { opacity: 0.3 },
+          },
+          
+        }}
+
+
       >
            {lottos?.map((item, index) => {
           return (
@@ -152,12 +168,16 @@ const lottery_result=lottery && lottery.latest_result
           }}
         >
           <Grid
-            sx={{ fontSize: "15px", borderBottom: "1px solid #ddd" }}
-            px={1}
+            sx={{ fontSize: "15px", backgroundColor:"#F9F9F9", borderBottom: "1px solid #ddd" }}
+            padding={'5px 10px'}
           >
           {/* {item?.opendate} */}
           {/* 2023-06-01 21:30:00 */}
-          { moment(lottery && lottery.created_at).format('YYYY-MM-DD h:s')}
+
+       <Typography color={'#555555'} fontSize={'15px'} fontWeight={'500'}>
+       {moment(lottery && lottery.created_at).format(utils.lotteryFormat)}
+       </Typography>
+
           </Grid>
           <CardHeader
             sx={{ padding: "10px" }}

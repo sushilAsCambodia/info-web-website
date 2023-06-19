@@ -73,9 +73,10 @@ export default function LotteryPage() {
   const [select, setSelect] = useState("");
   const [category, setCategory] = useState("");
   const { i18n } = useTranslation();
-  const perPage = 1;
+  const perPage = 5;
   const [value, setValue] = React.useState(0);
   const langKey = useSelector((state) => state?.load_language?.language);
+  const {filter}=router.query
   const {
     lotteryCategories = [],
     lotteryResults = [],
@@ -102,32 +103,13 @@ export default function LotteryPage() {
           icon: lottery.icon
             ? lottery.icon
             : "/assets/Lottery/superlotto-logo1.png",
+            categoryId:lottery.category_id
+
         },
       },
-      `/lotteryPastResults?title=${title}&id=${lottery.id}`
+      `/lotteryPastResults?title=${title}&id=${lottery.id}&categoryId=${lottery.category_id}`
     );
   };
-
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#DDDDDD",
-      color: theme.palette.common.black,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-      padding: "10px",
-    },
-  }));
-
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.grey,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
 
   const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
     background: "#F3F3F3",
@@ -143,7 +125,6 @@ export default function LotteryPage() {
   }));
 
   // past result modal controls
-  const [pastResultModalData, setPastResultModalData] = useState("");
 
   const [pastResult, setPastResult] = useState(false);
 
@@ -191,7 +172,14 @@ export default function LotteryPage() {
     );
     // dispatch(getLatestLottery("hey"));
     // setLoading(false);
-  }, [page, select, category]);
+  }, [page, select, category,i18n.language]);
+
+ useEffect(() => {
+    if(filter == 'favorite'){
+      setSelect('favorite')
+    }
+    else setSelect('')
+  }, [router.asPath]);
 
   const handleGetCategory = React.useCallback(() => {
     dispatch(
@@ -442,7 +430,7 @@ export default function LotteryPage() {
             sx={{ borderRadius: "10px 0px 0px 10px" }}
             className={`${select === "" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              handleSelectChange("");
+              (router.push("/LotteryPage"),setSelect(''));
             }}
           >
             {langKey && langKey.all}
@@ -451,7 +439,7 @@ export default function LotteryPage() {
             sx={{ borderRadius: "0px 10px 10px 0px" }}
             className={`${select === "favorite" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              handleSelectChange("favorite");
+              (router.push("/LotteryPage?filter=favorite"),setSelect('favorite'));
             }}
           >
             {langKey && langKey.favorites}

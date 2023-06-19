@@ -7,7 +7,8 @@ const initialState = {
     lotteryHistories:{},
     loading_history:false,
     lotteryResultByID:[],
-    scheduleResultList:[]
+    scheduleResultList:[],
+    lotteryHistoriesAll:[]
   } 
   const LotteryReducer =  (state = initialState, action) => {
     switch (action.type) {
@@ -41,7 +42,8 @@ const initialState = {
           status:'completed',
           loading: false
         };
-      case 'lottery/result-by-category/pending':
+      
+        case 'lottery/result-by-category/pending':
         return {
           ...state,
           lotteryResults: [],
@@ -61,7 +63,8 @@ const initialState = {
           status:'failed',
           loading: false
         };
-      case 'lottery/history/pending':
+      
+        case 'lottery/history/pending':
         return {
           ...state,
           lotteryHistories: {},
@@ -102,29 +105,15 @@ const initialState = {
             status:'failed',
             loading_history: false
           };
-
-          case 'matchschedule/list/pending':
+   
+          case 'lottery/history/all/fulfilled':
             return {
               ...state,
-              scheduleResultList: {},
-              status:'pending',
-              loading_history: true
-            };
-          case 'matchschedule/list/fulfilled':
-            return {
-              ...state,
-              scheduleResultList: action?.payload?.data || {},
+              lotteryHistoriesAll: action?.payload?.data || {},
               status:'completed',
               loading_history: false
             };
-          case 'matchschedule/list/rejected':
-            return {
-              ...state,
-              status:'failed',
-              loading_history: false
-            };
-          
-    }
+        }
     return state;
   } 
   export default LotteryReducer;

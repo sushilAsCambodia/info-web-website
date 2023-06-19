@@ -267,17 +267,19 @@ setOpen(true)
                         >
                           <Grid
                             item
-                            xs={1}
+                            xs={1.6}
                             display="flex"
                             alignItems="center"
-                            marginRight="5px"
+                           
                           >
                             <Image
                               alt="announcement"
                               src="./assets/Profile/announcement.png"
+                              width={'35px'}
+                              height={'35px'}
                             />
                           </Grid>
-                          <Grid item xs={11}>
+                          <Grid item xs={10.4}>
                             <Grid
                               item
                               xs={12}
@@ -288,21 +290,21 @@ setOpen(true)
                               <Grid item>
                                 <Typography
                                   fontWeight="500"
-                                  fontSize="12px"
+                                  fontSize="14px"
                                   color="#000"
                                 >
                                   {item.title}
                                 </Typography>
                                 <Typography
                                   textAlign="left"
-                                  fontSize="10px !important"
+                                  fontSize="12px !important"
                                   color="#8C8C8C"
                                 >
                                   {item.comment}
                                 </Typography>
                                 <Typography
                                   textAlign="left"
-                                  fontSize="10px !important"
+                                  fontSize="12px !important"
                                   color="#8C8C8C"
                                 >
                                  { moment(item.created_at).format(utils.DateWithTime) }

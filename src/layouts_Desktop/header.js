@@ -66,9 +66,9 @@ const Header = () => {
 
   const menuList = [
     { label: langKey && langKey.lottery_draw, page: "/LotteryPage" },
-    { label: (langKey && langKey.data_chart), page: "/dataChartPage" },
-    { label: langKey && langKey.foot_ball, page: "/footBallPage" },
-    { label: (langKey && langKey.basket_ball), page: "/basketBallPage" },
+    // { label: (langKey && langKey.data_chart), page: "/dataChartPage" },
+    // { label: langKey && langKey.foot_ball, page: "/footBallPage" },
+    // { label: (langKey && langKey.basket_ball), page: "/basketBallPage" },
   ];
 
   useEffect(() => {
@@ -294,7 +294,7 @@ const Header = () => {
                               <Typography
                                 textAlign="center"
                                 className={`${
-                                  hash == item.page || path == item.page ? "selectedTab" : "" }`}
+                                  hash.includes(item.page) || path.includes(item.page) ? "selectedTab" : "" }`}
                               >
                                 {item.label}
                               </Typography>
@@ -394,6 +394,7 @@ const Header = () => {
                       padding: "4px 8px",
                       fontSize: "12px",
                     }}
+                    onClick={()=>router.push('/LotteryPage?filter=favorite')}
                   >
                     <Icon icon="ic:round-star-border" width={20} />
                     {langKey && langKey.favorites}
