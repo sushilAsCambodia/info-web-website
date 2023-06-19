@@ -36,6 +36,7 @@ const style = {
 export default function ConfirmationModal(props) {
   const { action, open, setOpen, message } = props;
   const [loading, setLoading] = useState(false);
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
   const handleClose = () => {
     setTimeout(() => {
@@ -71,8 +72,8 @@ export default function ConfirmationModal(props) {
               <Typography variant="h5">{message}</Typography>
             </Grid>
             <Grid item xs={12} container alignContent="center" justifyContent="space-evenly">
-              <Button variant="outlined" onClick={() => setOpen(false)}>No</Button>
-              <Button variant="contained" sx={{color:"white",background:"#ff703d" }} onClick={handleClose}>Yes</Button>
+              <Button variant="outlined" onClick={() => setOpen(false)}>{langKey && langKey.no}</Button>
+              <Button variant="contained" sx={{color:"white",background:"#ff703d" }} onClick={handleClose}>{langKey && langKey.yes}</Button>
             </Grid>
           </Grid>
         ) : (
