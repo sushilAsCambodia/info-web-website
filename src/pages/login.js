@@ -284,6 +284,7 @@ export default function Login(props) {
                   xs={12}
                   sm={12}
                   padding={2}
+                  my={10}
                 >
                   <Grid container alignContent="center" minHeight="100px">
                     <Typography
@@ -304,7 +305,7 @@ export default function Login(props) {
                     }}
                   >
                     <form className="lnr">
-                      <Grid my={7}>
+                      <Grid >
                         <Grid item xs={12} sm={12} mb={3}>
                           <Typography fontWeight="bold" pb={1}>
                             {langKey && (langKey.user_name || t("user_name"))}
