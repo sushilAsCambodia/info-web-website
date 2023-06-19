@@ -85,7 +85,6 @@ const {total} = useSelector(
           lang_id: utils.convertLangCodeToID(i18n.language),
         },
         callback: (res) => {
-          console.log(':::',res.data.data[0].lottery.icon)
           setTitleIcon({icon:res.data.data[0].lottery.icon,title:title})
         },
       })
@@ -215,8 +214,8 @@ const pagination = <Pagination
   }
   return (
     <>
-      <TitleBreadCrumbs title={"Past Result"} />
-      <Grid container height="100vh">
+      <TitleBreadCrumbs title={langKey?.past_results} />
+      <Grid container  mt={7}>
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
             {lotteryResultByIDFilter()?.length > 0 &&
@@ -493,7 +492,7 @@ const pagination = <Pagination
             {search == "" ? (
               lotteryHistories?.data?.length > 0 && (
                 <Grid
-                  my={1}
+                  mt={7}
                   item
                   xs={12}
                   sx={{ display: "flex", justifyContent: "center" }}

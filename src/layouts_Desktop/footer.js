@@ -16,8 +16,8 @@ const Footer = () => {
 
   return (
     <>
-      <Grid container alignItems="center" flexDirection="column" pt={2} height="100%"
-      // sx={{background:"#FAFAFA"}} 
+      <Grid container alignItems="center" flexDirection="column" pt={2} height="100%" 
+      // sx={{background:"red"}} 
       >
         <Grid item xs={4} textAlign="center">
           <Image alt="footer_logo" src="./assets/Logo/new-logo-white-bg.png" width="150px" height="100%" />
