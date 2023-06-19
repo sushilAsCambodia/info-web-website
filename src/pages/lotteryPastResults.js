@@ -58,7 +58,7 @@ export default function LotteryPastReults() {
   const [titleIcon, setTitleIcon] = useState({ title: "", icon: "" });
   const [currentPage, setCurrentPage] = useState(1);
   const [expanded, setExpanded] = useState("");
-  const { lotteryHistories = {}, loading_history,lotteryResultByID = [] } = useSelector(
+  const { lotteryHistories = {}, loading_history,lotteryResultByID = [],lotteryHistoriesAll } = useSelector(
     (state) => state.lottery
   );
 const {total} = useSelector(
@@ -122,7 +122,6 @@ const {total} = useSelector(
 
   useEffect(()=>{
     handleGetLotteryHistoryAll()
-    
   },[search,i18n.language,total])
 
   useEffect(() => {
@@ -193,7 +192,7 @@ const {total} = useSelector(
   };
 
   const lotteryGameHistoryResult = () => {
-    const item = lotteryHistories?.data?.filter((obj) => {
+    const item = lotteryHistoriesAll?.data?.filter((obj) => {
       return obj?.issue.includes(search);
     });
 const pagination = <Pagination
@@ -272,7 +271,7 @@ const pagination = <Pagination
                                           title:
                                             lottery.translation.translation,
                                           icon: lottery.icon,
-                                        });
+                                        }),setCurrentPage(1);
                                     }}
                                     className="circle"
                                     style={{
@@ -288,7 +287,7 @@ const pagination = <Pagination
                                       setTitleIcon({
                                         title: lottery.translation.translation,
                                         icon: lottery.icon,
-                                      });
+                                      }),setCurrentPage(1);
                                   }}
                                 >
                                   {lottery?.translation?.translation}
@@ -349,7 +348,7 @@ const pagination = <Pagination
                   label={langKey?.issue}
                   value={search}
                   onChange={() => {
-                    setSearch(event.target.value);
+                    (setSearch(event.target.value),setCurrentPage(1));
                   }}
                   variant="outlined"
                 />
@@ -363,7 +362,7 @@ const pagination = <Pagination
                   color: "white",
                   textTransform: "capitalize",
                 }}
-                onClick={()=>setSearch('')}
+                onClick={()=>(setSearch(''),setCurrentPage(1))}
               >
                 {langKey?.reset}
               </Button>
@@ -376,7 +375,7 @@ const pagination = <Pagination
                       {" "}
                       {langKey && langKey.issue}{" "}
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="50px" align="left">
+                    <StyledHeaderCell width="80px" align="left">
                       {langKey && langKey.draw_time}
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
@@ -386,7 +385,7 @@ const pagination = <Pagination
                 </TableHead>
                 <TableBody>
                   {search != "" &&
-                    lotteryGameHistoryResult().item?.map((item, index) => {
+                    lotteryGameHistoryResult().item?.slice((currentPage-1)*rowsPerPage,(rowsPerPage*currentPage)).map((item, index) => {
                       return (
                         <StyledTableRow key={index}>
                           <StyledTableCell align="left">
