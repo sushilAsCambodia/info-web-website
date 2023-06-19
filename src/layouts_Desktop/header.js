@@ -141,7 +141,7 @@ const Header = () => {
                 spacing={2}
                 sx={{ alignItems: "center", justifyContent: "flex-end" }}
               >
-                <Grid item>
+                {/* <Grid item>
                   <Icon width={22} icon="solar:moon-bold" />
                 </Grid>
                 <Grid item>
@@ -149,7 +149,7 @@ const Header = () => {
                 </Grid>
                 <Grid item>
                   <Icon width={23} icon="material-symbols:search-rounded" />
-                </Grid>
+                </Grid> */}
                 <Grid item>
                   {!isLogin ? (
                     <Button
