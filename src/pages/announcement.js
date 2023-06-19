@@ -226,9 +226,7 @@ setOpen(true)
               justifyContent="center"
               paddingTop={3}
             >
-              <Stack spacing={2} sx={{ textAlign: "center" }}>
                 <Pagination count={last_page} page={currentPage} onChange={handleChange} variant="outlined" shape="rounded" className="announce-pagination" />
-              </Stack>
             </Grid>
           )}
         </Grid>

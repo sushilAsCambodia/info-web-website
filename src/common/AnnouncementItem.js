@@ -36,6 +36,7 @@ export default function AnnouncementItem(props) {
             title={announcement.title}
             className="twoLinesEllip"
             sx={{ fontSize: "14px",  
+            height:{xs:'42px',lg:''}
             // "&:hover": {
             //   textDecoration:"underline"
             // },
