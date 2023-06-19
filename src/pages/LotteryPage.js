@@ -86,13 +86,12 @@ export default function LotteryPage() {
     setCategory(event.target.value);
   };
 
-  useEffect(() => {
-    if (Cookies.get("token")) {
-      setMounted(true);
-    } else {
-      goToLogin();
-    }
-  }, []);
+
+  // useEffect(() => {    
+  //   if(Cookies.get('token') && select == 'favorite') {
+  //     goToLogin();
+  //   }
+  // },[]);
 
   const goToLogin = () => {
     Router.push("/login");
@@ -278,9 +277,18 @@ export default function LotteryPage() {
     }
     return false;
   };
-  return (
-    <>
-      {mounted && (
+  const handleFavoriteLogin=()=>{
+    //router.push("/LotteryPage?filter=favorite"),setSelect('favorite')
+   
+    if(Cookies.get('token')) {
+      router.push("/LotteryPage?filter=favorite"),setSelect('favorite')
+        } else {
+          goToLogin();
+        }
+  }
+  return  (
+    
+      
         <>
           {/* <Typography variant="h5" fontWeight="bold">
               {langKey && langKey.lottery}
@@ -322,10 +330,7 @@ export default function LotteryPage() {
                 className={`${
                   select === "favorite" ? "filterTabSelected" : ""
                 }`}
-                onClick={() => {
-                  router.push("/LotteryPage?filter=favorite"),
-                    setSelect("favorite");
-                }}
+                onClick={() =>handleFavoriteLogin()}
               >
                 {langKey && langKey.favorites}
               </MenuItem>
@@ -620,8 +625,8 @@ export default function LotteryPage() {
       */}
           </Grid>
         </>
-      )}
-    </>
+      
+  
   );
 }
 

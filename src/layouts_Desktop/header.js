@@ -18,6 +18,8 @@ import HeaderLiveScore from "@/components/header/headerLiveScore";
 import Link from "next/link";
 import utils from "@/common/utils";
 import Image from "mui-image";
+import Cookies from "js-cookie";
+import Router from "next/router";
 // import { signOut } from "next-auth/react";
 const Header = () => {
   const matches = useMediaQuery("(max-width:768px)");
@@ -29,6 +31,7 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [path, setPath] = useState("");
   const [hash, setHash] = useState("");
+  const [select, setSelect] = useState("");
   const open = Boolean(anchorEl);
   const [scroll, setScroll] = useState(false);
 
@@ -107,6 +110,22 @@ const Header = () => {
   //   }
 
   // }, []);
+
+  const handleFavoriteLogin=()=>{
+     // onClick={()=>router.push('/LotteryPage?filter=favorite')}
+   
+    if(Cookies.get('token')) {
+      router.push("/LotteryPage?filter=favorite"),setSelect('favorite')
+        } else {
+          goToLogin();
+        }
+  }
+
+  const goToLogin = () => {
+    Router.push("/login");
+  };
+
+
   return (
     <>
       {router.pathname == "/login" || router.pathname == "/register" ? (
@@ -394,7 +413,8 @@ const Header = () => {
                       padding: "4px 8px",
                       fontSize: "12px",
                     }}
-                    onClick={()=>router.push('/LotteryPage?filter=favorite')}
+                   
+                    onClick={() => handleFavoriteLogin()}
                   >
                     <Icon icon="ic:round-star-border" width={20} />
                     {langKey && langKey.favorites}
