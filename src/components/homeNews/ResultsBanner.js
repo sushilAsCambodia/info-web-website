@@ -147,6 +147,7 @@ export default function ResultsBanner(props) {
             overflow="auto"
             className={matches ? "verticleLotto" : "horizontalLotto"}
             px={1}
+            marginBottom={1}
           >
             {
               
@@ -228,6 +229,7 @@ export default function ResultsBanner(props) {
               overflow="auto"
               className={matches ? "verticleLotto" : "horizontalLotto"}
               px={1}
+              marginBottom={1}
             >
               {announcements?.length > 0 && announcements.map((item, index) => {
                 return (
