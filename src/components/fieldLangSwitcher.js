@@ -34,10 +34,10 @@ export default function FieldLanguageSwitcher() {
         language = 'Eng';
         break;
       case 'de':
-        language = 'Ch';
+        language = '中文';
         break;
       case 'kh':
-        language = 'Kh';
+        language = 'ខ្មែរ';
         break;
       default:
         break;
