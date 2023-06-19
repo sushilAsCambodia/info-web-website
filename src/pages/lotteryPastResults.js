@@ -249,7 +249,7 @@ const pagination = <Pagination
                         >
                           {item?.translation?.translation
                             ? item.translation.translation
-                            : "title not available"}
+                            : ""}
                         </div>
                       </div>
                       <Collapse
