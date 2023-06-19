@@ -16,7 +16,7 @@ const Footer = () => {
 
   return (
     <>
-      <Grid container alignItems="center" flexDirection="column" pt={2} 
+      <Grid container alignItems="center" flexDirection="column" pt={2} height="100%"
       // sx={{background:"#FAFAFA"}} 
       >
         <Grid item xs={4} textAlign="center">
@@ -38,12 +38,12 @@ const Footer = () => {
           </Grid>
         </Grid> */}
       </Grid>
-      {/* <Grid container item xs={12} style={{background: '#F3F3F3'}}>
+      <Grid container item xs={12} style={{background: '#F3F3F3'}}>
         <Grid container item style={{width:'80%',padding:'10px 0',margin:'0 auto'}}>
-          <Grid item xs={6} style={{color: '#777777', fontSize:12, fontWeight:400}}>{langKey && langKey.copy_right}</Grid> */}
-          {/* <Grid item xs={6} style={{color: '#777777', fontSize:12, fontWeight:400, textAlign:'right'}}>{langKey && langKey.terms_condition} | {langKey && langKey.privacy_policy}</Grid> */}
-        {/* </Grid>
-      </Grid> */}
+          <Grid item xs={6} style={{color: '#777777', fontSize:12, fontWeight:400}}>{langKey && langKey.copy_right}</Grid>
+          <Grid item xs={6} style={{color: '#777777', fontSize:12, fontWeight:400, textAlign:'right'}}>{langKey && langKey.terms_condition} | {langKey && langKey.privacy_policy}</Grid>
+        </Grid>
+      </Grid>
     </>
   );
 };
