@@ -20,6 +20,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import moment from "moment/moment";
+import utils from "@/common/utils";
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -137,7 +139,9 @@ const handleClose = () => {
           {article.comment}
        
           </Typography>
-         
+          <Typography fontSize="15px">
+          { moment(article.created_at).format(utils.letterFormat2) }
+          </Typography>
         </DialogContent>
      
       </BootstrapDialog>

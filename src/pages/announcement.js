@@ -146,7 +146,7 @@ setOpen(true)
           >
             <Grid>
               <Typography variant="h5" fontWeight={600}>
-                {langKey && langKey.announcement}
+                {langKey && langKey.announcement}  
               </Typography>
             </Grid>
             <Grid>
