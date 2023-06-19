@@ -8,6 +8,7 @@ import { Image } from "mui-image";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Route } from "@mui/icons-material";
 import router from "next/router";
+import ReactPlayer from "react-player";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const responsive = {
