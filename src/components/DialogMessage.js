@@ -60,7 +60,7 @@ const DialogMessage = (props) => {
         >
         <DialogContent dividers sx={{ maxWidth: "290px" }}>
             <Typography gutterBottom>
-                {message}
+                {message} 
             </Typography>
         </DialogContent>
         <DialogActions>
