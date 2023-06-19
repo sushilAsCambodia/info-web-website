@@ -24,6 +24,7 @@ import {
   Stack,
   Divider,
   Pagination,
+  Button,
 } from "@mui/material";
 import { getLatestLottery } from "@/store/actions/lotteryActions";
 import {
@@ -447,11 +448,12 @@ export default function LotteryPage() {
         </Grid>
         <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel id="category-select-label">
+            <Button variant="outlined" id="category-select-label" 
+            onClick={()=>{handleChartOpen(3)}}>
               {" "}
               {langKey && langKey.select_category}
-            </InputLabel>
-            <Select
+            </Button>
+            {/* <Select
               labelId="demo-simple-select-label"
               id="category-select"
               value={category}
@@ -469,7 +471,7 @@ export default function LotteryPage() {
                       </MenuItem>
                     );
                 })}
-            </Select>
+            </Select> */}
           </FormControl>
         </Grid>
       </Grid>
@@ -495,7 +497,7 @@ export default function LotteryPage() {
                   {langKey && langKey.past_results}
                 </StyledHeaderCell>
                 <StyledHeaderCell align="center">
-                  {langKey && langKey.chart}
+                  {langKey && langKey.data_chart}
                 </StyledHeaderCell>
                 <StyledHeaderCell align="center">
                   {langKey && langKey.favorites}
@@ -608,8 +610,9 @@ export default function LotteryPage() {
                                     onClick={() => goToLotteryHistory(item)}
                                   >
                                     <Icon
-                                      width="20px"
-                                      icon="solar:clipboard-list-broken"
+                                      width="25px"
+                                      icon="solar:clipboard-bold"
+                                      color="#6f6f6f"
                                     />
                                   </IconButton>
                                 </TableCell>
@@ -619,11 +622,11 @@ export default function LotteryPage() {
                                       background: "#F3F3F3",
                                       border: "1px solid #DDDDDD",
                                     }}
-                                    // onClick={() => handleChartOpen(3)}
                                   >
                                     <Icon
                                       width="25px"
                                       icon="material-symbols:add-chart-rounded"
+                                      color="#dddddd"
                                     />
                                   </IconButton>
                                 </TableCell>
@@ -658,7 +661,7 @@ export default function LotteryPage() {
                                     ) : (
                                       <Icon
                                         icon="ant-design:star-filled"
-                                        color="#ddd"
+                                        color="#6f6f6f"
                                         onClick={() => {
                                           handleAddRemove(item?.lottery_id);
                                         }}
