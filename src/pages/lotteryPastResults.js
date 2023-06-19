@@ -219,85 +219,11 @@ const pagination = <Pagination
       <Grid container height="100vh">
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
-<<<<<<< HEAD
-            {/* <Grid container justifyContent="center" borderRadius="10px">
-              <MenuItem
-                sx={{
-                  borderRadius: "10px 0px 0px 10px",
-                  padding: "10px",
-                  border: "1px solid #DDDDDD",
-                  borderRight: "0px",
-                  background: "#F3F3F3",
-                }}
-                className={`${select === 0 ? "filterTabSelected" : ""}`}
-                onClick={() => {
-                  setSelect(0);
-                }}
-              >
-              {langKey && langKey.view_by_category}
-              </MenuItem>
-              <MenuItem
-                sx={{
-                  borderRadius: "0px 10px 10px 0px",
-                  padding: "10px",
-                  border: "1px solid #DDDDDD",
-                  background: "#F3F3F3",
-                }}
-                className={`${select === 1 ? "filterTabSelected" : ""}`}
-                onClick={() => {
-                  setSelect(1);
-                }}
-              >
-            {langKey && langKey.view_by_time}
-              </MenuItem>
-            </Grid> */}
-
-            <Grid container>
-              <Grid className="container" item xs={10}>
-                {/* <!-- completed --> */}
-                <div
-                  className={`step ${
-                    filter == "China National" ? "completed" : ""
-                  }`}
-                >
-                  <div className="v-stepper">
-                    <div
-                    onClick={() => {
-                      setFilter("China National");
-                    }}
-                      className="circle"
-                      style={{
-                        "--iconImg": `url("https://thumbs.dreamstime.com/b/modern-creative-color-triangle-arrow-shape-logo-design-creative-color-triangle-arrow-shape-logo-design-142723014.jpg")`,
-                      }}
-                    ></div>
-                    <div className="line"></div>
-                  </div>
-
-                  <div
-                    className="contents"
-                    onClick={() => {
-                      setFilter("China National");
-                    }}
-                    style={{ display: "flex", alignItems: "center" }}
-                  >
-                    {router?.query?.title} 
-                  </div>
-                </div>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  {/* <!-- active --> */}
-                  <div
-                    className={`step ${
-                      filter == "Double color" ? "completed" : ""
-                    }`}
-                  >
-                    <div className="v-stepper">
-=======
             {lotteryResultByIDFilter()?.length > 0 &&
               lotteryResultByIDFilter().map((item, index) => {
                 return (
                   <Grid container key={index}>
                     <Grid className="container" item xs={10}>
->>>>>>> c8dcf4cedac678baa29f3dfde5067420dc474af5
                       <div
                         className={`step ${"completed"}`}
                         style={{ cursor: "pointer" }}
