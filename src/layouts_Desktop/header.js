@@ -405,7 +405,7 @@ const Header = () => {
                     {langKey && langKey.download_app}
                   </Button> */}
 
-                  <Button
+                  {/* <Button
                     variant="contain"
                     sx={{
                       background: "black",
@@ -418,7 +418,7 @@ const Header = () => {
                   >
                     <Icon icon="ic:round-star-border" width={20} />
                     {langKey && langKey.favorites}
-                  </Button>
+                  </Button> */}
                 </Grid>
               </Grid>
             </Grid>
