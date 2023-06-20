@@ -23,12 +23,9 @@ export default function AnnouncementItem(props) {
 
   return (
     <>
-      <div style={{ paddingRight: "10px"}}>
+      <div>
         <Grid
           sx={{
-            borderBottom: "2px solid grey",
-            marginY: "10px",
-            paddingBottom: "10px",
             minWidth: "200px",
           }}
         >
@@ -36,19 +33,22 @@ export default function AnnouncementItem(props) {
             title={announcement.title}
             className="twoLinesEllip"
             sx={{ fontSize: "14px",  
-            height:{xs:'42px',lg:''}
-            // "&:hover": {
-            //   textDecoration:"underline"
-            // },
-   }}
-            px={1}
+            lineHeight:"14px",
+            fontWeight:"500"
+
+            
+          }}
+           
           >
             {announcement.title}
           </Typography>
-          <Typography sx={{ fontSize: "12px", color: "#8C8C8C" }} px={1}>
+          <Typography sx={{ fontSize: "12px", color: "#8C8C8C" }} paddingTop={'4px'}>
             {moment(announcement.created_at).format(utils.letterFormat2)}
           </Typography>
         </Grid>
+       <Grid padding={'12px 0px'}>
+       <Divider />
+       </Grid>
       </div>
     </>
   );
