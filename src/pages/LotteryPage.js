@@ -592,7 +592,7 @@ export default function LotteryPage() {
                 </TableBody>
               </Table>
             </TableContainer>
-            {lotteryResultList?.data?.length > 0 && !noDataSign && (
+            {lotteryResultList?.data?.length > 0 && lotteryResultList.last_page >1 && !noDataSign && (
               <Grid
                 mt={10}
                 item
@@ -603,6 +603,7 @@ export default function LotteryPage() {
                   count={lotteryResultList.last_page}
                   page={page}
                   onChange={handlePageChange}
+                  variant="outlined" shape="rounded"
                 />
               </Grid>
             )}

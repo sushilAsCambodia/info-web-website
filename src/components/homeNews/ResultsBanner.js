@@ -76,11 +76,11 @@ export default function ResultsBanner(props) {
     dispatch(getLatestLottery("hey"));
     dispatch(
       getAnnouncement({
-        params: { lang_id: utils.convertLangCodeToID(langKey), take: 10 },
+        params: { lang_id: utils.convertLangCodeToID(i18n.language), take: 10 },
         callback: (res) => {},
       })
     );
-  }, []);
+  }, [i18n.language]);
 
   const handleGetCategory = React.useCallback(() => {
     dispatch(
@@ -101,13 +101,15 @@ export default function ResultsBanner(props) {
       })
     ); 
   },[dispatch,i18n.language]);
-  React.useEffect(() => {
+
+  useEffect(() => {
     handleGetCategory();
   },[handleGetCategory]);
-  React.useEffect(() => {
+
+  useEffect(() => {
   },[lotteryCategories])
-  React.useEffect(() => {
-  
+
+  useEffect(() => {
     if(value >= 0) {
       let hash = '';
       const lotteryCategory = lotteryCategories[value - 1] || {};
@@ -117,7 +119,7 @@ export default function ResultsBanner(props) {
       // router.replace(`${router.route}${hash}`)
         handleGetLotteryResult(lotteryCategory?.id);
     }
-  },[value]);
+  },[value,i18n.language]);
 
   
   return (
@@ -151,10 +153,10 @@ export default function ResultsBanner(props) {
           >
             {
               
-              lotteryResults && lotteryResults.length>0 &&  lotteryResults.map((lr,key) => {
+              lotteryResults && lotteryResults.length>0 && lotteryResults.map((lr,key) => {
                   return (
                     <div key={key}>
-                      <LottoList lottery={lr}/>       
+                      <LottoList lottery={lr} />       
                     </div>
                   );
                 })
@@ -236,8 +238,6 @@ export default function ResultsBanner(props) {
                   <div key={index}>
                     <AnnouncementItem announcement={item} />
                   </div>
-
-                  
                 );
               })}
                {announcements?.length == 0 && announcements.map((item, index) => {

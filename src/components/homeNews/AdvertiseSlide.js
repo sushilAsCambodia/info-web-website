@@ -15,10 +15,10 @@ const AdvertiseSlide = (props) => {
       setNewAds(advertises.filter(b =>b.position == 'brand_ad_space'));
       // setNewBanners(banners.filter(b => b.platform.toLowerCase() == type && b.position == 'top_carousel'));
     },[advertises])
-    return <>
+    return <Grid sx={{minHeight:'80px'}}>
     {
-        newAds && newAds.length > 0 && <Grid item minHeight="80px"
-        // sx={{marginTop:'5px',marginBottom:'5px'}}
+        newAds && newAds.length > 0 && <Grid item 
+        
         >
         <Tabs
           value={tabValue}
@@ -26,6 +26,7 @@ const AdvertiseSlide = (props) => {
           variant="scrollable"
           aria-label="scrollable auto tabs example"
           className="MuiTabs-custom-tab"
+          
           TabIndicatorProps={{
             style: { display:'none' }
           }}
@@ -34,7 +35,7 @@ const AdvertiseSlide = (props) => {
             '& .MuiButtonBase-root .MuiSvgIcon-root': {
               background:'#FF6F31',
               borderRadius:'50%',
-              color:'white'
+              color:'white',
             },
           }}
           >
@@ -43,7 +44,7 @@ const AdvertiseSlide = (props) => {
               return <Tab 
                   key={index} 
                   onClick={()=> setTabValue(0)} 
-                  sx={{ padding: '5px', minWidth:"80px"}} 
+                  sx={{ padding: '5px', minWidth:"80px",minHeight:'80px'}} 
                   label={<Link href={card?.ads_link ? card.ads_link:''} target='_blank'><Grid position="relative" textAlign="center" sx={{borderRadius:'4px',overflow:'hidden'}}>
                   <Grid 
                     sx={{backgroundImage:`url(${card.icon})`, backgroundSize:'cover'}} 
@@ -113,6 +114,6 @@ const AdvertiseSlide = (props) => {
         </style>
         </Grid>
     }
-    </>;
+    </Grid>;
 }
 export default AdvertiseSlide;
