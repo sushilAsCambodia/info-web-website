@@ -48,7 +48,7 @@ export default function ProfileAnnouncement() {
   useEffect(() => {
     dispatch(
       getAnnouncement({
-        params: { lang_id: utils.convertLangCodeToID(langKey), rowsPerPage: 16,page:currentPage },
+        params: { lang_id: utils.convertLangCodeToID(langKey), rowsPerPage: 10,page:currentPage },
         callback: (res) => {},
       })
     );
@@ -114,7 +114,7 @@ export default function ProfileAnnouncement() {
 
         </Grid>
 
-        {announcements?.length > 0 && (
+        {announcements?.length > 0 && last_page > 1 &&  (
             <Grid
               item
               xs={12}
