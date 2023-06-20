@@ -93,12 +93,7 @@ export default function LangSwitcher() {
           callback:(res) => { }
         }
       )); 
-      dispatch(getCategory(
-        {
-          params: {lang_id: utils.convertLangCodeToID(i18n.language)},
-          callback:(res) => { }
-        }
-      ));
+      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[lang])
