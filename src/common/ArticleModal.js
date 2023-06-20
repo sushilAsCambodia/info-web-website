@@ -129,7 +129,7 @@ const handleClose = () => {
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-        <Typography  variant="h6" fontSize="16px" component="h6" fontWeight='bold'>
+        <Typography  variant="h6" fontSize="16px" component="h6" fontWeight='bold' marginRight={5}>
           {article.title}
         </Typography>
         </BootstrapDialogTitle>
