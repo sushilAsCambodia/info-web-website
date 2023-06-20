@@ -58,9 +58,10 @@ export default function ResultsBanner(props) {
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [value, setValue] = React.useState(0);
+  const [lotteryResults,setLotteryResults] = useState('')
   const matches = useMediaQuery("(max-width:1199px)");
   const matches2 = useMediaQuery("(max-width:768px)");
-  const { lotteryCategories = [], lotteryResults = [] } = useSelector(
+  const { lotteryCategories = [] } = useSelector(
     (state) => state.lottery
   );
 
@@ -138,6 +139,10 @@ export default function ResultsBanner(props) {
             lang_id: utils.convertLangCodeToID(i18n.language),
             category_id: categoryId,
           },
+          callback:(res)=>{
+            // console.log('lotteryResults:::',res.data)
+            setLotteryResults(res.data)
+          }
         })
       );
     },
