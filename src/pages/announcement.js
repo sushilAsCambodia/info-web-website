@@ -56,24 +56,6 @@ const Announcement = () => {
   const [totalPage, setTotalPage] = useState(10);
 
   const dispatch = useDispatch();
-
-  const breadcrumbs = [
-    <Link
-      underline="hover"
-      component={Link}
-      key="1"
-      color="inherit"
-      sx={{ cursor: "pointer" }}
-      onClick={() => router.push("/")}
-    >
-      {langKey && langKey.home}
-    </Link>,
-    <Typography key="2" color="#F24E1E">
-      {langKey && langKey.announcement}
-    </Typography>,
-  ];
-
-
   const [open, setOpen] = useState(false);
   const [article, setArticle] = useState({});
 
@@ -112,13 +94,12 @@ setOpen(true)
     }
   };
   return !matches ? (
-    <>
-     <ArticleModal article={article} open={open} setOpen={setOpen}/>
-      <Grid
-        container
-        alignItems="flex-start"
+    <Grid height='100vh'container
+        // alignItems="flex-start"
         justifyContent="center"
-      >
+        alignContent="stretch">
+     <ArticleModal article={article} open={open} setOpen={setOpen}/>
+     
         <Grid
           item
           xs={12}
@@ -184,23 +165,24 @@ setOpen(true)
             {announcements?.length == 0 && (
              <NoDataMessage />
             )}
+          </Grid> 
           </Grid>
           {announcements?.length > 0 && last_page > 1 && (
             <Grid
               item
               xs={12}
-              textAlign="center"
+             
               display="flex"
               justifyContent="center"
-              paddingTop={3}
+              alignContent="center"
+              marginTop={10}
               
             >
                 <Pagination count={last_page} page={currentPage} onChange={handleChange} variant="outlined" shape="rounded" className="announce-pagination" />
             </Grid>
           )}
-        </Grid>
-      </Grid>
-    </>
+       
+    </Grid>
   ) : (
     <>
       <Grid

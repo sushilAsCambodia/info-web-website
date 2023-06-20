@@ -55,7 +55,8 @@ export default function LotteryPastReults() {
   const rowsPerPage = 10
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
-  const [titleIcon, setTitleIcon] = useState({ title: "", icon: "" });
+  const [titleIcon, setTitleIcon] = useState();
+  const [historyTitle, setHistoryTitle] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [expanded, setExpanded] = useState("");
   const [toSearch, setToSearch] = useState(false);	
@@ -86,7 +87,8 @@ const {total} = useSelector(
           lang_id: utils.convertLangCodeToID(i18n.language),
         },
         callback: (res) => {
-          setTitleIcon({icon:res.data.data[0].lottery.icon,title:title})
+          console.log(':::getLotteryHistory',res.data)
+          setTitleIcon(res.data.data[0].lottery.icon)
         },
       })
     );
@@ -101,7 +103,8 @@ const {total} = useSelector(
           lottery_id: filter ? filter : id,
           lang_id: utils.convertLangCodeToID(i18n.language),
         },
-        callback: (res) => { },
+        callback: (res) => { 
+        },
       })
     )
   };
@@ -276,11 +279,9 @@ const pagination = pageCount <= 1 ? '': <Pagination
                                   <div
                                     onClick={() => {
                                       setFilter(lottery?.lottery_id),
-                                        setTitleIcon({
-                                          title:
-                                            lottery.translation.translation,
-                                          icon: lottery.icon,
-                                        });
+                                        setTitleIcon(
+                                          lottery.icon
+                                        ),setHistoryTitle(lottery.translation.translation);
                                     }}
                                     className="circle"
                                     style={{
@@ -293,10 +294,8 @@ const pagination = pageCount <= 1 ? '': <Pagination
                                   className="contents"
                                   onClick={() => {
                                     setFilter(lottery?.lottery_id),
-                                      setTitleIcon({
-                                        title: lottery.translation.translation,
-                                        icon: lottery.icon,
-                                      });
+                                      setTitleIcon(
+                                        lottery.icon),setHistoryTitle(lottery.translation.translation);
                                   }}
                                 >
                                   {lottery?.translation?.translation}
@@ -328,22 +327,22 @@ const pagination = pageCount <= 1 ? '': <Pagination
           </Grid>
         </Grid>
         <Grid item xs={8} p={1}>
-          <Grid border="1px solid #DDDDDD" container p={1}>
-            <Grid container item xs={6} alignItems="center">
+          <Grid border="1px solid #DDDDDD" container p={1} justifyContent="space-between">
+            <Grid container item xs={'auto'} alignItems="center">
               <Image
                 alt="Welfare lottery lottery"
                 width="30px"
                 height="30px"
                 style={{ borderRadius: "30px" }}
-                src={titleIcon.icon ? titleIcon.icon : icon}
+                src={titleIcon}
               />
               <Typography ml={1}>
-                {titleIcon.title ? titleIcon.title : title}
+                {historyTitle ? historyTitle:title}
               </Typography>{" "}
             </Grid>
             <Grid
               item
-              xs={6}
+              xs={'auto'}
               display="flex"
               alignItems="center"
               justifyContent="flex-end"
@@ -392,7 +391,8 @@ const pagination = pageCount <= 1 ? '': <Pagination
                   color: "#FF6F31",
                   textTransform: "capitalize",
                   marginLeft:'5px',
-                  border:'1px solid #FF6F31'
+                  border:'1px solid #FF6F31',
+                  width:'max-content'
                 }}
                 onClick={()=>(setToSearch(false),allReset())}
               >
