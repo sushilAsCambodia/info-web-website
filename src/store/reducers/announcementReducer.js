@@ -8,11 +8,12 @@ const initialState = {
 
   } 
   const announcementReducer = (state = initialState, action) => {
+    
     switch (action.type) { 
       case 'announcement/list/pending':
         return {
           ...state,
-          announcements: [],
+         // announcements: [],
           status:'pending',
           loading: true
         };
