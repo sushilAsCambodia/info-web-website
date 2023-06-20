@@ -77,12 +77,17 @@ export const getLotteryHistory = createAsyncThunk(
     try {
       const response = await api.get('lotto/lotteryResult/all', params);
       const { data, status } = response;
+
       data["status_code"] = status;
       if (typeof callback == "function") {
         callback(data);
       }
+      // console.log('lottery/historyapi:::',data)
+
       return data;
     } catch (error) {
+      // console.log('lottery/historyerror:::',error)
+
       const { status, data } = error.response;
       data["status_code"] = status;
       if (typeof callback == "function") {

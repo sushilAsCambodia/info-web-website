@@ -9,15 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import utils from "@/common/utils";
-import moment from "moment/moment";
+import moment from "moment/min/moment-with-locales";
 import { useRouter } from "next/router";
 import Image from "mui-image";
 import { addRemoveFavourite } from "@/store/actions/favouriteActions";
 import { Icon } from "@iconify/react";
 import LoadingBackDrop from "../LoadingBackDrop";
-
-
-
+import { useTranslation } from "react-i18next";
 const LotteryCard = (props) => {
   const router = useRouter();
   const { lottery, allFavourite,toastMessage } = props;
@@ -28,6 +26,7 @@ const LotteryCard = (props) => {
     (state) => state && state.load_language && state.load_language.language
   );
   const [loading, setLoading] = useState(false);
+  const { i18n } = useTranslation();
 
   const checkActive = (active_features, value) => {
     if (active_features && active_features !== "") {
@@ -40,7 +39,7 @@ const LotteryCard = (props) => {
   };
   const goToLotteryHistory = (lottery = {}) => {
     const title =
-      lottery?.translation?.translation + lottery?.latest_result?.issue;
+      lottery?.translation?.translation;
     router.push(
       {
         pathname: "/lotteryHistory",
@@ -105,7 +104,7 @@ const LotteryCard = (props) => {
             >
               <Grid item xs={10} style={{ fontSize: 12, color: "#8C8C8C" }}>
                 {lottery?.latest_result?.opendate &&
-                  moment(lottery?.latest_result?.opendate).format(
+                  moment(lottery?.latest_result?.opendate).locale(utils.localChange(i18n.language)).format(
                     utils.lotteryFormat
                   )}
               </Grid>
