@@ -56,6 +56,7 @@ export default function ResultsBanner(props) {
   const { t } = useTranslation();
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
+  const [announceMent, setAnnounceMent] = useState([]);
   const [value, setValue] = React.useState(0);
   const matches = useMediaQuery("(max-width:1199px)");
   const matches2 = useMediaQuery("(max-width:768px)");
@@ -114,7 +115,10 @@ export default function ResultsBanner(props) {
     dispatch(
       getAnnouncement({
         params: { lang_id: utils.convertLangCodeToID(i18n.language), take: 10 },
-        callback: (res) => {},
+        callback: (res) => {
+          setAnnounceMent(res && res.data)
+          console.log("sssssss",res && res.data)
+        },
       })
     );
   }, [i18n.language]);
@@ -139,9 +143,9 @@ export default function ResultsBanner(props) {
     ); 
   },[dispatch,i18n.language]);
 
-  useEffect(() => {
-    handleGetCategory();
-  },[handleGetCategory]);
+  // useEffect(() => {
+  //   handleGetCategory();
+  // },[handleGetCategory]);
 
   useEffect(() => {
   },[lotteryCategories])
@@ -266,7 +270,7 @@ export default function ResultsBanner(props) {
             >
             <Slider {...announcementresult}>
             
-              {announcements?.length > 0 && announcements.map((item, index) => {
+              {announceMent?.length > 0 && announceMent.map((item, index) => {
                 return (
                   <div key={index}>
                     <AnnouncementItem announcement={item} />
@@ -274,7 +278,7 @@ export default function ResultsBanner(props) {
                 );
               })}
             </Slider>
-               {announcements?.length == 0 && announcements.map((item, index) => {
+               {announceMent?.length == 0 && announceMent.map((item, index) => {
                 return (
                   <NoDataMessage />
                 );
