@@ -91,7 +91,7 @@ export default function NewsSingle() {
         if (recentNews.last_page != parseInt(page)) {
           dispatch(
             getNextNewsRecent({
-              params: { type: "recent", page: page },
+              params: { type: "recent", page: page,lang_id: lang_id },
               callback: (res) => {
                 scrollDown("recent");
               },
@@ -105,7 +105,7 @@ export default function NewsSingle() {
         if (mostPopularNews.last_page != parseInt(page)) {
           dispatch(
             getNextNewsPopular({
-              params: { type: "popular", page: page },
+              params: { type: "popular", page: page,lang_id: lang_id },
               callback: (res) => {
                 scrollDown("popular");
               },
@@ -121,26 +121,26 @@ export default function NewsSingle() {
   useEffect(() => {
     dispatch(
       getNewsRecent({
-        params: { type: "recent" },
+        params: { type: "recent",lang_id: lang_id },
       })
     );
     dispatch(
       getNewsPopular({
-        params: { type: "popular" },
+        params: { type: "popular",lang_id: lang_id },
       })
     );
-  }, [dispatch]);
+  }, [dispatch,lang_id]);
   useEffect(() => {
     if (id) {
       dispatch(
         getNewsById({
           id,
-          params: {},
+          params: { lang_id: lang_id },
           callback: (res) => {},
         })
       );
     }
-  }, [dispatch,id]);
+  }, [dispatch,id,lang_id]);
 
   useEffect(() => {
     dispatch(

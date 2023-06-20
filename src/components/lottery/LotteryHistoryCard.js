@@ -1,16 +1,17 @@
 
 import { Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@mui/material';
 import utils from '@/common/utils';
-import moment from 'moment/moment';
 import Image from "mui-image";
-
-const LotteryHistoryCard = ({lottery,icon}) => {
+import moment from "moment/min/moment-with-locales";
+import { useTranslation } from 'react-i18next';
+const LotteryHistoryCard = ({lottery,icon,langkey}) => {
+    const { i18n } = useTranslation();
     return (
         <Card>
             <CardHeader style={{ padding: '5px 5px', borderBottom: '1px solid #ddd' }} title={
                 <Grid  container style={{ flexWrap: 'nowrap', alignItems: "center" }}>
                     <Grid item xs={10} style={{ fontSize: 12, color: '#8C8C8C' }}>
-                        {lottery?.opendate && moment(lottery?.opendate).format(utils.lotteryFormat)}
+                        {lottery?.opendate && moment(lottery?.opendate).locale(utils.localChange(i18n.language)).format(utils.lotteryFormat)}
                     </Grid>
                 </Grid>
             } />
