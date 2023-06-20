@@ -34,7 +34,9 @@ export default function AnnouncementItem(props) {
             className="twoLinesEllip"
             sx={{ fontSize: "14px",  
             lineHeight:"14px",
-            fontWeight:"500"
+            fontWeight:"500",
+            fontStyle:"normal",
+            fontFamily:"Roboto !important"
 
             
           }}
