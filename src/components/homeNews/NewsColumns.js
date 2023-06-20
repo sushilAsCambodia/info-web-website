@@ -17,7 +17,7 @@ import { getCategory } from "@/store/actions/categoryActions";
 
 export default function NewsColumns(props) {
   const dispatch = useDispatch();
-  const {t} = useTranslation()
+  const {t,i18n} = useTranslation()
   const theme = useTheme();
   const router = useRouter();
   const {lang_id=[]} = props; 
@@ -63,7 +63,7 @@ export default function NewsColumns(props) {
       </Grid>
       <Grid item xs={12} container justifyContent="center">
         {categories && categories.length > 0 ? categories.map((item,index) => {
-          return <NewsScrollColumn key={index} newsCategory={item} lang_id={lang_id} />
+          return <NewsScrollColumn key={index} newsCategory={item} lang_id={lang_id} i18n={i18n.language} />
         }):<Typography component="div"> {langKey && langKey.no_news}</Typography>
       }
       </Grid>

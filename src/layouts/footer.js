@@ -23,12 +23,12 @@ const Footer = () => {
         case  '/lottery':
             selectedTab = 1;
             break;
-        case  '/match':
+        case  '/profile':
             selectedTab = 2;
             break;
-        case  '/profile':
-            selectedTab = 3;
-            break;
+        // case  '/match':
+        //     selectedTab = 3;
+        //     break;
         default:
             break;
     }
@@ -66,7 +66,7 @@ const Footer = () => {
                     }}
                     onClick={() => router.push('/match')} 
                     label={langKey && langKey.match} 
-                    icon={<MatchIcon color={value == 2?'#FF0000':'#8C8C8C'}/>}
+                    icon={<MatchIcon color={value == 3?'#FF0000':'#8C8C8C'}/>}
                      /> */}
                 <BottomNavigationAction 
                     sx={{
@@ -74,7 +74,7 @@ const Footer = () => {
                             whiteSpace:'nowrap'
                         }
                     }}
-                    onClick={() => router.push('/profile')} label={langKey && langKey.profile} icon={<ProfileIcon color={value == 3?'#FF0000':'#8C8C8C'} />} />
+                    onClick={() => router.push('/profile')} label={langKey && langKey.profile} icon={<ProfileIcon color={value == 2?'#FF0000':'#8C8C8C'} />} />
             </BottomNavigation>
         </Paper>
 };

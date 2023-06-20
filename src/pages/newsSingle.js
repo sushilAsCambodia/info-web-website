@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, Dispatch } from "react";
 import { getNewsById } from "@/store/actions/newsActions";
 import router from "next/router";
-import moment from "moment/moment";
+import moment from 'moment/min/moment-with-locales'
 import utils from "@/common/utils";
 import { useTranslation } from "react-i18next";
 import { getCategory } from "@/store/actions/categoryActions";
@@ -161,7 +161,7 @@ export default function NewsSingle() {
                 {newsDetail.title || ""}
               </Typography>
               <Typography color="#8C8C8C" pt={1} fontSize="12px">
-                {moment(newsDetail.created_at).format(utils.formatDate)}
+                {moment(newsDetail.created_at).locale(utils.localChange(i18n.language)).format(utils.formatDate)}
               </Typography>
               <Grid>
                 <Image
@@ -198,6 +198,7 @@ export default function NewsSingle() {
                   setPage={setPage}
                   setType={setType}
                   loading={newsRecentLoading}
+                  i18n={i18n.language}
                 />
                 {noRecentNewsData && (
                   <Typography style={{ fontSize: 12, textAlign: "center" }}>
@@ -214,6 +215,7 @@ export default function NewsSingle() {
                   setPage={setPage}
                   setType={setType}
                   loading={newsPopularLoading}
+                  i18n={i18n.language}
                 />
                 {noPopularNewsData && (
                   <Typography style={{ fontSize: 12, textAlign: "center" }}>
@@ -244,6 +246,8 @@ export default function NewsSingle() {
                   <NewsSlider
                     lang_id={lang_id}
                     catId={categories[newsCat].id}
+                    i18n={i18n.language}
+
                   />
                 </Grid>
               ) : (

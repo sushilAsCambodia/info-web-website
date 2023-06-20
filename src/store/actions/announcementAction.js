@@ -4,18 +4,14 @@ export const getAnnouncement = createAsyncThunk(
     "announcement/list",
     async ({ params = {}, callback }) => {
       try {
-       // const response = await api.get('/ads/announcements/announcementAll',params);
        const response = await api.get('/ads/announcements/announcementAll/paginate',params);
-        //const {data, status} = response;
         const {status} = response;
-
         const data = {data:response && response.data && response.data.data.data &&  response.data.data.data ? response.data.data.data : []};
-
         data['status_code'] = status;
-
         data['current_page'] = response.data && response.data.data.data &&  response.data.data.current_page ? response.data.data.current_page : 0  ;
         data['per_page'] = response.data && response.data.data.data &&  response.data.data.per_page ? response.data.data.per_page : 0  ;
-        data['last_page'] = response?.data?.data?.last_page ;
+        data['last_page'] = response?.data?.data?.last_page;
+
         if(typeof callback == 'function') {
           callback(data);
         }

@@ -48,24 +48,24 @@ export default function ProfileAnnouncement() {
   useEffect(() => {
     dispatch(
       getAnnouncement({
-        params: { lang_id: utils.convertLangCodeToID(langKey), rowsPerPage: 6,page:currentPage },
+        params: { lang_id: utils.convertLangCodeToID(langKey), rowsPerPage: 10,page:currentPage },
         callback: (res) => {},
       })
     );
   }, [langKey,currentPage]);
 
 
-  const handleScroll = (event) => {
-    if (
-      last_page !== currentPage &&
-      last_page > currentPage &&
-      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
-        event.currentTarget.clientHeight
-    ) {
-      setCurrentPage(currentPage + 1);
+  // const handleScroll = (event) => {
+  //   if (
+  //     last_page !== currentPage &&
+  //     last_page > currentPage &&
+  //     event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+  //       event.currentTarget.clientHeight
+  //   ) {
+  //     setCurrentPage(currentPage + 1);
       
-    }
-  };
+  //   }
+  // };
 
 
 
@@ -105,7 +105,6 @@ export default function ProfileAnnouncement() {
                 </ListItem>
               );
             })}
-
           </List>
 
             {announcements?.length == 0 && (
@@ -115,7 +114,7 @@ export default function ProfileAnnouncement() {
 
         </Grid>
 
-        {announcements?.length > 0 && (
+        {announcements?.length > 0 && last_page > 1 &&  (
             <Grid
               item
               xs={12}

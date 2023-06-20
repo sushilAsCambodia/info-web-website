@@ -16,13 +16,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 import Router from "next/router";
-import moment from "moment/moment";
+import moment from "moment/min/moment-with-locales";
 import utils from "@/common/utils";
 export default function NewsScrollColumn(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { newsCategory = [], lang_id = "" } = props;
+  const { newsCategory = [], lang_id = "",i18n } = props;
   const [newsList, setNewsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setPageLimit] = useState("");
@@ -244,7 +244,7 @@ export default function NewsScrollColumn(props) {
                       >
                         <Typography textAlign="left">  {utils.subString(item.title,50)}</Typography>
                         <Typography textAlign="left" fontSize="12px">
-                          {moment(item.release_date).format(utils.formatDate)}
+                          {moment(item.release_date).locale(utils.localChange(i18n)).format(utils.formatDate)}
                         </Typography>
                       </Grid>
                     );
