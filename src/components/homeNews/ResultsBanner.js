@@ -17,7 +17,10 @@ import LottoList from "@/common/LottoList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import AnnouncementItem from "@/common/AnnouncementItem";
 import { getLatestLottery } from "@/store/actions/lotteryActions";
-import { getLotteryCategory,getLotteryResultByCategory } from "@/store/actions/lotteryActions";
+import {
+  getLotteryCategory,
+  getLotteryResultByCategory,
+} from "@/store/actions/lotteryActions";
 import utils from "@/common/utils";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -25,9 +28,8 @@ import { getAnnouncement } from "@/store/actions/announcementAction";
 import NoDataMessage from "@/common/NoDataMessage";
 import Slider from "react-slick";
 
-
 const responsive = {
-  largeDesktop: { 
+  largeDesktop: {
     breakpoint: { max: 4000, min: 1321 },
     items: 3,
   },
@@ -50,16 +52,18 @@ const responsive = {
   },
 };
 
-
 export default function ResultsBanner(props) {
   const { lang_id = [], banners = {} } = props;
   const { t } = useTranslation();
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [value, setValue] = React.useState(0);
+  const [lotteryResults,setLotteryResults] = useState('')
   const matches = useMediaQuery("(max-width:1199px)");
   const matches2 = useMediaQuery("(max-width:768px)");
-  const {lotteryCategories = [], lotteryResults = []} = useSelector(state => state.lottery)
+  const { lotteryCategories = [] } = useSelector(
+    (state) => state.lottery
+  );
 
   const dispatch = useDispatch();
 
@@ -67,10 +71,7 @@ export default function ResultsBanner(props) {
     (state) => state && state.load_language && state.load_language.language
   );
   const { latest } = useSelector((state) => state.lottery);
-  const { announcement } = useSelector(
-    (state) => state?.announcement
-  );
-
+  const { announcement } = useSelector((state) => state?.announcement);
 
   const lotteryresult = {
     dots: false,
@@ -81,13 +82,13 @@ export default function ResultsBanner(props) {
     verticalSwiping: true,
     swipeToSlide: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 2500,
     pauseOnFocus: true,
     arrows: false,
     lazyLoad: false,
     adaptiveHeight: true,
     centerMode: true,
-    centerPadding: "295px",
+    centerPadding: "268px",
   };
   const announcementresult = {
     dots: false,
@@ -98,16 +99,19 @@ export default function ResultsBanner(props) {
     verticalSwiping: true,
     swipeToSlide: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
     pauseOnFocus: true,
     arrows: false,
     lazyLoad: false,
     adaptiveHeight: true,
     centerMode: true,
-    centerPadding: "295px",
+    centerPadding: "12px",
+  
   };
 
-  const  announcements  = useSelector((state) => state?.announcement?.announcements);
+  const announcements = useSelector(
+    (state) => state?.announcement?.announcements
+  );
 
   useEffect(() => {
     dispatch(getLatestLottery("hey"));
@@ -123,42 +127,47 @@ export default function ResultsBanner(props) {
     dispatch(
       getLotteryCategory({
         params: {
-          lang_id:utils.convertLangCodeToID(i18n.language)
-        }
+          lang_id: utils.convertLangCodeToID(i18n.language),
+        },
       })
-    ); 
-  },[dispatch,i18n.language]);
-  const handleGetLotteryResult = React.useCallback((categoryId = undefined) => {
-    dispatch(
-      getLotteryResultByCategory({
-        params: {
-          lang_id:utils.convertLangCodeToID(i18n.language),
-          category_id: categoryId
-        }
-      })
-    ); 
-  },[dispatch,i18n.language]);
+    );
+  }, [dispatch, i18n.language]);
+  const handleGetLotteryResult = React.useCallback(
+    (categoryId = undefined) => {
+      dispatch(
+        getLotteryResultByCategory({
+          params: {
+            lang_id: utils.convertLangCodeToID(i18n.language),
+            category_id: categoryId,
+          },
+          callback:(res)=>{
+            // console.log('lotteryResults:::',res.data)
+            setLotteryResults(res.data)
+          }
+        })
+      );
+    },
+    [dispatch, i18n.language]
+  );
 
   useEffect(() => {
     handleGetCategory();
-  },[handleGetCategory]);
+  }, [handleGetCategory]);
+
+  useEffect(() => {}, [lotteryCategories]);
 
   useEffect(() => {
-  },[lotteryCategories])
-
-  useEffect(() => {
-    if(value >= 0) {
-      let hash = '';
+    if (value >= 0) {
+      let hash = "";
       const lotteryCategory = lotteryCategories[value - 1] || {};
-      if(Object.keys(lotteryCategory).length) {
-        hash = '#'+(lotteryCategory?.translation?.translation);
+      if (Object.keys(lotteryCategory).length) {
+        hash = "#" + lotteryCategory?.translation?.translation;
       }
       // router.replace(`${router.route}${hash}`)
-        handleGetLotteryResult(lotteryCategory?.id);
+      handleGetLotteryResult(lotteryCategory?.id);
     }
-  },[value,i18n.language]);
+  }, [value, i18n.language]);
 
-  
   return (
     <>
       <Grid
@@ -188,22 +197,18 @@ export default function ResultsBanner(props) {
             px={1}
             marginBottom={1}
           >
-          <Slider {...lotteryresult}>
-          
-            {
-              
-              lotteryResults && lotteryResults.length>0 && lotteryResults.map((lr,key) => {
+            <Slider {...lotteryresult}>
+              {lotteryResults &&
+                lotteryResults.length > 0 &&
+                lotteryResults.map((lr, key) => {
                   return (
                     <div key={key}>
-                      <LottoList lottery={lr} />       
+                      <LottoList lottery={lr} />
                     </div>
                   );
-                })
-            
-            }    
-           
-          </Slider>  
-                 
+                })}
+            </Slider>
+
             {/* {latest?.MOLHC?.map((item, index) => {
               return (
                 <>
@@ -264,21 +269,20 @@ export default function ResultsBanner(props) {
               px={1}
               marginBottom={1}
             >
-            <Slider {...announcementresult}>
-            
-              {announcements?.length > 0 && announcements.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <AnnouncementItem announcement={item} />
-                  </div>
-                );
-              })}
-            </Slider>
-               {announcements?.length == 0 && announcements.map((item, index) => {
-                return (
-                  <NoDataMessage />
-                );
-              })}
+              <Slider {...announcementresult}>
+                {announcements?.length > 0 &&
+                  announcements.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <AnnouncementItem announcement={item} />
+                      </div>
+                    );
+                  })}
+              </Slider>
+              {announcements?.length == 0 &&
+                announcements.map((item, index) => {
+                  return <NoDataMessage />;
+                })}
             </Grid>
           </Grid>
         ) : (
