@@ -37,7 +37,7 @@ const responsive = {
 
 
 export default function JournalsColumns(props) {
-  const { t } = useTranslation(); 
+  const { i18n } = useTranslation(); 
   const [open, setOpen] = React.useState(false);
   const [albumId, setAlbumId] = React.useState('');
   const [journals, setJournals] = React.useState('');
@@ -101,7 +101,7 @@ export default function JournalsColumns(props) {
             renderDotsOutside={false}
           >
             {journals.length > 0 ? journals.map((item,index)=>{
-              return <JournalItem setOpen={setOpen} setAlbumId={setAlbumId} key={index} item={item}/>;
+              return <JournalItem setOpen={setOpen} setAlbumId={setAlbumId} key={index} item={item} i18n={i18n.language}/>;
             }):<Typography textAlign="center">{langKey && langKey.no_journal_data}</Typography>}
           </Carousel>
         <style>

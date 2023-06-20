@@ -15,7 +15,6 @@ import Tab from '@mui/material/Tab';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Box from '@mui/material/Box';
 import moment from 'moment/min/moment-with-locales'
-// import moment from "moment/moment";
 
 
 // function TabPanel(props) {
