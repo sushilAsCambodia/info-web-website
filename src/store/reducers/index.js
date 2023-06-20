@@ -12,6 +12,7 @@ import customerServiceReducer from "./customerServiceReducer";
 import LotteryReducer from "./lotteryReducer";
 import announcementReducer from "./announcementReducer";
 import FavouriteReducer from "./favouriteReducer";
+import FootballReducer from "./footballReducer";
 export default  combineReducers({
     banner: bannerReducer,
     category: categoryReducer,
@@ -25,5 +26,6 @@ export default  combineReducers({
     load_language:languageReducer,
     lottery: LotteryReducer,
     announcement:announcementReducer,
-    favourite:FavouriteReducer
+    favourite:FavouriteReducer,
+    football:FootballReducer
 });
