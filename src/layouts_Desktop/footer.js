@@ -16,7 +16,7 @@ const Footer = () => {
 
   return (
     <>
-      <Grid container alignItems="center" flexDirection="column" pt={2} paddingBottom={5}
+      <Grid container alignItems="center" flexDirection="column" pt={5} paddingBottom={5}
       // sx={{background:"red"}} 
       >
         <Grid item xs={4} textAlign="center">
