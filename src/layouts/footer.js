@@ -26,7 +26,7 @@ const Footer = () => {
         case  '/profile':
             selectedTab = 2;
             break;
-        // case  '/profile':
+        // case  '/match':
         //     selectedTab = 3;
         //     break;
         default:
@@ -66,7 +66,7 @@ const Footer = () => {
                     }}
                     onClick={() => router.push('/match')} 
                     label={langKey && langKey.match} 
-                    icon={<MatchIcon color={value == 2?'#FF0000':'#8C8C8C'}/>}
+                    icon={<MatchIcon color={value == 3?'#FF0000':'#8C8C8C'}/>}
                      /> */}
                 <BottomNavigationAction 
                     sx={{
