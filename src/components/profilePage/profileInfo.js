@@ -79,7 +79,7 @@ export default function ProfileInfo(props) {
       <label
         htmlFor="photo-upload"
         className="desktop-file-upload fas"
-        style={{ "--uploadImg": `${imagePreviewUrl ? "" : "url('/assets/Profile/profile_upload.png')"}` }}
+        style={{ "--uploadImg": `${imagePreviewUrl ? "" : "url('/assets/Profile/defaultavatar.jpg')"}` }}
       >
         {src &&  <Image alt="photo_upload" htmlFor="photo-upload" width={120} height={120} src={src} style={{borderRadius:"50%"}}/>} 
         <input id="photo-upload" type="file" onChange={onChange} />
@@ -543,11 +543,11 @@ export default function ProfileInfo(props) {
         </Grid>
         
       </Paper>
-      <Grid container justifyContent="center" py={5}>
+      {/* <Grid container justifyContent="center" py={5}>
         <Grid item>
           <Button  style={{background:'#FAFAFA',border:'1px solid #DDDDDD',fontSize:'14px',padding:'5px 25px'}} onClick={handleLogout}>{langKey && langKey.logout}</Button>
         </Grid>
-      </Grid>
+      </Grid> */}
       <LoadingDialog loading={loading}/>
      </>
   );

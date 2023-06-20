@@ -23,6 +23,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { getAnnouncement } from "@/store/actions/announcementAction";
 import NoDataMessage from "@/common/NoDataMessage";
+import Slider from "react-slick";
+
 
 const responsive = {
   largeDesktop: { 
@@ -69,6 +71,41 @@ export default function ResultsBanner(props) {
     (state) => state?.announcement
   );
 
+
+  const lotteryresult = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    vertical: true,
+    verticalSwiping: true,
+    swipeToSlide: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnFocus: true,
+    arrows: false,
+    lazyLoad: false,
+    adaptiveHeight: true,
+    centerMode: true,
+    centerPadding: "295px",
+  };
+  const announcementresult = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    vertical: true,
+    verticalSwiping: true,
+    swipeToSlide: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnFocus: true,
+    arrows: false,
+    lazyLoad: false,
+    adaptiveHeight: true,
+    centerMode: true,
+    centerPadding: "295px",
+  };
 
   const  announcements  = useSelector((state) => state?.announcement?.announcements);
 
@@ -151,6 +188,8 @@ export default function ResultsBanner(props) {
             px={1}
             marginBottom={1}
           >
+          <Slider {...lotteryresult}>
+          
             {
               
               lotteryResults && lotteryResults.length>0 && lotteryResults.map((lr,key) => {
@@ -161,18 +200,10 @@ export default function ResultsBanner(props) {
                   );
                 })
             
-            }      
-               {
-              
-              lotteryResults && lotteryResults.length>0 &&  lotteryResults.map((lr,key) => {
-                  return (
-                    <div key={key}>
-                      <LottoList lottery={lr}/>       
-                    </div>
-                  );
-                })
-            
-            }           
+            }    
+           
+          </Slider>  
+                 
             {/* {latest?.MOLHC?.map((item, index) => {
               return (
                 <>
@@ -233,6 +264,8 @@ export default function ResultsBanner(props) {
               px={1}
               marginBottom={1}
             >
+            <Slider {...announcementresult}>
+            
               {announcements?.length > 0 && announcements.map((item, index) => {
                 return (
                   <div key={index}>
@@ -240,6 +273,7 @@ export default function ResultsBanner(props) {
                   </div>
                 );
               })}
+            </Slider>
                {announcements?.length == 0 && announcements.map((item, index) => {
                 return (
                   <NoDataMessage />
