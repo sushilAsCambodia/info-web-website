@@ -481,10 +481,10 @@ export default function LotteryPastReults() {
                     lotteryHistories?.paginate?.data?.map((item, index) => {
                       return (
                         <StyledTableRow key={item.name}>
-                          <StyledTableCell align="center">
+                          <StyledTableCell align="left">
                             {item.issue}
                           </StyledTableCell>
-                          <StyledTableCell align="center">
+                          <StyledTableCell align="left">
                             {/* {moment(item.opendate).locale(localChange(i18n.language)).format(utils.lotteryFormat)} */}
                             {item.opendate}
                           </StyledTableCell>

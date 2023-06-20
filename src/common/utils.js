@@ -1,8 +1,6 @@
 // import moment from "moment/moment";
 import moment from 'moment/min/moment-with-locales'
 
-
-
 const utils = {
     formatDate: 'YYYY/MM/D',
     lotteryFormat: 'Do MMM YYYY, dddd',
