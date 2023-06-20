@@ -274,22 +274,6 @@ padding="0px 16px">
     </Grid>
     <Grid item display="flex" flexDirection={`${profilePage? "column-reverse":"column" }`}>
     <Grid item xs={12} paddingTop="10px">
-      <Typography fontSize="12px">
-      {langKey && langKey.feedback_content} <Typography component="span" sx={{color:'red'}}>*</Typography>
-      </Typography>
-      <TextField
-        fullWidth
-        id="outlined-multiline-static"
-        multiline
-        rows={6}
-        placeholder={langKey && langKey.do_not_exceed_characters}
-        value={content}
-        onChange={onChangeContent}
-        error={errorContent}
-        helperText={errorContent ? (langKey && (langKey.feedback_content_required || t('feedback_content_required'))) : ''}/>
-    </Grid>
-
-    <Grid item xs={12} paddingTop="10px">
       <Typography  fontSize="12px">
         {langKey && (langKey.contact || t('contact'))}
       </Typography> 
@@ -321,6 +305,23 @@ padding="0px 16px">
         {errorEmail && <FormHelperText error>{errorEmailMessage}</FormHelperText>}
       </FormControl>
     </Grid>
+    <Grid item xs={12} paddingTop="10px">
+      <Typography fontSize="12px">
+      {langKey && langKey.feedback_content} <Typography component="span" sx={{color:'red'}}>*</Typography>
+      </Typography>
+      <TextField
+        fullWidth
+        id="outlined-multiline-static"
+        multiline
+        rows={6}
+        placeholder={langKey && langKey.do_not_exceed_characters}
+        value={content}
+        onChange={onChangeContent}
+        error={errorContent}
+        helperText={errorContent ? (langKey && (langKey.feedback_content_required || t('feedback_content_required'))) : ''}/>
+    </Grid>
+
+
     </Grid>
 
     <Grid item xs={12} spacing={1} paddingTop="30px" display="flex" justifyContent="space-between">
