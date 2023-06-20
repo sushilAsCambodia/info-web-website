@@ -235,9 +235,9 @@ function TabPanel(props) {
                           <Grid item display="flex" alignItems="center">
                             <Image
                               alt={customer.user_name || "Profile Name"}
-                              src={customer.image?.path || '/assets/Profile/user-icon.png'} 
+                              src={customer.image?.path || '/assets/Profile/defaultavatar.jpg'} 
                               style={{ height:50,width:50,borderRadius:'50%'}}
-                              onError={(e) => e.target.src = '/assets/Profile/user-icon.png'}
+                              onError={(e) => e.target.src = '/assets/Profile/defaultavatar.jpg'}
                             />
                             &nbsp;{" "}
                             <Typography fontWeight="600" fontSize="12px" style={{whiteSpace:'nowrap'}}>
@@ -248,7 +248,7 @@ function TabPanel(props) {
                       ) : (
                         <>
                           <Grid item xs={2} display="flex" alignItems="center">
-                            <Image alt="user_icon" src="/assets/Profile/user-icon.png" />
+                            <Image alt="user_icon" src="/assets/Profile/defaultavatar.jpg" />
                           </Grid>
                           <Grid item xs={10}>
                             <Grid
