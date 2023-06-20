@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
@@ -21,19 +21,20 @@ export default function NewsColumns(props) {
   const theme = useTheme();
   const router = useRouter();
   const {lang_id=[]} = props; 
-  const { categories=[] } = useSelector((state) => state.category);
+  const [categories,setCategories] = useState('')
+  // const { categories=[] } = useSelector((state) => state.category);
 
 
-  // useEffect(() => {
-  //   dispatch(
-  //     getCategory({
-  //       params: { lang_id: lang_id },
-  //       callback: (res) => {
-
-  //       },
-  //     })
-  //   );
-  // }, [dispatch,lang_id]);
+  useEffect(() => {
+    dispatch(
+      getCategory({
+        params: { lang_id: lang_id },
+        callback: (res) => {
+          setCategories(res.data.category)
+        },
+      })
+    );
+  }, [dispatch,lang_id]);
 
   
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
