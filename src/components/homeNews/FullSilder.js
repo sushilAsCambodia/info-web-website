@@ -65,7 +65,7 @@ export default function FullSilder(props) {
               swipeable={newBanners.length>1?true:false}
               draggable={newBanners.length>1?true:false}
               arrows={newBanners.length>1?true:false}
-              autoPlaySpeed={3000}
+              autoPlaySpeed={3500}
               autoPlay={newBanners.length !== 1}
               centerMode={false}
               containerClass="container-with-dots"

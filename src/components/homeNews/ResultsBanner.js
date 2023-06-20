@@ -82,13 +82,13 @@ export default function ResultsBanner(props) {
     verticalSwiping: true,
     swipeToSlide: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 2500,
     pauseOnFocus: true,
     arrows: false,
     lazyLoad: false,
     adaptiveHeight: true,
     centerMode: true,
-    centerPadding: "295px",
+    centerPadding: "268px",
   };
   const announcementresult = {
     dots: false,
@@ -99,13 +99,14 @@ export default function ResultsBanner(props) {
     verticalSwiping: true,
     swipeToSlide: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
     pauseOnFocus: true,
     arrows: false,
     lazyLoad: false,
     adaptiveHeight: true,
     centerMode: true,
-    centerPadding: "295px",
+    centerPadding: "12px",
+  
   };
 
   const announcements = useSelector(
