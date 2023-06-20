@@ -11,6 +11,9 @@ import {getAdvertise} from '@/store/actions/advertiseActions'
 import {getCategory} from '@/store/actions/categoryActions'
 import useMediaQuery from "@mui/material/useMediaQuery";
 import utils from "../common/utils";
+//import moment from "moment";
+//import "moment/locale/km";
+//import "moment/locale/zh-cn";
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -127,18 +130,24 @@ export default function LangSwitcher() {
     switch (l) {
       case 'en':
         language = 'Eng';
+       // moment.locale("en");  
         break;
       case 'de':
-        language = '中文';
+        language = '中文';  
+        //moment.locale("zh-cn");     
         break;
       case 'kh':
-        language = 'ខ្មែរ';
+        language = 'ខ្មែរ';    
+       // moment.locale("km");  
         break;
       default:
+        language = 'Eng';
+        //moment.locale("en"); 
         break;
-    }
+    }    
     return language;
   }
+ 
   return (
     <div>
       <Button

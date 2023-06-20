@@ -162,17 +162,7 @@ export default function ResultsBanner(props) {
                 })
             
             }      
-               {
-              
-              lotteryResults && lotteryResults.length>0 &&  lotteryResults.map((lr,key) => {
-                  return (
-                    <div key={key}>
-                      <LottoList lottery={lr}/>       
-                    </div>
-                  );
-                })
-            
-            }           
+                 
             {/* {latest?.MOLHC?.map((item, index) => {
               return (
                 <>
