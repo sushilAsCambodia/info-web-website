@@ -359,10 +359,10 @@ export default function LotteryPage() {
                     <StyledHeaderCell align="left">
                       {langKey && langKey.lottery}
                     </StyledHeaderCell>
-                    <StyledHeaderCell align="left">
+                    <StyledHeaderCell align="center">
                       {langKey && langKey.issue}
                     </StyledHeaderCell>
-                    <StyledHeaderCell align="left">
+                    <StyledHeaderCell align="center">
                       {langKey && langKey.draw_time}
                     </StyledHeaderCell>
                     <StyledHeaderCell align="center">
@@ -454,14 +454,14 @@ export default function LotteryPage() {
                                         </Typography>
                                       </Grid>
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="center">
                                       {item?.latest_result?.issue}
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="center">
                                       {/* {item?.latest_result?.created_at} */}
                                       {moment(
                                         item?.latest_result?.created_at
-                                      ).format("YYYY-MM-DD")}
+                                      ).format("YYYY-MM-DD")} 
                                     </TableCell>
                                     <TableCell align="center">
                                       <Grid

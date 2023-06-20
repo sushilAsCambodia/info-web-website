@@ -400,11 +400,11 @@ const pagination = <Pagination
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledHeaderCell width="50px">
+                    <StyledHeaderCell width="50px" align="center">
                       {" "}
                       {langKey && langKey.issue}{" "}
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="50px" align="left">
+                    <StyledHeaderCell width="50px" align="center">
                       {langKey && langKey.draw_time}
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
@@ -417,10 +417,10 @@ const pagination = <Pagination
                     lotteryGameHistoryResult().item?.slice((currentPage-1)*rowsPerPage,(rowsPerPage*currentPage)).map((item, index) => {
                       return (
                         <StyledTableRow key={index}>
-                          <StyledTableCell align="left">
+                          <StyledTableCell align="center">
                             {item.issue}
                           </StyledTableCell>
-                          <StyledTableCell align="left">
+                          <StyledTableCell align="center">
                             {/* {moment(item.opendate).locale(localChange(i18n.language)).format(utils.lotteryFormat)} */}
                             {item.opendate}
                           </StyledTableCell>
@@ -462,10 +462,10 @@ const pagination = <Pagination
                     lotteryHistories?.data?.map((item, index) => {
                       return (
                         <StyledTableRow key={item.name}>
-                          <StyledTableCell align="left">
+                          <StyledTableCell align="center">
                             {item.issue}
                           </StyledTableCell>
-                          <StyledTableCell align="left">
+                          <StyledTableCell align="center">
                             {/* {moment(item.opendate).locale(localChange(i18n.language)).format(utils.lotteryFormat)} */}
 {item.opendate}
                           </StyledTableCell>
