@@ -196,10 +196,13 @@ const {total} = useSelector(
     const item = lotteryHistoriesAll?.data?.filter((obj) => {
       return obj?.issue.includes(search);
     });
-const pagination = <Pagination
-    count={Math.ceil(item?.length / 10)}
+
+    const pageCount = Math.ceil(item?.length / 10)
+const pagination = pageCount <= 1 ? '': <Pagination
+    count={pageCount}
     page={currentPage}
     onChange={handlePageChange}
+    variant="outlined" shape="rounded"
   />
     return {item,pagination};
   };
@@ -497,7 +500,7 @@ const pagination = <Pagination
               </Table>
             </TableContainer>
             {!toSearch ? (	       
-                     lotteryHistories?.data?.length > 0 && (
+                    lotteryHistories.last_page > 1 && lotteryHistories?.data?.length > 0 && (
                 <Grid
                   mt={7}
                   item
@@ -508,17 +511,18 @@ const pagination = <Pagination
                     count={lotteryHistories.last_page}
                     page={currentPage}
                     onChange={handlePageChange}
+                    variant="outlined" shape="rounded"
                   />
                 </Grid>
               )
             ) : (
               <Grid
-                my={1}
+              mt={7}
                 item
                 xs={12}
                 sx={{ display: "flex", justifyContent: "center" }}
               >
-              {lotteryGameHistoryResult().pagination}
+              { lotteryGameHistoryResult().pagination}
               </Grid>
             )}
           </Grid>

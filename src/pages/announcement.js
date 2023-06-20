@@ -28,26 +28,22 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Image } from "mui-image";
 import utils from "@/common/utils";
 import { getAnnouncement } from "@/store/actions/announcementAction";
 import NoDataMessage from "@/common/NoDataMessage";
 import ArticleModal from "@/common/ArticleModal";
+import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 
 
 
 const Announcement = () => {
   const matches = useMediaQuery("(max-width:768px)");
   const router = useRouter();
-  const langKey = useSelector((state) => state?.load_language?.language);
-  // const { announcement } = useSelector(
-  //   (state) => state?.announcement?.announcements
-  // );
-  // const announcements = announcement?.filter((item) => {
-  //   return item.status === "0";
-  // });
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const { i18n } = useTranslation();
 
 
   const  {announcements,current_page,per_page,last_page}  = useSelector((state) => state?.announcement);
@@ -80,8 +76,7 @@ const Announcement = () => {
 
   const [open, setOpen] = useState(false);
   const [article, setArticle] = useState({});
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
 
   const handleModalOpen =(article)=>{
 setArticle(article)
@@ -95,9 +90,10 @@ setOpen(true)
 
   
   useEffect(() => {
+    console.log(':::lang key',langKey)
     dispatch(
       getAnnouncement({
-        params: { lang_id: utils.convertLangCodeToID(langKey), rowsPerPage: 10,page:currentPage },
+        params: { lang_id: utils.convertLangCodeToID(i18n.language), rowsPerPage: 10,page:currentPage },
         callback: (res) => {},
       })
     );
@@ -122,7 +118,6 @@ setOpen(true)
         container
         alignItems="flex-start"
         justifyContent="center"
-        padding="20px 16px"
       >
         <Grid
           item
@@ -132,34 +127,7 @@ setOpen(true)
           alignItems="center"
           overflow="auto"
         >
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={12}
-            xl={12}
-            padding="0px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            paddingBottom={2}
-          >
-            <Grid>
-              <Typography variant="h5" fontWeight={600}>
-                {langKey && langKey.announcement}  
-              </Typography>
-            </Grid>
-            <Grid>
-              <Stack spacing={2}>
-                <Breadcrumbs
-                  separator={<NavigateNextIcon fontSize="small" />}
-                  aria-label="breadcrumb"
-                >
-                  {breadcrumbs}
-                </Breadcrumbs>
-              </Stack>
-            </Grid>
-          </Grid>
+       <TitleBreadCrumbs title={langKey.announcement}/>
           <Grid container>
             {announcements?.length > 0 &&
               announcements.map((item, index) => {
@@ -171,7 +139,7 @@ setOpen(true)
                     sm={6}
                     md={4}
                     lg={3}
-                    sx={{ padding: "10px", textAlign: "left",cursor:'pointer' }}
+                    sx={{ padding: "5px", textAlign: "left",cursor:'pointer' }}
                     onClick={()=>handleModalOpen(item)}
                   >
                     <Grid
@@ -217,7 +185,7 @@ setOpen(true)
              <NoDataMessage />
             )}
           </Grid>
-          {announcements?.length > 0 && (
+          {announcements?.length > 0 && last_page > 1 && (
             <Grid
               item
               xs={12}
@@ -225,6 +193,7 @@ setOpen(true)
               display="flex"
               justifyContent="center"
               paddingTop={3}
+              
             >
                 <Pagination count={last_page} page={currentPage} onChange={handleChange} variant="outlined" shape="rounded" className="announce-pagination" />
             </Grid>

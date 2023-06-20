@@ -76,7 +76,7 @@ export default function JournalsColumns(props) {
             </Typography>
           </Divider>
         </Grid>
-        <Grid item xs={12} className="home-carousel-wrapper">
+        <Grid item xs={12} className="home-carousel-wrapper" paddingX='20px'>
           <Carousel
           className="makecenterforjournal"
             responsive={responsive}
@@ -109,12 +109,20 @@ export default function JournalsColumns(props) {
                 background: linear-gradient(0deg, #EFEFEF, #EFEFEF),
                 linear-gradient(0deg, #FFFFFF, #FFFFFF);
               }
+              .home-carousel-wrapper {
+                position: relative;
+              }
+             .home-carousel-wrapper .react-multi-carousel-list {
+              position: unset !important;
+            }
               .home-carousel-wrapper .react-multiple-carousel__arrow--left {
-                left:20px;
+                left: 0px;
               }
               .home-carousel-wrapper .react-multiple-carousel__arrow--right {
-                right:20px; 
+                right:0px; 
               }
+             
+            
               .react-multiple-carousel__arrow::before {
                 font-size: 10px;
                 color: #444444;
