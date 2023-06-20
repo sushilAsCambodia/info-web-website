@@ -38,10 +38,10 @@ const lotteryHistory = () => {
             },
             callback: (res) => {
               page == 1
-                ? (setLotteryHistories(res.data.data),
-                  setPageLimit(res.data.last_page),
+                ? (setLotteryHistories(res.data.paginate.data),
+                  setPageLimit(res.data.paginate.last_page),
                   handleClose())
-                : setLotteryHistories((data) => data.concat(res.data.data));
+                : setLotteryHistories((data) => data.concat(res.data.paginate.data));
               handleClose();
               
             },
