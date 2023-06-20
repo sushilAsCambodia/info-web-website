@@ -18,6 +18,7 @@ import { getJournal } from "@/store/actions/journalActions";
 import { useDispatch, useSelector } from "react-redux";
 import AdvertiseSlide from "./AdvertiseSlide";
 import ResultsBanner from "./ResultsBanner";
+import { getCategory } from "@/store/actions/categoryActions";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -48,11 +49,12 @@ function a11yProps(index) {
 
 export default function NewsJournalTabs(props) {
   const { t } = useTranslation();
-  const { banners = [], categories = [], advertises = [], lang_id } = props;
+  const { banners = [], advertises = [], lang_id } = props;
   const dispatch = useDispatch();
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(0);
+  const [categories, setCategories] = React.useState('');
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash == "journal") {
@@ -64,6 +66,17 @@ export default function NewsJournalTabs(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => { 
+    dispatch(
+      getCategory({
+        params: { lang_id: lang_id },
+        callback: (res) => { 
+          setCategories(res.data.category)
+         },
+      })
+    );
+  }, [dispatch,lang_id]);
   // useEffect(() => {
   //   if (value === 1) {
   //     dispatch(

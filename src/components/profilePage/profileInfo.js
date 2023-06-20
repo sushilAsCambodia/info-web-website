@@ -24,6 +24,7 @@ import {
   Divider,
   InputLabel,
   Drawer,
+  Box
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import Visibility from "@mui/icons-material/Visibility";
@@ -81,7 +82,15 @@ export default function ProfileInfo(props) {
         className="desktop-file-upload fas"
         style={{ "--uploadImg": `${imagePreviewUrl ? "" : "url('/assets/Profile/defaultavatar.jpg')"}` }}
       >
-        {src &&  <Image alt="photo_upload" htmlFor="photo-upload" width={120} height={120} src={src} style={{borderRadius:"50%"}}/>} 
+        {src &&  
+        // <Image duration={1} alt="photo_upload" htmlFor="photo-upload" width={120} height={120} src={src} style={{borderRadius:"50%"}}/>
+
+        <Box
+        component="img"
+        width={120} height={120}
+        src={src}
+      />
+        } 
         <input id="photo-upload" type="file" onChange={onChange} />
       </label>
     );

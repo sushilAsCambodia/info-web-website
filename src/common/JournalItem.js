@@ -10,10 +10,11 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
-import moment from "moment/moment";
+import moment from 'moment/min/moment-with-locales'
 import { useSelector } from "react-redux";
+import utils from "./utils";
 export default function JournalItem(props) {
-  const {item={}, setOpen, setAlbumId} = props;  
+  const {item={}, setOpen, setAlbumId,i18n} = props;  
 
 
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
@@ -69,7 +70,7 @@ export default function JournalItem(props) {
                     <Icon icon="ic:outline-calendar-today" color="grey" />
                     <Typography color="grey" fontSize="12px" ml={1}>
                       {" "}
-                      { moment(item?.album_slavs_latest?.issue_date).format('yyyy')}
+                      { moment(item?.album_slavs_latest?.issue_date).locale(utils.localChange(i18n)).format('yyyy')}
                     </Typography>
                   </Grid>
                   )
