@@ -197,7 +197,7 @@ export default function ResultsBanner(props) {
           </Typography>
           <Grid
             overflow="auto"
-            className={matches ? "verticleLotto" : "horizontalLotto"}
+            className={matches ? "" : "horizontalLotto"}
             px={1}
             marginBottom={1}
           >
