@@ -175,7 +175,7 @@ const lottery_result=lottery && lottery.latest_result
           {/* 2023-06-01 21:30:00 */}
 
        <Typography color={'#555555'} fontSize={'15px'} fontWeight={'500'}>
-       {moment(lottery && lottery.opendate).format(utils.lotteryLatestResult)}
+       {moment(lottery && lottery.opendate).locale(utils.localChange(i18n.language)).format(utils.lotteryLatestResult)}
        </Typography>
 
           </Grid>

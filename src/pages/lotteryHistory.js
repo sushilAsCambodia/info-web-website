@@ -22,12 +22,11 @@ const lotteryHistory = () => {
   const { id } = router.query;
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setPageLimit] = useState(2);
-  const [toBottom, setToBottom] = useState(false);
+  const [historyTitle, setHistoryTitle] = useState('');
 
 
 
   const handleGetLotteryHistory = (page = 1) => {
-   console.log('handleGetLotteryHistory id:::',id)
         dispatch(
           getLotteryHistory({
             params: {
@@ -37,6 +36,7 @@ const lotteryHistory = () => {
               lang_id: utils.convertLangCodeToID(i18n.language),
             },
             callback: (res) => {
+
               page == 1
                 ? (setLotteryHistories(res.data.paginate.data),
                   setPageLimit(res.data.paginate.last_page),
@@ -44,6 +44,7 @@ const lotteryHistory = () => {
                 : setLotteryHistories((data) => data.concat(res.data.paginate.data));
               handleClose();
               
+              setHistoryTitle(res.data.lottery.translation.translation)
             },
           })
         )
@@ -59,7 +60,7 @@ const lotteryHistory = () => {
       handleOpen()
       handleGetLotteryHistory(currentPage);
     }
-  }, [currentPage,router.query]);
+  }, [currentPage,router.query,i18n.language]);
 
   const handleScroll = (event) => {
     if (
@@ -88,7 +89,7 @@ const lotteryHistory = () => {
         alignItems="center"
         sx={{ marginTop: "10px", background: "#fff", top: -1, padding: 1 }}
       >
-        <Typography>{router?.query?.title}</Typography>
+        <Typography>{historyTitle ? historyTitle:  router?.query?.title}</Typography>
       </Grid>
 
       <Grid
@@ -103,7 +104,7 @@ const lotteryHistory = () => {
         {lotteryHistories.map((r, key) => {
           return (
             <div key={key} style={{ marginBottom: 10 }}>
-              <LotteryHistoryCard lottery={r} icon={router?.query?.icon}/>
+              <LotteryHistoryCard lottery={r} icon={router?.query?.icon} />
             </div>
           );
         })}
