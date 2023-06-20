@@ -16,11 +16,11 @@ const Footer = () => {
 
   return (
     <>
-      <Grid container alignItems="center" flexDirection="column" pt={2} height="100%" 
+      <Grid container alignItems="center" flexDirection="column" pt={5} paddingBottom={5}
       // sx={{background:"red"}} 
       >
         <Grid item xs={4} textAlign="center">
-          <Image alt="footer_logo" src="./assets/Logo/new-logo-white-bg.png" width="150px" height="100%" />
+          <Image alt="footer_logo" src="./assets/Logo/new-logo-white-bg.png" width="150px"  />
           <Typography> {langKey && langKey.footer_content} </Typography>
         </Grid>
         {/* <Grid container item xs={6} py={1} justifyContent="center">

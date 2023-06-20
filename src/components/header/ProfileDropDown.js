@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 import Menu from "@mui/material/Menu";
@@ -18,6 +18,10 @@ import {
 import { Icon } from "@iconify/react";
 import MuiButton from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import Router from "next/router";
+import ConfirmationModalWeb from "@/common/ConfirmationModalWeb";
+import { useDispatch } from "react-redux";
+
 import { logout } from "@/store/actions/authActions";
 import { useRouter } from "next/router";
 export default function ProfileDropDown(props) {
@@ -26,6 +30,9 @@ export default function ProfileDropDown(props) {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
+  const [openn,setOpenn] = useState(false)
+
   const router = useRouter();
   const handleClick = (event) => {
     const target = document.getElementById('demo-customized-button');
@@ -63,9 +70,14 @@ export default function ProfileDropDown(props) {
     },
   }));
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+  const handleConfirmation = ()=>{
+    setOpenn(true)
+  }
+
   return (
     <div 
     >
+         <ConfirmationModalWeb _handleLogout={logout} open={openn} setOpen={setOpenn} message={langKey && langKey.you_want_logout}/>
       <Button
         id="demo-customized-button"
         aria-controls={open ? "demo-customized-menu" : undefined}
@@ -113,9 +125,10 @@ export default function ProfileDropDown(props) {
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem
-          onClick={logout}
+          // onClick={logout}
           disableRipple
           sx={{ justifyContent: "flex-start" }}
+          onClick={handleConfirmation}
         >
          {langKey && langKey.logout}
         </MenuItem>

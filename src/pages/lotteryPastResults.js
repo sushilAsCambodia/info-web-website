@@ -415,11 +415,11 @@ export default function LotteryPastReults() {
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledHeaderCell width="50px" align="left">
+                    <StyledHeaderCell width="50px" align="center">
                       {" "}
                       {langKey && langKey.issue}{" "}
                     </StyledHeaderCell>
-                    <StyledHeaderCell width="50px" align="left">
+                    <StyledHeaderCell width="50px" align="center">
                       {langKey && langKey.draw_time}
                     </StyledHeaderCell>
                     <StyledHeaderCell width="100px" align="center">
