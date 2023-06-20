@@ -6,6 +6,7 @@ import moment from 'moment/min/moment-with-locales'
 const utils = {
     formatDate: 'YYYY/MM/D',
     lotteryFormat: 'Do MMM YYYY, dddd',
+    lotteryLatestResult: 'YYYY-MM-DD dddd',
     letterFormat: 'YYYY MMM DD',
     letterFormat2: 'YYYY MMM DD',
     letterFormatDDMMYYYY: 'YYYY/MM/DD',

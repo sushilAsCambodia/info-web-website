@@ -199,10 +199,11 @@ export default function ResultsBanner(props) {
                     </div>
                   );
                 })
-            }
-          </Slider>
-        
-                    
+            
+            }    
+           
+          </Slider>  
+                 
             {/* {latest?.MOLHC?.map((item, index) => {
               return (
                 <>
