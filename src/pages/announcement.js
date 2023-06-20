@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
-import moment from "moment/moment";
+import moment from 'moment/min/moment-with-locales'
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Pagination from "@mui/material/Pagination";
@@ -154,8 +154,8 @@ setOpen(true)
                         textAlign="left"
                         fontSize="12px"
                         color="#8C8C8C"
-                      >
-                        { moment(item.created_at).format(utils.letterFormat2) } 
+                      >                      
+                        {moment(item.created_at).locale(utils.localChange(i18n.language)).format(utils.letterFormat2)}
                       </Typography>
                     </Grid>
                   </Grid>
