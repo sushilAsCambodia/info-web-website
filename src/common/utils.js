@@ -1,4 +1,7 @@
-import moment from "moment/moment";
+// import moment from "moment/moment";
+import moment from 'moment/min/moment-with-locales'
+
+
 
 const utils = {
     formatDate: 'YYYY/MM/D',
@@ -80,6 +83,17 @@ const utils = {
         });
       }
       return result;
+    },
+
+    localChange:(key)=>{
+      switch(key){
+        case 'kh':
+        return 'km';
+        case 'de':
+          return 'zh-cn'
+          default:
+            return 'en'
+      }
     }
 }
 export default utils;
