@@ -55,7 +55,7 @@ export default function FullSilder(props) {
     // setNewBanners(banners.filter(b => b.platform.toLowerCase() == type && b.position == 'top_carousel'));
   },[banners,isH5])
   return (
-    <> 
+    <Grid> 
     { (newBanners && newBanners.length > 0) && <Grid item sx={{ position: "relative", marginTop:'0px' }} className="mainautoplayswipeable">
          
           <Grid item xs={12} id="AddCarouselBtn" sx={{maxHeight:"300px"}}>
@@ -133,6 +133,6 @@ export default function FullSilder(props) {
           }
           </style>
         </Grid>} 
-    </>
+    </Grid>
   );
 }

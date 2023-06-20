@@ -10,12 +10,12 @@ import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import utils from "@/common/utils";
 
-import moment from "moment/moment";
 import Slider from "react-slick";
 import Tab from '@mui/material/Tab';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Box from '@mui/material/Box';
-
+import moment from 'moment/min/moment-with-locales'
+// import moment from "moment/moment";
 
 
 // function TabPanel(props) {
@@ -175,7 +175,9 @@ const lottery_result=lottery && lottery.latest_result
           {/* 2023-06-01 21:30:00 */}
 
        <Typography color={'#555555'} fontSize={'15px'} fontWeight={'500'}>
-       {moment(lottery && lottery.created_at).format(utils.lotteryFormat)}
+                            {/* {moment(item.opendate).locale(localChange(i18n.language)).format(utils.lotteryFormat)} */}
+
+       {moment(lottery && lottery.created_at).locale(utils.localChange(i18n.language)).format(utils.lotteryFormat)}
        </Typography>
 
           </Grid>
