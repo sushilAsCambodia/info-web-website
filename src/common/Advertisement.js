@@ -67,7 +67,7 @@ export default function Advertisement(props) {
             swipeable={newAdverts.length>1?true:false}
             draggable={newAdverts.length>1?true:false}
             arrows={newAdverts.length>1?true:false}
-            autoPlaySpeed={3000}
+            autoPlaySpeed={2500}
             autoPlay={newAdverts.length !== 1}
             centerMode={false}
             containerClass="container-with-dots"
@@ -90,7 +90,7 @@ export default function Advertisement(props) {
                   style={{
                     color: "white",
                     textAlign: "left",
-                    height: "300px",
+                    height: "400px",
                     // border: "1px solid grey",
                     borderRadius: "5px",
                   }} 

@@ -59,9 +59,10 @@ export default function ResultsBanner(props) {
   const [loading, setLoading] = useState(false);
   const [announceMent, setAnnounceMent] = useState([]);
   const [value, setValue] = React.useState(0);
+  const [lotteryResults,setLotteryResults] = useState('')
   const matches = useMediaQuery("(max-width:1199px)");
   const matches2 = useMediaQuery("(max-width:768px)");
-  const { lotteryCategories = [], lotteryResults = [] } = useSelector(
+  const { lotteryCategories = [] } = useSelector(
     (state) => state.lottery
   );
 
@@ -82,13 +83,13 @@ export default function ResultsBanner(props) {
     verticalSwiping: true,
     swipeToSlide: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 2500,
     pauseOnFocus: true,
     arrows: false,
     lazyLoad: false,
     adaptiveHeight: true,
     centerMode: true,
-    centerPadding: "295px",
+    centerPadding: "268px",
   };
   const announcementresult = {
     dots: false,
@@ -99,13 +100,14 @@ export default function ResultsBanner(props) {
     verticalSwiping: true,
     swipeToSlide: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
     pauseOnFocus: true,
     arrows: false,
     lazyLoad: false,
     adaptiveHeight: true,
     centerMode: true,
-    centerPadding: "295px",
+    centerPadding: "12px",
+  
   };
 
   const announcements = useSelector(
@@ -142,6 +144,10 @@ export default function ResultsBanner(props) {
             lang_id: utils.convertLangCodeToID(i18n.language),
             category_id: categoryId,
           },
+          callback:(res)=>{
+            // console.log('lotteryResults:::',res.data)
+            setLotteryResults(res.data)
+          }
         })
       );
     },
