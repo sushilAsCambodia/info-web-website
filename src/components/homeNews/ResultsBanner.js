@@ -23,9 +23,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { getAnnouncement } from "@/store/actions/announcementAction";
 import NoDataMessage from "@/common/NoDataMessage";
-// import Marquee from "react-fast-marquee";
 import Slider from "react-slick";
-import Marquee from "react-fast-marquee";
 
 
 const responsive = {
