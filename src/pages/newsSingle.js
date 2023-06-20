@@ -121,12 +121,12 @@ export default function NewsSingle() {
   useEffect(() => {
     dispatch(
       getNewsRecent({
-        params: { type: "recent",lang_id: lang_id },
+        params: { type: "recent" },
       })
     );
     dispatch(
       getNewsPopular({
-        params: { type: "popular",lang_id: lang_id },
+        params: { type: "popular" },
       })
     );
   }, [dispatch,lang_id]);
@@ -135,7 +135,7 @@ export default function NewsSingle() {
       dispatch(
         getNewsById({
           id,
-          params: { lang_id: lang_id },
+          params: {  },
           callback: (res) => {},
         })
       );
