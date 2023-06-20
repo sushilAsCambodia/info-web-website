@@ -543,11 +543,11 @@ export default function ProfileInfo(props) {
         </Grid>
         
       </Paper>
-      <Grid container justifyContent="center" py={5}>
+      {/* <Grid container justifyContent="center" py={5}>
         <Grid item>
           <Button  style={{background:'#FAFAFA',border:'1px solid #DDDDDD',fontSize:'14px',padding:'5px 25px'}} onClick={handleLogout}>{langKey && langKey.logout}</Button>
         </Grid>
-      </Grid>
+      </Grid> */}
       <LoadingDialog loading={loading}/>
      </>
   );
