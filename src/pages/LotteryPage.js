@@ -1,5 +1,5 @@
 import * as React from "react";
-import moment from "moment/moment";
+import moment from 'moment/min/moment-with-locales'
 import {
   Typography,
   Grid,
@@ -459,9 +459,10 @@ export default function LotteryPage() {
                                     </TableCell>
                                     <TableCell align="center">
                                       {/* {item?.latest_result?.created_at} */}
-                                      {moment(
+                                      {/* {moment(
                                         item?.latest_result?.created_at
-                                      ).format("YYYY-MM-DD")} 
+                                      ).format("YYYY-MM-DD")}  */}
+                                      {moment(item?.latest_result?.created_at).locale(utils.localChange(i18n.language)).format("YYYY-MM-DD")}
                                     </TableCell>
                                     <TableCell align="center">
                                       <Grid
