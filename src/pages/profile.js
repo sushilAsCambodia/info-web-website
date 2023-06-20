@@ -459,10 +459,7 @@ function TabPanel(props) {
                     </Grid>
                   </ListItem>
                   <Divider />
-                  <ListItem
-                    sx={{ padding: "0px 0px" }}
-                    onClick={goToCustomerService}
-                  >
+                  <ListItem sx={{ padding: "0px 0px" }}  onClick={goToCustomerService}>
                     <Grid
                       item
                       xs={12}
