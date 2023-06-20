@@ -40,14 +40,17 @@ export default function JournalsColumns(props) {
   const { t } = useTranslation(); 
   const [open, setOpen] = React.useState(false);
   const [albumId, setAlbumId] = React.useState('');
+  const [journals, setJournals] = React.useState('');
   const {lang_id=''} = props; 
   const dispatch = useDispatch();
-  const { journals = [], loading } = useSelector((state) => state.journal); 
+  const {  loading } = useSelector((state) => state.journal); 
   useEffect(() => {
     dispatch(getJournal(
       {
         params: {lang_id: lang_id, take: 60},
-        callback:(res) => { }
+        callback:(res) => { 
+          setJournals(res.data)
+        }
       }
     ));
   },[dispatch,lang_id])
