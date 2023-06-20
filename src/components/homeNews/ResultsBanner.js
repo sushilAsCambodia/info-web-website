@@ -104,7 +104,7 @@ export default function ResultsBanner(props) {
     lazyLoad: false,
     adaptiveHeight: true,
     centerMode: true,
-    centerPadding: "0px",
+    centerPadding: "12px",
   
   };
 
