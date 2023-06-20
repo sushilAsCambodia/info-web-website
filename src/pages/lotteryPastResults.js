@@ -26,8 +26,7 @@ import {
   TextField,
 } from "@mui/material";
 // import moment from "moment/moment";
-import moment from 'moment/min/moment-with-locales'
-
+import moment from "moment/min/moment-with-locales";
 
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +38,7 @@ import {
   getLotteryHistory,
   getLotteryCategory,
   getLotteryResultByCategoryId,
-  getLotteryHistoryAll
+  getLotteryHistoryAll,
 } from "@/store/actions/lotteryActions";
 import { useRouter } from "next/router";
 import DataLoading from "@/components/DataLoading";
@@ -52,20 +51,21 @@ export default function LotteryPastReults() {
   const { id, icon, title, categoryId } = router.query;
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
-  const rowsPerPage = 10
+  const rowsPerPage = 10;
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const [titleIcon, setTitleIcon] = useState();
-  const [historyTitle, setHistoryTitle] = useState('');
+  const [historyTitle, setHistoryTitle] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [expanded, setExpanded] = useState("");
-  const [toSearch, setToSearch] = useState(false);	
-  const { lotteryHistories = {}, loading_history,lotteryResultByID = [],lotteryHistoriesAll  } = useSelector(
-    (state) => state.lottery
-  );
-const {total} = useSelector(
-  (state) => state.lottery.lotteryHistories
-);
+  const [toSearch, setToSearch] = useState(false);
+  const {
+    lotteryHistories = {},
+    loading_history,
+    lotteryResultByID = [],
+    lotteryHistoriesAll,
+  } = useSelector((state) => state.lottery);
+  const { total } = useSelector((state) => state.lottery.lotteryHistories);
   const handleExpandClick = (index) => {
     if (index === expanded) setExpanded("");
     else setExpanded(index);
@@ -87,8 +87,9 @@ const {total} = useSelector(
           lang_id: utils.convertLangCodeToID(i18n.language),
         },
         callback: (res) => {
-          console.log(':::getLotteryHistory',res.data)
-          setTitleIcon(res.data.data[0].lottery.icon)
+          console.log(':::getLotteryHistory',res.data.lottery)
+          setTitleIcon(res.data.lottery.icon)
+          setHistoryTitle(res.data.lottery.translation.translation)
         },
       })
     );
@@ -98,15 +99,17 @@ const {total} = useSelector(
     dispatch(
       getLotteryHistoryAll({
         params: {
-          rowsPerPage: lotteryHistories? lotteryHistories.total:50,
+          rowsPerPage: lotteryHistories
+            ? lotteryHistories?.paginate?.total
+            : 50,
           page: 1,
           lottery_id: filter ? filter : id,
           lang_id: utils.convertLangCodeToID(i18n.language),
         },
-        callback: (res) => { 
+        callback: (res) => {
         },
       })
-    )
+    );
   };
 
   const handlePageChange = (event, value) => {
@@ -114,19 +117,18 @@ const {total} = useSelector(
   };
 
   useEffect(() => {
-    if (id !== undefined && !toSearch) {	
-            handleGetLotteryHistory(), setFilter(filter == "" ? id : filter);
+    if (id !== undefined && !toSearch) {
+      handleGetLotteryHistory(), setFilter(filter == "" ? id : filter);
     }
   }, [currentPage, router.isReady, filter, i18n.language]);
 
   useEffect(() => {
-    allReset()	
-    }, [filter]);
+    allReset();
+  }, [filter]);
 
-  useEffect(()=>{
-    handleGetLotteryHistoryAll()
-    
-  },[search,i18n.language,total])
+  useEffect(() => {
+    handleGetLotteryHistoryAll();
+  }, [search, i18n.language, lotteryHistories?.paginate?.total]);
 
   useEffect(() => {
     if (categoryId !== undefined) {
@@ -143,12 +145,10 @@ const {total} = useSelector(
           pick: "",
           category_id: "",
         },
-        callback: (res) => {
-          
-        },
+        callback: (res) => {},
       })
     );
-  }, [i18n.language]);	
+  }, [i18n.language]);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -196,37 +196,42 @@ const {total} = useSelector(
   };
 
   const lotteryGameHistoryResult = () => {
-    const item = lotteryHistoriesAll?.data?.filter((obj) => {
+    const item = lotteryHistoriesAll?.paginate?.data?.filter((obj) => {
       return obj?.issue.includes(search);
     });
 
-    const pageCount = Math.ceil(item?.length / 10)
-const pagination = pageCount <= 1 ? '': <Pagination
-    count={pageCount}
-    page={currentPage}
-    onChange={handlePageChange}
-    variant="outlined" shape="rounded"
-  />
-    return {item,pagination};
+    const pageCount = Math.ceil(item?.length / 10);
+    const pagination =
+      pageCount <= 1 ? (
+        ""
+      ) : (
+        <Pagination
+          count={pageCount}
+          page={currentPage}
+          onChange={handlePageChange}
+          variant="outlined"
+          shape="rounded"
+        />
+      );
+    return { item, pagination };
   };
-  const localChange =(key)=>{
-    switch(key){
-      case 'kh':
-      return 'km';
-      case 'de':
-        return 'zh-cn'
-        default:
-          return 'en'
+  const localChange = (key) => {
+    switch (key) {
+      case "kh":
+        return "km";
+      case "de":
+        return "zh-cn";
+      default:
+        return "en";
     }
-  }
-  const allReset=()=>{	
-    setSearch(''),	
-    setCurrentPage(1)	
-  }
+  };
+  const allReset = () => {
+    setSearch(""), setCurrentPage(1);
+  };
   return (
     <>
       <TitleBreadCrumbs title={langKey?.past_results} />
-      <Grid container  mt={7}>
+      <Grid container mt={7}>
         <Grid item xs={4} p={1}>
           <Grid py={1} border="1px solid #DDDDDD">
             {lotteryResultByIDFilter()?.length > 0 &&
@@ -259,7 +264,7 @@ const pagination = pageCount <= 1 ? '': <Pagination
                         </div>
                       </div>
                       <Collapse
-                      style={{paddingLeft:'20px'}}
+                        style={{ paddingLeft: "20px" }}
                         in={expanded == item.id}
                         timeout="auto"
                         unmountOnExit
@@ -279,9 +284,10 @@ const pagination = pageCount <= 1 ? '': <Pagination
                                   <div
                                     onClick={() => {
                                       setFilter(lottery?.lottery_id),
-                                        setTitleIcon(
-                                          lottery.icon
-                                        ),setHistoryTitle(lottery.translation.translation);
+                                        setTitleIcon(lottery.icon),
+                                        setHistoryTitle(
+                                          lottery.translation.translation
+                                        );
                                     }}
                                     className="circle"
                                     style={{
@@ -294,8 +300,10 @@ const pagination = pageCount <= 1 ? '': <Pagination
                                   className="contents"
                                   onClick={() => {
                                     setFilter(lottery?.lottery_id),
-                                      setTitleIcon(
-                                        lottery.icon),setHistoryTitle(lottery.translation.translation);
+                                      setTitleIcon(lottery.icon),
+                                      setHistoryTitle(
+                                        lottery.translation.translation
+                                      );
                                   }}
                                 >
                                   {lottery?.translation?.translation}
@@ -327,8 +335,13 @@ const pagination = pageCount <= 1 ? '': <Pagination
           </Grid>
         </Grid>
         <Grid item xs={8} p={1}>
-          <Grid border="1px solid #DDDDDD" container p={1} justifyContent="space-between">
-            <Grid container item xs={'auto'} alignItems="center">
+          <Grid
+            border="1px solid #DDDDDD"
+            container
+            p={1}
+            justifyContent="space-between"
+          >
+            <Grid container item xs={"auto"} alignItems="center">
               <Image
                 alt="Welfare lottery lottery"
                 width="30px"
@@ -337,12 +350,12 @@ const pagination = pageCount <= 1 ? '': <Pagination
                 src={titleIcon}
               />
               <Typography ml={1}>
-                {historyTitle ? historyTitle:title}
+                {historyTitle ? historyTitle : title}
               </Typography>{" "}
             </Grid>
             <Grid
               item
-              xs={'auto'}
+              xs={"auto"}
               display="flex"
               alignItems="center"
               justifyContent="flex-end"
@@ -350,24 +363,25 @@ const pagination = pageCount <= 1 ? '': <Pagination
               <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
                 <TextField
                   onKeyDownCapture={(ev) => {
-                    if (ev.key === 'Enter') {
-                      setToSearch(true);setCurrentPage(1);
+                    if (ev.key === "Enter") {
+                      setToSearch(true);
+                      setCurrentPage(1);
                       // ev.preventDefault();
                     }
                   }}
-                className="issue-textfield"
+                  className="issue-textfield"
                   id="search-filter"
                   name="search-filter"
                   label={langKey?.issue}
                   value={search}
                   onChange={() => {
-                    (setSearch(event.target.value),setCurrentPage(1));	
-                                    }}
+                    setSearch(event.target.value), setCurrentPage(1);
+                  }}
                   variant="outlined"
                 />
               </FormControl>
               <Button
-                              disabled={search=='' ? true:false}	
+                disabled={search == "" ? true : false}
                 variant="contained"
                 sx={{
                   background: "#FF6F31",
@@ -376,9 +390,7 @@ const pagination = pageCount <= 1 ? '': <Pagination
                   color: "white",
                   textTransform: "capitalize",
                 }}
-                onClick={()=>(setToSearch(true),setCurrentPage(1))}
-                
-              
+                onClick={() => (setToSearch(true), setCurrentPage(1))}
               >
                 {langKey?.search}
               </Button>
@@ -390,11 +402,11 @@ const pagination = pageCount <= 1 ? '': <Pagination
                   paddingBottom: "5px",
                   color: "#FF6F31",
                   textTransform: "capitalize",
-                  marginLeft:'5px',
-                  border:'1px solid #FF6F31',
-                  width:'max-content'
+                  marginLeft: "5px",
+                  border: "1px solid #FF6F31",
+                  width: "max-content",
                 }}
-                onClick={()=>(setToSearch(false),allReset())}
+                onClick={() => (setToSearch(false), allReset())}
               >
                 {langKey?.reset}
               </Button>
@@ -416,53 +428,57 @@ const pagination = pageCount <= 1 ? '': <Pagination
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                {toSearch &&	
-                    lotteryGameHistoryResult().item?.slice((currentPage-1)*rowsPerPage,(rowsPerPage*currentPage)).map((item, index) => {
-                      return (
-                        <StyledTableRow key={index}>
-                          <StyledTableCell align="left">
-                            {item.issue}
-                          </StyledTableCell>
-                          <StyledTableCell align="left">
-                            {/* {moment(item.opendate).locale(localChange(i18n.language)).format(utils.lotteryFormat)} */}
-                            {item.opendate}
-                          </StyledTableCell>
-                          <StyledTableCell align="center">
-                            <Grid
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              {lottoTable(item)}
-                            </Grid>
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      );
-                    })}
-                    {toSearch && lotteryGameHistoryResult().item?.length ==0 &&	
-                                         <TableRow>
-                     <TableCell component="th" scope="row" colSpan={3}>
-                       <Grid textAlign={"center"} item xs={12} paddingTop={5}>
-                         <img
-                           alt="not_found_2"
-                           style={{ height: "50vh" }}
-                           src="./assets/Home/not-found.gif"
-                         />
-                         <Typography textAlign="center">
-                           {langKey.no_lottery_data}
-                         </Typography>
-                       </Grid>
-                     </TableCell>
-                   </TableRow>
-                      
-                    }
+                  {toSearch &&
+                    lotteryGameHistoryResult()
+                      .item?.slice(
+                        (currentPage - 1) * rowsPerPage,
+                        rowsPerPage * currentPage
+                      )
+                      .map((item, index) => {
+                        return (
+                          <StyledTableRow key={index}>
+                            <StyledTableCell align="left">
+                              {item.issue}
+                            </StyledTableCell>
+                            <StyledTableCell align="left">
+                              {/* {moment(item.opendate).locale(localChange(i18n.language)).format(utils.lotteryFormat)} */}
+                              {item.opendate}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                              <Grid
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {lottoTable(item)}
+                              </Grid>
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        );
+                      })}
+                  {toSearch && lotteryGameHistoryResult().item?.length == 0 && (
+                    <TableRow>
+                      <TableCell component="th" scope="row" colSpan={3}>
+                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                          <img
+                            alt="not_found_2"
+                            style={{ height: "50vh" }}
+                            src="./assets/Home/not-found.gif"
+                          />
+                          <Typography textAlign="center">
+                            {langKey.no_lottery_data}
+                          </Typography>
+                        </Grid>
+                      </TableCell>
+                    </TableRow>
+                  )}
 
                   {!loading_history &&
-                    !toSearch &&	
-                                        lotteryHistories?.data?.length > 0 &&
-                    lotteryHistories?.data?.map((item, index) => {
+                    !toSearch &&
+                    lotteryHistories?.paginate?.data?.length > 0 &&
+                    lotteryHistories?.paginate?.data?.map((item, index) => {
                       return (
                         <StyledTableRow key={item.name}>
                           <StyledTableCell align="left">
@@ -470,7 +486,7 @@ const pagination = pageCount <= 1 ? '': <Pagination
                           </StyledTableCell>
                           <StyledTableCell align="left">
                             {/* {moment(item.opendate).locale(localChange(i18n.language)).format(utils.lotteryFormat)} */}
-{item.opendate}
+                            {item.opendate}
                           </StyledTableCell>
                           <StyledTableCell align="center">
                             <Grid
@@ -499,8 +515,9 @@ const pagination = pageCount <= 1 ? '': <Pagination
                 </TableBody>
               </Table>
             </TableContainer>
-            {!toSearch ? (	       
-                    lotteryHistories.last_page > 1 && lotteryHistories?.data?.length > 0 && (
+            {!toSearch ? (
+              lotteryHistories?.paginate?.last_page > 1 &&
+              lotteryHistories?.paginate?.data?.length > 0 && (
                 <Grid
                   mt={7}
                   item
@@ -508,21 +525,22 @@ const pagination = pageCount <= 1 ? '': <Pagination
                   sx={{ display: "flex", justifyContent: "center" }}
                 >
                   <Pagination
-                    count={lotteryHistories.last_page}
+                    count={lotteryHistories?.paginate?.last_page}
                     page={currentPage}
                     onChange={handlePageChange}
-                    variant="outlined" shape="rounded"
+                    variant="outlined"
+                    shape="rounded"
                   />
                 </Grid>
               )
             ) : (
               <Grid
-              mt={7}
+                mt={7}
                 item
                 xs={12}
                 sx={{ display: "flex", justifyContent: "center" }}
               >
-              { lotteryGameHistoryResult().pagination}
+                {lotteryGameHistoryResult().pagination}
               </Grid>
             )}
           </Grid>
