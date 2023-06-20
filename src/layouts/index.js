@@ -102,7 +102,7 @@ const Layout = (props) => {
                    />
                 }else if(router.pathname == '/lotteryHistory') {
                     return <Navigate
-                        title={'History'}
+                        title={langKey?.history}
                         lead={<IconButton
                         onClick={() => router.push('/home')}
                         size="large" 
@@ -117,7 +117,7 @@ const Layout = (props) => {
                    />
                 }else if(router.pathname == '/match'){
                     return <Navigate
-                    title={'match'}
+                    title={langKey?.match}
                     lead={<IconButton
                         onClick={() => router.push('/home')}
                         size="large" 
@@ -133,7 +133,7 @@ const Layout = (props) => {
                 }
                 else {
                     return <Navigate
-                    title={'title'}
+                    title={langKey?.journal}
                     lead={<IconButton
                         onClick={() => router.push('/home')}
                         size="large" 

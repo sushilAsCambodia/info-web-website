@@ -3,11 +3,11 @@ import { Typography, Link } from "@mui/material";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect,useCallback } from "react"; 
-import moment from "moment/moment";
+import moment from 'moment/min/moment-with-locales'
 import utils from "./utils";
 import DataLoading from "@/components/DataLoading";
 export default function NewsList(props) { 
-  const {list = {}, type, setIsFetching, setPage, setType, loading } = props;
+  const {list = {}, type, setIsFetching, setPage, setType, loading,i18n } = props;
   const router = useRouter();
   // listiner on scroll behavior
   const onScroll = useCallback((el,list) => {
@@ -91,7 +91,7 @@ export default function NewsList(props) {
                       fontSize="12px"
                       color="#8C8C8C"
                     >
-                      {moment(item.release_date).format(utils.letterFormat)}
+                      {moment(item.release_date).locale(utils.localChange(i18n)).format(utils.letterFormat)}
                       {/* {moment(item.release_date).format('YYYY-MM-DD')}{' '} */}
                     </Typography>
                   </Grid>

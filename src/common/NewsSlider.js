@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { getNewsByCategory } from "@/store/actions/newsActions";
 import Slider from "react-slick";
-import moment from "moment/moment";
+import moment from 'moment/min/moment-with-locales'
 import utils from "./utils";
 import { Icon } from "@iconify/react";
 
@@ -17,7 +17,7 @@ export default function NewsSlider(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  const { catId = [], lang_id = [] } = props;
+  const { catId = [], lang_id = [],i18n } = props;
   const dispatch = useDispatch();
   const [newsList, setNewsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -135,7 +135,7 @@ export default function NewsSlider(props) {
                       fontSize="12px"
                       color="#8C8C8C"
                     >
-                      {moment(item.release_date).format(utils.letterFormat)}
+                      {moment(item.release_date).locale(utils.localChange(i18n)).format(utils.letterFormat)}
                     </Typography>
                   </Grid>
                 </Grid>
