@@ -215,16 +215,7 @@ export default function LotteryPastReults() {
       );
     return { item, pagination };
   };
-  const localChange = (key) => {
-    switch (key) {
-      case "kh":
-        return "km";
-      case "de":
-        return "zh-cn";
-      default:
-        return "en";
-    }
-  };
+
   const allReset = () => {
     setSearch(""), setCurrentPage(1);
   };
@@ -297,6 +288,7 @@ export default function LotteryPastReults() {
                                   <div className="line"></div>
                                 </div>
                                 <div
+                                style={{color:filter == lottery?.lottery_id ? '#ff0000':'' }}
                                   className="contents"
                                   onClick={() => {
                                     setFilter(lottery?.lottery_id),

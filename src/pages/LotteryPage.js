@@ -356,7 +356,7 @@ export default function LotteryPage() {
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledHeaderCell align="left">
+                    <StyledHeaderCell align="center">
                       {langKey && langKey.lottery}
                     </StyledHeaderCell>
                     <StyledHeaderCell align="center">
@@ -365,7 +365,7 @@ export default function LotteryPage() {
                     <StyledHeaderCell align="center">
                       {langKey && langKey.draw_time}
                     </StyledHeaderCell>
-                    <StyledHeaderCell align="center">
+                    <StyledHeaderCell align="left">
                       {langKey && langKey.result}
                     </StyledHeaderCell>
                     <StyledHeaderCell align="center">
@@ -410,7 +410,7 @@ export default function LotteryPage() {
                                   backgroundColor: "#dbd6d6",
                                 }}
                               >
-                                <Grid display="flex" alignItems="center">
+                                <Grid display="flex" alignItems="center" sx={{ marginLeft: {xs:'0',lg:'5%'}}} >
                                   {" "}
                                   <Image
                                     alt={rowData.lottoTitle}
@@ -441,13 +441,15 @@ export default function LotteryPage() {
                                         sx={{
                                           display: "flex",
                                           alignItems: "center",
+                                              marginLeft:{xs:'0', lg:'25%'}
                                         }}
                                       >
                                         <Image
                                           alt={item?.latest_result?.id + "icon"}
                                           width="30px"
+                                          
                                           src={item.icon}
-                                          style={{}}
+                                          style={{minWidth:'30px'}}
                                         />{" "}
                                         <Typography paddingLeft={1}>
                                           {item?.translation?.translation}
@@ -464,12 +466,12 @@ export default function LotteryPage() {
                                       ).format("YYYY-MM-DD")}  */}
                                       {moment(item?.latest_result?.created_at).locale(utils.localChange(i18n.language)).format("YYYY-MM-DD")}
                                     </TableCell>
-                                    <TableCell align="center">
+                                    <TableCell align="left">
                                       <Grid
                                         sx={{
                                           display: "flex",
                                           alignItems: "center",
-                                          justifyContent: "center",
+                                          justifyContent: "flex-start",
                                         }}
                                       >
                                         {lottoTable(item?.latest_result)}

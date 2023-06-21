@@ -113,52 +113,55 @@ setOpen(true)
             {announcements?.length > 0 &&
               announcements.map((item, index) => {
                 return (
-                  <Grid
-                    key={index}
-                    item
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    lg={3}
-                    sx={{ padding: "5px", textAlign: "left",cursor:'pointer' }}
-                    onClick={()=>handleModalOpen(item)}
-                  >
+                <>
                     <Grid
+                      key={index}
                       item
-                      sx={{
-                        backgroundColor: "#FFF5F0",
-                        border: "1px solid #FF6F31",
-                        borderRadius: "11px",
-                        padding: "10px",
-                      }}
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      lg={3}
+                      sx={{ padding: "5px", textAlign: "left",cursor:'pointer' }}
+                      onClick={()=>handleModalOpen(item)}
                     >
-                      <Typography
-                        fontWeight="bold"
-                        className="twoLinesEllip"
-                        color="#000"
-                        height="48px"
+                      <Grid
+                        item
+                        sx={{
+                          backgroundColor: "#FFF5F0",
+                          border: "1px solid #FF6F31",
+                          borderRadius: "11px",
+                          padding: "10px",
+                        }}
                       >
-                        {item.title}
-                      </Typography>
-                      <Typography
-                        fontWeight="500"
-                        className="twoLinesEllip"
-                        color="#000"
-                        height="48px"
-                        title={item.comment}
-                      >
-                        {item.comment}
-                      </Typography>
-                      <Typography
-                        paddingTop={1}
-                        textAlign="left"
-                        fontSize="12px"
-                        color="#8C8C8C"
-                      >
-                        { moment(item.created_at).format(utils.letterFormat2) } 
-                      </Typography>
+                        <Typography
+                          fontWeight="bold"
+                          className="twoLinesEllip"
+                          color="#000"
+                          height="48px"
+                        >
+                          {item.title}
+                        </Typography>
+                        <Typography
+                          fontWeight="500"
+                          className="twoLinesEllip"
+                          color="#000"
+                          height="48px"
+                          title={item.comment}
+                        >
+                          {item.comment}
+                        </Typography>
+                        <Typography
+                          paddingTop={1}
+                          textAlign="left"
+                          fontSize="12px"
+                          color="#8C8C8C"
+                        >
+                          { moment(item.created_at).format(utils.letterFormat2) } 
+                        </Typography>
+                      </Grid>
                     </Grid>
-                  </Grid>
+                    
+                </>
                 );
               })}
               
