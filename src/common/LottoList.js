@@ -15,40 +15,41 @@ import Tab from '@mui/material/Tab';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Box from '@mui/material/Box';
 import moment from 'moment/min/moment-with-locales'
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 
-// function TabPanel(props) {
-//   const { children, value, index, ...other } = props;
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`simple-tabpanel-${index}`}
-//       aria-labelledby={`simple-tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && (
-//         <Box sx={{ p: 3 }}>
-//           <Typography>{children}</Typography>
-//         </Box>
-//       )}
-//     </div>
-//   );
-// }
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.number.isRequired,
-//   value: PropTypes.number.isRequired,
-// };
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
 
-// function a11yProps(index) {
-//   return {
-//     id: `simple-tab-${index}`,
-//     'aria-controls': `simple-tabpanel-${index}`,
-//   };
-// }
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 const settings = {
   dots: false,
@@ -93,12 +94,19 @@ export function lottoGrid(lottos) {
   );
 }
 export function lottoBalls(lottos) {
+
+
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+}; 
   return (
     <>
     
       <Box  sx={{
         flexGrow: 1,
-        maxWidth: { sm: 230 },
+        maxWidth: {sm:260, md: 205 },
         bgcolor: 'background.paper',
       }} 
       className="lottotablist">
@@ -108,7 +116,8 @@ export function lottoBalls(lottos) {
           paddingTop:"5px",
         
         }}
-        
+          onChange={handleChange}
+          value={value}
         scrollButtons
         aria-label="visible arrows tabs example"
         sx={{
@@ -123,7 +132,7 @@ export function lottoBalls(lottos) {
            {lottos?.map((item, index) => {
           return (
             <Grid key={index} >
-        <Tab label={item.num} className="tbsbutton"  sx={{background:item.color,width:'25px',height:'25px',borderRadius:'20px'}} />
+        <Tab label={item.num} className="tbsbutton"  sx={{background:item.color,width:'25px',height:'25px',borderRadius:'20px'}} {...a11yProps(index)} />
         </Grid>
         );
       })}
@@ -146,14 +155,15 @@ export default function LottoList({lottery}) {
   const { i18n } = useTranslation();
   const [newsList, setNewsList] = useState([]);
 
-  const lottos = { numbers: [12, 32, 4, 5, 12, 34], winner: 34 };
+  const matches = useMediaQuery("(max-width:950px)");
+
 const lottery_result=lottery && lottery.latest_result
 
   return (
     <>
       <div
         style={{
-          paddingRight: "10px",
+          paddingRight: "px",
           display: "flex",
           justifyContent: "center",
         }}
@@ -215,10 +225,9 @@ const lottery_result=lottery && lottery.latest_result
                 {lottery && lottery.translation && lottery.translation.translation}      {lottery_result && lottery_result.issue}                
               </Typography>
             }
-            subheader= {lottoBalls(lottery_result  && lottery_result.result_data
-)} 
+            subheader= {!matches ? lottoBalls(lottery_result  && lottery_result.result_data):''} 
           />
-                  
+                  {matches ? lottoBalls(lottery_result  && lottery_result.result_data):''}
 
         </Card>
       </div>
