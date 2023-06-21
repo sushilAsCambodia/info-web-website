@@ -106,7 +106,7 @@ export function lottoBalls(lottos) {
     
       <Box  sx={{
         flexGrow: 1,
-        maxWidth: {sm:260, md: 205 },
+        maxWidth: {sm:260, md: 230 },
         bgcolor: 'background.paper',
       }} 
       className="lottotablist">
