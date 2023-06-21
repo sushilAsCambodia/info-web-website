@@ -114,7 +114,7 @@ export default function NewsJournalTabs(props) {
           />
           <Tab
             className="mui-custom-home mui-custom-journal"
-            label={langKey && langKey.journal}
+            label={langKey?.journal}
             {...a11yProps(1)}
             onClick={() => router.push("/home#journal")}
           />

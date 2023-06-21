@@ -38,6 +38,7 @@ export default function FullSilder(props) {
     setActiveStep(step);
   };  
 
+  console.log('newsbanner:::',newBanners)
   useEffect(() => { 
     let position = 'top_carousel';
     if(isH5) position = 'carousel_image';
@@ -82,7 +83,7 @@ export default function FullSilder(props) {
               // rtl={true}
               >
               {newBanners.map((ad, index) => (
-               <Link href={ad?.ads_link? ad.ads_link:''} target='_blank' key={index}>
+               <Grid onClick={()=> ad?.ads_link ? window.open(ad.ads_link, '_ blank'):''} key={index}>
                <Grid 
                  style={{
                    color: "white",
@@ -107,7 +108,7 @@ export default function FullSilder(props) {
                    draggable={false}
                  />
                </Grid>
-             </Link>
+             </Grid>
               ))}
             </Carousel>
           </Grid>
