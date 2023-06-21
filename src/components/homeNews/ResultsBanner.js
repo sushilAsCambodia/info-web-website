@@ -182,7 +182,7 @@ export default function ResultsBanner(props) {
               px={1}
               marginBottom={1}
             >
-              {/* <Slider {...lotteryresult}> */}
+              <Slider {...lotteryresult}>
                 {lotteryResults &&
                   lotteryResults.length > 0 &&
                   lotteryResults.map((lr, key) => {
@@ -192,7 +192,7 @@ export default function ResultsBanner(props) {
                       </div>
                     );
                   })}
-              {/* </Slider> */}
+              </Slider>
             </Grid>
           ) : (
             <Carousel
