@@ -87,7 +87,7 @@ export default function ProfileInfo(props) {
 
         <Box
         component="img"
-        width={120} height={120}
+        width={120} height={120} maxWidth={120} maxHeight={120} style={{borderRadius:"50%"}}
         src={src}
       />
         } 
