@@ -100,7 +100,7 @@ export default function JournalsColumns(props) {
             renderButtonGroupOutside={false}
             renderDotsOutside={false}
           >
-            {journals.length > 0 ? journals.map((item,index)=>{
+            {journals?.length > 0 ? journals.map((item,index)=>{
               return <JournalItem setOpen={setOpen} setAlbumId={setAlbumId} key={index} item={item} i18n={i18n.language}/>;
             }):<Typography textAlign="center">{langKey && langKey.no_journal_data}</Typography>}
           </Carousel>

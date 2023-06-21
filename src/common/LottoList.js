@@ -106,7 +106,7 @@ export function lottoBalls(lottos) {
     
       <Box  sx={{
         flexGrow: 1,
-        maxWidth: {sm:260, md: 230 },
+        maxWidth: {sm:260, md: 230,lg:240,xl:230 },
         bgcolor: 'background.paper',
       }} 
       className="lottotablist">
@@ -123,6 +123,9 @@ export function lottoBalls(lottos) {
         sx={{
           [`& .${tabsClasses.scrollButtons}`]: {
             '&.Mui-disabled': { opacity: 0.3 },
+          },
+          "& .MuiTabs-indicator": {
+            backgroundColor: "#ff000000",
           },
           
         }}
@@ -161,19 +164,20 @@ const lottery_result=lottery && lottery.latest_result
 
   return (
     <>
-      <div
-        style={{
-          paddingRight: "px",
+      <Grid
+        sx={{
           display: "flex",
           justifyContent: "center",
+          px:'5px'
         }}
       >
         <Card
           sx={{
             border: "1px solid #ddd",
             marginY: "5px",
-            width: "300px",
+            width: {xs:'340px', lg:"300px"},
             overflow: "auto",
+            
           }}
         >
           <Grid
@@ -230,7 +234,7 @@ const lottery_result=lottery && lottery.latest_result
                   {matches ? lottoBalls(lottery_result  && lottery_result.result_data):''}
 
         </Card>
-      </div>
+      </Grid>
     </>
   );
 }
