@@ -15,6 +15,7 @@ import Tab from '@mui/material/Tab';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Box from '@mui/material/Box';
 import moment from 'moment/min/moment-with-locales'
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 
 // function TabPanel(props) {
@@ -98,7 +99,7 @@ export function lottoBalls(lottos) {
     
       <Box  sx={{
         flexGrow: 1,
-        maxWidth: { sm: 230 },
+        maxWidth: {sm:260, md: 205 },
         bgcolor: 'background.paper',
       }} 
       className="lottotablist">
@@ -146,14 +147,15 @@ export default function LottoList({lottery}) {
   const { i18n } = useTranslation();
   const [newsList, setNewsList] = useState([]);
 
-  const lottos = { numbers: [12, 32, 4, 5, 12, 34], winner: 34 };
+  const matches = useMediaQuery("(max-width:950px)");
+
 const lottery_result=lottery && lottery.latest_result
 
   return (
     <>
       <div
         style={{
-          paddingRight: "10px",
+          paddingRight: "px",
           display: "flex",
           justifyContent: "center",
         }}
@@ -215,10 +217,9 @@ const lottery_result=lottery && lottery.latest_result
                 {lottery && lottery.translation && lottery.translation.translation}      {lottery_result && lottery_result.issue}                
               </Typography>
             }
-            subheader= {lottoBalls(lottery_result  && lottery_result.result_data
-)} 
+            subheader= {!matches ? lottoBalls(lottery_result  && lottery_result.result_data):''} 
           />
-                  
+                  {matches ? lottoBalls(lottery_result  && lottery_result.result_data):''}
 
         </Card>
       </div>

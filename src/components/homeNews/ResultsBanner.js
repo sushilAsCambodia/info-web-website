@@ -29,26 +29,9 @@ import NoDataMessage from "@/common/NoDataMessage";
 import Slider from "react-slick";
 
 const responsive = {
-  largeDesktop: {
-    breakpoint: { max: 4000, min: 1321 },
-    items: 3,
-  },
   desktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 1320, min: 1025 },
+    breakpoint: { max: 4000, min: 0 },
     items: 3,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 565 },
-    items: 3,
-  },
-  mobile: {
-    breakpoint: { max: 564, min: 375 },
-    items: 2,
-  },
-  smallMobile: {
-    breakpoint: { max: 389, min: 0 },
-    items: 1,
   },
 };
 
@@ -59,12 +42,10 @@ export default function ResultsBanner(props) {
   const [loading, setLoading] = useState(false);
   const [announceMent, setAnnounceMent] = useState([]);
   const [value, setValue] = React.useState(0);
-  const [lotteryResults,setLotteryResults] = useState('')
+  const [lotteryResults, setLotteryResults] = useState("");
   const matches = useMediaQuery("(max-width:1199px)");
   const matches2 = useMediaQuery("(max-width:768px)");
-  const { lotteryCategories = [] } = useSelector(
-    (state) => state.lottery
-  );
+  const { lotteryCategories = [] } = useSelector((state) => state.lottery);
 
   const dispatch = useDispatch();
 
@@ -107,7 +88,6 @@ export default function ResultsBanner(props) {
     adaptiveHeight: true,
     centerMode: true,
     centerPadding: "12px",
-  
   };
 
   const announcements = useSelector(
@@ -120,8 +100,8 @@ export default function ResultsBanner(props) {
       getAnnouncement({
         params: { lang_id: utils.convertLangCodeToID(i18n.language), take: 10 },
         callback: (res) => {
-          setAnnounceMent(res && res.data)
-          console.log("sssssss",res && res.data)
+          setAnnounceMent(res && res.data);
+          console.log("sssssss", res && res.data);
         },
       })
     );
@@ -144,10 +124,10 @@ export default function ResultsBanner(props) {
             lang_id: utils.convertLangCodeToID(i18n.language),
             category_id: categoryId,
           },
-          callback:(res)=>{
+          callback: (res) => {
             // console.log('lotteryResults:::',res.data)
-            setLotteryResults(res.data)
-          }
+            setLotteryResults(res.data);
+          },
         })
       );
     },
@@ -195,32 +175,56 @@ export default function ResultsBanner(props) {
           <Typography px={1.5} mb={1}>
             {langKey && langKey.latest_results}
           </Typography>
-          <Grid
-            overflow="auto"
-            className={matches ? "" : "horizontalLotto"}
-            px={1}
-            marginBottom={1}
-          >
-            <Slider {...lotteryresult}>
-              {lotteryResults &&
-                lotteryResults.length > 0 &&
-                lotteryResults.map((lr, key) => {
+          {!matches ? (
+            <Grid
+              overflow="auto"
+              className={matches ? "verticleLotto" : "horizontalLotto"}
+              px={1}
+              marginBottom={1}
+            >
+              <Slider {...lotteryresult}>
+                {lotteryResults &&
+                  lotteryResults.length > 0 &&
+                  lotteryResults.map((lr, key) => {
+                    return (
+                      <div key={key}>
+                        <LottoList lottery={lr} />
+                      </div>
+                    );
+                  })}
+              </Slider>
+            </Grid>
+          ) : (
+            <Carousel
+              responsive={responsive}
+              additionalTransfrom={0}
+              arrows={false}
+              autoPlaySpeed={3000}
+              centerMode={false}
+              containerClass="container-with-dots"
+              dotListClass=""
+              draggable
+              focusOnSelect={false}
+              infinite
+              itemClass=""
+              keyBoardControl
+              minimumTouchDrag={80}
+              pauseOnHover
+              renderArrowsWhenDisabled={false}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={false}
+              autoPlay
+            >
+              {lotteryResults?.length > 0 &&
+                lotteryResults.map((lr, index) => {
                   return (
-                    <div key={key}>
+                    <div key={index}>
                       <LottoList lottery={lr} />
                     </div>
                   );
                 })}
-            </Slider>
-
-            {/* {latest?.MOLHC?.map((item, index) => {
-              return (
-                <>
-                  <LottoList item={item}/>
-                </>
-              );
-            })} */}
-          </Grid>
+            </Carousel>
+          )}
         </Grid>
 
         <Grid
@@ -273,21 +277,20 @@ export default function ResultsBanner(props) {
               px={1}
               marginBottom={1}
             >
-            <Slider {...announcementresult}>
-            
-              {announceMent?.length > 0 && announceMent.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <AnnouncementItem announcement={item} />
-                  </div>
-                );
-              })}
-            </Slider>
-               {announceMent?.length == 0 && announceMent.map((item, index) => {
-                return (
-                  <NoDataMessage />
-                );
-              })}
+              <Slider {...announcementresult}>
+                {announceMent?.length > 0 &&
+                  announceMent.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <AnnouncementItem announcement={item} />
+                      </div>
+                    );
+                  })}
+              </Slider>
+              {announceMent?.length == 0 &&
+                announceMent.map((item, index) => {
+                  return <NoDataMessage />;
+                })}
             </Grid>
           </Grid>
         ) : (
