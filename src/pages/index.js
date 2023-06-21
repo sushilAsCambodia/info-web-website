@@ -14,6 +14,7 @@ import Link from "next/link";
 import NewsColumns from "@/components/homeNews/NewsColumns";
 import JournalsColumns from "@/components/homeNews/JournalsColumns";
 import PartnersColumns from "@/components/homeNews/PartnersColumns";
+
 import LandingPageBanner from "@/common/LandingPageBanner";
 import ResultsBanner from "@/components/homeNews/ResultsBanner";
 import {getLanguage} from '../store/actions/languageActions'
