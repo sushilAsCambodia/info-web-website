@@ -183,15 +183,15 @@ export default function ResultsBanner(props) {
               marginBottom={1}
             >
               <Slider {...lotteryresult}>
-                {lotteryResults &&
-                  lotteryResults.length > 0 &&
-                  lotteryResults.map((lr, key) => {
-                    return (
-                      <div key={key}>
-                        <LottoList lottery={lr} />
-                      </div>
-                    );
-                  })}
+              {lotteryResults &&
+                lotteryResults.length > 0 &&
+                lotteryResults.map((lr, key) => {
+                  return (
+                    <div key={key}>
+                      <LottoList lottery={lr} />
+                    </div>
+                  );
+                })}
               </Slider>
             </Grid>
           ) : (
@@ -213,7 +213,7 @@ export default function ResultsBanner(props) {
               renderArrowsWhenDisabled={false}
               renderButtonGroupOutside={false}
               renderDotsOutside={false}
-              autoPlay
+              // autoPlay
             >
               {lotteryResults?.length > 0 &&
                 lotteryResults.map((lr, index) => {
@@ -273,20 +273,52 @@ export default function ResultsBanner(props) {
             </Grid>
             <Grid
               overflow="auto"
-              className={matches ? "verticleLotto" : "horizontalLotto"}
+              className={matches ? "" : "horizontalLotto"}
               px={1}
               marginBottom={1}
             >
-              <Slider {...announcementresult}>
-                {announceMent?.length > 0 &&
-                  announceMent.map((item, index) => {
-                    return (
-                      <div key={index}>
-                        <AnnouncementItem announcement={item} />
-                      </div>
-                    );
-                  })}
-              </Slider>
+              {" "}
+              {!matches ? (
+                <Slider {...announcementresult}>
+                  {announceMent?.length > 0 &&
+                    announceMent.map((item, index) => {
+                      return (
+                        <div key={index}>
+                          <AnnouncementItem announcement={item} />
+                        </div>
+                      );
+                    })}
+                </Slider>
+              ) : (
+                <Carousel
+                responsive={responsive}
+                additionalTransfrom={0}
+                arrows={false}
+                autoPlaySpeed={3000}
+                centerMode={false}
+                containerClass="container-with-dots"
+                dotListClass=""
+                draggable
+                focusOnSelect={false}
+                infinite
+                keyBoardControl
+                minimumTouchDrag={80}
+                pauseOnHover
+                renderArrowsWhenDisabled={false}
+                renderButtonGroupOutside={false}
+                renderDotsOutside={false}
+                autoPlay
+                >
+                  {announceMent?.length > 0 &&
+                    announceMent.map((item, index) => {
+                      return (
+                        <div key={index}>
+                          <AnnouncementItem announcement={item} />
+                        </div>
+                      );
+                    })}
+                </Carousel>
+              )}
               {announceMent?.length == 0 &&
                 announceMent.map((item, index) => {
                   return <NoDataMessage />;

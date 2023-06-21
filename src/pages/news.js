@@ -221,13 +221,12 @@ const News = () => {
               textAlign="center"
               display="flex"
               justifyContent="center"
-              paddingTop={3}
+              paddingTop={15}
             >
               <Stack spacing={2} sx={{ textAlign: "center" }}>
                 <Pagination
                   count={totalPage ? totalPage : 1}
-                  variant="outlined"
-                  shape="rounded"
+                  variant="outlined" shape="rounded" className="announce-pagination" 
                   onChange={handleChange}
                 />
               </Stack>

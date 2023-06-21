@@ -59,9 +59,9 @@ export default function LotteryPastReults() {
   const [currentPage, setCurrentPage] = useState(1);
   const [expanded, setExpanded] = useState("");
   const [toSearch, setToSearch] = useState(false);
+  const [lotteryHistories, setLotteryHistories] = useState({});
+  const [loading_history, setLoading_history] = useState(false);
   const {
-    lotteryHistories = {},
-    loading_history,
     lotteryResultByID = [],
     lotteryHistoriesAll,
   } = useSelector((state) => state.lottery);
@@ -71,13 +71,13 @@ export default function LotteryPastReults() {
     else setExpanded(index);
   };
 
-  const [age, setAge] = useState("");
 
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
 
   const handleGetLotteryHistory = () => {
+    setLoading_history(true)
     dispatch(
       getLotteryHistory({
         params: {
@@ -87,9 +87,11 @@ export default function LotteryPastReults() {
           lang_id: utils.convertLangCodeToID(i18n.language),
         },
         callback: (res) => {
-          console.log(':::getLotteryHistory',res.data.lottery)
+          console.log(':::getLotteryHistory',res.data)
+          setLotteryHistories(res.data)
           setTitleIcon(res.data.lottery.icon)
           setHistoryTitle(res.data.lottery.translation.translation)
+          setLoading_history(false)
         },
       })
     );
@@ -150,9 +152,7 @@ export default function LotteryPastReults() {
     );
   }, [i18n.language]);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -343,7 +343,14 @@ export default function LotteryPastReults() {
               />
               <Typography ml={1}>
                 {historyTitle ? historyTitle : title}
-              </Typography>{" "}
+              </Typography>
+              {loading_history &&(
+                    
+                    <Grid textAlign={"center"} item xs={'auto'} >
+                      <DataLoading />
+                    </Grid>
+                  
+              )}
             </Grid>
             <Grid
               item
@@ -467,7 +474,7 @@ export default function LotteryPastReults() {
                     </TableRow>
                   )}
 
-                  {!loading_history &&
+                  {
                     !toSearch &&
                     lotteryHistories?.paginate?.data?.length > 0 &&
                     lotteryHistories?.paginate?.data?.map((item, index) => {
@@ -494,16 +501,6 @@ export default function LotteryPastReults() {
                         </StyledTableRow>
                       );
                     })}
-
-                  {loading_history && (
-                    <TableRow>
-                      <TableCell component="th" scope="row" colSpan={3}>
-                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
-                          <DataLoading />
-                        </Grid>
-                      </TableCell>
-                    </TableRow>
-                  )}
                 </TableBody>
               </Table>
             </TableContainer>

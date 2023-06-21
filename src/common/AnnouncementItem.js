@@ -27,6 +27,7 @@ export default function AnnouncementItem(props) {
         <Grid
           sx={{
             minWidth: "200px",
+          
           }}
         >
           <Typography
@@ -49,7 +50,8 @@ export default function AnnouncementItem(props) {
             {moment(announcement.created_at).locale(utils.localChange(i18n.language)).format(utils.letterFormat2)}
           </Typography>
         </Grid>
-       <Grid padding={'12px 0px'}>
+       <Grid padding={{lg:'12px 0px', xs:'12px 10px 5px 0px'}}>
+        
        <Divider />
        </Grid>
       </div>

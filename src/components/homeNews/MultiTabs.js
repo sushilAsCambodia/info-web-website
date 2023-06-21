@@ -51,6 +51,7 @@ export default function MultiTabs(props) {
 
   const {advertises} = useSelector((state) => state.advertise);
 
+  console.log('advertises?.length:::',advertises?.filter(b =>b.position == 'brand_ad_space').length)
   return (categories && categories.length > 0) && (
     <Grid
       item
@@ -88,7 +89,7 @@ export default function MultiTabs(props) {
             { categories.map((category,index) => {
                 return (
                   <TabPanel key={index} value={value} index={index}>
-                    <Grid sx={{overflow:"auto", height:advertises?.length > 0 ?`${viewport_height/21}vh`:`50vh`}}>
+                    <Grid sx={{overflow:"auto", height:advertises?.filter(b =>b.position == 'brand_ad_space').length > 0 ?`${viewport_height/20}vh`:`50vh`}}>
                     {/* <Grid sx={{overflow:"auto", height:`50vh`}}> */}
                     <DataTabComponent id={category?.id} lang_id={lang_id}/>
                     </Grid>
