@@ -43,13 +43,13 @@ export default function ScheculeDateFilterBar({fiterByDate}) {
         );
       })}
     </Grid>
-    {/* <Grid
+    <Grid
       item
       xs={1} md={1}
       display="flex"
       justifyContent="center"
     >
-      <FormControl size="small" fullWidth>
+      {/* <FormControl size="small" fullWidth>
         <Select
           value={age}
           onChange={(e) => {
@@ -72,8 +72,8 @@ export default function ScheculeDateFilterBar({fiterByDate}) {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select>
         <FormHelperText>Without label</FormHelperText>
-      </FormControl>
-    </Grid> */}
+      </FormControl> */}
+    </Grid>
   </Grid>
   );
 }
