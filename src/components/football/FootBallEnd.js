@@ -105,128 +105,7 @@ import { useSelector } from "react-redux";
       
       return result;
     }
-    const rows = [
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-        "Frozen yoghurt",
-        159,
-        "1 Subject to tie/half 0",
-      '[18] Gunma Hot Spring',
-        1,
-        "Yamagata Mountain God",
-        {team1:2,team2:0}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-        "Ice cream sandwich",
-        237,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        2,
-        "Yamagata Mountain God",
-        {team1:1,team2:3}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Eclair",
-        262,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        3,
-        "Yamagata Mountain God",
-        {team1:0,team2:0}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Cupcake",
-        305,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        4,
-        "Yamagata Mountain God",
-        {team1:1,team2:1}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-    ];
+   
     const handlePageChange = (event, value) => {
       setCurrentPage(value);
     };
@@ -332,7 +211,7 @@ import { useSelector } from "react-redux";
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                { footballEndList && footballEndList.slice(
+                { footballEndList && footballEndList.length>0 && footballEndList.slice(
                         (currentPage - 1) * 20,
                         20 * currentPage
                       ).map((item, index) => {
@@ -377,6 +256,29 @@ import { useSelector } from "react-redux";
                         </StyledTableRow>
                     );
                   })}
+
+                     {footballEndList && footballEndList.length <= 0 && (  
+                      <TableRow>
+                        <TableCell component="th" scope="row" colSpan={7}>
+                          <Grid
+                            textAlign={"center"}
+                            item
+                            xs={12}
+                            paddingTop={5}
+                          >
+                            <img
+                              alt="not_found_2"
+                              style={{ height: "50vh" }}
+                              src="./assets/Home/not-found.gif"
+                            />
+                            <Typography textAlign="center">
+                              {langKey && langKey.no_data_found } 
+                            </Typography>
+                          </Grid>
+                        </TableCell>
+                      </TableRow>
+                    )}
+
                 </TableBody>
               </Table>
             </TableContainer>

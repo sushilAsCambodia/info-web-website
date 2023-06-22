@@ -111,109 +111,7 @@ export default function Schedule({footballList,loadings}) {
   ) {
     return { icon, comp, location, time, round, home, favourite, away };
   }
-  const rows = [
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      1,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
 
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      4,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      5,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      5,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      5,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      5,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      5,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      5,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      5,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
-    createData(
-      "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-      "Stanley League",
-      "Marvel Stadium",
-      "Sunday, June 18, 2023",
-      5,
-      "[18] Gunma Hot Spring",
-      false,
-      "Yamagata Mountain God"
-    ),
-  ];
 
   const [dateFilter, setDateFilter] = useState("");
 
@@ -306,7 +204,7 @@ export default function Schedule({footballList,loadings}) {
                         </Grid>
                       </TableCell>
                     </TableRow>}
-                { footballUpdatedList && footballUpdatedList.slice(
+                { footballUpdatedList && footballUpdatedList.length>0 && footballUpdatedList.slice(
                         (currentPage - 1) * 20,
                         20 * currentPage
                       ).map((item, index) => {
@@ -335,7 +233,7 @@ export default function Schedule({footballList,loadings}) {
                         {item.awayTeamName}
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        {/* {item.location} */}
+                       
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         {item.favourite ? (
@@ -357,10 +255,42 @@ export default function Schedule({footballList,loadings}) {
                     </StyledTableRow>
                   );
                 })}
+          
+                     {footballUpdatedList && footballUpdatedList.length <= 0 && (  
+                      <TableRow>
+                        <TableCell component="th" scope="row" colSpan={7}>
+                          <Grid
+                            textAlign={"center"}
+                            item
+                            xs={12}
+                            paddingTop={5}
+                          >
+                            <img
+                              alt="not_found_2"
+                              style={{ height: "50vh" }}
+                              src="./assets/Home/not-found.gif"
+                            />
+                            <Typography textAlign="center">
+                              {langKey && langKey.no_data_found } 
+                            </Typography>
+                          </Grid>
+                        </TableCell>
+                      </TableRow>
+                    )}
+
+
+
+
+
               </TableBody>
             </Table>
           </TableContainer>
 
+          
+          
+          
+          
+          
           {footballUpdatedList?.length > 0 && (
             <Grid
               item
