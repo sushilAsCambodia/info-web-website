@@ -81,8 +81,20 @@ const utils = {
         });
       }
       return result;
-    },
-
+    }, NextDays:(days)=> {
+      var result = [];
+      for (var i = 0; i < days; i++) {
+        var d = new Date();
+        d.setDate(d.getDate() + i);
+        result.push({
+          day: moment(d).format(utils.dateLetter),
+          DateMonth: moment(d).format(utils.DateMonthFormat),
+          ddmmmyyyy:moment(d).format(utils.letterFormat2)
+        });
+      }
+      return result;
+    }
+,
     localChange:(key)=>{
       switch(key){
         case 'kh':
