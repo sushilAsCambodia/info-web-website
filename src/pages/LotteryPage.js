@@ -290,9 +290,6 @@ export default function LotteryPage() {
     
       
         <>
-          {/* <Typography variant="h5" fontWeight="bold">
-              {langKey && langKey.lottery}
-      </Typography> */}
           <TitleBreadCrumbs title={langKey && langKey.lottery} />
           <ToastContainer />
 
@@ -365,7 +362,7 @@ export default function LotteryPage() {
                     <StyledHeaderCell align="center">
                       {langKey && langKey.draw_time}
                     </StyledHeaderCell>
-                    <StyledHeaderCell align="left">
+                    <StyledHeaderCell align="left" >
                       {langKey && langKey.result}
                     </StyledHeaderCell>
                     <StyledHeaderCell align="center">
@@ -466,7 +463,7 @@ export default function LotteryPage() {
                                       ).format("YYYY-MM-DD")}  */}
                                       {moment(item?.latest_result?.created_at).locale(utils.localChange(i18n.language)).format("YYYY-MM-DD")}
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="left" >
                                       <Grid
                                         sx={{
                                           display: "flex",
@@ -639,7 +636,7 @@ export function lottoTable(lottos) {
     <>
       <Grid
         container
-        width="max-content"
+        // width="461px"
         // border="1px solid grey"
         // borderRadius="10px"
         background={lottos}
@@ -649,18 +646,6 @@ export function lottoTable(lottos) {
           lottos.result_data.length > 0 &&
           lottos.result_data.map((lotto, index) => {
             return (
-              // <Grid
-              //   key={index}
-              //   px={1}
-              //   color={'white'}
-              //   backgroundColor={lotto.color}
-              //   borderRadius="10px"
-              //   // className={`${
-              //   //   lotto === lottos.winner ? "lotteryPageHit" : "lotteryPageMiss"
-              //   // }`}
-              // >
-              //   {lotto.num}
-              // </Grid>
               <Grid
                 container
                 justifyContent="center"
