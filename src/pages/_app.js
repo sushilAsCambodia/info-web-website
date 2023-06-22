@@ -11,6 +11,12 @@ import Layout_D from "@/layouts_Desktop";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { SessionProvider } from "next-auth/react"
+import "@fontsource/poppins";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   const { i18n } = useTranslation();

@@ -20,8 +20,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import moment from "moment/moment";
+import moment from 'moment/min/moment-with-locales'
 import utils from "@/common/utils";
+import i18n from './i18n';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -140,7 +141,7 @@ const handleClose = () => {
        
           </Typography>
           <Typography fontSize="15px">
-          { moment(article.created_at).format(utils.letterFormat2) }
+          { moment(article.created_at).locale(utils.localChange(i18n.language)).format(utils.letterFormat2) }
           </Typography>
         </DialogContent>
      

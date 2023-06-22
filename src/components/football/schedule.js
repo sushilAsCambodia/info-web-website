@@ -36,16 +36,18 @@ import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
 import { Image } from "mui-image";
-import DateFilterBar from "@/common/dateFilterBar";
+import ScheculeDateFilterBar from "@/common/scheculeDateFilterBar";
+import DataLoading from "@/components/DataLoading";
 import { useSelector } from "react-redux";
 
-export default function Schedule({footballList}) {
+export default function Schedule({footballList,loadings}) {
   const [select, setSelect] = useState(0);  
   const [filter, setFilter] = useState("China National");
   
   const [openModal, setOpenModal] = useState(false);
   
   const [age, setAge] = useState("");
+  const [loading, setLoading] = useState(false);
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
@@ -222,8 +224,15 @@ export default function Schedule({footballList}) {
     setCurrentPage(value);
   };
   
-  const pageCount = Math.ceil(footballList?.length / 20);
- 
+  
+  const footballLists = footballList?.filter((obj) => {
+    return moment(obj.startTime).format(utils.dateFormate) == dateFilter;
+  });
+
+
+ const footballUpdatedList=dateFilter!=""?footballLists:footballList
+ const pageCount = Math.ceil(footballUpdatedList?.length / 20);
+ console.log("footballUpdatedListfootballUpdatedList",footballUpdatedList)
   return (
     <>
       {/* chart modal  */}
@@ -256,7 +265,7 @@ export default function Schedule({footballList}) {
             marginBottom: "10px",
           }}
         >
-                <DateFilterBar/>
+                <ScheculeDateFilterBar fiterByDate={(value)=>setDateFilter(value)} />
 
         </Grid>
         <Grid item xs={12}>
@@ -283,10 +292,21 @@ export default function Schedule({footballList}) {
                   <StyledHeaderCell width="30px" align="center">
                       {langKey && langKey.favourite}
                   </StyledHeaderCell>
+                  
                 </TableRow>
+            
               </TableHead>
+            
               <TableBody>
-                { footballList && footballList.slice(
+             
+                
+                     {loadings &&  <TableRow><TableCell component="th" scope="row" colSpan={7}>
+                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                          <DataLoading />
+                        </Grid>
+                      </TableCell>
+                    </TableRow>}
+                { footballUpdatedList && footballUpdatedList.slice(
                         (currentPage - 1) * 20,
                         20 * currentPage
                       ).map((item, index) => {
@@ -341,7 +361,7 @@ export default function Schedule({footballList}) {
             </Table>
           </TableContainer>
 
-          {rows?.length > 0 && (
+          {footballUpdatedList?.length > 0 && (
             <Grid
               item
               xs={12}

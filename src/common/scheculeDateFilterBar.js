@@ -8,7 +8,7 @@ import utils from './utils';
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
 
-export default function ScheculeDateFilterBar() {
+export default function ScheculeDateFilterBar({fiterByDate}) {
     
     const [dateFilter, setDateFilter] = useState("");
     const [age, setAge] = useState("");
@@ -18,13 +18,14 @@ export default function ScheculeDateFilterBar() {
   return (
     <Grid container  justifyContent="center" pb={1} >
     <Grid item xs={11} md={11} container flexWrap="nowrap" sx={{  overflow:"auto"}}  >
-      {utils.LastXDays(7).map((item, index) => {
+      {utils.NextDays(7).map((item, index) => {
         return (
           <Grid
             key={index}
             item
             className={`${item.day === dateFilter ? "dateSelected" : ""}`}
             onClick={() => {
+              fiterByDate(item.date);
               setDateFilter(item.day);
             }}
             sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'flex'},alignItems:'center' }}

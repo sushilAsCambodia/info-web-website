@@ -23,13 +23,18 @@ export default function JournalCard(props) {
       );
     
   }, [dispatch,lang_id]);
+
+  const viewport_height= window.innerHeight;
+
   return (
     loading ? <DataLoading /> : 
-    <Grid container item spacing={1} sx={{padding:'5px 5px 0px 5px'}}>
-      {journals && journals.length > 0 ?
+    <Grid container 
+    item sx={{height:viewport_height-56-47-40-10,overflow:'auto',padding:'5px 5px 0px 5px'}}
+     >
+    {journals && journals.length > 0 ?
         journals.map((journal, index) => {
           return <>
-          <Grid key={index} item xs={4} paddingLeft="12px !important" paddingTop="14px !important" sm={4} md={4} lg={4} xl={4} className='zxzxzxz'  onClick={() => cardDetail(journal.id,journal.album_name)}>
+          <Grid key={index} item xs={4} paddingLeft="12px !important"  sm={4} md={4} lg={4} xl={4}  onClick={() => cardDetail(journal.id,journal.album_name)}>
             <img
             
               src={journal.cover_img ? journal.cover_img : null}
@@ -43,6 +48,7 @@ export default function JournalCard(props) {
           </Grid></>
         })
         : <Grid mx="auto"> <Typography component="div" sx={{padding:'5px'}}><Empty /></Typography> </Grid>}
+       
     </Grid>
   )
 }

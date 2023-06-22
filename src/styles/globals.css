@@ -1217,3 +1217,13 @@ color: #fff;
     color: #000 !important;
     font-size: 1.50rem !important;
   }
+
+
+  .cardhead .css-4oithy-MuiTabs-indicator{
+display: none !important;
+  }
+
+  .cardhead .css-1r0hv1{
+    display: none !important;
+  }
+  
