@@ -8,6 +8,7 @@ import {getAdvertise} from '@/store/actions/advertiseActions'
 import Carousel from "react-multi-carousel";
 import Image from "mui-image";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import ReactPlayer from "react-player";
 
 const responsive = {
   largeDesktop: {
@@ -33,6 +34,7 @@ const responsive = {
   },
 };
 
+
 export default function Advertisement(props) {
   const { advertises = []} = useSelector((state) => state.advertise);
   const [newAdverts, setNewAdverts] = useState([]);
@@ -55,6 +57,8 @@ export default function Advertisement(props) {
     let type = 'web';
     if(isH5) type = 'h5';
     setNewAdverts(advertises.filter(b => b.position == 'central_carousel'));
+
+    console.log("newadverts:::",newAdverts)
   },[advertises,isH5])
   return (
     <>
@@ -95,6 +99,7 @@ export default function Advertisement(props) {
                     borderRadius: "5px",
                   }} 
                 >
+                  {!ad.icon.includes(".mp4") || !ad.icon.includes("youtube") ?
                   <Image  
                     src={ad.icon}
                     alt={ad.title}
@@ -103,7 +108,18 @@ export default function Advertisement(props) {
                       // height:'100%',
                       objectFit:"fill", 
                     }}
-                  />
+                  />:
+                   <Grid container justifyContent="center">
+                        <ReactPlayer
+                          controls={true}
+                           width="100%"
+                           height="400px"
+                          // playing={true}
+                          // muted={true}
+                          url={ad.icon}
+                          allowFullScreen
+                        />
+                      </Grid>}
                 </Grid>
               </Link>
             ))}

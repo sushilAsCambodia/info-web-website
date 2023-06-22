@@ -190,7 +190,7 @@ console.log('autoplay:::',autoPlay)
                       // maxHeight:{xs:'250px',md:'300px'}
                     }}
                   >
-                    {!ad.icon.includes(".jpg")  ? (
+                    {ad.icon.includes(".mp4") || ad.icon.includes("youtube")  ? (
                       <Grid container justifyContent="center">
                         <ReactPlayer
                           controls={true}
