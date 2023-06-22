@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
 import moment from 'moment/min/moment-with-locales'
-<<<<<<< HEAD
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-=======
->>>>>>> e0174e27a25ba0622bc37308bdfddb74dd0f027e
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Pagination from "@mui/material/Pagination";
 import {
