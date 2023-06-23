@@ -36,19 +36,22 @@ import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
 import { Image } from "mui-image";
-import DateFilterBar from "@/common/dateFilterBar";
+import ScheculeDateFilterBar from "@/common/scheculeDateFilterBar";
+import DataLoading from "@/components/DataLoading";
 import { useSelector } from "react-redux";
 
-export default function Schedule() {
-  const [select, setSelect] = useState(0);
+export default function Schedule({footballList,loadings}) {
+  const [select, setSelect] = useState(0);  
   const [filter, setFilter] = useState("China National");
-
+  
   const [openModal, setOpenModal] = useState(false);
-
+  
   const [age, setAge] = useState("");
+  const [loading, setLoading] = useState(false);
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleCloseModal = (event) => {
     setOpenModal(false);
@@ -217,6 +220,19 @@ export default function Schedule() {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+  
+  
+  const footballLists = footballList?.filter((obj) => {
+    return moment(obj.startTime).format(utils.dateFormate) == dateFilter;
+  });
+
+
+ const footballUpdatedList=dateFilter!=""?footballLists:footballList
+ const pageCount = Math.ceil(footballUpdatedList?.length / 20);
+ console.log("footballUpdatedListfootballUpdatedList",footballUpdatedList)
   return (
     <>
       {/* chart modal  */}
@@ -249,7 +265,7 @@ export default function Schedule() {
             marginBottom: "10px",
           }}
         >
-                <DateFilterBar/>
+                <ScheculeDateFilterBar fiterByDate={(value)=>setDateFilter(value)} />
 
         </Grid>
         <Grid item xs={12}>
@@ -276,10 +292,24 @@ export default function Schedule() {
                   <StyledHeaderCell width="30px" align="center">
                       {langKey && langKey.favourite}
                   </StyledHeaderCell>
+                  
                 </TableRow>
+            
               </TableHead>
+            
               <TableBody>
-                {rows.map((item, index) => {
+             
+                
+                     {loadings &&  <TableRow><TableCell component="th" scope="row" colSpan={7}>
+                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                          <DataLoading />
+                        </Grid>
+                      </TableCell>
+                    </TableRow>}
+                { footballUpdatedList && footballUpdatedList.slice(
+                        (currentPage - 1) * 20,
+                        20 * currentPage
+                      ).map((item, index) => {
                   return (
                     <StyledTableRow key={item.id}>
                       <StyledTableCell align="left">
@@ -289,23 +319,23 @@ export default function Schedule() {
                             src={item.icon}
                             alt="football_endtab"
                           />
-                          <Typography mx={1}>{item.comp}</Typography>
+                          <Typography mx={1}>{item.competitionName}</Typography>
                         </Grid>
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        {item.round}
+                        {item.stage}
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        {item.time}
+                        {item.startTime}
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        {item.home}
+                        {item.homeTeamName}
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        {item.away}
+                        {item.awayTeamName}
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        {item.location}
+                        {/* {item.location} */}
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         {item.favourite ? (
@@ -331,7 +361,7 @@ export default function Schedule() {
             </Table>
           </TableContainer>
 
-          {rows?.length > 0 && (
+          {footballUpdatedList?.length > 0 && (
             <Grid
               item
               xs={12}
@@ -342,7 +372,14 @@ export default function Schedule() {
               paddingBottom={3}
             >
               <Stack spacing={2} sx={{ textAlign: "center" }}>
-                <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
+                {/* <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" /> */}
+                <Pagination
+          count={pageCount}
+          page={currentPage}
+          onChange={handlePageChange}
+          variant="outlined"
+          shape="rounded"
+        />
               </Stack>
             </Grid>
           )}
