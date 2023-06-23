@@ -95,8 +95,33 @@ const utils = {
         });
       }
       return result;
-    }
-,
+    },
+    dataRangeLastNext:(days)=>{
+      var result = [];
+      for (var i = days; i >= 0; i--) {
+        var d = new Date();
+        d.setDate(d.getDate() - i);
+        result.push({
+          date:moment(d).format(utils.dateFormate),
+          day: moment(d).format(utils.dateLetter),
+          DateMonth: moment(d).format(utils.DateMonthFormat),
+          ddmmmyyyy:moment(d).format(utils.letterFormat2),
+        });
+      }
+
+      for (var i = 1; i < days+1; i++) {
+        var d = new Date();
+        d.setDate(d.getDate() + i);
+        result.push({
+          date:moment(d).format(utils.dateFormate),
+          day: moment(d).format(utils.dateLetter),
+          DateMonth: moment(d).format(utils.DateMonthFormat),
+          ddmmmyyyy:moment(d).format(utils.letterFormat2),
+        });
+      }
+
+      return result;
+    },
     localChange:(key)=>{
       switch(key){
         case 'kh':

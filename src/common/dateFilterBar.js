@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Box from '@mui/material/Box';
 import {Grid,Typography,FormControl,Select,InputAdornment,MenuItem,Divider} from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
@@ -7,27 +7,30 @@ import utils from './utils';
 
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
+import moment from 'moment/min/moment-with-locales'
 
-export default function DateFilterBar() {
-    
-    const [dateFilter, setDateFilter] = useState("");
-    const [age, setAge] = useState("");
+export default function DateFilterBar(props) {
+    const {setFilterDate}=props
+    const [dateFilter, setDateFilter] = useState(moment(new Date()).format(utils.letterFormat2));
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+    
 
-
+    useEffect(() => {
+      setFilterDate(moment(new Date()).format(utils.dateFormate))
+    }, []);
   return (
     <Grid container  justifyContent="center" pb={1} >
-    <Grid item xs={11} md={11} container flexWrap="nowrap" sx={{  overflow:"auto"}}  >
-      {utils.LastXDays(7).map((item, index) => {
+    <Grid item xs={12} md={12} container flexWrap="nowrap" sx={{ overflow:"auto"}}  >
+      {utils.dataRangeLastNext(6).map((item, index) => {
         return (
           <Grid
             key={index}
             item
-            className={`${item.day === dateFilter ? "dateSelected" : ""}`}
+            className={`${item.ddmmmyyyy === dateFilter ? "dateSelected" : ""}`}
             onClick={() => {
-              setDateFilter(item.day);
+              (setDateFilter(item.ddmmmyyyy),setFilterDate(item.date))
             }}
-            sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'flex'},alignItems:'center' }}
+            sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'flex'},alignItems:'center',textAlign:'center'}}
           >
             <Typography
               sx={{ fontWeight: "bold", fontSize: {xs:"14px",md:"16px"} }}
@@ -42,37 +45,7 @@ export default function DateFilterBar() {
         );
       })}
     </Grid>
-    <Grid
-      item
-      xs={1} md={1}
-      display="flex"
-      justifyContent="center"
-    >
-      <FormControl size="small" fullWidth>
-        <Select
-          value={age}
-          onChange={(e) => {
-            console.log('');
-          }}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-          sx={{ paddingLeft: "5px", fontSize: {xs:"12px",md:"14px"} }}
-          startAdornment={
-            <InputAdornment position="start">
-              <Icon icon="material-symbols:calendar-today" width={20} />
-            </InputAdornment>
-          }
-        >
-          <MenuItem value="">
-            <em>   {langKey && langKey.date}</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        {/* <FormHelperText>Without label</FormHelperText> */}
-      </FormControl>
-    </Grid>
+ 
   </Grid>
   );
 }

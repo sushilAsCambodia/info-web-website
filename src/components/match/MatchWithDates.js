@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import {
@@ -17,21 +17,86 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
 import { Image } from "mui-image";
-import moment from "moment/moment";
+import moment from "moment/min/moment-with-locales";
 import utils from "@/common/utils";
 import MatchItem from "@/common/MatchItem";
 import DateFilterBar from "@/common/dateFilterBar";
+import {
+  getScheduleList,
+  getMatchEndList,
+} from "@/store/actions/footballActions";
+import DataNotFound from "../DataNotFound";
+import LoadingBackDrop from "../LoadingBackDrop";
+import "core-js";
+
+const matches = [
+  { id: 1, name: "philly vs boston", time: "13:00 pm", date: "12 june" },
+  { id: 2, name: "Mets vs Giants", time: "14:00 pm", date: "14 july" },
+];
+
 export default function MatchWithDates(props) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  const [dateFilter, setDateFilter] = useState("");
-  const [age, setAge] = useState("");
+  const [dateFilter, setDateFilter] = useState(
+    moment(new Date()).format(utils.dateFormate)
+  );
+  const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [nextMatchList, setNextMatchList] = useState([]);
+  const [pastMatchList, setPastMatchList] = useState([]);
+  const [fullMatchList, setFullMatchList] = useState([]);
 
-  
+  useEffect(() => {
+    setLoading(true);
+    setLoading2(true);
+    dispatch(
+      getScheduleList({
+        params: {
+          lang_id: utils.convertLangCodeToID(i18n.language),
+          competition_id: "70",
+          season: moment().format("YYYY"),
+          isFinish: 0,
+        },
+        callback: (res) => {
+          console.log('res error:::',res)
+          setLoading(false);
+          setNextMatchList(res.data);
+        },
+      })
+    );
+    dispatch(
+      getMatchEndList({
+        params: {
+          lang_id: utils.convertLangCodeToID(i18n.language),
+          competition_id: "70",
+          season: moment().format("YYYY"),
+          isFinish: 1,
+        },
+        callback: (res) => {
+          console.log('res error2:::',res)
+          setLoading2(false)
+          setPastMatchList(res.data);
+        },
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    console.log(':::fulllist',pastMatchList.concat(nextMatchList))
+    const fullList = pastMatchList.concat(nextMatchList).filter((item)=>item.startTime.includes(dateFilter));
+    setFullMatchList(fullList);
+    const temp = pastMatchList.concat(nextMatchList).group(item  => item.startTime) 
+    // console.log(':::group list by start time',temp)
+
+    console.log('paginate pages:::',Math.ceil(fullMatchList?.length / 5))
+  }, [pastMatchList, nextMatchList,dateFilter]);
+
   return (
     <Grid style={{ position: "relative" }}>
+      
       <Grid
         item
         xs={12}
@@ -42,13 +107,16 @@ export default function MatchWithDates(props) {
           width: "100%",
         }}
       >
-                 <DateFilterBar />
+        <DateFilterBar setFilterDate={setDateFilter} />
+        <Grid >
+          {fullMatchList && !loading && !loading2 ?
+            fullMatchList.splice(0,5).map((item, index) => {
+              return <MatchItem details={item} index={index} />;
+            }):
+            <LoadingBackDrop loading={true}/>
+            }
 
-        <Grid pt={1}>
-          {" "}
-          <MatchItem />
-          <MatchItem />
-          <MatchItem />
+          {fullMatchList && fullMatchList?.length === 0 ? <DataNotFound />:''}
         </Grid>
       </Grid>
     </Grid>

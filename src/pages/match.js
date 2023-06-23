@@ -1,10 +1,9 @@
 import * as React from "react";
 import { useEffect, useState } from 'react';
-
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import {
   Box,
   FormControl,
@@ -22,7 +21,7 @@ import { Icon } from "@iconify/react";
 
 import utils from "@/common/utils";
 import moment from "moment/moment";
-import Events from "./events";
+import Router, { useRouter } from "next/router";
 import MatchWithDates from "@/components/match/MatchWithDates";
 import MatchWithRounds from "@/components/match/MatchWithRounds";
 import FavouritePage from "@/components/favourite/favouritePage";
@@ -56,7 +55,9 @@ function a11yProps(index) {
 }
 
 export default function Match() {
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
 
+  const route = useRouter()
   const [mounted,setMounted] = useState(false);
   useEffect(() => {
       setMounted(true)
@@ -107,12 +108,9 @@ export default function Match() {
               },
             }}
           >
-            <Tab className="matchtab" label="All" {...a11yProps(0)} />
-            <Tab className="matchtab" label="Events" {...a11yProps(1)} />
-            <Tab className="matchtab" label="Soccer" {...a11yProps(2)} />
-            <Tab className="matchtab" label="Basket Ball" {...a11yProps(3)} />
-            <Tab className="matchtab" label="favourite" {...a11yProps(4)} />
-            <Tab className="matchtab" label="Category 3" {...a11yProps(5)} />
+            <Tab className="matchtab" label={langKey?.favourite} {...a11yProps(0)} />
+            <Tab className="matchtab" label={langKey?.foot_ball} {...a11yProps(1)} />
+            <Tab className="matchtab" label={langKey?.basket_ball} {...a11yProps(2)} />
           </Tabs>
           <Grid
             width="60px"
@@ -141,30 +139,21 @@ export default function Match() {
 
             <Icon
               color="white"
-             
+             onClick={()=>{route.push('/events')}}
               width={25}
               icon="material-symbols:filter-alt-outline"
             />
           </Grid>
         </Grid>
         <TabPanel value={value} index={0} >
-          <MatchWithDates />
+        <FavouritePage/>
         </TabPanel>
+       
         <TabPanel value={value} index={1}>
-          <Grid sx={{minHeight:"50px"}}></Grid>
-          <Events />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
           <MatchWithDates />  
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={2}>
         <MatchWithRounds />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          <FavouritePage/>
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          Shíshí Cǎi
         </TabPanel>
       </Box>
     </NoSsr>
