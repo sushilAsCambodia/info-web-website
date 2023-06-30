@@ -38,9 +38,11 @@ import { Image } from "mui-image";
 import { useSelector } from "react-redux";
 
 
-  export default function FootBallEnd() {
+  export default function FootBallEnd({footballEndList}) {
     const [select, setSelect] = useState(0);
     const [filter, setFilter] = useState("China National");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [rowPerPage, setRowPerPage] = useState(20);
   
     const [dateFilter, setDateFilter] = useState("");
   
@@ -103,129 +105,12 @@ import { useSelector } from "react-redux";
       
       return result;
     }
-    const rows = [
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_7_2.png",
-        "Frozen yoghurt",
-        159,
-        "1 Subject to tie/half 0",
-      '[18] Gunma Hot Spring',
-        1,
-        "Yamagata Mountain God",
-        {team1:2,team2:0}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back04.jpg",
-        "Ice cream sandwich",
-        237,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        2,
-        "Yamagata Mountain God",
-        {team1:1,team2:3}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Eclair",
-        262,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        3,
-        "Yamagata Mountain God",
-        {team1:0,team2:0}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Cupcake",
-        305,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        4,
-        "Yamagata Mountain God",
-        {team1:1,team2:1}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-      createData(
-        "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back02.jpg",
-        "Gingerbread",
-        356,
-        "1 Subject to tie/half 0",
-        '[18] Gunma Hot Spring',
-        5,
-        "Yamagata Mountain God",
-        {team1:2,team2:2}
-      ),
-    ];
-  
+   
+    const handlePageChange = (event, value) => {
+      setCurrentPage(value);
+    };
+    
+    const pageCount = Math.ceil(footballEndList?.length / 20);
     return (
       <>
         <Grid container px={{xs:2,md:0}}>
@@ -326,30 +211,33 @@ import { useSelector } from "react-redux";
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((item, index) => {
+                { footballEndList && footballEndList.length>0 && footballEndList.slice(
+                        (currentPage - 1) * 20,
+                        20 * currentPage
+                      ).map((item, index) => {
                     return (
                         <StyledTableRow key={item.id}>
                           <StyledTableCell align="center">
                            <Grid display='flex' alignItems="center">
                              <Image width={30} src={item.img} alt="football" />
-                             <Typography mx={1}>{item.name}</Typography>
+                             <Typography mx={1}> {item.competitionName}</Typography>
                            </Grid>
                           </StyledTableCell>
                           <StyledTableCell align="center">
-                            {item.calories}
+                          {item.stage}
                           </StyledTableCell>
                           <StyledTableCell align="center">
-                            {item.fat}
+                          {item.startTime}
                           </StyledTableCell>
                           <StyledTableCell align="center">
-                            {item.fat}
+                           
                           </StyledTableCell>
                           <StyledTableCell align="center">
-                            {item.data}
+                          {item.homeTeamName}
                           </StyledTableCell>
                           
                           <StyledTableCell align="center">
-                            {item.fat}
+                          {item.finalScore}
                           </StyledTableCell>
                           <StyledTableCell align="center">
                             <Grid
@@ -359,21 +247,44 @@ import { useSelector } from "react-redux";
                                 justifyContent: "center",
                               }}
                             >
-                              {item.analyze}
+                             {item.awayTeamName}
                             </Grid>
                           </StyledTableCell>
-                          <StyledTableCell align="center">
-                           {item.score.team1} - {item.score.team2}
+                          <StyledTableCell align="center">                          
+                          {item.halfTimeScore}
                           </StyledTableCell>
                         </StyledTableRow>
                     );
                   })}
+
+                     {footballEndList && footballEndList.length <= 0 && (  
+                      <TableRow>
+                        <TableCell component="th" scope="row" colSpan={7}>
+                          <Grid
+                            textAlign={"center"}
+                            item
+                            xs={12}
+                            paddingTop={5}
+                          >
+                            <img
+                              alt="not_found_2"
+                              style={{ height: "50vh" }}
+                              src="./assets/Home/not-found.gif"
+                            />
+                            <Typography textAlign="center">
+                              {langKey && langKey.no_data_found } 
+                            </Typography>
+                          </Grid>
+                        </TableCell>
+                      </TableRow>
+                    )}
+
                 </TableBody>
               </Table>
             </TableContainer>
 
 
-            {rows?.length > 0 && (
+            {footballEndList?.length > 0 && (
             <Grid
               item
               xs={12}
@@ -384,7 +295,14 @@ import { useSelector } from "react-redux";
               paddingBottom={3}
             >
               <Stack spacing={2} sx={{ textAlign: "center" }}>
-                <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
+                {/* <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" /> */}
+                <Pagination
+          count={pageCount}
+          page={currentPage}
+          onChange={handlePageChange}
+          variant="outlined"
+          shape="rounded"
+        />
               </Stack>
             </Grid>
           )}

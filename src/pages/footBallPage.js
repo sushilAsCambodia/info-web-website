@@ -10,22 +10,25 @@ import {
   Checkbox,
   ListItemText,
   ListSubheader,
+  TableCell,TableRow
 } from "@mui/material";
 import { useState, useEffect } from "react";
+import moment from "moment";
 
-import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import { useSelector,useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import ScoreTable from "@/components/football/ScoreTable";
 import Schedule from "@/components/football/schedule";
-
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 import FootBallFollow from "@/components/football/FootBallFollow";
 import FootBallEnd from "@/components/football/FootBallEnd";
+import DataLoading from "@/components/DataLoading";
+import utils from "@/common/utils";
+
 import {
-  getScheduleList
-} from "@/store/actions/lotteryActions";
+  getScheduleList,getMatchEndList
+} from "@/store/actions/footballActions";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -80,6 +83,10 @@ export default function FootBallPage() {
   const [select, setSelect] = useState(0);
   const [selectedName, setSelectedName] = useState([]);
   const [page, setPage] = useState(1);
+  const [footballList, setFootballList] = useState([]);
+  const [footballEndList, setFootballEndList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
 
   const handleChange = (event) => {
     const {
@@ -111,29 +118,36 @@ export default function FootBallPage() {
     }
   }, [router.asPath]);
 
-  useEffect(() => {
-    // setLoading(true);
-    // dispatch(
-    //   getScheduleList({
-    //     params: {
-    //       rowsPerPage: 10,
-    //       page: page,
-    //       lang_id: utils.convertLangCodeToID(i18n.language),
-    //       member_id: customer.member_ID          
-    //     },
-    //     callback: (res) => {
-    //       // page == 1
-    //       //   ? (setLotteryHistories(res.data.data),
-    //       //     setPageLimit(res.data.last_page),
-    //       //     handleClose())
-    //       //   : setLotteryHistories((data) => data.concat(res.data.data));
-    //       handleClose();
-    //     },
-    //   })
-    // );
-    // dispatch(getLatestLottery("hey"));
-    // setLoading(false);
-  }, [page]);
+  useEffect(() => { 
+    setLoading(true)   
+    dispatch(
+      getScheduleList({    
+        params: {         
+          lang_id: utils.convertLangCodeToID(i18n.language),
+          competition_id: '70',
+          season:moment().format('YYYY'),
+          isFinish:0,
+        },
+        callback: (res) => {   
+          setLoading(false)      
+          setFootballList(res && res.data)        
+        },
+      })
+    );    
+    dispatch(
+      getMatchEndList({    
+        params: {         
+          lang_id: utils.convertLangCodeToID(i18n.language),
+          competition_id: '70',
+          season:moment().format('YYYY'),
+          isFinish:1,
+        },
+        callback: (res) => {         
+          setFootballEndList(res && res.data)        
+        },
+      })
+    );    
+  }, []);
 
   const renderSelectGroup = (product) => {
     const items = product.plans.map((p) => {
@@ -146,6 +160,7 @@ export default function FootBallPage() {
     });
     return [<ListSubheader>{product.name}</ListSubheader>, items];
   };
+
   return (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
@@ -204,6 +219,7 @@ export default function FootBallPage() {
             {langKey && langKey.schedule}
           </MenuItem>
         </Grid>
+        
         <Grid item xs={2}>
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">{langKey && langKey.select_event}</InputLabel>
@@ -221,6 +237,7 @@ export default function FootBallPage() {
               {data?.map((p) => renderSelectGroup(p))}
             </Select>
           </FormControl>
+          
         </Grid>
       </Grid>
       <TabPanel value={value} index={"Follow"}>
@@ -231,10 +248,10 @@ export default function FootBallPage() {
       </TabPanel>
 
       <TabPanel value={value} index={"End"}>
-        <FootBallEnd />
+        <FootBallEnd footballEndList={footballEndList} />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
-        <Schedule />
+        <Schedule footballList={footballList} loadings={loading}/>
       </TabPanel>
     </>
   );
