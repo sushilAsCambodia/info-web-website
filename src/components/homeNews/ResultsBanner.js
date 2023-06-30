@@ -55,10 +55,20 @@ export default function ResultsBanner(props) {
   const { latest } = useSelector((state) => state.lottery);
   const { announcement } = useSelector((state) => state?.announcement);
 
+  const slideToShowAnnounceCount =
+  announceMent && announceMent.length >= 6
+      ? 6
+      : announceMent && announceMent.length;
+
+  const slideToShowLotteryCount =
+  lotteryResults && lotteryResults.length >= 6
+          ? 6
+          : lotteryResults && lotteryResults.length;
+
   const lotteryresult = {
     dots: false,
     infinite: true,
-    slidesToShow: 1,
+    slidesToShow: slideToShowLotteryCount,
     slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
@@ -75,7 +85,7 @@ export default function ResultsBanner(props) {
   const announcementresult = {
     dots: false,
     infinite: true,
-    slidesToShow: 1,
+    slidesToShow: slideToShowAnnounceCount,
     slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
@@ -279,16 +289,20 @@ export default function ResultsBanner(props) {
             >
               {" "}
               {!matches ? (
+                <>
                 <Slider {...announcementresult}>
                   {announceMent?.length > 0 &&
                     announceMent.map((item, index) => {
                       return (
                         <div key={index}>
                           <AnnouncementItem announcement={item} />
+                       {/* {index+1} */}
+
                         </div>
                       );
                     })}
                 </Slider>
+                </>
               ) : (
                 <Carousel
                 responsive={responsive}
