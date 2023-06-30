@@ -27,8 +27,8 @@ export default function MatchWithRounds(props) {
   const theme = useTheme();
   const router = useRouter();
 
-  const [dateFilter, setDateFilter] = useState("");
   const [age, setAge] = useState("");
+  const [dateFilter, setDateFilter] = useState(moment(new Date()).format(utils.letterFormat2));
 
   
   return (
@@ -43,7 +43,7 @@ export default function MatchWithRounds(props) {
           width: "100%",
         }}
       >
-                 <DateFilterBar />
+        <DateFilterBar setFilterDate={setDateFilter}/>
 
         <Grid pt={1}>
           {" "}
