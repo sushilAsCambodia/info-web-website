@@ -65,7 +65,7 @@ const NewsCardDetails = () => {
                                             objectFit="fill !important"
                                             style={{objectFit:"fill !important", borderRadius:'6px'}}
                                         />
-                                        <Typography color="#444444" className="imageWidth"     textAlign="justify" lineHeight="14.06px" paddingTop="24px" pb={4} fontSize="14px" dangerouslySetInnerHTML={{ __html: newsDetail.description || '' }}></Typography>
+                                        <Typography  color="#444444" className="imageWidth" textAlign="justify" lineHeight="14.06px" paddingTop="24px" pb={4} fontSize="14px" dangerouslySetInnerHTML={{ __html: newsDetail.description || '' }}></Typography>
                                     </Grid>
     
                                 </Grid>
