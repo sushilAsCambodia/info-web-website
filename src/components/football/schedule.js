@@ -19,7 +19,6 @@ import {
   Backdrop,
   Fade,
   Stack,
-
   Box,
   Divider,
   Collapse,
@@ -40,18 +39,26 @@ import ScheculeDateFilterBar from "@/common/scheculeDateFilterBar";
 import DataLoading from "@/components/DataLoading";
 import { useSelector } from "react-redux";
 
-export default function Schedule({footballList,loadings}) {
-  const [select, setSelect] = useState(0);  
+export default function Schedule({
+  footballList,
+  loadings,
+  footballScheduleList,
+  last_page,
+  currentpage,
+  pageChange,
+  lang_id,handleAddRemove,matchId,dateoptions,datefilter
+}) {
+  const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
-  
+
   const [openModal, setOpenModal] = useState(false);
-  
+
   const [age, setAge] = useState("");
   const [loading, setLoading] = useState(false);
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(currentpage);
 
   const handleCloseModal = (event) => {
     setOpenModal(false);
@@ -72,7 +79,7 @@ export default function Schedule({footballList,loadings}) {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      padding: '10px'
+      padding: "10px",
     },
   }));
 
@@ -112,25 +119,29 @@ export default function Schedule({footballList,loadings}) {
     return { icon, comp, location, time, round, home, favourite, away };
   }
 
-
   const [dateFilter, setDateFilter] = useState("");
+  const [days, setDays] = useState("Ten");
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
   const handlePageChange = (event, value) => {
-    setCurrentPage(value);
+    pageChange(value);
   };
-  
-  
+
   const footballLists = footballList?.filter((obj) => {
     return moment(obj.startTime).format(utils.dateFormate) == dateFilter;
   });
 
-
- const footballUpdatedList=dateFilter!=""?footballLists:footballList
- const pageCount = Math.ceil(footballUpdatedList?.length / 20);
- console.log("footballUpdatedListfootballUpdatedList",footballUpdatedList)
+  const footballUpdatedList = dateFilter != "" ? footballLists : footballList;
+  const pageCount = Math.ceil(footballUpdatedList?.length / 20);
+  /*** handle fav */
+  const handleFav=(id)=>{
+    handleAddRemove(id);
+  }
+  var regex = /\d+/g;
+//var string = "you can enter maximum 500 choices";
+//var matches = string.match(regex);
   return (
     <>
       {/* chart modal  */}
@@ -151,7 +162,7 @@ export default function Schedule({footballList,loadings}) {
           </Grid>
         </Fade>
       </Modal>
-      <Grid container px={{xs:2,md:0}}>
+      <Grid container px={{ xs: 2, md: 0 }}>
         <Grid
           container
           pt={1}
@@ -163,135 +174,135 @@ export default function Schedule({footballList,loadings}) {
             marginBottom: "10px",
           }}
         >
-                <ScheculeDateFilterBar fiterByDate={(value)=>setDateFilter(value)} />
-
+          <ScheculeDateFilterBar
+            fiterByDate={(value) => datefilter(value)}
+            day={(value)=>dateoptions(value)}
+          />
         </Grid>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledHeaderCell width="60px" align="left">{langKey && langKey.competition}</StyledHeaderCell>
-                  <StyledHeaderCell width="50px" align="center">
-                  {langKey && langKey.rounds}
+                  <StyledHeaderCell width="60px" align="left">
+                    {langKey && langKey.competition}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="center">
-                  {langKey && langKey.competing_time}
+                    {langKey && langKey.rounds}
+                  </StyledHeaderCell>
+                  <StyledHeaderCell width="50px" align="center">
+                    {langKey && langKey.competing_time}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                {langKey && langKey.home_team}
+                    {langKey && langKey.home_team}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                       {langKey && langKey.visiting_team}
+                    {langKey && langKey.score}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-                      {langKey && langKey.location}
+                    {langKey && langKey.visiting_team}
+                  </StyledHeaderCell>
+                  <StyledHeaderCell width="100px" align="center">
+                    {langKey && langKey.location}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="30px" align="center">
-                      {langKey && langKey.favourite}
+                    {langKey && langKey.favourite}
                   </StyledHeaderCell>
-                  
                 </TableRow>
-            
               </TableHead>
-            
-              <TableBody>
-             
+              {loadings ? (
+                  <TableRow>
+                    <TableCell component="th" scope="row" colSpan={7}>
+                      <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                        <DataLoading />
+                      </Grid>
+                    </TableCell>
+                  </TableRow>)
+                :
+              (<TableBody>
                 
-                     {loadings &&  <TableRow><TableCell component="th" scope="row" colSpan={7}>
-                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
-                          <DataLoading />
-                        </Grid>
-                      </TableCell>
-                    </TableRow>}
-                { footballUpdatedList && footballUpdatedList.length>0 && footballUpdatedList.slice(
-                        (currentPage - 1) * 20,
-                        20 * currentPage
-                      ).map((item, index) => {
-                  return (
-                    <StyledTableRow key={item.id}>
-                      <StyledTableCell align="left">
-                        <Grid style={{ display: "flex", alignItems: "center" }}>
-                          <Image
-                            width={25}
-                            src={item.icon}
-                            alt="football_endtab"
-                          />
-                          <Typography mx={1}>{item.competitionName}</Typography>
-                        </Grid>
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {item.stage}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {item.startTime}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {item.homeTeamName}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {item.awayTeamName}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                       
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {item.favourite ? (
-                          <IconButton>
-                            {" "}
-                            <Icon
-                              width={30}
-                              color="orange"
-                              icon="ic:round-star"
-                            />
-                          </IconButton>
-                        ) : (
-                          <IconButton>
-                            {" "}
-                            <Icon width={25} icon="ic:round-star" />
-                          </IconButton>
-                        )}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  );
-                })}
-          
-                     {footballUpdatedList && footballUpdatedList.length <= 0 && (  
-                      <TableRow>
-                        <TableCell component="th" scope="row" colSpan={7}>
+                {footballScheduleList &&
+                  footballScheduleList.length > 0 ?
+                  footballScheduleList.map((item, index) => {
+                    let stage=item.stage
+                    return (
+                      <StyledTableRow key={item.id}>
+                        <StyledTableCell align="left">
                           <Grid
-                            textAlign={"center"}
-                            item
-                            xs={12}
-                            paddingTop={5}
+                            style={{ display: "flex", alignItems: "center" }}
                           >
-                            <img
-                              alt="not_found_2"
-                              style={{ height: "50vh" }}
-                              src="./assets/Home/not-found.gif"
-                            />
-                            <Typography textAlign="center">
-                              {langKey && langKey.no_data_found } 
+                            {/* <Image
+                              width={25}
+                              src={item.icon}
+                              alt="football_endtab"
+                            /> */}
+                            <Typography mx={1}>
+                              {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.name:item?.competition?.nameEn}
                             </Typography>
                           </Grid>
-                        </TableCell>
-                      </TableRow>
-                    )}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {lang_id==1?stage.match(regex):lang_id==3?stage.match(regex):stage}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.startTime}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {/* {item.homeTeamName} */}
+                          {/* {item.home_team==null && lang_id==1?'':item.home_team && lang_id==1?:item.homeTeamName} */}
+                          {item.home_team && lang_id==1?item.home_team && item.home_team.nameEn:item.home_team && lang_id==2?item.home_team && item.home_team.name:item.home_team && lang_id==3?item.home_team && item.home_team.nameEn:''}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">--</StyledTableCell>
+                        <StyledTableCell align="center">
+                          {/* {item.awayTeamName} */}
+                          {item.away_team && lang_id==1?item.away_team && item.away_team.nameEn:item.away_team && lang_id==2?item.away_team && item.away_team.name:item.away_team && lang_id==3?item.away_team && item.away_team.nameEn:''}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">--</StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.is_favorite ? (
+                            <IconButton onClick={()=>handleFav(item.id)}>
+                              {" "}
+                              <Icon
+                                width={30}
+                                color="orange"
+                                icon="ic:round-star"
+                              />
+                            </IconButton>
+                          ) : (
+                            <IconButton onClick={()=>handleFav(item.id)}>
+                              {" "}
+                              <Icon width={25}  icon="ic:round-star" />
+                            </IconButton>
+                          )}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  })
+                 : <>
+                  <TableRow>
+                    <TableCell component="th" scope="row" colSpan={7}>
+                      <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                        <img
+                          alt="not_found_2"
+                          style={{ height: "50vh" }}
+                          src="./assets/Home/not-found.gif"
+                        />
+                        <Typography textAlign="center">
+                          {langKey && langKey.no_data_found}
+                        </Typography>
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                  </>
+                  }
 
-
-
-
-
+               
               </TableBody>
+              )}
             </Table>
           </TableContainer>
 
-          
-          
-          
-          
-          
-          {footballUpdatedList?.length > 0 && (
+          {footballScheduleList && footballScheduleList.length > 0 && (
             <Grid
               item
               xs={12}
@@ -304,15 +315,30 @@ export default function Schedule({footballList,loadings}) {
               <Stack spacing={2} sx={{ textAlign: "center" }}>
                 {/* <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" /> */}
                 <Pagination
-          count={pageCount}
-          page={currentPage}
-          onChange={handlePageChange}
-          variant="outlined"
-          shape="rounded"
-        />
+                  count={last_page}
+                  page={currentpage}
+                  onChange={handlePageChange}
+                  variant="outlined"
+                  shape="rounded"
+                  className="announce-pagination"
+                />
               </Stack>
             </Grid>
           )}
+
+          {/* <Grid
+              item
+              xs={12}
+             
+              display="flex"
+              justifyContent="center"
+              alignContent="center"
+              marginTop={10}
+              
+            >
+                <Pagination count={last_page} page={currentpage}  variant="outlined" shape="rounded" className="announce-pagination" />
+            </Grid>
+           */}
         </Grid>
       </Grid>
     </>

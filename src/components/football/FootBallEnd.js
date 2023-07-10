@@ -94,12 +94,14 @@ import { useSelector } from "react-redux";
     }
     function Last7Days() {
       var result = [];
-      for (var i = 0; i < 7; i++) {
+      for (var i = 1; i < 8; i++) {
         var d = new Date();
         d.setDate(d.getDate() - i);
         result.push({
+          date:moment(d).format(utils.dateFormate),
           day: moment(d).format(utils.dateLetter),
-          monthyear: moment(d).format(utils.MonthYearFormat),
+          DateMonth: moment(d).format(utils.DateMonthFormat),
+          ddmmmyyyy:moment(d).format(utils.letterFormat2)
         });
       }
       
@@ -144,7 +146,7 @@ import { useSelector } from "react-redux";
                       <Typography sx={{ fontWeight: "bold" }} mr={1}>
                         {item.day}
                       </Typography>
-                      <Typography  mr={1}>{item.monthyear}</Typography>
+                      <Typography  mr={1}>{item.DateMonth}</Typography>
                       <Divider orientation="vertical" flexItem />
                     </Grid>
                   );

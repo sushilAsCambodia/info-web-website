@@ -48,7 +48,7 @@ export default function MatchItem(props) {
           alignItems="center"
         >
           <Typography color="#8C8C8C">
-            {index} {details.competitionName}
+             {details.competition.nameEn}
           </Typography>
           <IconButton
             onClick={() => {

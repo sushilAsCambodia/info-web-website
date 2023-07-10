@@ -10,13 +10,16 @@ import {
   Checkbox,
   ListItemText,
   ListSubheader,
-  TableCell,TableRow
+  TableCell,
+  TableRow,
+  InputAdornment,
+  Icon,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import moment from "moment";
 
 import { useRouter } from "next/router";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Schedule from "@/components/football/schedule";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
@@ -26,7 +29,10 @@ import DataLoading from "@/components/DataLoading";
 import utils from "@/common/utils";
 
 import {
-  getScheduleList,getMatchEndList
+  getScheduleList,
+  getMatchEndList,
+  getCompetitionList,
+  addRemoveFavourite,
 } from "@/store/actions/footballActions";
 
 function TabPanel(props) {
@@ -81,11 +87,17 @@ export default function FootBallPage() {
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const [select, setSelect] = useState(0);
+  const [competition, setCompetition] = useState("");
   const [selectedName, setSelectedName] = useState([]);
   const [page, setPage] = useState(1);
   const [footballList, setFootballList] = useState([]);
   const [footballEndList, setFootballEndList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [competitionList, setCompetitionList] = useState([]);
+  const [matchId, setMatchId] = useState("");
+  const [dateoption, setDateoption] = useState("Ten");
+  const { customer = {} } = useSelector((state) => state.auth);
+  const [datefilter, setDatefilter] = useState(moment().format("YYYY-MM-DD"));
   
 
   const handleChange = (event) => {
@@ -99,13 +111,19 @@ export default function FootBallPage() {
     );
   };
   const [value, setValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(page);
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
-  
+
   const {
-    scheduleResultList = []  
-  } = useSelector((state) => state?.lottery);
+    footballScheduleList,
+    current_page,
+    per_page,
+    last_page,
+    competitions,
+  } = useSelector((state) => state?.football);
+  const { scheduleResultList = [] } = useSelector((state) => state?.lottery);
 
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
@@ -118,49 +136,156 @@ export default function FootBallPage() {
     }
   }, [router.asPath]);
 
-  useEffect(() => { 
-    setLoading(true)   
+  const handleAddRemove = (id) => {
+    setLoading(true);
+    customer?.member_ID
+      ? dispatch(
+          addRemoveFavourite({
+            body: {
+              id: id,
+              member_ID: customer?.member_ID,
+              type: "match_schedule",
+            },
+            callback: (res) => {
+              console.log("sdsdsdsd", res);
+              // setIsFavourite(!isFavourite);
+              // toastMessage(langKey[res?.message]);
+              //   allFavourite();
+              setLoading(false);
+              dispatch(
+                getScheduleList({
+                  // params: {
+                  //   lang_id: utils.convertLangCodeToID(i18n.language),
+                  //   season: moment().format("YYYY"),
+                  //   status: 0,
+                  //   member_ID: customer?.member_ID,
+                  //   page: 1,
+                  //   rowsPerPage: 10,
+                  //   page: currentPage,
+                  // },
+                  params: {
+                    lang_id: utils.convertLangCodeToID(i18n.language),
+                    season: moment().format("YYYY"),
+                    status: 0,
+                    member_ID: customer?.member_ID,                   
+                    page: 1,                   
+                    date:datefilter,
+                    page: currentPage,
+                    descending:false,
+                    sortBy:'startTime'
+                  },
+                  callback: (res) => {
+                    setFootballList(res && res.data);
+                    setLoading(false);
+                  },
+                })
+              );
+            },
+          })
+        )
+      : router.push("/login");
+  };
+
+  useEffect(() => {
+    setLoading(true);
+  
+    // dispatch(
+    //   getScheduleList({
+    //     params: {
+    //       lang_id: utils.convertLangCodeToID(i18n.language),
+    //       season:moment().format('YYYY'),
+    //       status:0,
+    //       page:1,
+    //       date_option:30
+
+    //     },
+    //     callback: (res) => {
+    //       setLoading(false)
+    //       setFootballList(res && res.data && res.data.data)
+    //     },
+    //   })
+    // );
+
+    // dispatch(
+    //   getScheduleList({
+    //     params: { lang_id: utils.convertLangCodeToID(i18n.language), season:moment().format('YYYY'),
+    //     status:0,
+    //     member_ID: customer?.member_ID,
+    //     date_option:dateoption,
+    //     page:1,
+    //      rowsPerPage: 15,page:currentPage },
+    //     callback: (res) => {  setFootballList(res && res.data)
+    //       setLoading(false)  },
+    //   })
+    // );
+
     dispatch(
-      getScheduleList({    
-        params: {         
+      getScheduleList({
+        params: {
           lang_id: utils.convertLangCodeToID(i18n.language),
-          competition_id: '70',
-          season:moment().format('YYYY'),
-          isFinish:0,
+          season: moment().format("YYYY"),
+          status: 0,
+          member_ID: customer?.member_ID,
+          date_option: dateoption,
+          page: 1,         
+          date:datefilter,
+          page: currentPage,
+          descending:false,
+          sortBy:'startTime'
         },
-        callback: (res) => {   
-          setLoading(false)      
-          setFootballList(res && res.data)        
+        callback: (res) => {
+          setFootballList(res && res.data);
+          setLoading(false);
         },
       })
-    );    
+    );
+
     dispatch(
-      getMatchEndList({    
-        params: {         
+      getMatchEndList({
+        params: {
           lang_id: utils.convertLangCodeToID(i18n.language),
-          competition_id: '70',
-          season:moment().format('YYYY'),
-          isFinish:1,
+          competition_id: "70",
+          season: moment().format("YYYY"),
+          isFinish: 1,
         },
-        callback: (res) => {         
-          setFootballEndList(res && res.data)        
+        callback: (res) => {
+          setFootballEndList(res && res.data && res.data.data);
         },
       })
-    );    
-  }, []);
+    );
+    dispatch(
+      getCompetitionList({
+        params: {
+          lang_id: utils.convertLangCodeToID(i18n.language),
+        },
+        callback: (res) => {
+          setCompetitionList(res && res.data);
+        },
+      })
+    );
+  }, [currentPage, dateoption,datefilter]);
+  const lang_id = utils.convertLangCodeToID(i18n.language);
+
+  var result = footballScheduleList.filter(function(e) {
+    return selectedName.indexOf(e.competitionId) != -1
+  })
+
+  const footballlist=selectedName && selectedName.length>0?result:footballScheduleList
 
   const renderSelectGroup = (product) => {
-    const items = product.plans.map((p) => {
+    const items = product.competitions.map((p) => {
       return (
-        <MenuItem key={p.id} value={p.name}>
-          <Checkbox checked={selectedName.indexOf(p.name) > -1} />
-          <ListItemText primary={p.name} />
+        <MenuItem key={p.id} value={p.id}>
+          <Checkbox checked={selectedName.indexOf(p.id) > -1} />
+          <ListItemText primary={p.nameEn} />
         </MenuItem>
       );
     });
-    return [<ListSubheader>{product.name}</ListSubheader>, items];
+    return [<ListSubheader>{product.country}</ListSubheader>, items];
   };
-
+ 
+  //console.log("competitionscompetitionscompetitions", competitions);
+  
   return (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
@@ -219,10 +344,10 @@ export default function FootBallPage() {
             {langKey && langKey.schedule}
           </MenuItem>
         </Grid>
-        
+
         <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel id="demo-multiple-checkbox-label">{langKey && langKey.select_event}</InputLabel>
+          <InputLabel id="demo-multiple-checkbox-label">{langKey && langKey.select_event}</InputLabel>
             <Select
               labelId="demo-multiple-checkbox-label"
               id="demo-multiple-checkbox"
@@ -234,10 +359,29 @@ export default function FootBallPage() {
               renderValue={(selected) => selected.join(", ")}
               MenuProps={MenuProps}
             >
-              {data?.map((p) => renderSelectGroup(p))}
+              {competitions && competitions.length>0 && competitions.map((p) => renderSelectGroup(p))}
             </Select>
+
+            {/* <Select
+          value={competition}
+          onChange={(e)=>setCompetition(e.target.value)}
+          displayEmpty
+          inputProps={{ "aria-label": "Without label" }}
+          sx={{ paddingLeft: "5px", fontSize: {xs:"12px",md:"14px"} }}
+          startAdornment={
+            <InputAdornment position="start">
+              <Icon icon="material-symbols:calendar-today" width={20} />
+            </InputAdornment>
+          }
+        >
+          <MenuItem value="">
+            <em>   {langKey && langKey.select_event}</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select> */}
           </FormControl>
-          
         </Grid>
       </Grid>
       <TabPanel value={value} index={"Follow"}>
@@ -251,7 +395,19 @@ export default function FootBallPage() {
         <FootBallEnd footballEndList={footballEndList} />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
-        <Schedule footballList={footballList} loadings={loading}/>
+        <Schedule
+          dateoptions={(value) => setDateoption(value)}
+          datefilter={(value) => setDatefilter(value)}
+          footballList={footballList}
+          matchId={(value) => setMatchId(value)}
+          handleAddRemove={handleAddRemove}
+          lang_id={lang_id}
+          footballScheduleList={footballlist}
+          currentpage={currentPage}
+          pageChange={(value) => setCurrentPage(value)}
+          last_page={last_page}
+          loadings={loading}
+        />
       </TabPanel>
     </>
   );

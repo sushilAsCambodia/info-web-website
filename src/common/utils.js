@@ -6,6 +6,7 @@ const utils = {
     lotteryFormat: 'Do MMM YYYY, dddd',
     lotteryLatestResult: 'YYYY-MM-DD dddd',
     dateFormate: 'YYYY-MM-DD',
+    dateFormate1: 'MM-DD',
     letterFormat: 'YYYY MMM DD',
     letterFormat2: 'YYYY MMM DD',
     letterFormatDDMMYYYY: 'YYYY/MM/DD',
@@ -88,6 +89,8 @@ const utils = {
         var d = new Date();
         d.setDate(d.getDate() + i);
         result.push({
+          dateChecks:moment(d).format(utils.dateFormate1), 
+          dChecks:moment(d).format("DD"),          
           date:moment(d).format(utils.dateFormate),
           day: moment(d).format(utils.dateLetter),
           DateMonth: moment(d).format(utils.DateMonthFormat),

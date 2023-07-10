@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
+import moment from "moment";
 import {Grid,Typography,FormControl,Select,InputAdornment,MenuItem,Divider} from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import utils from './utils';
@@ -8,11 +9,14 @@ import utils from './utils';
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
 
-export default function ScheculeDateFilterBar({fiterByDate}) {
+export default function ScheculeDateFilterBar({fiterByDate,day}) {
     
-    const [dateFilter, setDateFilter] = useState("");
-    const [age, setAge] = useState("");
+    const [dateFilter, setDateFilter] = useState(moment().format("ddd"));
+    const [days, setDays] = useState("Ten");
+  
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
+    var d = new Date();
+    const datecheck= moment(d).format('DD')
 
 
   return (
@@ -32,12 +36,12 @@ export default function ScheculeDateFilterBar({fiterByDate}) {
           >
             <Typography
               sx={{ fontWeight: "bold", fontSize: {xs:"14px",md:"16px"} }}
-              px={0.5}
+              px={0.75}
             >
-              {item.day}
+              {item.dChecks!==datecheck && langKey && langKey[item.day]}
             </Typography>
-            <Typography px={0.5} sx={{ fontSize: {xs:"14px",md:"16px"} }}>
-              {item.DateMonth}
+            <Typography px={0.75} sx={{ fontSize: {xs:"14px",md:"16px"} }}>
+              {item.dChecks==datecheck?langKey && langKey.todays: item.dateChecks}
             </Typography>
           </Grid>
         );
@@ -49,11 +53,11 @@ export default function ScheculeDateFilterBar({fiterByDate}) {
       display="flex"
       justifyContent="center"
     >
-      {/* <FormControl size="small" fullWidth>
-        <Select
-          value={age}
+      <FormControl size="small" fullWidth>
+        {/* <Select
+          value={days}
           onChange={(e) => {
-            console.log('');
+            day(e.target.value);setDays(e.target.value)
           }}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
@@ -67,12 +71,12 @@ export default function ScheculeDateFilterBar({fiterByDate}) {
           <MenuItem value="">
             <em>   {langKey && langKey.date}</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        <FormHelperText>Without label</FormHelperText>
-      </FormControl> */}
+          <MenuItem value="Ten">Ten</MenuItem>
+          <MenuItem value="Twenty">Twenty</MenuItem>
+          <MenuItem value="Thirty">Thirty</MenuItem>
+        </Select> */}
+       
+      </FormControl>
     </Grid>
   </Grid>
   );
