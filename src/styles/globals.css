@@ -1230,13 +1230,10 @@ display: none !important;
     width: 100%;
   }
 
-  .tablehover tbody tr:hover{
+  #tablehover tbody tr:hover{
 background: #f5f5f5;
   }
-  tr {
-    height: 10px;
-  }
-  
-  tr td {
-     height: auto !important;
+
+  .makeStyles-table-1 .MuiTableBody-root .MuiTableRow-root{
+    height: 30px;
   }

@@ -30,7 +30,6 @@ import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import utils from "@/common/utils";
 import moment from "moment/moment";
-import { makeStyles } from '@mui/styles';
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
@@ -39,25 +38,6 @@ import { Image } from "mui-image";
 import ScheculeDateFilterBar from "@/common/scheculeDateFilterBar";
 import DataLoading from "@/components/DataLoading";
 import { useSelector } from "react-redux";
-
-
-const tableStyles = makeStyles({
-  tableHead: {
-    height: 44,
-  },
-})
-
-
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-    "& .MuiTableCell-root": {
-      border: '1px solid #DDDDDD'
-    }
-  }
-
-});
 
 export default function Schedule({
   footballList,
@@ -108,9 +88,9 @@ export default function Schedule({
       backgroundColor: theme.palette.action.grey,      
     },
     // hide last border
-    // "&:last-child td, &:last-child th": {
-    //   border: 0,
-    // },
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
   }));
 
   const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
@@ -162,10 +142,6 @@ export default function Schedule({
   var regex = /\d+/g;
 //var string = "you can enter maximum 500 choices";
 //var matches = string.match(regex);
-
-const classes = useStyles();
-const classes1 = tableStyles()
-
   return (
     <>
       {/* chart modal  */}
@@ -205,8 +181,8 @@ const classes1 = tableStyles()
         </Grid>
         <Grid item xs={12} >
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} className={classes.table} id="tablehover"  aria-label="customized table">
-              <TableHead className={classes1.tableHead}>
+            <Table sx={{ minWidth: 700 }} className="tablehover" aria-label="customized table">
+              <TableHead>
                 <TableRow>
                   <StyledHeaderCell width="60px" align="left">
                     {langKey && langKey.competition}
@@ -243,7 +219,7 @@ const classes1 = tableStyles()
                     </TableCell>
                   </TableRow>)
                 :
-              (<TableBody className={classes.tableBody}>
+              (<TableBody>
                 
                 {footballScheduleList &&
                   footballScheduleList.length > 0 ?
