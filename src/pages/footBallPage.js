@@ -89,6 +89,7 @@ export default function FootBallPage() {
   const [select, setSelect] = useState(0);
   const [competition, setCompetition] = useState("");
   const [selectedName, setSelectedName] = useState([]);
+  const [competitionIdd, setCompetitionIdd] = useState([]);
   const [page, setPage] = useState(1);
   const [footballList, setFootballList] = useState([]);
   const [footballEndList, setFootballEndList] = useState([]);
@@ -99,7 +100,7 @@ export default function FootBallPage() {
   const { customer = {} } = useSelector((state) => state.auth);
   const [datefilter, setDatefilter] = useState(moment().format("YYYY-MM-DD"));
   
-
+  const language_id= utils.convertLangCodeToID(i18n.language)
   const handleChange = (event) => {
     const {
       target: { value },
@@ -125,6 +126,7 @@ export default function FootBallPage() {
   } = useSelector((state) => state?.football);
   const { scheduleResultList = [] } = useSelector((state) => state?.lottery);
 
+  
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
     if (hash) {
@@ -134,6 +136,8 @@ export default function FootBallPage() {
       setSelect("Follow");
       setValue("Follow");
     }
+    
+    
   }, [router.asPath]);
 
   const handleAddRemove = (id) => {
@@ -218,7 +222,17 @@ export default function FootBallPage() {
     //       setLoading(false)  },
     //   })
     // );
-
+    let competId=[]
+    competitions && competitions.length>0 && competitions.map((ids,index)=>{
+      
+      ids && ids.competitions && ids.competitions.length>0 && ids.competitions.map((item,i)=>{
+       
+       if(selectedName.includes(item.nameEn) || selectedName.includes(item.name)){
+        competId.push(item.id)
+       }
+      })
+    })
+    setCompetitionIdd(competId)
     dispatch(
       getScheduleList({
         params: {
@@ -263,27 +277,30 @@ export default function FootBallPage() {
         },
       })
     );
-  }, [currentPage, dateoption,datefilter]);
+  }, [currentPage, dateoption,datefilter,selectedName]);
   const lang_id = utils.convertLangCodeToID(i18n.language);
 
   var result = footballScheduleList.filter(function(e) {
-    return selectedName.indexOf(e.competitionId) != -1
+    return competitionIdd.indexOf(e.competitionId) != -1
   })
 
   const footballlist=selectedName && selectedName.length>0?result:footballScheduleList
 
   const renderSelectGroup = (product) => {
     const items = product.competitions.map((p) => {
+      let name=language_id==1 || language_id==3?p.nameEn:p.name
       return (
-        <MenuItem key={p.id} value={p.id}>
-          <Checkbox checked={selectedName.indexOf(p.id) > -1} />
-          <ListItemText primary={p.nameEn} />
+        <MenuItem key={p.id} value={name}>
+          <Checkbox checked={selectedName.indexOf(name) > -1} />
+          <ListItemText primary={name} />
         </MenuItem>
       );
     });
     return [<ListSubheader>{product.country}</ListSubheader>, items];
   };
  
+  console.log("CompetitionIdd",competitionIdd)
+
   //console.log("competitionscompetitionscompetitions", competitions);
   
   return (
@@ -354,7 +371,7 @@ export default function FootBallPage() {
               multiple
               value={selectedName}
               onChange={(e) => handleChange(e)}
-              onClose={() => console.log("picked:::", selectedName)}
+            
               input={<OutlinedInput label="Select event" />}
               renderValue={(selected) => selected.join(", ")}
               MenuProps={MenuProps}

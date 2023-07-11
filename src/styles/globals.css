@@ -1229,3 +1229,7 @@ display: none !important;
    .imageWidth img{
     width: 100%;
   }
+
+  .tablehover tbody tr:hover{
+background: #f5f5f5;
+  }

@@ -179,9 +179,9 @@ export default function Schedule({
             day={(value)=>dateoptions(value)}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{height:"10px!important"}}>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <Table sx={{ minWidth: 700 }} className="tablehover" aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledHeaderCell width="60px" align="left">
@@ -226,16 +226,16 @@ export default function Schedule({
                   footballScheduleList.map((item, index) => {
                     let stage=item.stage
                     return (
-                      <StyledTableRow key={item.id}>
+                      <StyledTableRow key={item.id} className="xxx">
                         <StyledTableCell align="left">
                           <Grid
                             style={{ display: "flex", alignItems: "center" }}
                           >
-                            {/* <Image
+                            <Image
                               width={25}
-                              src={item.icon}
+                              src={item && item.competition && item.competition.image}
                               alt="football_endtab"
-                            /> */}
+                            />
                             <Typography mx={1}>
                               {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.name:item?.competition?.nameEn}
                             </Typography>
