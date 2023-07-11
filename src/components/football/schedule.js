@@ -40,15 +40,6 @@ import ScheculeDateFilterBar from "@/common/scheculeDateFilterBar";
 import DataLoading from "@/components/DataLoading";
 import { useSelector } from "react-redux";
 
-
-const tableStyles = makeStyles({
-  tableHead: {
-    height: 44,
-  },
-})
-
-
-
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -126,6 +117,7 @@ export default function Schedule({
       borderLeft: "1px solid #DDDDDD",
     },
   }));
+  
   function createData(
     icon,
     comp,
@@ -164,7 +156,7 @@ export default function Schedule({
 //var matches = string.match(regex);
 
 const classes = useStyles();
-const classes1 = tableStyles()
+
 
   return (
     <>
@@ -206,7 +198,7 @@ const classes1 = tableStyles()
         <Grid item xs={12} >
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} className={classes.table} id="tablehover"  aria-label="customized table">
-              <TableHead className={classes1.tableHead}>
+              <TableHead size="small">
                 <TableRow>
                   <StyledHeaderCell width="60px" align="left">
                     {langKey && langKey.competition}
@@ -243,17 +235,17 @@ const classes1 = tableStyles()
                     </TableCell>
                   </TableRow>)
                 :
-              (<TableBody className={classes.tableBody}>
+              (<TableBody>
                 
                 {footballScheduleList &&
                   footballScheduleList.length > 0 ?
                   footballScheduleList.map((item, index) => {
                     let stage=item.stage
                     return (
-                      <StyledTableRow key={item.id} className="xxx" style={{height:"20px!important"}}>
-                        <StyledTableCell align="left" style={{minHeight:"20px!important"}}>
+                      <StyledTableRow key={item.id} >
+                        <StyledTableCell align="left"  style={{color:"#fff", background:"#f35319" }}>
                           <Grid
-                            style={{ display: "flex", alignItems: "center" }}
+                            style={{ display: "flex", alignItems: "center", background:"#f35319" }}
                           >
                             <Image
                               width={25}
@@ -264,7 +256,7 @@ const classes1 = tableStyles()
                               {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.name:item?.competition?.nameEn}
                             </Typography>
                           </Grid>
-                        </StyledTableCell>
+                        </StyledTableCell >
                         <StyledTableCell align="center">
                           {lang_id==1?stage.match(regex):lang_id==3?stage.match(regex):stage}
                         </StyledTableCell>
