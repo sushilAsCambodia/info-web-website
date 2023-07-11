@@ -83,6 +83,26 @@ export default function Schedule({
     bgcolor: "background.paper",
     border: "1px solid #DDDDDD",
   };
+  
+
+
+
+
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.grey,      
+    },
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+   
+  }));
+
+
+
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: "#DDDDDD",
@@ -92,17 +112,14 @@ export default function Schedule({
       fontSize: 14,
       padding: "10px",
     },
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+  
   }));
 
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.grey,      
-    },
-    // hide last border
-    // "&:last-child td, &:last-child th": {
-    //   border: 0,
-    // },
-  }));
+
 
   const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
     background: "#FF6F31",
@@ -117,7 +134,17 @@ export default function Schedule({
       borderLeft: "1px solid #DDDDDD",
     },
   }));
-  
+
+
+
+
+
+
+
+
+
+
+
   function createData(
     icon,
     comp,
@@ -206,8 +233,8 @@ const classes = useStyles();
                   <StyledHeaderCell width="50px" align="center">
                     {langKey && langKey.rounds}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="50px" align="center">
-                    {langKey && langKey.competing_time}
+                  <StyledHeaderCell width="100px" align="center">
+                    {langKey && langKey.time}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
                     {langKey && langKey.home_team}
@@ -241,11 +268,17 @@ const classes = useStyles();
                   footballScheduleList.length > 0 ?
                   footballScheduleList.map((item, index) => {
                     let stage=item.stage
+                    let color
+                    if(index%2==0){
+                      color="#33cc75"
+                    } else {
+                      color="#e60039"
+                    }
                     return (
                       <StyledTableRow key={item.id} >
-                        <StyledTableCell align="left"  style={{color:"#fff", background:"#f35319" }}>
+                        <StyledTableCell align="left"  style={{color:"#fff", background:color }}>
                           <Grid
-                            style={{ display: "flex", alignItems: "center", background:"#f35319" }}
+                            style={{ display: "flex", alignItems: "center", background:color }}
                           >
                             <Image
                               width={25}
@@ -261,7 +294,7 @@ const classes = useStyles();
                           {lang_id==1?stage.match(regex):lang_id==3?stage.match(regex):stage}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.startTime}
+                          {moment(item.startTime).format('HH:MM')}
                         </StyledTableCell>
                         <StyledTableCell align="center">
                           {/* {item.homeTeamName} */}

@@ -32,8 +32,8 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
               fiterByDate(item.date);
               setDateFilter(item.day);
             }}
-            sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'flex'},alignItems:'center' }}
-          >
+            sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'block', textAlign:"center", padding:"0px 25px", textTransform:"uppercase"},alignItems:'center' }}
+          >           
             <Typography
               sx={{ fontWeight: "bold", fontSize: {xs:"14px",md:"16px"} }}
               px={0.75}
@@ -41,8 +41,15 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
               {item.dChecks!==datecheck && langKey && langKey[item.day]}
             </Typography>
             <Typography px={0.75} sx={{ fontSize: {xs:"14px",md:"16px"} }}>
-              {item.dChecks==datecheck?langKey && langKey.todays: item.dateChecks}
+              {item.dChecks==datecheck?langKey && langKey.todays: ''}
             </Typography>
+            <Typography
+              sx={{ fontWeight: "bold", fontSize: {xs:"14px",md:"16px"} }}
+              px={0.75}
+            >
+              {item.DateMonth}
+            </Typography>
+            
           </Grid>
         );
       })}
