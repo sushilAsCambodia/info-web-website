@@ -85,7 +85,7 @@ export default function Schedule({
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.grey,
+      backgroundColor: theme.palette.action.grey,      
     },
     // hide last border
     "&:last-child td, &:last-child th": {
@@ -179,7 +179,7 @@ export default function Schedule({
             day={(value)=>dateoptions(value)}
           />
         </Grid>
-        <Grid item xs={12} style={{height:"10px!important"}}>
+        <Grid item xs={12} >
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} className="tablehover" aria-label="customized table">
               <TableHead>
@@ -226,8 +226,8 @@ export default function Schedule({
                   footballScheduleList.map((item, index) => {
                     let stage=item.stage
                     return (
-                      <StyledTableRow key={item.id} className="xxx">
-                        <StyledTableCell align="left">
+                      <StyledTableRow key={item.id} className="xxx" style={{height:"20px!important"}}>
+                        <StyledTableCell align="left" style={{minHeight:"20px!important"}}>
                           <Grid
                             style={{ display: "flex", alignItems: "center" }}
                           >

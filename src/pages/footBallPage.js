@@ -296,9 +296,11 @@ export default function FootBallPage() {
         </MenuItem>
       );
     });
-    return [<ListSubheader>{product.country}</ListSubheader>, items];
+    //return [<ListSubheader>{product.country}</ListSubheader>, items];
+    return [items];
   };
  
+  
   console.log("CompetitionIdd",competitionIdd)
 
   //console.log("competitionscompetitionscompetitions", competitions);

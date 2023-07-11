@@ -1233,3 +1233,10 @@ display: none !important;
   .tablehover tbody tr:hover{
 background: #f5f5f5;
   }
+  tr {
+    height: 10px;
+  }
+  
+  tr td {
+     height: auto !important;
+  }
