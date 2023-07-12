@@ -2,7 +2,9 @@ const initialState = {
     status: 'idle',    
     loading:false,    
     footballScheduleList:[],
-    footballEndMatchList:[]
+    footballEndMatchList:[],
+    footballCompetitiomList:[],
+    competitions:[]
   } 
   const FootballReducer =  (state = initialState, action) => {
     switch (action.type) {
@@ -14,8 +16,12 @@ const initialState = {
         };
       case 'football/schedule/fulfilled':       
         return {
-          ...state,
-          footballScheduleList: action?.payload?.data || [],
+          ...state,         
+          footballScheduleList: action?.payload?.data,
+          current_page:action?.payload?.current_page,
+          per_page:action?.payload?.per_page,
+          last_page:action?.payload?.last_page,
+          competitions:action?.payload?.competition,
           status:'completed',
           loading: false
         };
@@ -45,7 +51,45 @@ const initialState = {
             status:'failed',
             latest:[],
             loading: false
-          };     
+          };    
+          
+          case 'football/competition/pending':
+            return {
+              ...state, 
+              status:'pending',
+              loading: true
+            };
+          case 'football/competition/fulfilled':         
+            return {
+              ...state,
+              footballCompetitiomList: action?.payload?.data || [],
+              status:'completed',
+              loading: false
+            };
+          case 'football/competition/rejected':
+            return {
+              ...state, 
+              status:'failed',
+              latest:[],
+              loading: false
+            };  
+            case 'add/remove/favourite/pending':
+              return {
+                ...initialState, 
+                loading:true
+              };
+            case 'add/remove/favourite/rejected':
+              return {
+                ...state,
+                status:'failed',
+                loading: false
+              };
+            case 'add/remove/favourite/fulfilled':
+              return {
+                ...state,
+                status:'completed',
+                loading: false
+              };
       
         }
     return state;

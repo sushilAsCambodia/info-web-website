@@ -26,13 +26,10 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-
-import CircularProgress from '@mui/material/CircularProgress';
 import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import utils from "@/common/utils";
 import moment from "moment/moment";
-import { makeStyles } from '@mui/styles';
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
@@ -41,16 +38,6 @@ import { Image } from "mui-image";
 import ScheculeDateFilterBar from "@/common/scheculeDateFilterBar";
 import DataLoading from "@/components/DataLoading";
 import { useSelector } from "react-redux";
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-    "& .MuiTableCell-root": {
-      border: '1px solid #DDDDDD'
-    }
-  }
-
-});
 
 export default function Schedule({
   footballList,
@@ -63,9 +50,9 @@ export default function Schedule({
 }) {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
-  //const [nodata, setNodata] = useState(0);
+
   const [openModal, setOpenModal] = useState(false);
-  console.log("footballScheduleList",footballScheduleList)
+
   const [age, setAge] = useState("");
   const [loading, setLoading] = useState(false);
   const langKey = useSelector(
@@ -85,26 +72,6 @@ export default function Schedule({
     bgcolor: "background.paper",
     border: "1px solid #DDDDDD",
   };
-  
-
-
-
-
-
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.grey,      
-    },
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-   
-  }));
-
-
-
-
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: "#DDDDDD",
@@ -114,14 +81,17 @@ export default function Schedule({
       fontSize: 14,
       padding: "10px",
     },
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-  
   }));
 
-
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.grey,      
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
+  }));
 
   const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
     background: "#FF6F31",
@@ -136,17 +106,6 @@ export default function Schedule({
       borderLeft: "1px solid #DDDDDD",
     },
   }));
-
-
-
-
-
-
-
-
-
-
-
   function createData(
     icon,
     comp,
@@ -169,7 +128,7 @@ export default function Schedule({
   const handlePageChange = (event, value) => {
     pageChange(value);
   };
-  const [open, setOpen] = useState(false);
+
   const footballLists = footballList?.filter((obj) => {
     return moment(obj.startTime).format(utils.dateFormate) == dateFilter;
   });
@@ -183,10 +142,6 @@ export default function Schedule({
   var regex = /\d+/g;
 //var string = "you can enter maximum 500 choices";
 //var matches = string.match(regex);
-
-const classes = useStyles();
-
-
   return (
     <>
       {/* chart modal  */}
@@ -226,8 +181,8 @@ const classes = useStyles();
         </Grid>
         <Grid item xs={12} >
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} className={classes.table} id="tablehover"  aria-label="customized table">
-              <TableHead size="small">
+            <Table sx={{ minWidth: 700 }} className="tablehover" aria-label="customized table">
+              <TableHead>
                 <TableRow>
                   <StyledHeaderCell width="60px" align="left">
                     {langKey && langKey.competition}
@@ -235,8 +190,8 @@ const classes = useStyles();
                   <StyledHeaderCell width="50px" align="center">
                     {langKey && langKey.rounds}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
-                    {langKey && langKey.time}
+                  <StyledHeaderCell width="50px" align="center">
+                    {langKey && langKey.competing_time}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
                     {langKey && langKey.home_team}
@@ -247,29 +202,15 @@ const classes = useStyles();
                   <StyledHeaderCell width="100px" align="center">
                     {langKey && langKey.visiting_team}
                   </StyledHeaderCell>
-                  {/* <StyledHeaderCell width="100px" align="center">
+                  <StyledHeaderCell width="100px" align="center">
                     {langKey && langKey.location}
-                  </StyledHeaderCell> */}
+                  </StyledHeaderCell>
                   <StyledHeaderCell width="30px" align="center">
                     {langKey && langKey.favourite}
                   </StyledHeaderCell>
                 </TableRow>
               </TableHead>
-              
-               {loadings && (                 
-                  <div>
-      <Backdrop
-        sx={{ color: '#ccc', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loadings}       
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    </div>
-                  
-                  )
-                
-              }
-              {/* {loadings ? (
+              {loadings ? (
                   <TableRow>
                     <TableCell component="th" scope="row" colSpan={7}>
                       <Grid textAlign={"center"} item xs={12} paddingTop={5}>
@@ -278,25 +219,17 @@ const classes = useStyles();
                     </TableCell>
                   </TableRow>)
                 :
-              ( */}
-             
-              <TableBody>
+              (<TableBody>
                 
                 {footballScheduleList &&
                   footballScheduleList.length > 0 ?
                   footballScheduleList.map((item, index) => {
                     let stage=item.stage
-                    let color
-                    if(index%2==0){
-                      color="#33cc75"
-                    } else {
-                      color="#e60039"
-                    }
                     return (
-                      <StyledTableRow key={item.id} >
-                        <StyledTableCell align="left"  style={{color:"#fff", background:color }}>
+                      <StyledTableRow key={item.id} className="xxx" style={{height:"20px!important"}}>
+                        <StyledTableCell align="left" style={{minHeight:"20px!important"}}>
                           <Grid
-                            style={{ display: "flex", alignItems: "center", background:color }}
+                            style={{ display: "flex", alignItems: "center" }}
                           >
                             <Image
                               width={25}
@@ -307,12 +240,12 @@ const classes = useStyles();
                               {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.name:item?.competition?.nameEn}
                             </Typography>
                           </Grid>
-                        </StyledTableCell >
+                        </StyledTableCell>
                         <StyledTableCell align="center">
                           {lang_id==1?stage.match(regex):lang_id==3?stage.match(regex):stage}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {moment(item.startTime).format('HH:MM')}
+                          {item.startTime}
                         </StyledTableCell>
                         <StyledTableCell align="center">
                           {/* {item.homeTeamName} */}
@@ -324,7 +257,7 @@ const classes = useStyles();
                           {/* {item.awayTeamName} */}
                           {item.away_team && lang_id==1?item.away_team && item.away_team.nameEn:item.away_team && lang_id==2?item.away_team && item.away_team.name:item.away_team && lang_id==3?item.away_team && item.away_team.nameEn:''}
                         </StyledTableCell>
-                        {/* <StyledTableCell align="center">--</StyledTableCell> */}
+                        <StyledTableCell align="center">--</StyledTableCell>
                         <StyledTableCell align="center">
                           {item.is_favorite ? (
                             <IconButton onClick={()=>handleFav(item.id)}>
@@ -345,7 +278,7 @@ const classes = useStyles();
                       </StyledTableRow>
                     );
                   })
-                 :!loadings? <>
+                 : <>
                   <TableRow>
                     <TableCell component="th" scope="row" colSpan={7}>
                       <Grid textAlign={"center"} item xs={12} paddingTop={5}>
@@ -360,12 +293,12 @@ const classes = useStyles();
                       </Grid>
                     </TableCell>
                   </TableRow>
-                  </>:''
+                  </>
                   }
 
                
               </TableBody>
-              {/* )} */}
+              )}
             </Table>
           </TableContainer>
 

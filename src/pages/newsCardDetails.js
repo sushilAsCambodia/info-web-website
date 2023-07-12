@@ -48,14 +48,14 @@ const NewsCardDetails = () => {
                                 alignContent="flex-start"
                                 alignItems="center"
                                 overflow="auto">
-                                <Grid item xs={12} sm={12} md={12} xl={12} padding="0px">
+                                <Grid item xs={12} sm={12} md={12} xl={12} padding="0px" >
                                     <Grid item xs={12} paddingTop="21px">
                                         <Typography fontWeight='550' lineHeight="16px"  fontSize="14px" color="#000000">
                                             {newsDetail.title || ''}
                                         </Typography>
                                         <Typography color="#8C8C8C" paddingTop="11px" lineHeight="14px" fontSize="12px">{moment(newsDetail.created_at).format(utils.formatDate)}</Typography>
                                     </Grid>
-                                    <Grid item xs={12} paddingTop="8px">
+                                    <Grid item xs={12} paddingTop="8px"   >
                                         <Image 
                                             src={newsDetail.image?.path}
                                             onError={(e) => e.target.src = '/assets/no-image.png'}

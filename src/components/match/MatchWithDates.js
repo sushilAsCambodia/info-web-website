@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -48,52 +48,44 @@ export default function MatchWithDates(props) {
   const [nextMatchList, setNextMatchList] = useState([]);
   const [pastMatchList, setPastMatchList] = useState([]);
   const [fullMatchList, setFullMatchList] = useState([]);
-
-  useEffect(() => {
-    setLoading(true);
-    setLoading2(true);
+  const [datefilter, setDatefilter] = useState(moment().format("YYYY-MM-DD"));
+  const { customer = {} } = useSelector((state) => state.auth);
+  useEffect(() => {   
     dispatch(
       getScheduleList({
         params: {
           lang_id: utils.convertLangCodeToID(i18n.language),
-          competition_id: "70",
           season: moment().format("YYYY"),
-          isFinish: 0,
+          status: 0,
+          member_ID: customer?.member_ID,        
+          page: 1,                
+          date:datefilter,        
+          descending:'desc',
+          sortBy:'created_at'
         },
         callback: (res) => {
-          console.log('res error:::',res)
+          console.log('res error:::',res && res.data)
           setLoading(false);
-          setNextMatchList(res.data);
+          setLoading2(false);
+          setNextMatchList(res && res.data);
+          setFullMatchList(res && res.data)
         },
       })
     );
-    dispatch(
-      getMatchEndList({
-        params: {
-          lang_id: utils.convertLangCodeToID(i18n.language),
-          competition_id: "70",
-          season: moment().format("YYYY"),
-          isFinish: 1,
-        },
-        callback: (res) => {
-          console.log('res error2:::',res)
-          setLoading2(false)
-          setPastMatchList(res.data);
-        },
-      })
-    );
-  }, []);
+    
+  }, [dateFilter]);
 
-  useEffect(() => {
-    console.log(':::fulllist',pastMatchList.concat(nextMatchList))
-    const fullList = pastMatchList.concat(nextMatchList).filter((item)=>item.startTime.includes(dateFilter));
-    setFullMatchList(fullList);
-    const temp = pastMatchList.concat(nextMatchList).group(item  => item.startTime) 
-    // console.log(':::group list by start time',temp)
+  // useEffect(() => {
+  // //  console.log(':::fulllist',pastMatchList.concat(nextMatchList))
+  //   const fullList = pastMatchList.concat(nextMatchList).filter((item)=>item.startTime.includes(dateFilter));
+  //   setFullMatchList(nextMatchList);
+  //   const temp = pastMatchList.concat(nextMatchList).group(item  => item.startTime) 
+  //   // console.log(':::group list by start time',temp)
 
-    console.log('paginate pages:::',Math.ceil(fullMatchList?.length / 5))
-  }, [pastMatchList, nextMatchList,dateFilter]);
-
+  //   console.log('paginate pages:::',Math.ceil(fullMatchList?.length / 5))
+  // }, [pastMatchList, nextMatchList,dateFilter]);
+  console.log("fullMatchList",fullMatchList)
+console.log("dateFilter",dateFilter)
   return (
     <Grid style={{ position: "relative" }}>
       

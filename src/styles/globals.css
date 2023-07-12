@@ -1229,3 +1229,14 @@ display: none !important;
    .imageWidth img{
     width: 100%;
   }
+
+  #tablehover tbody tr:hover{
+background: #f5f5f5;
+  }
+
+  .MuiTableCell-head{
+    padding: 10px 16px !important;
+  }
+  .MuiTableCell-body{
+    padding: 0px 10px !important;
+  }
