@@ -14,6 +14,8 @@ const utils = {
     MonthYearFormat: 'YYYY MMM',
     DateMonthFormat: 'MMM DD',
     DateMonthFormat2: 'DD MMM',
+    DateMonthFormat3: 'DD',
+    DateMonthFormat4: 'MMM',
     DateWithTime:'LLLL',
     tokenKey: "token",
     baseUrl: process.env.apiUrl,
@@ -94,7 +96,8 @@ const utils = {
           dChecks:moment(d).format("DD"),          
           date:moment(d).format(utils.dateFormate),
           day: moment(d).format(utils.dateLetter),
-          DateMonth: moment(d).format(utils.DateMonthFormat2),
+          DateMonth: moment(d).format(utils.DateMonthFormat3),
+          Month: moment(d).format(utils.DateMonthFormat4),
           ddmmmyyyy:moment(d).format(utils.letterFormat2)
         });
       }
