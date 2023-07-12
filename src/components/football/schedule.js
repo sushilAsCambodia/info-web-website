@@ -247,9 +247,9 @@ const classes = useStyles();
                   <StyledHeaderCell width="100px" align="center">
                     {langKey && langKey.visiting_team}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
+                  {/* <StyledHeaderCell width="100px" align="center">
                     {langKey && langKey.location}
-                  </StyledHeaderCell>
+                  </StyledHeaderCell> */}
                   <StyledHeaderCell width="30px" align="center">
                     {langKey && langKey.favourite}
                   </StyledHeaderCell>
@@ -324,7 +324,7 @@ const classes = useStyles();
                           {/* {item.awayTeamName} */}
                           {item.away_team && lang_id==1?item.away_team && item.away_team.nameEn:item.away_team && lang_id==2?item.away_team && item.away_team.name:item.away_team && lang_id==3?item.away_team && item.away_team.nameEn:''}
                         </StyledTableCell>
-                        <StyledTableCell align="center">--</StyledTableCell>
+                        {/* <StyledTableCell align="center">--</StyledTableCell> */}
                         <StyledTableCell align="center">
                           {item.is_favorite ? (
                             <IconButton onClick={()=>handleFav(item.id)}>
