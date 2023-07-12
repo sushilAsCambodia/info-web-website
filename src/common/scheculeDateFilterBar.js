@@ -23,6 +23,7 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
     <Grid container  justifyContent="center" pb={1} >
     <Grid item xs={11} md={11} container flexWrap="nowrap" sx={{  overflow:"auto"}}  >
       {utils.NextDays(7).map((item, index) => {
+        let month=item.Month
         return (
           <Grid
             key={index}
@@ -32,7 +33,7 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
               fiterByDate(item.date);
               setDateFilter(item.day);
             }}
-            sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'block', textAlign:"center", padding:"0px 25px", textTransform:"uppercase"},alignItems:'center' }}
+            sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'block', textAlign:"center", padding:"0px 25px",}, textTransform:"uppercase" ,alignItems:'center' }}
           >           
             <Typography
               sx={{  fontSize: {xs:"13px",md:"15px"} }}
@@ -47,7 +48,7 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
               sx={{  fontSize: {xs:"13px",md:"15px"} }}
               px={0.75}
             >
-              {item.DateMonth}
+              {item.DateMonth } {langKey && langKey[month]}
             </Typography>
             
           </Grid>
