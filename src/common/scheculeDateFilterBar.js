@@ -33,7 +33,7 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
               fiterByDate(item.date);
               setDateFilter(item.day);
             }}
-            sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'block', textAlign:"center", padding:"0px 25px",},alignItems:'center' }}
+            sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'block', textAlign:"center", padding:"0px 25px",}, textTransform:"uppercase" ,alignItems:'center' }}
           >           
             <Typography
               sx={{  fontSize: {xs:"13px",md:"15px"} }}
