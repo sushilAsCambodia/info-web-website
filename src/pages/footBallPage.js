@@ -235,6 +235,7 @@ export default function FootBallPage() {
           date_option: dateoption,
           page: 1,         
           date:datefilter,
+          competition_ids:competId,
           page: currentPage,
           descending:false,
           sortBy:'startTime'
