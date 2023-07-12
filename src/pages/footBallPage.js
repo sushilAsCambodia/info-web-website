@@ -93,6 +93,7 @@ export default function FootBallPage() {
   const [page, setPage] = useState(1);
   const [footballList, setFootballList] = useState([]);
   const [footballEndList, setFootballEndList] = useState([]);
+  const [footballScheduleListData, setFootballScheduleListData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [competitionList, setCompetitionList] = useState([]);
   const [matchId, setMatchId] = useState("");
@@ -155,18 +156,9 @@ export default function FootBallPage() {
               // setIsFavourite(!isFavourite);
               // toastMessage(langKey[res?.message]);
               //   allFavourite();
-              setLoading(false);
+              //setLoading(false);
               dispatch(
-                getScheduleList({
-                  // params: {
-                  //   lang_id: utils.convertLangCodeToID(i18n.language),
-                  //   season: moment().format("YYYY"),
-                  //   status: 0,
-                  //   member_ID: customer?.member_ID,
-                  //   page: 1,
-                  //   rowsPerPage: 10,
-                  //   page: currentPage,
-                  // },
+                getScheduleList({                 
                   params: {
                     lang_id: utils.convertLangCodeToID(i18n.language),
                     season: moment().format("YYYY"),
@@ -284,7 +276,7 @@ export default function FootBallPage() {
     return competitionIdd.indexOf(e.competitionId) != -1
   })
 
-  const footballlist=selectedName && selectedName.length>0?result:footballScheduleList
+  //const footballlist=selectedName && selectedName.length>0?result:footballScheduleList
 
   const renderSelectGroup = (product) => {
     const items = product.competitions.map((p) => {
@@ -301,7 +293,7 @@ export default function FootBallPage() {
   };
  
   
-  console.log("CompetitionIdd",competitionIdd)
+  console.log("FootballListFootballListFootballListFootballListFootballList",footballList)
 
   //console.log("competitionscompetitionscompetitions", competitions);
   
@@ -416,12 +408,11 @@ export default function FootBallPage() {
       <TabPanel value={value} index={"Schedule"}>
         <Schedule
           dateoptions={(value) => setDateoption(value)}
-          datefilter={(value) => setDatefilter(value)}
-          footballList={footballList}
+          datefilter={(value) => setDatefilter(value)}         
           matchId={(value) => setMatchId(value)}
           handleAddRemove={handleAddRemove}
           lang_id={lang_id}
-          footballScheduleList={footballlist}
+          footballScheduleList={footballList}
           currentpage={currentPage}
           pageChange={(value) => setCurrentPage(value)}
           last_page={last_page}

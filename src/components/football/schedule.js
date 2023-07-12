@@ -26,6 +26,8 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
+
+import CircularProgress from '@mui/material/CircularProgress';
 import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import utils from "@/common/utils";
@@ -61,9 +63,9 @@ export default function Schedule({
 }) {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
-
+  //const [nodata, setNodata] = useState(0);
   const [openModal, setOpenModal] = useState(false);
-
+  console.log("footballScheduleList",footballScheduleList)
   const [age, setAge] = useState("");
   const [loading, setLoading] = useState(false);
   const langKey = useSelector(
@@ -167,7 +169,7 @@ export default function Schedule({
   const handlePageChange = (event, value) => {
     pageChange(value);
   };
-
+  const [open, setOpen] = useState(false);
   const footballLists = footballList?.filter((obj) => {
     return moment(obj.startTime).format(utils.dateFormate) == dateFilter;
   });
@@ -253,7 +255,21 @@ const classes = useStyles();
                   </StyledHeaderCell>
                 </TableRow>
               </TableHead>
-              {loadings ? (
+              
+               {loadings && (                 
+                  <div>
+      <Backdrop
+        sx={{ color: '#ccc', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loadings}       
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </div>
+                  
+                  )
+                
+              }
+              {/* {loadings ? (
                   <TableRow>
                     <TableCell component="th" scope="row" colSpan={7}>
                       <Grid textAlign={"center"} item xs={12} paddingTop={5}>
@@ -262,7 +278,9 @@ const classes = useStyles();
                     </TableCell>
                   </TableRow>)
                 :
-              (<TableBody>
+              ( */}
+             
+              <TableBody>
                 
                 {footballScheduleList &&
                   footballScheduleList.length > 0 ?
@@ -327,7 +345,7 @@ const classes = useStyles();
                       </StyledTableRow>
                     );
                   })
-                 : <>
+                 :!loadings? <>
                   <TableRow>
                     <TableCell component="th" scope="row" colSpan={7}>
                       <Grid textAlign={"center"} item xs={12} paddingTop={5}>
@@ -342,12 +360,12 @@ const classes = useStyles();
                       </Grid>
                     </TableCell>
                   </TableRow>
-                  </>
+                  </>:''
                   }
 
                
               </TableBody>
-              )}
+              {/* )} */}
             </Table>
           </TableContainer>
 
