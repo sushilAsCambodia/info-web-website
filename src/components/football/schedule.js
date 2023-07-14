@@ -286,25 +286,39 @@ const classes = useStyles();
                   footballScheduleList.length > 0 ?
                   footballScheduleList.map((item, index) => {
                     let stage=item.stage
+                    let font_color
+                    let background_color                  
+                    if(item && item.competition && item.competition.background_colour===null){
+                      background_color="#e60039"
+                    } else {
+                      background_color=item.competition.background_colour
+                    }
+                    if(item && item.competition && item.competition.font_colour===null){
+                      font_color="#ffffff"
+                    } else {
+                     font_color=item.competition.font_colour                      
+                    }
                     let color
                     if(index%2==0){
                       color="#33cc75"
                     } else {
                       color="#e60039"
                     }
+                    let given_time=moment(item.startTime).format('HH:mm')
+                
                     return (
                       <StyledTableRow key={item.id} >
-                        <StyledTableCell align="left"  style={{color:"#fff", background:color }}>
+                        <StyledTableCell align="left"  style={{color:font_color, background:background_color }}>
                           <Grid
-                            style={{ display: "flex", alignItems: "center", background:color }}
+                            style={{ display: "flex", alignItems: "center", background:background_color }}
                           >
                             <Image
                               width={25}
                               src={item && item.competition && item.competition.image}
                               alt="football_endtab"
                             />
-                            <Typography mx={1}>
-                              {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.name:item?.competition?.nameEn}
+                            <Typography mx={1}>                           
+                              {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.nameFull:item?.competition?.nameEnFull}
                             </Typography>
                           </Grid>
                         </StyledTableCell >
@@ -312,17 +326,17 @@ const classes = useStyles();
                           {lang_id==1?stage.match(regex):lang_id==3?stage.match(regex):stage}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {moment(item.startTime).format('HH:MM')}
+                          {moment(item.startTime).format('HH:mm')}
                         </StyledTableCell>
                         <StyledTableCell align="center">
                           {/* {item.homeTeamName} */}
                           {/* {item.home_team==null && lang_id==1?'':item.home_team && lang_id==1?:item.homeTeamName} */}
-                          {item.home_team && lang_id==1?item.home_team && item.home_team.nameEn:item.home_team && lang_id==2?item.home_team && item.home_team.name:item.home_team && lang_id==3?item.home_team && item.home_team.nameEn:''}
+                          {item.home_team && lang_id==1?item.home_team && item.home_team.nameEn:item.home_team && lang_id==2?item.home_team && item.home_team.nameFull:item.home_team && lang_id==3?item.home_team && item.home_team.nameEnFull:''}
                         </StyledTableCell>
                         <StyledTableCell align="center">--</StyledTableCell>
                         <StyledTableCell align="center">
                           {/* {item.awayTeamName} */}
-                          {item.away_team && lang_id==1?item.away_team && item.away_team.nameEn:item.away_team && lang_id==2?item.away_team && item.away_team.name:item.away_team && lang_id==3?item.away_team && item.away_team.nameEn:''}
+                          {item.away_team && lang_id==1?item.away_team && item.away_team.nameEn:item.away_team && lang_id==2?item.away_team && item.away_team.nameFull:item.away_team && lang_id==3?item.away_team && item.away_team.nameEnFull:''}
                         </StyledTableCell>
                         {/* <StyledTableCell align="center">--</StyledTableCell> */}
                         <StyledTableCell align="center">
