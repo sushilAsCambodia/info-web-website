@@ -16,6 +16,7 @@ const utils = {
     DateMonthFormat2: 'DD MMM',
     DateMonthFormat3: 'DD',
     DateMonthFormat4: 'MMM',
+    DateMonthFormat5: 'MM',
     DateWithTime:'LLLL',
     tokenKey: "token",
     baseUrl: process.env.apiUrl,
@@ -98,6 +99,7 @@ const utils = {
           day: moment(d).format(utils.dateLetter),
           DateMonth: moment(d).format(utils.DateMonthFormat3),
           Month: moment(d).format(utils.DateMonthFormat4),
+          MonthNum: moment(d).format(utils.DateMonthFormat5),
           ddmmmyyyy:moment(d).format(utils.letterFormat2)
         });
       }

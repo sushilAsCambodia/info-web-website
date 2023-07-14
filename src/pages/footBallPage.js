@@ -281,7 +281,7 @@ export default function FootBallPage() {
 
   const renderSelectGroup = (product) => {
     const items = product.competitions.map((p) => {
-      let name=language_id==1 || language_id==3?p.nameEn:p.name
+      let name=language_id==1 || language_id==3?p.nameEnFull:p.nameFull
       return (
         <MenuItem key={p.id} value={name}>
           <Checkbox checked={selectedName.indexOf(name) > -1} />

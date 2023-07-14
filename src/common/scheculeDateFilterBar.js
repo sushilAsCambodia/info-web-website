@@ -13,10 +13,11 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
     
     const [dateFilter, setDateFilter] = useState(moment().format("ddd"));
     const [days, setDays] = useState("Ten");
-  
+    const { i18n } = useTranslation(); 
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
     var d = new Date();
     const datecheck= moment(d).format('DD')
+    const lang_id= utils.convertLangCodeToID(i18n.language)
 
 
   return (
@@ -44,12 +45,20 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
             <Typography px={0.75} sx={{ fontSize: {xs:"13px",md:"15px"} }}>
               {item.dChecks==datecheck?langKey && langKey.todays: ''}
             </Typography>
+{lang_id==1?
             <Typography
               sx={{  fontSize: {xs:"13px",md:"15px"} }}
               px={0.75}
             >
-              {item.DateMonth } {langKey && langKey[month]}
+              {item.DateMonth }  {langKey && langKey[month]}
             </Typography>
+:
+            <Typography
+              sx={{  fontSize: {xs:"13px",md:"15px"} }}
+              px={0.75}
+            >
+               {item.MonthNum } {langKey && langKey.Month}{item.DateMonth }{langKey && langKey.Day}
+            </Typography>}
             
           </Grid>
         );
