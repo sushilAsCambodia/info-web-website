@@ -228,13 +228,13 @@ const classes = useStyles();
             <Table sx={{ minWidth: 700 }} className={classes.table} id="tablehover"  aria-label="customized table">
               <TableHead size="small">
                 <TableRow>
-                  <StyledHeaderCell width="60px" align="left">
+                  <StyledHeaderCell width="110px" align="left">
                     {langKey && langKey.competition}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="center">
                     {langKey && langKey.rounds}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
+                  <StyledHeaderCell width="60px" align="center">
                     {langKey && langKey.time}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
@@ -249,7 +249,7 @@ const classes = useStyles();
                   {/* <StyledHeaderCell width="100px" align="center">
                     {langKey && langKey.location}
                   </StyledHeaderCell> */}
-                  <StyledHeaderCell width="30px" align="center">
+                  <StyledHeaderCell width="20px" align="center">
                     {langKey && langKey.favourite}
                   </StyledHeaderCell>
                 </TableRow>
@@ -316,7 +316,7 @@ const classes = useStyles();
                               src={item && item.competition && item.competition.image}
                               alt="football_endtab"
                             />
-                            <Typography mx={1}>                           
+                            <Typography mx={1} fontSize={'13px'}>                           
                               {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.nameFull:item?.competition?.nameEnFull}
                             </Typography>
                           </Grid>
