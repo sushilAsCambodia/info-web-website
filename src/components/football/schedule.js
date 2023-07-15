@@ -65,7 +65,6 @@ export default function Schedule({
   const [filter, setFilter] = useState("China National");
   //const [nodata, setNodata] = useState(0);
   const [openModal, setOpenModal] = useState(false);
-  console.log("footballScheduleList",footballScheduleList)
   const [age, setAge] = useState("");
   const [loading, setLoading] = useState(false);
   const langKey = useSelector(

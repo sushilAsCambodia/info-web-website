@@ -40,8 +40,12 @@ const initialState = {
           };
         case 'football/endmatch/fulfilled':         
           return {
-            ...state,
-            footballEndMatchList: action?.payload?.data || [],
+            ...state,           
+            footballEndMatchList: action?.payload?.data,
+            current_page:action?.payload?.current_page,
+            per_page:action?.payload?.per_page,
+            last_page:action?.payload?.last_page,
+            competitions:action?.payload?.competition,
             status:'completed',
             loading: false
           };

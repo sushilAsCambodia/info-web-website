@@ -45,7 +45,7 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
             <Typography px={0.75} sx={{ fontSize: {xs:"13px",md:"15px"} }}>
               {item.dChecks==datecheck?langKey && langKey.todays: ''}
             </Typography>
-{lang_id==1?
+          {lang_id===1?
             <Typography
               sx={{  fontSize: {xs:"13px",md:"15px"} }}
               px={0.75}
@@ -57,7 +57,7 @@ export default function ScheculeDateFilterBar({fiterByDate,day}) {
               sx={{  fontSize: {xs:"13px",md:"15px"} }}
               px={0.75}
             >
-               {item.MonthNum } {langKey && langKey.Month}{item.DateMonth }{langKey && langKey.Day}
+               {item.MonthNum} {langKey && langKey.Month}{item.DateMonth }{langKey && langKey.Day}
             </Typography>}
             
           </Grid>

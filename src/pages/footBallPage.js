@@ -152,7 +152,7 @@ export default function FootBallPage() {
               type: "match_schedule",
             },
             callback: (res) => {
-              console.log("sdsdsdsd", res);
+           
               // setIsFavourite(!isFavourite);
               // toastMessage(langKey[res?.message]);
               //   allFavourite();
@@ -224,7 +224,9 @@ export default function FootBallPage() {
        }
       })
     })
+    console.log("competIdcompetIdff",competId)
     setCompetitionIdd(competId)
+    if(select==="Schedule"){
     dispatch(
       getScheduleList({
         params: {
@@ -246,20 +248,46 @@ export default function FootBallPage() {
         },
       })
     );
+    } else {
+      alert("aaaa")
+      dispatch(
+        getMatchEndList({
+          params: {
+            lang_id: utils.convertLangCodeToID(i18n.language),
+            season: moment().format("YYYY"),
+            isFinish: 1,
+            member_ID: customer?.member_ID,
+            date_option: dateoption,
+            page: 1,         
+            // date:datefilter,
+            competition_ids:competId,
+            page: currentPage,
+            descending:false,
+            sortBy:'startTime'
+          },
+          callback: (res) => {
+            setFootballEndList(res && res.data);
+            setLoading(false);
+          },
+        })
+      );
+    }
+    
+    
 
-    dispatch(
-      getMatchEndList({
-        params: {
-          lang_id: utils.convertLangCodeToID(i18n.language),
-          competition_id: "70",
-          season: moment().format("YYYY"),
-          isFinish: 1,
-        },
-        callback: (res) => {
-          setFootballEndList(res && res.data && res.data.data);
-        },
-      })
-    );
+    // dispatch(
+    //   getMatchEndList({
+    //     params: {
+    //       lang_id: utils.convertLangCodeToID(i18n.language),
+    //       competition_id: "70",
+    //       season: moment().format("YYYY"),
+    //       isFinish: 1,
+    //     },
+    //     callback: (res) => {
+    //       setFootballEndList(res && res.data && res.data.data);
+    //     },
+    //   })
+    // );
     dispatch(
       getCompetitionList({
         params: {
@@ -270,7 +298,7 @@ export default function FootBallPage() {
         },
       })
     );
-  }, [currentPage, dateoption,datefilter,selectedName]);
+  }, [currentPage, dateoption,datefilter,selectedName,select]);
   const lang_id = utils.convertLangCodeToID(i18n.language);
 
   var result = footballScheduleList.filter(function(e) {
@@ -294,10 +322,10 @@ export default function FootBallPage() {
   };
  
   
-  console.log("FootballListFootballListFootballListFootballListFootballList",footballList)
+
 
   //console.log("competitionscompetitionscompetitions", competitions);
-  
+  console.log("FootballEndList",footballEndList,footballList)
   return (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
