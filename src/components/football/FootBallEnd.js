@@ -260,7 +260,7 @@ const useStyles = makeStyles({
                   
                   )}
                 <TableBody>
-                { footballEndList && footballEndList.length>0 && footballEndList.map((item, index) => {
+                { footballEndList && footballEndList.length>0 ? footballEndList.map((item, index) => {
                         let stage=item.stage
                         let font_color
                     let background_color                  
@@ -323,29 +323,26 @@ const useStyles = makeStyles({
                           </StyledTableCell>
                         </StyledTableRow>
                     );
-                  })}
+                  })
+                  :!loadings? <>
+                  <TableRow>
+                    <TableCell component="th" scope="row" colSpan={7}>
+                      <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                        <img
+                          alt="not_found_2"
+                          style={{ height: "50vh" }}
+                          src="./assets/Home/not-found.gif"
+                        />
+                        <Typography textAlign="center">
+                          {langKey && langKey.no_data_found}
+                        </Typography>
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                  </>:''
+                  }
 
-                     {footballEndList && footballEndList.length <= 0 && (  
-                      <TableRow>
-                        <TableCell component="th" scope="row" colSpan={7}>
-                          <Grid
-                            textAlign={"center"}
-                            item
-                            xs={12}
-                            paddingTop={5}
-                          >
-                            <img
-                              alt="not_found_2"
-                              style={{ height: "50vh" }}
-                              src="./assets/Home/not-found.gif"
-                            />
-                            <Typography textAlign="center">
-                              {langKey && langKey.no_data_found } 
-                            </Typography>
-                          </Grid>
-                        </TableCell>
-                      </TableRow>
-                    )}
+                   
 
                 </TableBody>
               </Table>
