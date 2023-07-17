@@ -65,7 +65,6 @@ export default function Schedule({
   const [filter, setFilter] = useState("China National");
   //const [nodata, setNodata] = useState(0);
   const [openModal, setOpenModal] = useState(false);
-  console.log("footballScheduleList",footballScheduleList)
   const [age, setAge] = useState("");
   const [loading, setLoading] = useState(false);
   const langKey = useSelector(
@@ -82,6 +81,7 @@ export default function Schedule({
     left: "70%",
     transform: "translate(-50%, -50%)",
     width: 750,
+    height:'45px!important',
     bgcolor: "background.paper",
     border: "1px solid #DDDDDD",
   };
@@ -136,16 +136,6 @@ export default function Schedule({
       borderLeft: "1px solid #DDDDDD",
     },
   }));
-
-
-
-
-
-
-
-
-
-
 
   function createData(
     icon,
@@ -229,28 +219,28 @@ const classes = useStyles();
             <Table sx={{ minWidth: 700 }} className={classes.table} id="tablehover"  aria-label="customized table">
               <TableHead size="small">
                 <TableRow>
-                  <StyledHeaderCell width="60px" align="left">
+                  <StyledHeaderCell width="170px" align="left">
                     {langKey && langKey.competition}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="50px" align="center">
+                  <StyledHeaderCell width="10px" align="center">
                     {langKey && langKey.rounds}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
+                  <StyledHeaderCell width="10px" align="center">
                     {langKey && langKey.time}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
+                  <StyledHeaderCell width="200px" align="center">
                     {langKey && langKey.home_team}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
+                  <StyledHeaderCell width="10px" align="center">
                     {langKey && langKey.score}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
+                  <StyledHeaderCell width="200px" align="center">
                     {langKey && langKey.visiting_team}
                   </StyledHeaderCell>
                   {/* <StyledHeaderCell width="100px" align="center">
                     {langKey && langKey.location}
                   </StyledHeaderCell> */}
-                  <StyledHeaderCell width="30px" align="center">
+                  <StyledHeaderCell width="10px" align="center">
                     {langKey && langKey.favourite}
                   </StyledHeaderCell>
                 </TableRow>
@@ -317,8 +307,8 @@ const classes = useStyles();
                               src={item && item.competition && item.competition.image}
                               alt="football_endtab"
                             />
-                            <Typography mx={1}>                           
-                              {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.nameFull:item?.competition?.nameEnFull}
+                            <Typography mx={1} fontSize={'13px'}>                           
+                              {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.name:item?.competition?.nameEn}
                             </Typography>
                           </Grid>
                         </StyledTableCell >

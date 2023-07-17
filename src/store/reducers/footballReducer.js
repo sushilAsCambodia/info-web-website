@@ -4,7 +4,8 @@ const initialState = {
     footballScheduleList:[],
     footballEndMatchList:[],
     footballCompetitiomList:[],
-    competitions:[]
+    competitions:[],
+    footballMatchListFavorite:[]
   } 
   const FootballReducer =  (state = initialState, action) => {
     switch (action.type) {
@@ -31,7 +32,31 @@ const initialState = {
           status:'failed',
           latest:[],
           loading: false
-        };       
+        }; 
+        case 'football/favorite/pending':
+          return {
+            ...state, 
+            status:'pending',
+            loading: true
+          };
+        case 'football/favorite/fulfilled':       
+          return {
+            ...state,         
+            footballMatchListFavorite: action?.payload?.data,
+            current_page:action?.payload?.current_page,
+            per_page:action?.payload?.per_page,
+            last_page:action?.payload?.last_page,
+            competitions:action?.payload?.competition,
+            status:'completed',
+            loading: false
+          };
+        case 'football/favorite/rejected':
+          return {
+            ...state, 
+            status:'failed',
+            latest:[],
+            loading: false
+          };       
         case 'football/endmatch/pending':
           return {
             ...state, 
@@ -40,8 +65,12 @@ const initialState = {
           };
         case 'football/endmatch/fulfilled':         
           return {
-            ...state,
-            footballEndMatchList: action?.payload?.data || [],
+            ...state,           
+            footballEndMatchList: action?.payload?.data,
+            current_page:action?.payload?.current_page,
+            per_page:action?.payload?.per_page,
+            last_page:action?.payload?.last_page,
+            competitions:action?.payload?.competition,
             status:'completed',
             loading: false
           };
