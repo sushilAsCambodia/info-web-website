@@ -32,7 +32,7 @@ import {
   getScheduleList,
   getMatchEndList,
   getCompetitionList,
-  addRemoveFavourite,
+  addRemoveFavourite,getMatchListFavorite
 } from "@/store/actions/footballActions";
 
 function TabPanel(props) {
@@ -96,11 +96,13 @@ export default function FootBallPage() {
   const [footballScheduleListData, setFootballScheduleListData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [competitionList, setCompetitionList] = useState([]);
+  const [footballFavoritList, setFootballFavoritList] = useState([]);
+  
   const [matchId, setMatchId] = useState("");
   const [dateoption, setDateoption] = useState("Ten");
   const { customer = {} } = useSelector((state) => state.auth);
   const [datefilter, setDatefilter] = useState(moment().format("YYYY-MM-DD"));
-  
+  const [datefilterEnd, setDatefilterEnd] = useState(moment().format("YYYY-MM-DD"));
   const language_id= utils.convertLangCodeToID(i18n.language)
   const handleChange = (event) => {
     const {
@@ -181,8 +183,13 @@ export default function FootBallPage() {
         )
       : router.push("/login");
   };
+//   function timeAndDate() {
+//     console.log(new Date());
+// }
 
   useEffect(() => {
+    console.log("selectselect",select)
+    //setInterval(timeAndDate, 10000);
     setLoading(true);
   
     // dispatch(
@@ -224,8 +231,33 @@ export default function FootBallPage() {
        }
       })
     })
-    console.log("competIdcompetIdff",competId)
+
     setCompetitionIdd(competId)
+
+    if(select=="End") {      
+      console.log("yertyetretruetru") 
+      dispatch(
+        getMatchEndList({
+          params: {
+            lang_id: utils.convertLangCodeToID(i18n.language),
+            season: moment().format("YYYY"),
+            status: 2,
+            member_ID: customer?.member_ID,           
+            page: 1,         
+            date:datefilterEnd,
+            competition_ids:competId,
+            page: currentPage,
+            descending:false,
+            sortBy:'startTime'
+          },
+          callback: (res) => {
+            setFootballEndList(res && res.data);
+            setLoading(false);
+          },
+        })
+      );
+    } 
+
     if(select==="Schedule"){
     dispatch(
       getScheduleList({
@@ -248,29 +280,30 @@ export default function FootBallPage() {
         },
       })
     );
-    } else {
-      alert("aaaa")
+    } 
+    
+     
+    if(select==="Follow") {
+
       dispatch(
-        getMatchEndList({
+        getMatchListFavorite({
           params: {
-            lang_id: utils.convertLangCodeToID(i18n.language),
-            season: moment().format("YYYY"),
-            isFinish: 1,
-            member_ID: customer?.member_ID,
-            date_option: dateoption,
-            page: 1,         
-            // date:datefilter,
+            lang_id: utils.convertLangCodeToID(i18n.language),                     
+            member_ID: customer?.member_ID,           
+            page: 1,
+            is_favorite:true,   
             competition_ids:competId,
             page: currentPage,
             descending:false,
             sortBy:'startTime'
           },
           callback: (res) => {
-            setFootballEndList(res && res.data);
+            setFootballFavoritList(res && res.data);
             setLoading(false);
           },
         })
       );
+      
     }
     
     
@@ -298,7 +331,7 @@ export default function FootBallPage() {
         },
       })
     );
-  }, [currentPage, dateoption,datefilter,selectedName,select]);
+  }, [currentPage, dateoption,datefilter,selectedName,select,datefilterEnd]);
   const lang_id = utils.convertLangCodeToID(i18n.language);
 
   var result = footballScheduleList.filter(function(e) {
@@ -313,7 +346,7 @@ export default function FootBallPage() {
       return (
         <MenuItem key={p.id} value={name}>
           <Checkbox checked={selectedName.indexOf(name) > -1} />
-          <ListItemText primary={name} />
+          <ListItemText style={{whiteSpace:"initial"}} primary={name} />
         </MenuItem>
       );
     });
@@ -322,10 +355,11 @@ export default function FootBallPage() {
   };
  
   
-
+console.log("datefilter",datefilterEnd)
 
   //console.log("competitionscompetitionscompetitions", competitions);
-  console.log("FootballEndList",footballEndList,footballList)
+  //console.log("FootballEndList",footballEndList,footballList)
+  console.log("footballFavoritList",footballFavoritList,select)
   return (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
@@ -425,14 +459,20 @@ export default function FootBallPage() {
         </Grid>
       </Grid>
       <TabPanel value={value} index={"Follow"}>
-        <FootBallFollow />
+        <FootBallFollow footballFavoritList={footballFavoritList} lang_id={lang_id}    currentpage={currentPage}
+          pageChange={(value) => setCurrentPage(value)}
+          last_page={last_page}
+          loadings={loading} />
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
         <FootBallFollow />
       </TabPanel>
 
       <TabPanel value={value} index={"End"}>
-        <FootBallEnd footballEndList={footballEndList} />
+        <FootBallEnd  datefilters={(value) => setDatefilterEnd(value)} currentpage={currentPage}
+          pageChange={(value) => setCurrentPage(value)}
+          last_page={last_page}
+          loadings={loading}     footballEndList={footballEndList}  lang_id={lang_id} />
       </TabPanel>
       <TabPanel value={value} index={"Schedule"}>
         <Schedule

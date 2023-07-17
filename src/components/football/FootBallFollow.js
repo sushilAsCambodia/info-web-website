@@ -27,6 +27,7 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 import { useState } from "react";
 import utils from "@/common/utils";
 import moment from "moment/moment";
@@ -34,16 +35,34 @@ import Pagination from "@mui/material/Pagination";
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
+import { makeStyles } from '@mui/styles';
 import { useSelector } from "react-redux";
-
 import { Image } from "mui-image";
-export default function FootBallFollow() {
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+    "& .MuiTableCell-root": {
+      border: '1px solid #DDDDDD'
+    }
+  }
+
+});
+
+export default function FootBallFollow({footballFavoritList,lang_id,loadings,
+  footballScheduleList,
+  last_page,
+  currentpage,
+  pageChange}) {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
 
   const [openModal, setOpenModal] = useState(false);
 
   const [age, setAge] = useState("");
+  const handlePageChange = (event, value) => {
+    pageChange(value);
+  };
 
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
@@ -52,6 +71,7 @@ export default function FootBallFollow() {
   const handleCloseModal = (event) => {
     setOpenModal(false);
   };
+  
   const style = {
     position: "absolute",
     top: "300px",
@@ -61,6 +81,26 @@ export default function FootBallFollow() {
     bgcolor: "background.paper",
     border: "1px solid #DDDDDD",
   };
+  
+
+
+
+
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.grey,      
+    },
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+   
+  }));
+
+
+
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: "#DDDDDD",
@@ -68,19 +108,16 @@ export default function FootBallFollow() {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      padding: '10px'
+      padding: "10px",
     },
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+  
   }));
 
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.grey,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
+
 
   const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
     background: "#FF6F31",
@@ -95,6 +132,7 @@ export default function FootBallFollow() {
       borderLeft: "1px solid #DDDDDD",
     },
   }));
+  const classes = useStyles();  
   function createData(img, name, calories, fat, data, id, favourite,awayTeam) {
     return { img, name, calories, fat, data, id, favourite,awayTeam };
   }
@@ -132,7 +170,7 @@ export default function FootBallFollow() {
       'Yamagata Mountain God'
     ),
   ];
-
+  var regex = /\d+/g;
   return (
     <>
       {/* chart modal  */}
@@ -156,27 +194,27 @@ export default function FootBallFollow() {
       <Grid container px={{xs:2,md:0}}>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <Table sx={{ minWidth: 700 }} className={classes.table} id="tablehover"  aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledHeaderCell width="60px">{langKey && langKey.league}</StyledHeaderCell>
+                  <StyledHeaderCell width="170px">{langKey && langKey.competition}</StyledHeaderCell>
 
                   <StyledHeaderCell width="50px" align="center">
                      {langKey && langKey.rounds}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="50px" align="center">
-                  {langKey && langKey.match_time}
+                  {langKey && langKey.time}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
-               {langKey && langKey.state}
+               {langKey && langKey.status}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="50px" align="center">
+                  <StyledHeaderCell width="170px" align="center">
                    {langKey && langKey.home_team}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="100px" align="center">
                  {langKey && langKey.score}
                   </StyledHeaderCell>
-                  <StyledHeaderCell width="100px" align="center">
+                  <StyledHeaderCell width="170px" align="center">
                     {langKey && langKey.visiting_team}
                   </StyledHeaderCell>
                   <StyledHeaderCell width="30px" align="center">
@@ -184,40 +222,74 @@ export default function FootBallFollow() {
                   </StyledHeaderCell>
                 </TableRow>
               </TableHead>
+              {loadings && (                 
+                  <div>
+      <Backdrop
+        sx={{ color: '#ccc', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loadings}       
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </div>
+                  
+                  )}
               <TableBody>
-                {rows.map((item, index) => {
+                {footballFavoritList && footballFavoritList.length>0 && footballFavoritList.map((item, index) => {
+                     let stage=item.stage
+                     let font_color
+                 let background_color                  
+                 if(item && item.competition && item.competition.background_colour===null){
+                   background_color="#e60039"
+                 } else {
+                   background_color=item.competition.background_colour
+                 }
+                 if(item && item.competition && item.competition.font_colour===null){
+                   font_color="#ffffff"
+                 } else {
+                  font_color=item.competition.font_colour                      
+                 }
                   return (
                       <StyledTableRow key={item.id}>
-                        <StyledTableCell align="left" >
-                          <Grid style={{display:'flex'}}>
-                          <Image width={25} src={item.img} alt="football_endtab"/>
-                          <Typography mx={1}>{item.name}</Typography></Grid>
+                      <StyledTableCell align="left"  style={{height:"45px!important",color:font_color, background:background_color }}>
+                          <Grid
+                            style={{ display: "flex", alignItems: "center", background:background_color }}
+                          >
+                            <Image
+                              width={25}
+                              src={item && item.competition && item.competition.image}
+                              alt="football_endtab"
+                            />
+                            <Typography mx={1} fontSize={'13px'}>                           
+                              {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.name:item?.competition?.nameEn}
+                            </Typography>
+                          </Grid>
+                        </StyledTableCell >
+                        
+                        <StyledTableCell align="center">
+                        {lang_id==1?stage.match(regex):lang_id==3?stage.match(regex):stage}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                        {moment(item.startTime).format('HH:mm')}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                        {langKey && langKey.ft}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                        {item.home_team && lang_id==1?item.home_team && item.home_team.nameEn:item.home_team && lang_id==2?item.home_team && item.home_team.nameFull:item.home_team && lang_id==3?item.home_team && item.home_team.nameEnFull:''}
                         </StyledTableCell>
                         
                         <StyledTableCell align="center">
-                          {item.calories} 
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.fat}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.data}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.id} 
-                        </StyledTableCell>
-                        
-                        <StyledTableCell align="center">
-                          {item.fat} <IconButton onClick={() => setOpenModal(true)}>
+                          {/* {item.fat} <IconButton onClick={() => setOpenModal(true)}>
                             <Icon icon="ic:baseline-live-tv" color="#03C12D" />
-                          </IconButton>
+                          </IconButton> */}
+                         --
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.awayTeam}
-                         
+                      
+                        {item.away_team && lang_id==1?item.away_team && item.away_team.nameEn:item.away_team && lang_id==2?item.away_team && item.away_team.nameFull:item.away_team && lang_id==3?item.away_team && item.away_team.nameEnFull:''}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.favourite ? (
+                          {item.is_favorite ? (
                             <IconButton>
                               {" "}
                               <Icon
@@ -237,7 +309,7 @@ export default function FootBallFollow() {
                   );
                 })}
 
-{rows?.length < 0 && (  
+{footballFavoritList?.length < 0 && (  
                       <TableRow>
                         <TableCell component="th" scope="row" colSpan={7}>
                           <Grid
@@ -263,7 +335,7 @@ export default function FootBallFollow() {
             </Table>
           </TableContainer>
 
-          {rows?.length > 0 && (
+          {/* {footballFavoritList?.length > 0 && (
             <Grid
               item
               xs={12}
@@ -275,6 +347,30 @@ export default function FootBallFollow() {
             >
               <Stack spacing={2} sx={{ textAlign: "center" }}>
                 <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" />
+              </Stack>
+            </Grid>
+          )} */}
+
+{footballFavoritList && footballFavoritList.length > 0 && (
+            <Grid
+              item
+              xs={12}
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              paddingTop={3}
+              paddingBottom={3}
+            >
+              <Stack spacing={2} sx={{ textAlign: "center" }}>
+                {/* <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" /> */}
+                <Pagination
+                  count={last_page}
+                  page={currentpage}
+                  onChange={handlePageChange}
+                  variant="outlined"
+                  shape="rounded"
+                  className="announce-pagination"
+                />
               </Stack>
             </Grid>
           )}
