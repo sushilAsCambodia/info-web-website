@@ -171,6 +171,7 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
     ),
   ];
   var regex = /\d+/g;
+  console.log("footballFavoritList44",footballFavoritList && footballFavoritList.length)
   return (
     <>
       {/* chart modal  */}
@@ -234,7 +235,7 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
                   
                   )}
               <TableBody>
-                {footballFavoritList && footballFavoritList.length>0 && footballFavoritList.map((item, index) => {
+                {footballFavoritList && footballFavoritList.length>0 ? footballFavoritList.map((item, index) => {
                      let stage=item.stage
                      let font_color
                  let background_color                  
@@ -307,11 +308,28 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
                         </StyledTableCell>
                       </StyledTableRow>
                   );
-                })}
+                })
+                :!loadings? <>
+                <TableRow>
+                  <TableCell component="th" scope="row" colSpan={7}>
+                    <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                      <img
+                        alt="not_found_2"
+                        style={{ height: "50vh" }}
+                        src="./assets/Home/not-found.gif"
+                      />
+                      <Typography textAlign="center">
+                        {langKey && langKey.no_data_found}
+                      </Typography>
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+                </>:''
+                }
 
-{footballFavoritList?.length < 0 && (  
+{/* {footballFavoritList && footballFavoritList.length ==0 && (  
                       <TableRow>
-                        <TableCell component="th" scope="row" colSpan={7}>
+                        <TableCell component="th" scope="row" colSpan={8}>
                           <Grid
                             textAlign={"center"}
                             item
@@ -329,7 +347,7 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
                           </Grid>
                         </TableCell>
                       </TableRow>
-                    )}
+                    )} */}
 
               </TableBody>
             </Table>
