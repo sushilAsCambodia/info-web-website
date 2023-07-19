@@ -14,6 +14,7 @@ import {
   TableRow,
   InputAdornment,
   Icon,
+  Button,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import moment from "moment";
@@ -381,19 +382,27 @@ export default function FootBallPage() {
 
   //const footballlist=selectedName && selectedName.length>0?result:footballScheduleList
 
+
+
   const renderSelectGroup = (product) => {
     const items = product.competitions.map((p) => {
       let name=language_id==1 || language_id==3?p.nameEnFull:p.nameFull
       return (
-        <MenuItem key={p.id} value={name}>
+       
+     
+         <MenuItem key={p.id} value={name}>
           <Checkbox checked={selectedName.indexOf(name) > -1} />
           <ListItemText style={{whiteSpace:"initial"}} primary={name} />
         </MenuItem>
+    
+        
       );
     });
     //return [<ListSubheader>{product.country}</ListSubheader>, items];
     return [items];
   }; 
+
+
   console.log("FootballLiveScoreLis",footballLiveScoreList)
 
   return (
@@ -455,8 +464,8 @@ export default function FootBallPage() {
           </MenuItem>
         </Grid>
         {select!=="Score" &&
-        <Grid item xs={2}>
-          <FormControl fullWidth>
+        <Grid item xs={2} >
+          <FormControl fullWidth className="ul-class">
           <InputLabel id="demo-multiple-checkbox-label">{langKey && langKey.select_event}</InputLabel>
             <Select
               labelId="demo-multiple-checkbox-label"
@@ -464,13 +473,27 @@ export default function FootBallPage() {
               multiple
               value={selectedName}
               onChange={(e) => handleChange(e)}
-            
-              input={<OutlinedInput label="Select event" />}
+           
+              input={<OutlinedInput label="Select event"  />}
               renderValue={(selected) => selected.join(", ")}
               MenuProps={MenuProps}
             >
-              {competitions && competitions.length>0 && competitions.map((p) => renderSelectGroup(p))}
+             <div className="grid-class" style={{ display:'grid', gridTemplateColumns:"repeat(3, minmax(0, 1fr))",gap: '4px', paddingBottom:"30px"}}>
+                {competitions && competitions.length>0 && competitions.map((p) => renderSelectGroup(p))}
+              </div>
+              <div className="" style={{ display:'grid',  gridTemplateColumns:"repeat(3, minmax(0, 1fr))",gap: '4px', padding: '6px 10px', position:'sticky', left:"0", right:'0', bottom:'0', background:'#fff'}} >
+                <Button style={{textTransform:"lowercase", fontSize:"12px",color:"#fff"}} variant="contained" size="small">
+                  select all 
+                </Button>
+                <Button style={{textTransform:"lowercase", fontSize:"12px", color:"#fff"}} size="small" variant="contained" color="error">
+                  clear all  
+                </Button>
+                <Button style={{textTransform:"lowercase", fontSize:"12px",color:"#fff"}} className="" variant="contained" color="success" size="small">
+                  confirm 
+                </Button>
+              </div>
             </Select>
+
 
            
           </FormControl>
