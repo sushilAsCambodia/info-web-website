@@ -237,6 +237,7 @@ export default function FootBallPage() {
     //       setLoading(false)  },
     //   })
     // );
+    
     let competId=[]
     competitions && competitions.length>0 && competitions.map((ids,index)=>{
       
@@ -379,6 +380,14 @@ export default function FootBallPage() {
     return competitionIdd.indexOf(e.competitionId) != -1
   })
 
+//   const competitionData=competitions && competitions.length>0 && competitions.map((competData,index)=>{
+// console.log("competData",competData)
+// competData.isTrue=true
+//   })
+//   competitions && competitions.length>0 && competitions.forEach(object => {
+//     object.isTrue = true;
+//   });
+// console.log("competitionData",competitions)
   //const footballlist=selectedName && selectedName.length>0?result:footballScheduleList
 
   const renderSelectGroup = (product) => {
@@ -394,6 +403,7 @@ export default function FootBallPage() {
     //return [<ListSubheader>{product.country}</ListSubheader>, items];
     return [items];
   }; 
+
   console.log("FootballLiveScoreLis",footballLiveScoreList)
 
   return (
