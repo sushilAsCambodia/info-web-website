@@ -24,6 +24,7 @@ import { useTranslation } from "react-i18next";
 import Schedule from "@/components/football/schedule";
 import TitleBreadCrumbs from "@/common/TitleBreadCrumbs";
 import FootBallFollow from "@/components/football/FootBallFollow";
+import FootBallLiveScore from "@/components/football/FootBallLiveScore";
 import FootBallEnd from "@/components/football/FootBallEnd";
 import DataLoading from "@/components/DataLoading";
 import utils from "@/common/utils";
@@ -32,7 +33,7 @@ import {
   getScheduleList,
   getMatchEndList,
   getCompetitionList,
-  addRemoveFavourite,getMatchListFavorite
+  addRemoveFavourite,getMatchListFavorite,getMatchLiveScoreList
 } from "@/store/actions/footballActions";
 
 function TabPanel(props) {
@@ -115,6 +116,8 @@ export default function FootBallPage() {
     );
   };
   const [value, setValue] = useState("");
+  const [footballLiveScoreList, setFootballLiveScoreList] = useState([]);
+  
   const [currentPage, setCurrentPage] = useState(page);
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
@@ -183,12 +186,25 @@ export default function FootBallPage() {
         )
       : router.push("/login");
   };
-//   function timeAndDate() {
-//     console.log(new Date());
-// }
+  function liveScore() {
+    dispatch(
+      getMatchLiveScoreList({
+        params: {
+          lang_id: utils.convertLangCodeToID(i18n.language),                     
+          member_ID: customer?.member_ID,          
+          sortBy:'startTime'
+        },
+        callback: (res) => {
+          setFootballLiveScoreList(res && res.data);
+          setLoading(false);
+        },
+      })
+    );
+}
 
   useEffect(() => {
     console.log("selectselect",select)
+    //setInterval(timeAndDate, 10000);
     //setInterval(timeAndDate, 10000);
     setLoading(true);
   
@@ -234,8 +250,8 @@ export default function FootBallPage() {
 
     setCompetitionIdd(competId)
 
-    if(select=="End") {      
-      console.log("yertyetretruetru") 
+    if(select=="End") {    
+     
       dispatch(
         getMatchEndList({
           params: {
@@ -256,9 +272,8 @@ export default function FootBallPage() {
           },
         })
       );
-    } 
-
-    if(select==="Schedule"){
+    }  else if(select==="Schedule"){
+      
     dispatch(
       getScheduleList({
         params: {
@@ -280,10 +295,28 @@ export default function FootBallPage() {
         },
       })
     );
-    } 
-    
-     
-    if(select==="Follow") {
+    }  else if(select==="Follow") {
+      
+      dispatch(
+        getMatchListFavorite({
+          params: {
+            lang_id: utils.convertLangCodeToID(i18n.language),                     
+            member_ID: customer?.member_ID,           
+            page: 1,
+            is_favorite:true,   
+            competition_ids:competId,
+            page: currentPage,
+            descending:false,
+            sortBy:'startTime'
+          },
+          callback: (res) => {
+            setFootballFavoritList(res && res.data);
+            setLoading(false);
+          },
+        })
+      );
+      
+    } else if(select==="Score") {
 
       dispatch(
         getMatchListFavorite({
@@ -303,6 +336,14 @@ export default function FootBallPage() {
           },
         })
       );
+
+      liveScore()
+      const interval = setInterval(() => {
+        liveScore()
+      }, 10000);
+      return () => clearInterval(interval);
+      //setInterval(timeAndDate, 10000);
+      //setInterval(timeAndDate, 10000);
       
     }
     
@@ -352,14 +393,9 @@ export default function FootBallPage() {
     });
     //return [<ListSubheader>{product.country}</ListSubheader>, items];
     return [items];
-  };
- 
-  
-console.log("datefilter",datefilterEnd)
+  }; 
+  console.log("FootballLiveScoreLis",footballLiveScoreList)
 
-  //console.log("competitionscompetitionscompetitions", competitions);
-  //console.log("FootballEndList",footballEndList,footballList)
-  console.log("footballFavoritList",footballFavoritList,select)
   return (
     <>
       {/* <Typography variant="h5" fontWeight="bold">
@@ -418,7 +454,7 @@ console.log("datefilter",datefilterEnd)
             {langKey && langKey.schedule}
           </MenuItem>
         </Grid>
-
+        {select!=="Score" &&
         <Grid item xs={2}>
           <FormControl fullWidth>
           <InputLabel id="demo-multiple-checkbox-label">{langKey && langKey.select_event}</InputLabel>
@@ -436,27 +472,11 @@ console.log("datefilter",datefilterEnd)
               {competitions && competitions.length>0 && competitions.map((p) => renderSelectGroup(p))}
             </Select>
 
-            {/* <Select
-          value={competition}
-          onChange={(e)=>setCompetition(e.target.value)}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-          sx={{ paddingLeft: "5px", fontSize: {xs:"12px",md:"14px"} }}
-          startAdornment={
-            <InputAdornment position="start">
-              <Icon icon="material-symbols:calendar-today" width={20} />
-            </InputAdornment>
-          }
-        >
-          <MenuItem value="">
-            <em>   {langKey && langKey.select_event}</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select> */}
+           
           </FormControl>
         </Grid>
+}
+
       </Grid>
       <TabPanel value={value} index={"Follow"}>
         <FootBallFollow footballFavoritList={footballFavoritList} lang_id={lang_id}    currentpage={currentPage}
@@ -465,7 +485,10 @@ console.log("datefilter",datefilterEnd)
           loadings={loading} />
       </TabPanel>
       <TabPanel value={value} index={"Score"}>
-        <FootBallFollow />
+        <FootBallLiveScore footballFavoritList={footballFavoritList} lang_id={lang_id} footballLiveScoreList={footballLiveScoreList && footballLiveScoreList.live_scores}   currentpage={currentPage}
+          pageChange={(value) => setCurrentPage(value)}
+          last_page={last_page}
+          loadings={loading}  />
       </TabPanel>
 
       <TabPanel value={value} index={"End"}>

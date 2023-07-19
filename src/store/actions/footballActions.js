@@ -95,27 +95,27 @@ export const getMatchListFavorite = createAsyncThunk(
     }
   }
 );
-// export const getMatchEndList = createAsyncThunk(
-//   "football/endmatch",
-//   async ({ params = {}, callback }) => {
-//     try {
-//       const response = await api.get('lotto/data44-aistat/match-schedules', params);
-//       const { data, status } = response;
-//       data["status_code"] = status;
-//       if (typeof callback == "function") {
-//         callback(data);
-//       }
-//       return data;
-//     } catch (error) {
-//       const { status, data } = error.response;
-//       data["status_code"] = status;
-//       if (typeof callback == "function") {
-//         callback(data);
-//       }
-//       return data;
-//     }
-//   }
-// );
+export const getMatchLiveScoreList = createAsyncThunk(
+  "football/livescore",
+  async ({ params = {}, callback }) => {
+    try {
+      const response = await api.get('lotto/data44-aistat/match-live-score', params);
+      const { data, status } = response;
+      data["status_code"] = status;
+      if (typeof callback == "function") {
+        callback(data);
+      }
+      return data;
+    } catch (error) {
+      const { status, data } = error.response;
+      data["status_code"] = status;
+      if (typeof callback == "function") {
+        callback(data);
+      }
+      return data;
+    }
+  }
+);
 
 export const getCompetitionList = createAsyncThunk(
   "football/competition",
