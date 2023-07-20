@@ -257,7 +257,7 @@ export default function FootBallPage() {
           },
           callback: (res) => {
             setFootballList(res && res.data);
-
+            setCompetition(res && res.competition);
             const arrayName = [];
             const competeName =
               res &&
@@ -276,7 +276,7 @@ export default function FootBallPage() {
                   });
               });
             setSelectedName(arrayName);
-            setCompetition(competeName);
+           
 
             setLoading(false);
           },
