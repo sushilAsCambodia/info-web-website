@@ -49,10 +49,11 @@ const useStyles = makeStyles({
   }
 
 });
-  export default function FootBallEnd({footballEndList,lang_id,loadings,datefilters,fiterByDate }) {
+
+/********FootBall Completed */
+  export default function FootBallEnd({footballEndList,lang_id,loadings,datefilters,last_page,pageChange,currentpage,fiterByDate }) {
     const [select, setSelect] = useState(0);
-    const [filter, setFilter] = useState("China National");
-    const [currentPage, setCurrentPage] = useState(1);
+    const [filter, setFilter] = useState("China National");  
     const [rowPerPage, setRowPerPage] = useState(20);
   
     const [dateFilter, setDateFilter] = useState(moment(d).format('DD'));
@@ -65,6 +66,7 @@ const useStyles = makeStyles({
     const handleChange = (event) => {
       setAge(event.target.value);
     };
+    
   
     const style = {
       position: "absolute",
@@ -150,8 +152,8 @@ const useStyles = makeStyles({
       return result;
     }
    
-    const handlePageChange = (event, value) => {
-      setCurrentPage(value);
+    const handlePageChange = (event, value) => {      
+      pageChange(value);
     };
     var regex = /\d+/g;
     const pageCount = Math.ceil(footballEndList?.length / 20);
@@ -361,13 +363,21 @@ const useStyles = makeStyles({
             >
               <Stack spacing={2} sx={{ textAlign: "center" }}>
                 {/* <Pagination count={5} variant="outlined" shape="rounded" className="announce-pagination" /> */}
-                <Pagination
+                {/* <Pagination
           count={pageCount}
           page={currentPage}
           onChange={handlePageChange}
           variant="outlined"
           shape="rounded"
-        />
+        /> */}
+         <Pagination
+                  count={last_page}
+                  page={currentpage}
+                  onChange={handlePageChange}
+                  variant="outlined"
+                  shape="rounded"
+                  className="announce-pagination"
+                />
               </Stack>
             </Grid>
           )}
