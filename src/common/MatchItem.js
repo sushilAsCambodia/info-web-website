@@ -14,9 +14,10 @@ import StarIcon from "@/components/svg/star";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { Image } from "mui-image";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import utils from "@/common/utils";
 export default function MatchItem(props) {
   const { details, index } = props;
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(false);
@@ -34,7 +35,7 @@ export default function MatchItem(props) {
     return {date,time};
   };
   useEffect(() => {}, []);
-
+  const lang_id= utils.convertLangCodeToID(i18n.language)
   return (
     <Grid p={1}>
       <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px">
@@ -74,14 +75,14 @@ export default function MatchItem(props) {
           }}
         >
           <Grid container justifyContent="space-between">
-            <Typography>{details.homeTeamName}</Typography>
-            <Typography>{details.awayTeamName}</Typography>
+            <Typography>{details.home_team && lang_id==1?details.home_team && details.home_team.nameEn:details.home_team && lang_id==2?details.home_team && details.home_team.nameFull:details.home_team && lang_id==3?details.home_team && details.home_team.nameEnFull:''}</Typography>
+            <Typography>  {details.away_team && lang_id==1?details.away_team && details.away_team.nameEn:details.away_team && lang_id==2?details.away_team && details.away_team.nameFull:details.away_team && lang_id==3?details.away_team && details.away_team.nameEnFull:''}</Typography>
           </Grid>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item xs={2}>
               <Grid display="flex" justifyContent="space-between" marginTop={1}>
                 <Grid position="relative" container>
-                  <Grid
+                  {/* <Grid
                     sx={{
                       background: "#FFE0D2",
                       color: "#FFE0D2",
@@ -90,8 +91,10 @@ export default function MatchItem(props) {
                       left: "-8px",
                     }}
                   >&nbsp;
-                  </Grid>
-                  <Image width="20px" alt="team" src="./assets/Logo/team.png" />{" "}
+                  </Grid> */}
+                  {details && details.home_team && details.home_team.image?
+                  <Image width="20px" alt="team" src={details && details.home_team && details.home_team.image} />
+                  :<Image width="20px" alt="team" src="./assets/Logo/team.png" />}{" "}
                 </Grid>
                 <Typography>{splitScore(details.finalScore)[0]}</Typography>
               </Grid>
@@ -120,13 +123,10 @@ export default function MatchItem(props) {
               <Grid display="flex" justifyContent="space-between" marginTop={1}>
                 <Typography>{splitScore(details.finalScore)[1]}</Typography>
                 <Grid position="relative" container justifyContent="flex-end">
-                  <Image
-                    width="20px"
-                    alt="team"
-                    src="./assets/Logo/team.png"
-                    style={{ zIndex: "1" }}
-                  />{" "}
-                  <Grid
+                {details && details.away_team && details.away_team.image?
+                  <Image width="20px" alt="team" src={details && details.away_team && details.away_team.image} />
+                  :<Image width="20px" alt="team" src="./assets/Logo/team.png" />}{" "}
+                  {/* <Grid
                     sx={{
                       background: "#FFE0D2",
                       color: "#FFE0D2",
@@ -135,8 +135,8 @@ export default function MatchItem(props) {
                       right: "-8px",
                     }}
                   >
-                    f
-                  </Grid>
+                    &nbsp;
+                  </Grid> */}
                 </Grid>
               </Grid>
             </Grid>

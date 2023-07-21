@@ -19,9 +19,9 @@ export default function DateFilterBar(props) {
       setFilterDate(moment(new Date()).format(utils.dateFormate))
     }, []);
   return (
-    <Grid container  justifyContent="center" pb={1} >
+    <Grid container  justifyContent="center" pb={1} className='StickyDate' >
     <Grid item xs={12} md={12} container flexWrap="nowrap" sx={{ overflow:"auto"}}  >
-      {utils.dataRangeLastNext(6).map((item, index) => {
+      {utils.dataRangeLastNext(3).map((item, index) => {
         return (
           <Grid
             key={index}
@@ -33,12 +33,12 @@ export default function DateFilterBar(props) {
             sx={{ borderRight: "1px solid #ddd",whiteSpace:'nowrap',cursor:'pointer',display:{xs:'',md:'flex'},alignItems:'center',textAlign:'center'}}
           >
             <Typography
-              sx={{ fontWeight: "bold", fontSize: {xs:"14px",md:"16px"} }}
+              sx={{ fontWeight: "bold", fontSize: {xs:"12px",md:"13px"} }}
               px={0.5}
             >
               {item.day}
             </Typography>
-            <Typography px={0.5} sx={{ fontSize: {xs:"14px",md:"16px"} }}>
+            <Typography px={0.5} sx={{ fontSize: {xs:"12px",md:"13px"} }}>
               {item.DateMonth}
             </Typography>
           </Grid>

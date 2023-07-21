@@ -21,6 +21,8 @@ import moment from "moment/min/moment-with-locales";
 import utils from "@/common/utils";
 import MatchItem from "@/common/MatchItem";
 import DateFilterBar from "@/common/dateFilterBar";
+import api from "@/services/http";
+import axios from "axios";
 import {
   getScheduleList,
   getMatchEndList,
@@ -50,28 +52,59 @@ export default function MatchWithDates(props) {
   const [fullMatchList, setFullMatchList] = useState([]);
   const [datefilter, setDatefilter] = useState(moment().format("YYYY-MM-DD"));
   const { customer = {} } = useSelector((state) => state.auth);
+  const  footballScheduleList = useSelector((state) => state.football.footballScheduleList);
+  /**** Render match data */
+  async function scheduleData(dateFilters){
+    var currenDate = moment(new Date()).format(utils.dateFormate);    
+    setLoading(true);
+    setLoading2(true);
+    console.log("dateFiltersdateFilters",dateFilters)
+   const params= {
+      lang_id: utils.convertLangCodeToID(i18n.language),
+      season: moment().format("YYYY"),
+      status: dateFilters<currenDate?2:0,
+      member_ID: customer?.member_ID,        
+      page: 1,                
+      date:dateFilters,        
+      descending:'desc',
+      sortBy:'created_at'
+    }
+    try {
+      const response = await api.get('lotto/data44-aistat/match-schedules', params);
+      console.log("responseresponseresponse",response?.data?.data?.data?.data)
+      setNextMatchList(response?.data?.data?.data?.data);
+      setFullMatchList(response?.data?.data?.data?.data)
+      setLoading(false);
+      setLoading2(false);
+    }catch (error) {
+     return console.log("error")
+    }
+    // dispatch(
+    //   getScheduleList({
+    //     params: {
+    //       lang_id: utils.convertLangCodeToID(i18n.language),
+    //       season: moment().format("YYYY"),
+    //       status: 0,
+    //       member_ID: customer?.member_ID,        
+    //       page: 1,                
+    //       date:dateFilters,        
+    //       descending:'desc',
+    //       sortBy:'created_at'
+    //     },
+    //     callback: (res) => {
+    //       console.log('res error:::',res && res.data)
+    //       //setNextMatchList(res && res.data);
+
+    //       // setLoading(false);
+    //       // setLoading2(false);
+    //       // setNextMatchList(res && res.data);
+    //       //setFullMatchList(res && res.data)
+    //     },
+    //   })
+    // );
+  }
   useEffect(() => {   
-    dispatch(
-      getScheduleList({
-        params: {
-          lang_id: utils.convertLangCodeToID(i18n.language),
-          season: moment().format("YYYY"),
-          status: 0,
-          member_ID: customer?.member_ID,        
-          page: 1,                
-          date:datefilter,        
-          descending:'desc',
-          sortBy:'created_at'
-        },
-        callback: (res) => {
-          console.log('res error:::',res && res.data)
-          setLoading(false);
-          setLoading2(false);
-          setNextMatchList(res && res.data);
-          setFullMatchList(res && res.data)
-        },
-      })
-    );
+    scheduleData(dateFilter)
     
   }, [dateFilter]);
 
@@ -84,8 +117,9 @@ export default function MatchWithDates(props) {
 
   //   console.log('paginate pages:::',Math.ceil(fullMatchList?.length / 5))
   // }, [pastMatchList, nextMatchList,dateFilter]);
-  console.log("fullMatchList",fullMatchList)
+  console.log("footballScheduleList",footballScheduleList)
 console.log("dateFilter",dateFilter)
+
   return (
     <Grid style={{ position: "relative" }}>
       
@@ -101,11 +135,11 @@ console.log("dateFilter",dateFilter)
       >
         <DateFilterBar setFilterDate={setDateFilter} />
         <Grid >
-          {fullMatchList && !loading && !loading2 ?
+          {fullMatchList && fullMatchList.length>0 && !loading && !loading2 ?
             fullMatchList.splice(0,5).map((item, index) => {
               return <MatchItem details={item} index={index} />;
             }):
-            <LoadingBackDrop loading={true}/>
+            <LoadingBackDrop loading={loading}/>
             }
 
           {fullMatchList && fullMatchList?.length === 0 ? <DataNotFound />:''}
