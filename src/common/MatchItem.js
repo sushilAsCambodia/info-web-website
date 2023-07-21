@@ -37,8 +37,8 @@ export default function MatchItem(props) {
   useEffect(() => {}, []);
   const lang_id= utils.convertLangCodeToID(i18n.language)
   return (
-    <Grid p={1}>
-      <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px">
+    <Grid p={1} >
+      <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px" >
         <Grid
           borderBottom="1px solid #ddd"
           item
@@ -49,7 +49,7 @@ export default function MatchItem(props) {
           alignItems="center"
         >
           <Typography color="#8C8C8C">
-             {details.competition.nameEn}
+          {lang_id==1?details?.competition?.nameEn:lang_id==2?details?.competition?.name:details?.competition?.nameEn}      
           </Typography>
           <IconButton
             onClick={() => {

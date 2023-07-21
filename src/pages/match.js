@@ -123,19 +123,7 @@ export default function Match() {
             justifyContent="center"
             alignItems="center"
           >
-            <Icon
-              color="white"
-             
-              width={25}
-              icon="material-symbols:refresh"
-            />
-            <Divider
-              sx={{
-                border: "1px solid white",
-              }}
-              orientation="vertical"
-              flexItem
-            />
+          
 
             <Icon
               color="white"
