@@ -36,8 +36,8 @@ export default function MatchItem(props) {
   useEffect(() => {}, []);
 
   return (
-    <Grid p={1}>
-      <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px">
+    <Grid p={1} >
+      <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px" >
         <Grid
           borderBottom="1px solid #ddd"
           item

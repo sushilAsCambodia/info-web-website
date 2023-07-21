@@ -26,9 +26,9 @@ const Footer = () => {
         case  '/profile':
             selectedTab = 2;
             break;
-        // case  '/match':
-        //     selectedTab = 3;
-        //     break;
+        case  '/match':
+            selectedTab = 3;
+            break;
         default:
             break;
     }
@@ -58,7 +58,7 @@ const Footer = () => {
                         }
                     }}
                     onClick={() => router.push('/lottery')} label={langKey && langKey.lottery} icon={<LotterIcon  color={value == 1?'#FF0000':'#8C8C8C'} />} />
-                {/* <BottomNavigationAction 
+                <BottomNavigationAction 
                     sx={{
                         '.MuiBottomNavigationAction-label' : {
                             whiteSpace:'nowrap'
@@ -67,7 +67,7 @@ const Footer = () => {
                     onClick={() => router.push('/match')} 
                     label={langKey && langKey.match} 
                     icon={<MatchIcon color={value == 3?'#FF0000':'#8C8C8C'}/>}
-                     /> */}
+                     />
                 <BottomNavigationAction 
                     sx={{
                         '.MuiBottomNavigationAction-label' : {

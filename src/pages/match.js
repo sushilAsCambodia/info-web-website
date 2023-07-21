@@ -110,7 +110,7 @@ export default function Match() {
           >
             <Tab className="matchtab" label={langKey?.favourite} {...a11yProps(0)} />
             <Tab className="matchtab" label={langKey?.foot_ball} {...a11yProps(1)} />
-            <Tab className="matchtab" label={langKey?.basket_ball} {...a11yProps(2)} />
+            {/* <Tab className="matchtab" label={langKey?.basket_ball} {...a11yProps(2)} /> */}
           </Tabs>
           <Grid
             width="60px"
@@ -123,19 +123,7 @@ export default function Match() {
             justifyContent="center"
             alignItems="center"
           >
-            <Icon
-              color="white"
-             
-              width={25}
-              icon="material-symbols:refresh"
-            />
-            <Divider
-              sx={{
-                border: "1px solid white",
-              }}
-              orientation="vertical"
-              flexItem
-            />
+          
 
             <Icon
               color="white"

@@ -94,13 +94,17 @@ console.log("dateFilter",dateFilter)
         xs={12}
         style={{
           padding: 10,
+          paddingTop:"0px",
           position: "absolute",
           top: 50,
           width: "100%",
         }}
       >
+        
         <DateFilterBar setFilterDate={setDateFilter} />
-        <Grid >
+    
+        
+        <Grid className="matchitem-box">
           {fullMatchList && !loading && !loading2 ?
             fullMatchList.splice(0,5).map((item, index) => {
               return <MatchItem details={item} index={index} />;

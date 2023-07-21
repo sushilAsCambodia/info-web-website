@@ -83,7 +83,7 @@ useEffect(() => {
 },[selected]);
   return (
     <Grid container>
-      <Grid p={1} item xs={12} container overflow="auto" flexWrap="nowrap">
+      <Grid p={1} item xs={12} container overflow="auto" style={{justifyContent:'center', borderBottom:'2px solid #dddddd', marginBottom:'10px'}} flexWrap="nowrap">
         <Grid px={1}>
           <Button
             variant="outlined"
@@ -97,7 +97,7 @@ useEffect(() => {
             <Typography>Select All</Typography>
           </Button>
         </Grid>
-        <Grid px={1}>
+        {/* <Grid px={1}>
           <Button
             variant="outlined"
             className={`${
@@ -109,7 +109,8 @@ useEffect(() => {
           >
             <Typography>Reverse Selection</Typography>
           </Button>
-        </Grid>
+        </Grid> */}
+        
         <Grid px={1}>
           <Button
             variant="outlined"
