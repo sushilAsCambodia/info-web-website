@@ -136,7 +136,7 @@ console.log("dateFilter",dateFilter)
       >
         
         <DateFilterBar setFilterDate={setDateFilter} />
-        <Grid style={{marginTop:"48px"}}>
+        <Grid className="matchitem-box">
           {fullMatchList && fullMatchList.length>0 && !loading && !loading2 ?
             fullMatchList.splice(0,5).map((item, index) => {
               return <MatchItem key={index} details={item} index={index} />;
