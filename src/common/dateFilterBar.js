@@ -39,7 +39,7 @@ export default function DateFilterBar(props) {
       setSelectedDate(date);
     }
 
-
+    const [startDate, setStartDate] = useState(new Date()); 
 
       
 
@@ -108,8 +108,48 @@ export default function DateFilterBar(props) {
           ddmmmyyyy:moment(d).format(utils.letterFormat2),
         });
       }
-      var d = new Date();
-      console.log("results655575",startDates,res,d)
+      let res1 =[]
+      for (var i = 3; i >= 0; i--) {
+        var d = startDate;
+        
+       // d.setDate(d.getDate() - i);
+        console.log("startDatestartDate",d)
+        // res1.push({
+        //   date:moment(d).format(utils.dateFormate),
+        //   day: moment(d).format(utils.dateLetter),
+        //   DateMonth: moment(d).format(utils.DateMonthFormat),
+        //   ddmmmyyyy:moment(d).format(utils.letterFormat2),
+        // });
+      }
+
+      // var startdate = moment();
+      var new_date = [];
+      
+      var res2=[]
+      for (var i = 3; i >= 0; i--) {
+        
+        new_date[i] = moment(startDate).add(i,"days").format("MMM DD");
+        res2.push({
+          date:moment(startDate).add(i,"days").format(utils.dateFormate),
+          day: moment(startDate).add(i,"days").format(utils.dateLetter),
+          DateMonth: moment(startDate).add(i,"days").format(utils.DateMonthFormat),
+          ddmmmyyyy:moment(startDate).add(i,"days").format(utils.letterFormat2),
+        });
+        
+       console.log("new_date[i]",new_date[i])
+        
+      }
+      for (var i = 1; i < 4; i++) {       
+       
+        res2.push({
+          date:moment(startDate).add(i,"days").format(utils.dateFormate),
+          day: moment(startDate).add(i,"days").format(utils.dateLetter),
+          DateMonth: moment(startDate).add(i,"days").format(utils.DateMonthFormat),
+          ddmmmyyyy:moment(startDate).add(i,"days").format(utils.letterFormat2),
+        });
+      }
+     
+      console.log("results655575",res2)
   return (
     <Grid  container justifyContent="center" className='weekfilter-sticky' >
     <Grid item container xs={10} md={10} flexWrap="nowrap" className='' sx={{ overflow:"auto", justifyContent:'space-between'}}  >
@@ -139,13 +179,20 @@ export default function DateFilterBar(props) {
     </Grid>
     <Grid item xs={2} md={2} container  className='datePickercss'>
     <Grid item>
-    <DatePicker
+    {/* <DatePicker
       selected={startDates}
       onChange={(date) => setStartDates(date)}
       customInput={<ExampleCustomInput />}
       // locale={lang_id==1?"enUS":lang_id==2?"zhCN":lang_id==3?"km":"enUS"}
 
-      />
+      /> */}
+        <DatePicker
+       selected={startDate}
+       selectsStart
+       startDate={startDate}       
+       onChange={date => setStartDate(date)}
+       customInput={<ExampleCustomInput />}
+     />
     </Grid>
     </Grid>
  
