@@ -24,6 +24,9 @@ import MatchDetailLiveText from "@/components/match/MatchDetailLiveText";
 import MatchStats from "@/components/match/MatchStats";
 import MatchVerticleChart from "@/components/match/MatchVerticleChart";
 import { Padding } from "@mui/icons-material";
+import {Route, Link, Routes, useParams} from 'react-router-dom';
+import api from "@/services/http";
+import axios from "axios";
 
 
 const HeaderTabs = styled(Tabs)({
@@ -86,15 +89,33 @@ export default function MatchDetails(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
+  const { id } = router.query;
   const [filterValue, setFilterValue] = useState("all");
-  const [selected, setSelected] = useState([]);
-
+  const [selected, setSelected] = useState([]); 
+  
   const handleSelectFilter = (value) => {
     setFilterValue(value);
   };
-
+  const params = useParams();
+if(id){
+  console.log("paramsparamsparams",id);
+}
+  async function matchDetails (){
+    
+    if(id){
+    try {
+      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=${id}`);
+      console.log("responseresponseresponse",response)
+     
+    }catch (error) {
+     return console.log("error")
+    }
+}
+  }
+ 
   useEffect(() => {
-    console.log('');
+    matchDetails()
+    
   }, [selected]);
 
   const [value, setValue] = React.useState(0);
@@ -102,6 +123,7 @@ export default function MatchDetails(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <Grid container>
       <MatchDetailHeader />

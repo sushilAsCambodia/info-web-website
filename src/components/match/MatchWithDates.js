@@ -26,22 +26,24 @@ import axios from "axios";
 import {
   getScheduleList,
   getMatchEndList,
+  getMatchListFavorite,
+  getMatchLiveScoreList,
+  addRemoveFavourite
 } from "@/store/actions/footballActions";
+
 import DataNotFound from "../DataNotFound";
 import LoadingBackDrop from "../LoadingBackDrop";
 import "core-js";
 
-const matches = [
-  { id: 1, name: "philly vs boston", time: "13:00 pm", date: "12 june" },
-  { id: 2, name: "Mets vs Giants", time: "14:00 pm", date: "14 july" },
-];
+
 
 export default function MatchWithDates(props) {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
   const dispatch = useDispatch();
-
+  const [page, setPage] = useState(1);
+  const [dateClicked, setDateClicked] = useState(false);
   const [dateFilter, setDateFilter] = useState(
     moment(new Date()).format(utils.dateFormate)
   );
@@ -50,21 +52,24 @@ export default function MatchWithDates(props) {
   const [nextMatchList, setNextMatchList] = useState([]);
   const [pastMatchList, setPastMatchList] = useState([]);
   const [fullMatchList, setFullMatchList] = useState([]);
-  const [datefilter, setDatefilter] = useState(moment().format("YYYY-MM-DD"));
+  // const [datefilter, setDatefilter] = useState(moment().format("YYYY-MM-DD"));
   const { customer = {} } = useSelector((state) => state.auth);
   const  footballScheduleList = useSelector((state) => state.football.footballScheduleList);
   /**** Render match data */
   async function scheduleData(dateFilters){
     var currenDate = moment(new Date()).format(utils.dateFormate);    
-    setLoading(true);
-    setLoading2(true);
+     setLoading(true);
+    if(dateClicked)
+{
+  setFullMatchList([])
+}    // setLoading2(true);
     console.log("dateFiltersdateFilters",dateFilters)
    const params= {
       lang_id: utils.convertLangCodeToID(i18n.language),
       season: moment().format("YYYY"),
       status: dateFilters<currenDate?2:0,
       member_ID: customer?.member_ID,        
-      page: 1,                
+      page: page,                
       date:dateFilters,        
       descending:'desc',
       sortBy:'created_at'
@@ -72,10 +77,15 @@ export default function MatchWithDates(props) {
     try {
       const response = await api.get('lotto/data44-aistat/match-schedules', params);
       console.log("responseresponseresponse",response?.data?.data?.data?.data)
-      setNextMatchList(response?.data?.data?.data?.data);
-      setFullMatchList(response?.data?.data?.data?.data)
-      setLoading(false);
-      setLoading2(false);
+      if (page == 1) {
+        setFullMatchList(response?.data?.data?.data?.data)
+      } else {
+        setFullMatchList((data) =>
+          data.concat(response?.data?.data?.data?.data)
+        );
+      }
+       setLoading(false);
+      // setLoading2(false);
     }catch (error) {
      return console.log("error")
     }
@@ -103,10 +113,59 @@ export default function MatchWithDates(props) {
     //   })
     // );
   }
+
+ 
   useEffect(() => {   
     scheduleData(dateFilter)
     
-  }, [dateFilter]);
+  }, [dateFilter,page]);
+
+   /*******Add and remove favorite*/
+  const handleAddRemove = (id) => {
+
+    customer?.member_ID
+      ? dispatch(
+          addRemoveFavourite({
+            body: {
+              id: id,
+              member_ID: customer?.member_ID,
+              type: "match_schedule",
+            },
+            callback: async (res) => {
+              var currenDate = moment(new Date()).format(utils.dateFormate);   
+              var dateFilters = moment(new Date()).format(utils.dateFormate);     
+              
+              console.log("dateFiltersdateFilters",dateFilters)
+             const params= {
+                lang_id: utils.convertLangCodeToID(i18n.language),
+                season: moment().format("YYYY"),
+                status: dateFilters<currenDate?2:0,
+                member_ID: customer?.member_ID,        
+                page: 1,                
+                date:dateFilters,        
+                descending:'desc',
+                sortBy:'created_at'
+              }
+              try {
+                const response = await api.get('lotto/data44-aistat/match-schedules', params);
+                console.log("responseresponseresponse",response?.data?.data?.data?.data)
+                //setNextMatchList(response?.data?.data?.data?.data);
+                if (page == 1) {
+                  setFullMatchList(response?.data?.data?.data?.data)
+                } else {
+                  setFullMatchList((data) =>
+                    data.concat(response && response.data && response.data.data)
+                  );
+                }
+                          
+              }catch (error) {
+               return console.log("error")
+              }
+            },
+          })
+        )
+      : router.push("/login");
+  };
 
   // useEffect(() => {
   // //  console.log(':::fulllist',pastMatchList.concat(nextMatchList))
@@ -119,7 +178,26 @@ export default function MatchWithDates(props) {
   // }, [pastMatchList, nextMatchList,dateFilter]);
   console.log("footballScheduleList",footballScheduleList)
 console.log("dateFilter",dateFilter)
+const handleScroll = (event) => {
+ 
+    if (
+      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+      event.currentTarget.clientHeight
+    ) {
+      setPage(page + 1);
+      setDateClicked(false)
+    }
+  };
 
+  const handleClose = () => {
+    setLoading(false);
+  };
+  const handleOpen = () => {
+    setLoading(true);
+  };
+const isChrome =
+typeof window !== "undefined" && /chrome/i.test(window.navigator.userAgent);
+console.log("fullMatchList",fullMatchList,dateClicked)
   return (
     <Grid style={{ position: "relative" }}>
       
@@ -135,16 +213,21 @@ console.log("dateFilter",dateFilter)
         }}
       >
         
-        <DateFilterBar setFilterDate={setDateFilter} />
-        <Grid className="matchitem-box">
+        <DateFilterBar setFilterDate={setDateFilter} setDateClicked={setDateClicked} />
+        <Grid className="matchitem-box"   sx={{
+            height: `${!isChrome ? "200vh" : "150vh"}`,
+            maxHeight: "calc(100vh - 137px)",
+            overflow: "auto",
+          }}
+          onScroll={handleScroll}>
           {fullMatchList && fullMatchList.length>0 && !loading && !loading2 ?
-            fullMatchList.splice(0,5).map((item, index) => {
-              return <MatchItem key={index} details={item} index={index} />;
+            fullMatchList.map((item, index) => {
+              return <MatchItem key={index} details={item} index={index} handleAddRemove={handleAddRemove} />;
             }):
             <LoadingBackDrop loading={loading}/>
             }
 
-          {fullMatchList && fullMatchList?.length === 0 ? <DataNotFound />:''}
+          {!loading&&fullMatchList && fullMatchList?.length === 0 ? <DataNotFound />:''}
         </Grid>
       </Grid>
     </Grid>

@@ -15,19 +15,25 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { Image } from "mui-image";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import utils from "@/common/utils";
+import moment from "moment/min/moment-with-locales";
 export default function MatchItem(props) {
-  const { details, index } = props;
+  const { details, index,handleAddRemove } = props;
   const { t,i18n } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = React.useState(false);
   const matches = useMediaQuery("(max-width:768px)");
 
-  const splitScore = (finalScore) => {
-    var chunks = finalScore.split(":");
-    var arr = [chunks.shift().trim(), chunks.join(" ").trim()];
-    return arr;
-  };
+  // const splitScore = (finalScore) => {
+  //   var chunks = finalScore.split(":");
+  //   var arr = [chunks.shift().trim(), chunks.join(" ").trim()];
+  //   return arr;
+  // };
+
+    /*** handle fav */
+    const handleFav=(id)=>{
+      handleAddRemove(id);
+    }
 
   const splitDates = (fullDate) => {
     var date = fullDate.slice(0, 10).trim();
@@ -50,18 +56,22 @@ export default function MatchItem(props) {
         >
           <Typography color="#8C8C8C">
           {lang_id==1?details?.competition?.nameEn:lang_id==2?details?.competition?.name:details?.competition?.nameEn}      
-          </Typography>
-          <IconButton
-            onClick={() => {
-              setValue(!value);
-            }}
-          >
-            {value ? (
-              <Icon icon="clarity:star-solid" color="yellow" width="20" />
-            ) : (
-              <Icon icon="clarity:star-solid" color="#ddd" width="20" />
-            )}
-          </IconButton>
+          </Typography>         
+
+{details.is_favorite ? (
+                            <IconButton onClick={()=>handleFav(details.id)}>
+                              {" "}
+                              <Icon
+                                icon="clarity:star-solid" color="yellow" width="20"
+                              />
+                            </IconButton>
+                          ) : (
+                            <IconButton onClick={()=>handleFav(details.id)}>
+                              {" "}
+                              <Icon icon="clarity:star-solid" color="#ddd" width="20" />
+                            </IconButton>
+                          )}
+         
         </Grid>
         <Grid
           item
@@ -70,7 +80,7 @@ export default function MatchItem(props) {
           py={1}
           onClick={() => {
             matches
-              ? router.push("/MatchDetails")
+              ? router.push(`/MatchDetails/${details.id}`)
               : router.push("/liveScorePage");
           }}
         >
@@ -96,7 +106,9 @@ export default function MatchItem(props) {
                   <Image width="20px" alt="team" src={details && details.home_team && details.home_team.image} />
                   :<Image width="20px" alt="team" src="./assets/Logo/team.png" />}{" "}
                 </Grid>
-                <Typography>{splitScore(details.finalScore)[0]}</Typography>
+                <Typography>
+                  {/* {splitScore(details.finalScore)[0]} */}
+                  </Typography>
               </Grid>
             </Grid>
             <Grid item xs={8} container justifyContent="center">
@@ -121,7 +133,9 @@ export default function MatchItem(props) {
             </Grid>
             <Grid item xs={2}>
               <Grid display="flex" justifyContent="space-between" marginTop={1}>
-                <Typography>{splitScore(details.finalScore)[1]}</Typography>
+                <Typography>
+                  {/* {splitScore(details.finalScore)[1]} */}
+                </Typography>
                 <Grid position="relative" container justifyContent="flex-end">
                 {details && details.away_team && details.away_team.image?
                   <Image width="20px" alt="team" src={details && details.away_team && details.away_team.image} />
@@ -149,7 +163,7 @@ export default function MatchItem(props) {
           textAlign="left"
           fontSize="10px"
         >
-          {splitDates(details.startTime).date},          {splitDates(details.startTime).time}
+         {moment(details.startTime).format('HH:mm')}
 
         </Grid>
       </Grid>

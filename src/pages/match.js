@@ -70,6 +70,7 @@ export default function Match() {
   };
 
  
+ 
   return (
   <>  
     <NoSsr>
@@ -137,7 +138,7 @@ export default function Match() {
         <FavouritePage/>
         </TabPanel>       
         <TabPanel value={value} index={1}>
-          <MatchWithDates />  
+          <MatchWithDates  />  
         </TabPanel>
         <TabPanel value={value} index={2}>
         <MatchWithRounds />

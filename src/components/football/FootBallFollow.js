@@ -53,7 +53,7 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
   footballScheduleList,
   last_page,
   currentpage,
-  pageChange}) {
+  pageChange,handleAddRemove}) {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
 
@@ -63,7 +63,10 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
   const handlePageChange = (event, value) => {
     pageChange(value);
   };
-
+ /*** handle fav */
+ const handleFav=(id)=>{
+  handleAddRemove(id);
+}
   const langKey = useSelector(
     (state) => state && state.load_language && state.load_language.language
   );
@@ -290,19 +293,19 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
                         {item.away_team && lang_id==1?item.away_team && item.away_team.nameEn:item.away_team && lang_id==2?item.away_team && item.away_team.nameFull:item.away_team && lang_id==3?item.away_team && item.away_team.nameEnFull:''}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.is_favorite ? (
-                            <IconButton>
+                        {item.is_favorite ? (
+                            <IconButton onClick={()=>handleFav(item.id)}>
                               {" "}
                               <Icon
-                                width={25}
+                                width={30}
                                 color="orange"
                                 icon="ic:round-star"
                               />
                             </IconButton>
                           ) : (
-                            <IconButton>
+                            <IconButton onClick={()=>handleFav(item.id)}>
                               {" "}
-                              <Icon width={25} icon="ic:round-star" />
+                              <Icon width={25}  icon="ic:round-star" />
                             </IconButton>
                           )}
                         </StyledTableCell>
@@ -369,7 +372,7 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
             </Grid>
           )} */}
 
-{footballFavoritList && footballFavoritList.length > 0 && (
+{last_page > 1 && (
             <Grid
               item
               xs={12}
