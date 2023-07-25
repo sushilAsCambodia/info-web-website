@@ -87,10 +87,11 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 export default function MatchStats(props) {
+  const {details}=props
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-
+console.log("details2222",details && details.stats)
   return (
     <Grid
       container
@@ -158,25 +159,52 @@ export default function MatchStats(props) {
             <Table  aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Dessert </TableCell>
-                  <TableCell align="right">Calories</TableCell>
-                  <TableCell align="right">fat</TableCell>
+                  <TableCell>Goals </TableCell>
+                  <TableCell align="right">Assists</TableCell>
+                  <TableCell align="right">Fat</TableCell>
+                  <TableCell>YelCards </TableCell>
+                  <TableCell align="right">Red Cards</TableCell>
+                  <TableCell align="right">Shots</TableCell>
+                  <TableCell>Shots OT </TableCell>
+                  <TableCell align="right">Shots Off Tag</TableCell>
+                  <TableCell align="right">Shots Blocked</TableCell>
+                  <TableCell align="right">Off Sides</TableCell>
+                  <TableCell align="right">Pass Success</TableCell>
+                  <TableCell align="right">Possession</TableCell>
+                  <TableCell align="right">Big Chance Created</TableCell>
+                  <TableCell align="right">Corners</TableCell>
+                  <TableCell align="right">Total Saves</TableCell>
+                  <TableCell align="right">Dangerous Attacks</TableCell>
+
+                  
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {details && details.stats  && details && details.stats.length>0 ? details && details.stats.map((row,index) => (
                   <TableRow
-                    key={row.name}
+                    key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell >
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
+                    <TableCell >{row.goals}</TableCell>
+                    <TableCell align="right">{row.assists}</TableCell>
                     <TableCell align="right">{row.fat}</TableCell>
+                    <TableCell >{row.yelCards}</TableCell>
+                    <TableCell align="right">{row.redCards}</TableCell>
+                    <TableCell align="right">{row.shots}</TableCell>
+                    <TableCell >{row.shotsOT}</TableCell>
+                    <TableCell align="right">{row.shotsOffTag}</TableCell>
+                    <TableCell align="right">{row.shotsBlocked}</TableCell>
+                    <TableCell align="right">{row.offsides}</TableCell>
+                    <TableCell align="right">{`${row.passSucc}%`}</TableCell>
+                    <TableCell align="right">{`${row.possession}%`}</TableCell>
+                    <TableCell align="right">{row.bigChanceCreated}</TableCell>
+                    <TableCell align="right">{row.corners}</TableCell>
+                    <TableCell align="right">{row.totalSaves}</TableCell>
+                    <TableCell align="right">{row.dangerousAttacks}</TableCell>
+
                    
                   </TableRow>
-                ))}
+                )):<>No Data</>}
               </TableBody>
             </Table>
           </TableContainer>

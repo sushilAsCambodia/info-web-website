@@ -92,7 +92,8 @@ export default function MatchDetails(props) {
   const { id } = router.query;
   const [filterValue, setFilterValue] = useState("all");
   const [selected, setSelected] = useState([]); 
-  const [details, setDetails] = useState([]); 
+  const [details, setDetails] = useState({});
+  const [infodetails, setInfoDetails] = useState({});
   
   const handleSelectFilter = (value) => {
     setFilterValue(value);
@@ -105,11 +106,18 @@ if(id){
     
     if(id){
     try {
-      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=${id}`);
+      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=449833`);
       if(response && response.data){
-        setDetails(response && response.data && response.data.data && response.data.data.match)
+        setDetails(response && response.data && response.data.data)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
+      const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=449833`);
+      if(responseInfo && responseInfo.data){
+        setInfoDetails(responseInfo && responseInfo.data && responseInfo.data.data)
+      //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
+      }
+
+      
      
     }catch (error) {
      return console.log("error")
@@ -127,7 +135,7 @@ if(id){
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+console.log("infodetails",infodetails)
   return (
     <Grid container>
       <MatchDetailHeader details={details} />

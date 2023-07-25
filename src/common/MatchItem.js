@@ -42,6 +42,10 @@ export default function MatchItem(props) {
   };
   useEffect(() => {}, []);
   const lang_id= utils.convertLangCodeToID(i18n.language)
+  console.log("detailsdetailsdetails",details)
+  const checkFavorite=details && details.match_schedule && details.match_schedule.is_favorite?details.match_schedule.is_favorite:details.is_favorite
+  console.log("checkFavorite",checkFavorite)
+  const matchDetail=details && details.match_schedule?details.match_schedule:details
   return (
     <Grid p={1} >
       <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px" >
@@ -55,10 +59,11 @@ export default function MatchItem(props) {
           alignItems="center"
         >
           <Typography color="#8C8C8C">
-          {lang_id==1?details?.competition?.nameEn:lang_id==2?details?.competition?.name:details?.competition?.nameEn}      
+          {lang_id==1?matchDetail?.competition?.nameEn:lang_id==2?matchDetail?.competition?.name:matchDetail?.competition?.nameEn}
+          {/* {lang_id==2?details?.match_schedule?.competition?.name:details?.match_schedule?.competition?.nameEn}    */}
           </Typography>         
 
-{details.is_favorite ? (
+{checkFavorite ? (
                             <IconButton onClick={()=>handleFav(details.id)}>
                               {" "}
                               <Icon

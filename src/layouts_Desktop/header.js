@@ -125,7 +125,7 @@ const Header = () => {
     Router.push("/login");
   };
 
-
+  const logo = './assets/Logo/new-logo.png'
   return (
     <>
       {router.pathname == "/login" || router.pathname == "/register" ? (
@@ -150,7 +150,7 @@ const Header = () => {
             >
               <Grid item xs={4}>
                 <Link href="/">
-                  <Image src="./assets/Logo/new-logo.png" width="130px" height="100%" alt="info_logo" />
+                  <Image src={logo} width="130px" height="100%" alt="info_logo" />
                 </Link>
               </Grid>
               <Grid

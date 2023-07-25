@@ -6,7 +6,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import LangSwitcher from '@/components/LangSwitcher';
 import Image from 'mui-image';
+
 const Header = () => {   
+  const logo = '/assets/Logo/new-logo.png'
   return (
     <AppBar position="static" style={{background:'linear-gradient(90.08deg, #FF0000 0.08%, #FF6F31 99.94%)',height: '40px', justifyContent:'center'}} >
       <Container maxWidth={false}>
@@ -27,7 +29,7 @@ const Header = () => {
               color: 'inherit',
               textDecoration: 'none',
             }}>
-            <Image src="./assets/Logo/new-logo.png" width="120px" height="100%" alt='logo-infoweb' />
+            <Image src={logo} width="120px" height="100%" alt='logo-infoweb' />
           </Typography> 
           <Box sx={{ alignItems:'center' }}>
             <LangSwitcher/>
