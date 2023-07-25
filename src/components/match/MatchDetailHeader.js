@@ -10,13 +10,17 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
+import utils from "@/common/utils";
 import StarIcon from "@/components/svg/star";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Image } from "mui-image";
 export default function MatchDetailHeader(props) {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
+  const {details}=props
   const theme = useTheme();
   const router = useRouter();
+  const lang_id= utils.convertLangCodeToID(i18n.language)
+  console.log("detailsdetails",details)
   
   return (
     <>
@@ -46,10 +50,11 @@ export default function MatchDetailHeader(props) {
             >
               <Image
                 alt="Dynamo Vladivostok"
-                src={"https://image.pngaaa.com/459/686459-middle.png"}
+                src={details && details.home_team && details.home_team.country_image_big}
                 style={{ borderRadius: "50px",height:'80px',width:'80px' }}
               />
-              <Typography fontWeight="bold">Manchester</Typography>
+              <Typography fontWeight="bold">{lang_id==2?details && details.home_team && details.home_team.name
+:details && details.home_team && details.home_team.nameEn}</Typography>
             </Grid>
 
             <Grid
@@ -104,11 +109,18 @@ export default function MatchDetailHeader(props) {
               <Image
                 alt="Dynamo Vladivostok"
                 src={
-                  "https://yt3.googleusercontent.com/1sL3o7HlNEOn4jV74w7WN-p7ABIbBop9c09QcwKTGcapN3eMvGt-tCDYoA3ErYbtVCHcpVtlcgM=s900-c-k-c0x00ffffff-no-rj"
+                  details && details.away_team
+&& details.away_team
+.country_image_big
                 }
                 style={{ borderRadius: "50px",height:'80px',width:'80px' }}
               />
-              <Typography fontWeight="bold">Chelsea</Typography>
+              <Typography fontWeight="bold">{lang_id==2?details && details.away_team
+ && details.away_team
+ .name
+:details && details.away_team
+&& details.away_team
+.nameEn}</Typography>
             </Grid>
           </Grid>
         </Grid>

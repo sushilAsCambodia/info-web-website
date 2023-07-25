@@ -92,6 +92,7 @@ export default function MatchDetails(props) {
   const { id } = router.query;
   const [filterValue, setFilterValue] = useState("all");
   const [selected, setSelected] = useState([]); 
+  const [details, setDetails] = useState([]); 
   
   const handleSelectFilter = (value) => {
     setFilterValue(value);
@@ -105,7 +106,10 @@ if(id){
     if(id){
     try {
       const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=${id}`);
-      console.log("responseresponseresponse",response)
+      if(response && response.data){
+        setDetails(response && response.data && response.data.data && response.data.data.match)
+      //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
+      }
      
     }catch (error) {
      return console.log("error")
@@ -126,7 +130,7 @@ if(id){
 
   return (
     <Grid container>
-      <MatchDetailHeader />
+      <MatchDetailHeader details={details} />
       <Grid item xs={12} className="sticky-header"  sx={{background:"#F3F3F3", borderWidth:"0.5px 0px", borderColor:"#DDDDDD", borderStyle:"solid", paddingBottom:"0px", }}>
         <Grid py={1} container justifyContent="center">
           <HeaderTabs value={value} onChange={handleChange} >
@@ -137,13 +141,13 @@ if(id){
         </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
-        <MatchVerticleChart />
+        <MatchVerticleChart details={details} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <MatchDetailLiveText />
+        <MatchDetailLiveText  details={details} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <MatchStats />
+        <MatchStats details={details} />
       </TabPanel>
     </Grid>
   );
