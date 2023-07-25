@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState,useEffect } from "react";
+import { useState,useEffect,forwardRef } from 'react';
 import Box from "@mui/material/Box";
 import {
   Grid,
@@ -35,6 +35,24 @@ export default function DateFilterBar2(props) {
     setFilterDate(moment(startDate).format(utils.dateFormate))
     setDateClicked(true)
   }, [startDate]);
+
+
+ 
+    const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+      // <button type="input" className="example-custom-input" onClick={onClick} ref={ref}>
+      //   {value}
+      // </button>
+    
+      <Button variant='contained' className="example-custom-input" onClick={onClick} ref={ref} style={{color:'#fff', minWidth:'40px', padding:'6px', background :'linear-gradient(90deg, #FF0000 0%, #FF6E31 100%)', borderRadius:'4px'}}>
+
+<div style={{paddingTop:'4px'}}>  {value}</div>
+   <img src='./assets/LiveScore/calendar_month.svg' width={'25px'} height={'25px'} alt='calendar'/>  
+
+     </Button>
+    ));
+
+
+
   return (
     <Grid
       container
@@ -53,15 +71,11 @@ export default function DateFilterBar2(props) {
       // locale={lang_id==1?"enUS":lang_id==2?"zhCN":lang_id==3?"km":"enUS"}
 
       /> */}
-        <DatePicker
-        style={{width:"50px"}}
-        showIcon
-       selected={startDate}
-       selectsStart
-       startDate={startDate}         
-       onChange={date => setStartDate(date)}       
-       
-     />
+       <DatePicker
+      selected={startDate}
+      onChange={(date) => setStartDate(date)}
+      customInput={<ExampleCustomInput />}
+    />
     </Grid>
     </Grid>
         {/* <FormControl size="small" fullWidth>
