@@ -44,6 +44,8 @@ export default function MatchWithDates(props) {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [dateClicked, setDateClicked] = useState(false);
+  const [DatePicker, setDatePicker] = useState(new Date());
+  
   const [dateFilter, setDateFilter] = useState(
     moment(new Date()).format(utils.dateFormate)
   );
@@ -67,10 +69,10 @@ export default function MatchWithDates(props) {
    const params= {
       lang_id: utils.convertLangCodeToID(i18n.language),
       season: moment().format("YYYY"),
-      status: dateFilters<currenDate?2:0,
+      status: dateFilters<currenDate || moment(new Date(DatePicker)).format(utils.dateFormate)<currenDate?2:0,
       member_ID: customer?.member_ID,        
       page: page,                
-      date:dateFilters,        
+      date:dateClicked?dateFilters:moment(new Date(DatePicker)).format(utils.dateFormate),        
       descending:'desc',
       sortBy:'created_at'
     }
@@ -114,11 +116,11 @@ export default function MatchWithDates(props) {
     // );
   }
 
- 
+ console.log("DatePicker",DatePicker)
   useEffect(() => {   
-    scheduleData(dateFilter)
+    scheduleData(dateFilter,DatePicker)
     
-  }, [dateFilter,page]);
+  }, [dateFilter,page,DatePicker]);
 
    /*******Add and remove favorite*/
   const handleAddRemove = (id) => {
@@ -213,7 +215,7 @@ console.log("fullMatchList",fullMatchList,dateClicked)
         }}
       >
         
-        <DateFilterBar setFilterDate={setDateFilter} setDateClicked={setDateClicked} />
+        <DateFilterBar setFilterDate={setDateFilter} setDateClicked={setDateClicked} setDatePicker={setDatePicker} />
         <Grid className="matchitem-box"   sx={{
             height: `${!isChrome ? "200vh" : "150vh"}`,
             maxHeight: "calc(100vh - 137px)",

@@ -21,17 +21,19 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 // registerLocale("km", km);
 
 export default function DateFilterBar(props) {
-    const {setFilterDate,setDateClicked}=props
+    const {setFilterDate,setDateClicked,setDatePicker}=props
     const { i18n } = useTranslation();
     const [startDates, setStartDates] = useState(new Date());
     const [dateFilter, setDateFilter] = useState(moment(new Date()).format(utils.letterFormat2));
     const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
     
     const lang_id= utils.convertLangCodeToID(i18n.language)
-
+    const [startDate, setStartDate] = useState(new Date()); 
     useEffect(() => {
+      setDatePicker(startDate)
+      console.log("startDate",startDate,new Date(),moment(startDate).format(utils.dateFormate))
       setFilterDate(moment(new Date()).format(utils.dateFormate))
-    }, []);
+    }, [startDate]);
     var currenDate = moment(new Date()).format(utils.dateFormate);   
 
     const [selectedDate, setSelectedDate] = useState(null);
@@ -39,57 +41,114 @@ export default function DateFilterBar(props) {
       setSelectedDate(date);
     }
 
-    const [startDate, setStartDate] = useState(new Date()); 
+    
 
       
 
-    const  dataRangeLastNext=(days,stdate)=>{
+    const  dataRangeLastNext=(days)=>{
         var result = [];
         for (var i = days; i >= 0; i--) {
-          var d = new Date();
-          d.setDate(d.getDate() - i);
+          // var d = new Date();
+          // d.setDate(d.getDate() - i);
+          // result.push({
+          //   date:moment(d).format(utils.dateFormate),
+          //   day: moment(d).format(utils.dateLetter),
+          //   DateMonth: moment(d).format(utils.DateMonthFormat),
+          //   ddmmmyyyy:moment(d).format(utils.letterFormat2),
+          // });
           result.push({
-            date:moment(d).format(utils.dateFormate),
-            day: moment(d).format(utils.dateLetter),
-            DateMonth: moment(d).format(utils.DateMonthFormat),
-            ddmmmyyyy:moment(d).format(utils.letterFormat2),
-          });
+      date:moment(startDate).subtract(i,"days").format(utils.dateFormate),
+      day: moment(startDate).subtract(i,"days").format(utils.dateLetter),
+      DateMonth: moment(startDate).subtract(i,"days").format(utils.DateMonthFormat),
+      ddmmmyyyy:moment(startDate).subtract(i,"days").format(utils.letterFormat2),
+    });
         }
   
         for (var i = 1; i < days+1; i++) {
-          var d = new Date();
-          d.setDate(d.getDate() + i);
+          // var d = new Date();
+          // d.setDate(d.getDate() + i);
+          // result.push({
+          //   date:moment(d).format(utils.dateFormate),
+          //   day: moment(d).format(utils.dateLetter),
+          //   DateMonth: moment(d).format(utils.DateMonthFormat),
+          //   ddmmmyyyy:moment(d).format(utils.letterFormat2),
+          // });
           result.push({
-            date:moment(d).format(utils.dateFormate),
-            day: moment(d).format(utils.dateLetter),
-            DateMonth: moment(d).format(utils.DateMonthFormat),
-            ddmmmyyyy:moment(d).format(utils.letterFormat2),
-          });
+      date:moment(startDate).add(i,"days").format(utils.dateFormate),
+      day: moment(startDate).add(i,"days").format(utils.dateLetter),
+      DateMonth: moment(startDate).add(i,"days").format(utils.DateMonthFormat),
+      ddmmmyyyy:moment(startDate).add(i,"days").format(utils.letterFormat2),
+    });
         }
 
-        var results = [];
-        for (var i = 1; i < days+1; i++) {
-          var d = startDates;
-          d.setDate(d.getDate() + i);
-          results.push({
-            date:moment(d).format(utils.dateFormate),
-            day: moment(d).format(utils.dateLetter),
-            DateMonth: moment(d).format(utils.DateMonthFormat),
-            ddmmmyyyy:moment(d).format(utils.letterFormat2),
-          });
-        }
-        for (var i = days; i >= 0; i--) {
-          var d = startDates;
-          d.setDate(d.getDate() - i);
-          results.push({
-            date:moment(d).format(utils.dateFormate),
-            day: moment(d).format(utils.dateLetter),
-            DateMonth: moment(d).format(utils.DateMonthFormat),
-            ddmmmyyyy:moment(d).format(utils.letterFormat2),
-          });
-        }
-   console.log("results44",results,startDates)
-        return result;
+  //       var results = [];
+  //       for (var i = 1; i < days+1; i++) {
+  //         var d = startDates;
+  //         d.setDate(d.getDate() + i);
+  //         results.push({
+  //           date:moment(d).format(utils.dateFormate),
+  //           day: moment(d).format(utils.dateLetter),
+  //           DateMonth: moment(d).format(utils.DateMonthFormat),
+  //           ddmmmyyyy:moment(d).format(utils.letterFormat2),
+  //         });
+  //       }
+  //       for (var i = days; i >= 0; i--) {
+  //         var d = startDates;
+  //         d.setDate(d.getDate() - i);
+  //         results.push({
+  //           date:moment(d).format(utils.dateFormate),
+  //           day: moment(d).format(utils.dateLetter),
+  //           DateMonth: moment(d).format(utils.DateMonthFormat),
+  //           ddmmmyyyy:moment(d).format(utils.letterFormat2),
+  //         });
+  //       }
+  //  console.log("results44",results,startDates)
+  //       return result;
+  var new_date = [];
+      
+  var res2=[]
+  // for (var i = 3; i >= 0; i--) {
+    
+   
+  //   res2.push({
+  //     date:moment(startDate).add(i,"days").format(utils.dateFormate),
+  //     day: moment(startDate).add(i,"days").format(utils.dateLetter),
+  //     DateMonth: moment(startDate).add(i,"days").format(utils.DateMonthFormat),
+  //     ddmmmyyyy:moment(startDate).add(i,"days").format(utils.letterFormat2),
+  //   });
+    
+  //  console.log("new_date[i]",new_date[i])
+    
+  // }
+  
+  // for (var i = 1; i < days+1; i++) {  
+  //   res2.push({
+  //     date:moment(startDate).subtract(i,"days").format(utils.dateFormate),
+  //     day: moment(startDate).subtract(i,"days").format(utils.dateLetter),
+  //     DateMonth: moment(startDate).subtract(i,"days").format(utils.DateMonthFormat),
+  //     ddmmmyyyy:moment(startDate).subtract(i,"days").format(utils.letterFormat2),
+  //   });
+  // }
+  //         for (var i = 1; i < days+1; i++) {
+         
+  //           res2.push({
+  //     date:moment(startDate).subtract(i,"days").format(utils.dateFormate),
+  //     day: moment(startDate).subtract(i,"days").format(utils.dateLetter),
+  //     DateMonth: moment(startDate).subtract(i,"days").format(utils.DateMonthFormat),
+  //     ddmmmyyyy:moment(startDate).subtract(i,"days").format(utils.letterFormat2),
+  //   });
+  //       }
+  //        for (var i = days; i >= 0; i--) {
+    
+   
+  //   res2.push({
+  //     date:moment(startDate).add(i,"days").format(utils.dateFormate),
+  //     day: moment(startDate).add(i,"days").format(utils.dateLetter),
+  //     DateMonth: moment(startDate).add(i,"days").format(utils.DateMonthFormat),
+  //     ddmmmyyyy:moment(startDate).add(i,"days").format(utils.letterFormat2),
+  //   });
+  // }
+  return result
       }
       
       const ExampleCustomInput = forwardRef(({ value,onClick }, ref) => (
@@ -142,10 +201,10 @@ export default function DateFilterBar(props) {
       for (var i = 1; i < 4; i++) {       
        
         res2.push({
-          date:moment(startDate).add(i,"days").format(utils.dateFormate),
-          day: moment(startDate).add(i,"days").format(utils.dateLetter),
-          DateMonth: moment(startDate).add(i,"days").format(utils.DateMonthFormat),
-          ddmmmyyyy:moment(startDate).add(i,"days").format(utils.letterFormat2),
+          date:moment(startDate).subtract(i,"days").format(utils.dateFormate),
+          day: moment(startDate).subtract(i,"days").format(utils.dateLetter),
+          DateMonth: moment(startDate).subtract(i,"days").format(utils.DateMonthFormat),
+          ddmmmyyyy:moment(startDate).subtract(i,"days").format(utils.letterFormat2),
         });
       }
      
@@ -190,7 +249,7 @@ export default function DateFilterBar(props) {
        selected={startDate}
        selectsStart
        startDate={startDate}       
-       onChange={date => setStartDate(date)}
+       onChange={date => setStartDate(date)}       
        customInput={<ExampleCustomInput />}
      />
     </Grid>
