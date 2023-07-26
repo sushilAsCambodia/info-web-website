@@ -20,6 +20,8 @@ import { useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { Image } from "mui-image";
 
+import TablePagination from '@mui/material/TablePagination';
+
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
@@ -138,6 +140,107 @@ export default function MatchStats(props) {
   
   }));
 
+
+
+  const columns = [
+    { id: 'name', label: 'Name', minWidth: 170 },
+    { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+    {
+      id: 'population',
+      label: 'Population',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+      id: 'size',
+      label: 'Size\u00a0(km\u00b2)',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+      id: 'density',
+      label: 'Density',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toFixed(2),
+    },
+  ];
+  
+  function createData(name, code, population, size) {
+    const density = population / size;
+    return { name, code, population, size, density };
+  }
+  
+  const rows = [
+    createData('India', 'IN', 1324171354, 3287263),
+    createData('China', 'CN', 1403500365, 9596961),
+    createData('Italy', 'IT', 60483973, 301340),
+    createData('United States', 'US', 327167434, 9833520),
+    createData('Canada', 'CA', 37602103, 9984670),
+    createData('Australia', 'AU', 25475400, 7692024),
+    createData('Germany', 'DE', 83019200, 357578),
+    createData('Ireland', 'IE', 4857000, 70273),
+    createData('Mexico', 'MX', 126577691, 1972550),
+    createData('Japan', 'JP', 126317000, 377973),
+    createData('France', 'FR', 67022000, 640679),
+    createData('United Kingdom', 'GB', 67545757, 242495),
+    createData('Russia', 'RU', 146793744, 17098246),
+    createData('Nigeria', 'NG', 200962417, 923768),
+    createData('Brazil', 'BR', 210147125, 8515767),
+    createData('India', 'IN', 1324171354, 3287263),
+    createData('China', 'CN', 1403500365, 9596961),
+    createData('Italy', 'IT', 60483973, 301340),
+    createData('United States', 'US', 327167434, 9833520),
+    createData('Canada', 'CA', 37602103, 9984670),
+    createData('Australia', 'AU', 25475400, 7692024),
+    createData('Germany', 'DE', 83019200, 357578),
+    createData('Ireland', 'IE', 4857000, 70273),
+    createData('Mexico', 'MX', 126577691, 1972550),
+    createData('Japan', 'JP', 126317000, 377973),
+    createData('France', 'FR', 67022000, 640679),
+    createData('United Kingdom', 'GB', 67545757, 242495),
+    createData('Russia', 'RU', 146793744, 17098246),
+    createData('Nigeria', 'NG', 200962417, 923768),
+    createData('Brazil', 'BR', 210147125, 8515767),
+    createData('India', 'IN', 1324171354, 3287263),
+    createData('China', 'CN', 1403500365, 9596961),
+    createData('Italy', 'IT', 60483973, 301340),
+    createData('United States', 'US', 327167434, 9833520),
+    createData('Canada', 'CA', 37602103, 9984670),
+    createData('Australia', 'AU', 25475400, 7692024),
+    createData('Germany', 'DE', 83019200, 357578),
+    createData('Ireland', 'IE', 4857000, 70273),
+    createData('Mexico', 'MX', 126577691, 1972550),
+    createData('Japan', 'JP', 126317000, 377973),
+    createData('France', 'FR', 67022000, 640679),
+    createData('United Kingdom', 'GB', 67545757, 242495),
+    createData('Russia', 'RU', 146793744, 17098246),
+    createData('Nigeria', 'NG', 200962417, 923768),
+    createData('Brazil', 'BR', 210147125, 8515767),
+    createData('India', 'IN', 1324171354, 3287263),
+    createData('China', 'CN', 1403500365, 9596961),
+    createData('Italy', 'IT', 60483973, 301340),
+    createData('United States', 'US', 327167434, 9833520),
+    createData('Canada', 'CA', 37602103, 9984670),
+    createData('Australia', 'AU', 25475400, 7692024),
+    createData('Germany', 'DE', 83019200, 357578),
+    createData('Ireland', 'IE', 4857000, 70273),
+    createData('Mexico', 'MX', 126577691, 1972550),
+    createData('Japan', 'JP', 126317000, 377973),
+    createData('France', 'FR', 67022000, 640679),
+    createData('United Kingdom', 'GB', 67545757, 242495),
+    createData('Russia', 'RU', 146793744, 17098246),
+    createData('Nigeria', 'NG', 200962417, 923768),
+    createData('Brazil', 'BR', 210147125, 8515767),
+  ];
+  
+
+
+
+
+
   return (
     <Grid
       container
@@ -199,13 +302,7 @@ export default function MatchStats(props) {
       {/* <Grid item xs={12} p={2}>
         <LinearProgressWithLabel team1={40} team2={60} />
       </Grid> */}
-      <Grid item xs={12}>
-
-
-  
-
-
-        
+      {/* <Grid item xs={12}>
           <TableContainer sx={{border:"2px solid #ddd"}} >
           <Table id="tablehover"  aria-label="simple table">
               <TableHead size="small">
@@ -283,15 +380,98 @@ export default function MatchStats(props) {
                     <StyledTableCell align="center">{row.corners}</StyledTableCell>
                     <StyledTableCell align="center">{row.totalSaves}</StyledTableCell>
                     <StyledTableCell align="center">{row.dangerousAttacks}</StyledTableCell>
-
-                   
                   </StyledTableRow>
                 )):<>No Data</>}
               </TableBody>
             </Table>
           </TableContainer>
-       
-      </Grid>
+      </Grid> */}
+
+      <Grid item xs={12}>
+      <TableContainer sx={{ maxHeight: 500 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+          <TableRow>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Goals </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Assists </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Fat </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  YelCards </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Red Cards </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Shots </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Shots OT </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Shots Off Tag </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Shots Blocked </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Off Sides </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Pass Success </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Possession </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Big Chance Created </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Corners </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Total Saves </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Dangerous Attacks </div>
+                  </StyledHeaderCell>
+                </TableRow>
+          </TableHead>
+          <TableBody>
+          {details && details.stats  && details && details.stats.length>0 ? details && details.stats.map((row,index) => (
+                  <StyledTableRow
+                    key={index}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <StyledTableCell align="center">{row.goals}</StyledTableCell>
+                    <StyledTableCell align="center">{row.assists}</StyledTableCell>
+                    <StyledTableCell align="center">{row.fat}</StyledTableCell>
+                    <StyledTableCell align="center">{row.yelCards}</StyledTableCell>
+                    <StyledTableCell align="center">{row.redCards}</StyledTableCell>
+                    <StyledTableCell align="center">{row.shots}</StyledTableCell>
+                    <StyledTableCell align="center">{row.shotsOT}</StyledTableCell>
+                    <StyledTableCell align="center">{row.shotsOffTag}</StyledTableCell>
+                    <StyledTableCell align="center">{row.shotsBlocked}</StyledTableCell>
+                    <StyledTableCell align="center">{row.offsides}</StyledTableCell>
+                    <StyledTableCell align="center">{`${row.passSucc}%`}</StyledTableCell>
+                    <StyledTableCell align="center">{`${row.possession}%`}</StyledTableCell>
+                    <StyledTableCell align="center">{row.bigChanceCreated}</StyledTableCell>
+                    <StyledTableCell align="center">{row.corners}</StyledTableCell>
+                    <StyledTableCell align="center">{row.totalSaves}</StyledTableCell>
+                    <StyledTableCell align="center">{row.dangerousAttacks}</StyledTableCell>
+                  </StyledTableRow>
+                )):<>No Data</>}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+        </Grid>
+
     </Grid>
   );
 }
