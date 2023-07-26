@@ -54,7 +54,7 @@ export default function MatchDetailHeader(props) {
               <Image
                 alt="Dynamo Vladivostok"
                 src={details && details.match && details.match.home_team && details.match.home_team.country_image_big}
-                style={{ borderRadius: "50px",height:'80px',width:'80px' }}
+                style={{ height:'80px',width:'80px' }}
               />
               <Typography fontWeight="bold">{lang_id==2?details && details.match && details.match.home_team && details.match.home_team.name
 :details && details.match && details.match.home_team && details.match.home_team.nameEn}</Typography>
@@ -116,7 +116,7 @@ export default function MatchDetailHeader(props) {
 && details.match.away_team
 .country_image_big
                 }
-                style={{ borderRadius: "50px",height:'80px',width:'80px' }}
+                style={{ height:'80px',width:'80px' }}
               />
               <Typography fontWeight="bold">{lang_id==2?details &&  details.match && details.away_team
    && details.match.away_team

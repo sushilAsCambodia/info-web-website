@@ -263,7 +263,7 @@ export default function MatchStats(props) {
               width: "50px",
               height: "50px",
               objectFit: "fill",
-              borderRadius: "50px",
+             
             }}
             alt="encrypted"
           />
@@ -293,7 +293,7 @@ export default function MatchStats(props) {
               width: "50px",
               height: "50px",
               objectFit: "fill",
-              borderRadius: "50px",
+              
             }}
             alt="encrypted"
           />
