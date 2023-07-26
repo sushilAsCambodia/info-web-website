@@ -94,6 +94,7 @@ export default function MatchDetails(props) {
   const [selected, setSelected] = useState([]); 
   const [details, setDetails] = useState({});
   const [infodetails, setInfoDetails] = useState({});
+  const [infodetailsText, setInfoDetailsText] = useState({});
   
   const handleSelectFilter = (value) => {
     setFilterValue(value);
@@ -105,17 +106,25 @@ if(id){
   async function matchDetails (){
     
     if(id){
+      console.log("paramsparamsparams454545454",id);
     try {
-      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=449833`);
+      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=430119`);
       if(response && response.data){
         setDetails(response && response.data && response.data.data)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
-      const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=449833`);
+      const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=430119`);
       if(responseInfo && responseInfo.data){
         setInfoDetails(responseInfo && responseInfo.data && responseInfo.data.data)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
+
+      const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=430119`);
+      if(responseText && responseText.data){
+        setInfoDetailsText(responseText && responseText.data && responseText.data.data)
+      //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
+      }
+
 
       
      
@@ -128,7 +137,7 @@ if(id){
   useEffect(() => {
     matchDetails()
     
-  }, [selected]);
+  }, [selected,id]);
 
   const [value, setValue] = React.useState(0);
 
@@ -149,10 +158,10 @@ console.log("infodetails",infodetails)
         </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
-        <MatchVerticleChart details={details} />
+        <MatchVerticleChart details={details} InfoDetails={infodetails} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <MatchDetailLiveText  details={details} />
+        <MatchDetailLiveText  details={details} InfoDetailsText={infodetailsText} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <MatchStats details={details} />

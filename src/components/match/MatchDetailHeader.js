@@ -20,8 +20,10 @@ export default function MatchDetailHeader(props) {
   const theme = useTheme();
   const router = useRouter();
   const lang_id= utils.convertLangCodeToID(i18n.language)
-  console.log("detailsdetails",details)
-  
+  console.log("detailsdetails55555",details)
+  let score=details && details.match && details.match.finalScore
+  const myScore = score  && score.split(":");
+
   return (
     <>
     <Grid
@@ -50,11 +52,11 @@ export default function MatchDetailHeader(props) {
             >
               <Image
                 alt="Dynamo Vladivostok"
-                src={details && details.home_team && details.home_team.country_image_big}
+                src={details && details.match && details.match.home_team && details.match.home_team.country_image_big}
                 style={{ borderRadius: "50px",height:'80px',width:'80px' }}
               />
-              <Typography fontWeight="bold">{lang_id==2?details && details.home_team && details.home_team.name
-:details && details.home_team && details.home_team.nameEn}</Typography>
+              <Typography fontWeight="bold">{lang_id==2?details && details.match && details.match.home_team && details.match.home_team.name
+:details && details.match && details.match.home_team && details.match.home_team.nameEn}</Typography>
             </Grid>
 
             <Grid
@@ -68,7 +70,7 @@ export default function MatchDetailHeader(props) {
               <Grid container       alignItems="center"        justifyContent="center"
 >
                 <Typography mx={1} variant="h5">
-                  0
+                  {myScore && myScore[0]}
                 </Typography>
                 <span style={{ borderColor: "white",marginTop:'10px' }} className="inner-circle">
                   <Grid
@@ -91,7 +93,7 @@ export default function MatchDetailHeader(props) {
                   </Grid>
                 </span>
                 <Typography mx={1} variant="h5">
-                  0
+                {myScore && myScore[1]}
                 </Typography>
                 <Typography sx={{ position: "absolute", bottom: "-30px", }}>
                   FT
@@ -109,24 +111,24 @@ export default function MatchDetailHeader(props) {
               <Image
                 alt="Dynamo Vladivostok"
                 src={
-                  details && details.away_team
-&& details.away_team
+                  details && details.match && details.match.away_team
+&& details.match.away_team
 .country_image_big
                 }
                 style={{ borderRadius: "50px",height:'80px',width:'80px' }}
               />
               <Typography fontWeight="bold">{lang_id==2?details && details.away_team
- && details.away_team
+ && details.match  && details.match.away_team
  .name
-:details && details.away_team
-&& details.away_team
+:details && details.match && details.match.away_team
+&& details.match.away_team
 .nameEn}</Typography>
             </Grid>
           </Grid>
         </Grid>
         <Grid container px={5} position="absolute" top="250px"></Grid>
       </Grid>
-      <Grid item xs={12} container alignItems="center" height="100px" px={1}>
+      {/* <Grid item xs={12} container alignItems="center" height="100px" px={1}>
         <Grid item xs={5} className="statsList">
           <Grid container alignItems="center" justifyContent="space-between">
             <Typography color="grey">jack Harrison</Typography>
@@ -189,6 +191,7 @@ export default function MatchDetailHeader(props) {
             </ul>
           </Grid>
         </Grid>
-      </Grid></>
+      </Grid> */}
+      </>
   );
 }

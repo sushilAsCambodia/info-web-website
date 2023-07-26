@@ -91,7 +91,8 @@ export default function MatchStats(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-console.log("details2222",details && details.stats)
+  let score=details && details.match && details.match.finalScore
+  const myScore = score  && score.split(":");
   return (
     <Grid
       container
@@ -109,7 +110,7 @@ console.log("details2222",details && details.stats)
           alignItems="center"
         >
           <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYRoEAG50_OBj1grdDD2eLQOm_YDakvZK7DM_a35OjbuPBKkz4RCLYQQmW31rbLt7CPMM&usqp=CAU"
+            src={details && details.match && details.match.home_team && details.match.home_team.country_image_big}
             style={{
               width: "50px",
               height: "50px",
@@ -119,7 +120,7 @@ console.log("details2222",details && details.stats)
             alt="encrypted"
           />
           <Typography color="black" mx={1}>
-            4
+          {myScore && myScore[0]}
           </Typography>
         </Grid>
         <Grid item xs={2} container alignItems="center" justifyContent="center">
@@ -136,10 +137,10 @@ console.log("details2222",details && details.stats)
           justifyContent="flex-end"
         >
           <Typography color="black" mx={1}>
-            4
+          {myScore && myScore[1]}
           </Typography>
           <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYRoEAG50_OBj1grdDD2eLQOm_YDakvZK7DM_a35OjbuPBKkz4RCLYQQmW31rbLt7CPMM&usqp=CAU"
+            src={details && details.match && details.match.away_team && details.match.away_team.country_image_big}
             style={{
               width: "50px",
               height: "50px",
@@ -150,9 +151,9 @@ console.log("details2222",details && details.stats)
           />
         </Grid>
       </Grid>
-      <Grid item xs={12} p={2}>
+      {/* <Grid item xs={12} p={2}>
         <LinearProgressWithLabel team1={40} team2={60} />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12}>
         <Grid px={2}>
           <TableContainer sx={{border:"2px solid #ddd"}}>
