@@ -43,7 +43,6 @@ export default function MatchItem(props) {
   useEffect(() => {}, []);
   const lang_id= utils.convertLangCodeToID(i18n.language)
   const checkFavorite=details && details.match_schedule && details.match_schedule.is_favorite?details.match_schedule.is_favorite:details.is_favorite
-  
   const matchDetail=details && details.match_schedule?details.match_schedule:details
   return (
     <Grid p={1} >
@@ -60,7 +59,7 @@ export default function MatchItem(props) {
           <Typography color="#8C8C8C">
           {lang_id==1?matchDetail?.competition?.nameEn:lang_id==2?matchDetail?.competition?.name:matchDetail?.competition?.nameEn}
           {/* {lang_id==2?details?.match_schedule?.competition?.name:details?.match_schedule?.competition?.nameEn}    */}
-          </Typography>         
+          </Typography>    
 
 {checkFavorite ? (
                             <IconButton onClick={()=>handleFav(details.matchId)}>
