@@ -10,6 +10,9 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  tableCellClasses,
+  Paper,
+
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
@@ -93,6 +96,48 @@ export default function MatchStats(props) {
   const router = useRouter();
   let score=details && details.match && details.match.finalScore
   const myScore = score  && score.split(":");
+
+  const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
+    background: "#FF6F31",
+    borderRight: "1px solid #DDDDDD ",
+    borderTop: "1px solid #DDDDDD ",
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.grey,
+    },
+    color: "white",
+    // hide last border
+    "&:first-of-type": {
+      borderLeft: "1px solid #DDDDDD",
+    },
+    width:100
+  }));
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.grey,      
+    },
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+   
+  }));
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: "#DDDDDD",
+      color: theme.palette.common.black,
+
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+      padding: "2px",
+    },
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+  
+  }));
+
   return (
     <Grid
       container
@@ -155,61 +200,97 @@ export default function MatchStats(props) {
         <LinearProgressWithLabel team1={40} team2={60} />
       </Grid> */}
       <Grid item xs={12}>
-        <Grid px={2}>
-          <TableContainer sx={{border:"2px solid #ddd"}}>
-            <Table  aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Goals </TableCell>
-                  <TableCell align="right">Assists</TableCell>
-                  <TableCell align="right">Fat</TableCell>
-                  <TableCell>YelCards </TableCell>
-                  <TableCell align="right">Red Cards</TableCell>
-                  <TableCell align="right">Shots</TableCell>
-                  <TableCell>Shots OT </TableCell>
-                  <TableCell align="right">Shots Off Tag</TableCell>
-                  <TableCell align="right">Shots Blocked</TableCell>
-                  <TableCell align="right">Off Sides</TableCell>
-                  <TableCell align="right">Pass Success</TableCell>
-                  <TableCell align="right">Possession</TableCell>
-                  <TableCell align="right">Big Chance Created</TableCell>
-                  <TableCell align="right">Corners</TableCell>
-                  <TableCell align="right">Total Saves</TableCell>
-                  <TableCell align="right">Dangerous Attacks</TableCell>
 
-                  
+
+  
+
+
+        
+          <TableContainer sx={{border:"2px solid #ddd"}} >
+          <Table id="tablehover"  aria-label="simple table">
+              <TableHead size="small">
+                <TableRow>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Goals </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Assists </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Fat </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  YelCards </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Red Cards </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Shots </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Shots OT </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Shots Off Tag </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Shots Blocked </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" >  Off Sides </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Pass Success </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Possession </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Big Chance Created </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Corners </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Total Saves </div>
+                  </StyledHeaderCell>
+                  <StyledHeaderCell align="center">
+                  <div className="tablecell-width" > Dangerous Attacks </div>
+                  </StyledHeaderCell>
                 </TableRow>
               </TableHead>
+
               <TableBody>
                 {details && details.stats  && details && details.stats.length>0 ? details && details.stats.map((row,index) => (
-                  <TableRow
+                  <StyledTableRow
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell >{row.goals}</TableCell>
-                    <TableCell align="right">{row.assists}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell >{row.yelCards}</TableCell>
-                    <TableCell align="right">{row.redCards}</TableCell>
-                    <TableCell align="right">{row.shots}</TableCell>
-                    <TableCell >{row.shotsOT}</TableCell>
-                    <TableCell align="right">{row.shotsOffTag}</TableCell>
-                    <TableCell align="right">{row.shotsBlocked}</TableCell>
-                    <TableCell align="right">{row.offsides}</TableCell>
-                    <TableCell align="right">{`${row.passSucc}%`}</TableCell>
-                    <TableCell align="right">{`${row.possession}%`}</TableCell>
-                    <TableCell align="right">{row.bigChanceCreated}</TableCell>
-                    <TableCell align="right">{row.corners}</TableCell>
-                    <TableCell align="right">{row.totalSaves}</TableCell>
-                    <TableCell align="right">{row.dangerousAttacks}</TableCell>
+                    <StyledTableCell align="center">{row.goals}</StyledTableCell>
+                    <StyledTableCell align="center">{row.assists}</StyledTableCell>
+                    <StyledTableCell align="center">{row.fat}</StyledTableCell>
+                    <StyledTableCell align="center">{row.yelCards}</StyledTableCell>
+                    <StyledTableCell align="center">{row.redCards}</StyledTableCell>
+                    <StyledTableCell align="center">{row.shots}</StyledTableCell>
+                    <StyledTableCell align="center">{row.shotsOT}</StyledTableCell>
+                    <StyledTableCell align="center">{row.shotsOffTag}</StyledTableCell>
+                    <StyledTableCell align="center">{row.shotsBlocked}</StyledTableCell>
+                    <StyledTableCell align="center">{row.offsides}</StyledTableCell>
+                    <StyledTableCell align="center">{`${row.passSucc}%`}</StyledTableCell>
+                    <StyledTableCell align="center">{`${row.possession}%`}</StyledTableCell>
+                    <StyledTableCell align="center">{row.bigChanceCreated}</StyledTableCell>
+                    <StyledTableCell align="center">{row.corners}</StyledTableCell>
+                    <StyledTableCell align="center">{row.totalSaves}</StyledTableCell>
+                    <StyledTableCell align="center">{row.dangerousAttacks}</StyledTableCell>
 
                    
-                  </TableRow>
+                  </StyledTableRow>
                 )):<>No Data</>}
               </TableBody>
             </Table>
           </TableContainer>
-        </Grid>
+       
       </Grid>
     </Grid>
   );
