@@ -24,6 +24,9 @@ import MatchDetailLiveText from "@/components/match/MatchDetailLiveText";
 import MatchStats from "@/components/match/MatchStats";
 import MatchVerticleChart from "@/components/match/MatchVerticleChart";
 import { Padding } from "@mui/icons-material";
+import {Route, Link, Routes, useParams} from 'react-router-dom';
+import api from "@/services/http";
+import axios from "axios";
 
 
 const HeaderTabs = styled(Tabs)({
@@ -86,25 +89,71 @@ export default function MatchDetails(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
+  const { id } = router.query;
+  const { status } = router.query;
   const [filterValue, setFilterValue] = useState("all");
-  const [selected, setSelected] = useState([]);
-
+  const [selected, setSelected] = useState([]); 
+  const [details, setDetails] = useState({});
+  const [infodetails, setInfoDetails] = useState({});
+  const [infodetailsText, setInfoDetailsText] = useState({});
+  
   const handleSelectFilter = (value) => {
     setFilterValue(value);
   };
+  const params = useParams();
+// if(id){
+//   console.log("paramsparamsparams",id);
+// }
+// if(status){
+//   console.log("statusstatusstatus",status);
+// }
+  async function matchDetails (){
+    
+    if(id){
 
+    try {
+      // const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=430119`);
+      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=${id}`)
+      if(response && response.data){
+        setDetails(response && response.data && response.data.data)
+      //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
+      }
+      // const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=430119`);
+      const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=${id}`);
+      if(responseInfo && responseInfo.data){
+        setInfoDetails(responseInfo && responseInfo.data && responseInfo.data.data)
+      //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
+      }
+      // const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=430119`);
+      const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=${id}`);
+      if(responseText && responseText.data){
+        setInfoDetailsText(responseText && responseText.data && responseText.data.data)
+      //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
+      }
+
+
+      
+     
+    }catch (error) {
+     return console.log("error")
+    }
+}
+  }
+ 
   useEffect(() => {
-    console.log('');
-  }, [selected]);
+    matchDetails()
+    
+  }, [selected,id,status]);
 
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <Grid container>
-      <MatchDetailHeader />
+      <MatchDetailHeader details={details} status={status} />
       <Grid item xs={12} className="sticky-header"  sx={{background:"#F3F3F3", borderWidth:"0.5px 0px", borderColor:"#DDDDDD", borderStyle:"solid", paddingBottom:"0px", }}>
         <Grid py={1} container justifyContent="center">
           <HeaderTabs value={value} onChange={handleChange} >
@@ -115,13 +164,13 @@ export default function MatchDetails(props) {
         </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
-        <MatchVerticleChart />
+        <MatchVerticleChart details={details} InfoDetails={infodetails} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <MatchDetailLiveText />
+        <MatchDetailLiveText  details={details} InfoDetailsText={infodetailsText} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <MatchStats />
+        <MatchStats details={details} />
       </TabPanel>
     </Grid>
   );

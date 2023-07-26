@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -21,24 +21,28 @@ import moment from "moment/min/moment-with-locales";
 import utils from "@/common/utils";
 import MatchItem from "@/common/MatchItem";
 import DateFilterBar from "@/common/dateFilterBar";
+import api from "@/services/http";
+import axios from "axios";
 import {
   getScheduleList,
   getMatchEndList,
+  getMatchListFavorite,
+  getMatchLiveScoreList,
+  addRemoveFavourite,
 } from "@/store/actions/footballActions";
+
 import DataNotFound from "../DataNotFound";
 import LoadingBackDrop from "../LoadingBackDrop";
 import "core-js";
-
-const matches = [
-  { id: 1, name: "philly vs boston", time: "13:00 pm", date: "12 june" },
-  { id: 2, name: "Mets vs Giants", time: "14:00 pm", date: "14 july" },
-];
 
 export default function MatchWithDates(props) {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+  const [dateClicked, setDateClicked] = useState(false);
+  const [DatePicker, setDatePicker] = useState(new Date());
 
   const [dateFilter, setDateFilter] = useState(
     moment(new Date()).format(utils.dateFormate)
@@ -48,67 +52,252 @@ export default function MatchWithDates(props) {
   const [nextMatchList, setNextMatchList] = useState([]);
   const [pastMatchList, setPastMatchList] = useState([]);
   const [fullMatchList, setFullMatchList] = useState([]);
-  const [datefilter, setDatefilter] = useState(moment().format("YYYY-MM-DD"));
+  // const [datefilter, setDatefilter] = useState(moment().format("YYYY-MM-DD"));
   const { customer = {} } = useSelector((state) => state.auth);
-  useEffect(() => {   
-    dispatch(
-      getScheduleList({
-        params: {
-          lang_id: utils.convertLangCodeToID(i18n.language),
-          season: moment().format("YYYY"),
-          status: 0,
-          member_ID: customer?.member_ID,        
-          page: 1,                
-          date:datefilter,        
-          descending:'desc',
-          sortBy:'created_at'
-        },
-        callback: (res) => {
-          console.log('res error:::',res && res.data)
-          setLoading(false);
-          setLoading2(false);
-          setNextMatchList(res && res.data);
-          setFullMatchList(res && res.data)
-        },
-      })
-    );
-    
-  }, [dateFilter]);
+  const footballScheduleList = useSelector(
+    (state) => state.football.footballScheduleList
+  );
+  console.log("dateClickeddfdfd",dateClicked)
+  const dateSelect=dateClicked  ? dateFilter
+  : moment(new Date(DatePicker)).format(utils.dateFormate)
+  localStorage.setItem('selectedDate',dateSelect)
+  /**** Render match data */
+  async function scheduleData(dateFilters,DatePicker) {
+    var currenDate = moment(new Date()).format(utils.dateFormate);
+    const date1 = new Date(dateFilters);
+const date2 = new Date(DatePicker);
+    setLoading(true);
+    if (dateClicked) {
+      setFullMatchList([]);
+    } // setLoading2(true);
 
-  // useEffect(() => {
-  // //  console.log(':::fulllist',pastMatchList.concat(nextMatchList))
-  //   const fullList = pastMatchList.concat(nextMatchList).filter((item)=>item.startTime.includes(dateFilter));
-  //   setFullMatchList(nextMatchList);
-  //   const temp = pastMatchList.concat(nextMatchList).group(item  => item.startTime) 
-  //   // console.log(':::group list by start time',temp)
+    const params = {
+      lang_id: utils.convertLangCodeToID(i18n.language),
+      season: moment().format("YYYY"),
+      status:
+        dateFilters < currenDate ||
+        moment(new Date(DatePicker)).format(utils.dateFormate) < currenDate
+          ? 2
+          : 0,
+      member_ID: customer?.member_ID,
+      page: page,
+      date:dateSelect,
+      descending: "desc",
+      sortBy: "created_at",
+    };
+    const paramsLive = {
+      lang_id: utils.convertLangCodeToID(i18n.language),
+      season: moment().format("YYYY"),
+      member_ID: customer?.member_ID,
+      page: page,
+      date: currenDate,
+      descending: "desc",
+      sortBy: "created_at",
+    };
+console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(DatePicker)).format(utils.dateFormate))
+    try {
+      if ( currenDate === dateFilters && currenDate==moment(new Date(DatePicker)).format(utils.dateFormate)) {
+        console.log("ddddddddddd")
+        const response = await api.get(
+          "lotto/football-matches/mixed-live-list",
+          paramsLive
+        );
+        console.log(
+          "response",
+          response && response.data && response.data.data.live_scores
+        );
+        if (page == 1) {
+          setFullMatchList(
+            response && response.data && response.data.data.live_scores
+          );
+        } else {
+          setFullMatchList((data) =>
+            data.concat(
+              response && response.data && response.data.data.live_scores
+            )
+          );
+        }
+        setLoading(false);
+      } else {
+        const response = await api.get(
+          "lotto/data44-aistat/match-schedules",
+          params
+        );
+        if (page == 1) {
+          setFullMatchList(response?.data?.data?.data?.data);
+        } else {
+          setFullMatchList((data) =>
+            data.concat(response?.data?.data?.data?.data)
+          );
+        }
+        setLoading(false);
+      }
 
-  //   console.log('paginate pages:::',Math.ceil(fullMatchList?.length / 5))
-  // }, [pastMatchList, nextMatchList,dateFilter]);
-  console.log("fullMatchList",fullMatchList)
-console.log("dateFilter",dateFilter)
+      // setLoading2(false);
+    } catch (error) {
+      return console.log("error");
+    }
+  }
+
+  console.log("dateSelectdateSelectdateSelect4546565656");
+  useEffect(() => {
+    scheduleData(dateFilter, DatePicker);
+  }, [dateFilter, page, DatePicker]);
+
+  /*******Add and remove favorite*/
+  const handleAddRemove = (id) => {
+    customer?.member_ID
+      ? dispatch(
+          addRemoveFavourite({
+            body: {
+              id: id,
+              member_ID: customer?.member_ID,
+              type: "match_schedule",
+            },
+            callback: async (res) => {
+              var currenDate = moment(new Date()).format(utils.dateFormate);
+              var dateFilters = moment(new Date()).format(utils.dateFormate);
+
+              console.log("dateFiltersdateFilters", dateFilters);
+              const params = {
+                lang_id: utils.convertLangCodeToID(i18n.language),
+                season: moment().format("YYYY"),
+                status: dateFilters < currenDate ? 2 : 0,
+                member_ID: customer?.member_ID,
+                page: 1,
+                date: dateFilters,
+                descending: "desc",
+                sortBy: "created_at",
+              };
+              const paramsLive = {
+                lang_id: utils.convertLangCodeToID(i18n.language),
+                season: moment().format("YYYY"),
+                member_ID: customer?.member_ID,
+                page: page,
+                date: currenDate,
+                descending: "desc",
+                sortBy: "created_at",
+              };
+              try {
+                if (currenDate == dateFilters) {
+                  const response = await api.get(
+                    "lotto/football-matches/mixed-live-list",
+                    paramsLive
+                  );
+                  console.log(
+                    "response",
+                    response && response.data && response.data.data.live_scores
+                  );
+                  if (page == 1) {
+                    setFullMatchList(
+                      response && response.data && response.data.data.live_scores
+                    );
+                  } else {
+                    setFullMatchList((data) =>
+                      data.concat(
+                        response && response.data && response.data.data.live_scores
+                      )
+                    );
+                  }
+                  setLoading(false);
+                } else {
+                const response = await api.get(
+                  "lotto/data44-aistat/match-schedules",
+                  params
+                );
+
+                if (page == 1) {
+                  setFullMatchList(response?.data?.data?.data?.data);
+                } else {
+                  setFullMatchList((data) =>
+                    data.concat(response && response.data && response.data.data)
+                  );
+                }
+                setLoading(false);
+                }
+                
+                //setNextMatchList(response?.data?.data?.data?.data);
+               
+              } catch (error) {
+                return console.log("error");
+              }
+            },
+          })
+        )
+      : router.push("/login");
+  };
+
+
+
+  const handleScroll = (event) => {
+    if (
+      event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
+      event.currentTarget.clientHeight
+    ) {
+      setPage(page + 1);
+      setDateClicked(false);
+    }
+  };
+
+  const handleClose = () => {
+    setLoading(false);
+  };
+  const handleOpen = () => {
+    setLoading(true);
+  };
+  const isChrome =
+    typeof window !== "undefined" && /chrome/i.test(window.navigator.userAgent);
+  console.log("fullMatchList", DatePicker);
   return (
     <Grid style={{ position: "relative" }}>
-      
       <Grid
         item
         xs={12}
         style={{
           padding: 10,
+          paddingTop: "0px",
           position: "absolute",
           top: 50,
           width: "100%",
         }}
       >
-        <DateFilterBar setFilterDate={setDateFilter} />
-        <Grid >
-          {fullMatchList && !loading && !loading2 ?
-            fullMatchList.splice(0,5).map((item, index) => {
-              return <MatchItem details={item} index={index} />;
-            }):
-            <LoadingBackDrop loading={true}/>
-            }
+        <DateFilterBar
+          setFilterDate={setDateFilter}
+          setDateClicked={setDateClicked}
+          setDatePicker={setDatePicker}
+        />
+        <Grid
+          className="matchitem-box"
+          sx={{
+            height: `${!isChrome ? "200vh" : "150vh"}`,
+            maxHeight: "calc(100vh - 137px)",
+            overflow: "auto",
+          }}
+          onScroll={handleScroll}
+        >
+          {fullMatchList &&
+          fullMatchList.length > 0 &&
+          !loading &&
+          !loading2 ? (
+            fullMatchList.map((item, index) => {
+              return (
+                <MatchItem
+                  key={index}
+                  details={item}
+                  index={index}
+                  handleAddRemove={handleAddRemove}
+                />
+              );
+            })
+          ) : (
+            <LoadingBackDrop loading={loading} />
+          )}
 
-          {fullMatchList && fullMatchList?.length === 0 ? <DataNotFound />:''}
+          {!loading && fullMatchList && fullMatchList?.length === 0 ? (
+            <DataNotFound />
+          ) : (
+            ""
+          )}
         </Grid>
       </Grid>
     </Grid>

@@ -10,14 +10,21 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
+import utils from "@/common/utils";
 import StarIcon from "@/components/svg/star";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Image } from "mui-image";
 export default function MatchDetailHeader(props) {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
+  const {status}=props
+  const {details}=props
   const theme = useTheme();
   const router = useRouter();
-  
+  const lang_id= utils.convertLangCodeToID(i18n.language)
+
+  let score=details && details.match && details.match.finalScore
+  const myScore = score  && score.split(":");
+
   return (
     <>
     <Grid
@@ -34,7 +41,7 @@ export default function MatchDetailHeader(props) {
       >
         <Grid color="white" container justifyContent="center">
           <Grid pt={2}>
-            <Typography>English Premier League</Typography>
+            <Typography>{lang_id==2?details && details.match && details.match.competition && details.match.competition.name:details && details.match && details.match.competition && details.match.competition.nameEn}</Typography>
           </Grid>
           <Grid container item xs={12} justifyContent="center" alignItems="start" px={1}>
             <Grid
@@ -46,10 +53,11 @@ export default function MatchDetailHeader(props) {
             >
               <Image
                 alt="Dynamo Vladivostok"
-                src={"https://image.pngaaa.com/459/686459-middle.png"}
-                style={{ borderRadius: "50px",height:'80px',width:'80px' }}
+                src={details && details.match && details.match.home_team && details.match.home_team.country_image_big}
+                style={{ height:'80px',width:'80px' }}
               />
-              <Typography fontWeight="bold">Manchester</Typography>
+              <Typography fontWeight="bold">{lang_id==2?details && details.match && details.match.home_team && details.match.home_team.name
+:details && details.match && details.match.home_team && details.match.home_team.nameEn}</Typography>
             </Grid>
 
             <Grid
@@ -63,7 +71,7 @@ export default function MatchDetailHeader(props) {
               <Grid container       alignItems="center"        justifyContent="center"
 >
                 <Typography mx={1} variant="h5">
-                  0
+                  {myScore && myScore[0]}
                 </Typography>
                 <span style={{ borderColor: "white",marginTop:'10px' }} className="inner-circle">
                   <Grid
@@ -86,10 +94,10 @@ export default function MatchDetailHeader(props) {
                   </Grid>
                 </span>
                 <Typography mx={1} variant="h5">
-                  0
+                {myScore && myScore[1]}
                 </Typography>
                 <Typography sx={{ position: "absolute", bottom: "-30px", }}>
-                  FT
+                  {status=='undefined'?"FT":status}
                 </Typography>
               </Grid>
             </Grid>
@@ -104,17 +112,24 @@ export default function MatchDetailHeader(props) {
               <Image
                 alt="Dynamo Vladivostok"
                 src={
-                  "https://yt3.googleusercontent.com/1sL3o7HlNEOn4jV74w7WN-p7ABIbBop9c09QcwKTGcapN3eMvGt-tCDYoA3ErYbtVCHcpVtlcgM=s900-c-k-c0x00ffffff-no-rj"
+                  details && details.match && details.match.away_team
+&& details.match.away_team
+.country_image_big
                 }
-                style={{ borderRadius: "50px",height:'80px',width:'80px' }}
+                style={{ height:'80px',width:'80px' }}
               />
-              <Typography fontWeight="bold">Chelsea</Typography>
+              <Typography fontWeight="bold">{lang_id==2?details &&  details.match && details.away_team
+   && details.match.away_team
+ .name
+:details && details.match && details.match.away_team
+&& details.match.away_team
+.nameEn}</Typography>
             </Grid>
           </Grid>
         </Grid>
         <Grid container px={5} position="absolute" top="250px"></Grid>
       </Grid>
-      <Grid item xs={12} container alignItems="center" height="100px" px={1}>
+      {/* <Grid item xs={12} container alignItems="center" height="100px" px={1}>
         <Grid item xs={5} className="statsList">
           <Grid container alignItems="center" justifyContent="space-between">
             <Typography color="grey">jack Harrison</Typography>
@@ -177,6 +192,7 @@ export default function MatchDetailHeader(props) {
             </ul>
           </Grid>
         </Grid>
-      </Grid></>
+      </Grid> */}
+      </>
   );
 }
