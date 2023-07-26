@@ -174,7 +174,7 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
     ),
   ];
   var regex = /\d+/g;
-  console.log("footballFavoritList44",footballFavoritList && footballFavoritList.length)
+
   return (
     <>
       {/* chart modal  */}

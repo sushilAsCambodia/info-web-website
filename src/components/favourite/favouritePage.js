@@ -66,9 +66,8 @@ export default function FavouritePage(props) {
     }
     try {
       const response = await api.get('lotto/data44-aistat/match-schedules', params);
-      console.log("sdsdsdsd",response && response.data && response.data.data)
       const responseDetail=response && response.data && response.data.data && response.data.data.data && response.data.data.data.data
-      // console.log("response2435467687AS",response?.data?.data?.data?.data)
+  
       setFullMatchList(responseDetail)
       // if (page == 1) {
       //   setFullMatchList(responseDetail)
@@ -133,7 +132,7 @@ export default function FavouritePage(props) {
               var currenDate = moment(new Date()).format(utils.dateFormate);   
               var dateFilters = moment(new Date()).format(utils.dateFormate);     
               
-              console.log("dateFiltersdateFilters",dateFilters)
+  
              const params= {
                 lang_id: utils.convertLangCodeToID(i18n.language),
                 season: moment().format("YYYY"),
@@ -145,8 +144,7 @@ export default function FavouritePage(props) {
                 sortBy:'created_at'
               }
               try {
-                const response = await api.get('lotto/data44-aistat/match-schedules', params);
-                console.log("responseresponseresponse",response?.data?.data?.data?.data)
+                const response = await api.get('lotto/data44-aistat/match-schedules', params);              
                 //setNextMatchList(response?.data?.data?.data?.data);
                 if (page == 1) {
                   setFullMatchList(response?.data?.data?.data?.data)
@@ -172,13 +170,12 @@ export default function FavouritePage(props) {
     setLoading(true);
   };
   useEffect(() => {
-    console.log("dfdfdf")
     favoriteData(dateFilter)
     
   }, [dateFilter,page]);
   const isChrome =
 typeof window !== "undefined" && /chrome/i.test(window.navigator.userAgent);
-  console.log("startDate54545",dateFilter)
+
   return (
     <Grid style={{ position: "relative" }}>
       <Grid

@@ -30,8 +30,8 @@ export default function DateFilterBar(props) {
     const lang_id= utils.convertLangCodeToID(i18n.language)
     const [startDate, setStartDate] = useState(new Date()); 
     useEffect(() => {
-      setDatePicker(startDate)
-      console.log("startDate",startDate,new Date(),moment(startDate).format(utils.dateFormate))
+      setDatePicker(startDate)  
+      setDateClicked(false)
       setFilterDate(moment(new Date()).format(utils.dateFormate))
     }, [startDate]);
     var currenDate = moment(new Date()).format(utils.dateFormate);   
@@ -172,7 +172,7 @@ export default function DateFilterBar(props) {
         var d = startDate;
         
        // d.setDate(d.getDate() - i);
-        console.log("startDatestartDate",d)
+      
         // res1.push({
         //   date:moment(d).format(utils.dateFormate),
         //   day: moment(d).format(utils.dateLetter),
@@ -193,9 +193,8 @@ export default function DateFilterBar(props) {
           day: moment(startDate).add(i,"days").format(utils.dateLetter),
           DateMonth: moment(startDate).add(i,"days").format(utils.DateMonthFormat),
           ddmmmyyyy:moment(startDate).add(i,"days").format(utils.letterFormat2),
-        });
-        
-       console.log("new_date[i]",new_date[i])
+        });        
+     
         
       }
       for (var i = 1; i < 4; i++) {       

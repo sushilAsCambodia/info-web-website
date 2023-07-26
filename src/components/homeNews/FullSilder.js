@@ -104,7 +104,7 @@ export default function FullSilder(props) {
   const [autoPlay, setAutoPlay] = React.useState(true);
   const [newBanners, setNewBanners] = React.useState([]);
   const maxSteps = newBanners?.length;
-  console.log("test");
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -117,7 +117,7 @@ export default function FullSilder(props) {
     setActiveStep(step);
   };
 
-  console.log("newsbanner:::", newBanners);
+
   useEffect(() => {
     let position = "top_carousel";
     if (isH5) position = "carousel_image";
@@ -134,7 +134,7 @@ export default function FullSilder(props) {
     }
   }, [banners, isH5]);
 
-  console.log("newBanners:::", newBanners);
+
   useEffect(() => {
 console.log('autoplay:::',autoPlay)
   },[autoPlay])

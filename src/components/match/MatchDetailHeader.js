@@ -16,11 +16,12 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Image } from "mui-image";
 export default function MatchDetailHeader(props) {
   const { t,i18n } = useTranslation();
+  const {status}=props
   const {details}=props
   const theme = useTheme();
   const router = useRouter();
   const lang_id= utils.convertLangCodeToID(i18n.language)
-  console.log("detailsdetails55555",details)
+
   let score=details && details.match && details.match.finalScore
   const myScore = score  && score.split(":");
 
@@ -40,7 +41,7 @@ export default function MatchDetailHeader(props) {
       >
         <Grid color="white" container justifyContent="center">
           <Grid pt={2}>
-            <Typography>English Premier League</Typography>
+            <Typography>{lang_id==2?details && details.match && details.match.competition && details.match.competition.name:details && details.match && details.match.competition && details.match.competition.nameEn}</Typography>
           </Grid>
           <Grid container item xs={12} justifyContent="center" alignItems="start" px={1}>
             <Grid
@@ -96,7 +97,7 @@ export default function MatchDetailHeader(props) {
                 {myScore && myScore[1]}
                 </Typography>
                 <Typography sx={{ position: "absolute", bottom: "-30px", }}>
-                  FT
+                  {status=='undefined'?"FT":status}
                 </Typography>
               </Grid>
             </Grid>
@@ -117,8 +118,8 @@ export default function MatchDetailHeader(props) {
                 }
                 style={{ borderRadius: "50px",height:'80px',width:'80px' }}
               />
-              <Typography fontWeight="bold">{lang_id==2?details && details.away_team
- && details.match  && details.match.away_team
+              <Typography fontWeight="bold">{lang_id==2?details &&  details.match && details.away_team
+   && details.match.away_team
  .name
 :details && details.match && details.match.away_team
 && details.match.away_team

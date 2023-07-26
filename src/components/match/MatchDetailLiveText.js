@@ -18,7 +18,7 @@ export default function MatchDetailLiveText(props) {
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
-  console.log("InfoDetailsTextInfoDetailsText",InfoDetailsText)
+
 
   const manageEvent=(eventType)=>{
     switch(eventType) {

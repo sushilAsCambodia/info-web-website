@@ -57,9 +57,15 @@ export default function MatchWithDates(props) {
   const footballScheduleList = useSelector(
     (state) => state.football.footballScheduleList
   );
+  console.log("dateClickeddfdfd",dateClicked)
+  const dateSelect=dateClicked  ? dateFilter
+  : moment(new Date(DatePicker)).format(utils.dateFormate)
+  localStorage.setItem('selectedDate',dateSelect)
   /**** Render match data */
-  async function scheduleData(dateFilters) {
+  async function scheduleData(dateFilters,DatePicker) {
     var currenDate = moment(new Date()).format(utils.dateFormate);
+    const date1 = new Date(dateFilters);
+const date2 = new Date(DatePicker);
     setLoading(true);
     if (dateClicked) {
       setFullMatchList([]);
@@ -75,9 +81,7 @@ export default function MatchWithDates(props) {
           : 0,
       member_ID: customer?.member_ID,
       page: page,
-      date: dateClicked
-        ? dateFilters
-        : moment(new Date(DatePicker)).format(utils.dateFormate),
+      date:dateSelect,
       descending: "desc",
       sortBy: "created_at",
     };
@@ -90,9 +94,10 @@ export default function MatchWithDates(props) {
       descending: "desc",
       sortBy: "created_at",
     };
-
+console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(DatePicker)).format(utils.dateFormate))
     try {
-      if (currenDate == dateFilters) {
+      if ( currenDate === dateFilters && currenDate==moment(new Date(DatePicker)).format(utils.dateFormate)) {
+        console.log("ddddddddddd")
         const response = await api.get(
           "lotto/football-matches/mixed-live-list",
           paramsLive
@@ -134,7 +139,7 @@ export default function MatchWithDates(props) {
     }
   }
 
-  console.log("DatePicker", DatePicker);
+  console.log("dateSelectdateSelectdateSelect4546565656");
   useEffect(() => {
     scheduleData(dateFilter, DatePicker);
   }, [dateFilter, page, DatePicker]);
@@ -242,7 +247,7 @@ export default function MatchWithDates(props) {
   };
   const isChrome =
     typeof window !== "undefined" && /chrome/i.test(window.navigator.userAgent);
-  console.log("fullMatchList", fullMatchList, dateClicked);
+  console.log("fullMatchList", DatePicker);
   return (
     <Grid style={{ position: "relative" }}>
       <Grid

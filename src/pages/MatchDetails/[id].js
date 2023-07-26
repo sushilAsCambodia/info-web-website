@@ -90,6 +90,7 @@ export default function MatchDetails(props) {
   const theme = useTheme();
   const router = useRouter();
   const { id } = router.query;
+  const { status } = router.query;
   const [filterValue, setFilterValue] = useState("all");
   const [selected, setSelected] = useState([]); 
   const [details, setDetails] = useState({});
@@ -100,26 +101,31 @@ export default function MatchDetails(props) {
     setFilterValue(value);
   };
   const params = useParams();
-if(id){
-  console.log("paramsparamsparams",id);
-}
+// if(id){
+//   console.log("paramsparamsparams",id);
+// }
+// if(status){
+//   console.log("statusstatusstatus",status);
+// }
   async function matchDetails (){
     
     if(id){
-      console.log("paramsparamsparams454545454",id);
+
     try {
-      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=430119`);
+      // const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=430119`);
+      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=${id}`)
       if(response && response.data){
         setDetails(response && response.data && response.data.data)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
-      const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=430119`);
+      // const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=430119`);
+      const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=${id}`);
       if(responseInfo && responseInfo.data){
         setInfoDetails(responseInfo && responseInfo.data && responseInfo.data.data)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
-
-      const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=430119`);
+      // const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=430119`);
+      const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=${id}`);
       if(responseText && responseText.data){
         setInfoDetailsText(responseText && responseText.data && responseText.data.data)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
@@ -137,17 +143,17 @@ if(id){
   useEffect(() => {
     matchDetails()
     
-  }, [selected,id]);
+  }, [selected,id,status]);
 
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-console.log("infodetails",infodetails)
+
   return (
     <Grid container>
-      <MatchDetailHeader details={details} />
+      <MatchDetailHeader details={details} status={status} />
       <Grid item xs={12} className="sticky-header"  sx={{background:"#F3F3F3", borderWidth:"0.5px 0px", borderColor:"#DDDDDD", borderStyle:"solid", paddingBottom:"0px", }}>
         <Grid py={1} container justifyContent="center">
           <HeaderTabs value={value} onChange={handleChange} >

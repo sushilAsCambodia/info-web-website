@@ -42,9 +42,8 @@ export default function MatchItem(props) {
   };
   useEffect(() => {}, []);
   const lang_id= utils.convertLangCodeToID(i18n.language)
-  console.log("detailsdetailsdetails",details)
   const checkFavorite=details && details.match_schedule && details.match_schedule.is_favorite?details.match_schedule.is_favorite:details.is_favorite
-  console.log("checkFavorite",checkFavorite)
+  
   const matchDetail=details && details.match_schedule?details.match_schedule:details
   return (
     <Grid p={1} >
@@ -64,14 +63,14 @@ export default function MatchItem(props) {
           </Typography>         
 
 {checkFavorite ? (
-                            <IconButton onClick={()=>handleFav(details.id)}>
+                            <IconButton onClick={()=>handleFav(details.matchId)}>
                               {" "}
                               <Icon
                                 icon="clarity:star-solid" color="yellow" width="20"
                               />
                             </IconButton>
                           ) : (
-                            <IconButton onClick={()=>handleFav(details.id)}>
+                            <IconButton onClick={()=>handleFav(details.matchId)}>
                               {" "}
                               <Icon icon="clarity:star-solid" color="#ddd" width="20" />
                             </IconButton>
@@ -85,7 +84,7 @@ export default function MatchItem(props) {
           py={1}
           onClick={() => {
             matches
-              ? router.push(`/MatchDetails/${details.id}`)
+              ? router.push(`/MatchDetails/${details.matchId}?status=${details.elapsed}`)
               : router.push("/liveScorePage");
           }}
         >
@@ -119,7 +118,7 @@ export default function MatchItem(props) {
             <Grid item xs={8} container justifyContent="center">
               <Grid container justifyContent="center">
                 <Grid item md={12}>
-                  <Typography
+               {details.elapsed &&   <Typography
                     component="div"
                     display="flex"
                     justifyContent="center"
@@ -128,10 +127,10 @@ export default function MatchItem(props) {
                     fontSize={10}
                   >
                     <FiberManualRecordIcon style={{ fontSize: 9 }} />
-                    &nbsp;LIVE
-                  </Typography>
+                    &nbsp; {details.elapsed?"LIVE":''}
+                  </Typography>}
                   <Typography fontSize={8}>
-                    First Half {details.halfTimeScore}
+                  {details && details.finalScore?details.finalScore:details && details.match_schedule && details.match_schedule.finalScore}
                   </Typography>
                 </Grid>
               </Grid>

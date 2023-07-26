@@ -8,8 +8,7 @@ export const getScheduleList = createAsyncThunk(
   async ({ params = {}, callback }) => {
     try {
       const response = await api.get('lotto/data44-aistat/match-schedules', params);
-      console.log("response", response && response.data && response.data.data)
-      console.log("paramsparams",params && params.competition_ids)
+     
       // const { data, status } = response;
       // data["status_code"] = status;      
       const {status} = response;
@@ -39,8 +38,7 @@ export const getMatchEndList = createAsyncThunk(
   async ({ params = {}, callback }) => {
     try {
       const response = await api.get('lotto/data44-aistat/match-schedules', params);
-      console.log("response", response && response.data && response.data.data)
-      console.log("paramsparams",params && params.competition_ids)
+      
       // const { data, status } = response;
       // data["status_code"] = status;      
       const {status} = response;
@@ -70,8 +68,7 @@ export const getMatchListFavorite = createAsyncThunk(
   async ({ params = {}, callback }) => {
     try {
       const response = await api.get('lotto/data44-aistat/match-schedules', params);
-      console.log("response", response && response.data && response.data.data)
-      console.log("paramsparams",params && params.competition_ids)
+
       // const { data, status } = response;
       // data["status_code"] = status;      
       const {status} = response;

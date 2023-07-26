@@ -31,7 +31,6 @@ export default function DateFilterBar2(props) {
     setDate(event.target.value);
   };
   useEffect(() => {
-    console.log("startDate",startDate)
     setFilterDate(moment(startDate).format(utils.dateFormate))
     setDateClicked(true)
   }, [startDate]);
