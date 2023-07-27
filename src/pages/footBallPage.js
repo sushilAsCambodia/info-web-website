@@ -672,8 +672,7 @@ export default function FootBallPage() {
               member_ID: customer?.member_ID,
               type: "match_schedule",
             },
-            callback: async (res) => {    
-              console.log("resresresresresres",res)         
+            callback: async (res) => {                    
               setLoading(false);
               if(res && res.status_code===201){
               const params= {
@@ -686,12 +685,10 @@ export default function FootBallPage() {
                       sortBy: "startTime",
                     }
               try {
-                const response = await api.get('lotto/data44-aistat/match-schedules', params);
-                console.log("responseresponseresponse34343434",response && response.data && response.data.data && response.data.data.competition)
+                const response = await api.get('lotto/data44-aistat/match-schedules', params);               
              const responseDetails=   response && response.data && response.data.data && response.data.data.data && response.data.data.data.data
                 setFootballFavoritList(responseDetails);
-                setCompetition(response && response.data && response.data.data && response.data.data.competition);
-              
+                setCompetition(response && response.data && response.data.data && response.data.data.competition);              
                  setLoading(false);
                  const arrayName = [];
                     const competeName =
@@ -719,49 +716,7 @@ export default function FootBallPage() {
                return console.log("error")
               }
             }
-              // dispatch(
-              //   getMatchListFavorite({
-              //     params: {
-              //       lang_id: utils.convertLangCodeToID(i18n.language),
-              //       member_ID: customer?.member_ID,
-              //       page: 1,
-              //       is_favorite: true,
-              //       competition_ids: competId,
-              //       page: currentPage,
-              //       descending: false,
-              //       sortBy: "startTime",
-              //     },
-              //     callback: (res) => {
-              //       console.log("resresresresresres",res)
-              //       setFootballFavoritList(res && res.data);
-              //       setCompetition(res && res.competition);
-              //       const arrayName = [];
-              //       const competeName =
-              //         res &&
-              //         res.competition.length > 0 &&
-              //         res &&
-              //         res.competition.map((ids, index) => {
-              //           ids &&
-              //             ids.competitions &&
-              //             ids.competitions.length > 0 &&
-              //             ids.competitions.map((item, i) => {
-              //               //  if(selectedName.includes(item.nameEn) || selectedName.includes(item.name)){
-              //               //   competId.push(item.id)
-              //               //  }
-              //               let name =
-              //                 language_id == 1 || language_id == 3
-              //                   ? item.nameEnFull
-              //                   : item.nameFull;
-              //               ids.isCheck = true;
-              //               arrayName.push(name);
-              //             });
-              //         });
-        
-              //       setSelectedName(arrayName);
-              //       setLoading(false);
-              //     },
-              //   })
-              // );
+              
               
             },
           })

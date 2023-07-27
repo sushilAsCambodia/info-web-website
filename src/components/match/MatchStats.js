@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
+import { useDispatch, useSelector } from "react-redux";
 import { Image } from "mui-image";
 
 import TablePagination from '@mui/material/TablePagination';
@@ -98,7 +99,7 @@ export default function MatchStats(props) {
   const router = useRouter();
   let score=details && details.match && details.match.finalScore
   const myScore = score  && score.split(":");
-
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
     background: "#FF6F31",
     borderRight: "1px solid #DDDDDD ",
@@ -393,52 +394,52 @@ export default function MatchStats(props) {
           <TableHead>
           <TableRow>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Goals </div>
+                  <div className="tablecell-width" > {langKey && langKey.Goals} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Assists </div>
+                  <div className="tablecell-width" > {langKey && langKey.Assists} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  Fat </div>
+                  <div className="tablecell-width" >  {langKey && langKey.Fat} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  YelCards </div>
+                  <div className="tablecell-width" >  {langKey && langKey.YelCards} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Red Cards </div>
+                  <div className="tablecell-width" > {langKey && langKey.RedCards} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  Shots </div>
+                  <div className="tablecell-width" >  {langKey && langKey.Shots} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  Shots OT </div>
+                  <div className="tablecell-width" >  {langKey && langKey.ShotsOT} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  Shots Off Tag </div>
+                  <div className="tablecell-width" >  {langKey && langKey.ShotsOffTag} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Shots Blocked </div>
+                  <div className="tablecell-width" >  {langKey && langKey.ShotsBlocked} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  Off Sides </div>
+                  <div className="tablecell-width" >  {langKey && langKey.OffSides} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Pass Success </div>
+                  <div className="tablecell-width" > {langKey && langKey.PassSuccess} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Possession </div>
+                  <div className="tablecell-width" > {langKey && langKey.Possession} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Big Chance Created </div>
+                  <div className="tablecell-width" > {langKey && langKey.BigChanceCreated} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Corners </div>
+                  <div className="tablecell-width" > {langKey && langKey.Corners} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Total Saves </div>
+                  <div className="tablecell-width" > {langKey && langKey.TotalSaves} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > Dangerous Attacks </div>
+                  <div className="tablecell-width" >  {langKey && langKey.DangerousAttacks} </div>
                   </StyledHeaderCell>
                 </TableRow>
           </TableHead>

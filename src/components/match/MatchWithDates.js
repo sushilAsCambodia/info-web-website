@@ -57,12 +57,28 @@ export default function MatchWithDates(props) {
   const footballScheduleList = useSelector(
     (state) => state.football.footballScheduleList
   );
-  console.log("dateClickeddfdfd",dateClicked)
+  
+  let competionSelected
+  if (typeof window != "undefined") {
+    competionSelected = window.localStorage.getItem("competition"); 
+  }
+
   const dateSelect=dateClicked  ? dateFilter
   : moment(new Date(DatePicker)).format(utils.dateFormate)
-  localStorage.setItem('selectedDate',dateSelect)
+  
+  let dateSelected
+  if (typeof window != "undefined") {
+     dateSelected = window.localStorage.getItem("eventDate"); 
+  }
   /**** Render match data */
   async function scheduleData(dateFilters,DatePicker) {
+    // competionSelected && competionSelected.length>0 && competionSelected.map((ids)=>{
+    //   console.log("jdjfdfdfdf",ids)
+    // })
+    
+    const competSplit=competionSelected && competionSelected.length>0 && competionSelected.split(",")
+
+    localStorage.setItem('selectedDate',dateSelect)
     var currenDate = moment(new Date()).format(utils.dateFormate);
     const date1 = new Date(dateFilters);
 const date2 = new Date(DatePicker);
@@ -70,8 +86,10 @@ const date2 = new Date(DatePicker);
     if (dateClicked) {
       setFullMatchList([]);
     } // setLoading2(true);
-
-    const params = {
+let params
+if(localStorage.getItem("competition") === null){
+  console.log("dateSelect454545rrrrrr",dateSelect)
+     params = {
       lang_id: utils.convertLangCodeToID(i18n.language),
       season: moment().format("YYYY"),
       status:
@@ -80,23 +98,42 @@ const date2 = new Date(DatePicker);
           ? 2
           : 0,
       member_ID: customer?.member_ID,
+      competition_ids: competSplit,
       page: page,
       date:dateSelect,
       descending: "desc",
       sortBy: "created_at",
     };
+  } else {
+    console.log("dateSelect454545",dateSelect)
+    params = {
+      lang_id: utils.convertLangCodeToID(i18n.language),
+      season: moment().format("YYYY"),
+      status:
+      dateSelected < currenDate 
+          ? 2
+          : 0,
+      member_ID: customer?.member_ID,
+      competition_ids: competSplit,
+      page: page,
+      date:dateSelected,
+      descending: "desc",
+      sortBy: "created_at",
+    };
+  }
     const paramsLive = {
       lang_id: utils.convertLangCodeToID(i18n.language),
       season: moment().format("YYYY"),
       member_ID: customer?.member_ID,
       page: page,
+      competition_ids: competSplit,
       date: currenDate,
       descending: "desc",
       sortBy: "created_at",
     };
 console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(DatePicker)).format(utils.dateFormate))
     try {
-      if ( currenDate === dateFilters && currenDate==moment(new Date(DatePicker)).format(utils.dateFormate)) {
+      if ( localStorage.getItem("competition") === null && currenDate === dateFilters && currenDate==moment(new Date(DatePicker)).format(utils.dateFormate)) {
         console.log("ddddddddddd")
         const response = await api.get(
           "lotto/football-matches/mixed-live-list",
@@ -106,6 +143,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
           "response",
           response && response.data && response.data.data.live_scores
         );
+        localStorage.removeItem("competition")
         if (page == 1) {
           setFullMatchList(
             response && response.data && response.data.data.live_scores
@@ -123,6 +161,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
           "lotto/data44-aistat/match-schedules",
           params
         );
+        localStorage.removeItem("competition")
         if (page == 1) {
           setFullMatchList(response?.data?.data?.data?.data);
         } else {
@@ -146,6 +185,9 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
 
   /*******Add and remove favorite*/
   const handleAddRemove = (id) => {
+     const dateSelect=dateClicked  ? dateFilter
+  : moment(new Date(DatePicker)).format(utils.dateFormate)
+    console.log("idididdid",id)
     customer?.member_ID
       ? dispatch(
           addRemoveFavourite({
@@ -162,7 +204,10 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
               const params = {
                 lang_id: utils.convertLangCodeToID(i18n.language),
                 season: moment().format("YYYY"),
-                status: dateFilters < currenDate ? 2 : 0,
+                status: dateFilter < currenDate ||
+                moment(new Date(DatePicker)).format(utils.dateFormate) < currenDate
+                  ? 2
+                  : 0,
                 member_ID: customer?.member_ID,
                 page: 1,
                 date: dateFilters,
@@ -179,7 +224,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
                 sortBy: "created_at",
               };
               try {
-                if (currenDate == dateFilters) {
+                if ( currenDate === dateFilter) {
                   const response = await api.get(
                     "lotto/football-matches/mixed-live-list",
                     paramsLive
@@ -265,6 +310,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
           setFilterDate={setDateFilter}
           setDateClicked={setDateClicked}
           setDatePicker={setDatePicker}
+          dateSelected={dateSelected}          
         />
         <Grid
           className="matchitem-box"

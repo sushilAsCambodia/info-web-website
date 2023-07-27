@@ -108,9 +108,9 @@ export default function Match() {
                 fontWeight: "bold",
               },
             }}
-          >
-            <Tab className="matchtab" label={langKey?.favourite} {...a11yProps(0)} />
-            <Tab className="matchtab" label={langKey?.foot_ball} {...a11yProps(1)} />
+          > <Tab className="matchtab" label={langKey?.foot_ball} {...a11yProps(0)} />
+            <Tab className="matchtab" label={langKey?.favourite} {...a11yProps(1)} />
+           
             {/* <Tab className="matchtab" label={langKey?.basket_ball} {...a11yProps(2)} /> */}
           </Tabs>
           <Grid
@@ -134,11 +134,12 @@ export default function Match() {
             />
           </Grid>
         </Grid>
-        <TabPanel value={value} index={0} >
-        <FavouritePage/>
-        </TabPanel>       
-        <TabPanel value={value} index={1}>
+               
+        <TabPanel value={value} index={0}>
           <MatchWithDates  />  
+        </TabPanel>
+        <TabPanel value={value} index={1} >
+        <FavouritePage/>
         </TabPanel>
         <TabPanel value={value} index={2}>
         <MatchWithRounds />
