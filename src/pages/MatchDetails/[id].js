@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import {
   Typography,
@@ -96,6 +97,7 @@ export default function MatchDetails(props) {
   const [details, setDetails] = useState({});
   const [infodetails, setInfoDetails] = useState({});
   const [infodetailsText, setInfoDetailsText] = useState({});
+  const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
   
   const handleSelectFilter = (value) => {
     setFilterValue(value);
@@ -157,9 +159,9 @@ export default function MatchDetails(props) {
       <Grid item xs={12} className="sticky-header"  sx={{background:"#F3F3F3", borderWidth:"0.5px 0px", borderColor:"#DDDDDD", borderStyle:"solid", paddingBottom:"0px", }}>
         <Grid py={1} container justifyContent="center">
           <HeaderTabs value={value} onChange={handleChange} >
-            <Tab className="matchtab" label="Info" {...a11yProps(0)} />
-            <Tab className="matchtab" label="Live Text" {...a11yProps(1)} />
-            <Tab className="matchtab" label="Statics" {...a11yProps(2)} />
+            <Tab className="matchtab" label={langKey && langKey.Info} {...a11yProps(0)} />
+            <Tab className="matchtab" label={langKey && langKey.LiveText} {...a11yProps(1)} />
+            <Tab className="matchtab" label={langKey && langKey.Statics} {...a11yProps(2)} />
           </HeaderTabs>
         </Grid>
       </Grid>

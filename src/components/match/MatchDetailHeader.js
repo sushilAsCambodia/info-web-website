@@ -118,7 +118,7 @@ export default function MatchDetailHeader(props) {
                 }
                 style={{ height:'80px',width:'80px' }}
               />
-              <Typography fontWeight="bold">{lang_id==2?details &&  details.match && details.away_team
+              <Typography fontWeight="bold">{lang_id==2?details &&  details.match && details.match.away_team
    && details.match.away_team
  .name
 :details && details.match && details.match.away_team

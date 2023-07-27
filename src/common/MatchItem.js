@@ -17,7 +17,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import utils from "@/common/utils";
 import moment from "moment/min/moment-with-locales";
 export default function MatchItem(props) {
-  const { details, index,handleAddRemove } = props;
+  const { details, index,handleAddRemove,setMatchId } = props;
   const { t,i18n } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
@@ -32,6 +32,7 @@ export default function MatchItem(props) {
 
     /*** handle fav */
     const handleFav=(id)=>{
+      console.log("idid",id)
       handleAddRemove(id);
     }
 
@@ -62,14 +63,14 @@ export default function MatchItem(props) {
           </Typography>    
 
 {checkFavorite ? (
-                            <IconButton onClick={()=>handleFav(details.matchId)}>
+                            <IconButton onClick={()=>handleFav(details.matchId?details.matchId:details.id)}>
                               {" "}
                               <Icon
                                 icon="clarity:star-solid" color="yellow" width="20"
                               />
                             </IconButton>
                           ) : (
-                            <IconButton onClick={()=>handleFav(details.matchId)}>
+                            <IconButton onClick={()=>handleFav(details.matchId?details.matchId:details.id)}>
                               {" "}
                               <Icon icon="clarity:star-solid" color="#ddd" width="20" />
                             </IconButton>
@@ -83,7 +84,7 @@ export default function MatchItem(props) {
           py={1}
           onClick={() => {
             matches
-              ? router.push(`/MatchDetails/${details.matchId}?status=${details.elapsed}`)
+              ? router.push(`/MatchDetails/${details.matchId?details.matchId:details.id}?status=${details.elapsed}`)
               : router.push("/liveScorePage");
           }}
         >
@@ -116,8 +117,8 @@ export default function MatchItem(props) {
             </Grid>
             <Grid item xs={8} container justifyContent="center">
               <Grid container justifyContent="center">
-                <Grid item md={12}>
-               {details.elapsed &&   <Typography
+              {details && details.finalScore || details && details.match_schedule && details.match_schedule.finalScore && <Grid item md={12}>
+                  <Typography
                     component="div"
                     display="flex"
                     justifyContent="center"
@@ -126,12 +127,12 @@ export default function MatchItem(props) {
                     fontSize={10}
                   >
                     <FiberManualRecordIcon style={{ fontSize: 9 }} />
-                    &nbsp; {details.elapsed?"LIVE":''}
-                  </Typography>}
-                  <Typography fontSize={8}>
+                    &nbsp; {details.elapsed?"LIVE":'SCORE'}
+                  </Typography>
+                  <Typography fontSize={9}>
                   {details && details.finalScore?details.finalScore:details && details.match_schedule && details.match_schedule.finalScore}
                   </Typography>
-                </Grid>
+                </Grid>}
               </Grid>
             </Grid>
             <Grid item xs={2}>
