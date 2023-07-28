@@ -296,7 +296,7 @@ export default function MatchStats(props) {
 
 const awayTeam=details && details.stats && details.stats.length>0 && details.stats.find(item => item.homeAway === "away");
 const homeTeam=details && details.stats && details.stats.length>0 && details.stats.find(item => item.homeAway === "home");
-
+const barArray=["Goals","Assists","Fat","YellowCards",]
   return (
     <Grid
       container
@@ -382,13 +382,22 @@ const homeTeam=details && details.stats && details.stats.length>0 && details.sta
         </Grid>
       </Grid>
       </div>
+      <div>
+      <Grid pb={1} pt={1} sx={{display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
+      {langKey && langKey.Assists}
+        </Grid>
+      <Grid item xs={12} sx={{display:'flex'}}>
+      <Grid item xs={6} pr={.5}>
+        <LinearProgressWithLabelLeft team1={30} team2={70} />
+        </Grid>
+        <Grid item xs={6} pl={.5}>
+        <LinearProgressWithLabelRight team1={30} team2={70} />
+        </Grid>
       </Grid>
-      <Grid item xs={12} p={2}>
-        <LinearProgressWithLabel team1={30} team2={70} />
+      </div>
+      
       </Grid>
-      <Grid item xs={12} p={2}>
-        <LinearProgressWithLabel team1={30} team2={70} />
-      </Grid>
+  
       {/* <Grid item xs={12}>
           <TableContainer sx={{border:"2px solid #ddd"}} >
           <Table id="tablehover"  aria-label="simple table">
