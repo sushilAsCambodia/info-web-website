@@ -57,7 +57,7 @@ const BorderLinearProgressRight = styled(LinearProgress)(({ theme }) => ({
 function LinearProgressWithLabelLeft(props) {
   return (
     <Grid sx={{ position: "relative" }}>
-      <BorderLinearProgressLeft variant="determinate" value={props.team1} />
+      <BorderLinearProgressLeft variant="determinate" value={props.team1} style={{borderTopLeftRadius:'10px', borderBottomLeftRadius:'10px', height:'15px'}} />
       <Grid
         sx={{
           top: 0,
@@ -97,7 +97,7 @@ function LinearProgressWithLabelLeft(props) {
 function LinearProgressWithLabelRight(props) {
   return (
     <Grid sx={{ position: "relative" }}>
-      <BorderLinearProgressRight variant="determinate" value={props.team1} />
+      <BorderLinearProgressRight variant="determinate" value={props.team1} style={{borderTopRightRadius:'10px', borderBottomRightRadius:'10px', height:'15px'}} />
       <Grid
         sx={{
           top: 0,
@@ -355,10 +355,10 @@ export default function MatchStats(props) {
       </Grid>
       <Grid item xs={12} p={2} >
         <div>
-      <Grid pb={1} pt={3} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
+      <Grid pb={.5} pt={3} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
       <Grid>1</Grid>
       <Grid>  {langKey && langKey.Goals}</Grid>
-      <Grid>2</Grid>
+      <Grid sx={{color:'#c7c0c0'}}>2</Grid>
         </Grid>
       <Grid item xs={12} sx={{display:'flex'}}>
       <Grid item xs={6} pr={.5}>
@@ -370,11 +370,11 @@ export default function MatchStats(props) {
       </Grid>
       </div>
       <div>
-      <Grid pb={1} pt={2} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
+      <Grid pb={.5} pt={2} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
     
-      <Grid>1</Grid>
+      <Grid sx={{color: '#000'}}>1</Grid>
       <Grid>   {langKey && langKey.Assists}</Grid>
-      <Grid>2</Grid>
+      <Grid sx={{color:'#000', opacity:'.5'}}>2</Grid>
         </Grid>
       <Grid item xs={12} sx={{display:'flex'}}>
       <Grid item xs={6} pr={.5}>
