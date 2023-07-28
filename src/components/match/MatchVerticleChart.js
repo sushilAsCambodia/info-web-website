@@ -109,15 +109,17 @@ export default function MatchVerticleChart(props) {
       case 11:
         return (
           <>
-            <Icon icon="icons8:arrows-long-up" color="green" />
-            <Icon icon="icons8:arrows-long-down" color="red" />
+            {/* <Icon icon="icons8:arrows-long-up" color="green" />
+            <Icon icon="icons8:arrows-long-down" color="red" /> */}
+            <img src="/assets/logo/assisticon.png" />
           </>
         );
       case 12:
         return (
           <>
-            <Icon icon="icons8:arrows-long-up" color="green" />
-            <Icon icon="icons8:arrows-long-down" color="red" />
+            {/* <Icon icon="icons8:arrows-long-up" color="green" />
+            <Icon icon="icons8:arrows-long-down" color="red" /> */}
+            <img src="/assets/logo/assisticon.png" />
           </>
         );
     }

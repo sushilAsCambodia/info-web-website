@@ -49,6 +49,7 @@ export default function FavouritePage(props) {
   const [loading2, setLoading2] = useState(false);
   /**** Render match data */
   async function favoriteData(dateFilter){
+    
     if(dateClicked)
     {
       setFullMatchList([])
@@ -67,43 +68,23 @@ export default function FavouritePage(props) {
     try {
       const response = await api.get('lotto/data44-aistat/match-schedules', params);
       const responseDetail=response && response.data && response.data.data && response.data.data.data && response.data.data.data.data
-  
-      setFullMatchList(responseDetail)
-      // if (page == 1) {
-      //   setFullMatchList(responseDetail)
-      // } else {
-      //   setFullMatchList((data) =>
-      //     data.concat(responseDetail)
-      //   )
-      // }
-       setLoading(false);
+  console.log("responseresponse",response)
+  if(response && response.status==200){
+      //setFullMatchList(responseDetail)
+      if (page == 1) {
+        setFullMatchList(responseDetail)
+      } else {
+        setFullMatchList((data) =>
+          data.concat(responseDetail)
+        )
+      }
+       
+    }
       // setLoading2(false);
     }catch (error) {
      return console.log("error")
     }
-    // dispatch(
-    //   getScheduleList({
-    //     params: {
-    //       lang_id: utils.convertLangCodeToID(i18n.language),
-    //       season: moment().format("YYYY"),
-    //       status: 0,
-    //       member_ID: customer?.member_ID,        
-    //       page: 1,                
-    //       date:dateFilters,        
-    //       descending:'desc',
-    //       sortBy:'created_at'
-    //     },
-    //     callback: (res) => {
-    //       console.log('res error:::',res && res.data)
-    //       //setNextMatchList(res && res.data);
-
-    //       // setLoading(false);
-    //       // setLoading2(false);
-    //       // setNextMatchList(res && res.data);
-    //       //setFullMatchList(res && res.data)
-    //     },
-    //   })
-    // );
+    
   }
   const handleScroll = (event) => {
  
@@ -119,7 +100,7 @@ export default function FavouritePage(props) {
 
   /*******Add and remove favorite*/
   const handleAddRemove = (id) => {
-
+    setLoading(true)
     customer?.member_ID
       ? dispatch(
           addRemoveFavourite({
@@ -133,19 +114,30 @@ export default function FavouritePage(props) {
               var dateFilters = moment(new Date()).format(utils.dateFormate);     
               
   
-             const params= {
-                lang_id: utils.convertLangCodeToID(i18n.language),
-                season: moment().format("YYYY"),
-                status: dateFilters<currenDate?2:0,
-                member_ID: customer?.member_ID,        
-                page: 1,                
-                date:dateFilters,        
-                descending:'desc',
-                sortBy:'created_at'
-              }
+            //  const params= {
+            //     lang_id: utils.convertLangCodeToID(i18n.language),
+            //     season: moment().format("YYYY"),
+            //     status: dateFilters<currenDate?2:0,
+            //     member_ID: customer?.member_ID,        
+            //     page: 1,
+            //     is_favorite: true,     
+            //     date:dateFilters,        
+            //     descending:'desc',
+            //     sortBy:'created_at'
+            //   }
+            const params= {
+              lang_id: utils.convertLangCodeToID(i18n.language),
+              member_ID: customer?.member_ID,
+              page: 1,
+              is_favorite: true,
+              date:dateFilter,      
+              descending: false,
+              sortBy: "startTime",
+            }
               try {
                 const response = await api.get('lotto/data44-aistat/match-schedules', params);              
                 //setNextMatchList(response?.data?.data?.data?.data);
+                if(response && response.status==200){
                 if (page == 1) {
                   setFullMatchList(response?.data?.data?.data?.data)
                 } else {
@@ -153,7 +145,10 @@ export default function FavouritePage(props) {
                     data.concat(response && response.data && response.data.data)
                   );
                 }
-                          
+                setLoading(false)
+                
+              }
+                       
               }catch (error) {
                return console.log("error")
               }
@@ -175,7 +170,7 @@ export default function FavouritePage(props) {
   }, [dateFilter,page]);
   const isChrome =
 typeof window !== "undefined" && /chrome/i.test(window.navigator.userAgent);
-
+console.log("dateFilter",dateFilter)
   return (
     <Grid style={{ position: "relative" }}>
       <Grid
@@ -189,17 +184,19 @@ typeof window !== "undefined" && /chrome/i.test(window.navigator.userAgent);
         }}
       >
         <DateFilterBar2  setFilterDate={setDateFilter} setDateClicked={setDateClicked}/>
+        {loading&&<LoadingBackDrop loading={loading}/>}
         <Grid className="matchitem-box"   sx={{
             height: `${!isChrome ? "200vh" : "150vh"}`,
             maxHeight: "calc(100vh - 137px)",
             overflow: "auto",
           }}
           onScroll={handleScroll}>
-          {fullMatchList && fullMatchList.length>0 && !loading && !loading2 ?
-            fullMatchList.map((item, index) => {
+          {fullMatchList && fullMatchList.length>0 &&
+            fullMatchList.map((item, index) => {       
+             
               return <MatchItem key={index} details={item} index={index} handleAddRemove={handleAddRemove} />;
-            }):
-            <LoadingBackDrop loading={loading}/>
+            })
+           
             }
 
           {!loading&&fullMatchList && fullMatchList?.length === 0 ? <DataNotFound />:''}

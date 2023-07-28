@@ -300,9 +300,9 @@ export default function MatchStats(props) {
           />
         </Grid>
       </Grid>
-      {/* <Grid item xs={12} p={2}>
-        <LinearProgressWithLabel team1={40} team2={60} />
-      </Grid> */}
+      <Grid item xs={12} p={2}>
+        <LinearProgressWithLabel team1={30} team2={70} />
+      </Grid>
       {/* <Grid item xs={12}>
           <TableContainer sx={{border:"2px solid #ddd"}} >
           <Table id="tablehover"  aria-label="simple table">
