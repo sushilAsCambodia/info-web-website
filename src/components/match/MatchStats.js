@@ -355,8 +355,10 @@ export default function MatchStats(props) {
       </Grid>
       <Grid item xs={12} p={2} >
         <div>
-      <Grid pb={1} sx={{display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
-        {langKey && langKey.Goals}
+      <Grid pb={1} pt={3} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
+      <Grid>1</Grid>
+      <Grid>  {langKey && langKey.Goals}</Grid>
+      <Grid>2</Grid>
         </Grid>
       <Grid item xs={12} sx={{display:'flex'}}>
       <Grid item xs={6} pr={.5}>
@@ -368,8 +370,11 @@ export default function MatchStats(props) {
       </Grid>
       </div>
       <div>
-      <Grid pb={1} pt={1} sx={{display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
-      {langKey && langKey.Assists}
+      <Grid pb={1} pt={2} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
+    
+      <Grid>1</Grid>
+      <Grid>   {langKey && langKey.Assists}</Grid>
+      <Grid>2</Grid>
         </Grid>
       <Grid item xs={12} sx={{display:'flex'}}>
       <Grid item xs={6} pr={.5}>
