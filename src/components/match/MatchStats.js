@@ -239,8 +239,10 @@ export default function MatchStats(props) {
   
 
 
+//const awayTeam=details && details.stats && details.stats.length>0
 
-
+const awayTeam=details && details.stats && details.stats.length>0 && details.stats.find(item => item.homeAway === "away");
+const homeTeam=details && details.stats && details.stats.length>0 && details.stats.find(item => item.homeAway === "home");
 
   return (
     <Grid
@@ -299,6 +301,12 @@ export default function MatchStats(props) {
             alt="encrypted"
           />
         </Grid>
+      </Grid>
+      <Grid item xs={12} p={2}>
+        <LinearProgressWithLabel team1={30} team2={70} />
+      </Grid>
+      <Grid item xs={12} p={2}>
+        <LinearProgressWithLabel team1={30} team2={70} />
       </Grid>
       <Grid item xs={12} p={2}>
         <LinearProgressWithLabel team1={30} team2={70} />

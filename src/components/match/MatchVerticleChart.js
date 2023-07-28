@@ -73,20 +73,20 @@ export default function MatchVerticleChart(props) {
   const manageEvent = (eventType) => {
     switch (eventType) {
       case 0:
-        return <Icon width={25} icon="openmoji:soccer-ball" />;
+        return <Icon width={20} icon="openmoji:soccer-ball" />;
       case 1:
-        return <Icon width={25} icon="openmoji:soccer-ball" />;
+        return <Icon width={20} icon="openmoji:soccer-ball" />;
       case 1:
-        return <Icon width={25} icon="openmoji:soccer-ball" />;
+        return <Icon width={20} icon="openmoji:soccer-ball" />;
       case 4:
-        return <Icon width={25} icon="openmoji:soccer-ball" />;
+        return <Icon width={20} icon="openmoji:soccer-ball" />;
       case 5:
         return <img src="/assets/Logo/1200px-Missed_penalty_icon.svg" />;
       case 7:
         return (
           <Icon
             color="#ffe94b"
-            width={25}
+            width={20}
             icon="tabler:rectangle-vertical-filled"
           />
         );
@@ -94,7 +94,7 @@ export default function MatchVerticleChart(props) {
         return (
           <Icon
             color="#ffe94b"
-            width={25}
+            width={20}
             icon="tabler:rectangle-vertical-filled"
           />
         );
@@ -102,7 +102,7 @@ export default function MatchVerticleChart(props) {
         return (
           <Icon
             color="#ff0000"
-            width={25}
+            width={20}
             icon="tabler:rectangle-vertical-filled"
           />
         );
