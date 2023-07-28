@@ -31,6 +31,7 @@ import { styled } from "@mui/material/styles";
 const BorderLinearProgressLeft = styled(LinearProgress)(({ theme,colorCode }) => ({
   height: 20,
   // borderRadius: 0,
+
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor:
       theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
@@ -38,6 +39,7 @@ const BorderLinearProgressLeft = styled(LinearProgress)(({ theme,colorCode }) =>
   [`& .${linearProgressClasses.bar}`]: {
     //   borderRadius: 0,
     backgroundColor: theme.palette.mode === "light" ? colorCode : "#308fe8",
+    transform: "translateX(90%) !important",
   },
 }));
 
@@ -59,6 +61,7 @@ function LinearProgressWithLabelLeft(props) {
     <Grid sx={{ position: "relative" }}>
       <BorderLinearProgressLeft variant="determinate"  colorCode={props.homeTeamColor} value={props.team1} style={{borderTopLeftRadius:'10px', borderBottomLeftRadius:'10px', height:'15px'}} />
       <Grid
+      CL
         sx={{
           top: 0,
           left: 0,
@@ -437,9 +440,9 @@ const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarge
         console.log("homeTeamColor",totalProgressBar,parseInt(manageHomeTeam(items,homeTeam)),parseInt(manageHomeTeam(items,awayTeam)))
         return(<div key={index}>
       <Grid pb={.5} pt={3} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
-      <Grid>{manageHomeTeam(items,homeTeam)}</Grid>
+      <Grid>{manageHomeTeam(items,homeTeam)}{items=="PassSuccess" || items=="Possession"?"%":""}</Grid>
       <Grid>{langKey && langKey[items]}</Grid>
-      <Grid sx={{color:'#c7c0c0'}}>{manageTeamAway(items,awayTeam)}</Grid>
+      <Grid sx={{color:'#c7c0c0'}}>{manageTeamAway(items,awayTeam)}{items=="PassSuccess" || items=="Possession"?"%":""} </Grid>
         </Grid>
       <Grid item xs={12} sx={{display:'flex'}}>
       <Grid item xs={6} pr={.5}>
