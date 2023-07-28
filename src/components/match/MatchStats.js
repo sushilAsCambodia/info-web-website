@@ -28,7 +28,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+const BorderLinearProgressLeft = styled(LinearProgress)(({ theme }) => ({
   height: 20,
   // borderRadius: 0,
   [`&.${linearProgressClasses.colorPrimary}`]: {
@@ -37,14 +37,67 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
   [`& .${linearProgressClasses.bar}`]: {
     //   borderRadius: 0,
-    backgroundColor: theme.palette.mode === "light" ? "red" : "#308fe8",
+    backgroundColor: theme.palette.mode === "light" ? "#FF6F31" : "#308fe8",
   },
 }));
 
-function LinearProgressWithLabel(props) {
+const BorderLinearProgressRight = styled(LinearProgress)(({ theme }) => ({
+  height: 20,
+  // borderRadius: 0,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    //   borderRadius: 0,
+    backgroundColor: theme.palette.mode === "light" ? "#595959" : "#308fe8",
+  },
+}));
+
+function LinearProgressWithLabelLeft(props) {
   return (
     <Grid sx={{ position: "relative" }}>
-      <BorderLinearProgress variant="determinate" value={props.team1} />
+      <BorderLinearProgressLeft variant="determinate" value={props.team1} />
+      <Grid
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingLeft: "10px",
+        }}
+      >
+        <Typography sx={{ color: "white", fontWeight: "bold" }}>
+          {`${Math.round(props.team1)}%`}
+        </Typography>
+      </Grid>
+      <Grid
+        sx={{
+          top: 0,
+          bottom: 0,
+          right: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingRight: "10px",
+        }}
+      >
+        <Typography sx={{ color: "black", fontWeight: "bold" }}>
+          {`${Math.round(props.team2)}%`}
+        </Typography>
+      </Grid>
+    </Grid>
+  );
+}
+
+function LinearProgressWithLabelRight(props) {
+  return (
+    <Grid sx={{ position: "relative" }}>
+      <BorderLinearProgressRight variant="determinate" value={props.team1} />
       <Grid
         sx={{
           top: 0,
@@ -302,8 +355,33 @@ const homeTeam=details && details.stats && details.stats.length>0 && details.sta
           />
         </Grid>
       </Grid>
-      <Grid item xs={12} p={2}>
-        <LinearProgressWithLabel team1={30} team2={70} />
+      <Grid item xs={12} p={2} >
+        <div>
+      <Grid pb={1} sx={{display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
+        {langKey && langKey.Goals}
+        </Grid>
+      <Grid item xs={12} sx={{display:'flex'}}>
+      <Grid item xs={6} pr={.5}>
+        <LinearProgressWithLabelLeft team1={30} team2={70} />
+        </Grid>
+        <Grid item xs={6} pl={.5}>
+        <LinearProgressWithLabelRight team1={30} team2={70} />
+        </Grid>
+      </Grid>
+      </div>
+      <div>
+      <Grid pb={1} pt={1} sx={{display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
+      {langKey && langKey.Assists}
+        </Grid>
+      <Grid item xs={12} sx={{display:'flex'}}>
+      <Grid item xs={6} pr={.5}>
+        <LinearProgressWithLabelLeft team1={30} team2={70} />
+        </Grid>
+        <Grid item xs={6} pl={.5}>
+        <LinearProgressWithLabelRight team1={30} team2={70} />
+        </Grid>
+      </Grid>
+      </div>
       </Grid>
       <Grid item xs={12} p={2}>
         <LinearProgressWithLabel team1={30} team2={70} />
@@ -396,7 +474,7 @@ const homeTeam=details && details.stats && details.stats.length>0 && details.sta
           </TableContainer>
       </Grid> */}
 
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
       <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -479,7 +557,7 @@ const homeTeam=details && details.stats && details.stats.length>0 && details.sta
         </Table>
       </TableContainer>
 
-        </Grid>
+        </Grid> */}
 
     </Grid>
   );
