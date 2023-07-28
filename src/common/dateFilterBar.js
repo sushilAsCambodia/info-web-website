@@ -30,7 +30,7 @@ registerLocale("enUS", enUS);
 registerLocale("km", km);
 
 export default function DateFilterBar(props) {
-  const { setFilterDate, setDateClicked, setDatePicker,competitions,dateSelected } = props;
+  const { setFilterDate, setDateClicked, setDatePicker,competitions,dateSelected,setPage } = props;
   const { i18n } = useTranslation();
   const [startDates, setStartDates] = useState(new Date());
   const [dateFilter, setDateFilter] = useState(
@@ -53,6 +53,7 @@ export default function DateFilterBar(props) {
     setDatePicker(startDate);
     setDateClicked(false);
     setClickDateFilter(false);
+    setPage(1)
     setFilterDate(moment(new Date()).format(utils.dateFormate));
   }, [startDate]);
   var currenDate = moment(new Date()).format(utils.dateFormate);
@@ -168,6 +169,7 @@ console.log("compSetcompSetcompSet",compSet,dateSelected)
                   setStartDate(new Date(item.date));
                   localStorage.removeItem("eventDate",false)
                   localStorage.removeItem("setComp",false)
+                  setPage(1)
               }}
               sx={{
                 borderRight: "1px solid #ddd",

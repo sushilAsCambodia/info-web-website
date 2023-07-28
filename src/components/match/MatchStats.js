@@ -394,34 +394,34 @@ export default function MatchStats(props) {
           <TableHead>
           <TableRow>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.Goals} </div>
+                  <div style={{width:"50px"}} > {langKey && langKey.Goals} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.Assists} </div>
+                  <div style={{width:"50px"}} > {langKey && langKey.Assists} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.Fat} </div>
+                  <div style={{width:"50px"}} >  {langKey && langKey.Fat} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.YelCards} </div>
+                  <div style={{width:"70px"}} >  {langKey && langKey.YellowCards} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.RedCards} </div>
+                  <div style={{width:"70px"}} > {langKey && langKey.RedCards} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.Shots} </div>
+                  <div style={{width:"70px"}} >  {langKey && langKey.Shots} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.ShotsOT} </div>
+                  <div style={{width:"100px"}} >  {langKey && langKey.ShotsOnTarget} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.ShotsOffTag} </div>
+                  <div className="tablecell-width" >  {langKey && langKey.ShotsOffTarget} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
                   <div className="tablecell-width" >  {langKey && langKey.ShotsBlocked} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.OffSides} </div>
+                  <div style={{width:"60px"}} >  {langKey && langKey.OffSides} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
                   <div className="tablecell-width" > {langKey && langKey.PassSuccess} </div>
@@ -433,13 +433,13 @@ export default function MatchStats(props) {
                   <div className="tablecell-width" > {langKey && langKey.BigChanceCreated} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.Corners} </div>
+                  <div style={{width:"70px"}} > {langKey && langKey.Corners} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.TotalSaves} </div>
+                  <div style={{width:"70px"}} > {langKey && langKey.TotalSaves} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.DangerousAttacks} </div>
+                  <div style={{width:"120px"}} >  {langKey && langKey.DangerousAttacks} </div>
                   </StyledHeaderCell>
                 </TableRow>
           </TableHead>

@@ -134,7 +134,7 @@ if(localStorage.getItem("competition") === null){
 console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(DatePicker)).format(utils.dateFormate))
     try {
       if ( localStorage.getItem("competition") === null && currenDate === dateFilters && currenDate==moment(new Date(DatePicker)).format(utils.dateFormate)) {
-        console.log("ddddddddddd")
+        console.log("ffffffff")
         const response = await api.get(
           "lotto/football-matches/mixed-live-list",
           paramsLive
@@ -181,7 +181,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
   console.log("dateSelectdateSelectdateSelect4546565656");
   useEffect(() => {
     scheduleData(dateFilter, DatePicker);
-  }, [dateFilter, page, DatePicker]);
+  }, [page, DatePicker]);
 
   /*******Add and remove favorite*/
   const handleAddRemove = (id) => {
@@ -275,6 +275,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
 
 
   const handleScroll = (event) => {
+    
     if (
       event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
       event.currentTarget.clientHeight
@@ -310,7 +311,8 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
           setFilterDate={setDateFilter}
           setDateClicked={setDateClicked}
           setDatePicker={setDatePicker}
-          dateSelected={dateSelected}          
+          dateSelected={dateSelected}
+          setPage={setPage}   
         />
         <Grid
           className="matchitem-box"
