@@ -4,6 +4,8 @@ import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingBackDrop from "../../components/LoadingBackDrop";
+import utils from "@/common/utils";
 import AppBar from "@mui/material/AppBar";
 import {
   Typography,
@@ -87,18 +89,21 @@ function a11yProps(index) {
 }
 
 export default function MatchDetails(props) {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
+    const dispatch = useDispatch();
   const { id } = router.query;
   const { status } = router.query;
   const [filterValue, setFilterValue] = useState("all");
   const [selected, setSelected] = useState([]); 
+  const [loading, setLoading] = useState([]);
   const [details, setDetails] = useState({});
   const [infodetails, setInfoDetails] = useState({});
   const [infodetailsText, setInfoDetailsText] = useState({});
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
-  
+  const lang_ids= utils.convertLangCodeToID(i18n.language)
+  let lang_id=lang_ids===2?lang_ids:1
   const handleSelectFilter = (value) => {
     setFilterValue(value);
   };
@@ -110,26 +115,29 @@ export default function MatchDetails(props) {
 //   console.log("statusstatusstatus",status);
 // }
   async function matchDetails (){
-    
+    setLoading(true)
     if(id){
 
     try {
       // const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=430119`);
-      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=${id}`)
+      const response = await api.get(`lotto/football-matches/live-team-statistic?match_id=${id}&lang_id=${lang_id}`)
       if(response && response.data){
         setDetails(response && response.data && response.data.data)
+       // setLoading(false)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
       // const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=430119`);
-      const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=${id}`);
+      const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=${id}&lang_id=${lang_id}`);
       if(responseInfo && responseInfo.data){
         setInfoDetails(responseInfo && responseInfo.data && responseInfo.data.data)
+        //setLoading(false)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
       // const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=430119`);
-      const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=${id}`);
+      const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=${id}&lang_id=${lang_id}`);
       if(responseText && responseText.data){
         setInfoDetailsText(responseText && responseText.data && responseText.data.data)
+        setLoading(false)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
 
@@ -145,7 +153,7 @@ export default function MatchDetails(props) {
   useEffect(() => {
     matchDetails()
     
-  }, [selected,id,status]);
+  }, [selected,id,status,lang_id]);
 
   const [value, setValue] = React.useState(0);
 
@@ -156,6 +164,7 @@ export default function MatchDetails(props) {
   return (
     <Grid container>
       <MatchDetailHeader details={details} status={status} />
+      {loading &&<LoadingBackDrop loading={loading} />}
       <Grid item xs={12} className="sticky-header"  sx={{background:"#F3F3F3", borderWidth:"0.5px 0px", borderColor:"#DDDDDD", borderStyle:"solid", paddingBottom:"0px", }}>
         <Grid py={1} container justifyContent="center">
           <HeaderTabs value={value} onChange={handleChange} >

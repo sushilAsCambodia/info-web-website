@@ -85,6 +85,7 @@ const date2 = new Date(DatePicker);
     setLoading(true);
     if (dateClicked) {
       setFullMatchList([]);
+      setPage(1)
     } // setLoading2(true);
 let params
 if(localStorage.getItem("competition") === null){
@@ -134,7 +135,7 @@ if(localStorage.getItem("competition") === null){
 console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(DatePicker)).format(utils.dateFormate))
     try {
       if ( localStorage.getItem("competition") === null && currenDate === dateFilters && currenDate==moment(new Date(DatePicker)).format(utils.dateFormate)) {
-        console.log("ddddddddddd")
+        console.log("ffffffff")
         const response = await api.get(
           "lotto/football-matches/mixed-live-list",
           paramsLive
@@ -181,13 +182,15 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
   console.log("dateSelectdateSelectdateSelect4546565656");
   useEffect(() => {
     scheduleData(dateFilter, DatePicker);
-  }, [dateFilter, page, DatePicker]);
+  }, [page, DatePicker]);
 
   /*******Add and remove favorite*/
   const handleAddRemove = (id) => {
      const dateSelect=dateClicked  ? dateFilter
   : moment(new Date(DatePicker)).format(utils.dateFormate)
-    console.log("idididdid",id)
+    setPage(1)
+    setLoading(true)
+    const competSplit=competionSelected && competionSelected.length>0 && competionSelected.split(",")
     customer?.member_ID
       ? dispatch(
           addRemoveFavourite({
@@ -201,19 +204,53 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
               var dateFilters = moment(new Date()).format(utils.dateFormate);
 
               console.log("dateFiltersdateFilters", dateFilters);
-              const params = {
-                lang_id: utils.convertLangCodeToID(i18n.language),
-                season: moment().format("YYYY"),
-                status: dateFilter < currenDate ||
-                moment(new Date(DatePicker)).format(utils.dateFormate) < currenDate
-                  ? 2
-                  : 0,
-                member_ID: customer?.member_ID,
-                page: 1,
-                date: dateFilters,
-                descending: "desc",
-                sortBy: "created_at",
-              };
+              let params
+if(localStorage.getItem("competition") === null){  
+     params = {
+      lang_id: utils.convertLangCodeToID(i18n.language),
+      season: moment().format("YYYY"),
+      status:
+        dateFilters < currenDate ||
+        moment(new Date(DatePicker)).format(utils.dateFormate) < currenDate
+          ? 2
+          : 0,
+      member_ID: customer?.member_ID,
+      competition_ids: competSplit,
+      page: page,
+      date:dateSelect,
+      descending: "desc",
+      sortBy: "created_at",
+    };
+  } else {
+   
+    params = {
+      lang_id: utils.convertLangCodeToID(i18n.language),
+      season: moment().format("YYYY"),
+      status:
+      dateSelected < currenDate 
+          ? 2
+          : 0,
+      member_ID: customer?.member_ID,
+      competition_ids: competSplit,
+      page: page,
+      date:dateSelected,
+      descending: "desc",
+      sortBy: "created_at",
+    };
+  }
+              // const params = {
+              //   lang_id: utils.convertLangCodeToID(i18n.language),
+              //   season: moment().format("YYYY"),
+              //   status: dateFilter < currenDate ||
+              //   moment(new Date(DatePicker)).format(utils.dateFormate) < currenDate
+              //     ? 2
+              //     : 0,
+              //   member_ID: customer?.member_ID,
+              //   page: 1,
+              //   date: dateFilters,
+              //   descending: "desc",
+              //   sortBy: "created_at",
+              // };
               const paramsLive = {
                 lang_id: utils.convertLangCodeToID(i18n.language),
                 season: moment().format("YYYY"),
@@ -224,7 +261,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
                 sortBy: "created_at",
               };
               try {
-                if ( currenDate === dateFilter) {
+                if ( localStorage.getItem("competition") === null && currenDate === dateFilters && currenDate==moment(new Date(DatePicker)).format(utils.dateFormate)) {
                   const response = await api.get(
                     "lotto/football-matches/mixed-live-list",
                     paramsLive
@@ -233,6 +270,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
                     "response",
                     response && response.data && response.data.data.live_scores
                   );
+                  
                   if (page == 1) {
                     setFullMatchList(
                       response && response.data && response.data.data.live_scores
@@ -275,6 +313,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
 
 
   const handleScroll = (event) => {
+    
     if (
       event.currentTarget.scrollHeight - event.currentTarget.scrollTop ===
       event.currentTarget.clientHeight
@@ -310,8 +349,10 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
           setFilterDate={setDateFilter}
           setDateClicked={setDateClicked}
           setDatePicker={setDatePicker}
-          dateSelected={dateSelected}          
+          dateSelected={dateSelected}
+          setPage={setPage}   
         />
+        {loading &&<LoadingBackDrop loading={loading} />}
         <Grid
           className="matchitem-box"
           sx={{
@@ -323,8 +364,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
         >
           {fullMatchList &&
           fullMatchList.length > 0 &&
-          !loading &&
-          !loading2 ? (
+           (
             fullMatchList.map((item, index) => {
               return (
                 <MatchItem
@@ -335,9 +375,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
                 />
               );
             })
-          ) : (
-            <LoadingBackDrop loading={loading} />
-          )}
+          ) }
 
           {!loading && fullMatchList && fullMatchList?.length === 0 ? (
             <DataNotFound />

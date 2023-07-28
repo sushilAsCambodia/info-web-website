@@ -28,7 +28,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+const BorderLinearProgressLeft = styled(LinearProgress)(({ theme,colorCode }) => ({
   height: 20,
   // borderRadius: 0,
   [`&.${linearProgressClasses.colorPrimary}`]: {
@@ -37,14 +37,27 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
   [`& .${linearProgressClasses.bar}`]: {
     //   borderRadius: 0,
-    backgroundColor: theme.palette.mode === "light" ? "red" : "#308fe8",
+    backgroundColor: theme.palette.mode === "light" ? colorCode : "#308fe8",
   },
 }));
 
-function LinearProgressWithLabel(props) {
+const BorderLinearProgressRight = styled(LinearProgress)(({ theme,colorCode }) => ({
+  height: 20,
+  // borderRadius: 0,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    //   borderRadius: 0,
+    backgroundColor: theme.palette.mode === "light" ? colorCode : "#308fe8",
+  },
+}));
+
+function LinearProgressWithLabelLeft(props) {
   return (
     <Grid sx={{ position: "relative" }}>
-      <BorderLinearProgress variant="determinate" value={props.team1} />
+      <BorderLinearProgressLeft variant="determinate"  colorCode={props.homeTeamColor} value={props.team1} style={{borderTopLeftRadius:'10px', borderBottomLeftRadius:'10px', height:'15px'}} />
       <Grid
         sx={{
           top: 0,
@@ -58,7 +71,7 @@ function LinearProgressWithLabel(props) {
         }}
       >
         <Typography sx={{ color: "white", fontWeight: "bold" }}>
-          {`${Math.round(props.team1)}%`}
+          {/* {`${Math.round(props.team1)}%`} */}
         </Typography>
       </Grid>
       <Grid
@@ -74,7 +87,47 @@ function LinearProgressWithLabel(props) {
         }}
       >
         <Typography sx={{ color: "black", fontWeight: "bold" }}>
-          {`${Math.round(props.team2)}%`}
+          {/* {`${Math.round(props.team2)}%`} */}
+        </Typography>
+      </Grid>
+    </Grid>
+  );
+}
+
+function LinearProgressWithLabelRight(props) {
+  return (
+    <Grid sx={{ position: "relative" }}>
+      <BorderLinearProgressRight variant="determinate" value={props.team1} colorCode={props.awayTeamColor} style={{borderTopRightRadius:'10px', borderBottomRightRadius:'10px', height:'15px'}} />
+      <Grid
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingLeft: "10px",
+        }}
+      >
+        <Typography sx={{ color: "white", fontWeight: "bold" }}>
+          {/* {`${Math.round(props.team1)}%`} */}
+        </Typography>
+      </Grid>
+      <Grid
+        sx={{
+          top: 0,
+          bottom: 0,
+          right: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingRight: "10px",
+        }}
+      >
+        <Typography sx={{ color: "black", fontWeight: "bold" }}>
+          {/* {`${Math.round(props.team2)}%`} */}
         </Typography>
       </Grid>
     </Grid>
@@ -237,11 +290,84 @@ export default function MatchStats(props) {
     createData('Brazil', 'BR', 210147125, 8515767),
   ];
   
+  const manageHomeTeam=(eventType,homeTeam)=>{
+    switch(eventType) {
+      case "Goals":
+        return  homeTeam && homeTeam.goals
+        case "Assists":
+        return  homeTeam && homeTeam.assists       
+        case "YellowCards":
+        return  homeTeam && homeTeam.yelCards 
+        case "RedCards":
+          return  homeTeam && homeTeam.redCards     
+        case "Shots":
+        return  homeTeam && homeTeam.shots
+        case "ShotsOnTarget":
+        return  homeTeam && homeTeam.shotsOT
+        case "ShotsOffTarget":
+        return  homeTeam && homeTeam.shotsOffTag
+        case "ShotsBlocked":
+        return  homeTeam && homeTeam.shotsBlocked
+        case "OffSides":
+        return  homeTeam && homeTeam.offsides
+        case "PassSuccess":
+        return  homeTeam && homeTeam.passSucc
+        case "Possession":
+        return  homeTeam && homeTeam.possession
+        case "BigChanceCreated":
+        return  homeTeam && homeTeam.bigChanceCreated
+        case "Corners":
+        return  homeTeam && homeTeam.corners
+        case "TotalSaves":
+        return  homeTeam && homeTeam.totalSaves
+        case "DangerousAttacks":
+        return  homeTeam && homeTeam.dangerousAttacks     
+     
+    }
+  }
+
+  const manageTeamAway=(eventType,awayTeam)=>{
+    switch(eventType) {
+      case "Goals":
+        return  awayTeam && awayTeam.goals
+        case "Assists":
+        return  awayTeam && awayTeam.assists       
+        case "YellowCards":
+        return  awayTeam && awayTeam.yelCards
+        case "RedCards":
+          return  awayTeam && awayTeam.redCards  
+        case "Shots":
+        return  awayTeam && awayTeam.shots
+        case "ShotsOnTarget":
+        return  awayTeam && awayTeam.shotsOT
+        case "ShotsOffTarget":
+        return  awayTeam && awayTeam.shotsOffTag
+        case "ShotsBlocked":
+        return  awayTeam && awayTeam.shotsBlocked
+        case "OffSides":
+        return  awayTeam && awayTeam.offsides
+        case "PassSuccess":
+        return  awayTeam && awayTeam.passSucc
+        case "Possession":
+        return  awayTeam && awayTeam.possession
+        case "BigChanceCreated":
+        return  awayTeam && awayTeam.bigChanceCreated
+        case "Corners":
+        return  awayTeam && awayTeam.corners
+        case "TotalSaves":
+        return  awayTeam && awayTeam.totalSaves
+        case "DangerousAttacks":
+        return  awayTeam && awayTeam.dangerousAttacks     
+     
+    }
+  }
 
 
+//const awayTeam=details && details.stats && details.stats.length>0
 
-
-
+const awayTeam=details && details.stats && details.stats.length>0 && details.stats.find(item => item.homeAway === "away");
+const homeTeam=details && details.stats && details.stats.length>0 && details.stats.find(item => item.homeAway === "home");
+const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarget","ShotsOffTarget","ShotsBlocked","OffSides","PassSuccess","Possession","BigChanceCreated","Corners","TotalSaves","DangerousAttacks"]
   return (
     <Grid
       container
@@ -300,9 +426,36 @@ export default function MatchStats(props) {
           />
         </Grid>
       </Grid>
-      {/* <Grid item xs={12} p={2}>
-        <LinearProgressWithLabel team1={40} team2={60} />
-      </Grid> */}
+      <Grid item xs={12} p={2} >
+        {barArray && barArray.length>0 && barArray.map((items,index)=>
+       { 
+        const totalProgressBar=parseInt(manageHomeTeam(items,homeTeam))+parseInt(manageTeamAway(items,awayTeam))
+        const homeTeamNum=parseInt(totalProgressBar)-parseInt(manageHomeTeam(items,homeTeam))
+        const awayTeamNum=parseInt(totalProgressBar)-parseInt(manageTeamAway(items,awayTeam))
+        const homeTeamColor= homeTeamNum<awayTeamNum?"#FF6F31":"#595959"
+        const awayTeamColor= homeTeamNum>awayTeamNum?"#FF6F31":"#595959"
+        console.log("homeTeamColor",totalProgressBar,parseInt(manageHomeTeam(items,homeTeam)),parseInt(manageHomeTeam(items,awayTeam)))
+        return(<div key={index}>
+      <Grid pb={.5} pt={3} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
+      <Grid>{manageHomeTeam(items,homeTeam)}</Grid>
+      <Grid>{langKey && langKey[items]}</Grid>
+      <Grid sx={{color:'#c7c0c0'}}>{manageTeamAway(items,awayTeam)}</Grid>
+        </Grid>
+      <Grid item xs={12} sx={{display:'flex'}}>
+      <Grid item xs={6} pr={.5}>
+        <LinearProgressWithLabelLeft homeTeamColor={homeTeamColor}  team1={parseInt(manageHomeTeam(items,homeTeam))} team2={homeTeamNum} />
+        </Grid>
+        <Grid item xs={6} pl={.5}>
+        <LinearProgressWithLabelRight awayTeamColor={awayTeamColor} team1={parseInt(manageTeamAway(items,awayTeam))} team2={awayTeamNum} />
+        </Grid>
+      </Grid>
+      </div>)
+})}
+        
+      
+  
+      </Grid>
+  
       {/* <Grid item xs={12}>
           <TableContainer sx={{border:"2px solid #ddd"}} >
           <Table id="tablehover"  aria-label="simple table">
@@ -388,40 +541,40 @@ export default function MatchStats(props) {
           </TableContainer>
       </Grid> */}
 
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
       <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
           <TableRow>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.Goals} </div>
+                  <div style={{width:"50px"}} > {langKey && langKey.Goals} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.Assists} </div>
+                  <div style={{width:"50px"}} > {langKey && langKey.Assists} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.Fat} </div>
+                  <div style={{width:"50px"}} >  {langKey && langKey.Fat} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.YelCards} </div>
+                  <div style={{width:"70px"}} >  {langKey && langKey.YellowCards} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.RedCards} </div>
+                  <div style={{width:"70px"}} > {langKey && langKey.RedCards} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.Shots} </div>
+                  <div style={{width:"70px"}} >  {langKey && langKey.Shots} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.ShotsOT} </div>
+                  <div style={{width:"100px"}} >  {langKey && langKey.ShotsOnTarget} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.ShotsOffTag} </div>
+                  <div className="tablecell-width" >  {langKey && langKey.ShotsOffTarget} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
                   <div className="tablecell-width" >  {langKey && langKey.ShotsBlocked} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.OffSides} </div>
+                  <div style={{width:"60px"}} >  {langKey && langKey.OffSides} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
                   <div className="tablecell-width" > {langKey && langKey.PassSuccess} </div>
@@ -433,13 +586,13 @@ export default function MatchStats(props) {
                   <div className="tablecell-width" > {langKey && langKey.BigChanceCreated} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.Corners} </div>
+                  <div style={{width:"70px"}} > {langKey && langKey.Corners} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" > {langKey && langKey.TotalSaves} </div>
+                  <div style={{width:"70px"}} > {langKey && langKey.TotalSaves} </div>
                   </StyledHeaderCell>
                   <StyledHeaderCell align="center">
-                  <div className="tablecell-width" >  {langKey && langKey.DangerousAttacks} </div>
+                  <div style={{width:"120px"}} >  {langKey && langKey.DangerousAttacks} </div>
                   </StyledHeaderCell>
                 </TableRow>
           </TableHead>
@@ -471,7 +624,7 @@ export default function MatchStats(props) {
         </Table>
       </TableContainer>
 
-        </Grid>
+        </Grid> */}
 
     </Grid>
   );
