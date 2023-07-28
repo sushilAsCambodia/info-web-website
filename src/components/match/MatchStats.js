@@ -71,7 +71,7 @@ function LinearProgressWithLabelLeft(props) {
         }}
       >
         <Typography sx={{ color: "white", fontWeight: "bold" }}>
-          {`${Math.round(props.team1)}%`}
+          {/* {`${Math.round(props.team1)}%`} */}
         </Typography>
       </Grid>
       <Grid
@@ -87,7 +87,7 @@ function LinearProgressWithLabelLeft(props) {
         }}
       >
         <Typography sx={{ color: "black", fontWeight: "bold" }}>
-          {`${Math.round(props.team2)}%`}
+          {/* {`${Math.round(props.team2)}%`} */}
         </Typography>
       </Grid>
     </Grid>
@@ -111,7 +111,7 @@ function LinearProgressWithLabelRight(props) {
         }}
       >
         <Typography sx={{ color: "white", fontWeight: "bold" }}>
-          {`${Math.round(props.team1)}%`}
+          {/* {`${Math.round(props.team1)}%`} */}
         </Typography>
       </Grid>
       <Grid
@@ -127,7 +127,7 @@ function LinearProgressWithLabelRight(props) {
         }}
       >
         <Typography sx={{ color: "black", fontWeight: "bold" }}>
-          {`${Math.round(props.team2)}%`}
+          {/* {`${Math.round(props.team2)}%`} */}
         </Typography>
       </Grid>
     </Grid>
@@ -369,22 +369,7 @@ export default function MatchStats(props) {
         </Grid>
       </Grid>
       </div>
-      <div>
-      <Grid pb={.5} pt={2} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
-    
-      <Grid sx={{color: '#000'}}>1</Grid>
-      <Grid>   {langKey && langKey.Assists}</Grid>
-      <Grid sx={{color:'#000', opacity:'.5'}}>2</Grid>
-        </Grid>
-      <Grid item xs={12} sx={{display:'flex'}}>
-      <Grid item xs={6} pr={.5}>
-        <LinearProgressWithLabelLeft team1={30} team2={70} />
-        </Grid>
-        <Grid item xs={6} pl={.5}>
-        <LinearProgressWithLabelRight team1={30} team2={70} />
-        </Grid>
-      </Grid>
-      </div>
+     
       </Grid>
       {/* <Grid item xs={12}>
           <TableContainer sx={{border:"2px solid #ddd"}} >
