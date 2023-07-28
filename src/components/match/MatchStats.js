@@ -28,7 +28,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
 
-const BorderLinearProgressLeft = styled(LinearProgress)(({ theme }) => ({
+const BorderLinearProgressLeft = styled(LinearProgress)(({ theme,colorCode }) => ({
   height: 20,
   // borderRadius: 0,
   [`&.${linearProgressClasses.colorPrimary}`]: {
@@ -37,11 +37,11 @@ const BorderLinearProgressLeft = styled(LinearProgress)(({ theme }) => ({
   },
   [`& .${linearProgressClasses.bar}`]: {
     //   borderRadius: 0,
-    backgroundColor: theme.palette.mode === "light" ? "#FF6F31" : "#308fe8",
+    backgroundColor: theme.palette.mode === "light" ? colorCode : "#308fe8",
   },
 }));
 
-const BorderLinearProgressRight = styled(LinearProgress)(({ theme }) => ({
+const BorderLinearProgressRight = styled(LinearProgress)(({ theme,colorCode }) => ({
   height: 20,
   // borderRadius: 0,
   [`&.${linearProgressClasses.colorPrimary}`]: {
@@ -50,14 +50,14 @@ const BorderLinearProgressRight = styled(LinearProgress)(({ theme }) => ({
   },
   [`& .${linearProgressClasses.bar}`]: {
     //   borderRadius: 0,
-    backgroundColor: theme.palette.mode === "light" ? "#595959" : "#308fe8",
+    backgroundColor: theme.palette.mode === "light" ? colorCode : "#308fe8",
   },
 }));
 
 function LinearProgressWithLabelLeft(props) {
   return (
     <Grid sx={{ position: "relative" }}>
-      <BorderLinearProgressLeft variant="determinate" value={props.team1} />
+      <BorderLinearProgressLeft variant="determinate"  colorCode={props.homeTeamColor} value={props.team1} style={{borderTopLeftRadius:'10px', borderBottomLeftRadius:'10px', height:'15px'}} />
       <Grid
         sx={{
           top: 0,
@@ -71,7 +71,7 @@ function LinearProgressWithLabelLeft(props) {
         }}
       >
         <Typography sx={{ color: "white", fontWeight: "bold" }}>
-          {`${Math.round(props.team1)}%`}
+          {/* {`${Math.round(props.team1)}%`} */}
         </Typography>
       </Grid>
       <Grid
@@ -87,7 +87,7 @@ function LinearProgressWithLabelLeft(props) {
         }}
       >
         <Typography sx={{ color: "black", fontWeight: "bold" }}>
-          {`${Math.round(props.team2)}%`}
+          {/* {`${Math.round(props.team2)}%`} */}
         </Typography>
       </Grid>
     </Grid>
@@ -97,7 +97,7 @@ function LinearProgressWithLabelLeft(props) {
 function LinearProgressWithLabelRight(props) {
   return (
     <Grid sx={{ position: "relative" }}>
-      <BorderLinearProgressRight variant="determinate" value={props.team1} />
+      <BorderLinearProgressRight variant="determinate" value={props.team1} colorCode={props.awayTeamColor} style={{borderTopRightRadius:'10px', borderBottomRightRadius:'10px', height:'15px'}} />
       <Grid
         sx={{
           top: 0,
@@ -111,7 +111,7 @@ function LinearProgressWithLabelRight(props) {
         }}
       >
         <Typography sx={{ color: "white", fontWeight: "bold" }}>
-          {`${Math.round(props.team1)}%`}
+          {/* {`${Math.round(props.team1)}%`} */}
         </Typography>
       </Grid>
       <Grid
@@ -127,7 +127,7 @@ function LinearProgressWithLabelRight(props) {
         }}
       >
         <Typography sx={{ color: "black", fontWeight: "bold" }}>
-          {`${Math.round(props.team2)}%`}
+          {/* {`${Math.round(props.team2)}%`} */}
         </Typography>
       </Grid>
     </Grid>
@@ -290,13 +290,84 @@ export default function MatchStats(props) {
     createData('Brazil', 'BR', 210147125, 8515767),
   ];
   
+  const manageHomeTeam=(eventType,homeTeam)=>{
+    switch(eventType) {
+      case "Goals":
+        return  homeTeam && homeTeam.goals
+        case "Assists":
+        return  homeTeam && homeTeam.assists       
+        case "YellowCards":
+        return  homeTeam && homeTeam.yelCards 
+        case "RedCards":
+          return  homeTeam && homeTeam.redCards     
+        case "Shots":
+        return  homeTeam && homeTeam.shots
+        case "ShotsOnTarget":
+        return  homeTeam && homeTeam.shotsOT
+        case "ShotsOffTarget":
+        return  homeTeam && homeTeam.shotsOffTag
+        case "ShotsBlocked":
+        return  homeTeam && homeTeam.shotsBlocked
+        case "OffSides":
+        return  homeTeam && homeTeam.offsides
+        case "PassSuccess":
+        return  homeTeam && homeTeam.passSucc
+        case "Possession":
+        return  homeTeam && homeTeam.possession
+        case "BigChanceCreated":
+        return  homeTeam && homeTeam.bigChanceCreated
+        case "Corners":
+        return  homeTeam && homeTeam.corners
+        case "TotalSaves":
+        return  homeTeam && homeTeam.totalSaves
+        case "DangerousAttacks":
+        return  homeTeam && homeTeam.dangerousAttacks     
+     
+    }
+  }
+
+  const manageTeamAway=(eventType,awayTeam)=>{
+    switch(eventType) {
+      case "Goals":
+        return  awayTeam && awayTeam.goals
+        case "Assists":
+        return  awayTeam && awayTeam.assists       
+        case "YellowCards":
+        return  awayTeam && awayTeam.yelCards
+        case "RedCards":
+          return  awayTeam && awayTeam.redCards  
+        case "Shots":
+        return  awayTeam && awayTeam.shots
+        case "ShotsOnTarget":
+        return  awayTeam && awayTeam.shotsOT
+        case "ShotsOffTarget":
+        return  awayTeam && awayTeam.shotsOffTag
+        case "ShotsBlocked":
+        return  awayTeam && awayTeam.shotsBlocked
+        case "OffSides":
+        return  awayTeam && awayTeam.offsides
+        case "PassSuccess":
+        return  awayTeam && awayTeam.passSucc
+        case "Possession":
+        return  awayTeam && awayTeam.possession
+        case "BigChanceCreated":
+        return  awayTeam && awayTeam.bigChanceCreated
+        case "Corners":
+        return  awayTeam && awayTeam.corners
+        case "TotalSaves":
+        return  awayTeam && awayTeam.totalSaves
+        case "DangerousAttacks":
+        return  awayTeam && awayTeam.dangerousAttacks     
+     
+    }
+  }
 
 
 //const awayTeam=details && details.stats && details.stats.length>0
 
 const awayTeam=details && details.stats && details.stats.length>0 && details.stats.find(item => item.homeAway === "away");
 const homeTeam=details && details.stats && details.stats.length>0 && details.stats.find(item => item.homeAway === "home");
-const barArray=["Goals","Assists","Fat","YellowCards",]
+const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarget","ShotsOffTarget","ShotsBlocked","OffSides","PassSuccess","Possession","BigChanceCreated","Corners","TotalSaves","DangerousAttacks"]
   return (
     <Grid
       container
@@ -356,46 +427,33 @@ const barArray=["Goals","Assists","Fat","YellowCards",]
         </Grid>
       </Grid>
       <Grid item xs={12} p={2} >
-        <div>
-      <Grid pb={1} sx={{display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
-        {langKey && langKey.Goals}
+        {barArray && barArray.length>0 && barArray.map((items,index)=>
+       { 
+        const totalProgressBar=parseInt(manageHomeTeam(items,homeTeam))+parseInt(manageTeamAway(items,awayTeam))
+        const homeTeamNum=parseInt(totalProgressBar)-parseInt(manageHomeTeam(items,homeTeam))
+        const awayTeamNum=parseInt(totalProgressBar)-parseInt(manageTeamAway(items,awayTeam))
+        const homeTeamColor= homeTeamNum<awayTeamNum?"#FF6F31":"#595959"
+        const awayTeamColor= homeTeamNum>awayTeamNum?"#FF6F31":"#595959"
+        console.log("homeTeamColor",totalProgressBar,parseInt(manageHomeTeam(items,homeTeam)),parseInt(manageHomeTeam(items,awayTeam)))
+        return(<div key={index}>
+      <Grid pb={.5} pt={3} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
+      <Grid>{manageHomeTeam(items,homeTeam)}</Grid>
+      <Grid>{langKey && langKey[items]}</Grid>
+      <Grid sx={{color:'#c7c0c0'}}>{manageTeamAway(items,awayTeam)}</Grid>
         </Grid>
       <Grid item xs={12} sx={{display:'flex'}}>
       <Grid item xs={6} pr={.5}>
-        <LinearProgressWithLabelLeft team1={30} team2={70} />
+        <LinearProgressWithLabelLeft homeTeamColor={homeTeamColor}  team1={parseInt(manageHomeTeam(items,homeTeam))} team2={homeTeamNum} />
         </Grid>
         <Grid item xs={6} pl={.5}>
-        <LinearProgressWithLabelRight team1={30} team2={70} />
+        <LinearProgressWithLabelRight awayTeamColor={awayTeamColor} team1={parseInt(manageTeamAway(items,awayTeam))} team2={awayTeamNum} />
         </Grid>
       </Grid>
-      </div>
-      <div>
-      <Grid pb={1} pt={1} sx={{display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
-      {langKey && langKey.Assists}
-        </Grid>
-      <Grid item xs={12} sx={{display:'flex'}}>
-      <Grid item xs={6} pr={.5}>
-        <LinearProgressWithLabelLeft team1={30} team2={70} />
-        </Grid>
-        <Grid item xs={6} pl={.5}>
-        <LinearProgressWithLabelRight team1={30} team2={70} />
-        </Grid>
-      </Grid>
-      </div>
-      <div>
-      <Grid pb={1} pt={1} sx={{display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
-      {langKey && langKey.Assists}
-        </Grid>
-      <Grid item xs={12} sx={{display:'flex'}}>
-      <Grid item xs={6} pr={.5}>
-        <LinearProgressWithLabelLeft team1={30} team2={70} />
-        </Grid>
-        <Grid item xs={6} pl={.5}>
-        <LinearProgressWithLabelRight team1={30} team2={70} />
-        </Grid>
-      </Grid>
-      </div>
+      </div>)
+})}
+        
       
+  
       </Grid>
   
       {/* <Grid item xs={12}>

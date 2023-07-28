@@ -58,43 +58,7 @@ export default function MatchDetailLiveText(props) {
     }
   }
 
-  const manageText=(eventType,item)=>{
-    switch(eventType) {
-      case 0:
-        return <Icon width={20} icon="openmoji:soccer-ball" />;
-        case 1:
-        return <Icon width={20} icon="openmoji:soccer-ball" />;
-        case 1:
-        return <Icon width={20} icon="openmoji:soccer-ball" />;
-        case 4:
-          return <Icon width={20} icon="openmoji:soccer-ball" />;
-          case 5:
-            return <img src="/assets/Logo/1200px-Missed_penalty_icon.svg" />;
-            case 7:
-          return <Icon color="#ffe94b" width={20} icon="tabler:rectangle-vertical-filled" />;
-          case 8:
-          return <Icon color="#ffe94b" width={20} icon="tabler:rectangle-vertical-filled" />;
-          case 10:
-          return <Icon color="#ff0000" width={20} icon="tabler:rectangle-vertical-filled" />;
-          case 11:
-            return (
-              <>
-                {/* <Icon icon="icons8:arrows-long-up" color="green" />
-                <Icon icon="icons8:arrows-long-down" color="red" /> */}
-                <img src="/assets/logo/assisticon.png" />
-              </>
-            );
-          case 12:
-            return (
-              <>
-                {/* <Icon icon="icons8:arrows-long-up" color="green" />
-                <Icon icon="icons8:arrows-long-down" color="red" /> */}
-                <img src="/assets/logo/assisticon.png" />
-              </>
-            );
-     
-    }
-  }
+ 
 
 
   const message = [
