@@ -89,7 +89,7 @@ const date2 = new Date(DatePicker);
     } // setLoading2(true);
 let params
 if(localStorage.getItem("competition") === null){
-  console.log("dateSelect454545rrrrrr",dateSelect)
+ 
      params = {
       lang_id: utils.convertLangCodeToID(i18n.language),
       season: moment().format("YYYY"),
@@ -106,7 +106,7 @@ if(localStorage.getItem("competition") === null){
       sortBy: "created_at",
     };
   } else {
-    console.log("dateSelect454545",dateSelect)
+    
     params = {
       lang_id: utils.convertLangCodeToID(i18n.language),
       season: moment().format("YYYY"),
@@ -132,18 +132,15 @@ if(localStorage.getItem("competition") === null){
       descending: "desc",
       sortBy: "created_at",
     };
-console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(DatePicker)).format(utils.dateFormate))
+
     try {
       if ( localStorage.getItem("competition") === null && currenDate === dateFilters && currenDate==moment(new Date(DatePicker)).format(utils.dateFormate)) {
-        console.log("ffffffff")
+       
         const response = await api.get(
           "lotto/football-matches/mixed-live-list",
           paramsLive
         );
-        console.log(
-          "response",
-          response && response.data && response.data.data.live_scores
-        );
+      
         localStorage.removeItem("competition")
         if (page == 1) {
           setFullMatchList(
@@ -179,7 +176,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
     }
   }
 
-  console.log("dateSelectdateSelectdateSelect4546565656");
+
   useEffect(() => {
     scheduleData(dateFilter, DatePicker);
   }, [page, DatePicker]);
@@ -202,8 +199,7 @@ console.log("currenDatecurrenDate",currenDate,dateFilters,  moment(new Date(Date
             callback: async (res) => {
               var currenDate = moment(new Date()).format(utils.dateFormate);
               var dateFilters = moment(new Date()).format(utils.dateFormate);
-
-              console.log("dateFiltersdateFilters", dateFilters);
+              
               let params
 if(localStorage.getItem("competition") === null){  
      params = {
@@ -331,7 +327,7 @@ if(localStorage.getItem("competition") === null){
   };
   const isChrome =
     typeof window !== "undefined" && /chrome/i.test(window.navigator.userAgent);
-  console.log("fullMatchList", DatePicker);
+  
   return (
     <Grid style={{ position: "relative" }}>
       <Grid

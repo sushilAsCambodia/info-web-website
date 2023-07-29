@@ -230,7 +230,7 @@ const competeName=res && res.competition.length>0 && res && res.competition.map(
   }
 
   const filterByCompetion =()=>{
-    console.log("Selected Name",selectedName)
+  
     setLoading(true);
     /*** Competition Id */
     let competId=[]
@@ -266,7 +266,7 @@ const competeName=res && res.competition.length>0 && res && res.competition.map(
         },
       })
     );
-    console.log("competIdcompetIdcompetId",competId)
+    
   }
   const [value, setValue] = useState("");
   const [footballLiveScoreList, setFootballLiveScoreList] = useState([]);

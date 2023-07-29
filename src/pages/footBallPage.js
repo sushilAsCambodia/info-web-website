@@ -211,6 +211,7 @@ export default function FootBallPage() {
   //     typeof value === "string" ? value.split(",") : value
   //   );
   // };
+  const [confirm, setConfirm] = useState(false);
   const classes = useStyles();
 
   const handleCheckbox = (e, name) => {
@@ -332,7 +333,7 @@ export default function FootBallPage() {
           params: {
             lang_id: utils.convertLangCodeToID(i18n.language),
             member_ID: customer?.member_ID,
-            competition_ids: competId,
+            // competition_ids: competId,
             sortBy: "startTime",
           },
           callback: (res) => {
@@ -403,7 +404,7 @@ export default function FootBallPage() {
       );
     }
   };
-  console.log("SelectedNameSelectedNameSelectedNameSelectedName",selectedName)
+ 
   /******* Clear competition filter*/
   const clearCheckBox = () => {
     const competId = ["No data"];
@@ -501,7 +502,7 @@ export default function FootBallPage() {
 
   /******* Filter by competition */
   function filterByCompetition() {
-    
+    setConfirm(true)
     setCompfilter(false);  
     setLoading(true);
     /*** Competition Id */
@@ -662,7 +663,7 @@ export default function FootBallPage() {
 
   /*******Add and remove favorite follow*/
   const handleAddRemoveFollow = (id) => {
-    console.log("resresresresresres")
+  
     setLoading(true);
     customer?.member_ID
       ? dispatch(
@@ -828,7 +829,7 @@ export default function FootBallPage() {
         params: {
           lang_id: utils.convertLangCodeToID(i18n.language),
           member_ID: customer?.member_ID,
-          competition_ids: competId,
+          // competition_ids: competId,
           sortBy: "startTime",
         },
         callback: (res) => {
@@ -866,6 +867,7 @@ export default function FootBallPage() {
   }
 /******** Default data loading */
   useEffect(() => {
+    setConfirm(false)   
     setLoading(true);
     let competId = [];
     competitions &&
@@ -926,7 +928,7 @@ export default function FootBallPage() {
           },
         })
       );
-    } else if (select === "Schedule") {
+    } else if (select === "Schedule" && confirm==false) {
       setSelectedName([]);
       dispatch(
         getScheduleList({
@@ -1056,6 +1058,7 @@ export default function FootBallPage() {
   //const footballlist=selectedName && selectedName.length>0?result:footballScheduleList
 
   /****** Render Competition */
+ /*** name.match(/(\b\S)?/g).join("")*/  
   const renderSelectGroup = (product) => {
     const items =
       product &&
@@ -1064,9 +1067,12 @@ export default function FootBallPage() {
         let name =
           language_id == 1 || language_id == 3 ? p.nameEnFull : p.nameFull;
         let nameData =
+          // language_id == 1 || language_id == 3
+          //   ? name.match(/(\b\S)?/g).join("")
+          //   : p.name;
           language_id == 1 || language_id == 3
-            ? name.match(/(\b\S)?/g).join("")
-            : p.name;
+          ? p.name
+          : p.name;
         let checkboxVal = selectedName.includes(name);
 
         return (
@@ -1230,7 +1236,7 @@ export default function FootBallPage() {
                     background: "green",
                   }}
                 >
-                  {langKey && langKey.confirm}{" "}
+                  {langKey && langKey.confirm}
                 </Button>
               </div>
             </Select>
