@@ -1176,7 +1176,8 @@ export default function FootBallPage() {
                   display: "grid",
                   gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
                   gap: "4px",
-                  paddingBottom: "30px",
+                  paddingBottom: "30px"
+                  
                 }}
               >
                 {competition &&
@@ -1195,6 +1196,7 @@ export default function FootBallPage() {
                   right: "0",
                   bottom: "0",
                   background: "#fff",
+                  zIndex:999999999
                 }}
               >
                 <Button
@@ -1236,7 +1238,7 @@ export default function FootBallPage() {
                     background: "green",
                   }}
                 >
-                  {langKey && langKey.confirm}
+                  {langKey && langKey.confirm}                  
                 </Button>
               </div>
             </Select>
