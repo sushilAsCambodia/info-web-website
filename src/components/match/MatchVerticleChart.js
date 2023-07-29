@@ -66,10 +66,10 @@ const matchInfo = [
 
 export default function MatchVerticleChart(props) {
   const { t } = useTranslation();
+  
   const theme = useTheme();
   const router = useRouter();
-  const { InfoDetails } = props;
-  console.log("InfoDetailsInfoDetails", InfoDetails);
+  const { InfoDetails,lang_id } = props;
   const manageEvent = (eventType) => {
     switch (eventType) {
       case 0:
@@ -148,11 +148,10 @@ export default function MatchVerticleChart(props) {
                     {manageEvent(eventType)}
                   </div>
                   {/* <img src="/assets/Logo/1200px-Missed_penalty_icon.svg" /> */}
-                  <h4>{item.playerName != null ? item.playerName : "__"}</h4>
+                  <h4>{lang_id==2 && item.playerName != null?item.playerName :lang_id==1 ||lang_id==3?item.playerNameEn:  "__"}</h4>
                   <p style={{ fontSize: "10px" }}>
-                    {item.relatedPlayerName != null
-                      ? item.relatedPlayerName
-                      : " "}
+                    {
+                       item.relatedPlayerName != null && lang_id==2?item.relatedPlayerName :lang_id==1 ||lang_id==3?item.relatedPlayerNameEn: " "}
                   </p>
                 </div>
               </div>

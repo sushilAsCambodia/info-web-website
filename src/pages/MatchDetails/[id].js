@@ -175,7 +175,7 @@ export default function MatchDetails(props) {
         </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
-        <MatchVerticleChart details={details} InfoDetails={infodetails} />
+        <MatchVerticleChart details={details} InfoDetails={infodetails} lang_id={lang_id} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <MatchDetailLiveText  details={details} InfoDetailsText={infodetailsText} />

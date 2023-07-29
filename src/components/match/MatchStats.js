@@ -39,7 +39,7 @@ const BorderLinearProgressLeft = styled(LinearProgress)(({ theme,colorCode }) =>
   [`& .${linearProgressClasses.bar}`]: {
     //   borderRadius: 0,
     backgroundColor: theme.palette.mode === "light" ? colorCode : "#308fe8",
-    transform: "translateX(90%) !important",
+    
   },
 }));
 
@@ -433,12 +433,16 @@ const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarge
         {barArray && barArray.length>0 && barArray.map((items,index)=>
        { 
         const totalProgressBar=parseInt(manageHomeTeam(items,homeTeam))+parseInt(manageTeamAway(items,awayTeam))
-        const homeTeamNum=parseInt(totalProgressBar)-parseInt(manageHomeTeam(items,homeTeam))
-        const awayTeamNum=parseInt(totalProgressBar)-parseInt(manageTeamAway(items,awayTeam))
+
+       const homeTeamPercentage=parseInt(manageHomeTeam(items,homeTeam))*100/parseInt(totalProgressBar)
+       const awayTeamPercentage=parseInt(manageHomeTeam(items,awayTeam))*100/parseInt(totalProgressBar)
+
+        const homeTeamNum=100-parseInt(homeTeamPercentage)
+        const awayTeamNum=100-parseInt(awayTeamPercentage)
         const homeTeamColor= homeTeamNum<awayTeamNum?"#FF6F31":"#595959"
-        const awayTeamColor= homeTeamNum>awayTeamNum?"#FF6F31":"#595959"
-        console.log("homeTeamColor",totalProgressBar,parseInt(manageHomeTeam(items,homeTeam)),parseInt(manageHomeTeam(items,awayTeam)))
-        return(<div key={index}>
+        const awayTeamColor= homeTeamNum>awayTeamNum?"#FF6F31":"#595959"       
+      
+       return(<div key={index}>
       <Grid pb={.5} pt={3} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
       <Grid>{manageHomeTeam(items,homeTeam)}{items=="PassSuccess" || items=="Possession"?"%":""}</Grid>
       <Grid>{langKey && langKey[items]}</Grid>
@@ -446,10 +450,10 @@ const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarge
         </Grid>
       <Grid item xs={12} sx={{display:'flex'}}>
       <Grid item xs={6} pr={.5}>
-        <LinearProgressWithLabelLeft homeTeamColor={homeTeamColor}  team1={parseInt(manageHomeTeam(items,homeTeam))} team2={homeTeamNum} />
+        <LinearProgressWithLabelLeft homeTeamColor={manageHomeTeam(items,homeTeam)==0?"#eeeeee":manageHomeTeam(items,homeTeam)==manageHomeTeam(items,awayTeam)?"#eeeeee":homeTeamColor}  team1={manageHomeTeam(items,homeTeam)==0?0:homeTeamPercentage} team2={manageHomeTeam(items,homeTeam)==0?100:homeTeamNum} />
         </Grid>
         <Grid item xs={6} pl={.5}>
-        <LinearProgressWithLabelRight awayTeamColor={awayTeamColor} team1={parseInt(manageTeamAway(items,awayTeam))} team2={awayTeamNum} />
+        <LinearProgressWithLabelRight awayTeamColor={manageHomeTeam(items,awayTeam)==0?"#eeeeee":manageHomeTeam(items,homeTeam)==manageHomeTeam(items,awayTeam)?"#eeeeee":awayTeamColor} team1={manageTeamAway(items,awayTeam)==0?0:awayTeamPercentage} team2={manageTeamAway(items,awayTeam)==0?100:awayTeamNum} />
         </Grid>
       </Grid>
       </div>)

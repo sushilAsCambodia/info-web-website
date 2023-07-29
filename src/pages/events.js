@@ -63,7 +63,7 @@ export default function Events(props) {
       localStorage.setItem('competition',selected)
       localStorage.setItem('setComp',true)
       localStorage.setItem('eventDate',dateSelected)
-console.log("selected",selected)
+
 router.push(`/match`)
     }
     setFilterValue(value);
@@ -123,7 +123,7 @@ router.push(`/match`)
 
     try {
       if ( currenDate === dateSelected) {
-        console.log("ddddddddddd")
+     
         const response = await api.get(
           "lotto/football-matches/mixed-live-list",
           paramsLive
@@ -145,7 +145,7 @@ router.push(`/match`)
           "lotto/data44-aistat/match-schedules",
           params
         );
-        console.log("responseData3434545d",response)
+     
         if(response && response.status==200){
           //console.log("responseData",response && response.data && response.data.data && response.data.data.competition)
           seCompetions(response && response.data && response.data.data && response.data.data.competition)
@@ -174,7 +174,7 @@ useEffect(() => {
 useEffect(() => {
   scheduleData();
 }, []);
-console.log("Selected",selected)
+
 /****** Render Competition */
 const renderCompetition = (product) => {
   const items =
@@ -254,7 +254,7 @@ const renderCompetition = (product) => {
 };
 
 
-console.log("selected",selected,dateSelected,competions)
+
   return (
     <Grid container>
  <Grid sx={{position:'relative'}}>

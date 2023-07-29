@@ -68,7 +68,7 @@ export default function FavouritePage(props) {
     try {
       const response = await api.get('lotto/data44-aistat/match-schedules', params);
       const responseDetail=response && response.data && response.data.data && response.data.data.data && response.data.data.data.data
-  console.log("responseresponse",response)
+
   if(response && response.status==200){
       //setFullMatchList(responseDetail)
       if (page == 1) {
@@ -170,7 +170,7 @@ export default function FavouritePage(props) {
   }, [dateFilter,page]);
   const isChrome =
 typeof window !== "undefined" && /chrome/i.test(window.navigator.userAgent);
-console.log("dateFilter",dateFilter)
+
   return (
     <Grid style={{ position: "relative" }}>
       <Grid
