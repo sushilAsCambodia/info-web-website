@@ -19,7 +19,6 @@ export default function MatchDetailLiveText(props) {
   const theme = useTheme();
   const router = useRouter();
 
-
   const manageEvent=(eventType)=>{
     switch(eventType) {
       case 0:
