@@ -451,10 +451,10 @@ const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarge
         </Grid>
       <Grid item xs={12} sx={{display:'flex'}}>
       <Grid item xs={6} pr={.5}>
-        <LinearProgressWithLabelLeft homeTeamColor={manageHomeTeam(items,homeTeam)==0?"#eeeeee":manageHomeTeam(items,homeTeam)==manageHomeTeam(items,awayTeam)?"#eeeeee":homeTeamColor}  team1={manageHomeTeam(items,homeTeam)==0?0:homeTeamPercentage} team2={manageHomeTeam(items,homeTeam)==0?100:homeTeamNum} />
+        <LinearProgressWithLabelLeft homeTeamColor={manageHomeTeam(items,homeTeam)==0?"#eeeeee":manageHomeTeam(items,homeTeam)==manageHomeTeam(items,awayTeam)?"#FF6F31":homeTeamColor}  team1={manageHomeTeam(items,homeTeam)==0?0:homeTeamPercentage} team2={manageHomeTeam(items,homeTeam)==0?100:homeTeamNum} />
         </Grid>
         <Grid item xs={6} pl={.5}>
-        <LinearProgressWithLabelRight awayTeamColor={manageHomeTeam(items,awayTeam)==0?"#eeeeee":manageHomeTeam(items,homeTeam)==manageHomeTeam(items,awayTeam)?"#eeeeee":awayTeamColor} team1={manageTeamAway(items,awayTeam)==0?0:awayTeamPercentage} team2={manageTeamAway(items,awayTeam)==0?100:awayTeamNum} />
+        <LinearProgressWithLabelRight awayTeamColor={manageHomeTeam(items,awayTeam)==0?"#eeeeee":manageHomeTeam(items,homeTeam)==manageHomeTeam(items,awayTeam)?"#FF6F31":awayTeamColor} team1={manageTeamAway(items,awayTeam)==0?0:awayTeamPercentage} team2={manageTeamAway(items,awayTeam)==0?100:awayTeamNum} />
         </Grid>
       </Grid>
       </div>)
