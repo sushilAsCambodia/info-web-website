@@ -19,7 +19,6 @@ export default function MatchDetailLiveText(props) {
   const theme = useTheme();
   const router = useRouter();
 
-
   const manageEvent=(eventType)=>{
     switch(eventType) {
       case 0:
@@ -43,7 +42,7 @@ export default function MatchDetailLiveText(props) {
               <>
                 {/* <Icon icon="icons8:arrows-long-up" color="green" />
                 <Icon icon="icons8:arrows-long-down" color="red" /> */}
-                <img src="/assets/logo/assisticon.png" />
+                <img src="/assets/Logo/assisticon.png" />
               </>
             );
           case 12:
@@ -51,7 +50,7 @@ export default function MatchDetailLiveText(props) {
               <>
                 {/* <Icon icon="icons8:arrows-long-up" color="green" />
                 <Icon icon="icons8:arrows-long-down" color="red" /> */}
-                <img src="/assets/logo/assisticon.png" />
+                <img src="/assets/Logo/assisticon.png" />
               </>
             );
      
