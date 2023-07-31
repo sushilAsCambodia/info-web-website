@@ -125,7 +125,7 @@ const Header = () => {
     Router.push("/login");
   };
 
-  const logo = './assets/Logo/new-logo.png'
+  const logo = '/assets/Logo/new-logo.png'
   return (
     <>
       {router.pathname == "/login" || router.pathname == "/register" ? (
