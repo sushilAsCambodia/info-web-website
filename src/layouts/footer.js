@@ -24,10 +24,13 @@ const Footer = () => {
             selectedTab = 1;
             break;
         case  '/profile':
-            selectedTab = 2;
+            selectedTab = 3;
             break;
         case  '/match':
-            selectedTab = 3;
+            selectedTab = 2;
+            break;
+            case  '/MatchDetails':
+            selectedTab = 2;
             break;
         default:
             break;
