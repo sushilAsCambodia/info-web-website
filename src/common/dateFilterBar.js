@@ -202,7 +202,7 @@ console.log("compSetcompSetcompSet",compSet,dateSelected)
           );
         })}
       </Grid>
-      <Grid item xs={2} md={2} container className="datePickercss">
+      <Grid item xs={2} md={2} container textAlign={'center'} className="datePickercss">
         <Grid item>
           {/* <DatePicker
       selected={startDates}

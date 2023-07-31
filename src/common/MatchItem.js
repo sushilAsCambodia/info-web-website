@@ -16,6 +16,7 @@ import { Image } from "mui-image";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import utils from "@/common/utils";
 import moment from "moment/min/moment-with-locales";
+import { useDispatch, useSelector } from "react-redux";
 export default function MatchItem(props) {
   const { details, index,handleAddRemove,setMatchId } = props;
   const { t,i18n } = useTranslation();
@@ -23,7 +24,9 @@ export default function MatchItem(props) {
   const router = useRouter();
   const [value, setValue] = React.useState(false);
   const matches = useMediaQuery("(max-width:768px)");
-
+  const langKey = useSelector(
+    (state) => state && state.load_language && state.load_language.language
+  );
   // const splitScore = (finalScore) => {
   //   var chunks = finalScore.split(":");
   //   var arr = [chunks.shift().trim(), chunks.join(" ").trim()];
@@ -45,6 +48,7 @@ export default function MatchItem(props) {
   const lang_id= utils.convertLangCodeToID(i18n.language)
   const checkFavorite=details && details.match_schedule && details.match_schedule.is_favorite?details.match_schedule.is_favorite:details.is_favorite
   const matchDetail=details && details.match_schedule?details.match_schedule:details
+  const finalScoreData=details && details.finalScore?details.finalScore:details && details.match_schedule && details.match_schedule.finalScore
   return (
     <Grid p={1} >
       <Grid textAlign="center" border="1px solid #ddd" borderRadius="10px" >
@@ -117,7 +121,7 @@ export default function MatchItem(props) {
             </Grid>
             <Grid item xs={8} container justifyContent="center">
               <Grid container justifyContent="center">
-              {details && details.finalScore || details && details.match_schedule && details.match_schedule.finalScore && <Grid item md={12}>
+              {finalScoreData && <Grid item md={12}>
                   <Typography
                     component="div"
                     display="flex"
@@ -127,7 +131,7 @@ export default function MatchItem(props) {
                     fontSize={10}
                   >
                     <FiberManualRecordIcon style={{ fontSize: 9 }} />
-                    &nbsp; {details.elapsed?"LIVE":'SCORE'}
+                    &nbsp; {details.elapsed?langKey && langKey.Live:langKey && langKey.scores}
                   </Typography>
                   <Typography fontSize={9}>
                   {details && details.finalScore?details.finalScore:details && details.match_schedule && details.match_schedule.finalScore}
