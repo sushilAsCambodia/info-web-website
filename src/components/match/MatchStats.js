@@ -28,7 +28,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
 
-const BorderLinearProgressLeft = styled(LinearProgress)(({ theme,colorCode }) => ({
+const BorderLinearProgressLeft = styled(LinearProgress)(({ theme,colorCode,tranformValue }) => ({
   height: 20,
   // borderRadius: 0,
 
@@ -39,7 +39,7 @@ const BorderLinearProgressLeft = styled(LinearProgress)(({ theme,colorCode }) =>
   [`& .${linearProgressClasses.bar}`]: {
     //   borderRadius: 0,
     backgroundColor: theme.palette.mode === "light" ? colorCode : "#308fe8",
-    
+    transform: `translateX(${tranformValue}%) !important`
   },
 }));
 
@@ -53,13 +53,14 @@ const BorderLinearProgressRight = styled(LinearProgress)(({ theme,colorCode }) =
   [`& .${linearProgressClasses.bar}`]: {
     //   borderRadius: 0,
     backgroundColor: theme.palette.mode === "light" ? colorCode : "#308fe8",
+  
   },
 }));
 
 function LinearProgressWithLabelLeft(props) {
   return (
     <Grid sx={{ position: "relative" }}>
-      <BorderLinearProgressLeft variant="determinate"  colorCode={props.homeTeamColor} value={props.team1} style={{borderTopLeftRadius:'10px', borderBottomLeftRadius:'10px', height:'15px'}} />
+      <BorderLinearProgressLeft variant="determinate" tranformValue={props.team2} colorCode={props.homeTeamColor} value={props.team1} style={{borderTopLeftRadius:'10px', borderBottomLeftRadius:'10px', height:'15px'}} />
       <Grid
       CL
         sx={{
