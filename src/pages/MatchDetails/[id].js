@@ -30,6 +30,28 @@ import { Padding } from "@mui/icons-material";
 import {Route, Link, Routes, useParams} from 'react-router-dom';
 import api from "@/services/http";
 import axios from "axios";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box >
+          <Grid className="center-children">{children}</Grid>
+        </Box>
+      )}
+    </div>
+  );
+}
 
 
 const HeaderTabs = styled(Tabs)({
@@ -91,6 +113,8 @@ function a11yProps(index) {
 export default function MatchDetails(props) {
   const { t,i18n } = useTranslation();
   const theme = useTheme();
+  const matches = useMediaQuery("(max-width:768px)");
+
   const router = useRouter();
     const dispatch = useDispatch();
   const { id } = router.query;
@@ -161,28 +185,68 @@ export default function MatchDetails(props) {
     setValue(newValue);
   };
 
-  return (
+  console.log('matches',matches)
+  return !matches ? (
+     <>
+       {/* web screen */}
     <Grid container>
       <MatchDetailHeader details={details} status={status} />
       {loading &&<LoadingBackDrop loading={loading} />}
-      <Grid item xs={12} className="sticky-header"  sx={{background:"#F3F3F3", borderWidth:"0.5px 0px", borderColor:"#DDDDDD", borderStyle:"solid", paddingBottom:"0px", }}>
+      <Box sx={{ width: '100%' }} >
+      <Grid item xs={12} className="sticky-header"  sx={{zIndex:'9', background:"#F3F3F3", borderWidth:"0.5px 0px", borderColor:"#DDDDDD", borderStyle:"solid", paddingBottom:"0px", }}>
         <Grid py={1} container justifyContent="center">
-          <HeaderTabs value={value} onChange={handleChange} >
+      <HeaderTabs value={value} onChange={handleChange} >
             <Tab className="matchtab" label={langKey && langKey.Info} {...a11yProps(0)} />
             <Tab className="matchtab" label={langKey && langKey.LiveText} {...a11yProps(1)} />
             <Tab className="matchtab" label={langKey && langKey.Statics} {...a11yProps(2)} />
-          </HeaderTabs>
-        </Grid>
-      </Grid>
-      <TabPanel value={value} index={0}>
-        <MatchVerticleChart details={details} InfoDetails={infodetails} lang_id={lang_id} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <MatchDetailLiveText  details={details} InfoDetailsText={infodetailsText} />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <MatchStats details={details} />
-      </TabPanel>
+      </HeaderTabs>
     </Grid>
+      </Grid>
+      <CustomTabPanel value={value} index={0}>
+        <Grid className="border-color">
+      <MatchVerticleChart details={details} InfoDetails={infodetails} lang_id={lang_id} />
+      </Grid>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+      <Grid className="border-color1">
+      <MatchDetailLiveText  details={details} InfoDetailsText={infodetailsText} />
+      </Grid>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+      <Grid className="border-color1">
+      <MatchStats details={details} />
+      </Grid>
+      </CustomTabPanel>
+    </Box>
+    </Grid>
+    </>
+) : (
+  <>
+    {/* mobile screen */}
+   <Grid container>
+      <MatchDetailHeader details={details} status={status} />
+      {loading &&<LoadingBackDrop loading={loading} />}
+      <Box sx={{ width: '100%' }} >
+      <Grid item xs={12} className="sticky-header"  sx={{zIndex:'9', background:"#F3F3F3", borderWidth:"0.5px 0px", borderColor:"#DDDDDD", borderStyle:"solid", paddingBottom:"0px", }}>
+        <Grid py={1} container justifyContent="center">
+      <HeaderTabs value={value} onChange={handleChange} >
+            <Tab className="matchtab" label={langKey && langKey.Info} {...a11yProps(0)} />
+            <Tab className="matchtab" label={langKey && langKey.LiveText} {...a11yProps(1)} />
+            <Tab className="matchtab" label={langKey && langKey.Statics} {...a11yProps(2)} />
+      </HeaderTabs>
+    </Grid>
+      </Grid>
+      <CustomTabPanel value={value} index={0}>
+      <MatchVerticleChart details={details} InfoDetails={infodetails} lang_id={lang_id} />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+      <MatchDetailLiveText  details={details} InfoDetailsText={infodetailsText} />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+      <MatchStats details={details} />
+      </CustomTabPanel>
+    </Box>
+    </Grid>
+  </>
   );
 }
