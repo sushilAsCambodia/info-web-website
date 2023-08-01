@@ -99,6 +99,7 @@ export default function MatchDetails(props) {
   const [selected, setSelected] = useState([]); 
   const [loading, setLoading] = useState([]);
   const [details, setDetails] = useState({});
+  const [tabValu, setTabvalue] = useState([]); 
   const [infodetails, setInfoDetails] = useState({});
   const [infodetailsText, setInfoDetailsText] = useState({});
   const langKey = useSelector((state) => state && state.load_language && state.load_language.language);
@@ -130,14 +131,14 @@ export default function MatchDetails(props) {
       const responseInfo = await api.get(`lotto/football-matches/live-info-list?match_id=${id}&lang_id=${lang_id}`);
       if(responseInfo && responseInfo.data){
         setInfoDetails(responseInfo && responseInfo.data && responseInfo.data.data)
-        //setLoading(false)
+        setLoading(false)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
       // const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=430119`);
       const responseText = await api.get(`lotto/football-matches/live-text-list?match_id=${id}&lang_id=${lang_id}`);
       if(responseText && responseText.data){
         setInfoDetailsText(responseText && responseText.data && responseText.data.data)
-        setLoading(false)
+        // setLoading(false)
       //console.log("responseresponseresponse",response && response.data && response.data.data && response.data.data.match)
       }
 
@@ -161,6 +162,7 @@ export default function MatchDetails(props) {
     setValue(newValue);
   };
 
+  console.log("value",value)
   return (
     <Grid container>
       <MatchDetailHeader details={details} status={status} />

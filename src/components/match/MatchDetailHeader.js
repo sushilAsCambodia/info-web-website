@@ -33,7 +33,7 @@ export default function MatchDetailHeader(props) {
         container
         sx={{
           background:
-            '-webkit-linear-gradient(rgba(0,0,0, 0.6),rgba(41, 40, 40, 0.8)),url("./assets/Download/bg-download-download.png")',
+            '-webkit-linear-gradient(rgba(0,0,0, 0.6),rgba(41, 40, 40, 0.8)),url("/assets/Download/bg-download-download.png")',
           // backgroundImage: `url("./assets/Download/bg-download-download.png")`,
           backgroundSize: "cover",
           height: "170px",
