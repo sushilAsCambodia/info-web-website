@@ -41,7 +41,7 @@ const Footer = () => {
 
 
 
-    return <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0,}}>
+    return <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex:'999', backgroundColor:'#fff !important'}}>
             <BottomNavigation
                 showLabels
                 value={value}

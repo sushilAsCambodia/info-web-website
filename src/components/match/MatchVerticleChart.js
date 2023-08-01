@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { Image } from "mui-image";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import LinearProgress, {
   linearProgressClasses,
@@ -66,7 +67,8 @@ const matchInfo = [
 
 export default function MatchVerticleChart(props) {
   const { t } = useTranslation();
-  
+  const matches = useMediaQuery("(max-width:768px)");
+
   const theme = useTheme();
   const router = useRouter();
   const { InfoDetails,lang_id } = props;
@@ -111,7 +113,7 @@ export default function MatchVerticleChart(props) {
           <>
             {/* <Icon icon="icons8:arrows-long-up" color="green" />
             <Icon icon="icons8:arrows-long-down" color="red" /> */}
-            <img src="/assets/Logo/assisticon.png" />
+            <img src="/assets/Logo/arrowsvg2.svg" width={'20px'}/>
           </>
         );
       case 12:
@@ -119,7 +121,7 @@ export default function MatchVerticleChart(props) {
           <>
             {/* <Icon icon="icons8:arrows-long-up" color="green" />
             <Icon icon="icons8:arrows-long-down" color="red" /> */}
-            <img src="/assets/Logo/assisticon.png" />
+            <img src="/assets/Logo/arrowsvg2.svg" width={'20px'} />
           </>
         );
     }
@@ -134,8 +136,10 @@ export default function MatchVerticleChart(props) {
     InfoDetails.liveTimelines.map((item, index) => {
       const eventType = item && item.eventType;
       // if (item && item.eventType != 11)
-        return (
-          <div style={{ width: "100vw" }} key={index}>
+      return !matches ? (
+<>
+  {/* web screen */}
+<div style={{ width: "100%" }} key={index} >
             <div className="timeline">
               <div
                 style={{ "--title": `'${item.minute + "`"}'` }}
@@ -143,7 +147,7 @@ export default function MatchVerticleChart(props) {
                   item && item.teamId === homeTeamId ? "left" : "right"
                 } container`}
               >
-                <div className="content">
+                <div className="content web">
                   <div className="match-icon" style={{ width: "35px" }}>
                     {manageEvent(eventType)}
                   </div>
@@ -157,6 +161,34 @@ export default function MatchVerticleChart(props) {
               </div>
             </div>
           </div>
+</>
+      ) : (
+        <>
+          {/* mobile screen */}
+<div key={index} >
+            <div className="timeline">
+              <div
+                style={{ "--title": `'${item.minute + "`"}'` }}
+                className={`${
+                  item && item.teamId === homeTeamId ? "left" : "right"
+                } container`}
+              >
+                <div className="content ">
+                  <div className="match-icon" style={{ width: "35px" }}>
+                    {manageEvent(eventType)}
+                  </div>
+                  {/* <img src="/assets/Logo/1200px-Missed_penalty_icon.svg" /> */}
+                  <h4>{lang_id==2 && item.playerName != null?item.playerName :lang_id==1 ||lang_id==3?item.playerNameEn:  "__"}</h4>
+                  <p style={{ fontSize: "10px" }}>
+                    {
+                       item.relatedPlayerName != null && lang_id==2?item.relatedPlayerName :lang_id==1 ||lang_id==3?item.relatedPlayerNameEn: " "}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+</>
+
         );
     })
   );

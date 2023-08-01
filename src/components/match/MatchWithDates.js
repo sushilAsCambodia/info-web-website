@@ -176,9 +176,41 @@ if(localStorage.getItem("competition") === null){
     }
   }
 
+ async function liveScoreData(){
+  const competSplit=competionSelected && competionSelected.length>0 && competionSelected.split(",")
+  var currenDate = moment(new Date()).format(utils.dateFormate);
+
+  const paramsLive = {
+    lang_id: utils.convertLangCodeToID(i18n.language),
+    season: moment().format("YYYY"),
+    member_ID: customer?.member_ID,
+    page: page,
+    competition_ids: competSplit,
+    date: currenDate,
+    descending: "desc",
+    sortBy: "created_at",
+  };
+    const response = await api.get(
+      "lotto/football-matches/mixed-live-list",
+      paramsLive
+    );
+  
+    localStorage.removeItem("competition")
+    if (page == 1) {
+      setFullMatchList(
+        response && response.data && response.data.data.live_scores
+      );
+    } 
+    
+
+  }
 
   useEffect(() => {
     scheduleData(dateFilter, DatePicker);
+    const interval = setInterval(() => {
+      liveScoreData();
+    }, 10000);
+    return () => clearInterval(interval);  
   }, [page, DatePicker]);
 
   /*******Add and remove favorite*/

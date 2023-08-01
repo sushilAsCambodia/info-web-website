@@ -1060,7 +1060,12 @@ height: 50px !important;
   top: 5px;
 }
 .left .content{
-  padding-right: 25px;
+  padding-right: 30px;
+
+}
+.left .content.web{
+  padding-right: 30px;
+  text-align: right;
 }
 /* Place the container to the right */
 .right {
@@ -1264,11 +1269,11 @@ background: #f5f5f5;
       }
 
       .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper{
-        width: 400px !important;
+        width: 430px !important;
         left: 1280px !important;
       }
       .css-pwxzbm{
-        width: 400px !important;
+        width: 430px !important;
         left: 1280px !important;
       }
 
@@ -1308,4 +1313,21 @@ background: #f5f5f5;
 
       .tablecell-width {
         width: 128px;
+    }
+
+    .center-children{
+      width: 80%;
+      margin: auto !important;
+      height: auto;
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+    .border-color{
+      border: 1px solid #f3f3f3;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    .border-color1{
+      border: 1px solid #f3f3f3;
+   padding: 10px 20px;
     }

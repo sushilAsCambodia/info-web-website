@@ -505,6 +505,7 @@ export default function FootBallPage() {
     setConfirm(true)
     setCompfilter(false);  
     setLoading(true);
+    console.log("selectedName5555",selectedName)
     /*** Competition Id */
     let competId = [100000];
     competition &&
