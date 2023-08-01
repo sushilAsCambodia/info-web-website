@@ -53,7 +53,7 @@ const Layout = (props) => {
     const pages = [
         '/lottery',
         '/lotteryHistory',
-        '/games',
+        '/games',               
         '/match',
         '/journalCardDetails',
     ];
@@ -62,6 +62,8 @@ const Layout = (props) => {
         '/register',
         '/forgotPassword',
         '/profile',
+        '/MatchDetails/[id]', 
+        '/events',
         '/profileDetail',
         '/feedback',
         '/customerService',
@@ -75,6 +77,7 @@ const Layout = (props) => {
     } if (router.pathname == '/login' || router.pathname == '/register' || router.pathname == '/forgotPassword') {
         height = 'calc(100vh - 40px)';
     } 
+    console.log("router.pathname",router.pathname)
     const switchHeader = () => { 
         if (router.pathname != '/') {
             if (pages.includes(router.pathname)) {
@@ -131,6 +134,37 @@ const Layout = (props) => {
                     </IconButton>}
                    />
                 }
+                else if(router.pathname === '/MatchDetails/[id]'){
+                    return <Navigate
+                    title={langKey?.match}
+                    lead={<IconButton
+                        onClick={() => router.push('/match')}
+                        size="large" 
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }} >
+                        <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.13716 0.700943L0.837158 7.00001L7.13716 13.2991L8.45528 11.9509L4.44185 7.93751H23.25V6.06251H4.44091L8.45528 2.04907L7.13716 0.700943Z" fill="white" />
+                        </svg>
+                    </IconButton>}
+                   />
+                }else if(router.pathname === '/events'){
+                    return <Navigate
+                    title={langKey?.match}
+                    lead={<IconButton
+                        onClick={() => router.push('/match')}
+                        size="large" 
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }} >
+                        <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.13716 0.700943L0.837158 7.00001L7.13716 13.2991L8.45528 11.9509L4.44185 7.93751H23.25V6.06251H4.44091L8.45528 2.04907L7.13716 0.700943Z" fill="white" />
+                        </svg>
+                    </IconButton>}
+                   />
+                }
                 else {
                     return <Navigate
                     title={langKey?.journal}
@@ -156,10 +190,15 @@ const Layout = (props) => {
                 
             } else if (innerpages.includes(router.pathname)) {
                 //let title = router.pathname.replace('/', '').toLowerCase();
+             
                 let title = langKey && langKey[router.pathname.replace('/', '').toLowerCase()];
                 const onNavigate = (r) => {
+                    console.log("r.pathname",r.pathname)
                     if(r.pathname === '/login' || r.pathname === '/register' || r.pathname === '/forgotPassword') {
                        r.push('/home')
+                    } else if(r.pathname === '/MatchDetails/[id]' || r.pathname === '/events') {
+                        // r.back();
+                        r.push('/match')
                     }else {
                         // r.back();
                         r.push('/home')
@@ -259,7 +298,7 @@ const Layout = (props) => {
     },[dispatch]);
     useEffect(() => {
         if (customer && Object.keys(customer).length > 0) {
-            if (!['/login', '/register', '/forgotPassword'].includes(router.pathname)) {
+            if (!['/login', '/register', '/forgotPassword','/match','/MatchDetails/[id]'].includes(router.pathname)) {
             api.get(`${utils.adminUrl}/auth/customers/${customer.id}/edit`, {}, true).then((result) => {
                 if (result && (result.status == 200 || result.status == 201)) {
                 const customer = result?.data?.data;
