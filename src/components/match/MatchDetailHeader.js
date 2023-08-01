@@ -112,8 +112,7 @@ export default function MatchDetailHeader(props) {
               container
               justifyContent="center"
               alignItems="center"
-            >
-              <Image
+            >              <Image
                 alt="Dynamo Vladivostok"
                 src={
                   details && details.match && details.match.away_team
