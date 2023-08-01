@@ -20,7 +20,7 @@ const Footer = () => {
       // sx={{background:"red"}} 
       >
         <Grid item xs={4} textAlign="center">
-          <Image alt="footer_logo" src="./assets/Logo/new-logo-white-bg.png" width="150px"  />
+          <Image alt="footer_logo" src="/assets/Logo/new-logo-white-bg.png" width="150px"  />
           <Typography> {langKey && langKey.footer_content} </Typography>
         </Grid>
         {/* <Grid container item xs={6} py={1} justifyContent="center">
