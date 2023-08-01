@@ -33,25 +33,6 @@ import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 
-function CustomTabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box >
-          <Grid className="center-children">{children}</Grid>
-        </Box>
-      )}
-    </div>
-  );
-}
 
 
 const HeaderTabs = styled(Tabs)({
@@ -174,6 +155,32 @@ export default function MatchDetails(props) {
 }
   }
  
+
+  function CustomTabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box>
+            { !matches ?
+            <Grid className="center-children">{children}</Grid> 
+            :
+            <Grid className="">{children}</Grid>
+          }
+          </Box>
+        )}
+      </div>
+    );
+  }
+  
+
   useEffect(() => {
     matchDetails()
     
@@ -203,7 +210,7 @@ export default function MatchDetails(props) {
     </Grid>
       </Grid>
       <CustomTabPanel value={value} index={0}>
-        <Grid className="border-color">
+        <Grid className="border-color" >
       <MatchVerticleChart details={details} InfoDetails={infodetails} lang_id={lang_id} />
       </Grid>
       </CustomTabPanel>
@@ -237,7 +244,9 @@ export default function MatchDetails(props) {
     </Grid>
       </Grid>
       <CustomTabPanel value={value} index={0}>
+      <Grid className="border-color-mobile" paddingBottom={'50px'}>
       <MatchVerticleChart details={details} InfoDetails={infodetails} lang_id={lang_id} />
+      </Grid>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
       <MatchDetailLiveText  details={details} InfoDetailsText={infodetailsText} />

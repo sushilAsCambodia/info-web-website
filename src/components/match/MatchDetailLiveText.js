@@ -13,11 +13,14 @@ import { Icon } from "@iconify/react";
 import StarIcon from "@/components/svg/star";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Image } from "mui-image";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 export default function MatchDetailLiveText(props) {
   const {InfoDetailsText}=props
   const { t } = useTranslation();
   const theme = useTheme();
   const router = useRouter();
+  const matches = useMediaQuery("(max-width:768px)");
 
   const manageEvent=(eventType)=>{
     switch(eventType) {
@@ -66,7 +69,8 @@ export default function MatchDetailLiveText(props) {
     {id:3,title:"90' + 3'",message:'hsdhfhd jsdjfsdjfsjdf jsdf jsdfjsdjfsj ddjs jsdf',icon:<><Icon icon="icons8:arrows-long-up" color="green" /><Icon icon="icons8:arrows-long-down" color="red" /></> },
     {id:4,title:"2' + 1'",message:'Goal Kick Leads',icon:<Icon icon="openmoji:soccer-ball" color="red" />  },
 ]
-  return (
+return !matches ? (
+   <>
     <Grid container height="100vh" overflow="auto" alignContent="flex-start">
     {InfoDetailsText && InfoDetailsText.liveTimelines && InfoDetailsText.liveTimelines.length>0 && InfoDetailsText.liveTimelines.map((item,index)=>{
         return(
@@ -84,5 +88,27 @@ export default function MatchDetailLiveText(props) {
         )
     })}
       </Grid>
+   </>
+
+):(
+  <>
+    <Grid container overflow="auto" alignContent="flex-start" paddingBottom={'50px'}>
+    {InfoDetailsText && InfoDetailsText.liveTimelines && InfoDetailsText.liveTimelines.length>0 && InfoDetailsText.liveTimelines.map((item,index)=>{
+        return(
+            <Grid py={1} item xs={12} key={index} container borderBottom="1px solid grey">
+                <Grid item container justifyContent="center" xs={3} alignContent="center">
+                    <Typography>{`${item.minute}'`}</Typography>
+                </Grid>
+                <Grid item xs={2} container alignItems="center" justifyContent="flex-end" pr={1}>
+                    {manageEvent(item.eventType)}
+                </Grid>
+               <Grid item xs={7}>
+                 <Typography>{item.text}</Typography>
+               </Grid>
+            </Grid>
+        )
+    })}
+      </Grid>
+   </>
   );
 }

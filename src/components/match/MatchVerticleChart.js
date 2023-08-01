@@ -113,7 +113,7 @@ export default function MatchVerticleChart(props) {
           <>
             {/* <Icon icon="icons8:arrows-long-up" color="green" />
             <Icon icon="icons8:arrows-long-down" color="red" /> */}
-            <img src="/assets/Logo/assisticon.png" />
+            <img src="/assets/Logo/arrowsvg2.svg" width={'20px'}/>
           </>
         );
       case 12:
@@ -121,7 +121,7 @@ export default function MatchVerticleChart(props) {
           <>
             {/* <Icon icon="icons8:arrows-long-up" color="green" />
             <Icon icon="icons8:arrows-long-down" color="red" /> */}
-            <img src="/assets/Logo/assisticon.png" />
+            <img src="/assets/Logo/arrowsvg2.svg" width={'20px'} />
           </>
         );
     }
@@ -165,7 +165,7 @@ export default function MatchVerticleChart(props) {
       ) : (
         <>
           {/* mobile screen */}
-<div key={index}>
+<div key={index} >
             <div className="timeline">
               <div
                 style={{ "--title": `'${item.minute + "`"}'` }}
