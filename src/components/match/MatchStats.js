@@ -303,7 +303,7 @@ const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarge
         alignItems="center"
       >
         <Image
-          src={details && details.match && details.match.home_team && details.match.home_team.country_image_big}
+          src={details && details.match && details.match.home_team && details.match.home_team.image}
           style={{
             width: "50px",
             height: "50px",
@@ -333,7 +333,7 @@ const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarge
         {myScore && myScore[1]}
         </Typography>
         <Image
-          src={details && details.match && details.match.away_team && details.match.away_team.country_image_big}
+          src={details && details.match && details.match.away_team && details.match.away_team.image}
           style={{
             width: "50px",
             height: "50px",
