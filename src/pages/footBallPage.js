@@ -78,11 +78,13 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Set the width to 100% to occupy the full width of the parent container
     minWidth: "249px !important", // Set a minimum width (adjust the value according to your needs)
     // Add any custom styles for the ul-class
+
   },
   liClass: {
     width: "100%", // Set the width to 100% to occupy the full width of the parent container
-    minWidth: 649, // Set a minimum width (adjust the value according to your needs)
+    // minWidth: 649, // Set a minimum width (adjust the value according to your needs)
     // Add any custom styles for the ul-class
+    padding:"0px !important"
   },
   gridClass: {
     // Add any custom styles for the grid-class
@@ -1078,11 +1080,13 @@ export default function FootBallPage() {
 
         return (
           <MenuItem key={p.id} value={name} className={classes.liClass}>
-            <Checkbox
+           <Grid className="checkboxclass">
+           <Checkbox
               onClick={(e) => handleCheckbox(e, name)}
               checked={checkboxVal ? true : false}
             />
-            {nameData}
+           </Grid>
+        <Grid className="text-class" title={nameData} >{nameData}</Grid>
           </MenuItem>
         );
       });
