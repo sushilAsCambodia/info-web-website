@@ -34,7 +34,7 @@ const Layout = (props) => {
   },[dispatch]);
   useEffect(() => {
     if (customer && Object.keys(customer).length > 0) {
-      if (!['/login', '/register', '/forgotPassword'].includes(router.pathname)) {
+      if (!['/login', '/register', '/forgotPassword','/match','/MatchDetails/[id]'].includes(router.pathname)) {
         api.get(`${utils.adminUrl}/auth/customers/${customer.id}/edit`, {}, true).then((result) => {
           if (result && (result.status == 200 || result.status == 201)) {
             const customer = result?.data?.data;
