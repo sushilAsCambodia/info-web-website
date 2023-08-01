@@ -57,7 +57,7 @@ export default function MatchDetailHeader(props) {
             >
               <Image
                 alt="Dynamo Vladivostok"
-                src={details && details.match && details.match.home_team && details.match.home_team.country_image_big}
+                src={details && details.match && details.match.home_team && details.match.home_team.image}
                 style={{ height:'80px',width:'80px' }}
               />
               <Typography fontWeight="bold">{lang_id==2?details && details.match && details.match.home_team && details.match.home_team.name
@@ -118,7 +118,7 @@ export default function MatchDetailHeader(props) {
                 src={
                   details && details.match && details.match.away_team
 && details.match.away_team
-.country_image_big
+.image
                 }
                 style={{ height:'80px',width:'80px' }}
               />
@@ -229,7 +229,7 @@ export default function MatchDetailHeader(props) {
           >
             <Image
               alt="Dynamo Vladivostok"
-              src={details && details.match && details.match.home_team && details.match.home_team.country_image_big}
+              src={details && details.match && details.match.home_team && details.match.home_team.image}
               style={{ height:'80px',width:'80px' }}
             />
             <Typography fontWeight="bold">{lang_id==2?details && details.match && details.match.home_team && details.match.home_team.name
@@ -290,7 +290,7 @@ export default function MatchDetailHeader(props) {
               src={
                 details && details.match && details.match.away_team
 && details.match.away_team
-.country_image_big
+.image
               }
               style={{ height:'80px',width:'80px' }}
             />
