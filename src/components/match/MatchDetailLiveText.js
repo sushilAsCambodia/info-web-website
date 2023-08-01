@@ -92,7 +92,7 @@ return !matches ? (
 
 ):(
   <>
-    <Grid container overflow="auto" alignContent="flex-start" paddingBottom={'50px'}>
+    <Grid container overflow="auto" alignContent="flex-start" paddingBottom={'30px'}>
     {InfoDetailsText && InfoDetailsText.liveTimelines && InfoDetailsText.liveTimelines.length>0 && InfoDetailsText.liveTimelines.map((item,index)=>{
         return(
             <Grid py={1} item xs={12} key={index} container borderBottom="1px solid grey">

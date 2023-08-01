@@ -244,15 +244,19 @@ export default function MatchDetails(props) {
     </Grid>
       </Grid>
       <CustomTabPanel value={value} index={0}>
-      <Grid className="border-color-mobile" paddingBottom={'50px'}>
+      <Grid className="border-color-mobile" paddingBottom={'80px'}>
       <MatchVerticleChart details={details} InfoDetails={infodetails} lang_id={lang_id} />
       </Grid>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
+      <Grid className="border-color-mobile" paddingBottom={'50px'}>
       <MatchDetailLiveText  details={details} InfoDetailsText={infodetailsText} />
+      </Grid>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
+      <Grid className="border-color-mobile" paddingBottom={'50px'}>
       <MatchStats details={details} />
+      </Grid>
       </CustomTabPanel>
     </Box>
     </Grid>

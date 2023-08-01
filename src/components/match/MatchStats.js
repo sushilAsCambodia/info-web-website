@@ -558,7 +558,7 @@ const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarge
   alignContent="flex-start"
   // height="100vh"
   overflow="auto"
-  paddingBottom={'50px'}
+  paddingBottom={'30px'}
 
 >
   <Grid item xs={12} container px={2} alignContent="flex-start">
