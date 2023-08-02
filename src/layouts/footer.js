@@ -13,9 +13,11 @@ import LotterIcon from '@/components/svg/lottery';
 import ProfileIcon from '@/components/svg/user';
 import MatchIcon from '@/components/svg/match';
 const Footer = () => {
+    
     const {t} = useTranslation();
     let selectedTab = 0;
     const router = useRouter();
+    console.log("router.pathname.toLowerCase()",router.pathname.toLowerCase())
     switch (router.pathname.toLowerCase()) {
         case  '/home':
             selectedTab = 0;
@@ -29,7 +31,10 @@ const Footer = () => {
         case  '/match':
             selectedTab = 2;
             break;
-            case  '/MatchDetails':
+            case  '/matchdetails/[id]':
+            selectedTab = 2;
+            break;
+            case  '/events':
             selectedTab = 2;
             break;
         default:
