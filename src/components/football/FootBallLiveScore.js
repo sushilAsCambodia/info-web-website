@@ -31,6 +31,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useState } from "react";
 import utils from "@/common/utils";
 import moment from "moment/moment";
+import { useRouter } from "next/router";
 import Pagination from "@mui/material/Pagination";
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
@@ -56,7 +57,7 @@ export default function FootBallLiveScore({footballFavoritList,lang_id,loadings,
   pageChange,footballLiveScoreList}) {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
-
+  const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
 
   const [age, setAge] = useState("");
@@ -94,6 +95,7 @@ export default function FootBallLiveScore({footballFavoritList,lang_id,loadings,
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
+    cursor:"pointer"
     // hide last border
    
   }));
@@ -251,7 +253,9 @@ export default function FootBallLiveScore({footballFavoritList,lang_id,loadings,
                  }
                  let image_URL=item && item?.match_schedule?.competition && item?.match_schedule?.competition.image
                   return (
-                      <StyledTableRow key={item.id} className="rowHeight">
+                      <StyledTableRow key={item.id} className="rowHeight" onClick={() => {
+                        router.push(`/MatchDetails/${item.matchId?item.matchId:item.id}?status=${item.elapsed}`)                         
+                     }}>
                       <StyledTableCell align="left"  style={{height:"45px!important",color:font_color, background:background_color }}>
                           <Grid
                             style={{ display: "flex", alignItems: "center", background:background_color }}
