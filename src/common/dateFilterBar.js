@@ -141,7 +141,7 @@ export default function DateFilterBar(props) {
       />
     </Button>
   ));
-console.log("compSetcompSetcompSet",compSet,dateSelected)
+
   return (
     <Grid container justifyContent="center" className="weekfilter-sticky">
       <Grid
