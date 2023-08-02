@@ -69,7 +69,7 @@ export default function Match() {
     setValue(newValue);
   };
 
- 
+ console.log("valuevalue",value)
  
   return (
   <>  
@@ -113,6 +113,7 @@ export default function Match() {
            
             {/* <Tab className="matchtab" label={langKey?.basket_ball} {...a11yProps(2)} /> */}
           </Tabs>
+          {value==0&&
           <Grid
             width="60px"
             height="30px"
@@ -132,7 +133,7 @@ export default function Match() {
               width={25}
               icon="material-symbols:filter-alt-outline"
             />
-          </Grid>
+          </Grid>}
         </Grid>
                
         <TabPanel value={value} index={0}>
