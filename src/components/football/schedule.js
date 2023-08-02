@@ -32,6 +32,7 @@ import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import utils from "@/common/utils";
 import moment from "moment/moment";
+import { useRouter } from "next/router";
 import { makeStyles } from '@mui/styles';
 
 import { Icon } from "@iconify/react";
@@ -98,6 +99,7 @@ export default function Schedule({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
+    cursor:"pointer"
     // hide last border
    
   }));
@@ -297,7 +299,9 @@ const classes = useStyles();
                     let given_time=moment(item.startTime).format('HH:mm')
                 
                     return (
-                      <StyledTableRow key={item.id} >
+                      <StyledTableRow key={item.id} onClick={() => {
+                        router.push(`/MatchDetails/${item.matchId?item.matchId:item.id}?status=${item.elapsed}`)                         
+                     }} >
                         <StyledTableCell align="left"  style={{color:font_color, background:background_color }}>
                           <Grid
                             style={{ display: "flex", alignItems: "center", background:background_color }}

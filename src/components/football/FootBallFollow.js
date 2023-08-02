@@ -32,6 +32,7 @@ import { useState } from "react";
 import utils from "@/common/utils";
 import moment from "moment/moment";
 import Pagination from "@mui/material/Pagination";
+import { useRouter } from "next/router";
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
 import ActionModal from "./ActionModal";
@@ -56,7 +57,7 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
   pageChange,handleAddRemove}) {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
-
+  const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
 
   const [age, setAge] = useState("");
@@ -97,6 +98,7 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
+    cursor:"pointer"
     // hide last border
    
   }));
@@ -253,7 +255,9 @@ export default function FootBallFollow({footballFavoritList,lang_id,loadings,
                   font_color=item.competition.font_colour                      
                  }
                   return (
-                      <StyledTableRow key={item.id}>
+                      <StyledTableRow key={item.id}  onClick={() => {
+                         router.push(`/MatchDetails/${item.matchId?item.matchId:item.id}?status=${item.elapsed}`)                         
+                      }}>
                       <StyledTableCell align="left"  style={{height:"45px!important",color:font_color, background:background_color }}>
                           <Grid
                             style={{ display: "flex", alignItems: "center", background:background_color }}

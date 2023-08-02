@@ -32,6 +32,7 @@ import CircularProgress from '@mui/material/CircularProgress';
   import Pagination from "@mui/material/Pagination";
   import { useState } from "react";
   import utils from "@/common/utils";
+  import { useRouter } from "next/router";
   import moment from "moment/moment";
   import { makeStyles } from '@mui/styles';
   
@@ -55,7 +56,7 @@ const useStyles = makeStyles({
     const [select, setSelect] = useState(0);
     const [filter, setFilter] = useState("China National");  
     const [rowPerPage, setRowPerPage] = useState(20);
-  
+    const router = useRouter();
     const [dateFilter, setDateFilter] = useState(moment(d).format('DD'));
   
     const [age, setAge] = useState("");
@@ -90,6 +91,7 @@ const useStyles = makeStyles({
       '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
       },
+      cursor:"pointer"
       // hide last border
      
     }));
@@ -277,7 +279,9 @@ const useStyles = makeStyles({
                      font_color=item.competition.font_colour                      
                     }
                     return (
-                        <StyledTableRow key={item.id} className="rowHeight">
+                        <StyledTableRow key={item.id} className="rowHeight" onClick={() => {
+                          router.push(`/MatchDetails/${item.matchId?item.matchId:item.id}?status=${item.elapsed}`)                         
+                       }}>
                           <StyledTableCell align="left"  style={{height:"45px!important",color:font_color, background:background_color }}>
                           <Grid
                             style={{ display: "flex", alignItems: "center", background:background_color }}
