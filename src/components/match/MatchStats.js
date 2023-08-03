@@ -361,7 +361,7 @@ const barArray=["Goals","Assists","YellowCards","RedCards","Shots","ShotsOnTarge
     <Grid pb={.5} pt={3} sx={{display:'flex', alignItems:'center', justifyContent:'space-between', fontFamily:'"Roboto","Helvetica","Arial",sans-serif'}}>
     <Grid>{manageHomeTeam(items,homeTeam)}{items=="PassSuccess" || items=="Possession"?"%":""}</Grid>
     <Grid>{langKey && langKey[items]}</Grid>
-    <Grid sx={{color:'#c7c0c0'}}>{manageTeamAway(items,awayTeam)}{items=="PassSuccess" || items=="Possession"?"%":""} </Grid>
+    <Grid >{manageTeamAway(items,awayTeam)}{items=="PassSuccess" || items=="Possession"?"%":""} </Grid>
       </Grid>
     <Grid item xs={12} sx={{display:'flex'}}>
     <Grid item xs={6} pr={.5}>

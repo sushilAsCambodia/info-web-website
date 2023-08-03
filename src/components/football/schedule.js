@@ -27,13 +27,13 @@ import {
   InputAdornment,
 } from "@mui/material";
 
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import utils from "@/common/utils";
 import moment from "moment/moment";
 import { useRouter } from "next/router";
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from "@mui/styles";
 
 import { Icon } from "@iconify/react";
 import { lottoTable } from "@/pages/LotteryPage";
@@ -47,10 +47,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
     "& .MuiTableCell-root": {
-      border: '1px solid #DDDDDD'
-    }
-  }
-
+      border: "1px solid #DDDDDD",
+    },
+  },
 });
 
 export default function Schedule({
@@ -60,7 +59,11 @@ export default function Schedule({
   last_page,
   currentpage,
   pageChange,
-  lang_id,handleAddRemove,matchId,dateoptions,datefilter
+  lang_id,
+  handleAddRemove,
+  matchId,
+  dateoptions,
+  datefilter,
 }) {
   const [select, setSelect] = useState(0);
   const [filter, setFilter] = useState("China National");
@@ -82,30 +85,21 @@ export default function Schedule({
     left: "70%",
     transform: "translate(-50%, -50%)",
     width: 750,
-    height:'45px!important',
+    height: "45px!important",
     bgcolor: "background.paper",
     border: "1px solid #DDDDDD",
   };
-  
-
-
-
-
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.grey,      
+      backgroundColor: theme.palette.action.grey,
     },
-    '&:nth-of-type(odd)': {
+    "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
-    cursor:"pointer"
+    cursor: "pointer",
     // hide last border
-   
   }));
-
-
-
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -120,10 +114,7 @@ export default function Schedule({
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
     },
-  
   }));
-
-
 
   const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
     background: "#FF6F31",
@@ -169,15 +160,14 @@ export default function Schedule({
   const footballUpdatedList = dateFilter != "" ? footballLists : footballList;
   const pageCount = Math.ceil(footballUpdatedList?.length / 20);
   /*** handle fav */
-  const handleFav=(id)=>{
+  const handleFav = (id) => {
     handleAddRemove(id);
-  }
+  };
   var regex = /\d+/g;
-//var string = "you can enter maximum 500 choices";
-//var matches = string.match(regex);
+  //var string = "you can enter maximum 500 choices";
+  //var matches = string.match(regex);
 
-const classes = useStyles();
-
+  const classes = useStyles();
 
   return (
     <>
@@ -213,12 +203,17 @@ const classes = useStyles();
         >
           <ScheculeDateFilterBar
             fiterByDate={(value) => datefilter(value)}
-            day={(value)=>dateoptions(value)}
+            day={(value) => dateoptions(value)}
           />
         </Grid>
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} className={classes.table} id="tablehover"  aria-label="customized table">
+            <Table
+              sx={{ minWidth: 700 }}
+              className={classes.table}
+              id="tablehover"
+              aria-label="customized table"
+            >
               <TableHead size="small">
                 <TableRow>
                   <StyledHeaderCell width="170px" align="left">
@@ -247,20 +242,20 @@ const classes = useStyles();
                   </StyledHeaderCell>
                 </TableRow>
               </TableHead>
-              
-               {loadings && (                 
-                  <div>
-      <Backdrop
-        sx={{ color: '#ccc', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loadings}       
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    </div>
-                  
-                  )
-                
-              }
+
+              {loadings && (
+                <div>
+                  <Backdrop
+                    sx={{
+                      color: "#ccc",
+                      zIndex: (theme) => theme.zIndex.drawer + 1,
+                    }}
+                    open={loadings}
+                  >
+                    <CircularProgress color="inherit" />
+                  </Backdrop>
+                </div>
+              )}
               {/* {loadings ? (
                   <TableRow>
                     <TableCell component="th" scope="row" colSpan={7}>
@@ -271,71 +266,118 @@ const classes = useStyles();
                   </TableRow>)
                 :
               ( */}
-             
+
               <TableBody>
-                
-                {footballScheduleList &&
-                  footballScheduleList.length > 0 ?
+                {footballScheduleList && footballScheduleList.length > 0 ? (
                   footballScheduleList.map((item, index) => {
-                    let stage=item.stage
-                    let font_color
-                    let background_color                  
-                    if(item && item.competition && item.competition.background_colour===null){
-                      background_color="#e60039"
+                    let stage = item.stage;
+                    let font_color;
+                    let background_color;
+                    if (
+                      item &&
+                      item.competition &&
+                      item.competition.background_colour === null
+                    ) {
+                      background_color = "#e60039";
                     } else {
-                      background_color=item.competition.background_colour
+                      background_color = item.competition.background_colour;
                     }
-                    if(item && item.competition && item.competition.font_colour===null){
-                      font_color="#ffffff"
+                    if (
+                      item &&
+                      item.competition &&
+                      item.competition.font_colour === null
+                    ) {
+                      font_color = "#ffffff";
                     } else {
-                     font_color=item.competition.font_colour                      
+                      font_color = item.competition.font_colour;
                     }
-                    let color
-                    if(index%2==0){
-                      color="#33cc75"
+                    let color;
+                    if (index % 2 == 0) {
+                      color = "#33cc75";
                     } else {
-                      color="#e60039"
+                      color = "#e60039";
                     }
-                    let given_time=moment(item.startTime).format('HH:mm')
-                
+                    let given_time = moment(item.startTime).format("HH:mm");
+
                     return (
-                      <StyledTableRow key={item.id} onClick={() => {
-                        router.push(`/MatchDetails/${item.matchId?item.matchId:item.id}?status=${item.elapsed}`)                         
-                     }} >
-                        <StyledTableCell align="left"  style={{color:font_color, background:background_color }}>
+                      <StyledTableRow
+                        key={item.id}
+                        onClick={() => {
+                          router.push(
+                            `/MatchDetails/${
+                              item.matchId ? item.matchId : item.id
+                            }?status=${item.elapsed}`
+                          );
+                        }}
+                      >
+                        <StyledTableCell
+                          align="left"
+                          style={{
+                            color: font_color,
+                            background: background_color,
+                          }}
+                        >
                           <Grid
-                            style={{ display: "flex", alignItems: "center", background:background_color }}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              background: background_color,
+                            }}
                           >
                             <Image
                               width={25}
-                              src={item && item.competition && item.competition.image}
+                              src={
+                                item &&
+                                item.competition &&
+                                item.competition.image
+                              }
                               alt="football_endtab"
                             />
-                            <Typography mx={1} fontSize={'13px'}>                           
-                              {lang_id==1?item?.competition?.nameEn:lang_id==2?item?.competition?.name:item?.competition?.nameEn}
+                            <Typography mx={1} fontSize={"13px"}>
+                              {lang_id == 1
+                                ? item?.competition?.nameEn
+                                : lang_id == 2
+                                ? item?.competition?.name
+                                : item?.competition?.nameEn}
                             </Typography>
                           </Grid>
-                        </StyledTableCell >
-                        <StyledTableCell align="center">
-                          {lang_id==1?stage.match(regex):lang_id==3?stage.match(regex):stage}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {moment(item.startTime).format('HH:mm')}
+                          {lang_id == 1
+                            ? stage.match(regex)
+                            : lang_id == 3
+                            ? stage.match(regex)
+                            : stage}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {moment(item.startTime).format("HH:mm")}
                         </StyledTableCell>
                         <StyledTableCell align="center">
                           {/* {item.homeTeamName} */}
                           {/* {item.home_team==null && lang_id==1?'':item.home_team && lang_id==1?:item.homeTeamName} */}
-                          {item.home_team && lang_id==1?item.home_team && item.home_team.nameEn:item.home_team && lang_id==2?item.home_team && item.home_team.nameFull:item.home_team && lang_id==3?item.home_team && item.home_team.nameEnFull:''}
+                          {item.home_team && lang_id == 1
+                            ? item.home_team && item.home_team.nameEn
+                            : item.home_team && lang_id == 2
+                            ? item.home_team && item.home_team.nameFull
+                            : item.home_team && lang_id == 3
+                            ? item.home_team && item.home_team.nameEnFull
+                            : ""}
                         </StyledTableCell>
                         <StyledTableCell align="center">--</StyledTableCell>
                         <StyledTableCell align="center">
                           {/* {item.awayTeamName} */}
-                          {item.away_team && lang_id==1?item.away_team && item.away_team.nameEn:item.away_team && lang_id==2?item.away_team && item.away_team.nameFull:item.away_team && lang_id==3?item.away_team && item.away_team.nameEnFull:''}
+                          {item.away_team && lang_id == 1
+                            ? item.away_team && item.away_team.nameEn
+                            : item.away_team && lang_id == 2
+                            ? item.away_team && item.away_team.nameFull
+                            : item.away_team && lang_id == 3
+                            ? item.away_team && item.away_team.nameEnFull
+                            : ""}
                         </StyledTableCell>
                         {/* <StyledTableCell align="center">--</StyledTableCell> */}
                         <StyledTableCell align="center">
                           {item.is_favorite ? (
-                            <IconButton onClick={()=>handleFav(item.id)}>
+                            <IconButton onClick={() => handleFav(item.id)}>
                               {" "}
                               <Icon
                                 width={30}
@@ -344,34 +386,35 @@ const classes = useStyles();
                               />
                             </IconButton>
                           ) : (
-                            <IconButton onClick={()=>handleFav(item.id)}>
+                            <IconButton onClick={() => handleFav(item.id)}>
                               {" "}
-                              <Icon width={25}  icon="ic:round-star" />
+                              <Icon width={25} icon="ic:round-star" />
                             </IconButton>
                           )}
                         </StyledTableCell>
                       </StyledTableRow>
                     );
                   })
-                 :!loadings? <>
-                  <TableRow>
-                    <TableCell component="th" scope="row" colSpan={7}>
-                      <Grid textAlign={"center"} item xs={12} paddingTop={5}>
-                        <img
-                          alt="not_found_2"
-                          style={{ height: "50vh" }}
-                          src="./assets/Home/not-found.gif"
-                        />
-                        <Typography textAlign="center">
-                          {langKey && langKey.no_data_found}
-                        </Typography>
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
-                  </>:''
-                  }
-
-               
+                ) : !loadings ? (
+                  <>
+                    <TableRow>
+                      <TableCell component="th" scope="row" colSpan={7}>
+                        <Grid textAlign={"center"} item xs={12} paddingTop={5}>
+                          <img
+                            alt="not_found_2"
+                            style={{ height: "50vh" }}
+                            src="./assets/Home/not-found.gif"
+                          />
+                          <Typography textAlign="center">
+                            {langKey && langKey.no_data_found}
+                          </Typography>
+                        </Grid>
+                      </TableCell>
+                    </TableRow>
+                  </>
+                ) : (
+                  ""
+                )}
               </TableBody>
               {/* )} */}
             </Table>

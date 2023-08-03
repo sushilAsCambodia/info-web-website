@@ -55,7 +55,7 @@ const NewsCardDetails = () => {
                                         </Typography>
                                         <Typography color="#8C8C8C" paddingTop="11px" lineHeight="14px" fontSize="12px">{moment(newsDetail.created_at).format(utils.formatDate)}</Typography>
                                     </Grid>
-                                    <Grid item xs={12} paddingTop="8px"   >
+                                    <Grid item xs={12} paddingTop="8px"  paddingBottom={'80px'} >
                                         <Image 
                                             src={newsDetail.image?.path}
                                             onError={(e) => e.target.src = '/assets/no-image.png'}
