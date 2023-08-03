@@ -78,13 +78,12 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Set the width to 100% to occupy the full width of the parent container
     minWidth: "249px !important", // Set a minimum width (adjust the value according to your needs)
     // Add any custom styles for the ul-class
-
   },
   liClass: {
     width: "100%", // Set the width to 100% to occupy the full width of the parent container
     // minWidth: 649, // Set a minimum width (adjust the value according to your needs)
     // Add any custom styles for the ul-class
-    padding:"0px !important"
+    padding: "0px !important",
   },
   gridClass: {
     // Add any custom styles for the grid-class
@@ -175,9 +174,6 @@ const data = [
     plans: [{ id: 3, name: "Euro cup", type: "ltd" }],
   },
 ];
-
-
-
 
 export default function FootBallPage() {
   const router = useRouter();
@@ -283,7 +279,6 @@ export default function FootBallPage() {
                   });
               });
             setSelectedName(arrayName);
-           
 
             setLoading(false);
           },
@@ -399,14 +394,13 @@ export default function FootBallPage() {
                   });
               });
             setSelectedName(arrayName);
-            setCompetition(res && res.competition);            
-          
+            setCompetition(res && res.competition);
           },
         })
       );
     }
   };
- 
+
   /******* Clear competition filter*/
   const clearCheckBox = () => {
     const competId = ["No data"];
@@ -477,7 +471,7 @@ export default function FootBallPage() {
           },
         })
       );
-    }else if (select === "Follow") {
+    } else if (select === "Follow") {
       dispatch(
         getMatchListFavorite({
           params: {
@@ -494,7 +488,7 @@ export default function FootBallPage() {
             setFootballFavoritList(res && res.data);
             setCompetition(res && res.competition);
             const arrayName = [];
-            setSelectedName(arrayName);                        
+            setSelectedName(arrayName);
             setLoading(false);
           },
         })
@@ -504,10 +498,10 @@ export default function FootBallPage() {
 
   /******* Filter by competition */
   function filterByCompetition() {
-    setConfirm(true)
-    setCompfilter(false);  
+    setConfirm(true);
+    setCompfilter(false);
     setLoading(true);
-    console.log("selectedName5555",selectedName)
+    console.log("selectedName5555", selectedName);
     /*** Competition Id */
     let competId = [100000];
     competition &&
@@ -608,13 +602,12 @@ export default function FootBallPage() {
           },
           callback: (res) => {
             setFootballFavoritList(res && res.data);
-            setCompetition(res && res.competition);            
+            setCompetition(res && res.competition);
             setLoading(false);
           },
         })
       );
     }
-    
   }
   const [value, setValue] = useState("");
   const [footballLiveScoreList, setFootballLiveScoreList] = useState([]);
@@ -666,7 +659,6 @@ export default function FootBallPage() {
 
   /*******Add and remove favorite follow*/
   const handleAddRemoveFollow = (id) => {
-  
     let competId = [];
     competitions &&
       competitions.length > 0 &&
@@ -692,94 +684,92 @@ export default function FootBallPage() {
               member_ID: customer?.member_ID,
               type: "match_schedule",
             },
-            callback: async (res) => {                    
+            callback: async (res) => {
               setLoading(false);
-              if(res && res.status_code===201){
-            //   const params= {
-            //           lang_id: utils.convertLangCodeToID(i18n.language),
-            //           member_ID: customer?.member_ID,
-            //           page: 1,
-            //           is_favorite: true,                     
-            //           page: currentPage,
-            //           descending: false,
-            //           sortBy: "startTime",
-            //         }
-            //   try {
-            //     const response = await api.get('lotto/data44-aistat/match-schedules', params);               
-            //  const responseDetails=   response && response.data && response.data.data && response.data.data.data && response.data.data.data.data
-            //     setFootballFavoritList(responseDetails);
-            //     setCompetition(response && response.data && response.data.data && response.data.data.competition);              
-            //      setLoading(false);
-            //      const arrayName = [];
-            //         const competeName =
-            //         response && response.data && response.data.data && response.data.data.competition.length > 0 &&
-            //         response && response.data && response.data.data && response.data.data.competition.competition.map((ids, index) => {
-            //             ids &&
-            //               ids.competitions &&
-            //               ids.competitions.length > 0 &&
-            //               ids.competitions.map((item, i) => {
-            //                 //  if(selectedName.includes(item.nameEn) || selectedName.includes(item.name)){
-            //                 //   competId.push(item.id)
-            //                 //  }
-            //                 let name =
-            //                   language_id == 1 || language_id == 3
-            //                     ? item.nameEnFull
-            //                     : item.nameFull;
-            //                 ids.isCheck = true;
-            //                 arrayName.push(name);
-            //               });
-            //           });
-        
-            //         setSelectedName(arrayName);
-            //     // setLoading2(false);
-            //   }catch (error) {
-            //    return console.log("error")
-            //   }
+              if (res && res.status_code === 201) {
+                //   const params= {
+                //           lang_id: utils.convertLangCodeToID(i18n.language),
+                //           member_ID: customer?.member_ID,
+                //           page: 1,
+                //           is_favorite: true,
+                //           page: currentPage,
+                //           descending: false,
+                //           sortBy: "startTime",
+                //         }
+                //   try {
+                //     const response = await api.get('lotto/data44-aistat/match-schedules', params);
+                //  const responseDetails=   response && response.data && response.data.data && response.data.data.data && response.data.data.data.data
+                //     setFootballFavoritList(responseDetails);
+                //     setCompetition(response && response.data && response.data.data && response.data.data.competition);
+                //      setLoading(false);
+                //      const arrayName = [];
+                //         const competeName =
+                //         response && response.data && response.data.data && response.data.data.competition.length > 0 &&
+                //         response && response.data && response.data.data && response.data.data.competition.competition.map((ids, index) => {
+                //             ids &&
+                //               ids.competitions &&
+                //               ids.competitions.length > 0 &&
+                //               ids.competitions.map((item, i) => {
+                //                 //  if(selectedName.includes(item.nameEn) || selectedName.includes(item.name)){
+                //                 //   competId.push(item.id)
+                //                 //  }
+                //                 let name =
+                //                   language_id == 1 || language_id == 3
+                //                     ? item.nameEnFull
+                //                     : item.nameFull;
+                //                 ids.isCheck = true;
+                //                 arrayName.push(name);
+                //               });
+                //           });
 
-            dispatch(
-              getMatchListFavorite({
-                params: {
-                  lang_id: utils.convertLangCodeToID(i18n.language),
-                  member_ID: customer?.member_ID,
-                  page: 1,
-                  is_favorite: true,
-                  competition_ids: competId,                  
-                  descending: false,
-                  sortBy: "startTime",
-                },
-                callback: (res) => {
-                  setFootballFavoritList(res && res.data);
-                  setCompetition(res && res.competition);
-                  const arrayName = [];
-                  const competeName =
-                    res &&
-                    res.competition.length > 0 &&
-                    res &&
-                    res.competition.map((ids, index) => {
-                      ids &&
-                        ids.competitions &&
-                        ids.competitions.length > 0 &&
-                        ids.competitions.map((item, i) => {
-                          //  if(selectedName.includes(item.nameEn) || selectedName.includes(item.name)){
-                          //   competId.push(item.id)
-                          //  }
-                          let name =
-                            language_id == 1 || language_id == 3
-                              ? item.nameEnFull
-                              : item.nameFull;
-                          ids.isCheck = true;
-                          arrayName.push(name);
+                //         setSelectedName(arrayName);
+                //     // setLoading2(false);
+                //   }catch (error) {
+                //    return console.log("error")
+                //   }
+
+                dispatch(
+                  getMatchListFavorite({
+                    params: {
+                      lang_id: utils.convertLangCodeToID(i18n.language),
+                      member_ID: customer?.member_ID,
+                      page: 1,
+                      is_favorite: true,
+                      competition_ids: competId,
+                      descending: false,
+                      sortBy: "startTime",
+                    },
+                    callback: (res) => {
+                      setFootballFavoritList(res && res.data);
+                      setCompetition(res && res.competition);
+                      const arrayName = [];
+                      const competeName =
+                        res &&
+                        res.competition.length > 0 &&
+                        res &&
+                        res.competition.map((ids, index) => {
+                          ids &&
+                            ids.competitions &&
+                            ids.competitions.length > 0 &&
+                            ids.competitions.map((item, i) => {
+                              //  if(selectedName.includes(item.nameEn) || selectedName.includes(item.name)){
+                              //   competId.push(item.id)
+                              //  }
+                              let name =
+                                language_id == 1 || language_id == 3
+                                  ? item.nameEnFull
+                                  : item.nameFull;
+                              ids.isCheck = true;
+                              arrayName.push(name);
+                            });
                         });
-                    });
-      
-                  setSelectedName(arrayName);
-                  setLoading(false);
-                },
-              })
-            );
-            }
-              
-              
+
+                      setSelectedName(arrayName);
+                      setLoading(false);
+                    },
+                  })
+                );
+              }
             },
           })
         )
@@ -854,7 +844,7 @@ export default function FootBallPage() {
                             arrayName.push(name);
                           });
                       });
-        
+
                     setSelectedName(arrayName);
                     setLoading(false);
                   },
@@ -866,7 +856,8 @@ export default function FootBallPage() {
       : router.push("/login");
   };
   /*******Live Score function*/
-  function liveScore() {    
+  function liveScore() {
+    console.log("selectedName", selectedName);
     let competId = [];
     competition &&
       competition.length > 0 &&
@@ -883,18 +874,17 @@ export default function FootBallPage() {
             }
           });
       });
- 
-    
+
     dispatch(
       getMatchLiveScoreList({
         params: {
           lang_id: utils.convertLangCodeToID(i18n.language),
           member_ID: customer?.member_ID,
-           competition_ids: competId,
+          competition_ids: competId,
           sortBy: "startTime",
         },
         callback: (res) => {
-          setFootballLiveScoreList(res && res.data);         
+          setFootballLiveScoreList(res && res.data);
           setCompetition(res && res.data && res.data.competition);
 
           const arrayName = [];
@@ -918,17 +908,17 @@ export default function FootBallPage() {
                   arrayName.push(name);
                 });
             });
-         // if (compfilter) {           
-            setSelectedName(arrayName);
-         // }
+          // if (compfilter) {
+          setSelectedName(arrayName);
+          // }
           setLoading(false);
         },
       })
     );
   }
-/******** Default data loading */
+  /******** Default data loading */
   useEffect(() => {
-    setConfirm(false)   
+    setConfirm(false);
     setLoading(true);
     let competId = [];
     competitions &&
@@ -963,7 +953,7 @@ export default function FootBallPage() {
             sortBy: "startTime",
           },
           callback: (res) => {
-            setFootballEndList(res && res.data);           
+            setFootballEndList(res && res.data);
             setCompetition(res && res.competition);
 
             const arrayName = [];
@@ -989,7 +979,7 @@ export default function FootBallPage() {
           },
         })
       );
-    } else if (select === "Schedule" && confirm==false) {
+    } else if (select === "Schedule" && confirm == false) {
       setSelectedName([]);
       dispatch(
         getScheduleList({
@@ -1038,7 +1028,7 @@ export default function FootBallPage() {
           },
         })
       );
-    } else if (select === "Follow") {
+    } else if (select === "Follow" && confirm == false) {
       dispatch(
         getMatchListFavorite({
           params: {
@@ -1081,7 +1071,8 @@ export default function FootBallPage() {
           },
         })
       );
-    } else if (select === "Score") {
+    } else if (select === "Score" && confirm == false) {
+      setSelectedName([]);
       // dispatch(
       //   getMatchListFavorite({
       //     params: {
@@ -1105,25 +1096,23 @@ export default function FootBallPage() {
       const interval = setInterval(() => {
         liveScore();
       }, 10000);
-      return () => clearInterval(interval);     
+      return () => clearInterval(interval);
     }
-
-  
   }, [currentPage, dateoption, datefilter, select, datefilterEnd, compfilter]);
   const lang_id = utils.convertLangCodeToID(i18n.language);
 
   var result = footballScheduleList.filter(function (e) {
     return competitionIdd.indexOf(e.competitionId) != -1;
   });
-  const clickEvent=()=>{
-    setSelectedName([])
-    setPage(1)
-  }
+  const clickEvent = () => {
+    setSelectedName([]);
+    setPage(1);
+  };
   //console.log("competeNamecompeteName",competition)
   //const footballlist=selectedName && selectedName.length>0?result:footballScheduleList
 
   /****** Render Competition */
- /*** name.match(/(\b\S)?/g).join("")*/  
+  /*** name.match(/(\b\S)?/g).join("")*/
   const renderSelectGroup = (product) => {
     const items =
       product &&
@@ -1135,20 +1124,20 @@ export default function FootBallPage() {
           // language_id == 1 || language_id == 3
           //   ? name.match(/(\b\S)?/g).join("")
           //   : p.name;
-          language_id == 1 || language_id == 3
-          ? p.name
-          : p.name;
+          language_id == 1 || language_id == 3 ? p.name : p.name;
         let checkboxVal = selectedName.includes(name);
 
         return (
           <MenuItem key={p.id} value={name} className={classes.liClass}>
-           <Grid className="checkboxclass">
-           <Checkbox
-              onClick={(e) => handleCheckbox(e, name)}
-              checked={checkboxVal ? true : false}
-            />
-           </Grid>
-        <Grid className="text-class" title={nameData} >{nameData}</Grid>
+            <Grid className="checkboxclass">
+              <Checkbox
+                onClick={(e) => handleCheckbox(e, name)}
+                checked={checkboxVal ? true : false}
+              />
+            </Grid>
+            <Grid className="text-class" title={nameData}>
+              {nameData}
+            </Grid>
           </MenuItem>
         );
       });
@@ -1182,8 +1171,8 @@ export default function FootBallPage() {
             sx={{ borderRadius: "5px 0px 0px 5px" }}
             className={`${select === "Follow" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              clickEvent()
-              router.push("/footBallPage#Follow");              
+              clickEvent();
+              router.push("/footBallPage#Follow");
             }}
           >
             {langKey && langKey.follow}
@@ -1192,7 +1181,7 @@ export default function FootBallPage() {
             sx={{ borderRadius: "0px 0px 0px 0px" }}
             className={`${select === "Score" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              clickEvent()
+              clickEvent();
               router.push("/footBallPage#Score");
             }}
           >
@@ -1202,7 +1191,7 @@ export default function FootBallPage() {
             sx={{ borderRadius: "0px 0px 0px 0px" }}
             className={`${select === "End" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              clickEvent()
+              clickEvent();
               router.push("/footBallPage#End");
             }}
           >
@@ -1212,7 +1201,7 @@ export default function FootBallPage() {
             sx={{ borderRadius: "0px 5px 5px 0px" }}
             className={`${select === "Schedule" ? "filterTabSelected" : ""}`}
             onClick={() => {
-              clickEvent()
+              clickEvent();
               router.push("/footBallPage#Schedule");
             }}
           >
@@ -1240,15 +1229,13 @@ export default function FootBallPage() {
               // renderValue={(selected) => selected.join(", ")}
               MenuProps={MenuProps}
             >
-             
               <div
                 className={classes.gridClass || "grid-class"}
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
                   gap: "4px",
-                  paddingBottom: "30px"
-                  
+                  paddingBottom: "30px",
                 }}
               >
                 {competition &&
@@ -1267,7 +1254,7 @@ export default function FootBallPage() {
                   right: "0",
                   bottom: "0",
                   background: "#fff",
-                  zIndex:999999999
+                  zIndex: 999999999,
                 }}
               >
                 <Button
@@ -1309,7 +1296,7 @@ export default function FootBallPage() {
                     background: "green",
                   }}
                 >
-                  {langKey && langKey.confirm}                  
+                  {langKey && langKey.confirm}
                 </Button>
               </div>
             </Select>
@@ -1345,7 +1332,7 @@ export default function FootBallPage() {
         <FootBallEnd
           datefilters={(value) => setDatefilterEnd(value)}
           currentpage={currentPage}
-          pageChange={(value) => setCurrentPage(value)}          
+          pageChange={(value) => setCurrentPage(value)}
           last_page={last_page}
           loadings={loading}
           footballEndList={footballEndList}
