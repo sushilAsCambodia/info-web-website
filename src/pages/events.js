@@ -10,6 +10,7 @@ import { Grid } from "@mui/material";
 import moment from "moment/min/moment-with-locales";
 import utils from "@/common/utils";
 import { useRouter } from "next/router";
+import LoadingBackDrop from "../components/LoadingBackDrop";
 import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
 import Image from "mui-image";
@@ -48,6 +49,7 @@ export default function Events(props) {
   const [eventList, setEventList] = useState(events);
   const [filterValue, setFilterValue] = useState("all");
   const [selected, setSelected] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [competions, seCompetions] = useState([]);
   
   let dateSelected
@@ -100,7 +102,7 @@ router.push(`/match`)
   async function scheduleData() {
     var currenDate = moment(new Date()).format(utils.dateFormate);
    
-    
+    setLoading(true)
    
     const params = {
       lang_id: utils.convertLangCodeToID(i18n.language),
@@ -130,6 +132,7 @@ router.push(`/match`)
         );
 
         if(response && response.status==200){
+          setLoading(false)
           seCompetions(response && response.data && response.data.data && response.data.data.competition)
           response && response.data && response.data.data && response.data.data.competition.length>0 && response.data.data.competition.map((item,index)=>{
             item && item.competitions && item.competitions.length>0 && item.competitions.map((item,index)=>{
@@ -313,6 +316,7 @@ const renderCompetition = (product) => {
           </Button>
         </Grid>
       </Grid>
+      {loading &&<LoadingBackDrop loading={loading} />}
  </Grid>
       
       <Grid px={2} item xs={12} container sx={{marginTop:'55px'}}>
